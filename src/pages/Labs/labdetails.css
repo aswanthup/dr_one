@@ -1,0 +1,144 @@
+
+.lab-details-about{
+    gap:3vw;
+    margin-top:3vw;
+}
+.lab-deatials-left{
+    /* width:1vw; */
+}
+
+.lab-deatials-left img{
+    width:14vw;
+    height:14vw;
+    object-fit: cover;
+    border-radius:1vw;
+}
+
+.lab-deatials-right{
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.lab-details-imges{
+    display: grid;
+    gap:2vw;
+    grid-auto-flow: column;
+    overflow-x: auto;
+    overscroll-behavior-inline: contain;
+    
+}
+
+::-webkit-scrollbar{
+    width: 1px;
+}
+
+.lab-details-imges img {
+    width:20vw;
+    height:12vw;
+    object-fit: cover;
+    border-radius:1vw;
+    /* margin-bottom: 2vw; */
+   
+}
+
+.lab-details-buttons a{
+    height:3vw;
+    border-radius:5px;
+    /* background-color: var(--color-white); */
+    justify-content: center; 
+    align-items: center;
+    padding-left:30px;
+    padding-right: 30px;
+   
+}
+
+.lab-deatails-star {
+    gap: 1vw;
+}
+
+
+.lab-details-buttons{
+    gap:2vw;
+}
+
+
+.lab-details-buttons1{
+    border:1px solid var(--color-primary);
+    color: var(--color-primary);
+    transition:500ms ease-in-out;
+}
+
+/* .lab-details-buttons1:hover{
+    border:1px solid #DAE2FF ;
+    background-color:#DAE2FF ;
+} */
+
+.lab-details-buttons2{
+   background-color:var(--color-primary);
+   border:1px solid var(--color-primary);
+   cursor:pointer;
+} 
+
+/* .lab-details-buttons2:hover{
+    background-color: white;
+    color:var(--color-primary);
+}
+.lab-details-buttons2 h4:hover{
+    color:var(--color-primary);
+} */
+
+.lab-details-buttons2 h4{
+    /* background-color:var(--color-primary); */
+    color: var(--color-white);
+ 
+ }
+ 
+
+
+
+#style-2::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	border-radius: 10px;
+	background-color: #F5F5F5;
+}
+
+#style-2::-webkit-scrollbar
+{
+	height:8px;
+ 
+	background-color: #F5F5F5;
+}
+
+#style-2::-webkit-scrollbar-thumb
+{
+	border-radius: 10px;
+	/* -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3); */
+	background-color:var(--color-primary);
+}
+
+
+.lab-details-heading{
+    padding:2vw 0vw;
+}
+
+.lab-deatails-star{
+    color:#FA8D0D;
+}
+
+.lab-details-location i{
+    color: #3A65FD;
+}
+
+.lab-details-location{
+    gap:1.2vw;
+}
+.sevice-list{
+    align-items: center;
+    gap:1.2vw;
+    padding-bottom:1vw;
+}
+
+.sevice-list i{
+    color: #3A65FD;
+}

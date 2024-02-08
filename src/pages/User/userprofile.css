@@ -1,0 +1,127 @@
+
+.editing-section{
+    justify-content: space-between;
+    margin-top:3vw;
+}
+
+
+.photo-section{
+    width:25vw;
+    padding:2vw;
+    box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px, rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
+    border-radius:2vw;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.img-button-section{
+     width:100%;
+     margin-top:2vw;
+}
+.img-button-section a{
+    background-color: var(--color-primary);
+    width: 100%; 
+    text-align: center;
+    color:white;
+    border-radius:.5vw;
+    height:45px;
+    align-items: center;
+    justify-content: center;
+}
+
+
+/* .img-button-section h4{
+    width: 100%;
+} */
+
+.photo-section img{
+   width: 15vw;
+   height:15vw;
+ border-radius:50%;
+ object-fit: cover;
+}
+
+.editing-data-section{
+    width:45vw;
+    padding:2vw;
+    box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px, rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
+    border-radius:2vw;
+  
+}
+.editing-input-label{
+    margin-top:15px;
+}
+.editing-input-label input{
+    box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;  border-radius:.6vw;
+    height:50px;
+    width:400px;
+    padding-left:20px;
+    margin-top:15px;
+}
+.editing-button-section{
+    width:400px;
+    justify-content: space-between;
+    margin-top: 2vw;
+}
+.editing-button-section a{
+ /* background-color: var(--color-primary);
+ /* padding: .6vw 4vw; */
+ /* color: white;
+ border-radius:.5vw; */ 
+}
+
+.cancel-edit{
+    background-color:white;
+    padding: .6vw 4vw;
+    color: var(--color-primary);
+    border-radius:.5vw;
+    border: 1px solid var(--color-primary);
+}
+
+.cancel-edit2{
+    background-color: var(--color-primary);
+    padding: .6vw 4vw;
+    color: white;
+    border-radius:.5vw;
+}
+
+
+
+@media screen and (max-width: 980px){
+
+.editing-section{
+    flex-direction: column;
+    gap:4vw;
+}
+
+.photo-section{
+    width: 100%;
+    padding: 6vw;
+    gap:6vw;
+}
+
+.editing-data-section{
+    width:100%;
+    padding: 6vw;
+}
+
+
+.editing-input-label input{
+    width:100%;
+}
+
+.editing-button-section{
+    width:100%;
+    margin-top:6vw;
+
+}
+
+.photo-section img{
+    width: 22vw;
+    height:22vw;
+
+}
+
+    
+}

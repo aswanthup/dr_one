@@ -1,0 +1,52 @@
+
+.doctor-list-section{
+
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+    width: 100%;
+    padding:1vw;
+    border-radius: 2vw;
+    margin-top:2vw;
+    gap:2vw;
+}
+
+
+
+.doctor-list-image img{
+    width: 8.3vw;
+    height:8.3vw;
+    object-fit: cover;
+    border-radius:50%;
+   
+}
+
+
+.main-list-button{
+    width: 100%;
+    justify-content: space-between;
+}
+
+.details-button{
+    background-color: #3A65FD;
+    color: white;
+    border-radius:.6vw;
+    padding:.3vw 2vw;
+}
+
+.doctor-list-button{
+    text-align: center;
+    align-items: end;
+}
+
+.doctor-list-star{
+    gap: 1vw;
+}
+
+.doctor-list-star i{
+  color: chocolate;
+  font-size:1vw;
+}
+
+.doctor-list-data{
+    flex-direction: column;
+    justify-content: space-between;
+}
