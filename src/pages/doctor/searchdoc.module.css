@@ -1,0 +1,97 @@
+.container {
+  padding: 3rem;
+  min-height: 100dvh;
+  font-family: "Outfit", sans-serif;
+  /* border: 1px solid red; */
+}
+
+.section1 {
+  height: 100px;
+}
+.section2 {
+  /* border: 1px Solid grey; */
+  height: 90px;
+}
+.section3 {
+  display: flex;
+}
+
+.leftSide {
+  padding: 2rem;
+  width: 300px;
+  border: 1px solid #e7e5e4;
+  border-radius: 10px;
+}
+.rightSide {
+  flex: 3;
+  /* border: 1px solid green; */
+}
+.types > :nth-child(1) {
+  padding-bottom: 1rem;
+}
+.types > :nth-child(2) {
+  padding-bottom: 2.5rem;
+  padding-left: 30px;
+}
+
+.specialization > :nth-child(2) {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  /* border: 1px solid red; */
+  height: 260px;
+  overflow-x: scroll;
+  padding-left: 30px;
+
+  padding-bottom: 2.5rem;
+}
+.gender > :nth-child(1) {
+  padding-bottom: 1rem;
+}
+
+.gender > :nth-child(2) {
+  padding-bottom: 2.5rem;
+  padding-left: 30px;
+}
+
+.cardMainContainer {
+  padding: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  /* border: 1px solid blue; */
+  overflow-x: scroll;
+  height: 800px;
+}
+
+/* ----------------- Card */
+
+.cardContainer {
+  padding: 1.5rem;
+  display: flex;
+  gap: 10px;
+  height: 200px;
+  border: 1px solid #e7e5e4;
+  border-radius: 23px;
+  width: calc(49% - 10px);
+  margin-top: 2rem;
+  box-sizing: border-box;
+}
+
+.cardContainer > :nth-child(1) {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  & > span {
+    font-weight: 200;
+  }
+
+  /* border: 1px solid red; */
+}
+.cardContainer > :nth-child(2) {
+  flex: 3;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  /* border: 1px solid red; */
+}

@@ -39,6 +39,7 @@ import Labadminregistration2 from './pages/Labadmin/Labadminregistration2';
 import Pharmacyadminregister2 from './pages/Pharmacyadmin/Pharmacyadminregister2';
 
 import Pharmacyregistration1 from './pages/Pharmacyadmin/Pharmacyregistration1';
+import SearchDoc from './pages/doctor/SearchDoc';
 function App() {
   return (
     <div className="App">
@@ -76,6 +77,8 @@ function App() {
 
         <Route path='/hospitaladminregistration1' element={<Hospitaladminregistration1 />} ></Route>
         <Route path='/map' element={<Map />} ></Route>
+
+        <Route path='/searchdoctor' element={<SearchDoc/>} ></Route>
 
 
 {/* Doctor admin */}
