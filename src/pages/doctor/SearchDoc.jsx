@@ -30,7 +30,7 @@ export default function SearchDoc() {
   };
   const handleSpecializationChanges = (event) => {
     const { checked } = event.target;
-    const specialization = event.target.name;
+    const specialization = event.target.name.toLowerCase();
     // alert(`${specialization} is ${checked}`);
     if (checked && !filters.specializations.includes(specialization)) {
       const updatedSpecializations = [
@@ -48,8 +48,29 @@ export default function SearchDoc() {
     }
   };
 
-  const handleGenderChanges = (value) => {};
-  const getAllDoctorData = async () => {
+  const handleGenderChanges = (event) => {
+    const { value } = event.target;
+    console.log(value);
+    setFilters({ ...filters, gender: value });
+  };
+
+  useEffect(() => {
+    const filteredDocs = allDocData.filter((doctor) => {
+      const typeMatch =
+        !filters.type ||
+        doctor.type.toLowerCase() === filters.type.toLowerCase();
+      const specializationsMatch =
+        filters.specializations.length === 0 ||
+        filters.specializations.includes(doctor.specialization.toLowerCase());
+      const genderMatch =
+        !filters.gender ||
+        doctor.gender.toLowerCase() === filters.gender.toLowerCase();
+      return typeMatch && genderMatch &&specializationsMatch;
+    });
+    setFilteredDoctors(filteredDocs);
+  }, [filters]);
+
+  const getAllDoctorsData = async () => {
     try {
       const response = await axios.get(
         "http://192.168.1.2:3003/doctor/complete_data"
@@ -63,11 +84,10 @@ export default function SearchDoc() {
     }
   };
   useEffect(() => {
-    // alert("api calling");
-    getAllDoctorData();
+    getAllDoctorsData();
   }, []);
 
-  // console.log({ allDocData });
+  console.log({ allDocData });
   // console.log({ filteredDoctors });
   console.log({ filters });
 
@@ -141,6 +161,7 @@ export default function SearchDoc() {
                 >
                   {genderData.map((gender, index) => (
                     <FormControlLabel
+                      onChange={handleGenderChanges}
                       key={index}
                       value={gender}
                       control={

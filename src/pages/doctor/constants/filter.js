@@ -2,11 +2,8 @@ export const speacializationNames=[
     "Dermatology",
     "General medicine",
     "Cardiology",
-    "Neuorology",
+    "Neurology",
     "Opthalmology",
-    "Cardiology",
-    "Neuorology",
-    "Opthalmology"
 ]
 export const types=[
     "Allopathy",
