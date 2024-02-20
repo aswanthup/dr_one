@@ -9,7 +9,12 @@ import {
   Radio,
   RadioGroup,
 } from "@mui/material";
-import { speacializationNames, types, genderData } from "./constants/filter";
+import {
+  speacializationNames,
+  types,
+  genderData,
+  ayurSpec,
+} from "./constants/filter";
 import Footer from "../../components/Footer";
 import DocCard from "./DocCard";
 import axios from "axios";
@@ -18,15 +23,17 @@ export default function SearchDoc() {
   const [allDocData, setAllDocData] = useState([]);
   const [filteredDoctors, setFilteredDoctors] = useState([]);
   const [filters, setFilters] = useState({
-    type: "",
+    type: "Allopathy",
     specializations: [],
     gender: "",
   });
 
   const handleTypeChanges = (event) => {
     const { value } = event.target;
-    console.log(value);
-    setFilters({ ...filters, type: value });
+
+    // clearSpecializations();
+
+    setFilters({ ...filters, specializations: [], type: value });
   };
   const handleSpecializationChanges = (event) => {
     const { checked } = event.target;
@@ -65,10 +72,17 @@ export default function SearchDoc() {
       const genderMatch =
         !filters.gender ||
         doctor.gender.toLowerCase() === filters.gender.toLowerCase();
-      return typeMatch && genderMatch &&specializationsMatch;
+      return typeMatch && genderMatch && specializationsMatch;
     });
     setFilteredDoctors(filteredDocs);
   }, [filters]);
+
+  const clearSpecializations = () => {
+    setFilters((prev) => ({
+      ...prev,
+      specializations: [],
+    }));
+  };
 
   const getAllDoctorsData = async () => {
     try {
@@ -115,6 +129,7 @@ export default function SearchDoc() {
                     <FormControlLabel
                       key={index}
                       value={type}
+                      checked={filters.type === type}
                       onChange={handleTypeChanges}
                       control={
                         <Radio
@@ -129,23 +144,66 @@ export default function SearchDoc() {
             </div>
             <div className={styles.specialization}>
               <div>
-                <span>Specialization</span>
+                <span>
+                  Specialization{" "}
+                  {(filters.type === "Unani" ||
+                    filters.type === "Homeopathy") && (
+                    <span style={{ fontSize: "14px", fontWeight: 300 }}>
+                      (Not Applicable)
+                    </span>
+                  )}
+                </span>
               </div>
               <div>
                 <FormGroup>
-                  {speacializationNames.map((name, index) => (
-                    <FormControlLabel
-                      name={name}
-                      onChange={handleSpecializationChanges}
-                      key={index}
-                      control={
-                        <Checkbox
-                          sx={{ "& .MuiSvgIcon-root": { fontSize: 22 } }}
+                  {filters.type === "Ayurvedic"
+                    ? ayurSpec.map((name, index) => (
+                        <FormControlLabel
+                          name={name}
+                          checked={
+                            filters.specializations.length !== 0 &&
+                            filters.specializations.includes(name.toLowerCase())
+                          }
+                          disabled={
+                            filters.type === "Homeopathy" ||
+                            filters.type === "Unani"
+                              ? true
+                              : false
+                          }
+                          onChange={handleSpecializationChanges}
+                          key={index}
+                          control={
+                            <Checkbox
+                              sx={{ "& .MuiSvgIcon-root": { fontSize: 22 } }}
+                            />
+                          }
+                          label={<span style={{ fontSize: 16 }}>{name}</span>}
                         />
-                      }
-                      label={<span style={{ fontSize: 16 }}>{name}</span>}
-                    />
-                  ))}
+                      ))
+                    : filters.type === "Allopathy" &&
+                      speacializationNames.map((name, index) => (
+                        <FormControlLabel
+                          name={name}
+                          checked={
+                            filters.specializations.length !== 0 &&
+                            filters.specializations.includes(name.toLowerCase())
+                          }
+                          disabled={
+                            filters.type === "Homeopathy" ||
+                            filters.type === "Unani"
+                              ? true
+                              : false
+                          }
+                          onChange={handleSpecializationChanges}
+                          key={index}
+                          control={
+                            <Checkbox
+                              sx={{ "& .MuiSvgIcon-root": { fontSize: 22 } }}
+                            />
+                          }
+                          label={<span style={{ fontSize: 16 }}>{name}</span>}
+                        />
+                      ))}
                 </FormGroup>
               </div>
             </div>

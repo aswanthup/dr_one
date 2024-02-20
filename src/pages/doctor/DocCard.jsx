@@ -17,7 +17,7 @@ export default function DocCard({details}) {
           <div>
             {" "}
             <span style={{ fontWeight: 300, fontSize: 18 }}>
-              Dentist, Cosemetic/Asthetic Dentist
+              {details?.specialization}
             </span>
           </div>
           <div>

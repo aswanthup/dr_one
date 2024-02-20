@@ -5,6 +5,10 @@ export const speacializationNames=[
     "Neurology",
     "Opthalmology",
 ]
+export const ayurSpec=[
+    "Pediatrics",
+   
+]
 export const types=[
     "Allopathy",
     "Homeopathy",
