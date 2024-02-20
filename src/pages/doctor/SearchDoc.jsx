@@ -1,18 +1,76 @@
-import { React, useState } from "react";
+import { React, useState, useEffect } from "react";
 import Navbar from "../../components/Navbar";
 import SearchBox from "./SearchBox";
 import styles from "./searchdoc.module.css";
-import { Checkbox, FormControlLabel, FormGroup } from "@mui/material";
-import { speacializationNames } from "./constants/specialization";
+import {
+  Checkbox,
+  FormControlLabel,
+  FormGroup,
+  Radio,
+  RadioGroup,
+} from "@mui/material";
+import { speacializationNames, types, genderData } from "./constants/filter";
 import Footer from "../../components/Footer";
 import DocCard from "./DocCard";
+import axios from "axios";
 
 export default function SearchDoc() {
-  const [selectedOption, setSelectedOption] = useState(null);
+  const [allDocData, setAllDocData] = useState([]);
+  const [filteredDoctors, setFilteredDoctors] = useState([]);
+  const [filters, setFilters] = useState({
+    type: "",
+    specializations: [],
+    gender: "",
+  });
 
-  const handleCheckboxChange = (value) => {
-    setSelectedOption(value === selectedOption ? null : value);
+  const handleTypeChanges = (event) => {
+    const { value } = event.target;
+    console.log(value);
+    setFilters({ ...filters, type: value });
   };
+  const handleSpecializationChanges = (event) => {
+    const { checked } = event.target;
+    const specialization = event.target.name;
+    // alert(`${specialization} is ${checked}`);
+    if (checked && !filters.specializations.includes(specialization)) {
+      const updatedSpecializations = [
+        ...filters.specializations,
+        specialization,
+      ];
+      setFilters({ ...filters, specializations: updatedSpecializations });
+    } else if (!checked) {
+      setFilters((prev) => ({
+        ...prev,
+        specializations: prev.specializations.filter(
+          (spec) => spec !== specialization
+        ),
+      }));
+    }
+  };
+
+  const handleGenderChanges = (value) => {};
+  const getAllDoctorData = async () => {
+    try {
+      const response = await axios.get(
+        "http://192.168.1.2:3003/doctor/complete_data"
+      );
+      // console.log({ response });
+      setAllDocData(response.data.data);
+      setFilteredDoctors(response.data.data);
+    } catch (err) {
+      alert("server error");
+    } finally {
+    }
+  };
+  useEffect(() => {
+    // alert("api calling");
+    getAllDoctorData();
+  }, []);
+
+  // console.log({ allDocData });
+  // console.log({ filteredDoctors });
+  console.log({ filters });
+
   return (
     <>
       <Navbar />
@@ -28,40 +86,25 @@ export default function SearchDoc() {
                 <span>Type</span>
               </div>
               <div>
-                <FormGroup>
-                  <FormControlLabel
-                    control={
-                      <Checkbox
-                        sx={{ "& .MuiSvgIcon-root": { fontSize: 28 } }}
-                      />
-                    }
-                    label="Allopathy"
-                  />
-                  <FormControlLabel
-                    control={
-                      <Checkbox
-                        sx={{ "& .MuiSvgIcon-root": { fontSize: 28 } }}
-                      />
-                    }
-                    label="Homeopathy"
-                  />
-                  <FormControlLabel
-                    control={
-                      <Checkbox
-                        sx={{ "& .MuiSvgIcon-root": { fontSize: 28 } }}
-                      />
-                    }
-                    label="Unani"
-                  />
-                  <FormControlLabel
-                    control={
-                      <Checkbox
-                        sx={{ "& .MuiSvgIcon-root": { fontSize: 28 } }}
-                      />
-                    }
-                    label="Ayurvedic"
-                  />
-                </FormGroup>
+                <RadioGroup
+                  aria-labelledby="demo-radio-buttons-group-label"
+                  defaultValue=""
+                  name="radio-buttons-group"
+                >
+                  {types.map((type, index) => (
+                    <FormControlLabel
+                      key={index}
+                      value={type}
+                      onChange={handleTypeChanges}
+                      control={
+                        <Radio
+                          sx={{ "& .MuiSvgIcon-root": { fontSize: 22 } }}
+                        />
+                      }
+                      label={<span style={{ fontSize: 16 }}>{type}</span>}
+                    />
+                  ))}
+                </RadioGroup>
               </div>
             </div>
             <div className={styles.specialization}>
@@ -72,12 +115,15 @@ export default function SearchDoc() {
                 <FormGroup>
                   {speacializationNames.map((name, index) => (
                     <FormControlLabel
+                      name={name}
+                      onChange={handleSpecializationChanges}
+                      key={index}
                       control={
                         <Checkbox
-                          sx={{ "& .MuiSvgIcon-root": { fontSize: 28 } }}
+                          sx={{ "& .MuiSvgIcon-root": { fontSize: 22 } }}
                         />
                       }
-                      label={name}
+                      label={<span style={{ fontSize: 16 }}>{name}</span>}
                     />
                   ))}
                 </FormGroup>
@@ -88,64 +134,38 @@ export default function SearchDoc() {
                 <span>Gender</span>
               </div>
               <div>
-                <FormGroup>
-                  <FormControlLabel
-                    control={
-                      <Checkbox
-                        sx={{ "& .MuiSvgIcon-root": { fontSize: 28 } }}
-                      />
-                    }
-                    label="Male"
-                  />
-                  <FormControlLabel
-                    control={
-                      <Checkbox
-                        sx={{ "& .MuiSvgIcon-root": { fontSize: 28 } }}
-                      />
-                    }
-                    label="Female"
-                  />
-                  <FormControlLabel
-                    control={
-                      <Checkbox
-                        sx={{ "& .MuiSvgIcon-root": { fontSize: 28 } }}
-                      />
-                    }
-                    label="Other"
-                  />
-                </FormGroup>
+                <RadioGroup
+                  aria-labelledby="demo-radio-buttons-group-label"
+                  defaultValue=""
+                  name="radio-buttons-group"
+                >
+                  {genderData.map((gender, index) => (
+                    <FormControlLabel
+                      key={index}
+                      value={gender}
+                      control={
+                        <Radio
+                          sx={{ "& .MuiSvgIcon-root": { fontSize: 22 } }}
+                        />
+                      }
+                      label={<span style={{ fontSize: 16 }}>{gender}</span>}
+                    />
+                  ))}
+                </RadioGroup>
               </div>
             </div>
           </div>
           <div className={styles.rightSide}>
             <div className={styles.cardMainContainer}>
-
-            <DocCard/>
-            <DocCard/>
-            <DocCard/>
-            <DocCard/>
-            <DocCard/>
-            <DocCard/>
-            <DocCard/>
-            <DocCard/>
-            <DocCard/>
-            <DocCard/>
-            <DocCard/>
-            <DocCard/>
-            <DocCard/>
-            <DocCard/>
-            <DocCard/>
-            <DocCard/>
-            <DocCard/>
-            <DocCard/>
-            <DocCard/>
-            <DocCard/>
-           
+              {filteredDoctors &&
+                filteredDoctors.map((details, index) => (
+                  <DocCard key={index} details={details} />
+                ))}
             </div>
           </div>
         </div>
       </div>
-      <Footer/>
+      <Footer />
     </>
   );
 }
