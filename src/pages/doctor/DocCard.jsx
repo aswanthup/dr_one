@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./searchdoc.module.css";
 import { Height } from "@mui/icons-material";
 
-export default function DocCard({details}) {
+export default function DocCard({ details }) {
   return (
     <>
       <div className={styles.cardContainer}>
@@ -11,7 +11,9 @@ export default function DocCard({details}) {
         </div>
         <div>
           <div>
-            <span style={{ fontWeight: 400,fontSize: 22 }}>{details?.name}</span>
+            <span style={{ fontWeight: 400, fontSize: 22 }}>
+              {details?.name}
+            </span>
           </div>
           <div style={{ fontWeight: 300, fontSize: 18 }}>Rating</div>
           <div>
@@ -22,7 +24,8 @@ export default function DocCard({details}) {
           </div>
           <div>
             <span style={{ fontWeight: 300, fontSize: 18 }}>
-              6 Year experience
+              {new Date().getFullYear() -
+                parseInt(details?.experience || new Date().getFullYear(), 10)} Year Experience
             </span>
           </div>
         </div>

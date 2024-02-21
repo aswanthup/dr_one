@@ -3,11 +3,16 @@ import Navbar from "../../components/Navbar";
 import SearchBox from "./SearchBox";
 import styles from "./searchdoc.module.css";
 import {
+  Box,
   Checkbox,
   FormControlLabel,
   FormGroup,
+  IconButton,
   Radio,
   RadioGroup,
+  Slider,
+  Stack,
+  Typography,
 } from "@mui/material";
 import {
   speacializationNames,
@@ -18,14 +23,16 @@ import {
 import Footer from "../../components/Footer";
 import DocCard from "./DocCard";
 import axios from "axios";
+import { Add, Remove } from "@mui/icons-material";
 
 export default function SearchDoc() {
   const [allDocData, setAllDocData] = useState([]);
   const [filteredDoctors, setFilteredDoctors] = useState([]);
   const [filters, setFilters] = useState({
-    type: "Allopathy",
+    type: "",
     specializations: [],
     gender: "",
+    experience: 0,
   });
 
   const handleTypeChanges = (event) => {
@@ -72,7 +79,14 @@ export default function SearchDoc() {
       const genderMatch =
         !filters.gender ||
         doctor.gender.toLowerCase() === filters.gender.toLowerCase();
-      return typeMatch && genderMatch && specializationsMatch;
+      const doctorExperince =
+        new Date().getFullYear() - parseInt(doctor?.experience);
+
+      const experienceMatch =
+        !filters.experience || doctorExperince >= filters.experience;
+      return (
+        typeMatch && genderMatch && specializationsMatch && experienceMatch
+      );
     });
     setFilteredDoctors(filteredDocs);
   }, [filters]);
@@ -87,7 +101,7 @@ export default function SearchDoc() {
   const getAllDoctorsData = async () => {
     try {
       const response = await axios.get(
-        "http://192.168.1.2:3003/doctor/complete_data"
+        "http://localhost:3003/doctor/complete_data"
       );
       // console.log({ response });
       setAllDocData(response.data.data);
@@ -104,6 +118,27 @@ export default function SearchDoc() {
   console.log({ allDocData });
   // console.log({ filteredDoctors });
   console.log({ filters });
+  //
+
+  const handleExpChange = (event) => {
+    const experience = event.target.value;
+
+    setFilters({ ...filters, experience });
+  };
+
+  const handleExpChangeBtn = (clickedBtn) => {
+    if (clickedBtn === "add" && filters?.experience < 75) {
+      setFilters((prev) => ({
+        ...prev,
+        experience: prev.experience + 1,
+      }));
+    } else if (clickedBtn === "minus" && filters?.experience > 0) {
+      setFilters((prev) => ({
+        ...prev,
+        experience: prev.experience - 1,
+      }));
+    }
+  };
 
   return (
     <>
@@ -180,8 +215,7 @@ export default function SearchDoc() {
                           label={<span style={{ fontSize: 16 }}>{name}</span>}
                         />
                       ))
-                    : filters.type === "Allopathy" &&
-                      speacializationNames.map((name, index) => (
+                    : speacializationNames.map((name, index) => (
                         <FormControlLabel
                           name={name}
                           checked={
@@ -232,6 +266,82 @@ export default function SearchDoc() {
                   ))}
                 </RadioGroup>
               </div>
+            </div>
+            <div className={styles.exp}>
+              <div>
+                <span>Experience </span>
+              </div>
+              <Stack
+                spacing={2}
+                direction="row"
+                sx={{ mb: 1 }}
+                alignItems="center"
+              >
+                <IconButton onClick={() => handleExpChangeBtn("minus")}>
+                  <Remove />
+                </IconButton>
+
+                <Slider
+                  aria-label="experience"
+                  defaultValue={0}
+                  // getAriaValueText={filters?.experience ?? "" }
+                  shiftStep={30}
+                  valueLabelDisplay="on"
+                  step={1}
+                  value={filters?.experience}
+                  onChange={handleExpChange}
+                  min={0}
+                  max={10}
+                />
+                <IconButton onClick={() => handleExpChangeBtn("add")}>
+                  <Add />
+                </IconButton>
+              </Stack>
+              {/* 
+              <Box sx={{ width: 240 }}>
+                <Box
+                  sx={{
+                    display: "flex",
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                  }}
+                >
+                  <IconButton onClick={() => handleExpChangeBtn("minus")}>
+                    <Remove />
+                  </IconButton>
+                  <Slider
+                    aria-label="experience"
+                    defaultValue={0}
+                    // getAriaValueText={filters?.experience ?? "" }
+                    shiftStep={30}
+                    valueLabelDisplay="on"
+                    step={1}
+                    value={filters?.experience}
+                    onChange={handleExpChange}
+                    min={0}
+                    max={10}
+                  />
+                  <IconButton onClick={() => handleExpChangeBtn("add")}>
+                    <Add />
+                  </IconButton>
+                </Box>
+                <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+                  <Typography
+                    variant="body2"
+                    // onClick={() => setVal(MIN)}
+                    sx={{ cursor: "pointer" }}
+                  >
+                    0
+                  </Typography>
+                  <Typography
+                    variant="body2"
+                    // onClick={() => setVal(MAX)}
+                    sx={{ cursor: "pointer" }}
+                  >
+                    20
+                  </Typography>
+                </Box>
+              </Box> */}
             </div>
           </div>
           <div className={styles.rightSide}>

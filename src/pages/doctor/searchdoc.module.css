@@ -52,6 +52,9 @@
   padding-bottom: 2.5rem;
   padding-left: 30px;
 }
+.exp > :nth-child(1) {
+  padding-bottom: 2.5rem;
+}
 
 .cardMainContainer {
   padding-left: 2rem;
@@ -103,6 +106,6 @@
   height: 100px;
   width: 100px;
   border-radius: 50%;
-  /* object-fit: contain; */
+  object-fit: cover;
 
 }
