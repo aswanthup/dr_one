@@ -15,7 +15,7 @@ export default function Doctor_profile() {
     <div className="doctor-profile-section">
 
       <div className="doctor-profile-photo">
-        <img src="images/doc.jpg" alt="" />
+        <img src= {doctor?.image || `images/doc.jpg`} alt="" />
       </div>
 
   
@@ -33,12 +33,12 @@ export default function Doctor_profile() {
 
      </div>
 
-     <h4>BDS.MDS-Prosthodontist</h4>
+     <h4> {doctor?.education_qualification || `BDS.MDS-Prosthodontist` } </h4>
      <h4>  {new Date().getFullYear() - (doctor?.experience || new Date().getFullYear())}
-            <span style={{ fontWeight: 300, fontSize: 18, paddingLeft: 4 }}>
+            <span style={{paddingLeft: 4 }}>
               Year Experience
             </span></h4>
-     <h4>Dentist,Cosmetic</h4>
+     <h4> {doctor?.specialization || `Dentist,Cosmetic` }</h4>
 
     
 
@@ -48,7 +48,7 @@ export default function Doctor_profile() {
 
 <div className="doctor-profile-right">
       <h4>
-      Dr. Rohith Rajashekhar is a Dentist,Restorative Dentist and Cosmetic/Aesthetic Dentist in T Dasarahalli, Bangalore and has an experience of 6 years in these fields. Dr. Rohith Rajashekhar practices at Partha Dental Skin Hair in T Dasarahalli, Bangalore. He completed BDS from Rajiv Gandhi University of Health Sciences in 2017 and MDS - Prosthodontist And Crown Bridge from Rajiv Gandhi University of Health Sciences in 2022.
+        {doctor?.about}
       </h4>
 
     
