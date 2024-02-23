@@ -71,7 +71,7 @@
 /* ----------------- Card */
 
 .cardContainer {
-  
+  cursor:pointer;
   padding: 1.5rem;
   display: flex;
   gap: 10px;

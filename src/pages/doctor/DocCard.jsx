@@ -1,11 +1,12 @@
 import React from "react";
 import styles from "./searchdoc.module.css";
-import { Height } from "@mui/icons-material";
+import { useNavigate } from "react-router-dom";
 
 export default function DocCard({ details }) {
+  const navigate = useNavigate()
   return (
     <>
-      <div className={styles.cardContainer}>
+      <div onClick={() => navigate("/doctorprofile",{state:details})} className={styles.cardContainer}>
         <div>
           <img className={styles.docImage} src={details?.image} alt="" />
         </div>
@@ -22,10 +23,10 @@ export default function DocCard({ details }) {
               {details?.specialization}
             </span>
           </div>
-          <div>
-            <span style={{ fontWeight: 300, fontSize: 18 }}>
-              {new Date().getFullYear() -
-                parseInt(details?.experience || new Date().getFullYear(), 10)} Year Experience
+          <div style={{ fontWeight: 300, fontSize: 18 }}>
+            {new Date().getFullYear() - (details?.experience || new Date().getFullYear())}
+            <span style={{ fontWeight: 300, fontSize: 18, paddingLeft: 4 }}>
+              Year Experience
             </span>
           </div>
         </div>

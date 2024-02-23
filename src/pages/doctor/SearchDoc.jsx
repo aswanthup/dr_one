@@ -24,6 +24,7 @@ import Footer from "../../components/Footer";
 import DocCard from "./DocCard";
 import axios from "axios";
 import { Add, Remove } from "@mui/icons-material";
+import { useNavigate } from "react-router-dom";
 
 export default function SearchDoc() {
   const [allDocData, setAllDocData] = useState([]);
@@ -34,6 +35,7 @@ export default function SearchDoc() {
     gender: "",
     experience: 0,
   });
+  const navigate=useNavigate()
 
   const handleTypeChanges = (event) => {
     const { value } = event.target;
@@ -80,7 +82,7 @@ export default function SearchDoc() {
         !filters.gender ||
         doctor.gender.toLowerCase() === filters.gender.toLowerCase();
       const doctorExperince =
-        new Date().getFullYear() - parseInt(doctor?.experience);
+        new Date().getFullYear() - doctor?.experience;
 
       const experienceMatch =
         !filters.experience || doctorExperince >= filters.experience;
@@ -139,6 +141,8 @@ export default function SearchDoc() {
       }));
     }
   };
+
+ 
 
   return (
     <>
@@ -348,7 +352,7 @@ export default function SearchDoc() {
             <div className={styles.cardMainContainer}>
               {filteredDoctors &&
                 filteredDoctors.map((details, index) => (
-                  <DocCard key={index} details={details} />
+                  <DocCard  key={index} details={details} />
                 ))}
             </div>
           </div>

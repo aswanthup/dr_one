@@ -98,13 +98,127 @@
 
     /* End Search box */
 
+/* medical field */
+
+.medical_field{
+    justify-content: space-between;
+    margin-top:5vw;
+  
+}
+
+.medical_left{
+    width:32%;
+  
+    flex-direction: column;
+    justify-content: space-between;
+    
+}
+ 
+
+.medical_image{
+    width:30%;
+    align-items: center;
+    justify-content: center;
+}
+
+.medical_right{
+   width:32%;
+   flex-direction: column;
+   justify-content: space-between;
+  align-items:end;
+ 
+
+
+}
 
 
 
+.medical_images_1{
+    height:5vw;
+    width: 5vw;
+  
+    background-image: url("../../../public/images/hosptal1\ \(2\).jpg");
+    background-size: cover;
+
+    border-radius:50%;
+    margin-left:30px;
+    position:relative;
+}
+
+
+
+.medical_data_1{
+    height:70px;
+    width:22vw;
+    margin-top: -24px;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+    z-index:-3;
+    border-radius:1vw;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right:2vw;
+   transition:500ms ease-in-out;
+
+}
+
+.medical_data_1:hover{
+    box-shadow: rgba(222, 16, 16, 0.05) 0px 6px 24px 0px, rgba(58, 101, 253,0.6) 0px 0px 0px 1px;
+}
+
+
+
+
+.medical_image img{
+      width:80%;
+}
+
+.new{
+    align-items: center;
+    gap:1vw;
+}
+
+.new i{
+    font-weight: 100;
+    color:#3A65FD;
+}
+
+
+
+.hospital_mobile_screen{
+    display: none;
+}
+
+
+/*End medical field */
+@media screen and (max-width:1280px){
+
+    .medical_left h1{
+        font-size:2.6rem;
+    }
+
+}
+
+@media screen and (max-width:1024px){
+ 
+    .medical_left h1{
+        font-size:3rem;
+    }
+
+
+
+}
     
 @media screen and (max-width:780px){
 
- 
+ .hospital_web{
+    display:none;
+ }
+
+ .hospital_mobile_screen{
+    display:block;
+}
+
+
 
     .hospital-head-section{
         flex-direction: column;
@@ -199,8 +313,61 @@
   
       /* End Search box */
    
+      .medical_img{
+        justify-content: center;
+      }
 
 
+      .medical_img img{
+        width:40vw;
+      }
+.hospital-banner-section_mobile{
+    margin-top:4vw;
+}
+
+.medical_field_mobile {
+    justify-content: space-between;
+    margin-top:5vw;
+}
+
+.medical_data_1_mobile{
+    height:12vw;
+   width:40vw;
+    margin-top: -24px;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+    z-index:-3;
+    border-radius:1vw;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right:2vw;
+}
+
+.medical_images_mobile img{
+  height:12vw;
+  width: 12vw;
+  object-fit: cover;
+  border-radius: 50%;
+
+}
+
+.medical_images_mobile {
+    margin-left:4vw;
+}
+
+.spec_main_card{
+    width: 100%;
+    padding:1vw;
+    margin-top:4vw;
+}
+
+.spec_main_card h4{
+  margin-left:3vw;
+}
+
+.spec_main_card_button{
+    height: 8vw;
+    width: 8vw;
+}
 
 
 

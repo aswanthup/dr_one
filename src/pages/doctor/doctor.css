@@ -168,10 +168,12 @@
 .doctor_spe{
  height:15vw;
  position: relative;
- margin-top: 3vw;
+
  border-radius:2vw;
- background-image: url(../../../public/images/doc20.jpg);
+ background-image: url(../../../public/images/one.jpg);
  background-size: cover;
+ z-index:-999;
+ opacity: 23;
 }
 
 
@@ -180,26 +182,26 @@
  justify-content: center;
  width: 100%;
 
-  background-color: aqua;
+
+ 
 }
 
 .doctor_spec_card{
-  /* height: 20vw; */
+ margin-top:-130px;
   min-width:20vw;
   background-color: rgb(255, 255, 255);
-  position: absolute;
   border-radius:1.5vw;
   padding: 2.5vw;
-  top:76vw;
-  box-shadow: rgba(255, 255, 255, 0.1) 0px 1px 1px 0px inset, rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+  box-shadow: rgba(255, 255, 255, 0.1) 0px 1px 1px 0px inset, rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(144, 150, 255, 0.3) 0px 30px 60px -30px;
 }
+
 
 
 .spec_main_card{
   border:1px solid rgba(110, 110, 110, 0.4);
   padding:.2vw;
   border-radius:0.3vw;
-  width:15vw;
+  width:250px;
   justify-content:space-between;
   align-items: center;
 }
@@ -226,9 +228,7 @@
 .spec_main_card_button i{
   font-weight: 100;
 }
-.space{
-  height:12vw;
-}
+
 
 .spec_main_cards2{
   margin-top:2vw;
@@ -301,23 +301,38 @@ background-color: #DAE2FF;
 }
 
 
+
+/* Specialties */
+
+.doctor_spec2{
+  margin-top:-100px;
+z-index:1;  
+}
+
+
+
+
+/*End Specialties */
+
+
+
 @media screen and (max-width:1280px){
   .spec_main_card{
-    width:18vw;
+    width:230px;
   }
-
   .doctor_spec_card{
-    top:1000px;
+    margin-top:-100px;
   }
 }
   @media screen and (max-width:1100px){
     .spec_main_card{
-      width:19vw;
+      width:200px;
     }
 
     .doctor_spec_card{
-      top:980px;
+      margin-top:-80px;
     }
+
 }
 
 

@@ -2,8 +2,12 @@ import React from 'react'
 import '../doctor/doctor-profile.css'
 import Footer from '../../components/Footer'
 import Navbar from '../../components/Navbar'
+import { useLocation } from 'react-router-dom';
 
 export default function Doctor_profile() {
+  const location = useLocation();
+  const doctor = location?.state
+  console.log(doctor)
   return (
     <div>
  <Navbar/>
@@ -17,7 +21,7 @@ export default function Doctor_profile() {
   
   <div className="doctor-profile-left-right flex">
   <div className="doctor-profile-left flex">
-     <h2 style={{color:'white'}}>Dr.Rohith Rajashekehar</h2>
+     <h2 style={{color:'white'}}>{doctor?.name}</h2>
      <div className="doctorprofilestar flex">
 
                   <i className="ri-star-fill" />
@@ -30,7 +34,10 @@ export default function Doctor_profile() {
      </div>
 
      <h4>BDS.MDS-Prosthodontist</h4>
-     <h4>6 Year Experience</h4>
+     <h4>  {new Date().getFullYear() - (doctor?.experience || new Date().getFullYear())}
+            <span style={{ fontWeight: 300, fontSize: 18, paddingLeft: 4 }}>
+              Year Experience
+            </span></h4>
      <h4>Dentist,Cosmetic</h4>
 
     

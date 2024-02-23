@@ -71,16 +71,24 @@ export default function Doctoradminregistration2() {
 </div>
 
 
-<div className='doctoradminregistration_input3 flex'>
+<div className='text_area_section flex'>
 
-<div>
+<div className='doctoradminregistration_input3 flex'>
     <h4>About</h4>
     <textarea name="" id="" cols="30" rows="10"></textarea>
 </div>
 
-<div>
+<div className='doctoradminregistration_input4 flex' >
     <h4>Address</h4>
-    <textarea name="" id="" cols="30" rows="10"></textarea>
+
+<div className='doctoradminregistration_input7 flex' >
+    <textarea name="" id=""> </textarea>
+    <div className='doctoradminregistration_input6 flex'>
+        <input type="text" placeholder='Pincode' />
+        <input type="text" />
+    </div>
+</div>
+
 </div>
 
 
