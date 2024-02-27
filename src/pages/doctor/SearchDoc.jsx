@@ -19,7 +19,7 @@ import {
   ayurSpec,
 } from "./constants/filter";
 import Footer from "../../components/Footer";
-import DocCard from "./DocCard";  
+import DocCard from "./DocCard";
 import axios from "axios";
 import { Add, Remove } from "@mui/icons-material";
 // import { useNavigate } from "react-router-dom";
@@ -27,11 +27,16 @@ import { Add, Remove } from "@mui/icons-material";
 export default function SearchDoc() {
   const [allDocData, setAllDocData] = useState([]);
   const [filteredDoctors, setFilteredDoctors] = useState([]);
+
+  const [docsBySearch, setDocsBySearch] = useState([]);
+  const [allDocsBySearch, setAllDocsBySearch] = useState([]);
+  const [emptyResults, setEmptyResults] = useState(false);
   const [filters, setFilters] = useState({
     type: "",
     specializations: [],
     gender: "",
     experience: 0,
+    name: "",
   });
 
   // const navigate=useNavigate()
@@ -70,26 +75,59 @@ export default function SearchDoc() {
   };
 
   useEffect(() => {
-    const filteredDocs = allDocData.filter((doctor) => {
-      const typeMatch =
-        !filters.type ||
-        doctor.type.toLowerCase() === filters.type.toLowerCase();
-      const specializationsMatch =
-        filters.specializations.length === 0 ||
-        filters.specializations.includes(doctor.specialization.toLowerCase());
-      const genderMatch =
-        !filters.gender ||
-        doctor.gender.toLowerCase() === filters.gender.toLowerCase();
-      const doctorExperince =
-        new Date().getFullYear() - doctor?.experience;
+    if (allDocData.length > 0) {
+      let targetArray = [];
+      if (allDocsBySearch.length > 0) {
+        targetArray = [...allDocsBySearch];
+      } else {
+        targetArray = [...allDocData];
+      }
+      console.log({ targetArray });
+      const filteredDocs = targetArray.filter((doctor) => {
+        const typeMatch =
+          !filters.type ||
+          doctor.type.toLowerCase() === filters.type.toLowerCase();
+        const specializationsMatch =
+          filters.specializations.length === 0 ||
+          filters.specializations.includes(doctor.specialization.toLowerCase());
+        const genderMatch =
+          !filters.gender ||
+          doctor.gender.toLowerCase() === filters.gender.toLowerCase();
+        const doctorExperince = new Date().getFullYear() - doctor?.experience;
 
-      const experienceMatch =
-        !filters.experience || doctorExperince >= filters.experience;
-      return (
-        typeMatch && genderMatch && specializationsMatch && experienceMatch
-      );
-    });
-    setFilteredDoctors(filteredDocs);
+        const experienceMatch =
+          !filters.experience || doctorExperince >= filters.experience;
+
+        const nameMatch =
+          !filters.name ||
+          doctor.name.toLowerCase().includes(filters.name.toLowerCase());
+        return (
+          typeMatch &&
+          genderMatch &&
+          specializationsMatch &&
+          experienceMatch &&
+          nameMatch
+        );
+      });
+
+      if (allDocsBySearch.length > 0) {
+        if (filteredDocs.length === 0) {
+          setEmptyResults(true);
+        } else {
+          console.log({ filteredDocs });
+          setDocsBySearch(filteredDocs);
+          setEmptyResults(false);
+        }
+      } else {
+        if (filteredDocs.length === 0) {
+          setEmptyResults(true);
+        } else {
+          console.log({ filteredDocs });
+          setFilteredDoctors(filteredDocs);
+          setEmptyResults(false);
+        }
+      }
+    }
   }, [filters]);
 
   // const clearSpecializations = () => {
@@ -141,18 +179,29 @@ export default function SearchDoc() {
     }
   };
 
-  const updateDocByPlace=(data)=>{
-    setFilteredDoctors(data)
-  }
+  const updateDocByPlace = (data) => {
+    if (data.length === 0) {
+      setEmptyResults(true);
+    } else {
+      setDocsBySearch(data);
+      setAllDocsBySearch(data);
+      setFilters({ ...filters, kk: "kk" });
+    }
+  };
 
- 
+  const handleDocNameSearch = (value) => {
+    setFilters({ ...filters, name: value });
+  };
 
   return (
     <>
       <Navbar />
       <div className={styles.container}>
         <div className={styles.section1}>
-          <SearchBox updateDocs={updateDocByPlace}/>
+          <SearchBox
+            updateDocs={updateDocByPlace}
+            docNames={handleDocNameSearch}
+          />
         </div>
         <div className={styles.section2}></div>
         <div className={styles.section3}>
@@ -231,7 +280,8 @@ export default function SearchDoc() {
                           }
                           disabled={
                             filters.type === "Homeopathy" ||
-                            filters.type === "Unani"
+                            filters.type === "Unani" ||
+                            !filters.type
                               ? true
                               : false
                           }
@@ -292,7 +342,7 @@ export default function SearchDoc() {
                   aria-label="experience"
                   defaultValue={0}
                   // getAriaValueText={filters?.experience ?? "" }
-                  shiftStep={30}
+                  shiftstep={30}
                   valueLabelDisplay="on"
                   step={1}
                   value={filters?.experience}
@@ -304,59 +354,21 @@ export default function SearchDoc() {
                   <Add />
                 </IconButton>
               </Stack>
-              {/* 
-              <Box sx={{ width: 240 }}>
-                <Box
-                  sx={{
-                    display: "flex",
-                    flexDirection: "row",
-                    justifyContent: "space-between",
-                  }}
-                >
-                  <IconButton onClick={() => handleExpChangeBtn("minus")}>
-                    <Remove />
-                  </IconButton>
-                  <Slider
-                    aria-label="experience"
-                    defaultValue={0}
-                    // getAriaValueText={filters?.experience ?? "" }
-                    shiftStep={30}
-                    valueLabelDisplay="on"
-                    step={1}
-                    value={filters?.experience}
-                    onChange={handleExpChange}
-                    min={0}
-                    max={10}
-                  />
-                  <IconButton onClick={() => handleExpChangeBtn("add")}>
-                    <Add />
-                  </IconButton>
-                </Box>
-                <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-                  <Typography
-                    variant="body2"
-                    // onClick={() => setVal(MIN)}
-                    sx={{ cursor: "pointer" }}
-                  >
-                    0
-                  </Typography>
-                  <Typography
-                    variant="body2"
-                    // onClick={() => setVal(MAX)}
-                    sx={{ cursor: "pointer" }}
-                  >
-                    20
-                  </Typography>
-                </Box>
-              </Box> */}
             </div>
           </div>
           <div className={styles.rightSide}>
             <div className={styles.cardMainContainer}>
-              {filteredDoctors &&
+              {emptyResults ? (
+                <h5>No results found</h5>
+              ) : docsBySearch.length > 0 ? (
+                docsBySearch.map((details, index) => (
+                  <DocCard key={index} details={details} />
+                ))
+              ) : (
                 filteredDoctors.map((details, index) => (
-                  <DocCard  key={index} details={details} />
-                ))}
+                  <DocCard key={index} details={details} />
+                ))
+              )}
             </div>
           </div>
         </div>

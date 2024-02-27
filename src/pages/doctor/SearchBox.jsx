@@ -1,10 +1,14 @@
 import axios from "axios";
-import { React, useState, useEffect } from "react";
+import { React, useState, useEffect, useRef } from "react";
+import { useOutsideClick } from "../../hooks/useOutsideClick";
 
-export default function SearchBox({updateDocs}) {
+export default function SearchBox({ updateDocs, docNames }) {
   const [showSearchList, setShowSearchList] = useState(false);
   const [placeLists, setplaceLists] = useState([]);
   const [searchPlace, setSearchPlace] = useState("");
+  const [selectedPlace, setSelectedPlace] = useState("");
+
+  const boxRef = useRef();
 
   useEffect(() => {
     const handleSearch = setTimeout(() => {
@@ -26,42 +30,62 @@ export default function SearchBox({updateDocs}) {
       if (searchPlace) {
         fetchData();
       }
-    }, 700);
+    }, 400);
 
     return () => clearTimeout(handleSearch);
   }, [searchPlace]);
   console.log(placeLists);
 
-  const handleClickPlace = async (id) => {
-    const response = await axios.post(
-      "http://192.168.1.2:3003/doctor/get_pincode",
-      {
-        selectedArea_id: id,
-      }
-    );
-    console.log(typeof(response.data.data))
-    updateDocs(response.data.data)
-    console.log(response);
-
+  const handleClickPlace = async (data) => {
+    const placeName = `${data.postname}, ${data.district}`;
+    setSelectedPlace(placeName);
     setShowSearchList(false);
+    try {
+      const response = await axios.post(
+        "http://192.168.1.2:3003/doctor/get_pincode",
+        {
+          selectedArea_id: data.id,
+        }
+      );
+      const docData = response.data.data;
+      console.log({ docData });
+
+      updateDocs(docData);
+    } catch (err) {
+      console.log(err);
+    }
   };
+  const searchNames = (event) => {
+    const { value } = event.target;
+    docNames(value);
+  };
+
+  useOutsideClick(() => {
+    setShowSearchList(false);
+  }, boxRef);
   return (
-    <div className="Doctor-search-box flex">
+    <div  className="Doctor-search-box flex">
       <div className="Doctor-container-search flex">
         <div className="Doctor-Search-box flex">
           <div className="Doctor-location-section flex">
             <i className="ri-map-pin-2-line" />
-            <input
+            < input ref={boxRef}
               onChange={(event) => {
+                setSelectedPlace("");
                 setSearchPlace(event.target.value);
               }}
+              value={selectedPlace || searchPlace}
               className="Doctor-Location-input"
               type="text"
-              placeholder="Kozhikode"
+              placeholder="Search location"
             />
           </div>
           <div className="Doctor-search-input flex">
-            <input type="text" placeholder="Search Doctor" />
+            <input
+              onChange={searchNames}
+              type="text"
+              placeholder="Search Doctor"
+            />
           </div>
           <div className="Doctor-search-section flex">
             <i className="ri-search-2-line" />
@@ -74,7 +98,7 @@ export default function SearchBox({updateDocs}) {
             {placeLists.map((data, index) => (
               <div
                 key={index}
-                onClick={() => handleClickPlace(data.id)}
+                onClick={() => handleClickPlace(data)}
                 className="searchBox_rslt_items"
               >
                 {data?.postname}, {data?.district}
