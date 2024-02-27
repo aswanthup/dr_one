@@ -1,124 +1,203 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import '../Doctoradmin/doctoradminregistration2.css'
+import { useState, useEffect } from 'react'
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import axios from 'axios'
+import { useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { MyContext } from '../../contexts/Contexts';
 
 export default function Doctoradminregistration2() {
-  return (
-    <div>
-        
-        <div className='doctoradminregistration flex'>
+    const navigate = useNavigate();
+    const { Data, setData } = useContext(MyContext);
+    const [postal, setPostal] = useState();
+    const [postalError, setPostalError] = useState('');
+    const [addressdata, setAddressdata] = useState({});
+  
 
-            <div><h1>Doctor Registration</h1></div>
+    const handleChange = (e) => {
+        setData({
+            ...Data,
+            [e.target.name]: e.target.value
+        });
+    };
 
-<div className='doctoradminregistration_input flex'>
+    const handleSubmit = (e) => {
+        e.preventDefault();
+           // Check if any other validations fail
+           if (!Data.name || !Data.email || !Data.phone || !postal) {
+            toast.error('Please fill in all the required fields.');
+            return;
+        }
+        // Check if there are any validation errors
+        if (postalError) {
+            toast.error('Please fix the pincode error.');
+            return;
+        }
 
+     
+        const mergedData = { ...Data, ...addressdata };
+        console.log("mergedData", mergedData);
+        axios
+            .post(`http://localhost:3003/doctor/dr_registration`, mergedData)
+            .then((res) => {
+                console.log("resssssssssssssss", res);
 
-<div className='doctoradminregistration_input1 flex'>
+                if (res?.data?.success === true) {
+                    console.log("errorrrrrrrr");
+                    toast.success(res?.data?.message);
+                } else {
+                    console.log(res?.data)
+                    toast.error(res?.data);
+                }
+            })
+    };
 
-    <div>
+    const handlePostChange = (event) => {
+        // setData(event.target.value)
+        const { value } = event.target;
+        setPostal(event.target.value);
+        if (!/^\d+$/.test(value)) {
+            setPostalError('Please enter only digits.');
+        } else if (value.length !== 6) {
+            setPostalError('Pincode must be exactly 6 digits.');
+        } else {
+            setPostalError('');
+        }
+    };
+    useEffect(() => {
+        console.log("postal===", postal);
+        if (postal?.length === 6) {
+            console.log(6);
+            axios
+                .get(`https://api.postalpincode.in/pincode/${postal}`)
+                .then((res) => {
+                    console.log(res.data[0].PostOffice);
+                    if (res?.data[0]?.PostOffice === null) {
+                        console.log("noo dataaaa")
+                        toast.error("No records found")
 
-        <h4>Qualification</h4>
-        <input type="text" />
-
-    </div>
-
-
-    <div>
-        
-        <h4>Gender</h4>
-        <input type="text" />
-
-    </div>
-
-    <div>
-        
-        <h4>Type</h4>
-        <input type="text" />
-
-    </div>
-
-
-
-</div>
-
-
-<div className='doctoradminregistration_input2 flex'>
-
-<div>
-
-<h4>Experience</h4>
-<input type="text" />
-
-</div>
-
-
-<div>
-
-<h4>Registration Number</h4>
-<input type="text" />
-
-</div>
-
-<div>
-
-<h4>Specialization</h4>
-<input type="text" />
-
-</div>
-
-
-
-
-</div>
-
-
-<div className='text_area_section flex'>
-
-<div className='doctoradminregistration_input3 flex'>
-    <h4>About</h4>
-    <textarea name="" id="" cols="30" rows="10"></textarea>
-</div>
-
-<div className='doctoradminregistration_input4 flex' >
-    <h4>Address</h4>
-
-<div className='doctoradminregistration_input7 flex' >
-    <textarea name="" id=""> </textarea>
-    <div className='doctoradminregistration_input6 flex'>
-        <input type="text" placeholder='Pincode' />
-        <input type="text" />
-    </div>
-</div>
-
-</div>
+                    } else {
+                        setAddressdata({
+                            ...addressdata,
+                            district: res.data[0]?.PostOffice[0].District,
+                            state: res.data[0]?.PostOffice[0].State,
+                            Name: res.data[0]?.PostOffice[0].Name,
+                            Block: res.data[0]?.PostOffice[0].Block,
+                            pincode: parseInt(postal),
+                        });
+                    }
+                });
+        } else {
+            console.log("no");
+        }
+    }, [postal]);
 
 
+    return (
+        <div>
+            <ToastContainer>
+                position="top-right" autoClose={1000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick rtl={false}, pauseOnFocusLoss draggable pauseOnHover
+            </ToastContainer>
+
+            <div className='doctoradminregistration flex'>
+                <div><h1>Doctor Registration</h1></div>
+                <div className='doctoradminregistration_input flex'>
+                    <div className='doctoradminregistration_input1 flex'>
+                        <div>
+                            <h4>Qualification</h4>
+                            <input type="text" value={Data?.qualification} onChange={handleChange}
+                                name="qualification" />
+
+                        </div>
+                        <div>
+                            <h4>Gender</h4>
+                            <select type="text" name='gender' className='doctoradminregistration_gender' value={Data?.gender} onChange={handleChange}>
+                                <option value="" className='doctoradminregistration_gender_font'></option>
+                                <option value="male" className='doctoradminregistration_gender_font'>Male</option>
+                                <option value="female" className='doctoradminregistration_gender_font'>Female</option>
+                                <option value="other" className='doctoradminregistration_gender_font'>Other</option>
+
+                            </select>
+                        </div>
+                        <div>
+
+                            <h4>Type</h4>
+                            <select type="text" name='type' value={Data?.type} onChange={handleChange} className='doctoradminregistration_gender'>
+                                <option value="" className='doctoradminregistration_gender_font'></option>
+                                <option value="Experience1" className='doctoradminregistration_gender_font'>Allopathy</option>
+                                <option value="Homeopathy" className='doctoradminregistration_gender_font'>Homeopathy</option>
+                                <option value="Ayurveda" className='doctoradminregistration_gender_font'>Ayurveda</option>
+                                <option value="Unani" className='doctoradminregistration_gender_font'>Unani</option>
+
+                            </select>
+                        </div>
+                    </div>
 
 
-</div>
+                    <div className='doctoradminregistration_input2 flex'>
+                        <div>
+                            <h4>Experience</h4>
+                            <select type="number" name='experience' value={Data?.experience} onChange={handleChange} className='doctoradminregistration_gender'>
+                                <option value="" className='doctoradminregistration_gender_font'></option>
+                                <option value="1" className='doctoradminregistration_gender_font'>1</option>
+                                <option value="2" className='doctoradminregistration_gender_font'>2</option>
+                                <option value="3" className='doctoradminregistration_gender_font'>3</option>
+                            </select>
+
+                        </div>
+                        <div>
+                            <h4>Registration Number</h4>
+                            <input type="text" name='registration_no' value={Data?.registration_no} onChange={handleChange} />
+                        </div>
+                        <div>
+
+                            <h4>Specialization</h4>
+                            <select type="text" name='specialization' value={Data?.specialization} onChange={handleChange} className='doctoradminregistration_gender'>
+                                <option value="" className='doctoradminregistration_gender_font'></option>
+                                <option value="spec1" className='doctoradminregistration_gender_font'>spec1</option>
+                                <option value="spec2" className='doctoradminregistration_gender_font'>spec2</option>
+                                <option value="spec3" className='doctoradminregistration_gender_font'>spec3</option>
+                            </select>
+                        </div>
+                    </div>
 
 
+                    <div className='text_area_section flex'>
 
+                        <div className='doctoradminregistration_input3 flex'>
+                            <h4>About</h4>
+                            <textarea name="about" value={Data?.about} id="" cols="30" rows="10" onChange={handleChange}></textarea>
+                        </div>
 
+                        <div className='doctoradminregistration_input4 flex' >
+                            <h4>Address</h4>
 
+                            <div className='doctoradminregistration_input7 flex' >
+                                <textarea name="address" value={Data?.address} id="" onChange={handleChange}> </textarea>
+                                <div className='doctoradminregistration_input6 flex'>
+                                    <input type="text" value={postal} placeholder="Pincode" maxLength={6} onChange={handlePostChange} />
+                                    {/* {postalError && <p style={{ fontSize: "1rem" }}>{postalError}</p>} */}
+                                    <input type="text" value={addressdata?.Name} />
+                                </div>
+                            </div>
 
+                        </div>
+                    </div>
 
+                </div>
+                <div className='doctoradminregistration_button flex'>
 
-</div>
+                    <a href="" className='demo1' onClick={(event) => { event.preventDefault(); navigate(-1); }}><h4>Back</h4></a>
+                    <a href="" onClick={handleSubmit}><h4>Submit</h4></a>
 
-<div className='doctoradminregistration_button flex'>
-
-<a href="" className='demo1'><h4>Back</h4></a>
-                   <a href=""><h4>Next</h4></a> 
-    
-</div>
-
-
-
+                </div>
+            </div>
 
         </div>
-
-
-
-    </div>
-  )
+    )
 }

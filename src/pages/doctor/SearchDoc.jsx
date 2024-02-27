@@ -3,7 +3,6 @@ import Navbar from "../../components/Navbar";
 import SearchBox from "./SearchBox";
 import styles from "./searchdoc.module.css";
 import {
-  Box,
   Checkbox,
   FormControlLabel,
   FormGroup,
@@ -12,7 +11,6 @@ import {
   RadioGroup,
   Slider,
   Stack,
-  Typography,
 } from "@mui/material";
 import {
   speacializationNames,
@@ -21,10 +19,10 @@ import {
   ayurSpec,
 } from "./constants/filter";
 import Footer from "../../components/Footer";
-import DocCard from "./DocCard";
+import DocCard from "./DocCard";  
 import axios from "axios";
 import { Add, Remove } from "@mui/icons-material";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
 export default function SearchDoc() {
   const [allDocData, setAllDocData] = useState([]);
@@ -35,7 +33,8 @@ export default function SearchDoc() {
     gender: "",
     experience: 0,
   });
-  const navigate=useNavigate()
+
+  // const navigate=useNavigate()
 
   const handleTypeChanges = (event) => {
     const { value } = event.target;
@@ -93,17 +92,17 @@ export default function SearchDoc() {
     setFilteredDoctors(filteredDocs);
   }, [filters]);
 
-  const clearSpecializations = () => {
-    setFilters((prev) => ({
-      ...prev,
-      specializations: [],
-    }));
-  };
+  // const clearSpecializations = () => {
+  //   setFilters((prev) => ({
+  //     ...prev,
+  //     specializations: [],
+  //   }));
+  // };
 
   const getAllDoctorsData = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:3003/doctor/complete_data"
+        "http://192.168.1.2:3003/doctor/complete_data"
       );
       // console.log({ response });
       setAllDocData(response.data.data);
@@ -142,6 +141,10 @@ export default function SearchDoc() {
     }
   };
 
+  const updateDocByPlace=(data)=>{
+    setFilteredDoctors(data)
+  }
+
  
 
   return (
@@ -149,7 +152,7 @@ export default function SearchDoc() {
       <Navbar />
       <div className={styles.container}>
         <div className={styles.section1}>
-          <SearchBox />
+          <SearchBox updateDocs={updateDocByPlace}/>
         </div>
         <div className={styles.section2}></div>
         <div className={styles.section3}>
