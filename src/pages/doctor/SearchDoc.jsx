@@ -354,7 +354,7 @@ export default function SearchDoc() {
           <div className={styles.rightSide}>
             <div className={styles.cardMainContainer}>
               {emptyResults ? (
-                <h5>No results found</h5>
+                <h4>No Doctors found</h4>
               ) : docsBySearch.length > 0 ? (
                 docsBySearch.map((details, index) => (
                   <DocCard key={index} details={details} />
