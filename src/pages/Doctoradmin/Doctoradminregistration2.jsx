@@ -22,7 +22,7 @@ export default function Doctoradminregistration2() {
             [e.target.name]: e.target.value
         });
     };
-
+console.log("dataaaaaaaaaa",Data)
     const handleSubmit = (e) => {
         e.preventDefault();
            // Check if any other validations fail
@@ -53,27 +53,17 @@ export default function Doctoradminregistration2() {
                 }
             })
     };
-
-    const handlePostChange = (event) => {
-        // setData(event.target.value)
-        const { value } = event.target;
-        setPostal(event.target.value);
-        if (!/^\d+$/.test(value)) {
-            setPostalError('Please enter only digits.');
-        } else if (value.length !== 6) {
-            setPostalError('Pincode must be exactly 6 digits.');
-        } else {
-            setPostalError('');
-        }
-    };
-    useEffect(() => {
-        console.log("postal===", postal);
-        if (postal?.length === 6) {
+    const updatePosts=(pinCode)=>{
+        
+            // alert("pooo")
             console.log(6);
             axios
-                .get(`https://api.postalpincode.in/pincode/${postal}`)
+                .get(`https://api.postalpincode.in/pincode/${pinCode}`)
                 .then((res) => {
-                    console.log(res.data[0].PostOffice);
+                    console.log(res.data[0]?.PostOffice);
+                    // console.log(res.data);
+
+                    setData({...Data,"Postoffice":res.data[0]?.PostOffice,pincode:pinCode})
                     if (res?.data[0]?.PostOffice === null) {
                         console.log("noo dataaaa")
                         toast.error("No records found")
@@ -85,14 +75,32 @@ export default function Doctoradminregistration2() {
                             state: res.data[0]?.PostOffice[0].State,
                             Name: res.data[0]?.PostOffice[0].Name,
                             Block: res.data[0]?.PostOffice[0].Block,
-                            pincode: parseInt(postal),
+                            pincode: parseInt(Data?.pincode),
                         });
                     }
                 });
-        } else {
-            console.log("no");
+     
+    }
+
+    const handlePostChange = (event) => {
+        // setData(event.target.value)
+        const { value } = event.target;
+        setData({...Data,pincode:value});
+        if(value.length===6){
+            updatePosts(value)
         }
-    }, [postal]);
+        if (!/^\d+$/.test(value)) {
+            setPostalError('Please enter only digits.');
+        } else if (value.length !== 6) {
+            setPostalError('Pincode must be exactly 6 digits.');
+        } else {
+            setPostalError('');
+        }
+    };
+    useEffect(() => {
+        // console.log("postal===", postal);
+      
+    }, []);
 
 
     return (
@@ -180,9 +188,15 @@ export default function Doctoradminregistration2() {
                             <div className='doctoradminregistration_input7 flex' >
                                 <textarea name="address" value={Data?.address} id="" onChange={handleChange}> </textarea>
                                 <div className='doctoradminregistration_input6 flex'>
-                                    <input type="text" value={postal} placeholder="Pincode" maxLength={6} onChange={handlePostChange} />
+                                    <input type="text" value={Data?.pincode ?? ""} placeholder="Pincode" maxLength={6} onChange={handlePostChange} />
                                     {/* {postalError && <p style={{ fontSize: "1rem" }}>{postalError}</p>} */}
-                                    <input type="text" value={addressdata?.Name} />
+                                    {/* <input type="text" value={addressdata?.Name} /> */}
+                                    <select type="text" onChange={handleChange} value={Data.selectedPlace}   name="selectedPlace"  >
+                                    <option selected disabled  > select place </option>
+                                        {Data?.Postoffice&&Data?.Postoffice.map((postData,index)=>(
+                                            <option key={index} value={postData?.Name}>{postData?.Name}</option>
+                                        ))}
+                                    </select>
                                 </div>
                             </div>
 

@@ -130,12 +130,7 @@ export default function SearchDoc() {
     }
   }, [filters]);
 
-  // const clearSpecializations = () => {
-  //   setFilters((prev) => ({
-  //     ...prev,
-  //     specializations: [],
-  //   }));
-  // };
+
 
   const getAllDoctorsData = async () => {
     try {
@@ -178,12 +173,12 @@ export default function SearchDoc() {
       }));
     }
   };
-
+//handle place click and filter docs function
   const updateDocByPlace = (data) => {
     if (data.length === 0) {
       setEmptyResults(true);
     } else {
-      setDocsBySearch(data);
+      // setDocsBySearch(data);
       setAllDocsBySearch(data);
       setFilters({ ...filters, kk: "kk" });
     }

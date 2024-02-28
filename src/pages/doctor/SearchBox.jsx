@@ -50,7 +50,7 @@ export default function SearchBox({ updateDocs, docNames }) {
       const docData = response.data.data;
       console.log({ docData });
 
-      updateDocs(docData);
+      updateDocs(docData);//run function on searchdoc
     } catch (err) {
       console.log(err);
     }

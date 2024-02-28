@@ -1,153 +1,151 @@
 .doctoradminregistration {
-    height:100vh;
-    background-color:#3A65FD;
-    flex-direction: column;
-    justify-content: space-between;
-    padding:2vw;
+  height: 100vh;
+  background-color: #3a65fd;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 2vw;
 }
 
-.doctoradminregistration h1{
+.doctoradminregistration h1 {
+  color: white;
+}
+
+.doctoradminregistration_input1,
+.doctoradminregistration_input2,
+.doctoradminregistration_input3 {
+  justify-content: space-between;
+}
+.doctoradminregistration_input h4 {
+  color: white;
+}
+
+.doctoradminregistration_input {
+  flex-direction: column;
+  justify-content: space-between;
+  height: 68vh;
+}
+
+.doctoradminregistration_input input {
+  background-color: rgba(246, 246, 249, 0.4);
+  border-radius: 0.5vw;
+  height: 3vw;
+  color: white;
+  padding: 1vw;
+  letter-spacing: 2px;
+  width: 30vw;
+  margin-top: 1vw;
+}
+
+.text_area_section {
+  justify-content: space-between;
+  height: 15vw;
+}
+.doctoradminregistration_input3 {
+  flex-direction: column;
+  justify-content: space-between;
+}
+.doctoradminregistration_input3 textarea {
+  height: 12vw;
+  border-radius: 1vw;
+  resize: none;
+  /* margin-top:1vw; */
+  background-color: rgba(246, 246, 249, 0.4);
+  color: white;
+  padding: 1vw;
+  letter-spacing: 2px;
+  width: 46vw;
+}
+
+.doctoradminregistration_input4 textarea {
+  border-radius: 1vw;
+  resize: none;
+  height: 7vw;
+  background-color: rgba(246, 246, 249, 0.4);
+  color: white;
+  padding: 1vw;
+  letter-spacing: 2px;
+  width: 46vw;
+}
+
+.doctoradminregistration_input4 {
+  flex-direction: column;
+  justify-content: space-between;
+}
+.doctoradminregistration_input7 {
+  height: 12vw;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.doctoradminregistration_input6 {
+  justify-content: space-between;
+}
+.doctoradminregistration_input6 input {
+  width: 22vw;
+  margin-top: 0px;
+}
+.doctoradminregistration_input6 select {
+  width: 22vw;
+  margin-top: 0px;
+}
+
+.doctoradminregistration_input6 select::placeholder {
     color: white;
+  }
+
+.doctoradminregistration_input6 input::placeholder {
+  color: white;
 }
 
-.doctoradminregistration_input1,.doctoradminregistration_input2,.doctoradminregistration_input3{
-    justify-content: space-between;
-}
-.doctoradminregistration_input h4{
-    color: white;
-
-
+.doctoradminregistration_button {
+  justify-content: flex-end;
 }
 
-.doctoradminregistration_input{
-    flex-direction:column;
-    justify-content: space-between;
-    height: 68vh;
+.doctoradminregistration_button h4 {
+  background-color: white;
+  width: fit-content;
+  padding: 0.5vw 3vw;
+  border-radius: 0.5vw;
+  color: #3a65fd;
+  margin-left: 2vw;
+  border: 1px solid white;
 }
 
-
-
-.doctoradminregistration_input input{
-    background-color: rgba(246, 246, 249, .4);
-    border-radius:.5vw;
-    height:3vw;
-    color:white;
-    padding: 1vw;
-    letter-spacing:2px;
-    width:30vw;
-    margin-top:1vw;
+.demo1 h4 {
+  border: 1px solid white;
+  background-color: #3a65fd;
+  color: white;
 }
 
-.text_area_section{
-    justify-content: space-between;
-    height:15vw;
-}
-.doctoradminregistration_input3{
-    flex-direction: column;
-    justify-content: space-between;
-}
-.doctoradminregistration_input3 textarea{
-
-    height:12vw;
-    border-radius:1vw;
-    resize: none;
-    /* margin-top:1vw; */
-    background-color: rgba(246, 246, 249, .4);
-    color:white;
-    padding: 1vw;
-    letter-spacing:2px;
-    width:46vw;
-    }
-
-.doctoradminregistration_input4 textarea{
-  
-    border-radius:1vw;
-    resize: none;
-   height:7vw;
-    background-color: rgba(246, 246, 249, .4);
-    color:white;
-    padding: 1vw;
-    letter-spacing:2px;
-    width:46vw;
+.doctoradminregistration_gender {
+  background-color: rgba(246, 246, 249, 0.4);
+  border-radius: 0.5vw;
+  height: 3vw;
+  color: white;
+  padding: 1vw;
+  letter-spacing: 2px;
+  width: 30vw;
+  margin-top: 1vw;
 }
 
-.doctoradminregistration_input4{
-    flex-direction: column;
-    justify-content: space-between;
-}
-.doctoradminregistration_input7{
-   height:12vw;
-     flex-direction: column;
-    justify-content: space-between;
+.doctoradminregistration_gender_font {
+  border: 1px solid rgba(8, 1, 1, 0.884);
+  background-color: white;
+  color: #3a65fd;
 }
 
-.doctoradminregistration_input6{
-    justify-content: space-between;
-}
-.doctoradminregistration_input6 input{
-     width:22vw;
-  margin-top:0px;
-  
-}
-
-.doctoradminregistration_input6 input::placeholder{
-    color: white;
-}
-
-.doctoradminregistration_button{
-   
-    justify-content: flex-end;
-}
-
-.doctoradminregistration_button h4{
-    background-color: white;
-     width: fit-content;
-    padding: .5vw 3vw;
-    border-radius:.5vw;
-    color: #3A65FD;
-    margin-left:2vw;
-    border: 1px solid white;
-}
-
-
-.demo1 h4{
-    border: 1px solid white;
-    background-color: #3A65FD;
-    color: white;
-}
-
-
-.doctoradminregistration_gender{
-    background-color: rgba(246, 246, 249, .4);
-    border-radius: .5vw;
-    height: 3vw;
-    color: white;
-    padding: 1vw;
-    letter-spacing: 2px;
-    width: 30vw;
-    margin-top: 1vw;
-}
-
-.doctoradminregistration_gender_font{
-    border: 1px solid rgba(8, 1, 1, 0.884);
-    background-color:white;
-    color:  #3A65FD;
-
-}
-
-.doctoradminregistration_spec_font{
-    /* border: 1px solid white;
+.doctoradminregistration_spec_font {
+  /* border: 1px solid white;
     background-color: #3A65FD;
     color: white;
     flex-direction: column; */
-    justify-content: space-between;
-    background-color: rgba(246, 246, 249, .4);
-    border-radius: .5vw;
-    height: 3vw;
-    color: white;
-    padding: 1vw;
-    letter-spacing: 2px;
-    width: 30vw;
-    margin-top: 1vw;
-
+  justify-content: space-between;
+  background-color: rgba(246, 246, 249, 0.4);
+  border-radius: 0.5vw;
+  height: 3vw;
+  color: white;
+  padding: 1vw;
+  letter-spacing: 2px;
+  width: 30vw;
+  margin-top: 1vw;
 }
