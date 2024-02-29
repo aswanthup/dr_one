@@ -4,9 +4,20 @@ export const speacializationNames=[
     "Cardiology",
     "Neurology",
     "Opthalmology",
+    "Gynaecology",
+    "Orthopedic",
+    "Pulmanology",
+    "Gastrology",
+    "Mental health",
+    "Pediatrics",
+    "Ophthalmology",
+    "ENT",
+    "Dental",
+    "Nephrology",
+    "Cosmetologist"
 ]
 export const ayurSpec=[
-    "Pediatrics",
+    "Pediatrics",""
    
 ]
 export const types=[

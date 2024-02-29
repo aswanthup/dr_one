@@ -22,9 +22,12 @@ import Footer from "../../components/Footer";
 import DocCard from "./DocCard";
 import axios from "axios";
 import { Add, Remove } from "@mui/icons-material";
+import { useLocation } from "react-router-dom";
 // import { useNavigate } from "react-router-dom";
 
 export default function SearchDoc() {
+  const location=useLocation()
+  const passedSpecialization=location.state || ""
   const [allDocData, setAllDocData] = useState([]);
   const [filteredDoctors, setFilteredDoctors] = useState([]);
 
@@ -33,11 +36,13 @@ export default function SearchDoc() {
   const [emptyResults, setEmptyResults] = useState(false);
   const [filters, setFilters] = useState({
     type: "",
-    specializations: [],
+    specializations: [passedSpecialization],
     gender: "",
     experience: 0,
     name: "",
   });
+
+  console.log({location})
 
   // const navigate=useNavigate()
 
@@ -137,9 +142,18 @@ export default function SearchDoc() {
       const response = await axios.get(
         "http://192.168.1.2:3003/doctor/complete_data"
       );
+      const allDoctorsDetails=response.data.data
+      // if(passedSpecialization){
+      // const docsBySpecialization=allDoctorsDetails.filter((doc)=>doc.specialization.toLowerCase()===passedSpecialization.toLowerCase())
+      // setAllDocData(docsBySpecialization)
+      // setFilteredDoctors(docsBySpecialization)
+      // }else{
+
+        setAllDocData(allDoctorsDetails);
+        setFilteredDoctors(allDoctorsDetails);
+      // }
+      
       // console.log({ response });
-      setAllDocData(response.data.data);
-      setFilteredDoctors(response.data.data);
     } catch (err) {
       alert("server error");
     } finally {

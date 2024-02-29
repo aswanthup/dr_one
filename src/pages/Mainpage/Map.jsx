@@ -44,7 +44,7 @@ export default function Map() {
             <a href="/doctoradminregistration1"><h4>Registration</h4></a>
             <a href="/doctoradminregistration2"><h4>Registration 2</h4></a>
             
-            <a href="/hospitaladmin"><h4>Dashboard</h4></a>
+            <a href="/doctoradmin"><h4>Dashboard</h4></a>
 
             <h2>LAB ADMIN</h2>
 
