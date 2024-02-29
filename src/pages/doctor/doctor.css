@@ -326,6 +326,12 @@
 }
 
 @media screen and (max-width: 780px) {
+
+
+  .head{
+    display: none;
+  }
+
   .doctor-banner-image img {
     width: 60vw;
   }
@@ -411,4 +417,35 @@
     width: 100%;
     height: 50vw;
   }
+
+
+
+.mobile_partner_card{
+  padding: 2vw;
+  box-shadow: rgba(3, 102, 214, 0.3) 0px 0px 0px 2px;
+  border-radius: 2vw;
+  gap: 4vw;
+  margin-top:5vw;
+}
+
+.mobile_partner_card_img img{
+  width: 14vw;
+  height: 14vw;
+  border-radius:2vw;
+}
+
+.mobile_partner_card_img{
+  align-items: center;
+}
+
+
+.mobile_partner_card_data{
+  flex-direction: column;
+ justify-content: center;
+
+}
+
+.mobile_partner_card1{
+  margin-top: 0px;
+}
 }

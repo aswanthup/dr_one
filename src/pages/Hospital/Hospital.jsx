@@ -553,7 +553,7 @@ export default function Hospital() {
 
 <div className="mobile-second-heading">
                 <h1>Find Hospitals by </h1>
-                <h1><span className='color-blue '>Medical Field</span></h1>
+                <h1><span className='color-blue '>Specialties</span></h1>
 </div>
 
  <div className='spec_main_card flex'> 

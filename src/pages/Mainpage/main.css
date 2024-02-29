@@ -877,31 +877,37 @@ margin-top:40px;
         border-radius:50px;
         padding: 0px 4vw;
     }
-
+    .mobile-specialties-image{
+        height:25vw;
+    }
 .mobile-specialties-image img{
-    width: 30vw;
-    height: 30vw;
-    border-radius:50%;
+    width: 25vw;
+    height: 25vw;
+    border-radius:10px;
 }
 .mobile-specialties-card{
-    gap:5vw;
+    gap:7vw;
 }
 .mobile-specialties-data{
-    padding:2.5vw 0vw;
+    /* padding:2.5vw 0vw; */
     flex-direction: column;
-    justify-content: space-between;
+    /* justify-content: space-around; */
+    height: 25vw;
 }
-
+/* .mobile-specialties-data h4{
+    line-height:20px;
+} */
 .mobile-specialties-button{
     background-color: #3A65FD;
     color: white;
     width:fit-content;
-    border-radius:50px;
+    border-radius:5px;
     padding: 0px 4vw;
+
 }
 
 .mobile-specialties-card2{
-    margin-top:5vw;
+    margin-top:7vw;
 }
 
 .diagnostic-card{

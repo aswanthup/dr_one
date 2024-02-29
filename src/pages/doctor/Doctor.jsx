@@ -686,164 +686,186 @@ export default function Doctor() {
 
 <div className="mobile-doctor-specialties">
 <div className="mobile-second-heading">
-                <h1>Our <span className='color-blue '>Specialties</span></h1>
-              </div>
-              <div class="container1">
-  <div class="flex1">
-    <div class="content">              <div className="mobile-specialties-card flex">
-                <div className="mobile-specialties-image">
-                       <img src="images/lab2.jpg" alt="" />
-                </div>
-
-                <div className="mobile-specialties-data flex">
-
-                  <h4>Period doubts or Pregnancy</h4>
-                  <a href=""><h4 className='mobile-specialties-button' >Consult Now</h4></a>
-
+                <h1>Find Doctor by<span className='color-blue '>Health Concern</span></h1>
 </div>
 
+<div className="mobile-specialties-card mobile-specialties-card flex">
+            <div className="mobile-specialties-image">
+              <img src="images/lab2.jpg" alt="" />
+            </div>
 
-              </div></div>
-    <div class="content">              <div className="mobile-specialties-card flex">
-                <div className="mobile-specialties-image">
-                       <img src="images/lab2.jpg" alt="" />
-                </div>
-
-                <div className="mobile-specialties-data flex">
-
-                  <h4>Period doubts or Pregnancy</h4>
-                  <a href=""><h4 className='mobile-specialties-button' >Consult Now</h4></a>
-
-</div>
-
-
-              </div></div>
-    <div class="content">      <div className="mobile-specialties-card flex">
-                <div className="mobile-specialties-image">
-                       <img src="images/lab2.jpg" alt="" />
-                </div>
-
-                <div className="mobile-specialties-data flex">
-
-                  <h4>Period doubts or Pregnancy</h4>
-                  <a href=""><h4 className='mobile-specialties-button' >Consult Now</h4></a>
-
-</div>
-
-
-              </div></div>
-    <div class="content">      <div className="mobile-specialties-card flex">
-                <div className="mobile-specialties-image">
-                       <img src="images/lab2.jpg" alt="" />
-                </div>
-
-                <div className="mobile-specialties-data flex">
-
-                  <h4>Period doubts or Pregnancy</h4>
-                  <a href=""><h4 className='mobile-specialties-button' >Consult Now</h4></a>
-
-</div>
-
-
-              </div></div>
-    <div class="content">      <div className="mobile-specialties-card flex">
-                <div className="mobile-specialties-image">
-                       <img src="images/lab2.jpg" alt="" />
-                </div>
-
-                <div className="mobile-specialties-data flex">
-
-                  <h4>Period doubts or Pregnancy</h4>
-                  <a href=""><h4 className='mobile-specialties-button' >Consult Now</h4></a>
-
-</div>
-
-
-              </div></div>
-    <div class="content">      <div className="mobile-specialties-card flex">
-                <div className="mobile-specialties-image">
-                       <img src="images/lab2.jpg" alt="" />
-                </div>
-
-                <div className="mobile-specialties-data flex">
-
-                  <h4>Period doubts or Pregnancy</h4>
-                  <a href=""><h4 className='mobile-specialties-button' >Consult Now</h4></a>
-
-</div>
-
-
-              </div></div>
-    <div class="content">      <div className="mobile-specialties-card flex">
-                <div className="mobile-specialties-image">
-                       <img src="images/lab2.jpg" alt="" />
-                </div>
-
-                <div className="mobile-specialties-data flex">
-
-                  <h4>Period doubts or Pregnancy</h4>
-                  <a href=""><h4 className='mobile-specialties-button' >Consult Now</h4></a>
-
-</div>
-
-
-              </div></div>
-    <div class="content">      <div className="mobile-specialties-card flex">
-                <div className="mobile-specialties-image">
-                       <img src="images/lab2.jpg" alt="" />
-                </div>
-
-                <div className="mobile-specialties-data flex">
-
-                  <h4>Period doubts or Pregnancy</h4>
-                  <a href=""><h4 className='mobile-specialties-button' >Consult Now</h4></a>
-
-</div>
-
-
-              </div></div>
+            <div className="mobile-specialties-data flex">
  
-  </div>
+              <h4>Period doubts or</h4> 
+              <h4> Pregnancy</h4>
+              <a href="">
+                <h4 className="mobile-specialties-button">Consult Now</h4>
+              </a>
+
+
+            </div>
+          </div>
+
+
+          <div className="mobile-specialties-card2 mobile-specialties-card flex">
+            <div className="mobile-specialties-image">
+              <img src="images/lab2.jpg" alt="" />
+            </div>
+
+            <div className="mobile-specialties-data flex">
+ 
+              <h4>Period doubts or</h4> 
+              <h4> Pregnancy</h4>
+              <a href="">
+                <h4 className="mobile-specialties-button">Consult Now</h4>
+              </a>
+
+
+            </div>
+          </div>
+
+          <div className="mobile-specialties-card2 mobile-specialties-card flex">
+            <div className="mobile-specialties-image">
+              <img src="images/lab2.jpg" alt="" />
+            </div>
+
+            <div className="mobile-specialties-data flex">
+ 
+              <h4>Period doubts or</h4> 
+              <h4> Pregnancy</h4>
+              <a href="">
+                <h4 className="mobile-specialties-button">Consult Now</h4>
+              </a>
+
+
+            </div>
+          </div>
+
+
+</div>
 
 
 
+<div className="mobile-second-heading">
+                <h1>Find Hospitals by </h1>
+                <h1><span className='color-blue '>Specialties</span></h1>
+</div>
 
+<div className='spec_main_card flex'> 
 
-  
-  <h4>  <a href="#" id="loadMore"  onClick={showMoreContent}>Load More</a></h4>
+<h4>Neurology</h4>
 
+<div className='spec_main_card_button flex'>
 
-  <div>
-      {content.slice(0, visibleContent).map((item, index) => (
-      //   <div key={index} className="content">
-      //    {/* Render your content here */}
-      //  </div>
-      <>
-      </>
-     
-      ))}
-      {visibleContent < content.length && (
-        <button id="loadMore" onClick={showMoreContent}>
-          Load More
-        </button>
-      )}
-      {visibleContent >= content.length && (
-        <button id="loadMore" className="noContent" disabled>
-          {/* No Content h */}
-        </button>
-      )} 
-    </div>
+<i class="ri-arrow-right-line"></i>
 
 </div>
 
 </div>
+<div className='spec_main_card flex'> 
+
+<h4>Neurology</h4>
+
+<div className='spec_main_card_button flex'>
+
+<i class="ri-arrow-right-line"></i>
+
+</div>
+
+</div>
+<div className='spec_main_card flex'> 
+
+<h4>Neurology</h4>
+
+<div className='spec_main_card_button flex'>
+
+<i class="ri-arrow-right-line"></i>
+
+</div>
+
+</div>
+
+
+
+
 
 <div className="mobile-Our-Featured-Partners">
 <div className="mobile-second-heading">
+
                 <h1>Our <span className='color-blue '>Featured</span> Partner</h1>
       
               </div>
+
+<div className="mobile_partner_card mobile_partner_card1 flex">
+<div className="mobile_partner_card_img flex">
+<img src="images/lab2.jpg" alt="" />
 </div>
+
+<div className="mobile_partner_card_data flex">
+
+  <h3>Dr.Rohith Raj</h3>
+  <h4>Dentist, Cosmetic</h4>
+  
+</div>
+
+
+</div>
+
+
+<div className="mobile_partner_card flex">
+<div className="mobile_partner_card_img flex">
+<img src="images/lab2.jpg" alt="" />
+</div>
+
+<div className="mobile_partner_card_data flex">
+
+  <h3>Dr.Rohith Raj</h3>
+  <h4>Dentist, Cosmetic</h4>
+  
+</div>
+
+
+</div>
+
+
+<div className="mobile_partner_card flex">
+<div className="mobile_partner_card_img flex">
+<img src="images/lab2.jpg" alt="" />
+</div>
+
+<div className="mobile_partner_card_data flex">
+
+  <h3>Dr.Rohith Raj</h3>
+  <h4>Dentist, Cosmetic</h4>
+  
+</div>
+
+
+</div>
+
+
+<div className="mobile_partner_card flex">
+<div className="mobile_partner_card_img flex">
+<img src="images/lab2.jpg" alt="" />
+</div>
+
+<div className="mobile_partner_card_data flex">
+
+  <h3>Dr.Rohith Raj</h3>
+  <h4>Dentist, Cosmetic</h4>
+  
+</div>
+
+
+</div>
+
+
+</div>
+
+
+
+
+
 
   </div>
          

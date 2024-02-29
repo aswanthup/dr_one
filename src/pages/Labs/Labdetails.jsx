@@ -10,10 +10,12 @@ export default function Labdetails() {
     
     <div>
 
-<Headroom>
+
+ <div className='Lab_details_Laptop'>
+
+ <Headroom>
 <Navbar /> 
 </Headroom>
- <div>
 
         <div className="container-third">
           <div className="lab-details-about flex">
@@ -55,6 +57,7 @@ export default function Labdetails() {
              <div><img src="images/la (3).jpg" alt="" /></div>
              <div><img src="images/la (4).jpg" alt="" /></div>
              <div><img src="images/la (1).jpg" alt="" /></div>
+
             </div>
 
             </div>
@@ -91,6 +94,92 @@ export default function Labdetails() {
           </div>
         </div>
       </div>
+
+
+
+{/*End Lab Mobile Screen */}
+
+      <div className='container Lab_details_mobile'>
+
+
+
+
+{/* search box */}
+
+
+{/*End search box */}
+
+{/* Hero */}
+<div className="lab_Pha_Mob_img">
+<img src="images/ph1 (3).jpg" alt="" />
+</div>
+
+{/*End Hero */}
+
+
+{/* Datas */}
+
+<h1>New Emprire Lab</h1>
+
+<div className='lab_type'><h4>Allopathy</h4></div>
+
+<div className='lab_about'>
+  <h4>
+  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat 
+  </h4>
+</div>
+
+
+<div className='lab_location_mobile'>
+   <i className="ri-map-pin-fill" />
+   <h4>Shop No 3, Empire House, Irla, S V Road, Vile Parle West, Mumbai - 400056 (Opposite Irla Petrol Pump)</h4>
+</div>
+
+<a href=''>
+<h4 className="lab_time_button_mobile flex">9.00 am to 5 pm</h4>
+</a>
+
+<a href=''>
+<h4 className="lab_time_button_mobile2 flex">Contact now</h4>
+</a>
+
+
+{/*End Datas */}
+
+{/* Photos */}
+
+
+
+<div className="lab_Pha_Mob_img">
+   <img src="images/ph1 (1).jpg" alt="" />
+</div>
+
+<div className="lab_Pha_Mob_img">
+<img src="images/ph1 (2).jpg" alt="" />
+</div>
+
+<div className="lab_Pha_Mob_img">
+<img src="images/ph1 (3).jpg" alt="" />
+</div>
+
+
+{/*End Photos */}
+
+
+
+
+{/*End Lab Mobile Screen */}
+
+
+
+
+
+
+
+
+   </div>
+
+
 <Footer />
     </div>
   )

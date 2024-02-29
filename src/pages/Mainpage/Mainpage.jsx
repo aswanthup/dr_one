@@ -540,10 +540,14 @@ export default function Mainpage() {
             </div>
 
             <div className="mobile-specialties-data flex">
-              <h4>Period doubts or Pregnancy</h4>
+ 
+              <h4>Period doubts or</h4> 
+              <h4> Pregnancy</h4>
               <a href="">
                 <h4 className="mobile-specialties-button">Consult Now</h4>
               </a>
+
+
             </div>
           </div>
 
@@ -553,10 +557,28 @@ export default function Mainpage() {
             </div>
 
             <div className="mobile-specialties-data flex">
-              <h4>Period doubts or Pregnancy</h4>
+            <h4>Period doubts or</h4> 
+              <h4> Pregnancy</h4>
               <a href="">
                 <h4 className="mobile-specialties-button">Consult Now</h4>
               </a>
+            </div>
+          </div>
+
+          <div className="mobile-specialties-card2 mobile-specialties-card flex">
+            <div className="mobile-specialties-image">
+              <img src="images/lab2.jpg" alt="" />
+            </div>
+
+            <div className="mobile-specialties-data flex">
+ 
+              <h4>Period doubts or</h4> 
+              <h4> Pregnancy</h4>
+              <a href="">
+                <h4 className="mobile-specialties-button">Consult Now</h4>
+              </a>
+
+
             </div>
           </div>
 
