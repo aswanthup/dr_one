@@ -1,13 +1,29 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Footer from "../../components/Footer";
 import Navbar from "../../components/Navbar";
 import Headroom from "react-headroom";
 import "../Labs/labdetails.css";
 
+
+
+import { useLocation } from 'react-router-dom'
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+
 export default function Mainpage() {
   const handleSearch = () => {
 
+
   };
+  
+  const location = useLocation();
+
+  useEffect(() => {
+      AOS.init({
+          once: false,
+      });
+      AOS.refresh();
+  }, [location.pathname]);
   return (
     <div>
       <div>
@@ -59,8 +75,8 @@ export default function Mainpage() {
                 Explore Our <span>Features</span>
               </h1>
             </div>
-            <div className="home-cards flex ">
-              <div className="home-card">
+            <div   className="home-cards flex ">
+              <div  className="home-card" data-aos="zoom-in"  data-aos-duration="3000" >
                 <div className="image-section">
                   <img src="/images/doc.jpg" alt="" />
                 </div>
@@ -73,7 +89,7 @@ export default function Mainpage() {
                   </a>
                 </div>
               </div>
-              <div className="home-card">
+              <div className="home-card" data-aos="zoom-in" data-aos-duration="3000">
                 <div className="image-section">
                   <img src="/images/lab.jpg" alt="" />
                 </div>
@@ -86,7 +102,7 @@ export default function Mainpage() {
                   </a>
                 </div>
               </div>
-              <div className="home-card">
+              <div  className="home-card" data-aos="zoom-in" data-aos-duration="3000">
                 <div className="image-section">
                   <img src="/images/med.jpg" alt="" />
                 </div>
@@ -100,7 +116,8 @@ export default function Mainpage() {
                 </div>
               </div>
             </div>
-            <div className="home-hospital flex">
+            <div className="home-hospital flex" data-aos="fade-up"
+     data-aos-anchor-placement="top-bottom"  data-aos-duration="3000">
               <div className="home-hospital-images flex">
                 <img src="/images/hosptal1 (1).jpg" alt="" />
                 <img src="/images/hosptal1 (2).jpg" alt="" />
@@ -136,7 +153,7 @@ export default function Mainpage() {
 
             <div className="home-specialties-cards flex">
               <div className="home-specialties-card hide flex">
-                <div className="home-specialties-image">
+                <div className="home-specialties-image" data-aos="zoom-out" data-aos-duration="3000">
                   <img src="/images/banner-web-01.png" alt="" />
                 </div>
                 <div className="home-specialties-titile">
@@ -151,7 +168,7 @@ export default function Mainpage() {
               </div>
 
               <div className="home-specialties-card flex">
-                <div className="home-specialties-image">
+                <div className="home-specialties-image" data-aos="zoom-out" data-aos-duration="3000">
                   <img src="/images/1 (2).jpg" alt="" />
                 </div>
                 <div className="home-specialties-titile">
@@ -164,7 +181,7 @@ export default function Mainpage() {
               </div>
 
               <div className="home-specialties-card flex">
-                <div className="home-specialties-image">
+                <div className="home-specialties-image" data-aos="zoom-out" data-aos-duration="3000">
                   <img src="/images/1 (6).jpg" alt="" />
                 </div>
                 <div className="home-specialties-titile">
@@ -177,7 +194,7 @@ export default function Mainpage() {
               </div>
 
               <div className="home-specialties-card hide flex">
-                <div className="home-specialties-image">
+                <div className="home-specialties-image" data-aos="zoom-out" data-aos-duration="3000">
                   <img src="/images/banner-web-01.png" alt="" />
                 </div>
                 <div className="home-specialties-titile">
@@ -195,7 +212,7 @@ export default function Mainpage() {
               style={{ marginTop: "5vh" }}
             >
               <div className="home-specialties-card flex">
-                <div className="home-specialties-image">
+                <div className="home-specialties-image" data-aos="zoom-out" data-aos-duration="3000">
                   <img src="/images/1 (1).jpg" alt="" />
                 </div>
                 <div className="home-specialties-titile">
@@ -208,7 +225,7 @@ export default function Mainpage() {
               </div>
 
               <div className="home-specialties-card flex">
-                <div className="home-specialties-image">
+                <div className="home-specialties-image" data-aos="zoom-out" data-aos-duration="3000">
                   <img src="/images/1 (4).jpg" alt="" />
                 </div>
                 <div className="home-specialties-titile">
@@ -221,7 +238,7 @@ export default function Mainpage() {
               </div>
 
               <div className="home-specialties-card flex">
-                <div className="home-specialties-image">
+                <div className="home-specialties-image" data-aos="zoom-out" data-aos-duration="3000">
                   <img src="/images/1 (2).jpg" alt="" />
                 </div>
                 <div className="home-specialties-titile">
@@ -234,7 +251,7 @@ export default function Mainpage() {
               </div>
 
               <div className="home-specialties-card flex">
-                <div className="home-specialties-image">
+                <div className="home-specialties-image" data-aos="zoom-out" data-aos-duration="3000">
                   <img src="/images/1 (5).jpg" alt="" />
                 </div>
                 <div className="home-specialties-titile">
@@ -256,7 +273,8 @@ export default function Mainpage() {
               </h1>
             </div>
 
-            <div className="lab-content flex">
+            <div className="lab-content flex" data-aos="fade-up"
+     data-aos-anchor-placement="top-bottom" data-aos-duration="3000">
               <div className="lab-left">
                 <div className="home-lab-title">
                   <h2>HEALTH TEST AT YOUR HOME</h2>
