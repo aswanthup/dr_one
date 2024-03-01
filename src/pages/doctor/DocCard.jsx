@@ -19,7 +19,7 @@ export default function DocCard({ details }) {
           <div style={{ fontWeight: 300, fontSize: 18 }}>Rating</div>
           <div>
             {" "}
-            <span style={{ fontWeight: 300, fontSize: 18 }}>
+            <span style={{ fontWeight: 300, fontSize: 18,color:"#3A65FD" }}>
               {details?.specialization}
             </span>
           </div>
