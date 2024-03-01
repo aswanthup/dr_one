@@ -66,13 +66,13 @@ export default function Doctoradmin() {
 
   </div>
 
-<div className='hospitaladmin_images flex' >
+{/* <div className='hospitaladmin_images flex' >
 
 <img src="images/hos.jpeg" alt="" />
 <img src="images/hosptal1 (1).jpg" alt="" />
 <img src="images/hosptal1 (2).jpg" alt="" />
 <img src="images/hosptal1 (3).jpg" alt="" />
-</div>
+</div> */}
 
 
 </div>

@@ -98,7 +98,7 @@ export default function Hospital() {
 
 <div>
 
-<div className='medical_images_1'>
+<div className='medical_images_1 medical_images_2'>
 
 </div>
 
@@ -130,14 +130,14 @@ export default function Hospital() {
 
           <div className='new2'>
 
-              <div className='medical_images_1'>
+              <div className='medical_images_1 medical_images_3'>
 
               </div>
 
               <a href='' className='medical_data_1 flex'>
 
                 <div className='flex new'>
-                  <h4>Allopathy</h4>
+                  <h4>Unani</h4>
                   <i class="ri-arrow-right-circle-line"></i>
                 </div>
 
@@ -149,14 +149,14 @@ export default function Hospital() {
 
             <div>
 
-              <div className='medical_images_1'>
+              <div className='medical_images_1 medical_images_4'>
 
               </div>
 
               <a href='' className='medical_data_1 flex'>
 
                 <div className='flex new'>
-                  <h4>Allopathy</h4>
+                  <h4>Ayurvedic</h4>
                   <i class="ri-arrow-right-circle-line"></i>
                 </div>
 
@@ -167,14 +167,14 @@ export default function Hospital() {
 
 <div>
 
-<div className='medical_images_1'>
+<div className='medical_images_1 medical_images_5'>
 
 </div>
 
 <a href='' className='medical_data_1 flex'>
 
   <div className='flex new'>
-    <h4>Homeopathy</h4>
+    <h4>Other</h4>
     <i class="ri-arrow-right-circle-line"></i>
   </div>
 

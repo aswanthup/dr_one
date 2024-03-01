@@ -153,7 +153,7 @@ export default function Mainpage() {
 
             <div className="home-specialties-cards flex">
               <div className="home-specialties-card hide flex">
-                <div className="home-specialties-image" data-aos="zoom-out" data-aos-duration="3000">
+                <div className="home-specialties-image" data-aos="zoom-out" >
                   <img src="/images/banner-web-01.png" alt="" />
                 </div>
                 <div className="home-specialties-titile">
@@ -168,7 +168,7 @@ export default function Mainpage() {
               </div>
 
               <div className="home-specialties-card flex">
-                <div className="home-specialties-image" data-aos="zoom-out" data-aos-duration="3000">
+                <div className="home-specialties-image" data-aos="zoom-out" >
                   <img src="/images/1 (2).jpg" alt="" />
                 </div>
                 <div className="home-specialties-titile">
@@ -181,7 +181,7 @@ export default function Mainpage() {
               </div>
 
               <div className="home-specialties-card flex">
-                <div className="home-specialties-image" data-aos="zoom-out" data-aos-duration="3000">
+                <div className="home-specialties-image" data-aos="zoom-out" >
                   <img src="/images/1 (6).jpg" alt="" />
                 </div>
                 <div className="home-specialties-titile">
@@ -194,7 +194,7 @@ export default function Mainpage() {
               </div>
 
               <div className="home-specialties-card hide flex">
-                <div className="home-specialties-image" data-aos="zoom-out" data-aos-duration="3000">
+                <div className="home-specialties-image" data-aos="zoom-out" >
                   <img src="/images/banner-web-01.png" alt="" />
                 </div>
                 <div className="home-specialties-titile">
@@ -212,7 +212,7 @@ export default function Mainpage() {
               style={{ marginTop: "5vh" }}
             >
               <div className="home-specialties-card flex">
-                <div className="home-specialties-image" data-aos="zoom-out" data-aos-duration="3000">
+                <div className="home-specialties-image" data-aos="zoom-out" >
                   <img src="/images/1 (1).jpg" alt="" />
                 </div>
                 <div className="home-specialties-titile">
@@ -225,7 +225,7 @@ export default function Mainpage() {
               </div>
 
               <div className="home-specialties-card flex">
-                <div className="home-specialties-image" data-aos="zoom-out" data-aos-duration="3000">
+                <div className="home-specialties-image" data-aos="zoom-out" >
                   <img src="/images/1 (4).jpg" alt="" />
                 </div>
                 <div className="home-specialties-titile">
@@ -238,7 +238,7 @@ export default function Mainpage() {
               </div>
 
               <div className="home-specialties-card flex">
-                <div className="home-specialties-image" data-aos="zoom-out" data-aos-duration="3000">
+                <div className="home-specialties-image" data-aos="zoom-out">
                   <img src="/images/1 (2).jpg" alt="" />
                 </div>
                 <div className="home-specialties-titile">
@@ -251,7 +251,7 @@ export default function Mainpage() {
               </div>
 
               <div className="home-specialties-card flex">
-                <div className="home-specialties-image" data-aos="zoom-out" data-aos-duration="3000">
+                <div className="home-specialties-image" data-aos="zoom-out" >
                   <img src="/images/1 (5).jpg" alt="" />
                 </div>
                 <div className="home-specialties-titile">
