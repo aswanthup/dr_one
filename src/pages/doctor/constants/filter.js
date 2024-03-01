@@ -17,8 +17,7 @@ export const speacializationNames=[
     "Cosmetologist"
 ]
 export const ayurSpec=[
-    "Pediatrics",""
-   
+    "Pediatrics",  
 ]
 export const types=[
     "Allopathy",

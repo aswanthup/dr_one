@@ -1,5 +1,5 @@
 .container {
-  padding: 3rem;
+  padding: 2.5rem;
   min-height: 100dvh;
   font-family: "Outfit", sans-serif;
   background-color: rgba(231, 236, 253,0.4);
@@ -8,10 +8,13 @@
 
 .section1 {
   height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .section2 {
   /* border: 1px Solid grey; */
-  height: 30px;
+  height: 2.5rem;
 }
 .section3 {
   display: flex;
@@ -31,6 +34,9 @@
 .rightSide {
   flex: 3;
   /* border: 1px solid green; */
+}
+.leftHeadings{
+  font-weight: 400;
 }
 .types > :nth-child(1) {
   padding-bottom: 1rem;
@@ -63,14 +69,16 @@
 }
 
 .cardMainContainer {
+  /* border: 1px solid red; */
   padding-left: 2rem;
-  padding-top: .5rem;
+  padding-top: .1rem;
+  /* padding-bottom: .1rem; */
   padding-right: 2rem;
   display: flex;
   flex-wrap: wrap;
   gap: 2rem;
   overflow-x: scroll;
-  max-height: 800px;
+  max-height: 870px;
   justify-content: space-between;
 }
 

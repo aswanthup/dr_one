@@ -48,8 +48,9 @@ export default function SearchDoc() {
     setFilters({ ...filters, specializations: [], type: value });
   };
   const handleSpecializationChanges = (event) => {
-    const { checked } = event.target;
-    const specialization = event.target.name.toLowerCase();
+    const { checked, name } = event.target;
+    const specialization = name.toLowerCase();
+
     if (checked && !filters.specializations.includes(specialization)) {
       const updatedSpecializations = [
         ...filters.specializations,
@@ -68,62 +69,59 @@ export default function SearchDoc() {
 
   const handleGenderChanges = (event) => {
     const { value } = event.target;
-    console.log(value);
     setFilters({ ...filters, gender: value });
   };
 
   useEffect(() => {
-    if (allDocData.length > 0) {
-      let targetArray = [];
-      if (allDocsBySearch.length > 0) {
-        targetArray = [...allDocsBySearch];
+    if (allDocData.length === 0) {
+      return;
+    }
+    const targetArray =
+      allDocsBySearch.length > 0 ? [...allDocsBySearch] : [...allDocData];
+
+    const filteredDocs = targetArray.filter((doctor) => {
+      const typeMatch =
+        !filters.type ||
+        doctor.type.toLowerCase() === filters.type.toLowerCase();
+      const specializationsMatch =
+        filters.specializations.length === 0 ||
+        filters.specializations.includes(doctor.specialization.toLowerCase());
+      const genderMatch =
+        !filters.gender ||
+        doctor.gender.toLowerCase() === filters.gender.toLowerCase();
+      const doctorExperince = new Date().getFullYear() - doctor?.experience;
+
+      const experienceMatch =
+        !filters.experience || doctorExperince >= filters.experience;
+
+      const nameMatch =
+        !filters.name ||
+        doctor.name.toLowerCase().includes(filters.name.toLowerCase());
+      return (
+        typeMatch &&
+        genderMatch &&
+        specializationsMatch &&
+        experienceMatch &&
+        nameMatch
+      );
+    });
+
+    if (allDocsBySearch.length > 0) {
+      if (filteredDocs.length === 0) {
+        // setAllDocsBySearch([])
+        setEmptyResults(true);
       } else {
-        targetArray = [...allDocData];
+        console.log({ filteredDocs });
+        setDocsBySearch(filteredDocs);
+        setEmptyResults(false);
       }
-      console.log({ targetArray });
-      const filteredDocs = targetArray.filter((doctor) => {
-        const typeMatch =
-          !filters.type ||
-          doctor.type.toLowerCase() === filters.type.toLowerCase();
-        const specializationsMatch =
-          filters.specializations.length === 0 ||
-          filters.specializations.includes(doctor.specialization.toLowerCase());
-        const genderMatch =
-          !filters.gender ||
-          doctor.gender.toLowerCase() === filters.gender.toLowerCase();
-        const doctorExperince = new Date().getFullYear() - doctor?.experience;
-
-        const experienceMatch =
-          !filters.experience || doctorExperince >= filters.experience;
-
-        const nameMatch =
-          !filters.name ||
-          doctor.name.toLowerCase().includes(filters.name.toLowerCase());
-        return (
-          typeMatch &&
-          genderMatch &&
-          specializationsMatch &&
-          experienceMatch &&
-          nameMatch
-        );
-      });
-
-      if (allDocsBySearch.length > 0) {
-        if (filteredDocs.length === 0) {
-          setEmptyResults(true);
-        } else {
-          console.log({ filteredDocs });
-          setDocsBySearch(filteredDocs);
-          setEmptyResults(false);
-        }
+    } else {
+      if (filteredDocs.length === 0) {
+        setEmptyResults(true);
       } else {
-        if (filteredDocs.length === 0) {
-          setEmptyResults(true);
-        } else {
-          console.log({ filteredDocs });
-          setFilteredDoctors(filteredDocs);
-          setEmptyResults(false);
-        }
+        console.log({ filteredDocs });
+        setFilteredDoctors(filteredDocs);
+        setEmptyResults(false);
       }
     }
   }, [filters]);
@@ -185,19 +183,18 @@ export default function SearchDoc() {
       }));
     }
   };
-  //handle place click and filter docs function
+  //handle location click and filter docs function
   const updateDocByPlace = (data) => {
     if (data.length === 0) {
       setEmptyResults(true);
+      return;
+    }
+    if (passedSpecialization) {
+      //if specialization coming from doc page filter the search results also
+      handlePassedSpecialization(data);
     } else {
-      if (passedSpecialization) {
-        //if specialization coming from doc page filter the search results also
-        handlePassedSpecialization(data);
-        // setFilters({ ...filters, kk: "kk" });
-      } else {
-        setAllDocsBySearch(data);
-        setFilters({ ...filters, kk: "kk" });
-      }
+      setAllDocsBySearch(data);
+      setFilters({ ...filters, kk: "kk" });
     }
   };
 
@@ -220,7 +217,7 @@ export default function SearchDoc() {
           <div className={styles.leftSide}>
             <div className={styles.types}>
               <div>
-                <span>Type</span>
+                <span className={styles.leftHeadings}>Type</span>
               </div>
               <div>
                 <RadioGroup
@@ -248,7 +245,7 @@ export default function SearchDoc() {
             </div>
             <div className={styles.specialization}>
               <div>
-                <span>
+                <span className={styles.leftHeadings}>
                   Specialization{" "}
                   {(filters.type === "Unani" ||
                     filters.type === "Homeopathy") && (
@@ -313,7 +310,7 @@ export default function SearchDoc() {
             </div>
             <div className={styles.gender}>
               <div>
-                <span>Gender</span>
+                <span className={styles.leftHeadings}>Gender</span>
               </div>
               <div>
                 <RadioGroup
@@ -339,7 +336,7 @@ export default function SearchDoc() {
             </div>
             <div className={styles.exp}>
               <div>
-                <span>Experience </span>
+                <span className={styles.leftHeadings}>Experience </span>
               </div>
               <Stack
                 spacing={2}
