@@ -85,7 +85,7 @@ export default function Doctor() {
           </div>
         </div>
 
-        <div className="Doctor-search-box flex">
+        <div className="Doctor-search-box flex" onClick={()=>navigate("/searchdoctor")}>
           <div className="Doctor-container-search flex">
             <div className="Doctor-Search-box flex">
               <div className="Doctor-location-section flex">
@@ -93,7 +93,7 @@ export default function Doctor() {
                 <input
                   className="Doctor-Location-input"
                   type="text"
-                  placeholder="Kozhikode"
+                  placeholder="Select location"
                 />
               </div>
               <div className="Doctor-search-input flex">

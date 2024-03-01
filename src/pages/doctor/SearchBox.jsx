@@ -64,7 +64,7 @@ export default function SearchBox({ updateDocs, docNames }) {
     setShowSearchList(false);
   }, boxRef);
   return (
-    <div  className="Doctor-search-box flex">
+    <div  className="Doctor-search-box flex" style={{paddingTop:0}}>
       <div className="Doctor-container-search flex">
         <div className="Doctor-Search-box flex">
           <div className="Doctor-location-section flex">
@@ -77,7 +77,7 @@ export default function SearchBox({ updateDocs, docNames }) {
               value={selectedPlace || searchPlace}
               className="Doctor-Location-input"
               type="text"
-              placeholder="Search location"
+              placeholder="Select location"
             />
           </div>
           <div className="Doctor-search-input flex">
