@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useContext } from "react";
 import Footer from "../../components/Footer";
 import "../doctor/doctor.css";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -13,8 +13,10 @@ import { Navigation } from "swiper/modules";
 import $ from "jquery"; // Import jQuery
 import Navbar from "../../components/Navbar";
 import { useNavigate } from "react-router-dom";
+import { MyContext } from "../../contexts/Contexts";
 export default function Doctor() {
   const [visibleContent, setVisibleContent] = useState(2);
+  const {passedSpecialization,setPassedSpecialization}=useContext(MyContext)
   const navigate=useNavigate()
   const content = [
     $(document).ready(function () {
@@ -35,7 +37,8 @@ export default function Doctor() {
   };
 
   const handleSelectSpecialization=(specialization)=>{
-    navigate("/searchdoctor",{state:specialization})
+    setPassedSpecialization(specialization)
+    navigate("/searchdoctor")
 
   }
 
@@ -140,11 +143,11 @@ export default function Doctor() {
                   <div className="home-specialties-image">
                     <img src="/images/1 (6).jpg" alt="" />
                   </div>
-                  <div className="home-specialties-titile">
+                  <div  className="home-specialties-titile">
                     <h4>Acne, pimple or</h4>
                     <h4>skin issues</h4>
                   </div>
-                  <div className="home-specialties-button">
+                  <div  onClick={()=>handleSelectSpecialization("dermatology")}  className="home-specialties-button">
                     <h4>Consult Now</h4>
                   </div>
                 </div>
@@ -157,7 +160,7 @@ export default function Doctor() {
                     <h4>Cold, cough or</h4>
                     <h4>Fever</h4>
                   </div>
-                  <div className="home-specialties-button">
+                  <div  onClick={()=>handleSelectSpecialization("general medicine")}  className="home-specialties-button">
                     <h4>Consult Now</h4>
                   </div>
                 </div>
@@ -170,7 +173,7 @@ export default function Doctor() {
                     <h4>Depression or</h4>
                     <h4>Anxiety</h4>
                   </div>
-                  <div className="home-specialties-button">
+                  <div  onClick={()=>handleSelectSpecialization("mental health")}  className="home-specialties-button">
                     <h4>Consult Now</h4>
                   </div>
                 </div>
@@ -332,10 +335,10 @@ export default function Doctor() {
 
         <div className="swiper-new-buttons flex">
           <button className="prevButton">
-            <i class="ri-arrow-left-fill"></i>
+            <i className="ri-arrow-left-fill"></i>
           </button>
           <button className="nextButton">
-            <i class="ri-arrow-right-fill"></i>
+            <i className="ri-arrow-right-fill"></i>
           </button>
         </div>
 
@@ -350,11 +353,11 @@ export default function Doctor() {
         <div className="doctor_spec flex">
           <div className="doctor_spec_card">
             <div className="spec_main_cards flex">
-              <div className="spec_main_card flex">
+              <div className="spec_main_card flex" >
                 <h4>Gynaecology</h4>
 
-                <div className="spec_main_card_button flex">
-                  <i class="ri-arrow-right-line"></i>
+                <div  onClick={()=>handleSelectSpecialization("gynaecology")} className="spec_main_card_button flex">
+                  <i className="ri-arrow-right-line"></i>
                 </div>
               </div>
 
@@ -362,7 +365,7 @@ export default function Doctor() {
                 <h4>Dermatology</h4>
 
                 <div className="spec_main_card_button flex">
-                  <i class="ri-arrow-right-line"></i>
+                  <i className="ri-arrow-right-line"></i>
                 </div>
               </div>
 
@@ -370,7 +373,7 @@ export default function Doctor() {
                 <h4>General medicine</h4>
 
                 <div className="spec_main_card_button flex">
-                  <i class="ri-arrow-right-line"></i>
+                  <i className="ri-arrow-right-line"></i>
                 </div>
               </div>
             </div>
@@ -380,7 +383,7 @@ export default function Doctor() {
                 <h4>Mental health</h4>
 
                 <div className="spec_main_card_button flex">
-                  <i class="ri-arrow-right-line"></i>
+                  <i className="ri-arrow-right-line"></i>
                 </div>
               </div>
 
@@ -388,7 +391,7 @@ export default function Doctor() {
                 <h4>Pediatrics</h4>
 
                 <div className="spec_main_card_button flex">
-                  <i class="ri-arrow-right-line"></i>
+                  <i className="ri-arrow-right-line"></i>
                 </div>
               </div>
 
@@ -396,7 +399,7 @@ export default function Doctor() {
                 <h4>Cardiology</h4>
 
                 <div className="spec_main_card_button flex">
-                  <i class="ri-arrow-right-line"></i>
+                  <i className="ri-arrow-right-line"></i>
                 </div>
               </div>
             </div>
@@ -406,7 +409,7 @@ export default function Doctor() {
                 <h4>Orthopedic</h4>
 
                 <div className="spec_main_card_button flex">
-                  <i class="ri-arrow-right-line"></i>
+                  <i className="ri-arrow-right-line"></i>
                 </div>
               </div>
 
@@ -414,7 +417,7 @@ export default function Doctor() {
                 <h4>Neurology</h4>
 
                 <div className="spec_main_card_button flex">
-                  <i class="ri-arrow-right-line"></i>
+                  <i className="ri-arrow-right-line"></i>
                 </div>
               </div>
 
@@ -422,7 +425,7 @@ export default function Doctor() {
                 <h4>Pulmonology</h4>
 
                 <div className="spec_main_card_button flex">
-                  <i class="ri-arrow-right-line"></i>
+                  <i className="ri-arrow-right-line"></i>
                 </div>
               </div>
             </div>
@@ -432,7 +435,7 @@ export default function Doctor() {
                 <h4>Gastrology</h4>
 
                 <div className="spec_main_card_button flex">
-                  <i class="ri-arrow-right-line"></i>
+                  <i className="ri-arrow-right-line"></i>
                 </div>
               </div>
 
@@ -440,7 +443,7 @@ export default function Doctor() {
                 <h4>Ophthalmology</h4>
 
                 <div className="spec_main_card_button flex">
-                  <i class="ri-arrow-right-line"></i>
+                  <i className="ri-arrow-right-line"></i>
                 </div>
               </div>
 
@@ -448,7 +451,7 @@ export default function Doctor() {
                 <h4>ENT</h4>
 
                 <div className="spec_main_card_button flex">
-                  <i class="ri-arrow-right-line"></i>
+                  <i className="ri-arrow-right-line"></i>
                 </div>
               </div>
             </div>
@@ -630,21 +633,21 @@ export default function Doctor() {
           <h4>Neurology</h4>
 
           <div className="spec_main_card_button flex">
-            <i class="ri-arrow-right-line"></i>
+            <i className="ri-arrow-right-line"></i>
           </div>
         </div>
         <div className="spec_main_card flex">
           <h4>Neurology</h4>
 
           <div className="spec_main_card_button flex">
-            <i class="ri-arrow-right-line"></i>
+            <i className="ri-arrow-right-line"></i>
           </div>
         </div>
         <div className="spec_main_card flex">
           <h4>Neurology</h4>
 
           <div className="spec_main_card_button flex">
-            <i class="ri-arrow-right-line"></i>
+            <i className="ri-arrow-right-line"></i>
           </div>
         </div>
 

@@ -1,4 +1,4 @@
-import { React, useState, useEffect } from "react";
+import { React, useState, useEffect, useContext } from "react";
 import Navbar from "../../components/Navbar";
 import SearchBox from "./SearchBox";
 import styles from "./searchdoc.module.css";
@@ -22,41 +22,34 @@ import Footer from "../../components/Footer";
 import DocCard from "./DocCard";
 import axios from "axios";
 import { Add, Remove } from "@mui/icons-material";
-import { useLocation } from "react-router-dom";
-// import { useNavigate } from "react-router-dom";
+import { MyContext } from "../../contexts/Contexts";
 
 export default function SearchDoc() {
-  const location=useLocation()
-  const passedSpecialization=location.state || ""
   const [allDocData, setAllDocData] = useState([]);
   const [filteredDoctors, setFilteredDoctors] = useState([]);
 
   const [docsBySearch, setDocsBySearch] = useState([]);
   const [allDocsBySearch, setAllDocsBySearch] = useState([]);
   const [emptyResults, setEmptyResults] = useState(false);
+  const { passedSpecialization } = useContext(MyContext);
   const [filters, setFilters] = useState({
     type: "",
-    specializations: [passedSpecialization],
+    specializations: [],
     gender: "",
     experience: 0,
     name: "",
   });
 
-  console.log({location})
-
-  // const navigate=useNavigate()
+  console.log({ passedSpecialization });
 
   const handleTypeChanges = (event) => {
     const { value } = event.target;
-
-    // clearSpecializations();
 
     setFilters({ ...filters, specializations: [], type: value });
   };
   const handleSpecializationChanges = (event) => {
     const { checked } = event.target;
     const specialization = event.target.name.toLowerCase();
-    // alert(`${specialization} is ${checked}`);
     if (checked && !filters.specializations.includes(specialization)) {
       const updatedSpecializations = [
         ...filters.specializations,
@@ -135,25 +128,18 @@ export default function SearchDoc() {
     }
   }, [filters]);
 
-
-
   const getAllDoctorsData = async () => {
     try {
       const response = await axios.get(
         "http://192.168.1.2:3003/doctor/complete_data"
       );
-      const allDoctorsDetails=response.data.data
-      // if(passedSpecialization){
-      // const docsBySpecialization=allDoctorsDetails.filter((doc)=>doc.specialization.toLowerCase()===passedSpecialization.toLowerCase())
-      // setAllDocData(docsBySpecialization)
-      // setFilteredDoctors(docsBySpecialization)
-      // }else{
-
+      const allDoctorsDetails = response.data.data;
+      if (passedSpecialization) {
+        handlePassedSpecialization(allDoctorsDetails);
+      } else {
         setAllDocData(allDoctorsDetails);
         setFilteredDoctors(allDoctorsDetails);
-      // }
-      
-      // console.log({ response });
+      }
     } catch (err) {
       alert("server error");
     } finally {
@@ -163,8 +149,20 @@ export default function SearchDoc() {
     getAllDoctorsData();
   }, []);
 
+  const handlePassedSpecialization = (DoctorsDetails) => {
+    const docsBySpecialization = DoctorsDetails.filter(
+      (doc) =>
+        doc.specialization.toLowerCase() === passedSpecialization.toLowerCase()
+    );
+    if (docsBySpecialization.length === 0) {
+      setEmptyResults(true);
+    }
+    setAllDocData(docsBySpecialization);
+    setFilteredDoctors(docsBySpecialization);
+  };
+
   console.log({ allDocData });
-  // console.log({ filteredDoctors });
+  console.log({ filteredDoctors });
   console.log({ filters });
   //
 
@@ -187,14 +185,19 @@ export default function SearchDoc() {
       }));
     }
   };
-//handle place click and filter docs function
+  //handle place click and filter docs function
   const updateDocByPlace = (data) => {
     if (data.length === 0) {
       setEmptyResults(true);
     } else {
-      // setDocsBySearch(data);
-      setAllDocsBySearch(data);
-      setFilters({ ...filters, kk: "kk" });
+      if (passedSpecialization) {
+        //if specialization coming from doc page filter the search results also
+        handlePassedSpecialization(data);
+        // setFilters({ ...filters, kk: "kk" });
+      } else {
+        setAllDocsBySearch(data);
+        setFilters({ ...filters, kk: "kk" });
+      }
     }
   };
 
@@ -227,6 +230,7 @@ export default function SearchDoc() {
                 >
                   {types.map((type, index) => (
                     <FormControlLabel
+                      disabled={passedSpecialization ? true : false}
                       key={index}
                       value={type}
                       checked={filters.type === type}
