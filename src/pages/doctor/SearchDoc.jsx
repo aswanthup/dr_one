@@ -110,6 +110,7 @@ export default function SearchDoc() {
 
       if (allDocsBySearch.length > 0) {
         if (filteredDocs.length === 0) {
+          // setAllDocsBySearch([])
           setEmptyResults(true);
         } else {
           console.log({ filteredDocs });

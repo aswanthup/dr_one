@@ -169,7 +169,7 @@ export default function Doctoradminregistration2() {
                   className="doctoradminregistration_gender_font"
                 ></option>
                 <option
-                  value="Experience1"
+                  value="Allopathy"
                   className="doctoradminregistration_gender_font"
                 >
                   Allopathy
