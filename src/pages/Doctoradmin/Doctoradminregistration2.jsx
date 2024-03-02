@@ -52,7 +52,8 @@ export default function Doctoradminregistration2() {
       });
   };
   const updatePosts = (pinCode) => {
-    // alert("pooo")
+   
+    if(pinCode.length===6){
     console.log(6);
     axios.get(`https://api.postalpincode.in/pincode/${pinCode}`).then((res) => {
       console.log(res.data[0]?.PostOffice);
@@ -77,6 +78,9 @@ export default function Doctoradminregistration2() {
         });
       }
     });
+  }else{
+    console.log("pincode should be 6 digits")
+  }
   };
 
   const handlePostChange = (event) => {
