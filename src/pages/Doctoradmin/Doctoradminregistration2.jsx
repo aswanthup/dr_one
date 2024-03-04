@@ -35,10 +35,10 @@ export default function Doctoradminregistration2() {
       return;
     }
 
-    const mergedData = { ...Data, ...addressdata };
+    const mergedData = { ...Data };
     console.log("mergedData", mergedData);
     axios
-      .post(`http://192.168.1.2:3003/doctor/dr_registration`, mergedData)
+      .post(`http://localhost:3003/doctor/dr_registration`, mergedData)
       .then((res) => {
         // console.log("resssssssssssssss", res);
 
@@ -202,7 +202,7 @@ export default function Doctoradminregistration2() {
 
           <div className="doctoradminregistration_input2 flex">
             <div>
-              <h4>Practise started year</h4>
+              <h4>Practice started year</h4>
               {/* <select
                 type="number"
                 name="experience"

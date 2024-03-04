@@ -7,7 +7,8 @@ export default function Rightnavbar() {
 <div className="hospitaladmin_left flex">
                    <div className="hospitaladmin_image_title flex">
                     <img src="images/doc.jpg" alt="" />
-                    <h2>Hospital Name</h2>
+                    <h2>Dr Rajashekhar</h2>
+                    {/* <h2>Hospital Name</h2> */}
 
                    </div>
 
