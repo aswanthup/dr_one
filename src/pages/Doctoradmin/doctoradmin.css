@@ -1,0 +1,59 @@
+.availability{
+   background-color: #3A65FD;
+   border-radius:1vw;
+   min-height:10vw;
+   margin-top:3vw;
+   padding:2vw;
+   color: white;
+}
+
+.available{
+    background-color: rgb(194, 207, 255);
+    padding:0.6vw;
+    border-radius:0.6vw;
+    margin-top:1.5vw;
+    justify-content: space-between;
+}
+
+.hospitalname h4{
+    background-color: white;
+    width: fit-content;
+    color: #3A65FD;
+    padding:0.3vw 1vw;
+    border-radius:.3vw;
+}
+
+.hospitalname_button h4{
+    background-color:#3A65FD;
+    width: fit-content;
+   
+    padding:0.3vw 1vw;
+    border-radius:.3vw;
+}
+
+
+.available_add_button h4{
+    background-color: white;
+    width: fit-content;
+    color: #3A65FD;
+    margin-top:1.5vw;
+    padding:.5vw 1.2vw;
+    border-radius:.5vw;
+}
+
+.available_add_button{
+    justify-content: flex-end;
+}
+
+
+.viewdetails{
+    padding: 10px;
+ 
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius:1vw;
+    background-color:white;
+    padding:10px;
+}
