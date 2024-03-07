@@ -129,7 +129,7 @@ export default function SearchDoc() {
   const getAllDoctorsData = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:3003/doctor/complete_data"
+        "http://13.232.117.141:3003/doctor/complete_data"
       );
       const allDoctorsDetails = response.data.data;
       if (passedSpecialization) {

@@ -7,6 +7,7 @@ import axios from "axios";
 import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { MyContext } from "../../contexts/Contexts";
+import { speacializationNames } from "../../pages/doctor/constants/filter.js";
 
 export default function Doctoradminregistration2() {
   const navigate = useNavigate();
@@ -38,7 +39,7 @@ export default function Doctoradminregistration2() {
     const mergedData = { ...Data };
     console.log("mergedData", mergedData);
     axios
-      .post(`http://localhost:3003/doctor/dr_registration`, mergedData)
+      .post(`http://13.232.117.141:3003/doctor/dr_registration`, mergedData)
       .then((res) => {
         // console.log("resssssssssssssss", res);
 
@@ -52,35 +53,36 @@ export default function Doctoradminregistration2() {
       });
   };
   const updatePosts = (pinCode) => {
-   
-    if(pinCode.length===6){
-    console.log(6);
-    axios.get(`https://api.postalpincode.in/pincode/${pinCode}`).then((res) => {
-      console.log(res.data[0]?.PostOffice);
-      // console.log(res.data);
+    if (pinCode.length === 6) {
+      console.log(6);
+      axios
+        .get(`https://api.postalpincode.in/pincode/${pinCode}`)
+        .then((res) => {
+          console.log(res.data[0]?.PostOffice);
+          // console.log(res.data);
 
-      setData({
-        ...Data,
-        Postoffice: res.data[0]?.PostOffice,
-        pincode: pinCode,
-      });
-      if (res?.data[0]?.PostOffice === null) {
-        console.log("noo dataaaa");
-        toast.error("No records found");
-      } else {
-        setAddressdata({
-          ...addressdata,
-          district: res.data[0]?.PostOffice[0].District,
-          state: res.data[0]?.PostOffice[0].State,
-          Name: res.data[0]?.PostOffice[0].Name,
-          Block: res.data[0]?.PostOffice[0].Block,
-          pincode: parseInt(Data?.pincode),
+          setData({
+            ...Data,
+            Postoffice: res.data[0]?.PostOffice,
+            pincode: pinCode,
+          });
+          if (res?.data[0]?.PostOffice === null) {
+            console.log("noo dataaaa");
+            toast.error("Invalid pincode");
+          } else {
+            setAddressdata({
+              ...addressdata,
+              district: res.data[0]?.PostOffice[0].District,
+              state: res.data[0]?.PostOffice[0].State,
+              Name: res.data[0]?.PostOffice[0].Name,
+              Block: res.data[0]?.PostOffice[0].Block,
+              pincode: parseInt(Data?.pincode),
+            });
+          }
         });
-      }
-    });
-  }else{
-    console.log("pincode should be 6 digits")
-  }
+    } else {
+      console.log("pincode should be 6 digits");
+    }
   };
 
   const handlePostChange = (event) => {
@@ -233,13 +235,14 @@ export default function Doctoradminregistration2() {
                   3
                 </option>
               </select> */}
-            
-                <input       
+
+              <input
                 type="number"
                 maxLength={4}
                 name="experience"
                 value={Data?.experience}
-                onChange={handleChange}/>
+                onChange={handleChange}
+              />
             </div>
             <div>
               <h4>Registration Number</h4>
@@ -263,7 +266,16 @@ export default function Doctoradminregistration2() {
                   value=""
                   className="doctoradminregistration_gender_font"
                 ></option>
-                <option
+                {speacializationNames.map((value, index) => (
+                  <option
+                    value={value}
+                    key={index}
+                    className="doctoradminregistration_gender_font"
+                  >
+                    {value}
+                  </option>
+                ))}
+                {/* <option
                   value="Dermatology"
                   className="doctoradminregistration_gender_font"
                 >
@@ -280,7 +292,7 @@ export default function Doctoradminregistration2() {
                   className="doctoradminregistration_gender_font"
                 >
                   Cardiology
-                </option>
+                </option> */}
               </select>
             </div>
           </div>

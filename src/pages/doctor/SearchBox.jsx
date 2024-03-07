@@ -15,7 +15,7 @@ export default function SearchBox({ updateDocs, docNames }) {
       const fetchData = async () => {
         try {
           const response = await axios.post(
-            "http://localhost:3003/doctor/suggest",
+            "http://13.232.117.141:3003/doctor/suggest",
             {
               searchitem: searchPlace,
             }
@@ -42,7 +42,7 @@ export default function SearchBox({ updateDocs, docNames }) {
     setShowSearchList(false);
     try {
       const response = await axios.post(
-        "http://localhost:3003/doctor/get_pincode",
+        "http://13.232.117.141:3003/doctor/get_pincode",
         {
           selectedArea_id: data.id,
         }
