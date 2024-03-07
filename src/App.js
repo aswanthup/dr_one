@@ -40,6 +40,12 @@ import Pharmacyadminregister2 from './pages/Pharmacyadmin/Pharmacyadminregister2
 
 import Pharmacyregistration1 from './pages/Pharmacyadmin/Pharmacyregistration1';
 import SearchDoc from './pages/doctor/SearchDoc';
+import Registerlanding from './pages/registerlanding/Registerlanding';
+
+
+
+
+
 function App() {
   return (
     <div className="App">
@@ -101,7 +107,7 @@ function App() {
 <Route path='/labadminregistration2' element={<Labadminregistration2 />} ></Route>
 <Route path='/labadmin' element={<Labadmin />} ></Route>
 
-
+<Route path='/registerlanding' element={<Registerlanding />} ></Route>
 
       </Routes>
 
