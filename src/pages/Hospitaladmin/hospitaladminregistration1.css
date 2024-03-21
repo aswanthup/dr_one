@@ -12,4 +12,19 @@
 
 .hospitalname_input{
     margin-top:1vw;
+    display: block;
+}
+.mobileHospital{
+    display: none;
+}
+
+
+@media only screen and (max-width: 768px) {
+    .mobileHospital{
+        display: block;
+    }
+    .hospitalname_input{
+        display: none;
+    }
+    
 }

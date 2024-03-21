@@ -55,6 +55,10 @@ export default function Hospitaladminregistration1() {
 
             <div className="register-input-section flex">
               <div className="register-left-section">
+                <div className="mobileHospital">
+                <h4>Hospital Name</h4>
+              <input type="text" />
+                </div>
                 <div>
                   <h4>Phone Number</h4>
                   <input type="text" />
