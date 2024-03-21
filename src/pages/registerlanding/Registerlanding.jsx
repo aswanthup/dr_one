@@ -11,8 +11,8 @@ export default function Registerlanding() {
 
       <div className="container registerlanding_main flex">
         <div className="registerlanding_left">
-          <div className="registerlanding_image">
-            <img src="/images/doctor10.jpg" alt="" />
+          <div className="registerlanding_image flex">
+            <img src="images/mobile.png" alt="" />
           </div>
 
           <div onClick={()=>navigate("/doctoradminregistration1")} className="registerlanding_button flex">
@@ -21,7 +21,7 @@ export default function Registerlanding() {
         </div>
 
         <div className="registerlanding_left">
-          <div className="registerlanding_image">
+          <div className="registerlanding_image flex">
             <img src="/images/hospital10.jpg" alt="" />
           </div>
 
