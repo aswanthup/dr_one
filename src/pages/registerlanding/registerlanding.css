@@ -1,3 +1,9 @@
+.container10{
+    max-width:80%;
+    margin-inline: auto;
+    padding-inline: 20px;
+}
+
 .registerlanding{
     background-color: #3A65FD;
     height: 100vh;
@@ -10,6 +16,7 @@
     text-align: center;
     color: white;
     padding: 4vw;
+
 }
 
 .maintitle h1{
@@ -26,6 +33,7 @@
     height:15vw;
     object-fit: cover;
     border-radius:1vw;
+    box-shadow: rgba(255, 255, 255, 0.3) 0px 25px 50px -12px;
 }
 
 .registerlanding_button h2{
@@ -61,6 +69,7 @@
     .registerlanding_image img{
         width:100%;
         height:55vw;
+        border-radius:4vw;
     }
 
     .registerlanding_button{
@@ -68,11 +77,16 @@
         margin-top:20px;
         justify-content: center;
         align-items: center;
+        border-radius:2vw;
     }
 
 
     .registerlanding_button h2{
         width:35vw;
 
+    }
+
+    .maintitle{
+        margin-bottom:4vw;
     }
 }
