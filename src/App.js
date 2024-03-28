@@ -37,109 +37,115 @@ import Hospitaladminregistration1 from "./pages/Hospitaladmin/Hospitaladminregis
 import Labadminregistration1 from "./pages/Labadmin/Labadminregistration1";
 import Labadminregistration2 from "./pages/Labadmin/Labadminregistration2";
 import Pharmacyadminregister2 from "./pages/Pharmacyadmin/Pharmacyadminregister2";
-
+import { LocalizationProvider } from '@mui/x-date-pickers';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import Pharmacyregistration1 from "./pages/Pharmacyadmin/Pharmacyregistration1";
 import SearchDoc from "./pages/doctor/SearchDoc";
 import Registerlanding from "./pages/registerlanding/Registerlanding";
+import { HospitalFiltering } from "./pages/HospitalFiltering/HospitalFiltering";
 
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <Routes>
-          <Route path="/footer" element={<Footer />}></Route>
-          <Route path="/" element={<Registerlanding />}></Route>
-          <Route path="/doctor" element={<Doctor />}></Route>
-          <Route path="/labs" element={<Labs />}></Route>
-          <Route path="/Pharmacy" element={<Pharmacy />}></Route>
-          <Route path="/hospital" element={<Hospital />}></Route>
-          <Route path="/navbar" element={<Navbar />}></Route>
-          <Route path="/login" element={<LoginSignin />}></Route>
-          <Route path="/register" element={<Register1 />}></Route>
-          <Route path="/doctorprofile" element={<Doctor_profile />}></Route>
-          <Route path="/doctorlist" element={<Doctorlist />}></Route>
-          <Route path="/Labdetails" element={<Labdetails />}></Route>
-          <Route path="/about" element={<About />}></Route>
-          <Route path="/notification" element={<Notification />}></Route>
-          <Route path="/userprofile" element={<Userprofile />}></Route>
-          <Route path="/pharmacydetails" element={<Pharmacydetails />}></Route>
-          <Route path="/nav" element={<Navbar2 />}></Route>
 
-          <Route path="/hospitaladmin" element={<Hospitaladmin />}></Route>
-          <Route path="/rightnav" element={<Rightnavbar />}></Route>
-          <Route
-            path="/hospitaladminnotification"
-            element={<Hospitaladminnotification />}
-          ></Route>
-          <Route
-            path="/hospitaladmindoctorlist"
-            element={<Hospitaladmindoctorlist />}
-          ></Route>
-          <Route path="/hospitaldetails" element={<Hospitaldetails />}></Route>
-          <Route
-            path="/hospitaladmindoctorcard"
-            element={<Hospitaladmin_doctor_card />}
-          ></Route>
-          <Route
-            path="/hospitaladmindoctordetails"
-            element={<Hospitaladmindoctordetails />}
-          ></Route>
-          <Route
-            path="/hospitaladminregistration2"
-            element={<Hospitaladminregistration2 />}
-          ></Route>
-          <Route
-            path="/hospitaladminadddoctor"
-            element={<Hospitaladminadddoctor />}
-          ></Route>
+        <LocalizationProvider dateAdapter={AdapterDayjs}>
 
-          <Route
-            path="/hospitaladminregistration1"
-            element={<Hospitaladminregistration1 />}
-          ></Route>
-          <Route path="/map" element={<Map />}></Route>
+          <Routes>
+            <Route path="/footer" element={<Footer />}></Route>
+            <Route path="/" element={<Mainpage />}></Route>
+            <Route path="/doctor" element={<Doctor />}></Route>
+            <Route path="/labs" element={<Labs />}></Route>
+            <Route path="/Pharmacy" element={<Pharmacy />}></Route>
+            <Route path="/hospital" element={<Hospital />}></Route>
+            <Route path="/navbar" element={<Navbar />}></Route>
+            <Route path="/login" element={<LoginSignin />}></Route>
+            <Route path="/register" element={<Register1 />}></Route>
+            <Route path="/doctorprofile" element={<Doctor_profile />}></Route>
+            <Route path="/doctorlist" element={<Doctorlist />}></Route>
+            <Route path="/Labdetails" element={<Labdetails />}></Route>
+            <Route path="/about" element={<About />}></Route>
+            <Route path="/notification" element={<Notification />}></Route>
+            <Route path="/userprofile" element={<Userprofile />}></Route>
+            <Route path="/pharmacydetails" element={<Pharmacydetails />}></Route>
+            <Route path="/nav" element={<Navbar2 />}></Route>
+            <Route path="/hospitaladmin" element={<Hospitaladmin />}></Route>
+            <Route path="/rightnav" element={<Rightnavbar />}></Route>
+            <Route path="/hosPitalfilter" element={<HospitalFiltering />}></Route>
+            <Route
+              path="/hospitaladminnotification"
+              element={<Hospitaladminnotification />}
+            ></Route>
+            <Route
+              path="/hospitaladmindoctorlist"
+              element={<Hospitaladmindoctorlist />}
+            ></Route>
+            <Route path="/hospitaldetails" element={<Hospitaldetails />}></Route>
+            <Route
+              path="/hospitaladmindoctorcard"
+              element={<Hospitaladmin_doctor_card />}
+            ></Route>
+            <Route
+              path="/hospitaladmindoctordetails"
+              element={<Hospitaladmindoctordetails />}
+            ></Route>
+            <Route
+              path="/hospitaladminregistration2"
+              element={<Hospitaladminregistration2 />}
+            ></Route>
+            <Route
+              path="/hospitaladminadddoctor"
+              element={<Hospitaladminadddoctor />}
+            ></Route>
 
-          <Route path="/searchdoctor" element={<SearchDoc />}></Route>
+            <Route
+              path="/hospitaladminregistration1"
+              element={<Hospitaladminregistration1 />}
+            ></Route>
+            <Route path="/map" element={<Map />}></Route>
 
-          {/* Doctor admin */}
+            <Route path="/searchdoctor" element={<SearchDoc />}></Route>
 
-          <Route
-            path="/doctoradminregistration1"
-            element={<Doctoradminregistration1 />}
-          ></Route>
-          <Route
-            path="/doctoradminregistration2"
-            element={<Doctoradminregistration2 />}
-          ></Route>
-          <Route path="/doctoradmin" element={<Doctoradmin />}></Route>
+            <Route
+              path="/doctoradminregistration1"
+              element={<Doctoradminregistration1 />}
+            ></Route>
+            <Route
+              path="/doctoradminregistration2"
+              element={<Doctoradminregistration2 />}
+            ></Route>
 
-          {/* Pharmacy admin */}
 
-          <Route path="/pharmacyadmin" element={<Pharmacyadmin />}></Route>
-          <Route
-            path="/pharmacyadminregister2"
-            element={<Pharmacyadminregister2 />}
-          ></Route>
+            <Route path="/doctoradmin" element={<Doctoradmin />}></Route>
 
-          <Route
-            path="/pharmacyadminregister1"
-            element={<Pharmacyregistration1 />}
-          ></Route>
+            {/* Pharmacy admin */}
 
-          {/* Lab admin */}
+            <Route path="/pharmacyadmin" element={<Pharmacyadmin />}></Route>
+            <Route
+              path="/pharmacyadminregister2"
+              element={<Pharmacyadminregister2 />}
+            ></Route>
 
-          <Route
-            path="/labadminregistration1"
-            element={<Labadminregistration1 />}
-          ></Route>
-          <Route
-            path="/labadminregistration2"
-            element={<Labadminregistration2 />}
-          ></Route>
-          <Route path="/labadmin" element={<Labadmin />}></Route>
+            <Route
+              path="/pharmacyadminregister1"
+              element={<Pharmacyregistration1 />}
+            ></Route>
 
-          {/* <Route path='/registerlanding' element={<Registerlanding />} ></Route> */}
-        </Routes>
+            {/* Lab admin */}
+
+            <Route
+              path="/labadminregistration1"
+              element={<Labadminregistration1 />}
+            ></Route>
+            <Route
+              path="/labadminregistration2"
+              element={<Labadminregistration2 />}
+            ></Route>
+            <Route path="/labadmin" element={<Labadmin />}></Route>
+
+            {/* <Route path='/registerlanding' element={<Registerlanding />} ></Route> */}
+          </Routes>
+        </LocalizationProvider>
       </BrowserRouter>
     </div>
   );

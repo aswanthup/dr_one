@@ -1,15 +1,20 @@
-.hospitalname_input input{
+.hospitalname_input input {
     width: 100%;
-    height:3vw;
-    border:none;
-    border-radius:5px;
-    margin-top:1vw;
+    height: 3vw;
+    border: none;
+    border-radius: 5px;
+    margin-top: 1vw;
     background-color: rgba(246, 246, 249, .4);
-    padding:1vw;
-    color:white;
+    padding: 1vw;
+    color: white;
 
 }
 
-.hospitalname_input{
-    margin-top:1vw;
+.hospitalname_input {
+    margin-top: 1vw;
+}
+
+.register-number-warning {
+    color: red;
+    font-size: 13px;
 }

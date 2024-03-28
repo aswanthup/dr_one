@@ -105,7 +105,7 @@ export default function Doctoradminregistration2() {
   }, []);
 
   return (
-    <div>
+    <>
       <ToastContainer>
         position="top-right" autoClose={1000}
         hideProgressBar={false}
@@ -113,7 +113,7 @@ export default function Doctoradminregistration2() {
         closeOnClick rtl={false}, pauseOnFocusLoss draggable pauseOnHover
       </ToastContainer>
 
-      <div className="doctoradminregistration flex">
+      <div className="doctoradminregistration flex desktop">
         <div>
           <h1>Doctor Registration</h1>
         </div>
@@ -205,36 +205,7 @@ export default function Doctoradminregistration2() {
           <div className="doctoradminregistration_input2 flex">
             <div>
               <h4>Practice started year</h4>
-              {/* <select
-                type="number"
-                name="experience"
-                value={Data?.experience}
-                onChange={handleChange}
-                className="doctoradminregistration_gender"
-              >
-                <option
-                  value=""
-                  className="doctoradminregistration_gender_font"
-                ></option>
-                <option
-                  value="1"
-                  className="doctoradminregistration_gender_font"
-                >
-                  1
-                </option>
-                <option
-                  value="2"
-                  className="doctoradminregistration_gender_font"
-                >
-                  2
-                </option>
-                <option
-                  value="3"
-                  className="doctoradminregistration_gender_font"
-                >
-                  3
-                </option>
-              </select> */}
+
 
               <input
                 type="number"
@@ -275,39 +246,57 @@ export default function Doctoradminregistration2() {
                     {value}
                   </option>
                 ))}
-                {/* <option
-                  value="Dermatology"
-                  className="doctoradminregistration_gender_font"
-                >
-                  Dermatology
-                </option>
-                <option
-                  value="General medicine"
-                  className="doctoradminregistration_gender_font"
-                >
-                  General medicine
-                </option>
-                <option
-                  value="Cardiology"
-                  className="doctoradminregistration_gender_font"
-                >
-                  Cardiology
-                </option> */}
+
               </select>
             </div>
           </div>
 
           <div className="text_area_section flex">
-            <div className="doctoradminregistration_input3 flex">
+          <div className="doctoradminregistration_input4 flex">
               <h4>About</h4>
-              <textarea
-                name="about"
-                value={Data?.about}
-                id=""
-                cols="30"
-                rows="10"
-                onChange={handleChange}
-              ></textarea>
+
+              <div className="doctoradminregistration_input7 flex">
+                <textarea
+                  name="address"
+                  value={Data?.address}
+                  id=""
+                  onChange={handleChange}
+                >
+                  {" "}
+                </textarea>
+                <div className="doctoradminregistration_input6 flex">
+                  <input
+                    type="text"
+                    value={Data?.pincode ?? ""}
+                    placeholder="Office Number"
+                    maxLength={6}
+                    onChange={handlePostChange}
+                  />
+
+                  <select
+                    type="text"
+                    onChange={handleChange}
+                    value={Data.selectedPlace}
+                    name="selectedPlace"
+                    className="doctoradminregistration_gender"
+                  >
+                    <option selected disabled>
+                      {" "}
+                      select place{" "}
+                    </option>
+                    {Data?.Postoffice &&
+                      Data?.Postoffice.map((postData, index) => (
+                        <option
+                          style={{ color: "black" }}
+                          key={index}
+                          value={postData?.Name}
+                        >
+                          {postData?.Name}
+                        </option>
+                      ))}
+                  </select>
+                </div>
+              </div>
             </div>
 
             <div className="doctoradminregistration_input4 flex">
@@ -330,8 +319,7 @@ export default function Doctoradminregistration2() {
                     maxLength={6}
                     onChange={handlePostChange}
                   />
-                  {/* {postalError && <p style={{ fontSize: "1rem" }}>{postalError}</p>} */}
-                  {/* <input type="text" value={addressdata?.Name} /> */}
+
                   <select
                     type="text"
                     onChange={handleChange}
@@ -375,6 +363,235 @@ export default function Doctoradminregistration2() {
           </a>
         </div>
       </div>
-    </div>
+
+      <div className="doctoradminregistration mobile ">
+        <div className="docadminhead">
+          <h1>Doctor Registration</h1>
+        </div>
+        <div className="doctoradminregistration_input ">
+          <div className="doctoradminregistration_input1 ">
+            <div>
+              <h4>Qualification</h4>
+              <input
+                type="text"
+                value={Data?.qualification}
+                onChange={handleChange}
+                name="qualification"
+              />
+            </div>
+            <div style={{ display: "flex", justifyContent: "space-between" }}>
+              <div style={{ width: "48%" }}>
+                <h4>Gender</h4>
+                <select
+                  type="text"
+                  name="gender"
+                  className="doctoradminregistration_gender"
+                  value={Data?.gender}
+                  style={{ paddingLeft: "15px" }}
+                  onChange={handleChange}
+                >
+                  <option
+                    value=""
+                    className="doctoradminregistration_gender_font"
+                  ></option>
+                  <option
+                    value="male"
+                    className="doctoradminregistration_gender_font"
+                  >
+                    Male
+                  </option>
+                  <option
+                    value="female"
+                    className="doctoradminregistration_gender_font"
+                  >
+                    Female
+                  </option>
+                  <option
+                    value="other"
+                    className="doctoradminregistration_gender_font"
+                  >
+                    Other
+                  </option>
+                </select>
+              </div>
+              <div style={{ width: "48%" }}>
+                <h4>Type</h4>
+                <select
+                  style={{ paddingLeft: "15px" }}
+                  type="text"
+                  name="type"
+                  value={Data?.type}
+                  onChange={handleChange}
+                  className="doctoradminregistration_gender"
+                >
+                  <option
+                    value=""
+                    className="doctoradminregistration_gender_font"
+                  ></option>
+                  <option
+                    value="Allopathy"
+                    className="doctoradminregistration_gender_font"
+                  >
+                    Allopathy
+                  </option>
+                  <option
+                    value="Homeopathy"
+                    className="doctoradminregistration_gender_font"
+                  >
+                    Homeopathy
+                  </option>
+                  <option
+                    value="Ayurveda"
+                    className="doctoradminregistration_gender_font"
+                  >
+                    Ayurveda
+                  </option>
+                  <option
+                    value="Unani"
+                    className="doctoradminregistration_gender_font"
+                  >
+                    Unani
+                  </option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div className="doctoradminregistration_input2 ">
+            <div>
+              <h4>Practice started year</h4>
+
+
+              <input
+                type="number"
+                maxLength={4}
+                name="experience"
+                value={Data?.experience}
+                onChange={handleChange}
+              />
+            </div>
+            <div>
+              <h4>Registration Number</h4>
+              <input
+                type="text"
+                name="registration_no"
+                value={Data?.registration_no}
+                onChange={handleChange}
+              />
+            </div>
+            <div>
+              <h4>Specialization</h4>
+              <select
+                type="text"
+                name="specialization"
+                value={Data?.specialization}
+                onChange={handleChange}
+                className="doctoradminregistration_gender"
+              >
+                <option
+                  value=""
+                  className="doctoradminregistration_gender_font"
+                ></option>
+                {speacializationNames.map((value, index) => (
+                  <option
+                    value={value}
+                    key={index}
+                    className="doctoradminregistration_gender_font"
+                  >
+                    {value}
+                  </option>
+                ))}
+
+              </select>
+            </div>
+          </div>
+
+          <div className="text_area_section ">
+            <div className="doctoradminregistration_input3 ">
+              <h4>About</h4>
+              <textarea
+                name="about"
+                value={Data?.about}
+                id=""
+                onChange={handleChange}
+              ></textarea>
+            </div>
+
+            <div className="doctoradminregistration_input4 ">
+              <h4>Address</h4>
+
+              <div className="doctoradminregistration_inpu ">
+                <textarea
+                  name="address"
+                  value={Data?.address}
+                  id=""
+                  onChange={handleChange}
+                >
+                  {" "}
+                </textarea>
+                <div className="doctoradminregistration_input6 ">
+                  <div style={{ display: "flex", gap: "20px" }}>
+                    <input
+                      type="text"
+                      value={Data?.pincode ?? ""}
+                      placeholder="Pincode"
+                      style={{ width: "40%" }}
+                      maxLength={6}
+                      onChange={handlePostChange}
+                    />
+
+                    <select
+                      type="text"
+                      onChange={handleChange}
+                      value={Data.selectedPlace}
+                      style={{ width: "60%" }}
+                      name="selectedPlace"
+                      className="doctoradminregistration_gender"
+                    >
+                      <option selected disabled>
+                        {" "}
+                        select place{" "}
+                      </option>
+                      {Data?.Postoffice &&
+                        Data?.Postoffice.map((postData, index) => (
+                          <option
+                            style={{ color: "black" }}
+                            key={index}
+                            value={postData?.Name}
+                          >
+                            {postData?.Name}
+                          </option>
+                        ))}
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="doctoradminregistration_button">
+              <a
+                href=""
+                className="demo2"
+                onClick={(event) => {
+                  event.preventDefault();
+                  navigate(-1);
+                }}
+              >
+                <h4>Back</h4>
+              </a>
+              <a href="" onClick={handleSubmit}>
+                <h4>Submit</h4>
+              </a>
+            </div>
+
+          </div>
+
+
+
+
+        </div>
+
+      </div>
+
+    </>
   );
 }

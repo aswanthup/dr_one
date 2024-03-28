@@ -23,6 +23,7 @@ import DocCard from "./DocCard";
 import axios from "axios";
 import { Add, Remove } from "@mui/icons-material";
 import { MyContext } from "../../contexts/Contexts";
+import { port } from "../../config";
 
 export default function SearchDoc() {
   const [allDocData, setAllDocData] = useState([]);
@@ -129,7 +130,7 @@ export default function SearchDoc() {
   const getAllDoctorsData = async () => {
     try {
       const response = await axios.get(
-        "http://13.232.117.141:3003/doctor/complete_data"
+        `${port}/doctor/complete_data`
       );
       const allDoctorsDetails = response.data.data;
       if (passedSpecialization) {
@@ -249,62 +250,62 @@ export default function SearchDoc() {
                   Specialization{" "}
                   {(filters.type === "Unani" ||
                     filters.type === "Homeopathy") && (
-                    <span style={{ fontSize: "14px", fontWeight: 300 }}>
-                      (Not Applicable)
-                    </span>
-                  )}
+                      <span style={{ fontSize: "14px", fontWeight: 300 }}>
+                        (Not Applicable)
+                      </span>
+                    )}
                 </span>
               </div>
               <div>
                 <FormGroup>
                   {filters.type === "Ayurvedic"
                     ? ayurSpec.map((name, index) => (
-                        <FormControlLabel
-                          name={name}
-                          checked={
-                            filters.specializations.length !== 0 &&
-                            filters.specializations.includes(name.toLowerCase())
-                          }
-                          disabled={
-                            filters.type === "Homeopathy" ||
+                      <FormControlLabel
+                        name={name}
+                        checked={
+                          filters.specializations.length !== 0 &&
+                          filters.specializations.includes(name.toLowerCase())
+                        }
+                        disabled={
+                          filters.type === "Homeopathy" ||
                             filters.type === "Unani"
-                              ? true
-                              : false
-                          }
-                          onChange={handleSpecializationChanges}
-                          key={index}
-                          control={
-                            <Checkbox
-                              sx={{ "& .MuiSvgIcon-root": { fontSize: 22 } }}
-                            />
-                          }
-                          label={<span style={{ fontSize: 16 }}>{name}</span>}
-                        />
-                      ))
+                            ? true
+                            : false
+                        }
+                        onChange={handleSpecializationChanges}
+                        key={index}
+                        control={
+                          <Checkbox
+                            sx={{ "& .MuiSvgIcon-root": { fontSize: 22 } }}
+                          />
+                        }
+                        label={<span style={{ fontSize: 16 }}>{name}</span>}
+                      />
+                    ))
                     : speacializationNames.map((name, index) => (
-                        <FormControlLabel
-                          name={name}
-                          checked={
-                            filters.specializations.length !== 0 &&
-                            filters.specializations.includes(name.toLowerCase())
-                          }
-                          disabled={
-                            filters.type === "Homeopathy" ||
+                      <FormControlLabel
+                        name={name}
+                        checked={
+                          filters.specializations.length !== 0 &&
+                          filters.specializations.includes(name.toLowerCase())
+                        }
+                        disabled={
+                          filters.type === "Homeopathy" ||
                             filters.type === "Unani" ||
                             !filters.type
-                              ? true
-                              : false
-                          }
-                          onChange={handleSpecializationChanges}
-                          key={index}
-                          control={
-                            <Checkbox
-                              sx={{ "& .MuiSvgIcon-root": { fontSize: 22 } }}
-                            />
-                          }
-                          label={<span style={{ fontSize: 16 }}>{name}</span>}
-                        />
-                      ))}
+                            ? true
+                            : false
+                        }
+                        onChange={handleSpecializationChanges}
+                        key={index}
+                        control={
+                          <Checkbox
+                            sx={{ "& .MuiSvgIcon-root": { fontSize: 22 } }}
+                          />
+                        }
+                        label={<span style={{ fontSize: 16 }}>{name}</span>}
+                      />
+                    ))}
                 </FormGroup>
               </div>
             </div>
@@ -347,7 +348,6 @@ export default function SearchDoc() {
                 <IconButton onClick={() => handleExpChangeBtn("minus")}>
                   <Remove />
                 </IconButton>
-
                 <Slider
                   aria-label="experience"
                   defaultValue={0}
@@ -372,11 +372,11 @@ export default function SearchDoc() {
                 <h4>No Doctors found</h4>
               ) : docsBySearch.length > 0 ? (
                 docsBySearch.map((details, index) => (
-                  <DocCard key={index} details={details} />
+                  <DocCard key={index} data={{ details: details }} />
                 ))
               ) : (
                 filteredDoctors.map((details, index) => (
-                  <DocCard key={index} details={details} />
+                  <DocCard key={index} data={{ details: details }} />
                 ))
               )}
             </div>

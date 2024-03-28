@@ -2,13 +2,14 @@ import React from "react";
 import styles from "./searchdoc.module.css";
 import { useNavigate } from "react-router-dom";
 
-export default function DocCard({ details }) {
+export default function DocCard({ data }) {
+  const details = data?.details
   const navigate = useNavigate()
   return (
     <>
-      <div onClick={() => navigate("/doctorprofile",{state:details})} className={styles.cardContainer}>
+      <div onClick={() => navigate("/doctorprofile", { state: details })} className={styles.cardContainer}>
         <div>
-          <img className={styles.docImage} src={details?.image} alt="" />
+          <img className={styles.docImage} src='./images/hospital.jpg' alt="" />
         </div>
         <div>
           <div>
@@ -19,7 +20,7 @@ export default function DocCard({ details }) {
           <div style={{ fontWeight: 300, fontSize: 18 }}>Rating</div>
           <div>
             {" "}
-            <span style={{ fontWeight: 300, fontSize: 18,color:"#3A65FD",textTransform:"capitalize" }}>
+            <span style={{ fontWeight: 300, fontSize: 18, color: "#3A65FD", textTransform: "capitalize" }}>
               {details?.specialization}
             </span>
           </div>

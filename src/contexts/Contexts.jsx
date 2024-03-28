@@ -5,10 +5,13 @@ export const MyContext = createContext()
 
 export default function Contexts({ children }) {
     const [Data, setData] = useState({})
+    const [HospitalAdminRg, setHospitalAdminRg] = useState({})
     const [passedSpecialization, setPassedSpecialization] = useState("")
     const value = {
         Data,
         setData,
+        HospitalAdminRg,
+        setHospitalAdminRg,
         passedSpecialization,
         setPassedSpecialization
     }
