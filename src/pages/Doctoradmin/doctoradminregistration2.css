@@ -15,6 +15,7 @@
 .doctoradminregistration_input3 {
   justify-content: space-between;
 }
+
 .doctoradminregistration_input h4 {
   color: white;
 }
@@ -36,14 +37,22 @@
   margin-top: 1vw;
 }
 
+.DoctorRegInfo {
+  color: white;
+  font-size: 10px;
+  letter-spacing: 1px;
+}
+
 .text_area_section {
   justify-content: space-between;
   height: 15vw;
 }
+
 .doctoradminregistration_input3 {
   flex-direction: column;
   justify-content: space-between;
 }
+
 .doctoradminregistration_input3 textarea {
   height: 12vw;
   border-radius: 1vw;
@@ -70,6 +79,7 @@
   flex-direction: column;
   justify-content: space-between;
 }
+
 .doctoradminregistration_input7 {
   height: 12vw;
   flex-direction: column;
@@ -79,10 +89,12 @@
 .doctoradminregistration_input6 {
   justify-content: space-between;
 }
+
 .doctoradminregistration_input6 input {
   width: 22vw;
   margin-top: 0px;
 }
+
 .doctoradminregistration_input6 select {
   width: 22vw;
   margin-top: 0px;
@@ -145,9 +157,11 @@
   width: 30vw;
   margin-top: 1vw;
 }
+
 .desktop {
   display: block;
 }
+
 .mobile {
   display: none;
 }
@@ -158,9 +172,11 @@
   .desktop {
     display: none;
   }
+
   .mobile {
     display: block;
   }
+
   .doctoradminregistration {
     min-height: 130vh;
     /* height: 100vh; */
@@ -169,6 +185,7 @@
     /* justify-content: space-between; */
     padding: 4vw;
   }
+
   .docadminhead {
     padding-bottom: 3rem;
   }
@@ -182,6 +199,7 @@
     height: 40px;
     letter-spacing: 2px;
   }
+
   .doctoradminregistration_gender {
     background-color: rgba(246, 246, 249, 0.4);
     border-radius: 5px;
@@ -192,6 +210,7 @@
     width: 100%;
     margin-top: 2vw;
   }
+
   .text_area_section {
     /* justify-content: flex-end; */
     /* height: 1vw; */
@@ -227,11 +246,13 @@
     flex-direction: column;
     gap: 3rem;
   }
+
   .doctoradminregistration_input6 input {
     width: 40%;
     margin-top: 0px;
     padding-left: 20px;
   }
+
   .doctoradminregistration_input6 select {
     width: 40%;
     padding-left: 20px;
@@ -254,6 +275,7 @@
     margin-left: 2vw;
     border: 1px solid white;
   }
+
   .demo2 h4 {
     border: 1px solid white;
     background-color: #3a65fd;

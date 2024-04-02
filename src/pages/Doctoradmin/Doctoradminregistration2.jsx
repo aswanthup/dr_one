@@ -8,6 +8,7 @@ import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { MyContext } from "../../contexts/Contexts";
 import { speacializationNames } from "../../pages/doctor/constants/filter.js";
+import { port } from "../../config.js";
 
 export default function Doctoradminregistration2() {
   const navigate = useNavigate();
@@ -26,7 +27,8 @@ export default function Doctoradminregistration2() {
   const handleSubmit = (e) => {
     e.preventDefault();
     // Check if any other validations fail
-    if (!Data.name || !Data.email || !Data.phone || !Data.pincode) {
+    if (!Data.name || !Data.email || !Data.phone || !Data.phone_office || !Data?.pincode || !Data.sector) {
+      console.log("chekcingggggg", Data.name, Data.email, Data.phone, Data.phone_office, Data?.pincode, Data.sector)
       toast.error("Please fill in all the required fields.");
       return;
     }
@@ -39,13 +41,14 @@ export default function Doctoradminregistration2() {
     const mergedData = { ...Data };
     console.log("mergedData", mergedData);
     axios
-      .post(`http://13.232.117.141:3003/doctor/dr_registration`, mergedData)
+      .post(`${port}/doctor/dr_registration`, mergedData)
       .then((res) => {
         // console.log("resssssssssssssss", res);
 
         if (res?.data?.success === true) {
           console.log("errorrrrrrrr");
           toast.success(res?.data?.message);
+          window.location.reload()
         } else {
           console.log(res?.data);
           toast.error(res?.data);
@@ -187,10 +190,10 @@ export default function Doctoradminregistration2() {
                   Homeopathy
                 </option>
                 <option
-                  value="Ayurveda"
+                  value="Ayurvedic"
                   className="doctoradminregistration_gender_font"
                 >
-                  Ayurveda
+                  Ayurvedic
                 </option>
                 <option
                   value="Unani"
@@ -205,8 +208,6 @@ export default function Doctoradminregistration2() {
           <div className="doctoradminregistration_input2 flex">
             <div>
               <h4>Practice started year</h4>
-
-
               <input
                 type="number"
                 maxLength={4}
@@ -252,13 +253,13 @@ export default function Doctoradminregistration2() {
           </div>
 
           <div className="text_area_section flex">
-          <div className="doctoradminregistration_input4 flex">
+            <div className="doctoradminregistration_input4 flex">
               <h4>About</h4>
 
               <div className="doctoradminregistration_input7 flex">
                 <textarea
-                  name="address"
-                  value={Data?.address}
+                  name="about"
+                  value={Data?.about}
                   id=""
                   onChange={handleChange}
                 >
@@ -267,33 +268,36 @@ export default function Doctoradminregistration2() {
                 <div className="doctoradminregistration_input6 flex">
                   <input
                     type="text"
-                    value={Data?.pincode ?? ""}
+                    value={Data?.phone_office ?? ""}
                     placeholder="Office Number"
                     maxLength={6}
-                    onChange={handlePostChange}
+                    name="phone_office"
+                    onChange={handleChange}
                   />
 
                   <select
                     type="text"
                     onChange={handleChange}
-                    value={Data.selectedPlace}
-                    name="selectedPlace"
+                    value={Data.sector}
+                    name="sector"
                     className="doctoradminregistration_gender"
                   >
                     <option selected disabled>
                       {" "}
-                      select place{" "}
+                      Sector{" "}
                     </option>
-                    {Data?.Postoffice &&
-                      Data?.Postoffice.map((postData, index) => (
-                        <option
-                          style={{ color: "black" }}
-                          key={index}
-                          value={postData?.Name}
-                        >
-                          {postData?.Name}
-                        </option>
-                      ))}
+                    <option
+                      style={{ color: "black" }}
+                      value="goverment"
+                    >
+                      Goverment
+                    </option>
+                    <option
+                      style={{ color: "black" }}
+                      value="private"
+                    >
+                      Private
+                    </option>
                   </select>
                 </div>
               </div>
@@ -317,6 +321,7 @@ export default function Doctoradminregistration2() {
                     value={Data?.pincode ?? ""}
                     placeholder="Pincode"
                     maxLength={6}
+                    name="pincode"
                     onChange={handlePostChange}
                   />
 
@@ -532,7 +537,7 @@ export default function Doctoradminregistration2() {
                 <div className="doctoradminregistration_input6 ">
                   <div style={{ display: "flex", gap: "20px" }}>
                     <input
-                      type="text"
+                      type="number"
                       value={Data?.pincode ?? ""}
                       placeholder="Pincode"
                       style={{ width: "40%" }}

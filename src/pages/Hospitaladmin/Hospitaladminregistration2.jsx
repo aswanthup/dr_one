@@ -21,6 +21,12 @@ export default function Hospitaladminregistration2() {
                 { name: "Cardiology" },
 
         ]
+        const type = [
+                { name: "Allopathy" },
+                { name: "Homeopathy" },
+                { name: "Unani" },
+                { name: "Ayurvedic" },
+        ]
         const Features = [
                 { name: "Casuality" },
                 { name: "Op" },
@@ -104,7 +110,7 @@ export default function Hospitaladminregistration2() {
                         axios.post(`${port}/hospital/registration`, HospitalAdminRg).then((res) => {
                                 if (res?.data?.success) {
                                         toastifyFun(res?.data?.message, { success: true })
-                                        setHospitalAdminRg("")
+                                        window.location.reload()
                                 }
                         }).catch((err) => {
                                 console.log(err)
@@ -119,12 +125,10 @@ export default function Hospitaladminregistration2() {
         const CheckValidation = () => {
                 const Pincode = /^\d{6}$/;
                 if (HospitalAdminRg?.pincode) {
-
                         if (!Pincode.test(HospitalAdminRg?.pincode)) {
                                 setErrors({ ...Errors, pincode: "Not a valid 6-digit number" })
                         } else {
                                 setErrors({ ...Errors, pincode: "" })
-
                         }
                 }
 
@@ -180,7 +184,6 @@ export default function Hospitaladminregistration2() {
 
                                         <div>
                                                 <h4>Specialties</h4>
-
                                                 <div className='Features_card_ho_ad flex'>
                                                         <div className='Features_card_ho_ad_check '>
                                                                 {specialties.map((ele) =>
@@ -216,8 +219,26 @@ export default function Hospitaladminregistration2() {
                                                 </div>
                                                 <div>
                                                         <h4>Type</h4>
-                                                        <input value={HospitalAdminRg?.type || ''} onChange={inputChanges} type="text" name="type" />
-
+                                                        <select
+                                                                type="text"
+                                                                onChange={inputChanges}
+                                                                value={HospitalAdminRg?.type ? HospitalAdminRg?.type : ''}
+                                                                name="type"
+                                                                className="hospitalRegTypeList"
+                                                        >
+                                                                <option
+                                                                        disabled selected value=''
+                                                                >
+                                                                        Select Type
+                                                                </option>
+                                                                {type.map((types, index) => (
+                                                                        <option style={{ color: "black" }}
+                                                                                key={index}
+                                                                                value={types?.name}>
+                                                                                {types?.name}
+                                                                        </option>
+                                                                ))}
+                                                        </select>
                                                 </div>
                                         </div>
 

@@ -218,8 +218,9 @@ export default function Doctoradminregistration1() {
                     onChange={handleChange}
                   />
                   {validationErrors.phone && (
-                    <p style={{ fontSize: "1rem" }}>{validationErrors.phone}</p>
+                    <p style={{ fontSize: "1rem", color: "red" }}>{validationErrors.phone}</p>
                   )}
+                  <p className="DoctorRegInfo">Your number will be kept confidential and not shared.</p>
                 </div>
               </div>
               <div className="register-right-section">

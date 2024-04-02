@@ -24,6 +24,7 @@
   color: #3A65FD;
   padding: .2vw 2vw;
   border-radius: .3vw;
+  cursor: pointer;
 }
 
 .ho_ad_re_button {
@@ -68,7 +69,8 @@
   padding: 1vw;
   flex-direction: column;
   justify-content: space-between;
-  overflow-x: scroll;
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 .image_card_ho_ad {
@@ -92,7 +94,6 @@
   border-radius: .5vw;
   width: 100%;
   height: 3vw;
-  margin-top: 1vw;
   color: white;
   padding: 1vw;
   letter-spacing: 2px;
@@ -108,7 +109,7 @@
 
 .Toastify__toast-body>div:last-child {
   font-weight: 200;
-  font-size: 17px ;
+  font-size: 17px;
 }
 
 .hospitalAdminPinType div {
@@ -140,6 +141,7 @@
 .image_card_ho_ad2 {
   flex-direction: column;
   justify-content: space-between;
+  gap: 10px;
 }
 
 
@@ -192,7 +194,6 @@ input[type="checkbox"] {
   border: 0.8px solid currentColor;
   border-radius: 50px;
   transform: translateY(-0.075em);
-
   display: grid;
   place-content: center;
 }
@@ -245,4 +246,15 @@ input[type="checkbox"]:disabled {
   align-items: center;
   padding: .2vw;
   border-radius: 50px;
+}
+
+.hospitalRegTypeList {
+  background-color: rgba(246, 246, 249, .4);
+  border-radius: .5vw;
+  width: 100%;
+  height: 3vw;
+  margin-top: 1vw;
+  color: white;
+  padding: 1vw;
+  letter-spacing: 2px;
 }

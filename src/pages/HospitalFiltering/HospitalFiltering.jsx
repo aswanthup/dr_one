@@ -2,18 +2,13 @@ import React, { useEffect, useState } from 'react'
 import "./HospitalFiltering.css"
 import Footer from "../../components/Footer";
 import axios from "axios";
-import { Add, Remove } from "@mui/icons-material";
-import { MyContext } from "../../contexts/Contexts";
 import styles from "../doctor/searchdoc.module.css";
 import {
     Checkbox,
     FormControlLabel,
     FormGroup,
-    IconButton,
     Radio,
     RadioGroup,
-    Slider,
-    Stack,
 } from "@mui/material";
 import Navbar from '../../components/Navbar';
 import { SearchBox } from './SearchComponent/SearchBox';
@@ -32,14 +27,13 @@ export const HospitalFiltering = () => {
     const updateDocByPlace = (value) => {
         sethospitals(value)
     }
-    useEffect(() => {
-        // let FinalData = hospitalsFilter.length > 0 ? [...hospitalsFilter] : [...hospitals] || [];
+    useEffect(() => {   
         let FinalData = [...hospitals] || [];
         let updatedArray = [];
         FinalData.forEach(ele => {
             let typeMatched = ele?.type.toLowerCase() === filters?.type.toLowerCase(); // Check if ele.type matches or if filters.type is not set
             let specialityMatched = true; // Assume speciality matches by default
-            let featureMatched = true; // Assume features match by default
+            let featureMatched = true;
 
             if (typeMatched) {
                 if (filters.speciality && filters.speciality.length > 0) {
@@ -87,12 +81,10 @@ export const HospitalFiltering = () => {
     }
     useEffect(() => {
         axios.get(`${port}/hospital/list`).then((res) => {
-            // console.log("res>>>", res.data.data)
             sethospitals(res.data.data)
         })
     }, [])
 
-    // console.log("filters>>>>>>", filters)
     const handleTypeChanges = (e) => {
         const { name, value } = e?.target;
         if (name === "speciality") {
@@ -181,10 +173,6 @@ export const HospitalFiltering = () => {
                                     {speciality.map((name, index) => (
                                         <FormControlLabel
                                             name="speciality"
-                                            // checked={
-                                            //     filters.specializations.length !== 0 &&
-                                            //     filters.specializations.includes(name.toLowerCase())
-                                            // }
                                             disabled={
                                                 !filters.type || !hospitalsFilter.length > 0 && !filters.speciality.length > 0 ? true : false
                                             }

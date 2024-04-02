@@ -1,6 +1,7 @@
 import axios from "axios";
 import { React, useState, useEffect, useRef } from "react";
 import { useOutsideClick } from "../../hooks/useOutsideClick";
+import { port } from "../../config";
 
 export default function SearchBox({ updateDocs, docNames }) {
   const [showSearchList, setShowSearchList] = useState(false);
@@ -15,7 +16,7 @@ export default function SearchBox({ updateDocs, docNames }) {
       const fetchData = async () => {
         try {
           const response = await axios.post(
-            "http://13.232.117.141:3003/doctor/suggest",
+            `${port}/doctor/suggest`,
             {
               searchitem: searchPlace,
             }
@@ -37,12 +38,12 @@ export default function SearchBox({ updateDocs, docNames }) {
   console.log(placeLists);
 
   const handleClickPlace = async (data) => {
-    const placeName = `${data.postname}, ${data.district}`;
+    const placeName = `${ data.postname }, ${ data.district }`;
     setSelectedPlace(placeName);
     setShowSearchList(false);
     try {
       const response = await axios.post(
-        "http://13.232.117.141:3003/doctor/get_pincode",
+        `${ port } / doctor / get_pincode`,
         {
           selectedArea_id: data.id,
         }
@@ -64,7 +65,7 @@ export default function SearchBox({ updateDocs, docNames }) {
     setShowSearchList(false);
   }, boxRef);
   return (
-    <div  className="Doctor-search-box flex" style={{paddingTop:0}}>
+    <div className="Doctor-search-box flex" style={{ paddingTop: 0 }}>
       <div className="Doctor-container-search flex">
         <div className="Doctor-Search-box flex">
           <div className="Doctor-location-section flex">
