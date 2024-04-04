@@ -51,12 +51,12 @@ export default function Labadminregistration1() {
   const checkErrors = () => {
     const errors = {};
 
-    const Passwordpattern = /[@.#$!%*?&]/;
+    const Passwordpattern = /^(?=.*[A-Z])(?=.*\d)(?=.*[@.#$!%*?&]).{6,}$/;
     const EmailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const PhonePattern = /^[0-9]{10}$/;
 
     if (LabAdminRg?.password && !Passwordpattern.test(LabAdminRg.password)) {
-      errors.password = "Password requires at least one of: @.#$!%*?&";
+      errors.password = "Password must contain at least 1 uppercase letter, 1 number, 1 special character (@.#$!%*?&), and be at least 6 characters long.";
     }
 
     if (LabAdminRg?.email && !EmailPattern.test(LabAdminRg.email)) {

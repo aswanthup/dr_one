@@ -127,17 +127,33 @@
 }
 
 .login-InnerModal {
-    padding: 10px;
-    width: 40%;
+    padding: 30px;
+    width: 35%;
     background-color: white;
     border-radius: 10px;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 20px;
+
+}
+
+.login-InnerModal button {
+    background-color: blue;
+    border-radius: 10px;
+    width: 120px;
+    padding: 10px;
+    color: white;
+    letter-spacing: 1px;
+}
+
+.login-InnerModal-Button {
+    width: 100%;
+    display: flex;
+    justify-content: center;
 }
 
 .login-InnerModal p {
-    font-size: 17px;
+    font-size: 20px;
     font-weight: 400;
     color: rgba(0, 0, 0, 0.651);
 }
@@ -153,14 +169,19 @@
 .login-InnerModal-H3 {
     font-weight: 400;
     letter-spacing: 1px;
+    font-size: 30px;
 }
 
 .login-InnerModal-Inputs {
     width: 100%;
+    display: flex;
+    justify-content: center;
 }
 
 .login-InnerModal-Inputs-Align {
     display: flex;
+    width: 50%;
+    justify-content: center;
 }
 
 input::-webkit-outer-spin-button,

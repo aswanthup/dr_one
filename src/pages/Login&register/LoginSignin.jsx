@@ -2,11 +2,11 @@ import React, { useState } from 'react'
 import '../Login&register/login.css'
 import { Modal } from '@mui/material'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import OTPInput from 'react-otp-input';
+import { MuiOtpInput } from 'mui-one-time-password-input';
 export const LoginSignin = () => {
   const [Open, setOpen] = useState(false)
-  const [Otp, setOtp] = useState({
-  })
+  // const [Otp, setOtp] = useState({
+  // })
   const openModal = (cls) => {
     console.log("Checkinggggggggg", cls)
     if (cls.cls) {
@@ -15,11 +15,12 @@ export const LoginSignin = () => {
       setOpen(true)
     }
   }
-  console.log("Checkinggggggggg", Open)
 
 
-  const onchangeOTp = (e) => {
-    setOtp({ ...Otp, userOtp: e?.target?.value })
+  const [otp, setOtp] = React.useState('')
+
+  const handleChange = (newValue) => {
+    setOtp(newValue)
   }
 
   return (
@@ -87,18 +88,24 @@ export const LoginSignin = () => {
         <>
           <div className='login-InnerModal'>
             <div className='login-InnerModal-close'>
-              <ArrowBackIcon id="login-InnerModal-closeIcon" />
+              <div style={{ cursor: "pointer" }} onClick={() => { openModal({ cls: true }) }}>
+                <ArrowBackIcon id="login-InnerModal-closeIcon" />
+              </div>
             </div>
-            <h2 className='login-InnerModal-H3'>
+            <label className='login-InnerModal-H3'>
               Check your email for OTP
-            </h2>
+            </label>
             <p >
               Kindly input the 6-digit code that has been dispatched to your email.
             </p>
             <div className='login-InnerModal-Inputs'>
               <div className='login-InnerModal-Inputs-Align'>
-
+                <MuiOtpInput value={otp} onChange={handleChange} />
               </div>
+            </div>
+            <p>Didin't receive a code? <a href="">Resent</a></p>
+            <div className='login-InnerModal-Button'>
+              <button >Verify Code </button>
             </div>
           </div>
         </>

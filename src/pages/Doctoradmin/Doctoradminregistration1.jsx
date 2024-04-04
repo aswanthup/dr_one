@@ -83,11 +83,18 @@ export default function Doctoradminregistration1() {
 
     setValidationErrors({ ...validationErrors, [e.target.name]: "" });
 
-    if (name === "password" && value.length < 6) {
-      setValidationErrors((prevErrors) => ({
-        ...prevErrors,
-        [name]: "Password must be at least 6 characters long",
-      }));
+    if (name === "password") {
+      if (!validPassword(value)) {
+        setValidationErrors((prevErrors) => ({
+          ...prevErrors,
+          [name]: "Password must contain at least 1 uppercase letter, 1 number, 1 special character (@.#$!%*?&), and be at least 6 characters long",
+        }));
+      } else {
+        setValidationErrors((prevErrors) => ({
+          ...prevErrors,
+          [name]: "",
+        }));
+      }
     }
 
     // Validate confirm password
@@ -135,6 +142,10 @@ export default function Doctoradminregistration1() {
   const validateEmail = (email) => {
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return regex.test(email);
+  };
+  const validPassword = (password) => {
+    const regex = /^(?=.*[A-Z])(?=.*\d)(?=.*[@.#$!%*?&]).{6,}$/;
+    return regex.test(password);
   };
 
   const handleClick = () => {
@@ -219,9 +230,9 @@ export default function Doctoradminregistration1() {
                   />
 
                   {validationErrors.phone && (
-                    <p style={{ fontSize: "1rem", color: "red" }}>{validationErrors.phone}</p>
+                    <p className="register-number-warning">{validationErrors.phone}</p>
                   )}
-                  <p className="DoctorRegInfo">Your number will be kept confidential and not shared.</p>
+                  <p className="register-number-warning">Your number will be kept confidential and not shared.</p>
                 </div>
               </div>
               <div className="register-right-section">
@@ -235,7 +246,7 @@ export default function Doctoradminregistration1() {
                     pattern="^[^\s@]+@[^\s@]+\.[^\s@]+$"
                   />
                   {validationErrors.email && (
-                    <p style={{ fontSize: "1rem" }}>{validationErrors.email}</p>
+                    <p className="register-number-warning">{validationErrors.email}</p>
                   )}
                 </div>
                 <div style={{ position: "relative" }}>
@@ -247,7 +258,7 @@ export default function Doctoradminregistration1() {
                     onChange={handleChange}
                   />
                   {validationErrors.password && (
-                    <p style={{ fontSize: "1rem" }}>
+                    <p className="register-number-warning">
                       {validationErrors.password}
                     </p>
                   )}
@@ -262,7 +273,7 @@ export default function Doctoradminregistration1() {
                     required
                   />
                   {validationErrors.confirmPassword && (
-                    <p style={{ fontSize: "1rem" }}>
+                    <p className="register-number-warning">
                       {validationErrors.confirmPassword}
                     </p>
                   )}
@@ -285,6 +296,6 @@ export default function Doctoradminregistration1() {
         </div>
       </div>
       <ToastContainer />
-    </div>
+    </div >
   );
 }
