@@ -24,11 +24,12 @@ import axios from "axios";
 import { Add, Remove } from "@mui/icons-material";
 import { MyContext } from "../../contexts/Contexts";
 import { port } from "../../config";
+import { Backdrop, CircularProgress } from "@mui/material";
 
 export default function SearchDoc() {
+  const [loading, setLoading] = useState(false);
   const [allDocData, setAllDocData] = useState([]);
   const [filteredDoctors, setFilteredDoctors] = useState([]);
-
   const [docsBySearch, setDocsBySearch] = useState([]);
   const [allDocsBySearch, setAllDocsBySearch] = useState([]);
   const [emptyResults, setEmptyResults] = useState(false);
@@ -129,9 +130,8 @@ export default function SearchDoc() {
 
   const getAllDoctorsData = async () => {
     try {
-      const response = await axios.get(
-        `${port}/doctor/complete_data`
-      );
+      setLoading(true);
+      const response = await axios.get(`${port}/doctor/complete_data`);
       const allDoctorsDetails = response.data.data;
       if (passedSpecialization) {
         handlePassedSpecialization(allDoctorsDetails);
@@ -142,6 +142,7 @@ export default function SearchDoc() {
     } catch (err) {
       alert("server error");
     } finally {
+      setLoading(false);
     }
   };
   useEffect(() => {
@@ -250,62 +251,62 @@ export default function SearchDoc() {
                   Specialization{" "}
                   {(filters.type === "Unani" ||
                     filters.type === "Homeopathy") && (
-                      <span style={{ fontSize: "14px", fontWeight: 300 }}>
-                        (Not Applicable)
-                      </span>
-                    )}
+                    <span style={{ fontSize: "14px", fontWeight: 300 }}>
+                      (Not Applicable)
+                    </span>
+                  )}
                 </span>
               </div>
               <div>
                 <FormGroup>
                   {filters.type === "Ayurvedic"
                     ? ayurSpec.map((name, index) => (
-                      <FormControlLabel
-                        name={name}
-                        checked={
-                          filters.specializations.length !== 0 &&
-                          filters.specializations.includes(name.toLowerCase())
-                        }
-                        disabled={
-                          filters.type === "Homeopathy" ||
+                        <FormControlLabel
+                          name={name}
+                          checked={
+                            filters.specializations.length !== 0 &&
+                            filters.specializations.includes(name.toLowerCase())
+                          }
+                          disabled={
+                            filters.type === "Homeopathy" ||
                             filters.type === "Unani"
-                            ? true
-                            : false
-                        }
-                        onChange={handleSpecializationChanges}
-                        key={index}
-                        control={
-                          <Checkbox
-                            sx={{ "& .MuiSvgIcon-root": { fontSize: 22 } }}
-                          />
-                        }
-                        label={<span style={{ fontSize: 16 }}>{name}</span>}
-                      />
-                    ))
+                              ? true
+                              : false
+                          }
+                          onChange={handleSpecializationChanges}
+                          key={index}
+                          control={
+                            <Checkbox
+                              sx={{ "& .MuiSvgIcon-root": { fontSize: 22 } }}
+                            />
+                          }
+                          label={<span style={{ fontSize: 16 }}>{name}</span>}
+                        />
+                      ))
                     : speacializationNames.map((name, index) => (
-                      <FormControlLabel
-                        name={name}
-                        checked={
-                          filters.specializations.length !== 0 &&
-                          filters.specializations.includes(name.toLowerCase())
-                        }
-                        disabled={
-                          filters.type === "Homeopathy" ||
+                        <FormControlLabel
+                          name={name}
+                          checked={
+                            filters.specializations.length !== 0 &&
+                            filters.specializations.includes(name.toLowerCase())
+                          }
+                          disabled={
+                            filters.type === "Homeopathy" ||
                             filters.type === "Unani" ||
                             !filters.type
-                            ? true
-                            : false
-                        }
-                        onChange={handleSpecializationChanges}
-                        key={index}
-                        control={
-                          <Checkbox
-                            sx={{ "& .MuiSvgIcon-root": { fontSize: 22 } }}
-                          />
-                        }
-                        label={<span style={{ fontSize: 16 }}>{name}</span>}
-                      />
-                    ))}
+                              ? true
+                              : false
+                          }
+                          onChange={handleSpecializationChanges}
+                          key={index}
+                          control={
+                            <Checkbox
+                              sx={{ "& .MuiSvgIcon-root": { fontSize: 22 } }}
+                            />
+                          }
+                          label={<span style={{ fontSize: 16 }}>{name}</span>}
+                        />
+                      ))}
                 </FormGroup>
               </div>
             </div>
@@ -382,6 +383,16 @@ export default function SearchDoc() {
             </div>
           </div>
         </div>
+        <Backdrop
+          sx={{
+            color: "#fff",
+            zIndex: (theme) => theme.zIndex.drawer + 1,
+          }}
+          open={loading}
+          // onClick={handleClose}
+        >
+          <CircularProgress color="inherit" />
+        </Backdrop>
       </div>
       <Footer />
     </>
