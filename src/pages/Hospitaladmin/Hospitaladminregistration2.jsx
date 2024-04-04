@@ -6,12 +6,15 @@ import axios from 'axios'
 import 'react-toastify/dist/ReactToastify.css';
 import { Bounce, ToastContainer, toast } from 'react-toastify'
 import { port } from '../../config'
+import { Backdrop, CircularProgress } from '@mui/material'
 
 export default function Hospitaladminregistration2() {
 
         const { HospitalAdminRg, setHospitalAdminRg } = useContext(MyContext)
         const [Errors, setErrors] = useState({})
         const navigate = useNavigate()
+        const [loader, setloader] = useState(false)
+
         const specialties = [
                 { name: "Gynaecology" },
                 { name: "Dermatology" },
@@ -105,17 +108,22 @@ export default function Hospitaladminregistration2() {
 
 
         const Finish = () => {
+                setloader(true)
                 if (HospitalAdminRg?.pincode && HospitalAdminRg?.about && HospitalAdminRg?.lisence_no && HospitalAdminRg?.type && HospitalAdminRg.features.length > 0 && HospitalAdminRg.specialties.length > 0 && !Errors?.pincode) {
                         CheckValidation()
                         axios.post(`${port}/hospital/registration`, HospitalAdminRg).then((res) => {
                                 if (res?.data?.success) {
                                         toastifyFun(res?.data?.message, { success: true })
                                         window.location.reload()
+                                        setloader(false)
                                 }
                         }).catch((err) => {
                                 console.log(err)
+                                toastifyFun(err?.response?.data?.message, { info: true })
+                                setloader(false)
                         })
                 } else {
+                        setloader(false)
                         toastifyFun("All fields are mandatory", { info: true })
                 }
 
@@ -135,9 +143,22 @@ export default function Hospitaladminregistration2() {
         }
 
         console.log("HospitalAdminRg>>>>>>>", HospitalAdminRg)
+        const handleClose = () => {
+                setloader(false)
+        }
         return (
 
                 <div>
+                        <Backdrop
+                                sx={{
+                                        color: "#fff",
+                                        zIndex: (theme) => theme.zIndex.drawer + 1,
+                                }}
+                                open={loader}
+                                onClick={handleClose}
+                        >
+                                <CircularProgress color="inherit" />
+                        </Backdrop>
                         <ToastContainer />
 
                         <div className='hospitaladminregistration2 flex'>
@@ -166,7 +187,7 @@ export default function Hospitaladminregistration2() {
 
                                         </div>
 
-                                        <div>
+                                        <div className='Features_card_ho_ad_media'>
                                                 <h4>Features</h4>
                                                 <div className='Features_card_ho_ad flex'>
                                                         <div className='Features_card_ho_ad_check '>
@@ -182,7 +203,7 @@ export default function Hospitaladminregistration2() {
                                                 </div>
                                         </div>
 
-                                        <div>
+                                        <div className='Features_card_ho_ad_media'>
                                                 <h4>Specialties</h4>
                                                 <div className='Features_card_ho_ad flex'>
                                                         <div className='Features_card_ho_ad_check '>
@@ -211,35 +232,33 @@ export default function Hospitaladminregistration2() {
 
 
                                 <div className='hospitaladminregistration_second flex' >
-                                        <div className='hospitalAdminPinType'>
-                                                <div>
-                                                        <h4>Pincode</h4>
-                                                        <input value={HospitalAdminRg?.pincode || ''} onChange={inputChanges} type="number" name="pincode" />
-                                                        <p className="register-number-warning">{Errors?.pincode}</p>
-                                                </div>
-                                                <div>
-                                                        <h4>Type</h4>
-                                                        <select
-                                                                type="text"
-                                                                onChange={inputChanges}
-                                                                value={HospitalAdminRg?.type ? HospitalAdminRg?.type : ''}
-                                                                name="type"
-                                                                className="hospitalRegTypeList"
+                                        <div>
+                                                <h4>Pincode</h4>
+                                                <input value={HospitalAdminRg?.pincode || ''} onChange={inputChanges} type="number" maxLength={6} name="pincode" />
+                                                <p className="register-number-warning">{Errors?.pincode}</p>
+                                        </div>
+                                        <div>
+                                                <h4>Type</h4>
+                                                <select
+                                                        type="text"
+                                                        onChange={inputChanges}
+                                                        value={HospitalAdminRg?.type ? HospitalAdminRg?.type : ''}
+                                                        name="type"
+                                                        className="hospitalRegTypeList"
+                                                >
+                                                        <option
+                                                                disabled selected value=''
                                                         >
-                                                                <option
-                                                                        disabled selected value=''
-                                                                >
-                                                                        Select Type
+                                                                Select Type
+                                                        </option>
+                                                        {type.map((types, index) => (
+                                                                <option style={{ color: "black" }}
+                                                                        key={index}
+                                                                        value={types?.name}>
+                                                                        {types?.name}
                                                                 </option>
-                                                                {type.map((types, index) => (
-                                                                        <option style={{ color: "black" }}
-                                                                                key={index}
-                                                                                value={types?.name}>
-                                                                                {types?.name}
-                                                                        </option>
-                                                                ))}
-                                                        </select>
-                                                </div>
+                                                        ))}
+                                                </select>
                                         </div>
 
                                         <div>

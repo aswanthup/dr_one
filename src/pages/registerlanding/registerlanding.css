@@ -89,4 +89,8 @@
     .maintitle{
         margin-bottom:4vw;
     }
+    .registerlanding{
+        height: auto;
+        padding: 30px;
+    }
 }

@@ -13,8 +13,12 @@
 }
 
 .register-number-warning {
-    color: red;
+    color: #ffffff;
     font-size: 13px;
+    font-weight: 300;
+    letter-spacing: 1px;
+    padding: 2px -0px;
+    position: absolute;
 }
 
 @media screen and (max-width: 780px) {

@@ -172,7 +172,7 @@ export default function Doctoradminregistration1() {
           </div>
           <div className="registration-form">
             <div>
-              <h1 style={{ color: "white" }}>Register</h1>
+              <h1 style={{ color: "white" }}>Doctor Register</h1>
             </div>
             <div className="upload-image flex">
               <label for="inputTag">
@@ -217,6 +217,7 @@ export default function Doctoradminregistration1() {
                     value={Data?.phone}
                     onChange={handleChange}
                   />
+
                   {validationErrors.phone && (
                     <p style={{ fontSize: "1rem", color: "red" }}>{validationErrors.phone}</p>
                   )}
@@ -224,7 +225,7 @@ export default function Doctoradminregistration1() {
                 </div>
               </div>
               <div className="register-right-section">
-                <div>
+                <div style={{ position: "relative" }}>
                   <h4>Email</h4>
                   <input
                     type="email"
@@ -234,10 +235,10 @@ export default function Doctoradminregistration1() {
                     pattern="^[^\s@]+@[^\s@]+\.[^\s@]+$"
                   />
                   {validationErrors.email && (
-                    <p style={{ fontSize: "1rem" }}>{validationErrors.email}</p>
+                    <p style={{ fontSize: "1rem", position: "absolute" }}>{validationErrors.email}</p>
                   )}
                 </div>
-                <div>
+                <div style={{ position: "relative" }}>
                   <h4>Password</h4>
                   <input
                     type="password"
@@ -246,12 +247,12 @@ export default function Doctoradminregistration1() {
                     onChange={handleChange}
                   />
                   {validationErrors.password && (
-                    <p style={{ fontSize: "1rem" }}>
+                    <p style={{ fontSize: "1rem", position: "absolute" }}>
                       {validationErrors.password}
                     </p>
                   )}
                 </div>
-                <div>
+                <div style={{ position: "relative" }}>
                   <h4>Confirm Password</h4>
                   <input
                     type="password"
@@ -261,7 +262,7 @@ export default function Doctoradminregistration1() {
                     required
                   />
                   {validationErrors.confirmPassword && (
-                    <p style={{ fontSize: "1rem" }}>
+                    <p style={{ fontSize: "1rem", position: "absolute" }}>
                       {validationErrors.confirmPassword}
                     </p>
                   )}

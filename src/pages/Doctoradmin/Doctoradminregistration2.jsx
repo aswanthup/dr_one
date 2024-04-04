@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 import { MyContext } from "../../contexts/Contexts";
 import { speacializationNames } from "../../pages/doctor/constants/filter.js";
 import { port } from "../../config.js";
+import { Backdrop, CircularProgress } from "@mui/material";
 
 export default function Doctoradminregistration2() {
   const navigate = useNavigate();
@@ -16,7 +17,7 @@ export default function Doctoradminregistration2() {
   const [postal, setPostal] = useState();
   const [postalError, setPostalError] = useState("");
   const [addressdata, setAddressdata] = useState({});
-
+  const [loader, setloader] = useState(false)
   const handleChange = (e) => {
     setData({
       ...Data,
@@ -26,6 +27,7 @@ export default function Doctoradminregistration2() {
   console.log("dataaaaaaaaaa", Data);
   const handleSubmit = (e) => {
     e.preventDefault();
+    setloader(true)
     // Check if any other validations fail
     if (!Data.name || !Data.email || !Data.phone || !Data.phone_office || !Data?.pincode || !Data.sector) {
       console.log("chekcingggggg", Data.name, Data.email, Data.phone, Data.phone_office, Data?.pincode, Data.sector)
@@ -48,10 +50,12 @@ export default function Doctoradminregistration2() {
         if (res?.data?.success === true) {
           console.log("errorrrrrrrr");
           toast.success(res?.data?.message);
+          setloader(false)
           window.location.reload()
         } else {
           console.log(res?.data);
           toast.error(res?.data);
+          setloader(false)
         }
       });
   };
@@ -106,7 +110,9 @@ export default function Doctoradminregistration2() {
   useEffect(() => {
     // console.log("postal===", postal);
   }, []);
-
+  const handleClose = () => {
+    setloader(false)
+  }
   return (
     <>
       <ToastContainer>
@@ -115,7 +121,16 @@ export default function Doctoradminregistration2() {
         newestOnTop={false}
         closeOnClick rtl={false}, pauseOnFocusLoss draggable pauseOnHover
       </ToastContainer>
-
+      <Backdrop
+        sx={{
+          color: "#fff",
+          zIndex: (theme) => theme.zIndex.drawer + 1,
+        }}
+        open={loader}
+        onClick={handleClose}
+      >
+        <CircularProgress color="inherit" />
+      </Backdrop>
       <div className="doctoradminregistration flex desktop">
         <div>
           <h1>Doctor Registration</h1>
@@ -270,7 +285,7 @@ export default function Doctoradminregistration2() {
                     type="text"
                     value={Data?.phone_office ?? ""}
                     placeholder="Office Number"
-                    maxLength={6}
+                    maxLength={10}
                     name="phone_office"
                     onChange={handleChange}
                   />
@@ -521,10 +536,45 @@ export default function Doctoradminregistration2() {
                 onChange={handleChange}
               ></textarea>
             </div>
+            <div className="doctoradminregistration_input3 ">
+              <h4>Office Number</h4>
+              <input
+                type="text"
+                name="phone_office"
+                value={Data?.phone_office}
+                onChange={handleChange}
+              />
+            </div>
+            <div className="doctoradminregistration_input3 ">
+              <h4>Select Sector</h4>
+              <select
+                type="text"
+                onChange={handleChange}
+                value={Data.sector}
+                name="sector"
+                className="doctoradminregistration_gender"
+              >
+                <option selected disabled>
+                  {" "}
+                  Select{" "}
+                </option>
+                <option
+                  style={{ color: "black" }}
+                  value="goverment"
+                >
+                  Goverment
+                </option>
+                <option
+                  style={{ color: "black" }}
+                  value="private"
+                >
+                  Private
+                </option>
+              </select>
+            </div>
 
             <div className="doctoradminregistration_input4 ">
               <h4>Address</h4>
-
               <div className="doctoradminregistration_inpu ">
                 <textarea
                   name="address"

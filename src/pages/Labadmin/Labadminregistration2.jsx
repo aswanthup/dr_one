@@ -9,10 +9,12 @@ import { port } from '../../config'
 import '../Labadmin/Labadminregistration2.css'
 import { DesktopTimePicker } from '@mui/x-date-pickers'
 import dayjs from 'dayjs'
+import { Backdrop, CircularProgress } from '@mui/material'
 
 export default function Labadminregistration2() {
   const { LabAdminRg, setLabAdminRg } = useContext(MyContext)
   const [Errors, setErrors] = useState({})
+  const [loader, setloader] = useState(false)
   const navigate = useNavigate()
 
   const Services = [
@@ -35,11 +37,11 @@ export default function Labadminregistration2() {
 
   ]
 
-  // useEffect(() => {
-  //   if (!LabAdminRg?.name && !LabAdminRg?.contact_no && !LabAdminRg?.password && !LabAdminRg?.email && !LabAdminRg?.repassword) {
-  //     navigate("/labadminregistration1")
-  //   }
-  // }, [])
+  useEffect(() => {
+    if (!LabAdminRg?.name && !LabAdminRg?.contact_no && !LabAdminRg?.password && !LabAdminRg?.email && !LabAdminRg?.repassword) {
+      navigate("/labadminregistration1")
+    }
+  }, [])
 
   const toastifyFun = (value, success) => {
     if (!success?.success) {
@@ -110,19 +112,24 @@ export default function Labadminregistration2() {
 
 
   const Finish = () => {
+
     if (LabAdminRg?.pincode && LabAdminRg?.about && LabAdminRg?.lisence_no && LabAdminRg?.features?.length > 0 && LabAdminRg?.Services?.length > 0 && !Errors?.pincode && LabAdminRg?.timing?.opening_time && LabAdminRg?.timing?.closing_time) {
+      setloader(true)
       CheckValidation()
-      axios.post(`http://192.168.1.12:3003/lab/addlab`, LabAdminRg).then((res) => {
+      axios.post(`${port}/lab/addlab`, LabAdminRg).then((res) => {
         console.log(res)
         if (res?.data?.success) {
           toastifyFun(res?.data?.message, { success: true })
           window.location.reload()
+          setloader(false)
         }
       }).catch((err) => {
         console.log(err)
+        setloader(false)
         toastifyFun(err?.response?.data?.message, { info: true })
       })
     } else {
+      setloader(false)
       toastifyFun("All fields are mandatory", { info: true })
     }
   }
@@ -141,14 +148,28 @@ export default function Labadminregistration2() {
 
   }
 
+  const handleClose = () => {
+    setloader(false)
+  }
   console.log("LabAdminRg>>>>>>>", LabAdminRg)
   return (
+
     <div>
+      <Backdrop
+        sx={{
+          color: "#fff",
+          zIndex: (theme) => theme.zIndex.drawer + 1,
+        }}
+        open={loader}
+        onClick={handleClose}
+      >
+        <CircularProgress color="inherit" />
+      </Backdrop>
       <ToastContainer />
 
       <div className='hospitaladminregistration2 flex'>
 
-        <h1>Lab Registration</h1>
+        <h1>Laboratory Registration</h1>
         <div className='hospitaladminregistration_first flex'>
           <div className='image_card_ho_ad flex'>
             <h4>Add Photos</h4>
@@ -172,7 +193,7 @@ export default function Labadminregistration2() {
               </div>
               <div>
                 <h4>License Number</h4>
-                <input value={LabAdminRg?.lisence_no || ''} onChange={inputChanges} type="number" name='lisence_no' />
+                <input value={LabAdminRg?.lisence_no || ''} onChange={inputChanges} type="text" name='lisence_no' />
               </div>
             </div>
 
@@ -223,17 +244,17 @@ export default function Labadminregistration2() {
           <div className='LabPinType'>
             <div className='LabPinTypeDiv'>
               <h4>Pincode</h4>
-              <input className='hospitalAdminInput' value={LabAdminRg?.pincode || ''} onChange={inputChanges} type="number" name="pincode" />
+              <input className='hospitalAdminInput' value={LabAdminRg?.pincode || ''} onChange={inputChanges} type="number" maxLength={6} name="pincode" />
               <p className="register-number-warning">{Errors?.pincode}</p>
             </div>
             <div className='LabAdminPin'>
               <div className='LabAdminPinTimePic'>
                 <h4>Opening Time</h4>
-                <DesktopTimePicker className='hospitalAdminPinTimePic' onChange={(e) => { TimeSetting(e, "opening_time") }} defaultValue={dayjs(LabAdminRg?.timing?.opening_time) || ''} />
+                <DesktopTimePicker className='hospitalAdminPinTimePic' onChange={(e) => { TimeSetting(e, "opening_time") }} />
               </div>
               <div className='LabAdminPinTimePic'>
                 <h4>Closing Time</h4>
-                <DesktopTimePicker className='hospitalAdminPinTimePic' onChange={(e) => { TimeSetting(e, "closing_time") }} defaultValue={dayjs(LabAdminRg?.timing?.closing_time) || ''} />
+                <DesktopTimePicker className='hospitalAdminPinTimePic' onChange={(e) => { TimeSetting(e, "closing_time") }} />
               </div>
             </div>
           </div>

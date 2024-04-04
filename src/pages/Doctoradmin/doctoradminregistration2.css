@@ -8,6 +8,7 @@
 
 .doctoradminregistration h1 {
   color: white;
+  margin: 40px 00px;
 }
 
 .doctoradminregistration_input1,
@@ -39,7 +40,7 @@
 
 .DoctorRegInfo {
   color: white;
-  font-size: 10px;
+  font-size: 1rem;
   letter-spacing: 1px;
 }
 
@@ -177,18 +178,20 @@
     display: block;
   }
 
+  .doctoradminregistration_input {
+    height: 100%;
+    margin: 10px 00px;
+  }
+
   .doctoradminregistration {
-    min-height: 130vh;
     /* height: 100vh; */
+    height: auto;
     background-color: #3a65fd;
     flex-direction: column;
     /* justify-content: space-between; */
     padding: 4vw;
   }
 
-  .docadminhead {
-    padding-bottom: 3rem;
-  }
 
   .doctoradminregistration_input input {
     background-color: rgba(246, 246, 249, 0.4);
@@ -214,6 +217,7 @@
   .text_area_section {
     /* justify-content: flex-end; */
     /* height: 1vw; */
+    height: 100%;
     border: 1px soli red;
   }
 

@@ -15,6 +15,7 @@
 .hospitaladminregistration_first {
   justify-content: space-between;
   min-height: 15vw;
+  gap: 5px;
 }
 
 
@@ -92,7 +93,7 @@
 .hospitaladminregistration_second input {
   background-color: rgba(246, 246, 249, .4);
   border-radius: .5vw;
-  width: 100%;
+  width: 43vw;
   height: 3vw;
   color: white;
   padding: 1vw;
@@ -251,10 +252,107 @@ input[type="checkbox"]:disabled {
 .hospitalRegTypeList {
   background-color: rgba(246, 246, 249, .4);
   border-radius: .5vw;
-  width: 100%;
+  width: 43vw;
   height: 3vw;
   margin-top: 1vw;
   color: white;
   padding: 1vw;
   letter-spacing: 2px;
+}
+
+@media only screen and (max-width: 768px) {
+  .Features_card_ho_ad {
+    width: 100%;
+  }
+
+  .hospitaladminregistration_second input {
+    width: 100%;
+  }
+  .hospitalRegTypeList{
+    width: 100%;
+  }
+
+  .hospitalAdminPinType div {
+    gap: 5px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .hospitaladminregistration2 {
+    height: auto;
+    gap: 30px;
+  }
+
+  .hospitaladminregistration_first {
+    flex-direction: column;
+  }
+
+  .Features_card_ho_ad_check label {
+    width: 40%;
+  }
+
+  .Features_card_ho_ad {
+    height: 120px;
+    padding: 10px;
+  }
+
+  .image_card_ho_ad {
+    width: 100%;
+  }
+
+  .image_card_ho_ad input {
+    height: 10vw;
+  }
+
+  .image_card_ho_ad_section {
+    justify-content: flex-start;
+    gap: 10px;
+    align-items: center;
+  }
+
+  .image_card_ho_ad_section img {
+    width: 10vw;
+    height: 10vw;
+  }
+
+  .image_card_ho_ad_add_image {
+    width: 10vw;
+    height: 10vw;
+  }
+
+  .hospitaladminregistration_second input {
+    height: 10vw;
+  }
+
+  .hospitalRegTypeList {
+    height: 10vw;
+  }
+
+  .hospitaladminregistration_second textarea {
+    height: 100px;
+  }
+
+  .Features_card_ho_ad_media {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+}
+
+@media only screen and (max-width: 408px) {
+  .hospitalAdminPinType {
+    flex-direction: column;
+  }
+
+  .hospitalAdminPinType div {
+    width: 100%;
+  }
+
+  .hospitaladminregistration_second {
+    flex-direction: column;
+  }
+
+  .hospitaladminregistration_second textarea {
+    width: 100%;
+  }
 }

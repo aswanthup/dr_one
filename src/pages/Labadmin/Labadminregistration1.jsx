@@ -56,7 +56,7 @@ export default function Labadminregistration1() {
     const PhonePattern = /^[0-9]{10}$/;
 
     if (LabAdminRg?.password && !Passwordpattern.test(LabAdminRg.password)) {
-      errors.password = "Password must contain at least one special character among @.#$!%*?&.";
+      errors.password = "Password requires at least one of: @.#$!%*?&";
     }
 
     if (LabAdminRg?.email && !EmailPattern.test(LabAdminRg.email)) {
@@ -84,38 +84,37 @@ export default function Labadminregistration1() {
           </div>
           <div className="registration-form">
             <div>
-              <h1 style={{ color: "white" }}>Lab Register</h1>
+              <h1 style={{ color: "white" }}>Laboratory Register</h1>
             </div>
             {/* <label className="photo-upload">
              <h4>Upload Photo</h4>
                 <input type="file" />
              </div> */}
 
-            <div className="hospitalname_input">
-              <h4>Lab Name</h4>
+            <div id="hospitalname_inputId" className="hospitalname_input">
+              <h4>Laboratory Name</h4>
               <input value={LabAdminRg?.name} onChange={inputOnchanges} name="name" type="text" />
-
             </div>
             <div className="register-input-section flex">
-              <div className="register-left-section">
-                <div>
+              <div className="lab-left-section">
+                <div style={{ position: "relative" }}>
                   <h4>Phone Number</h4>
                   <input value={LabAdminRg?.contact_no} onChange={inputOnchanges} name="contact_no" type="number" />
                   <p className="register-number-warning">{Errors?.phone}</p>
                 </div>
-                <div>
+                <div style={{ position: "relative" }}>
                   <h4>Email</h4>
                   <input value={LabAdminRg?.email} pattern="^[^\s@]+@[^\s@]+\.[^\s@]+$" name="email" onChange={inputOnchanges} type="email" />
                   <p className="register-number-warning">{Errors?.email}</p>
                 </div>
               </div>
               <div className="register-right-section">
-                <div>
+                <div style={{ position: "relative" }}>
                   <h4>Password</h4>
                   <input value={LabAdminRg.password} name="password" onChange={inputOnchanges} type="password" />
                   <p className="register-number-warning">{Errors?.password}</p>
                 </div>
-                <div>
+                <div style={{ position: "relative" }}>
                   <h4>Confirm Password</h4>
                   <input value={LabAdminRg.repassword} name="repassword" onChange={inputOnchanges} type="password" />
                   <p className="register-number-warning">{Errors?.repassword}</p>
