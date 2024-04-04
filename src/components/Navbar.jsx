@@ -35,20 +35,14 @@ export default function Navbar() {
       <a href="/hospital">
         <h3>Hospital</h3>
       </a>
-      
-   
     </div>
     <div className="nav-buttons flex">
       <div className="nav-button">
         <button onClick={()=>window.location.href='/login'}>
           <h3 className="nav-button1" >Login</h3>
         </button>
-      
-
       </div>
- 
     </div>
-  
   </nav>
   </div>
 </>

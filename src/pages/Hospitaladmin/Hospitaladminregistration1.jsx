@@ -70,12 +70,12 @@ export default function Hospitaladminregistration1() {
   const checkErrors = () => {
     const errors = {};
 
-    const Passwordpattern = /[@.#$!%*?&]/;
+    const Passwordpattern = /^(?=.*[A-Z])(?=.*\d)(?=.*[@.#$!%*?&]).{6,}$/;
     const EmailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const PhonePattern = /^[0-9]{10}$/;
 
     if (HospitalAdminRg?.password && !Passwordpattern.test(HospitalAdminRg.password)) {
-      errors.password = "Password must contain at least one special character among @.#$!%*?&.";
+      errors.password = "Password must contain at least 1 uppercase letter, 1 number, 1 special character (@.#$!%*?&), and be at least 6 characters long.";
     }
 
     if (HospitalAdminRg?.email && !EmailPattern.test(HospitalAdminRg.email)) {

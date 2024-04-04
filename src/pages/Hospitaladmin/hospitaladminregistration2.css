@@ -1,10 +1,10 @@
 .hospitaladminregistration2 {
   background-color: #3A65FD;
-  height: 100vh;
   color: white;
   padding: 3vw;
   flex-direction: column;
   justify-content: space-between;
+  gap: 50px;
 
 }
 
@@ -30,6 +30,7 @@
 
 .ho_ad_re_button {
   justify-content: flex-end;
+  gap: 10px;
 }
 
 .hospitaladminregistration_second {
@@ -268,7 +269,8 @@ input[type="checkbox"]:disabled {
   .hospitaladminregistration_second input {
     width: 100%;
   }
-  .hospitalRegTypeList{
+
+  .hospitalRegTypeList {
     width: 100%;
   }
 

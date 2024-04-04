@@ -276,6 +276,7 @@ export default function Hospitaladminregistration2() {
                                 </div>
 
                                 <div className='ho_ad_re_button flex'>
+                                        <a onClick={() => { navigate(-1) }} ><h4>Back</h4></a>
                                         <a onClick={Finish} ><h4>Finish</h4></a>
                                 </div>
 

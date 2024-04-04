@@ -1,69 +1,106 @@
+/* Navbar */
 
- /* Navbar */
+.nav-background {
+   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 
- .nav-background{
-    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-  
- }
-.nav-bar{
-    align-items: center;
-    justify-content:space-between;
-    height:5vw;
-    /* backdrop-filter: blur(20px); */
-    background-color: var(--color-white);
- 
 }
-.nav-logo{
-width:20%;
+
+.nav-bar {
+   align-items: center;
+   justify-content: space-between;
+   height: 5vw;
+   /* backdrop-filter: blur(20px); */
+   background-color: var(--color-white);
+
 }
-.nav-links{
-   gap:3vw;
+
+.nav-logo {
+   width: 20%;
 }
+
+.nav-links {
+   gap: 3vw;
+}
+
 .nav-links a {
-    color: black; 
-    transition: 500ms ease-in-out;
- }
-
- .nav-links h3{
-    font-weight: 400;
- }
-
- .nav-links a:hover {
-    color:var(--color-primary); 
- }
-
- 
- .nav-links a.active {
-    color:var(--color-primary); 
- }
-
-
- .nav-buttons{
-    width:20%;
-    justify-content: end;
-}
-.nav-button button{
-    background-color:var(--color-primary);
-    padding:10px 30px;
-    border-radius:50px;
-    color:white;
-
+   color: black;
+   transition: 500ms ease-in-out;
 }
 
-.nav-button1{
-font-family:'Outfit', sans-serif;
-font-size:1.6rem;
-font-weight:300;
+.nav-links h3 {
+   font-weight: 400;
+}
+
+.nav-links a:hover {
+   color: var(--color-primary);
+}
+
+
+.nav-links a.active {
+   color: var(--color-primary);
+}
+
+
+.nav-buttons {
+   width: 20%;
+   justify-content: end;
+   position: relative;
+}
+
+.nav-button button {
+   background-color: var(--color-primary);
+   padding: 10px 30px;
+   border-radius: 50px;
+   color: white;
+
+}
+
+.nav-button1 {
+   font-family: 'Outfit', sans-serif;
+   font-size: 1.6rem;
+   font-weight: 300;
 }
 
 
 .nav-buttons a {
-    color:var(--color-white);
-   }
+   color: var(--color-white);
+}
 
+/* .nav-button {
+   display: flex;
+   flex-direction: column;
+   gap: 10px;
+} */
 
+.nav-button-Hover {
+   width: 200px;
+   background-color: aliceblue;
+   border-radius: 10px;
+   position: absolute;
+   margin-top: 10px;
+   margin-right: 40px;
+   display: flex;
+   flex-direction: column;
+   padding: 10px;
+   gap: 15px;
+}
 
+.nav-button-Hover a {
+   color: black;
+   font-size: 17px;
+   font-weight: 400;
+   letter-spacing: 1px;
 
+}
+
+.nav-button-Hover-Atags {
+   display: flex;
+   gap: 10px;
+}
+
+#nav-button-Hover-Icon {
+   color: blue;
+   font-size: 20px;
+}
 
 /* <!--End Navbar --> */
-

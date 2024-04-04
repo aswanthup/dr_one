@@ -209,7 +209,7 @@ export default function Doctoradminregistration1() {
                   />
                 </div>
                 <div>
-                  <h4>Number</h4>
+                  <h4> Phone Number</h4>
                   <input
                     type="text"
                     maxLength={10}
@@ -235,7 +235,7 @@ export default function Doctoradminregistration1() {
                     pattern="^[^\s@]+@[^\s@]+\.[^\s@]+$"
                   />
                   {validationErrors.email && (
-                    <p style={{ fontSize: "1rem", position: "absolute" }}>{validationErrors.email}</p>
+                    <p style={{ fontSize: "1rem" }}>{validationErrors.email}</p>
                   )}
                 </div>
                 <div style={{ position: "relative" }}>
@@ -247,7 +247,7 @@ export default function Doctoradminregistration1() {
                     onChange={handleChange}
                   />
                   {validationErrors.password && (
-                    <p style={{ fontSize: "1rem", position: "absolute" }}>
+                    <p style={{ fontSize: "1rem" }}>
                       {validationErrors.password}
                     </p>
                   )}
@@ -262,7 +262,7 @@ export default function Doctoradminregistration1() {
                     required
                   />
                   {validationErrors.confirmPassword && (
-                    <p style={{ fontSize: "1rem", position: "absolute" }}>
+                    <p style={{ fontSize: "1rem" }}>
                       {validationErrors.confirmPassword}
                     </p>
                   )}

@@ -29,7 +29,7 @@
 }
 
 ::-webkit-scrollbar {
-    width: 10px;
+    width: 0px;
     /* width of vertical scrollbar */
     height: 10px;
     /* height of horizontal scrollbar */
