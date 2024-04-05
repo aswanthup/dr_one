@@ -39,11 +39,11 @@ export default function Hospitaladminregistration2() {
 
         ]
 
-        useEffect(() => {
-                if (!HospitalAdminRg?.name && !HospitalAdminRg?.contact_no && !HospitalAdminRg?.password && !HospitalAdminRg?.email && !HospitalAdminRg?.repassword) {
-                        navigate("/hospitaladminregistration1")
-                }
-        }, [])
+        // useEffect(() => {
+        //         if (!HospitalAdminRg?.name && !HospitalAdminRg?.contact_no && !HospitalAdminRg?.password && !HospitalAdminRg?.email && !HospitalAdminRg?.repassword) {
+        //                 navigate("/hospitaladminregistration1")
+        //         }
+        // }, [])
 
         const toastifyFun = (value, success) => {
                 if (!success?.success) {
@@ -164,30 +164,40 @@ export default function Hospitaladminregistration2() {
                         <div className='hospitaladminregistration2 flex'>
 
                                 <h1>Hospital Registration</h1>
-                                <div className='hospitaladminregistration_first flex'>
-                                        <div className='image_card_ho_ad flex'>
-                                                <h4>Add Photos</h4>
-                                                <div className='image_card_ho_ad2 flex' >
-                                                        <div className='image_card_ho_ad_section flex'>
 
-                                                                <img src="images/hosptal1 (1).jpg" alt="" />
-                                                                <img src="images/hosptal1 (1).jpg" alt="" />
-                                                                <img src="images/hosptal1 (1).jpg" alt="" />
-                                                                <div className='image_card_ho_ad_add_image flex'>
-                                                                        <i class="ri-add-line"></i>
-                                                                </div>
+                                <div className='image_card_ho_ad flex'>
 
-                                                        </div>
 
-                                                        <div>
-                                                                <h4>License Number</h4>
-                                                                <input value={HospitalAdminRg?.lisence_no || ''} onChange={inputChanges} type="number" name='lisence_no' />
-                                                        </div>
-                                                </div>
 
-                                        </div>
+<h4>Add Photos</h4>
+<div className='image_card_ho_ad2 flex' >
+        <div className='image_card_ho_ad_section flex'>
 
-                                        <div className='Features_card_ho_ad_media'>
+                <img src="images/hosptal1 (1).jpg" alt="" />
+                <img src="images/hosptal1 (1).jpg" alt="" />
+                <img src="images/hosptal1 (1).jpg" alt="" />
+                <div className='image_card_ho_ad_add_image flex'>
+                        <i class="ri-add-line"></i>
+                </div>
+
+        </div>
+
+</div>
+
+</div>
+
+
+
+
+
+                                {/* <div className='hospitaladminregistration_first flex'> */}
+
+
+
+
+                                     
+
+                                        {/* <div className='Features_card_ho_ad_media'>
                                                 <h4>Features</h4>
                                                 <div className='Features_card_ho_ad flex'>
                                                         <div className='Features_card_ho_ad_check '>
@@ -201,8 +211,8 @@ export default function Hospitaladminregistration2() {
                                                                 )}
                                                         </div>
                                                 </div>
-                                        </div>
-
+                                        </div> */}
+{/* 
                                         <div className='Features_card_ho_ad_media'>
                                                 <h4>Specialties</h4>
                                                 <div className='Features_card_ho_ad flex'>
@@ -223,7 +233,29 @@ export default function Hospitaladminregistration2() {
                                                 </div>
 
 
-                                        </div>
+                                        </div> */}
+
+                                {/* </div> */}
+
+
+
+
+                                <div className='hospital-second-section flex'>
+                                <div>
+                                                                <h4>License Number</h4>
+                                                                <input value={HospitalAdminRg?.lisence_no || ''} onChange={inputChanges} type="number" name='lisence_no' />
+                                                        </div>
+
+                                                        <div>
+                                                                <h4>Features</h4>
+                                                                <input type="number" name='features' placeholder='Select Features' />
+                                                        </div>
+
+                                                        <div>
+                                                                <h4>Specialties</h4>
+                                                                <input type="number" name='specialties' placeholder='Select Specialties' />
+                                                        </div>
+
 
                                 </div>
 
@@ -231,12 +263,37 @@ export default function Hospitaladminregistration2() {
 
 
 
+
+
+
+
                                 <div className='hospitaladminregistration_second flex' >
-                                        <div>
+
+
+                                        <div className='flex pin-lo'>
+
+                                                 <div className='pin-input' >
                                                 <h4>Pincode</h4>
+                                                
+                                                
                                                 <input value={HospitalAdminRg?.pincode || ''} onChange={inputChanges} type="number" maxLength={6} name="pincode" />
+                                               
+                                               
+                                                <div className="main-waring-section main-waring-section4 flex ">
                                                 <p className="register-number-warning">{Errors?.pincode}</p>
+                                                </div>
+                                                </div>
+
+
+                                                <div className='lo-input'>
+                                                <h4>Location</h4>
+                                                <input  type="text" />
+                                                </div>
+
                                         </div>
+
+
+
                                         <div>
                                                 <h4>Type</h4>
                                                 <select
@@ -261,8 +318,20 @@ export default function Hospitaladminregistration2() {
                                                 </select>
                                         </div>
 
-                                        <div>
-                                                <h4>About</h4>
+
+
+
+
+                                       
+                                </div>
+
+
+
+
+                                <div className='flex hospital-adress-about'>
+
+                                <div  className=''>
+                                <h4>About</h4>
                                                 <textarea value={HospitalAdminRg?.about || ''} onChange={inputChanges} name="about" id="" cols="30" rows="10"></textarea>
                                         </div>
 
@@ -271,9 +340,15 @@ export default function Hospitaladminregistration2() {
                                                 <textarea value={HospitalAdminRg?.address || ''} onChange={inputChanges} name="address" id="" cols="30" rows="5"></textarea>
                                         </div>
 
-
-
                                 </div>
+
+
+
+
+
+
+
+
 
                                 <div className='ho_ad_re_button flex'>
                                         <a onClick={() => { navigate(-1) }} ><h4>Back</h4></a>
@@ -281,6 +356,11 @@ export default function Hospitaladminregistration2() {
                                 </div>
 
                         </div>
+
+
+
+
+                        
                 </div>
 
         )
