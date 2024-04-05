@@ -25,6 +25,7 @@ import { Add, Remove } from "@mui/icons-material";
 import { MyContext } from "../../contexts/Contexts";
 import { port } from "../../config";
 import { Backdrop, CircularProgress } from "@mui/material";
+import { Loader } from "../../components/Loader/Loader";
 
 export default function SearchDoc() {
   const [loading, setLoading] = useState(false);
@@ -83,14 +84,14 @@ export default function SearchDoc() {
 
     const filteredDocs = targetArray.filter((doctor) => {
       const typeMatch =
-        !filters.type ||
-        doctor.type.toLowerCase() === filters.type.toLowerCase();
+        !filters?.type ||
+        doctor?.type?.toLowerCase() === filters?.type?.toLowerCase();
       const specializationsMatch =
-        filters.specializations.length === 0 ||
-        filters.specializations.includes(doctor.specialization.toLowerCase());
+        filters?.specializations.length === 0 ||
+        filters?.specializations.includes(doctor.specialization?.toLowerCase());
       const genderMatch =
-        !filters.gender ||
-        doctor.gender.toLowerCase() === filters.gender.toLowerCase();
+        !filters?.gender ||
+        doctor.gender.toLowerCase() === filters.gender?.toLowerCase();
       const doctorExperince = new Date().getFullYear() - doctor?.experience;
 
       const experienceMatch =
@@ -251,62 +252,62 @@ export default function SearchDoc() {
                   Specialization{" "}
                   {(filters.type === "Unani" ||
                     filters.type === "Homeopathy") && (
-                    <span style={{ fontSize: "14px", fontWeight: 300 }}>
-                      (Not Applicable)
-                    </span>
-                  )}
+                      <span style={{ fontSize: "14px", fontWeight: 300 }}>
+                        (Not Applicable)
+                      </span>
+                    )}
                 </span>
               </div>
               <div>
                 <FormGroup>
                   {filters.type === "Ayurvedic"
                     ? ayurSpec.map((name, index) => (
-                        <FormControlLabel
-                          name={name}
-                          checked={
-                            filters.specializations.length !== 0 &&
-                            filters.specializations.includes(name.toLowerCase())
-                          }
-                          disabled={
-                            filters.type === "Homeopathy" ||
+                      <FormControlLabel
+                        name={name}
+                        checked={
+                          filters.specializations.length !== 0 &&
+                          filters.specializations.includes(name.toLowerCase())
+                        }
+                        disabled={
+                          filters.type === "Homeopathy" ||
                             filters.type === "Unani"
-                              ? true
-                              : false
-                          }
-                          onChange={handleSpecializationChanges}
-                          key={index}
-                          control={
-                            <Checkbox
-                              sx={{ "& .MuiSvgIcon-root": { fontSize: 22 } }}
-                            />
-                          }
-                          label={<span style={{ fontSize: 16 }}>{name}</span>}
-                        />
-                      ))
+                            ? true
+                            : false
+                        }
+                        onChange={handleSpecializationChanges}
+                        key={index}
+                        control={
+                          <Checkbox
+                            sx={{ "& .MuiSvgIcon-root": { fontSize: 22 } }}
+                          />
+                        }
+                        label={<span style={{ fontSize: 16 }}>{name}</span>}
+                      />
+                    ))
                     : speacializationNames.map((name, index) => (
-                        <FormControlLabel
-                          name={name}
-                          checked={
-                            filters.specializations.length !== 0 &&
-                            filters.specializations.includes(name.toLowerCase())
-                          }
-                          disabled={
-                            filters.type === "Homeopathy" ||
+                      <FormControlLabel
+                        name={name}
+                        checked={
+                          filters.specializations.length !== 0 &&
+                          filters.specializations.includes(name.toLowerCase())
+                        }
+                        disabled={
+                          filters.type === "Homeopathy" ||
                             filters.type === "Unani" ||
                             !filters.type
-                              ? true
-                              : false
-                          }
-                          onChange={handleSpecializationChanges}
-                          key={index}
-                          control={
-                            <Checkbox
-                              sx={{ "& .MuiSvgIcon-root": { fontSize: 22 } }}
-                            />
-                          }
-                          label={<span style={{ fontSize: 16 }}>{name}</span>}
-                        />
-                      ))}
+                            ? true
+                            : false
+                        }
+                        onChange={handleSpecializationChanges}
+                        key={index}
+                        control={
+                          <Checkbox
+                            sx={{ "& .MuiSvgIcon-root": { fontSize: 22 } }}
+                          />
+                        }
+                        label={<span style={{ fontSize: 16 }}>{name}</span>}
+                      />
+                    ))}
                 </FormGroup>
               </div>
             </div>
@@ -352,7 +353,6 @@ export default function SearchDoc() {
                 <Slider
                   aria-label="experience"
                   defaultValue={0}
-                  // getAriaValueText={filters?.experience ?? "" }
                   shiftstep={30}
                   valueLabelDisplay="on"
                   step={1}
@@ -369,31 +369,25 @@ export default function SearchDoc() {
           </div>
           <div className={styles.rightSide}>
             <div className={styles.cardMainContainer}>
-              {emptyResults ? (
-                <h4>No Doctors found</h4>
-              ) : docsBySearch.length > 0 ? (
-                docsBySearch.map((details, index) => (
-                  <DocCard key={index} data={{ details: details }} />
-                ))
-              ) : (
-                filteredDoctors.map((details, index) => (
-                  <DocCard key={index} data={{ details: details }} />
-                ))
-              )}
+              {loading ?
+                <Loader /> :
+
+                emptyResults ? (
+                  <h4> No Doctors found</h4>
+                ) : docsBySearch.length > 0 ? (
+                  docsBySearch.map((details, index) => (
+                    <DocCard key={index} data={{ details: details }} />
+                  ))
+                ) : (
+                  filteredDoctors.map((details, index) => (
+                    <DocCard key={index} data={{ details: details }} />
+                  ))
+                )}
             </div>
           </div>
         </div>
-        <Backdrop
-          sx={{
-            color: "#fff",
-            zIndex: (theme) => theme.zIndex.drawer + 1,
-          }}
-          open={loading}
-          // onClick={handleClose}
-        >
-          <CircularProgress color="inherit" />
-        </Backdrop>
-      </div>
+
+      </div >
       <Footer />
     </>
   );

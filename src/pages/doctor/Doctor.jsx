@@ -1,4 +1,4 @@
-import React, { useState,useContext } from "react";
+import React, { useState, useContext } from "react";
 import Footer from "../../components/Footer";
 import "../doctor/doctor.css";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -16,8 +16,8 @@ import { useNavigate } from "react-router-dom";
 import { MyContext } from "../../contexts/Contexts";
 export default function Doctor() {
   const [visibleContent, setVisibleContent] = useState(2);
-  const {passedSpecialization,setPassedSpecialization}=useContext(MyContext)
-  const navigate=useNavigate()
+  const { passedSpecialization, setPassedSpecialization } = useContext(MyContext)
+  const navigate = useNavigate()
   const content = [
     $(document).ready(function () {
       $(".content").slice(0, 2).show();
@@ -36,10 +36,9 @@ export default function Doctor() {
     setVisibleContent((prev) => prev + 1); // Increase visible content count by 4 on click
   };
 
-  const handleSelectSpecialization=(specialization)=>{
+  const handleSelectSpecialization = (specialization) => {
     setPassedSpecialization(specialization)
     navigate("/searchdoctor")
-
   }
 
   return (
@@ -85,7 +84,7 @@ export default function Doctor() {
           </div>
         </div>
 
-        <div className="Doctor-search-box flex" onClick={()=>navigate("/searchdoctor")}>
+        <div className="Doctor-search-box flex" onClick={() => navigate("/searchdoctor")}>
           <div className="Doctor-container-search flex">
             <div className="Doctor-Search-box flex">
               <div className="Doctor-location-section flex">
@@ -132,7 +131,7 @@ export default function Doctor() {
                     <h4>Pregnancy</h4>
                   </div>
                   <div
-                    onClick={()=>handleSelectSpecialization("gynaecology")}
+                    onClick={() => handleSelectSpecialization("gynaecology")}
                     className="home-specialties-button"
                   >
                     <h4>Consult Now</h4>
@@ -143,11 +142,11 @@ export default function Doctor() {
                   <div className="home-specialties-image">
                     <img src="/images/1 (6).jpg" alt="" />
                   </div>
-                  <div  className="home-specialties-titile">
+                  <div className="home-specialties-titile">
                     <h4>Acne, pimple or</h4>
                     <h4>skin issues</h4>
                   </div>
-                  <div  onClick={()=>handleSelectSpecialization("dermatology")}  className="home-specialties-button">
+                  <div onClick={() => handleSelectSpecialization("dermatology")} className="home-specialties-button">
                     <h4>Consult Now</h4>
                   </div>
                 </div>
@@ -160,7 +159,7 @@ export default function Doctor() {
                     <h4>Cold, cough or</h4>
                     <h4>Fever</h4>
                   </div>
-                  <div  onClick={()=>handleSelectSpecialization("general medicine")}  className="home-specialties-button">
+                  <div onClick={() => handleSelectSpecialization("general medicine")} className="home-specialties-button">
                     <h4>Consult Now</h4>
                   </div>
                 </div>
@@ -173,7 +172,7 @@ export default function Doctor() {
                     <h4>Depression or</h4>
                     <h4>Anxiety</h4>
                   </div>
-                  <div  onClick={()=>handleSelectSpecialization("mental health")}  className="home-specialties-button">
+                  <div onClick={() => handleSelectSpecialization("mental health")} className="home-specialties-button">
                     <h4>Consult Now</h4>
                   </div>
                 </div>
@@ -356,7 +355,7 @@ export default function Doctor() {
               <div className="spec_main_card flex" >
                 <h4>Gynaecology</h4>
 
-                <div  onClick={()=>handleSelectSpecialization("gynaecology")} className="spec_main_card_button flex">
+                <div onClick={() => handleSelectSpecialization("gynaecology")} className="spec_main_card_button flex">
                   <i className="ri-arrow-right-line"></i>
                 </div>
               </div>

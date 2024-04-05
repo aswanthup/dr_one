@@ -12,7 +12,7 @@ export default function Registerlanding() {
       <div className="container10 registerlanding_main flex">
         <div onClick={() => navigate("/doctoradminregistration1")} className="registerlanding_left">
           <div className="registerlanding_image flex">
-            <img src="images/mobile.png" alt="" />
+            <img src="images/RegLanDoc.png" alt="" />
           </div>
 
           <div className="registerlanding_button flex">

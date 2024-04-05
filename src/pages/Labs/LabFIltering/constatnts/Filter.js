@@ -1,3 +1,4 @@
-export const speciality = ["Gynaecology", "Dermatology", "General medicine", "Cardiology", "Mental health", "Pediatrics",]
-export const features = ["Op", "Casuality", "Palliative", "Care", "Other Services "]
-export const type = ["Allopathy", "Homeopathy", "Unani", "Ayurvedic"]
+export const services = ["Blood Count Tests", "Genetic Testing", "Kidney Tests", "Laboratory Tests", "Prenatal Testing", "Thyroid Tests", "Bilirubin Test", "Cholesterol Level", "Electrocardiogram"]
+export const features = ["Home collection", "Onilne report", "Cashless", "24 hours services", "Doctor available"]
+
+

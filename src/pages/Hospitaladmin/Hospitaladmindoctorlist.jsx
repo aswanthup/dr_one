@@ -5,6 +5,7 @@ import "../Hospitaladmin/hospitaladmindoctorlist.css";
 import Hospitaladmin_doctor_card from "../../components/Hospitaladmin_doctor_card";
 import axios from "axios";
 import { Backdrop, CircularProgress } from "@mui/material";
+import { port } from "../../config";
 
 
 export default function Hospitaladmindoctorlist() {
@@ -15,7 +16,7 @@ export default function Hospitaladmindoctorlist() {
     try {
       setLoading(true);
       const response = await axios.post(
-        `http://localhost:3003/hospital/getdoctorlist`,
+        `${port}/hospital/getdoctorlist`,
         {
           id: 52,
         }
@@ -74,7 +75,7 @@ export default function Hospitaladmindoctorlist() {
           zIndex: (theme) => theme.zIndex.drawer + 1,
         }}
         open={loading}
-        // onClick={handleClose}
+      // onClick={handleClose}
       >
         <CircularProgress color="inherit" />
       </Backdrop>

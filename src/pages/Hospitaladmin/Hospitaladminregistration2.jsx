@@ -6,12 +6,16 @@ import axios from 'axios'
 import 'react-toastify/dist/ReactToastify.css';
 import { Bounce, ToastContainer, toast } from 'react-toastify'
 import { port } from '../../config'
-import { Backdrop, CircularProgress } from '@mui/material'
+import { Backdrop, CircularProgress, Modal } from '@mui/material'
 
 export default function Hospitaladminregistration2() {
 
         const { HospitalAdminRg, setHospitalAdminRg } = useContext(MyContext)
         const [Errors, setErrors] = useState({})
+        const [ModalOpen, setModalOpen] = useState({
+                features: false,
+                specialties: false
+        })
         const navigate = useNavigate()
         const [loader, setloader] = useState(false)
 
@@ -146,6 +150,19 @@ export default function Hospitaladminregistration2() {
         const handleClose = () => {
                 setloader(false)
         }
+        const openModal = (data) => {
+                if (data?.specialties) {
+                        setModalOpen({ specialties: true })
+                } else {
+                        setModalOpen({ features: true })
+
+                }
+        }
+        const CloseModal = (data) => {
+                setModalOpen({ specialties: false, features: false })
+                setModalOpen()
+        }
+        console.log("ModalOpen>>>>", ModalOpen)
         return (
 
                 <div>
@@ -169,22 +186,22 @@ export default function Hospitaladminregistration2() {
 
 
 
-<h4>Add Photos</h4>
-<div className='image_card_ho_ad2 flex' >
-        <div className='image_card_ho_ad_section flex'>
+                                        <h4>Add Photos</h4>
+                                        <div className='image_card_ho_ad2 flex' >
+                                                <div className='image_card_ho_ad_section flex'>
 
-                <img src="images/hosptal1 (1).jpg" alt="" />
-                <img src="images/hosptal1 (1).jpg" alt="" />
-                <img src="images/hosptal1 (1).jpg" alt="" />
-                <div className='image_card_ho_ad_add_image flex'>
-                        <i class="ri-add-line"></i>
-                </div>
+                                                        <img src="images/hosptal1 (1).jpg" alt="" />
+                                                        <img src="images/hosptal1 (1).jpg" alt="" />
+                                                        <img src="images/hosptal1 (1).jpg" alt="" />
+                                                        <div className='image_card_ho_ad_add_image flex'>
+                                                                <i class="ri-add-line"></i>
+                                                        </div>
 
-        </div>
+                                                </div>
 
-</div>
+                                        </div>
 
-</div>
+                                </div>
 
 
 
@@ -195,9 +212,9 @@ export default function Hospitaladminregistration2() {
 
 
 
-                                     
 
-                                        {/* <div className='Features_card_ho_ad_media'>
+
+                                {/* <div className='Features_card_ho_ad_media'>
                                                 <h4>Features</h4>
                                                 <div className='Features_card_ho_ad flex'>
                                                         <div className='Features_card_ho_ad_check '>
@@ -212,7 +229,7 @@ export default function Hospitaladminregistration2() {
                                                         </div>
                                                 </div>
                                         </div> */}
-{/* 
+                                {/* 
                                         <div className='Features_card_ho_ad_media'>
                                                 <h4>Specialties</h4>
                                                 <div className='Features_card_ho_ad flex'>
@@ -241,53 +258,41 @@ export default function Hospitaladminregistration2() {
 
 
                                 <div className='hospital-second-section flex'>
-                                <div>
-                                                                <h4>License Number</h4>
-                                                                <input value={HospitalAdminRg?.lisence_no || ''} onChange={inputChanges} type="number" name='lisence_no' />
-                                                        </div>
+                                        <div>
+                                                <h4>License Number</h4>
+                                                <input value={HospitalAdminRg?.lisence_no || ''} onChange={inputChanges} type="number" name='lisence_no' />
+                                        </div>
 
-                                                        <div>
-                                                                <h4>Features</h4>
-                                                                <input type="number" name='features' placeholder='Select Features' />
-                                                        </div>
+                                        <div>
+                                                <h4>Features</h4>
+                                                <div onClick={() => { openModal() }} className='hospital-second-section-Div'></div>
+                                        </div>
 
-                                                        <div>
-                                                                <h4>Specialties</h4>
-                                                                <input type="number" name='specialties' placeholder='Select Specialties' />
-                                                        </div>
+                                        <div>
+                                                <h4>Specialties</h4>
+                                                <div onClick={() => { openModal({ specialties: true }) }} className='hospital-second-section-Div'></div>
+                                        </div>
 
 
                                 </div>
-
-
-
-
-
-
-
-
 
                                 <div className='hospitaladminregistration_second flex' >
 
 
                                         <div className='flex pin-lo'>
 
-                                                 <div className='pin-input' >
-                                                <h4>Pincode</h4>
-                                                
-                                                
-                                                <input value={HospitalAdminRg?.pincode || ''} onChange={inputChanges} type="number" maxLength={6} name="pincode" />
-                                               
-                                               
-                                                <div className="main-waring-section main-waring-section4 flex ">
-                                                <p className="register-number-warning">{Errors?.pincode}</p>
-                                                </div>
+                                                <div className='pin-input' >
+                                                        <h4>Pincode</h4>
+                                                        <input value={HospitalAdminRg?.pincode || ''} onChange={inputChanges} type="number" maxLength={6} name="pincode" />
+                                                        <div className="main-waring-section main-waring-section4 flex ">
+                                                                <p className="register-number-warning">{Errors?.pincode}</p>
+                                                        </div>
                                                 </div>
 
 
                                                 <div className='lo-input'>
-                                                <h4>Location</h4>
-                                                <input  type="text" />
+                                                        <h4>Location</h4>
+                                                        <input type="text" />
                                                 </div>
 
                                         </div>
@@ -317,21 +322,11 @@ export default function Hospitaladminregistration2() {
                                                         ))}
                                                 </select>
                                         </div>
-
-
-
-
-
-                                       
                                 </div>
-
-
-
-
                                 <div className='flex hospital-adress-about'>
 
-                                <div  className=''>
-                                <h4>About</h4>
+                                        <div className=''>
+                                                <h4>About</h4>
                                                 <textarea value={HospitalAdminRg?.about || ''} onChange={inputChanges} name="about" id="" cols="30" rows="10"></textarea>
                                         </div>
 
@@ -354,13 +349,37 @@ export default function Hospitaladminregistration2() {
                                         <a onClick={() => { navigate(-1) }} ><h4>Back</h4></a>
                                         <a onClick={Finish} ><h4>Finish</h4></a>
                                 </div>
-
+                                <Modal className='Features_card_ho_Modal' open={ModalOpen?.features || ModalOpen?.specialties}
+                                        onClose={CloseModal}
+                                >
+                                        <>
+                                                <div className='Features_card_ho_ad flex'>
+                                                        <div className='Features_card_ho_ad_check '>
+                                                                {ModalOpen?.features ?
+                                                                        Features.map((ele) =>
+                                                                                <label class="form-control flex">
+                                                                                        <input value={ele?.name || ''}
+                                                                                                checked={HospitalAdminRg?.features?.includes(ele.name)}
+                                                                                                onChange={(e) => { storeArray(e, { features: true }) }} type="checkbox" name="checkbox" />
+                                                                                        <h4>{ele.name}</h4>
+                                                                                </label>
+                                                                        )
+                                                                        :
+                                                                        specialties.map((ele) =>
+                                                                                <label class="form-control flex">
+                                                                                        <input value={ele?.name || ''}
+                                                                                                checked={HospitalAdminRg?.specialties?.includes(ele.name)}
+                                                                                                onChange={(e) => { storeArray(e, { features: true }) }} type="checkbox" name="checkbox" />
+                                                                                        <h4>{ele.name}</h4>
+                                                                                </label>
+                                                                        )
+                                                                }
+                                                        </div>
+                                                </div>
+                                        </>
+                                </Modal>
                         </div>
 
-
-
-
-                        
                 </div>
 
         )
