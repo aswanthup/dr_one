@@ -20,7 +20,7 @@ export default function About() {
             </div>
 
             <div className='about-para'>
-<h1>About <span className='color-blue'> Us</span></h1>
+<h1>ABOUT <span className='color-blue'> US</span></h1>
 <h4>We believe in a patient-centric approach, tailoring treatments to address individual needs and concerns. Our practice emphasizes open communication and patient education, ensuring that you are well-informed and empowered to make informed decisions about your health.</h4>
 <h4>We believe in a patient-centric approach, tailoring treatments to address individual needs and concerns. Our practice emphasizes open communication and patient education, ensuring that you are well-informed and empowered to make informed decisions about your health.</h4>
   
