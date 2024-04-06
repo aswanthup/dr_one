@@ -1,101 +1,110 @@
-.adddoctor{
-    background-color:#3A65FD;
-    height:100vh; 
-    padding:2vw;  
-    flex-direction: column;
-    color: white;
-    justify-content: space-between;
+.adddoctor {
+  background-color: #3a65fd;
+  height: 100vh;
+  padding: 2vw;
+  flex-direction: column;
+  color: white;
+  justify-content: space-between;
 }
 
-.adddoctor h1{
-    color: white;
+.adddoctor h1 {
+  color: white;
 }
 
-.adddoctor_button h4{
-    background-color: white;
-    width: fit-content;
-    padding: .5vw 3vw;
-    border-radius:.5vw;
-    color: #3A65FD;
-    margin-left:2vw;
+.adddoctor_button {
+  display: flex;
+  justify-content: flex-end;
+  gap: 6px;
+}
+.adddoctor_button_cancel {
+  font-size: 1.2rem;
+  border: 1px solid white;
+  background-color: #3a65fd;
+  width: fit-content;
+  padding: 0.5vw 3vw;
+  border-radius: 0.5vw;
+  color: white;
+  margin-left: 2vw;
+}
+.adddoctor_button_submit {
+  font-size: 1.2rem;
+  border: 1px solid white;
+  background-color: white;
+  width: fit-content;
+  padding: 0.5vw 3vw;
+  border-radius: 0.5vw;
+  color: #3a65fd;
+  margin-left: 2vw;
 }
 
-.adddoctor_button{
-    justify-content: flex-end;
+.adddoctor_inputsection {
+  justify-content: space-between;
 }
 
-.adddoctor_inputsection{
-    justify-content: space-between;
+.adddoctor_inputsection1 {
+  width: 30%;
+  height: 65vh;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
-.adddoctor_inputsection1{
-    width:30%;
-    height:65vh;
-    flex-direction: column;
-    justify-content: space-between;
+.adddoctor_inputsection1 input {
+  width: 100%;
+  background-color: rgba(246, 246, 249, 0.4);
+  border-radius: 0.5vw;
+  width: 100%;
+  height: 3vw;
+  /* margin-top:.5vw ; */
+
+  color: white;
+  padding: 1vw;
+  letter-spacing: 2px;
+}
+.hospital-admin-add-doctor-select {
+  background-color: rgba(246, 246, 249, 0.4);
+  border-radius: 5px;
+  height: 3vw;
+  color: white;
+  padding: 1vw;
+  letter-spacing: 2px;
+  width: 100%;
 }
 
-.adddoctor_inputsection1 input{
-    width: 100%;
-    background-color: rgba(246, 246, 249, .4);
-    border-radius:.5vw;
-    width:100%;
-    height:3vw;
-    /* margin-top:.5vw ; */
-
-    color:white;
-    padding: 1vw;
-    letter-spacing:2px;
+.adddoctor_inputsection1 h2 {
+  color: white;
+  font-size: 1.2rem;
+  letter-spacing: 3px;
+  font-weight: 400;
+  line-height: 30px;
 }
 
-.adddoctor_inputsection1 h2{
-    color:white;
-    font-size:1.2rem; 
-    letter-spacing: 3px; 
-    font-weight:400;
-    line-height:30px;
+.adddoctor_inputsection1 textarea {
+  height: 23.3vh;
+  border-radius: 1vw;
+  resize: none;
+  width: 100%;
+  /* margin-top:.5vw ; */
+  background-color: rgba(246, 246, 249, 0.4);
+  color: white;
+  padding: 1vw;
+  letter-spacing: 2px;
 }
 
-
-.adddoctor_inputsection1 textarea{
-
-height:23.3vh;
-border-radius:1vw;
-resize: none;
-/* margin-top:.5vw ; */
-background-color: rgba(246, 246, 249, .4);
-color:white;
-padding: 1vw;
-letter-spacing:2px;
+.demo h4 {
+  border: 1px solid white;
+  background-color: #3a65fd;
+  color: white;
 }
 
-.adddoctor_button h4{
-    background-color: white;
-     width: fit-content;
-    padding: .5vw 3vw;
-    border-radius:.5vw;
-    color: #3A65FD;
-    margin-left:2vw;
-    border: 1px solid white;
+.upload_button h4 {
+  background-color: white;
+  color: #3a65fd;
+  padding: 0vw 2vw;
+  border-radius: 0.5vw;
+  margin-left: 1vw;
+  height: 100%;
 }
 
-
-.demo h4{
-    border: 1px solid white;
-    background-color: #3A65FD;
-    color: white;
-}
-
-
-.upload_button h4{
-    background-color:white;
-    color: #3A65FD;
-    padding: 0vw 2vw;
-    border-radius:.5vw;
-    margin-left:1vw;
-    height: 100%;
-}
-
-.upload_button2{
-    align-items: center; 
+.upload_button2 {
+  align-items: center;
 }
