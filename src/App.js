@@ -44,10 +44,14 @@ import SearchDoc from "./pages/doctor/SearchDoc";
 import Registerlanding from "./pages/registerlanding/Registerlanding";
 import { HospitalFiltering } from "./pages/HospitalFiltering/HospitalFiltering";
 import { LabFiltering } from "./pages/Labs/LabFIltering/LabFiltering";
+import { Loader } from "./components/Loader/Loader";
+import { ToastContainer } from "react-toastify";
+import { ToastifyComponent } from "./components/ToastifyComponent/ToastifyComponent";
 
 function App() {
   return (
     <div className="App">
+      <ToastifyComponent />
       <BrowserRouter>
 
         <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -142,10 +146,11 @@ function App() {
               path="/labadminregistration2"
               element={<Labadminregistration2 />}
             ></Route>
-            
+
             <Route path="/labadmin" element={<Labadmin />}></Route>
             <Route path="/labfiltering" element={<LabFiltering />}></Route>
-            {/* <Route path='/' element={<Registerlanding />} ></Route> */}
+            <Route path="/loader" element={<Loader />}></Route>
+            <Route path='/checking' element={<Registerlanding />} ></Route>
           </Routes>
         </LocalizationProvider>
       </BrowserRouter>

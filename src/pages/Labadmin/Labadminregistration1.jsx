@@ -91,36 +91,141 @@ export default function Labadminregistration1() {
                 <input type="file" />
              </div> */}
 
-            <div id="hospitalname_inputId" className="hospitalname_input">
+
+
+             
+
+            {/* <div id="hospitalname_inputId" className="hospitalname_input">
               <h4>Laboratory Name</h4>
               <input value={LabAdminRg?.name} onChange={inputOnchanges} name="name" type="text" />
+           
+              <div className="main-waring-section">
+              </div>
+            </div> */}
+
+
+<div className="flex hospital-top">
+
+
+
+<div className="upload-image">
+
+  <h4 className="pass-con">Profile Photo</h4>
+  <label for="inputTag">
+    <h4 className="select-file flex">Upload Photo</h4>
+    <input onChange={''} id="inputTag" type="file" />
+  </label>
+
+
+</div>
+
+{/* <label className="photo-upload">
+ <h4>Upload Photo</h4>
+    <input type="file" />
+ </div> */}
+
+
+
+
+
+
+<div className="hospitalname_input">
+  <h4 className="pass-con">Laboratory Name</h4>
+  <input value={LabAdminRg?.name} onChange={inputOnchanges} name="name" type="text" />
+
+</div>
+</div>
+
+
+<div className="main-waring-section" style={{overflow:"Hidden"}}>
+              <h4 className="register-number-warning" id="fileNameDisplay"> {' '} </h4>
             </div>
-            <div className="register-input-section flex">
-              <div className="lab-left-section">
+
+
+
+
+
+
+
+
+            <div className="register-input-section">
+
+
+
+              <div className=" register-left-section flex">
+
+
+
                 <div style={{ position: "relative" }}>
-                  <h4>Phone Number</h4>
+                  <h4 className="pass-con">Phone Number</h4>
                   <input value={LabAdminRg?.contact_no} onChange={inputOnchanges} name="contact_no" type="number" />
+                  
+                  <div className="main-waring-section">
                   <p className="register-number-warning">{Errors?.phone}</p>
+                  </div>
                 </div>
+
+
+
+
                 <div style={{ position: "relative" }}>
-                  <h4>Email</h4>
+                  <h4 className="pass-con">Email</h4>
                   <input value={LabAdminRg?.email} pattern="^[^\s@]+@[^\s@]+\.[^\s@]+$" name="email" onChange={inputOnchanges} type="email" />
+                  
+                  
+                  <div className="main-waring-section">
                   <p className="register-number-warning">{Errors?.email}</p>
+                  </div>
+
+
                 </div>
+
+
+
               </div>
-              <div className="register-right-section">
+
+
+
+              <div className="register-right-section  flex">
+
+
+
                 <div style={{ position: "relative" }}>
-                  <h4>Password</h4>
+                  <h4 className="pass-con">Password</h4>
                   <input value={LabAdminRg.password} name="password" onChange={inputOnchanges} type="password" />
+                  
+                  
+                  <div className="main-waring-section main-waring-section-pass">
                   <p className="register-number-warning">{Errors?.password}</p>
+
+                  </div>
                 </div>
+
+
+
                 <div style={{ position: "relative" }}>
-                  <h4>Confirm Password</h4>
+                  <h4 className="pass-con">Confirm Password</h4>
                   <input value={LabAdminRg.repassword} name="repassword" onChange={inputOnchanges} type="password" />
+                 
+                  <div className="main-waring-section">
                   <p className="register-number-warning">{Errors?.repassword}</p>
+                  </div>
                 </div>
+
+
+
               </div>
+
+
+
+
+
+
             </div>
+
+
+
+
             <div
               className="register-button-section flex"
             >

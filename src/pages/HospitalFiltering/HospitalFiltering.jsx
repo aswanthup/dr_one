@@ -15,6 +15,7 @@ import { SearchBox } from './SearchComponent/SearchBox';
 import { features, speciality, type } from './constants/Filter';
 import DocCard from '../doctor/DocCard';
 import { port } from '../../config';
+import { Loader } from '../../components/Loader/Loader';
 export const HospitalFiltering = () => {
     const [filters, setFilters] = useState({
         speciality: "",
@@ -27,7 +28,7 @@ export const HospitalFiltering = () => {
     const updateDocByPlace = (value) => {
         sethospitals(value)
     }
-    useEffect(() => {   
+    useEffect(() => {
         let FinalData = [...hospitals] || [];
         let updatedArray = [];
         FinalData.forEach(ele => {
@@ -224,31 +225,34 @@ export const HospitalFiltering = () => {
 
                     </div>
                     <div className='HospitalFilterHosSec'>
+                        {hospitals.length > 0 ?
+                            <div className={styles.rightSide}>
+                                <div className={styles.cardMainContainer}>
+                                    {hospitalsFilter.length > 0 || filters.type || filters?.speciality?.length > 0 || filters?.features?.length > 0 ?
+                                        hospitalsFilter.length > 0 ?
+                                            hospitalsFilter.map((details, index) =>
+                                                <DocCard key={index} data={{ details: details, hospitals: true }} />
+                                            )
+                                            :
+                                            <div className='HospitalNotfound'>
+                                                <h3>
+                                                    Hospitals were not found.</h3>
 
-                        <div className={styles.rightSide}>
-                            <div className={styles.cardMainContainer}>
-                                {hospitalsFilter.length > 0 || filters.type || filters?.speciality?.length > 0 || filters?.features?.length > 0 ?
-                                    hospitalsFilter.length > 0 ?
-                                        hospitalsFilter.map((details, index) =>
-                                            <DocCard key={index} data={{ details: details, hospitals: true }} />
-                                        )
+                                            </div>
+
                                         :
-                                        <div className='HospitalNotfound'>
-                                            <h3>
-                                                Hospitals were not found.</h3>
-
-                                        </div>
-
-                                    :
-                                    <>
-                                        {hospitals.map((details, index) =>
-                                            <DocCard key={index} data={{ details: details, hospitals: true }} />
-                                        )
-                                        }
-                                    </>
-                                }
+                                        <>
+                                            {hospitals.map((details, index) =>
+                                                <DocCard key={index} data={{ details: details, hospitals: true }} />
+                                            )
+                                            }
+                                        </>
+                                    }
+                                </div>
                             </div>
-                        </div>
+                            :
+                            <Loader />
+                        }
                     </div>
                 </div>
             </div>

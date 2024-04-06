@@ -2,6 +2,7 @@ import axios from "axios";
 import { React, useState, useEffect, useRef } from "react";
 import { useOutsideClick } from "../../../../hooks/useOutsideClick";
 import { port } from "../../../../config";
+import { Bounce, ToastContainer, toast } from "react-toastify";
 
 export const SearchBox = ({ updateDocs, docNames }) => {
     const [showSearchList, setShowSearchList] = useState(false);
@@ -43,21 +44,23 @@ export const SearchBox = ({ updateDocs, docNames }) => {
         setShowSearchList(false);
         try {
             const response = await axios.post(
-                `${port}/hospital/pincode_result`,
+                // `http://192.168.1.12:3003/lab/pincode_result`,
+                `${port}/lab/pincode_result`,
                 {
                     selectedArea_id: data.id,
                 }
             );
             const docData = response.data.data;
-            // console.log({ docData });
             updateDocs(docData);//run function on searchdoc
+            console.log("docData>>>>", docData)
         } catch (err) {
             console.log(err);
+            toast.info(err?.response?.data?.message)
+
         }
     };
     const searchNames = (event) => {
         const { value } = event.target;
-
         docNames(value);
     };
 
@@ -86,7 +89,7 @@ export const SearchBox = ({ updateDocs, docNames }) => {
                         <input
                             onChange={searchNames}
                             type="text"
-                            placeholder="Search Hospital"
+                            placeholder="Search Laboratory"
                         />
                     </div>
                     <div className="Doctor-search-section flex">

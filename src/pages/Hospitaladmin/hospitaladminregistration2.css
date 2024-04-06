@@ -1,11 +1,10 @@
 .hospitaladminregistration2 {
   background-color: #3A65FD;
   color: white;
-  padding: 3vw;
+  padding: 1vw 5vw;
   flex-direction: column;
   justify-content: space-between;
-  gap: 50px;
-
+  height: 100vh;
 }
 
 .hospitaladminregistration2 h1 {
@@ -23,8 +22,8 @@
   background-color: white;
   width: fit-content;
   color: #3A65FD;
-  padding: .2vw 2vw;
-  border-radius: .3vw;
+  padding: .5vw 3vw;
+  border-radius: .6vw;
   cursor: pointer;
 }
 
@@ -33,11 +32,7 @@
   gap: 10px;
 }
 
-.hospitaladminregistration_second {
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 20px;
-}
+
 
 .hospitaladminregistration_second textarea {
   width: 44vw;
@@ -63,16 +58,15 @@
 }
 
 .Features_card_ho_ad {
-  width: 26vw;
-  height: 13vw;
-  background-color: rgba(246, 246, 249, .4);
+  width: 480px;
+  background-color: rgb(255, 255, 255);
   border-radius: 1vw;
   margin-top: 1vw;
-  padding: 1vw;
+  padding: 2vw;
   flex-direction: column;
-  justify-content: space-between;
   overflow-y: scroll;
   overflow-x: hidden;
+  align-items: center;
 }
 
 .image_card_ho_ad {
@@ -91,15 +85,7 @@
   letter-spacing: 2px;
 }
 
-.hospitaladminregistration_second input {
-  background-color: rgba(246, 246, 249, .4);
-  border-radius: .5vw;
-  width: 43vw;
-  height: 3vw;
-  color: white;
-  padding: 1vw;
-  letter-spacing: 2px;
-}
+
 
 .hospitalAdminPinType {
   width: 100%;
@@ -158,7 +144,34 @@
   box-sizing: border-box;
 }
 
+.Features_card_ho_Modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
+
+.hospital-second-section-Div {
+  background-color: rgba(246, 246, 249, .4);
+  border-radius: .5vw;
+  width: 28vw;
+  height: 3vw;
+  color: white;
+  padding-left: 1vw;
+  letter-spacing: 2px;
+  margin-top: 1vw;
+  align-items: center;
+  overflow-y: scroll;
+  white-space: nowrap;
+  /* Ensure text doesn't wrap */
+  text-overflow: ellipsis;
+  /* Show ellipsis for overflow text */
+}
+
+.hospital-second-section-Div h4 {
+  font-weight: 200;
+
+}
 
 .form-control {
   font-family: system-ui, sans-serif;
@@ -169,7 +182,6 @@
   display: grid;
   grid-template-columns: 1em auto;
   gap: 0.5em;
-  width: 40%;
 }
 
 .form-control+.form-control {}
@@ -191,8 +203,8 @@ input[type="checkbox"] {
 
   font: inherit;
   color: currentColor;
-  width: 1.15em;
-  height: 1.15em;
+  width: 1em;
+  height: 1em;
   border: 0.8px solid currentColor;
   border-radius: 50px;
   transform: translateY(-0.075em);
@@ -229,13 +241,27 @@ input[type="checkbox"]:disabled {
   cursor: not-allowed;
 }
 
+.hospital-second-section-Div-Map {
+  display: flex;
+
+}
+
+.hospital-second-section-Div-Map p {
+  font-size: 15px;
+  font-weight: 400;
+  overflow: hidden;
+  /* Hide overflowing content */
+  white-space: nowrap;
+  /* Ensure text doesn't wrap */
+  text-overflow: ellipsis;
+}
 
 .Features_card_ho_ad_check {
-  justify-content: space-between;
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 25px;
 
+  justify-content: space-between;
 }
 
 .Features_card_ho_ad_check input {
@@ -243,8 +269,6 @@ input[type="checkbox"]:disabled {
 }
 
 .Features_card_ho_ad_check label {
-
-  width: 10vw;
   align-items: center;
   padding: .2vw;
   border-radius: 50px;
@@ -253,17 +277,115 @@ input[type="checkbox"]:disabled {
 .hospitalRegTypeList {
   background-color: rgba(246, 246, 249, .4);
   border-radius: .5vw;
-  width: 43vw;
+  width: 44vw;
   height: 3vw;
   margin-top: 1vw;
+  color: white;
+  /* padding: 1vw; */
+  padding-left: 1vw;
+  letter-spacing: 2px;
+  color: white;
+  font-weight: 200;
+  font-size: 1.2rem;
+}
+
+
+
+/* Changes */
+
+.hospital-adress-about {
+  justify-content: space-between;
+}
+
+.hospital-adress-about textarea {
+  width: 44vw;
+  height: 7vw;
+  border-radius: 1vw;
+  resize: none;
+  margin-top: 1vw;
+  background-color: rgba(246, 246, 249, .4);
   color: white;
   padding: 1vw;
   letter-spacing: 2px;
 }
 
+
+
+
+
+
+.hospitaladminregistration_second {
+  justify-content: space-between;
+  flex-wrap: wrap;
+
+}
+
+.hospital-second-section {
+  justify-content: space-between;
+}
+
+.hospital-second-section input {
+  background-color: rgba(246, 246, 249, .4);
+  border-radius: .5vw;
+  width: 28vw;
+  height: 3vw;
+  color: white;
+  padding: 1vw;
+  letter-spacing: 2px;
+  margin-top: 1vw;
+}
+
+.hospital-second-section input::placeholder {
+  color: white;
+  font-weight: 200;
+  font-size: 1.2rem;
+}
+
+.main-waring-section4 {
+  align-items: flex-end;
+}
+
+.pin-lo {
+  justify-content: space-between;
+  width: 44vw;
+}
+
+.pin-input input {
+  width: 16vw;
+}
+
+.lo-input select {
+  width: 26vw;
+}
+
+
+.select-new {
+  width: 140px;
+}
+
+
+.Features_card_ho_ad_button {
+  background-color: #3A65FD;
+  width: 100%;
+  padding: 10px;
+  margin-top: 24px;
+  border-radius: 10px;
+  color: white;
+}
+
+
+
+
+
+
+
 @media only screen and (max-width: 768px) {
   .Features_card_ho_ad {
     width: 100%;
+  }
+
+  .margin-about {
+    margin-top: 5vw;
   }
 
   .hospitaladminregistration_second input {
@@ -313,17 +435,20 @@ input[type="checkbox"]:disabled {
   }
 
   .image_card_ho_ad_section img {
-    width: 10vw;
-    height: 10vw;
+    width: 18vw;
+    height: 18vw;
+    border-radius: 2vw;
   }
 
   .image_card_ho_ad_add_image {
-    width: 10vw;
-    height: 10vw;
+    width: 18vw;
+    height: 18vw;
+    border-radius: 2vw;
   }
 
   .hospitaladminregistration_second input {
     height: 10vw;
+    border-radius: 1vw;
   }
 
   .hospitalRegTypeList {
@@ -339,7 +464,75 @@ input[type="checkbox"]:disabled {
     flex-direction: column;
     gap: 5px;
   }
+
+
+  .hospital-adress-about {
+    flex-direction: column;
+  }
+
+  .hospital-adress-about textarea {
+    width: 100%;
+    height: 30vw;
+    border-radius: 1vw;
+  }
+
+  .hospital-second-section {
+    flex-direction: column;
+  }
+
+  .hospital-second-section input {
+    width: 100%;
+    height: 10vw;
+    border-radius: 1vw;
+  }
+
+  .pin-lo {
+
+    width: 100%;
+  }
+
+  .pin-input input {
+    width: 36vw;
+  }
+
+  .lo-input input {
+    width: 48vw;
+  }
+
+  .Features_card_ho_ad {
+    width: fit-content;
+    height: fit-content;
+    border-radius: 10px;
+  }
+
+  .hospital-second-section-Div {
+    width: 100%;
+    height: 10vw;
+  }
+
+  .Features_card_ho_ad_check {
+    width: 200px;
+
+  }
+
+  .Features_card_ho_ad_check label {
+    width: 100%;
+  }
+
+  .Features_card_ho_ad_button {
+    padding: 6px;
+  }
+
+
 }
+
+
+
+
+
+
+
+
 
 @media only screen and (max-width: 408px) {
   .hospitalAdminPinType {

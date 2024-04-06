@@ -6,23 +6,24 @@ import "../Labs/labdetails.css";
 
 
 
-import { useLocation } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 
 export default function Mainpage() {
+  const navigate = useNavigate()
   const handleSearch = () => {
 
 
   };
-  
+
   const location = useLocation();
 
   useEffect(() => {
-      AOS.init({
-          once: false,
-      });
-      AOS.refresh();
+    AOS.init({
+      once: false,
+    });
+    AOS.refresh();
   }, [location.pathname]);
   return (
     <div>
@@ -75,8 +76,8 @@ export default function Mainpage() {
                 Explore Our <span>Features</span>
               </h1>
             </div>
-            <div   className="home-cards flex ">
-              <div  className="home-card" data-aos="zoom-in"  data-aos-duration="3000" >
+            <div className="home-cards flex ">
+              <div className="home-card" data-aos="zoom-in" data-aos-duration="3000" >
                 <div className="image-section">
                   <img src="/images/doc.jpg" alt="" />
                 </div>
@@ -84,7 +85,7 @@ export default function Mainpage() {
                   <div className="card-icon flex">
                     <img src="images/doc-icon.svg" alt="" />
                   </div>
-                  <a className="card-button flex" href>
+                  <a onClick={() => { navigate("/searchdoctor") }} className="card-button flex" href>
                     <h4>Search Doctor</h4>
                   </a>
                 </div>
@@ -97,12 +98,12 @@ export default function Mainpage() {
                   <div className="card-icon flex">
                     <img src="images/test.png" alt="" />
                   </div>
-                  <a className="card-button flex" href>
+                  <a onClick={() => { navigate("/labfiltering") }} className="card-button flex" href>
                     <h4>Find Labs</h4>
                   </a>
                 </div>
               </div>
-              <div  className="home-card" data-aos="zoom-in" data-aos-duration="3000">
+              <div className="home-card" data-aos="zoom-in" data-aos-duration="3000">
                 <div className="image-section">
                   <img src="/images/med.jpg" alt="" />
                 </div>
@@ -110,14 +111,14 @@ export default function Mainpage() {
                   <div className="card-icon flex">
                     <img src="images/med1.svg" alt="" />
                   </div>
-                  <a className="card-button flex" href>
+                  <a className="card-button flex" >
                     <h4>Get Medicines</h4>
                   </a>
                 </div>
               </div>
             </div>
             <div className="home-hospital flex" data-aos="fade-up"
-     data-aos-anchor-placement="top-bottom"  data-aos-duration="3000">
+              data-aos-anchor-placement="top-bottom" data-aos-duration="3000">
               <div className="home-hospital-images flex">
                 <img src="/images/hosptal1 (1).jpg" alt="" />
                 <img src="/images/hosptal1 (2).jpg" alt="" />
@@ -130,7 +131,7 @@ export default function Mainpage() {
                 <h2>Near You</h2>
               </div>
               <div className="home-hospital-button flex">
-                <a href=" " className="card-button flex">
+                <a onClick={() => { navigate("/hospitalfilter") }} href=" " className="card-button flex">
                   <h4>Hospital</h4>
                 </a>
               </div>
@@ -274,7 +275,7 @@ export default function Mainpage() {
             </div>
 
             <div className="lab-content flex" data-aos="fade-up"
-     data-aos-anchor-placement="top-bottom" data-aos-duration="3000">
+              data-aos-anchor-placement="top-bottom" data-aos-duration="3000">
               <div className="lab-left">
                 <div className="home-lab-title">
                   <h2>HEALTH TEST AT YOUR HOME</h2>
@@ -558,8 +559,8 @@ export default function Mainpage() {
             </div>
 
             <div className="mobile-specialties-data flex">
- 
-              <h4>Period doubts or</h4> 
+
+              <h4>Period doubts or</h4>
               <h4> Pregnancy</h4>
               <a href="">
                 <h4 className="mobile-specialties-button">Consult Now</h4>
@@ -575,7 +576,7 @@ export default function Mainpage() {
             </div>
 
             <div className="mobile-specialties-data flex">
-            <h4>Period doubts or</h4> 
+              <h4>Period doubts or</h4>
               <h4> Pregnancy</h4>
               <a href="">
                 <h4 className="mobile-specialties-button">Consult Now</h4>
@@ -589,8 +590,8 @@ export default function Mainpage() {
             </div>
 
             <div className="mobile-specialties-data flex">
- 
-              <h4>Period doubts or</h4> 
+
+              <h4>Period doubts or</h4>
               <h4> Pregnancy</h4>
               <a href="">
                 <h4 className="mobile-specialties-button">Consult Now</h4>

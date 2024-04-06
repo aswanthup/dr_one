@@ -2,6 +2,7 @@ import axios from "axios";
 import { React, useState, useEffect, useRef } from "react";
 import { useOutsideClick } from "../../hooks/useOutsideClick";
 import { port } from "../../config";
+import { toast } from "react-toastify";
 
 export default function SearchBox({ updateDocs, docNames }) {
   const [showSearchList, setShowSearchList] = useState(false);
@@ -38,12 +39,12 @@ export default function SearchBox({ updateDocs, docNames }) {
   console.log(placeLists);
 
   const handleClickPlace = async (data) => {
-    const placeName = `${ data.postname }, ${ data.district }`;
+    const placeName = `${data.postname}, ${data.district}`;
     setSelectedPlace(placeName);
     setShowSearchList(false);
     try {
       const response = await axios.post(
-        `${ port } / doctor / get_pincode`,
+        `${port}/doctor/get_pincode`,
         {
           selectedArea_id: data.id,
         }
@@ -53,7 +54,7 @@ export default function SearchBox({ updateDocs, docNames }) {
 
       updateDocs(docData);//run function on searchdoc
     } catch (err) {
-      console.log(err);
+      toast.info(err?.response?.data?.message)
     }
   };
   const searchNames = (event) => {

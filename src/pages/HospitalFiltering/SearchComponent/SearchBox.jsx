@@ -2,6 +2,7 @@ import axios from "axios";
 import { React, useState, useEffect, useRef } from "react";
 import { useOutsideClick } from "../../../hooks/useOutsideClick";
 import { port } from "../../../config";
+import { toast } from "react-toastify";
 
 export const SearchBox = ({ updateDocs, docNames }) => {
     const [showSearchList, setShowSearchList] = useState(false);
@@ -52,7 +53,7 @@ export const SearchBox = ({ updateDocs, docNames }) => {
             // console.log({ docData });
             updateDocs(docData);//run function on searchdoc
         } catch (err) {
-            console.log(err);
+            toast.info(err?.response?.data?.message)
         }
     };
     const searchNames = (event) => {

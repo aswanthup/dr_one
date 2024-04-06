@@ -22,7 +22,7 @@ export default function Hospitaladmindoctorlist() {
     try {
       setLoading(true);
       const response = await axios.post(
-        `http://localhost:3003/hospital/getdoctorlist`,
+        `${port}/hospital/getdoctorlist`,
         {
           id: 52,
         }
@@ -77,7 +77,7 @@ export default function Hospitaladmindoctorlist() {
           zIndex: (theme) => theme.zIndex.drawer + 1,
         }}
         open={loading}
-        // onClick={handleClose}
+      // onClick={handleClose}
       >
         <CircularProgress color="inherit" />
       </Backdrop>

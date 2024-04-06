@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { MyContext } from "../../contexts/Contexts";
 import 'react-toastify/dist/ReactToastify.css';
 import { Bounce, ToastContainer, toast } from "react-toastify";
+import { Hidden } from "@mui/material";
 export default function Hospitaladminregistration1() {
   const [fileName, setFileName] = useState("No file selected");
   const navigate = useNavigate()
@@ -105,56 +106,141 @@ export default function Hospitaladminregistration1() {
           <div className="register-png-div">
             <img src="images/Group 72.png" alt="" />
           </div>
+
+
+
           <div className="registration-form">
+
+
+
             <div>
               <h1 style={{ color: "white" }}>Hospital Register</h1>
             </div>
-            <div className="upload-image flex">
-              <label for="inputTag">
-                <h4 className="select-file">Upload Photo</h4>
-                <input onChange={handleFileChange} id="inputTag" type="file" />
-              </label>
 
-              <h4 id="fileNameDisplay"> {fileName} </h4>
-            </div>
 
-            {/* <label className="photo-upload">
+
+
+            <div className="flex hospital-top">
+
+
+
+              <div className="upload-image">
+
+                <h4 className="pass-con">Profile Photo</h4>
+                <label for="inputTag">
+                  <h4 className="select-file flex">Upload Photo</h4>
+                  <input onChange={handleFileChange} id="inputTag" type="file" />
+                </label>
+
+
+              </div>
+
+              {/* <label className="photo-upload">
                <h4>Upload Photo</h4>
                   <input type="file" />
                </div> */}
 
-            <div className="hospitalname_input">
-              <h4>Hospital Name</h4>
-              <input value={HospitalAdminRg?.name} onChange={inputOnchanges} name="name" type="text" />
 
+
+
+
+
+              <div className="hospitalname_input">
+                <h4 className="pass-con">Hospital Name</h4>
+                <input value={HospitalAdminRg?.name} onChange={inputOnchanges} name="name" type="text" />
+
+              </div>
             </div>
 
-            <div className="register-input-section flex">
-              <div className="register-left-section">
+
+
+            <div className="main-waring-section main-waring-section-image " style={{overflow:"Hidden"}}>
+              <h4 className="register-number-warning" id="fileNameDisplay"> {fileName} </h4>
+            </div>
+
+
+
+
+
+            <div className="register-input-section">
+
+
+              <div className="register-left-section flex">
+
+
+
                 <div>
-                  <h4>Phone Number</h4>
+                  <h4 className="pass-con">Phone Number</h4>
                   <input value={HospitalAdminRg?.contact_no} onChange={inputOnchanges} name="contact_no" type="number" />
-                  <p className="register-number-warning">{Errors?.phone}</p>
+
+                  <div className="main-waring-section">
+
+
+
+                    <p className="register-number-warning">{Errors?.phone}</p>
+
+                  </div>
+
                 </div>
+
+
+
                 <div>
-                  <h4>Email</h4>
+                  <h4 className="pass-con">Email</h4>
                   <input value={HospitalAdminRg?.email} pattern="^[^\s@]+@[^\s@]+\.[^\s@]+$" name="email" onChange={inputOnchanges} type="email" />
-                  <p className="register-number-warning">{Errors?.email}</p>
+
+                  <div className="main-waring-section">
+                    <p className="register-number-warning">{Errors?.email}</p>
+                  </div>
+
                 </div>
               </div>
-              <div className="register-right-section">
+
+
+
+
+
+              <div className="register-right-section flex">
+
+
+
+
                 <div>
-                  <h4>Password</h4>
+                  <h4 className="pass-con">Password</h4>
                   <input value={HospitalAdminRg.password} name="password" onChange={inputOnchanges} type="password" />
-                  <p className="register-number-warning">{Errors?.password}</p>
+
+                  <div className="main-waring-section main-waring-section-pass">
+                    <p className="register-number-warning">{Errors?.password}</p>
+
+                  </div>
                 </div>
-                <div>
-                  <h4>Confirm Password</h4>
+
+
+
+                <div >
+                  <h4 className="pass-con">Confirm Password</h4>
                   <input value={HospitalAdminRg.repassword} name="repassword" onChange={inputOnchanges} type="password" />
-                  <p className="register-number-warning">{Errors?.repassword}</p>
+
+                  <div className="main-waring-section">
+                    <p className="register-number-warning">{Errors?.repassword}</p>
+                  </div>
+
                 </div>
+
+
+
+
               </div>
+
+
+
+
+
             </div>
+
+
+
+
             <div
 
               className="register-button-section flex"

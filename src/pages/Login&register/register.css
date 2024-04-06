@@ -30,41 +30,30 @@
     cursor: pointer;
 }
 
-.select-file{
-    background-color:white;
-    color:var(--color-primary);
-    width: fit-content;
-    border-radius:.4vw;
-    padding:4px 20px;
-   
+
+/* .register-input-section{
+    justify-content: space-between;
+} */
+
+.register-left-section{
+
+    justify-content: space-between;
 }
-.upload-image{
-    margin-top: 2vw;
- gap: 1vw;
- align-items: center;
-}
-.register-input-section{
+.register-right-section{
     justify-content: space-between;
 }
 
-.register-left-section{
-    width: 48%;
-}
-.register-right-section{
-    width: 48%;
-}
-
 .register-right-section div{
-   margin-top:2vw;
+   margin-top:0vw;
 }
 
 .register-left-section div{
-    margin-top:2vw;
+    margin-top:1vw;
  }
  
 
 .register-right-section input{
-    width: 100%;
+    width:32vw;
     height:3vw;
     border:none;
     border-radius:5px;
@@ -75,7 +64,7 @@
 }
 
 .register-left-section input{
-    width: 100%;
+    width:32vw;
     height:3vw;
     border:none;
     border-radius:5px;
@@ -108,6 +97,92 @@
     color: var(--color-primary);
 }
 
+.main-waring-section{
+    height:2.5vw;
+}
+
+.main-waring-section-pass{
+    width:32vw;
+}
+
+.hospital-top{
+    justify-content: space-between;
+}
+
+
+
+
+.register-number-warning {
+    color:rgba(246, 246, 249, .6);
+    font-size:1.2rem;
+    font-weight: 300;
+    letter-spacing: 1.5px;   
+    margin-top:0.4vw;
+}
+
+
+
+
+
+.hospitalname_input input{
+    width:48vw;
+    border: none;
+    border-radius: 5px;
+    margin-top: 1vw;
+    background-color: rgba(246, 246, 249, .4);
+    padding: 1vw;
+    color: white;
+    height:3vw;
+}
+
+
+
+.select-file{
+    background-color:white;
+    color:var(--color-primary);
+    width:16vw;
+    height:3vw;
+    border-radius:.4vw;
+    padding-left:1vw;
+  
+   
+    margin-top: 1vw;
+    align-items: center;
+}
+
+.hospital-top{
+    margin-top:1.5vw;
+}
+
+
+
+/* .upload-image{
+    margin-top: 2vw;
+ gap: 1vw;
+ align-items: center;
+} */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 @media screen and (max-width:780px){
@@ -122,20 +197,24 @@
 
 .register-left-section{
     width:100%;
-    margin-top: 20px;
+ 
+    flex-direction: column;
 }
 .register-right-section{
     width:100%;
+    flex-direction: column;
 }
 
 .register-left-section input{
     height:9vw;
     padding-left:10px;
+    width:100%;
 }
 
 .register-right-section input{
     height:9vw;
     padding-left:10px;
+    width:100%;
 }
 
 .register-button-section a{
@@ -155,12 +234,57 @@
     border-radius:0vw;
  }
  
- .upload-image{
+ /* .upload-image{
     margin-top: 7vw;
- }
+ } */
  .register-button-section{
     justify-content: end;
     margin-top:5vw;
 }
+
+.hospital-top{
+    flex-direction: column-reverse;
+}
+
+.hospital-top input{
+    width: 100%;
+}
+
+
+.select-file{
+    background-color:white;
+    color:var(--color-primary);
+    width:100%;
+    height:9vw;
+    border-radius:.4vw;
+    padding-left:1vw;
+  
+   
+    margin-top: 1vw;
+    align-items: center;
+    justify-content: center;
+    border-radius:2vw;
+}
+
+
+.main-waring-section{
+    height:fit-content;
+}
+
+.main-waring-section-pass{
+    width:100%;
+    height:fit-content;
+}
+
+.main-waring-section-image{
+    height:fit-content;
+}
+
+.pass-con{
+    margin-top:2vw;
+}
+
+
+
 
 }
