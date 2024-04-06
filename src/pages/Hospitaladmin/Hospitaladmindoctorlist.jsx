@@ -22,7 +22,7 @@ export default function Hospitaladmindoctorlist() {
     try {
       setLoading(true);
       const response = await axios.post(
-        `${port}/hospital/getdoctorlist`,
+        `http://localhost:3003/hospital/getdoctorlist`,
         {
           id: 52,
         }
