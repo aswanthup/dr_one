@@ -29,8 +29,7 @@ export const LabFiltering = () => {
         let FinalData = [...lab] || [];
         let updatedArray = [];
         FinalData.forEach(ele => {
-            // let typeMatched = ele?.type?.toLowerCase() === filters?.type?.toLowerCase(); // Check if ele.type matches or if filters.type is not set
-            let servicesMatched = true; // Assume services matches by default
+            let servicesMatched = true;
             let featureMatched = true;
             if (filters.services && filters.services.length > 0) {
                 servicesMatched = filters.services.every(spec => {

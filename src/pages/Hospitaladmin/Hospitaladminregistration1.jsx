@@ -4,13 +4,17 @@ import { useNavigate } from "react-router-dom";
 import { MyContext } from "../../contexts/Contexts";
 import 'react-toastify/dist/ReactToastify.css';
 import { Bounce, ToastContainer, toast } from "react-toastify";
-import { Hidden } from "@mui/material";
+import { IconButton } from "@mui/material";
+import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
 export default function Hospitaladminregistration1() {
   const [fileName, setFileName] = useState("No file selected");
   const navigate = useNavigate()
   const { HospitalAdminRg, setHospitalAdminRg } = useContext(MyContext)
   const [Errors, setErrors] = useState({
   })
+  const [showPassword, setShowPassword] = useState(false);
+  const [showRePassword, setShowRePassword] = useState(false);
 
   const handleFileChange = (event) => {
     const selectedFile = event.target.files[0];
@@ -30,7 +34,7 @@ export default function Hospitaladminregistration1() {
   };
 
   // toast
-
+  console.log("HospitalAdminRg>>>>", HospitalAdminRg)
   const toastifyFun = (value) => {
     toast.info(value, {
       position: "top-right",
@@ -95,6 +99,15 @@ export default function Hospitaladminregistration1() {
   };
   //  end checking
 
+  const handleClickShowPassword = () => setShowPassword((show) => !show);
+  const handleClickShowRePassword = () => setShowRePassword((show) => !show);
+
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
+  };
+  const handleMouseDownRePassword = (event) => {
+    event.preventDefault();
+  };
 
   console.log("errorss>>>", Errors)
 
@@ -106,24 +119,11 @@ export default function Hospitaladminregistration1() {
           <div className="register-png-div">
             <img src="images/Group 72.png" alt="" />
           </div>
-
-
-
           <div className="registration-form">
-
-
-
             <div>
               <h1 style={{ color: "white" }}>Hospital Register</h1>
             </div>
-
-
-
-
             <div className="flex hospital-top">
-
-
-
               <div className="upload-image">
 
                 <h4 className="pass-con">Profile Photo</h4>
@@ -154,7 +154,7 @@ export default function Hospitaladminregistration1() {
 
 
 
-            <div className="main-waring-section main-waring-section-image " style={{overflow:"Hidden"}}>
+            <div className="main-waring-section main-waring-section-image " style={{ overflow: "Hidden" }}>
               <h4 className="register-number-warning" id="fileNameDisplay"> {fileName} </h4>
             </div>
 
@@ -184,7 +184,6 @@ export default function Hospitaladminregistration1() {
                 </div>
 
 
-
                 <div>
                   <h4 className="pass-con">Email</h4>
                   <input value={HospitalAdminRg?.email} pattern="^[^\s@]+@[^\s@]+\.[^\s@]+$" name="email" onChange={inputOnchanges} type="email" />
@@ -207,8 +206,45 @@ export default function Hospitaladminregistration1() {
 
                 <div>
                   <h4 className="pass-con">Password</h4>
-                  <input value={HospitalAdminRg.password} name="password" onChange={inputOnchanges} type="password" />
+                  {/* <input type="password" /> */}
+                  <div
+                    style={{
+                      position: "relative",
+                      height: "3vw",
+                    }}
+                    className="pass-con-Inp"
+                  >
+                    <input
+                      value={HospitalAdminRg.password} name="password" onChange={inputOnchanges}
+                      style={{
+                        margin: 0,
+                        position: "absolute",
+                        top: "0",
+                        left: "0",
+                        height: "100%",
+                        width: "calc(100% - 2px)",
+                        padding: "0 10px",
+                        appearance: "none",
+                        WebkitAppearance: "none",
+                      }}
+                      type={showPassword ? "text" : "password"}
+                    />
 
+                    <IconButton
+                      sx={{
+                        position: "absolute",
+                        top: "50%",
+                        right: "10px",
+                        transform: "translateY(-50%)",
+                        color: "#fafaf9",
+                      }}
+                      aria-label="toggle password visibility"
+                      onClick={handleClickShowPassword}
+                      onMouseDown={handleMouseDownPassword}
+                    >
+                      {showPassword ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
+                  </div>
                   <div className="main-waring-section main-waring-section-pass">
                     <p className="register-number-warning">{Errors?.password}</p>
 
@@ -219,22 +255,52 @@ export default function Hospitaladminregistration1() {
 
                 <div >
                   <h4 className="pass-con">Confirm Password</h4>
-                  <input value={HospitalAdminRg.repassword} name="repassword" onChange={inputOnchanges} type="password" />
+                  {/* <input type="password" /> */}
+                  <div
+                    style={{
+                      position: "relative",
+                      height: "3vw",
+                    }}
+                    className="pass-con-Inp"
+                  >
+                    <input
+                      value={HospitalAdminRg.repassword} name="repassword" onChange={inputOnchanges}
+                      style={{
+                        margin: 0,
+                        position: "absolute",
+                        top: "0",
+                        left: "0",
+                        height: "100%",
+                        width: "calc(100% - 2px)",
+                        padding: "0 10px",
+                        appearance: "none",
+                        WebkitAppearance: "none",
+                      }}
+                      type={showPassword ? "text" : "password"}
+                    />
 
+                    <IconButton
+                      sx={{
+                        position: "absolute",
+                        top: "50%",
+                        right: "10px",
+                        transform: "translateY(-50%)",
+                        color: "#fafaf9",
+                      }}
+                      aria-label="toggle password visibility"
+                      onClick={handleClickShowRePassword}
+                      onMouseDown={handleMouseDownRePassword}
+                    >
+                      {showRePassword ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
+                  </div>
                   <div className="main-waring-section">
                     <p className="register-number-warning">{Errors?.repassword}</p>
                   </div>
 
                 </div>
 
-
-
-
               </div>
-
-
-
-
 
             </div>
 

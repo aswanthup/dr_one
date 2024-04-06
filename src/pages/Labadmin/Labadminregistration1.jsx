@@ -4,12 +4,17 @@ import { useNavigate } from "react-router-dom";
 import { MyContext } from "../../contexts/Contexts";
 import 'react-toastify/dist/ReactToastify.css';
 import { Bounce, ToastContainer, toast } from "react-toastify";
+import { IconButton } from "@mui/material";
+import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
 
 export default function Labadminregistration1() {
   const navigate = useNavigate()
   const { LabAdminRg, setLabAdminRg } = useContext(MyContext)
   const [Errors, setErrors] = useState({
   })
+  const [showPassword, setShowPassword] = useState(false);
+  const [showRePassword, setShowRePassword] = useState(false);
 
   const toastifyFun = (value) => {
     toast.info(value, {
@@ -24,6 +29,17 @@ export default function Labadminregistration1() {
       transition: Bounce,
     });
   }
+
+  const handleClickShowPassword = () => setShowPassword((show) => !show);
+  const handleClickShowRePassword = () => setShowRePassword((show) => !show);
+
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
+  };
+  const handleMouseDownRePassword = (event) => {
+    event.preventDefault();
+  };
+
 
   // add data to state
 
@@ -93,7 +109,7 @@ export default function Labadminregistration1() {
 
 
 
-             
+
 
             {/* <div id="hospitalname_inputId" className="hospitalname_input">
               <h4>Laboratory Name</h4>
@@ -104,22 +120,22 @@ export default function Labadminregistration1() {
             </div> */}
 
 
-<div className="flex hospital-top">
+            <div className="flex hospital-top">
 
 
 
-<div className="upload-image">
+              <div className="upload-image">
 
-  <h4 className="pass-con">Profile Photo</h4>
-  <label for="inputTag">
-    <h4 className="select-file flex">Upload Photo</h4>
-    <input onChange={''} id="inputTag" type="file" />
-  </label>
+                <h4 className="pass-con">Profile Photo</h4>
+                <label for="inputTag">
+                  <h4 className="select-file flex">Upload Photo</h4>
+                  <input onChange={''} id="inputTag" type="file" />
+                </label>
 
 
-</div>
+              </div>
 
-{/* <label className="photo-upload">
+              {/* <label className="photo-upload">
  <h4>Upload Photo</h4>
     <input type="file" />
  </div> */}
@@ -129,15 +145,15 @@ export default function Labadminregistration1() {
 
 
 
-<div className="hospitalname_input">
-  <h4 className="pass-con">Laboratory Name</h4>
-  <input value={LabAdminRg?.name} onChange={inputOnchanges} name="name" type="text" />
+              <div className="hospitalname_input">
+                <h4 className="pass-con">Laboratory Name</h4>
+                <input value={LabAdminRg?.name} onChange={inputOnchanges} name="name" type="text" />
 
-</div>
-</div>
+              </div>
+            </div>
 
 
-<div className="main-waring-section" style={{overflow:"Hidden"}}>
+            <div className="main-waring-section" style={{ overflow: "Hidden" }}>
               <h4 className="register-number-warning" id="fileNameDisplay"> {' '} </h4>
             </div>
 
@@ -159,9 +175,9 @@ export default function Labadminregistration1() {
                 <div style={{ position: "relative" }}>
                   <h4 className="pass-con">Phone Number</h4>
                   <input value={LabAdminRg?.contact_no} onChange={inputOnchanges} name="contact_no" type="number" />
-                  
+
                   <div className="main-waring-section">
-                  <p className="register-number-warning">{Errors?.phone}</p>
+                    <p className="register-number-warning">{Errors?.phone}</p>
                   </div>
                 </div>
 
@@ -171,10 +187,10 @@ export default function Labadminregistration1() {
                 <div style={{ position: "relative" }}>
                   <h4 className="pass-con">Email</h4>
                   <input value={LabAdminRg?.email} pattern="^[^\s@]+@[^\s@]+\.[^\s@]+$" name="email" onChange={inputOnchanges} type="email" />
-                  
-                  
+
+
                   <div className="main-waring-section">
-                  <p className="register-number-warning">{Errors?.email}</p>
+                    <p className="register-number-warning">{Errors?.email}</p>
                   </div>
 
 
@@ -192,23 +208,92 @@ export default function Labadminregistration1() {
 
                 <div style={{ position: "relative" }}>
                   <h4 className="pass-con">Password</h4>
-                  <input value={LabAdminRg.password} name="password" onChange={inputOnchanges} type="password" />
-                  
-                  
+                  <div
+                    style={{
+                      position: "relative",
+                      height: "3vw",
+                    }}
+                    className="pass-con-Inp"
+                  >
+                    <input
+                      value={LabAdminRg.password} name="password" onChange={inputOnchanges}
+                      style={{
+                        margin: 0,
+                        position: "absolute",
+                        top: "0",
+                        left: "0",
+                        height: "100%",
+                        width: "calc(100% - 2px)",
+                        padding: "0 10px",
+                        appearance: "none",
+                        WebkitAppearance: "none",
+                      }}
+                      type={showPassword ? "text" : "password"}
+                    />
+
+                    <IconButton
+                      sx={{
+                        position: "absolute",
+                        top: "50%",
+                        right: "10px",
+                        transform: "translateY(-50%)",
+                        color: "#fafaf9",
+                      }}
+                      aria-label="toggle password visibility"
+                      onClick={handleClickShowPassword}
+                      onMouseDown={handleMouseDownRePassword}
+                    >
+                      {showPassword ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
+                  </div>
+
                   <div className="main-waring-section main-waring-section-pass">
-                  <p className="register-number-warning">{Errors?.password}</p>
+                    <p className="register-number-warning">{Errors?.password}</p>
 
                   </div>
                 </div>
-
-
-
                 <div style={{ position: "relative" }}>
                   <h4 className="pass-con">Confirm Password</h4>
-                  <input value={LabAdminRg.repassword} name="repassword" onChange={inputOnchanges} type="password" />
-                 
+                  <div
+                    style={{
+                      position: "relative",
+                      height: "3vw",
+                    }}
+                    className="pass-con-Inp"
+                  >
+                    <input
+                      value={LabAdminRg.repassword} name="repassword" onChange={inputOnchanges}
+                      style={{
+                        margin: 0,
+                        position: "absolute",
+                        top: "0",
+                        left: "0",
+                        height: "100%",
+                        width: "calc(100% - 2px)",
+                        padding: "0 10px",
+                        appearance: "none",
+                        WebkitAppearance: "none",
+                      }}
+                      type={showPassword ? "text" : "password"}
+                    />
+
+                    <IconButton
+                      sx={{
+                        position: "absolute",
+                        top: "50%",
+                        right: "10px",
+                        transform: "translateY(-50%)",
+                        color: "#fafaf9",
+                      }}
+                      aria-label="toggle password visibility"
+                      onClick={handleClickShowRePassword}
+                      onMouseDown={handleMouseDownPassword}
+                    >
+                      {showRePassword ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
+                  </div>
                   <div className="main-waring-section">
-                  <p className="register-number-warning">{Errors?.repassword}</p>
+                    <p className="register-number-warning">{Errors?.repassword}</p>
                   </div>
                 </div>
 

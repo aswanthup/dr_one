@@ -4,10 +4,15 @@ import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { MyContext } from "../../contexts/Contexts";
-
+import { IconButton } from "@mui/material";
+import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import "../Login&register/register.css"
 export default function Doctoradminregistration1() {
   const navigate = useNavigate();
   const [fileName, setFileName] = useState("No file selected");
+  const [showPassword, setShowPassword] = useState(false);
+  const [ShowRePassword, setShowRePassword] = useState(false);
   const { Data, setData } = useContext(MyContext);
   console.log("Data===", Data);
   const [validationErrors, setValidationErrors] = useState({});
@@ -172,6 +177,17 @@ export default function Doctoradminregistration1() {
     }
   };
 
+  const handleClickShowPassword = () => setShowPassword((show) => !show);
+  const handleClickShowRePassword = () => setShowRePassword((show) => !show);
+
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
+  };
+  const handleMouseDownRePassword = (event) => {
+    event.preventDefault();
+  };
+
+
   console.log(Data);
 
   return (
@@ -251,12 +267,44 @@ export default function Doctoradminregistration1() {
                 </div>
                 <div style={{ position: "relative" }}>
                   <h4>Password</h4>
-                  <input
-                    type="password"
-                    name="password"
-                    value={Data?.password}
-                    onChange={handleChange}
-                  />
+                  <div
+                    style={{
+                      position: "relative",
+                      height: "3vw",
+                    }}
+                    className="pass-con-Inp"
+                  >
+                    <input
+                      value={Data.password} name="password" onChange={handleChange}
+                      style={{
+                        margin: 0,
+                        position: "absolute",
+                        top: "0",
+                        left: "0",
+                        height: "100%",
+                        width: "calc(100% - 2px)",
+                        padding: "0 10px",
+                        appearance: "none",
+                        WebkitAppearance: "none",
+                      }}
+                      type={showPassword ? "text" : "password"}
+                    />
+
+                    <IconButton
+                      sx={{
+                        position: "absolute",
+                        top: "50%",
+                        right: "10px",
+                        transform: "translateY(-50%)",
+                        color: "#fafaf9",
+                      }}
+                      aria-label="toggle password visibility"
+                      onClick={handleClickShowPassword}
+                      onMouseDown={handleMouseDownPassword}
+                    >
+                      {showPassword ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
+                  </div>
                   {validationErrors.password && (
                     <p className="register-number-warning">
                       {validationErrors.password}
@@ -265,13 +313,44 @@ export default function Doctoradminregistration1() {
                 </div>
                 <div style={{ position: "relative" }}>
                   <h4>Confirm Password</h4>
-                  <input
-                    type="password"
-                    name="confirmPassword"
-                    value={Data?.confirmPassword}
-                    onChange={handleChange}
-                    required
-                  />
+                  <div
+                    style={{
+                      position: "relative",
+                      height: "3vw",
+                    }}
+                    className="pass-con-Inp"
+                  >
+                    <input
+                      value={Data?.confirmPassword} name="confirmPassword" onChange={handleChange}
+                      style={{
+                        margin: 0,
+                        position: "absolute",
+                        top: "0",
+                        left: "0",
+                        height: "100%",
+                        width: "calc(100% - 2px)",
+                        padding: "0 10px",
+                        appearance: "none",
+                        WebkitAppearance: "none",
+                      }}
+                      type={ShowRePassword ? "text" : "password"}
+                    />
+
+                    <IconButton
+                      sx={{
+                        position: "absolute",
+                        top: "50%",
+                        right: "10px",
+                        transform: "translateY(-50%)",
+                        color: "#fafaf9",
+                      }}
+                      aria-label="toggle password visibility"
+                      onClick={handleClickShowRePassword}
+                      onMouseDown={handleMouseDownRePassword}
+                    >
+                      {ShowRePassword ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
+                  </div>
                   {validationErrors.confirmPassword && (
                     <p className="register-number-warning">
                       {validationErrors.confirmPassword}

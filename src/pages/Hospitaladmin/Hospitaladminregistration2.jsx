@@ -86,7 +86,11 @@ export default function Hospitaladminregistration2() {
                                 .get(`https://api.postalpincode.in/pincode/${pinCode}`)
                                 .then((res) => {
                                         console.log("res.data[0]?.PostOffice", res.data[0]?.PostOffice);
-                                        setlocation(res.data[0]?.PostOffice)
+                                        if (res.data[0]?.PostOffice?.length > 0) {
+                                                setlocation(res.data[0]?.PostOffice)
+                                        } else {
+                                                toast.info("Pincode not found")
+                                        }
                                 });
                 } else {
                         console.log("pincode should be 6 digits");
@@ -127,7 +131,6 @@ export default function Hospitaladminregistration2() {
                                 features = features.filter(feat => feat !== value);
                         }
                 }
-
                 setHospitalAdminRg({ ...HospitalAdminRg, features: features, specialties: specialties });
         };
 
@@ -183,7 +186,7 @@ export default function Hospitaladminregistration2() {
                 setModalOpen({ specialties: false, features: false })
                 setModalOpen()
         }
-        console.log("ModalOpen>>>>", ModalOpen)
+        console.log("HospitalAdminRg>>>>", HospitalAdminRg)
         return (
 
                 <div>
@@ -204,9 +207,6 @@ export default function Hospitaladminregistration2() {
                                 <h1>Hospital Registration</h1>
 
                                 <div className='image_card_ho_ad flex'>
-
-
-
                                         <h4>Add Photos</h4>
                                         <div className='image_card_ho_ad2 flex' >
                                                 <div className='image_card_ho_ad_section flex'>
@@ -223,17 +223,6 @@ export default function Hospitaladminregistration2() {
                                         </div>
 
                                 </div>
-
-
-
-
-
-                                {/* <div className='hospitaladminregistration_first flex'> */}
-
-
-
-
-
 
                                 {/* <div className='Features_card_ho_ad_media'>
                                                 <h4>Features</h4>
@@ -311,10 +300,7 @@ export default function Hospitaladminregistration2() {
                                 </div>
 
                                 <div className='hospitaladminregistration_second flex' >
-
-
                                         <div className='flex pin-lo'>
-
                                                 <div className='pin-input' >
                                                         <h4>Pincode</h4>
                                                         <input value={HospitalAdminRg?.pincode || ''} onChange={inputChanges} type="number" maxLength={6} name="pincode" />
@@ -322,14 +308,12 @@ export default function Hospitaladminregistration2() {
                                                                 <p className="register-number-warning">{Errors?.pincode}</p>
                                                         </div>
                                                 </div>
-
-
                                                 <div className='lo-input'>
-                                                        <h4>Location</h4>
+                                                        <h4>Place</h4>
                                                         <select
                                                                 type="text"
                                                                 onChange={inputChanges}
-                                                                value={HospitalAdminRg?.type ? HospitalAdminRg?.type : ''}
+                                                                value={HospitalAdminRg?.place ? HospitalAdminRg?.place : ''}
                                                                 name="place"
                                                                 className="hospitalRegTypeList"
                                                         >

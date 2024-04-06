@@ -9,14 +9,18 @@ import { port } from '../../config'
 import '../Labadmin/Labadminregistration2.css'
 import { DesktopTimePicker } from '@mui/x-date-pickers'
 import dayjs from 'dayjs'
-import { Backdrop, CircularProgress } from '@mui/material'
+import { Backdrop, CircularProgress, Modal } from '@mui/material'
 
 export default function Labadminregistration2() {
   const { LabAdminRg, setLabAdminRg } = useContext(MyContext)
   const [Errors, setErrors] = useState({})
   const [loader, setloader] = useState(false)
   const navigate = useNavigate()
-
+  const [ModalOpen, setModalOpen] = useState({
+    features: false,
+    services: false
+  })
+  const [location, setlocation] = useState([])
   const Services = [
     { name: "Blood Count Tests" },
     { name: "Genetic Testing" },
@@ -71,10 +75,31 @@ export default function Labadminregistration2() {
     }
 
   }
-
+  const updatePosts = (pinCode) => {
+    if (pinCode.length === 6) {
+      console.log(6);
+      axios
+        .get(`https://api.postalpincode.in/pincode/${pinCode}`)
+        .then((res) => {
+          console.log("res.data[0]?.PostOffice", res.data[0]?.PostOffice);
+          if (res.data[0]?.PostOffice?.length > 0) {
+            setlocation(res.data[0]?.PostOffice)
+          } else {
+            toast.info("Pincode not found")
+          }
+        });
+    } else {
+      console.log("pincode should be 6 digits");
+    }
+  };
   const inputChanges = (e) => {
-    const name = e.target.name
-    const value = e.target.value
+    const { name, value } = e.target
+
+    if (name === "pincode") {
+      if (value.length === 6) {
+        updatePosts(value);
+      }
+    }
     setLabAdminRg({ ...LabAdminRg, [name]: value })
   }
   const TimeSetting = (e, name) => {
@@ -113,7 +138,7 @@ export default function Labadminregistration2() {
 
   const Finish = () => {
 
-    if (LabAdminRg?.pincode && LabAdminRg?.about && LabAdminRg?.lisence_no && LabAdminRg?.features?.length > 0 && LabAdminRg?.Services?.length > 0 && !Errors?.pincode && LabAdminRg?.timing?.opening_time && LabAdminRg?.timing?.closing_time) {
+    if (LabAdminRg?.pincode && LabAdminRg?.about && LabAdminRg?.lisence_no && LabAdminRg?.features?.length > 0 && LabAdminRg?.Services?.length > 0 && !Errors?.pincode && LabAdminRg?.timing?.opening_time && LabAdminRg?.timing?.closing_time && LabAdminRg?.place) {
       setloader(true)
       CheckValidation()
       axios.post(`${port}/lab/addlab`, LabAdminRg).then((res) => {
@@ -147,7 +172,17 @@ export default function Labadminregistration2() {
     }
 
   }
+  const openModal = (data) => {
+    if (data?.services) {
+      setModalOpen({ services: true })
+    } else {
+      setModalOpen({ features: true })
 
+    }
+  }
+  const CloseModal = () => {
+    setModalOpen({ services: false, features: false })
+  }
   const handleClose = () => {
     setloader(false)
   }
@@ -324,27 +359,34 @@ export default function Labadminregistration2() {
           <div>
             <h4>License Number</h4>
             <input value={LabAdminRg?.lisence_no || ''} onChange={inputChanges} type="text" name='lisence_no' />
-            {/* <input value={HospitalAdminRg?.lisence_no || ''} onChange={inputChanges} type="number" name='lisence_no' /> */}
+            {/* <input value={LabAdminRg?.lisence_no || ''} onChange={inputChanges} type="number" name='lisence_no' /> */}
           </div>
 
           <div>
-            <h4 className="pass-con">Features</h4>
-            <input type="number" name='features' placeholder='Select Features' />
+            <h4>Features</h4>
+            <div onClick={() => { openModal() }} className='hospital-second-section-Div flex'> {LabAdminRg?.features?.length > 0 ?
+              <div className='hospital-second-section-Div-Map'>
+                {LabAdminRg?.features?.map(ele =>
+                  <p>{ele},&nbsp; </p>
+                )}
+              </div>
+              : <h4>Select Features</h4>}</div>
           </div>
 
           <div>
-            <h4 className="pass-con">Specialties</h4>
-            <input type="number" name='specialties' placeholder='Select Specialties' />
+            <h4>Services</h4>
+            <div onClick={() => { openModal({ services: true }) }} className='hospital-second-section-Div flex'>{LabAdminRg?.services?.length > 0 ?
+              <div className='hospital-second-section-Div-Map'>
+                {LabAdminRg?.services?.map(ele =>
+                  <p>{ele},&nbsp; </p>
+                )}
+              </div>
+              : <h4>Select Specialties</h4>}
+            </div>
           </div>
 
 
         </div>
-
-
-
-
-
-
 
 
 
@@ -359,7 +401,7 @@ export default function Labadminregistration2() {
               <input className='hospitalAdminInput' value={LabAdminRg?.pincode || ''} onChange={inputChanges} type="number" maxLength={6} name="pincode" />
 
 
-              {/* <input value={HospitalAdminRg?.pincode || ''} onChange={inputChanges} type="number" maxLength={6} name="pincode" /> */}
+              {/* <input value={LabAdminRg?.pincode || ''} onChange={inputChanges} type="number" maxLength={6} name="pincode" /> */}
 
 
               <div className="main-waring-section main-waring-section4 flex ">
@@ -370,17 +412,29 @@ export default function Labadminregistration2() {
 
             <div className='lo-input'>
               <h4>Location</h4>
-              <input type="text" />
+              <select
+                type="text"
+                onChange={inputChanges}
+                value={LabAdminRg?.place ? LabAdminRg?.place : ''}
+                name="place"
+                className="hospitalRegTypeList"
+              >
+                <option
+                  disabled selected value=''
+                >
+                  Select place
+                </option>
+                {location?.map((types, index) => (
+                  <option style={{ color: "black" }}
+                    key={index}
+                    value={types?.Name}>
+                    {types?.Name}
+                  </option>
+                ))}
+              </select>
             </div>
 
           </div>
-
-
-
-
-
-
-
 
           <div className='LabAdminPin flex'>
 
@@ -408,13 +462,10 @@ export default function Labadminregistration2() {
 
             <textarea value={LabAdminRg?.about || ''} onChange={inputChanges} name="about" id="" cols="30" rows="10"></textarea>
           </div>
-
           <div>
             <h4>Address</h4>
-
             <textarea value={LabAdminRg?.address || ''} onChange={inputChanges} name="address" id="" cols="30" rows="5"></textarea>
           </div>
-
         </div>
 
         <div className='ho_ad_re_button flex'>
@@ -424,7 +475,39 @@ export default function Labadminregistration2() {
 
       </div>
 
+      <Modal className='Features_card_ho_Modal' open={ModalOpen?.features || ModalOpen?.services}
+        onClose={CloseModal}
+      >
+        <>
+          <div className='Features_card_ho_ad flex'>
+            <div className='Features_card_ho_ad_check '>
+              {ModalOpen?.features ?
+                Features.map((ele) =>
+                  <label class="form-control flex">
+                    <input value={ele?.name || ''}
+                      checked={LabAdminRg?.features?.includes(ele.name)}
+                      onChange={(e) => { storeArray(e, { features: true }) }} type="checkbox" name="checkbox" />
+                    <h4 className='select-new'>{ele.name}</h4>
+                  </label>
+                )
+                :
+                Services.map((ele) =>
+                  <label class="form-control flex">
+                    <input value={ele?.name || ''}
+                      checked={LabAdminRg?.Srvices?.includes(ele.name)}
+                      onChange={(e) => { storeArray(e, { Services: true }) }} type="checkbox" name="checkbox" />
+                    <h4 className='select-new'>{ele.name}</h4>
+                  </label>
+                )
+              }
+            </div>
 
+
+
+            <button onClick={CloseModal} className='Features_card_ho_ad_button'><h4>ok</h4></button>
+          </div>
+        </>
+      </Modal>
 
 
     </div>

@@ -1,10 +1,14 @@
-
-
 /* .hospitalname_input {
     margin-top: 1vw;
 } */
 
+.pass-con-Inp {
+    margin-top: 11vw;
+}
 
+.register-right-section div {
+    margin-top: 1vw;
+}
 
 @media screen and (max-width: 780px) {
 
