@@ -58,14 +58,15 @@
 }
 
 .Features_card_ho_ad {
-  width: 40vw;
+  width:480px;
   background-color: rgb(255, 255, 255);
   border-radius: 1vw;
   margin-top: 1vw;
-  padding: 2vw;
+  padding:2vw;
   flex-direction: column;
   overflow-y: scroll;
   overflow-x: hidden;
+ align-items: center;
 }
 
 .image_card_ho_ad {
@@ -156,10 +157,16 @@
   width: 28vw;
   height: 3vw;
   color: white;
-  padding: 1vw;
+  padding-left:1vw;
+ 
   letter-spacing: 2px;
   margin-top: 1vw;
+  align-items: center;
 }
+.hospital-second-section-Div h4{
+  font-weight: 200;
+  
+} 
 
 .form-control {
   font-family: system-ui, sans-serif;
@@ -191,8 +198,8 @@ input[type="checkbox"] {
 
   font: inherit;
   color: currentColor;
-  width: 1.15em;
-  height: 1.15em;
+  width: 1em;
+  height: 1em;
   border: 0.8px solid currentColor;
   border-radius: 50px;
   transform: translateY(-0.075em);
@@ -234,8 +241,8 @@ input[type="checkbox"]:disabled {
   display: flex;
   flex-wrap: wrap;
   gap: 25px;
-  justify-content: space-evenly;
-  justify-content: flex-start;
+ 
+  justify-content:space-between;
 }
 
 .Features_card_ho_ad_check input {
@@ -330,6 +337,21 @@ input[type="checkbox"]:disabled {
 
 .lo-input input {
   width: 26vw;
+}
+
+
+.select-new{
+  width:140px;
+}
+
+
+.Features_card_ho_ad_button{
+  background-color: #3A65FD;
+  width:100%;
+  padding:10px;
+  margin-top:24px;
+  border-radius:10px;
+  color: white;
 }
 
 
@@ -458,8 +480,40 @@ input[type="checkbox"]:disabled {
     width: 48vw;
   }
 
+  .Features_card_ho_ad{
+      width:fit-content;
+      height: fit-content;
+      border-radius:10px;
+  }
+
+  .hospital-second-section-Div{
+    width: 100%;
+    height:10vw;
+  }
+
+  .Features_card_ho_ad_check{
+          width:200px;
+        
+  }
+
+  .Features_card_ho_ad_check label{
+    width:100%;
+  }
+
+  .Features_card_ho_ad_button{
+    padding:6px;
+  }
+
 
 }
+
+
+
+
+
+
+
+
 
 @media only screen and (max-width: 408px) {
   .hospitalAdminPinType {

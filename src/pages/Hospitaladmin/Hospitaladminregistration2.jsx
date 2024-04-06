@@ -265,12 +265,12 @@ export default function Hospitaladminregistration2() {
 
                                         <div>
                                                 <h4>Features</h4>
-                                                <div onClick={() => { openModal() }} className='hospital-second-section-Div'></div>
+                                                <div onClick={() => { openModal() }} className='hospital-second-section-Div flex'><h4>Select Features</h4></div>
                                         </div>
 
                                         <div>
                                                 <h4>Specialties</h4>
-                                                <div onClick={() => { openModal({ specialties: true }) }} className='hospital-second-section-Div'></div>
+                                                <div onClick={() => { openModal({ specialties: true }) }} className='hospital-second-section-Div flex'><h4>Select Specialties</h4></div>
                                         </div>
 
 
@@ -354,6 +354,9 @@ export default function Hospitaladminregistration2() {
                                 >
                                         <>
                                                 <div className='Features_card_ho_ad flex'>
+
+
+
                                                         <div className='Features_card_ho_ad_check '>
                                                                 {ModalOpen?.features ?
                                                                         Features.map((ele) =>
@@ -361,7 +364,7 @@ export default function Hospitaladminregistration2() {
                                                                                         <input value={ele?.name || ''}
                                                                                                 checked={HospitalAdminRg?.features?.includes(ele.name)}
                                                                                                 onChange={(e) => { storeArray(e, { features: true }) }} type="checkbox" name="checkbox" />
-                                                                                        <h4>{ele.name}</h4>
+                                                                                        <h4 className='select-new'>{ele.name}</h4>
                                                                                 </label>
                                                                         )
                                                                         :
@@ -370,11 +373,15 @@ export default function Hospitaladminregistration2() {
                                                                                         <input value={ele?.name || ''}
                                                                                                 checked={HospitalAdminRg?.specialties?.includes(ele.name)}
                                                                                                 onChange={(e) => { storeArray(e, { features: true }) }} type="checkbox" name="checkbox" />
-                                                                                        <h4>{ele.name}</h4>
+                                                                                        <h4 className='select-new'>{ele.name}</h4>
                                                                                 </label>
                                                                         )
                                                                 }
                                                         </div>
+
+
+
+                                                        <button className='Features_card_ho_ad_button'><h4>ok</h4></button>
                                                 </div>
                                         </>
                                 </Modal>
