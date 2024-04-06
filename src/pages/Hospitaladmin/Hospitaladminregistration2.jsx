@@ -12,6 +12,7 @@ export default function Hospitaladminregistration2() {
 
         const { HospitalAdminRg, setHospitalAdminRg } = useContext(MyContext)
         const [Errors, setErrors] = useState({})
+        const [location, setlocation] = useState([])
         const [ModalOpen, setModalOpen] = useState({
                 features: false,
                 specialties: false
@@ -78,8 +79,28 @@ export default function Hospitaladminregistration2() {
 
         }
 
+        const updatePosts = (pinCode) => {
+                if (pinCode.length === 6) {
+                        console.log(6);
+                        axios
+                                .get(`https://api.postalpincode.in/pincode/${pinCode}`)
+                                .then((res) => {
+                                        console.log("res.data[0]?.PostOffice", res.data[0]?.PostOffice);
+                                        setlocation(res.data[0]?.PostOffice)
+                                });
+                } else {
+                        console.log("pincode should be 6 digits");
+                }
+        };
         const inputChanges = (e) => {
                 const { name, value } = e.target
+
+                if (name === "pincode") {
+                        if (value.length === 6) {
+                                updatePosts(value);
+                        }
+                }
+
                 setHospitalAdminRg({ ...HospitalAdminRg, [name]: value })
         }
         useEffect(() => {
@@ -189,10 +210,10 @@ export default function Hospitaladminregistration2() {
                                         <h4>Add Photos</h4>
                                         <div className='image_card_ho_ad2 flex' >
                                                 <div className='image_card_ho_ad_section flex'>
-
+                                                        {/* 
                                                         <img src="images/hosptal1 (1).jpg" alt="" />
                                                         <img src="images/hosptal1 (1).jpg" alt="" />
-                                                        <img src="images/hosptal1 (1).jpg" alt="" />
+                                                        <img src="images/hosptal1 (1).jpg" alt="" /> */}
                                                         <div className='image_card_ho_ad_add_image flex'>
                                                                 <i class="ri-add-line"></i>
                                                         </div>
@@ -265,12 +286,25 @@ export default function Hospitaladminregistration2() {
 
                                         <div>
                                                 <h4>Features</h4>
-                                                <div onClick={() => { openModal() }} className='hospital-second-section-Div flex'><h4>Select Features</h4></div>
+                                                <div onClick={() => { openModal() }} className='hospital-second-section-Div flex'> {HospitalAdminRg?.features?.length > 0 ?
+                                                        <div className='hospital-second-section-Div-Map'>
+                                                                {HospitalAdminRg?.features?.map(ele =>
+                                                                        <p>{ele},&nbsp; </p>
+                                                                )}
+                                                        </div>
+                                                        : <h4>Select Features</h4>}</div>
                                         </div>
 
                                         <div>
                                                 <h4>Specialties</h4>
-                                                <div onClick={() => { openModal({ specialties: true }) }} className='hospital-second-section-Div flex'><h4>Select Specialties</h4></div>
+                                                <div onClick={() => { openModal({ specialties: true }) }} className='hospital-second-section-Div flex'>{HospitalAdminRg?.specialties?.length > 0 ?
+                                                        <div className='hospital-second-section-Div-Map'>
+                                                                {HospitalAdminRg?.specialties?.map(ele =>
+                                                                        <p>{ele},&nbsp; </p>
+                                                                )}
+                                                        </div>
+                                                        : <h4>Select Specialties</h4>}
+                                                </div>
                                         </div>
 
 
@@ -292,7 +326,26 @@ export default function Hospitaladminregistration2() {
 
                                                 <div className='lo-input'>
                                                         <h4>Location</h4>
-                                                        <input type="text" />
+                                                        <select
+                                                                type="text"
+                                                                onChange={inputChanges}
+                                                                value={HospitalAdminRg?.type ? HospitalAdminRg?.type : ''}
+                                                                name="place"
+                                                                className="hospitalRegTypeList"
+                                                        >
+                                                                <option
+                                                                        disabled selected value=''
+                                                                >
+                                                                        Select place
+                                                                </option>
+                                                                {location?.map((types, index) => (
+                                                                        <option style={{ color: "black" }}
+                                                                                key={index}
+                                                                                value={types?.Name}>
+                                                                                {types?.Name}
+                                                                        </option>
+                                                                ))}
+                                                        </select>
                                                 </div>
 
                                         </div>
@@ -372,7 +425,7 @@ export default function Hospitaladminregistration2() {
                                                                                 <label class="form-control flex">
                                                                                         <input value={ele?.name || ''}
                                                                                                 checked={HospitalAdminRg?.specialties?.includes(ele.name)}
-                                                                                                onChange={(e) => { storeArray(e, { features: true }) }} type="checkbox" name="checkbox" />
+                                                                                                onChange={(e) => { storeArray(e, { specialties: true }) }} type="checkbox" name="checkbox" />
                                                                                         <h4 className='select-new'>{ele.name}</h4>
                                                                                 </label>
                                                                         )
@@ -381,13 +434,13 @@ export default function Hospitaladminregistration2() {
 
 
 
-                                                        <button className='Features_card_ho_ad_button'><h4>ok</h4></button>
+                                                        <button onClick={CloseModal} className='Features_card_ho_ad_button'><h4>ok</h4></button>
                                                 </div>
                                         </>
                                 </Modal>
                         </div>
 
-                </div>
+                </div >
 
         )
 }

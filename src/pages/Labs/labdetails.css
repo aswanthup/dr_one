@@ -31,7 +31,7 @@
 ::-webkit-scrollbar {
     width: 0px;
     /* width of vertical scrollbar */
-    height: 10px;
+    height: 0px;
     /* height of horizontal scrollbar */
 }
 
@@ -127,7 +127,6 @@
 
 #style-2::-webkit-scrollbar {
     height: 8px;
-
     background-color: #F5F5F5;
 }
 

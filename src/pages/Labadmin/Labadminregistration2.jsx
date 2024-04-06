@@ -393,15 +393,7 @@ export default function Labadminregistration2() {
               <h4 className="pass-con">Closing Time</h4>
               <DesktopTimePicker className='hospitalAdminPinTimePic' onChange={(e) => { TimeSetting(e, "closing_time") }} />
             </div>
-
-
-
-
           </div>
-
-
-
-
 
 
         </div>
@@ -424,16 +416,6 @@ export default function Labadminregistration2() {
           </div>
 
         </div>
-
-
-
-
-
-
-
-
-
-
 
         <div className='ho_ad_re_button flex'>
           <a onClick={() => { navigate(-1) }} ><h4>Back</h4></a>

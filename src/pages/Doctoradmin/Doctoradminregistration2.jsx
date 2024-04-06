@@ -67,7 +67,6 @@ export default function Doctoradminregistration2() {
         .then((res) => {
           console.log(res.data[0]?.PostOffice);
           // console.log(res.data);
-
           setData({
             ...Data,
             Postoffice: res.data[0]?.PostOffice,
