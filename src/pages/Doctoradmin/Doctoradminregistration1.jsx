@@ -192,31 +192,96 @@ export default function Doctoradminregistration1() {
 
   return (
     <div>
+
+
+
+
+
       <div>
+
+
+
+
         <div className="main-register flex">
+
+
           <div className="register-png-div">
+
+
             <img src="images/Group 72.png" alt="" />
+
+
           </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
           <div className="registration-form">
+
+
+
+
             <div>
               <h1 style={{ color: "white" }}>Doctor Register</h1>
             </div>
+
+
+
+
             <div className="upload-image flex">
               <label for="inputTag">
-                <h4 className="select-file">Upload Photo</h4>
+                <h4 className="select-file flex">Upload Photo</h4>
                 <input onChange={handleFileChange} id="inputTag" type="file" />
               </label>
 
+              <div className="fileNameDisplay-div">
+
               <h4 id="fileNameDisplay"> {Data?.image} </h4>
+
+              </div>
             </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
             {/* <label className="photo-upload">
                <h4>Upload Photo</h4>
                   <input type="file" />
                </div> */}
 
-            <div className="register-input-section flex">
-              <div className="register-left-section">
+            <div className="register-input-section">
+
+
+
+
+
+              <div className="register-left-section flex">
+
+
+
                 <div>
                   <h4>Name</h4>
                   <input
@@ -235,7 +300,12 @@ export default function Doctoradminregistration1() {
                     onChange={handleChange}
                   />
                 </div>
-                <div>
+                
+              </div>
+
+              <div className="register-right-section flex">
+
+              <div>
                   <h4> Phone Number</h4>
                   <input
                     type="text"
@@ -244,14 +314,20 @@ export default function Doctoradminregistration1() {
                     value={Data?.phone}
                     onChange={handleChange}
                   />
-
+<div className="main-waring-section">
                   {validationErrors.phone && (
+
+
+
                     <p className="register-number-warning">{validationErrors.phone}</p>
+
+
+
                   )}
                   <p className="register-number-warning">Your number will be kept confidential and not shared.</p>
-                </div>
-              </div>
-              <div className="register-right-section">
+                  </div>   </div>
+
+
                 <div style={{ position: "relative" }}>
                   <h4>Email</h4>
                   <input
@@ -265,12 +341,22 @@ export default function Doctoradminregistration1() {
                     <p className="register-number-warning">{validationErrors.email}</p>
                   )}
                 </div>
+
+
+              </div>
+
+
+
+
+
+              <div className="register-right-section flex">
+               
                 <div style={{ position: "relative" }}>
                   <h4>Password</h4>
                   <div
                     style={{
                       position: "relative",
-                      height: "3vw",
+                    
                     }}
                     className="pass-con-Inp"
                   >
@@ -306,9 +392,14 @@ export default function Doctoradminregistration1() {
                     </IconButton>
                   </div>
                   {validationErrors.password && (
+
+<div className="main-waring-section main-waring-section-pass">
                     <p className="register-number-warning">
                       {validationErrors.password}
                     </p>
+
+</div>
+
                   )}
                 </div>
                 <div style={{ position: "relative" }}>
@@ -316,7 +407,7 @@ export default function Doctoradminregistration1() {
                   <div
                     style={{
                       position: "relative",
-                      height: "3vw",
+                    
                     }}
                     className="pass-con-Inp"
                   >
@@ -350,15 +441,36 @@ export default function Doctoradminregistration1() {
                     >
                       {ShowRePassword ? <VisibilityOff /> : <Visibility />}
                     </IconButton>
-                  </div>
+                  </div><div className="main-waring-section">
                   {validationErrors.confirmPassword && (
+
+
                     <p className="register-number-warning">
                       {validationErrors.confirmPassword}
                     </p>
+
+
+
                   )}
-                </div>
+                </div></div>
               </div>
+
+
+
+
+
+
+
+
+
             </div>
+
+
+
+
+
+
+
             <div className="register-button-section flex">
               <a
                 className="flex"
@@ -368,7 +480,30 @@ export default function Doctoradminregistration1() {
                 <h4>Next</h4>
               </a>
             </div>
+
+
+
+
+
+
           </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
           <div className="register-png-div2 register-png-div flex">
             <img src="images/Group 73.png" alt="" />
           </div>

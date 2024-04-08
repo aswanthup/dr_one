@@ -210,7 +210,7 @@ export default function Hospitaladminregistration1() {
                   <div
                     style={{
                       position: "relative",
-                      height: "3vw",
+                     
                     }}
                     className="pass-con-Inp"
                   >
@@ -259,11 +259,12 @@ export default function Hospitaladminregistration1() {
                   <div
                     style={{
                       position: "relative",
-                      height: "3vw",
+                     
                     }}
                     className="pass-con-Inp"
                   >
                     <input
+                  
                       value={HospitalAdminRg.repassword} name="repassword" onChange={inputOnchanges}
                       style={{
                         margin: 0,

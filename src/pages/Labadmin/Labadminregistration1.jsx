@@ -211,7 +211,7 @@ export default function Labadminregistration1() {
                   <div
                     style={{
                       position: "relative",
-                      height: "3vw",
+                    
                     }}
                     className="pass-con-Inp"
                   >
@@ -257,7 +257,7 @@ export default function Labadminregistration1() {
                   <div
                     style={{
                       position: "relative",
-                      height: "3vw",
+                    
                     }}
                     className="pass-con-Inp"
                   >

@@ -8,7 +8,7 @@
 
 .doctoradminregistration h1 {
   color: white;
-  margin: 40px 00px;
+  /* margin: 40px 0px; */
 }
 
 .doctoradminregistration_input1,
@@ -159,9 +159,7 @@
   margin-top: 1vw;
 }
 
-.desktop {
-  display: block;
-}
+
 
 .mobile {
   display: none;
