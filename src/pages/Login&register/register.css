@@ -147,11 +147,11 @@
 .select-file{
     background-color:white;
     color:var(--color-primary);
-    width:16vw;
+    
     height:3vw;
     border-radius:.4vw;
     padding-left:1vw;
-  
+    padding-right:1vw;
    
    
     align-items: center;
