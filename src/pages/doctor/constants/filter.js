@@ -3,7 +3,6 @@ export const speacializationNames=[
     "General medicine",
     "Cardiology",
     "Neurology",
-    "Opthalmology",
     "Gynaecology",
     "Orthopedic",
     "Pulmanology",

@@ -7,7 +7,7 @@ import { MyContext } from "../../contexts/Contexts";
 import { IconButton } from "@mui/material";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
-import "../Login&register/register.css"
+import "../Login&register/register.css";
 export default function Doctoradminregistration1() {
   const navigate = useNavigate();
   const [fileName, setFileName] = useState("No file selected");
@@ -37,44 +37,19 @@ export default function Doctoradminregistration1() {
       setData("No file selected");
     }
   };
-  //   const handleChange = (e) => {
-  //     const { name, value } = e.target;
-  //     setData({
-  //         ...Data,
-  //         [e.target.name]: e.target.value
-  //     });
-
-  //     setValidationErrors({ ...validationErrors, [e.target.name]: '' });
-
-  //     if (name === 'password' && value.length < 6) {
-  //       setValidationErrors({ ...validationErrors, [name]: 'Password must be at least 6 characters long' });
-  //     }
-
-  //     // Validate confirm password
-  //     if (name === 'confirmPassword' && value !== Data.password) {
-  //       setValidationErrors({ ...validationErrors, [name]: 'Passwords do not match' });
-  //     }
-
-  //     if (name === 'email') {
-  //       setValidationErrors(value);
-  //       if (!validateEmail(value)) {
-  //         setValidationErrors('Please enter a valid email address.');
-  //       } else {
-  //         setValidationErrors('');
-  //       }
-  //     }
-
-  // };
-  // const validateEmail = (email) => {
-  //   const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  //   return regex.test(email);
-  // };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+    if ((name === "phone") & (value.toString().length > 10)) {
+      setData({
+        ...Data,
+        [name]: Data.phone,
+      });
+      return;
+    }
     setData({
       ...Data,
-      [e.target.name]: e.target.value,
+      [name]: value,
     });
 
     setValidationErrors({ ...validationErrors, [e.target.name]: "" });
@@ -83,8 +58,21 @@ export default function Doctoradminregistration1() {
       if (!validPassword(value)) {
         setValidationErrors((prevErrors) => ({
           ...prevErrors,
-          [name]: "Password must contain at least 1 uppercase letter, 1 number, 1 special character (@.#$!%*?&), and be at least 6 characters long",
+          [name]:
+            "Password must contain at least 1 uppercase letter, 1 number, 1 special character (@.#$!%*?&), and be at least 6 characters long",
         }));
+      } else if (Data.confirmPassword) {
+        if (value !== Data.confirmPassword) {
+          setValidationErrors((prevErrors) => ({
+            ...prevErrors,
+            confirmPassword: "Passwords do not match",
+          }));
+        } else {
+          setValidationErrors((prevErrors) => ({
+            ...prevErrors,
+            confirmPassword: "",
+          }));
+        }
       } else {
         setValidationErrors((prevErrors) => ({
           ...prevErrors,
@@ -116,15 +104,10 @@ export default function Doctoradminregistration1() {
     }
 
     if (name === "phone") {
-      if (!/^\d+$/.test(value)) {
+      if (/^\d{10}$/.test(value) === false) {
         setValidationErrors((prevErrors) => ({
           ...prevErrors,
-          [name]: "Please enter only digits.",
-        }));
-      } else if (value.length !== 10) {
-        setValidationErrors((prevErrors) => ({
-          ...prevErrors,
-          [name]: "Phone number must be exactly 10 digits.",
+          [name]: "Please enter a valid 10 digit number",
         }));
       } else {
         setValidationErrors((prevErrors) => ({
@@ -160,9 +143,9 @@ export default function Doctoradminregistration1() {
       validationErrors.phone;
 
     if (isInValid) {
-      toast.info("All fields required",);
+      toast.info("All fields required");
     } else if (isValidationError) {
-      toast.info("Check mobile email and password",);
+      toast.info("Check mobile email and password");
     } else {
       navigate("/doctoradminregistration2", { state: Data });
     }
@@ -178,82 +161,36 @@ export default function Doctoradminregistration1() {
     event.preventDefault();
   };
 
-
   console.log(Data);
 
   return (
     <div>
-
-
-
-
-
       <div>
-
-
-
-
         <div className="main-register flex">
-
-
           <div className="register-png-div">
-
-
             <img src="images/Group 72.png" alt="" />
-
-
           </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
           <div className="registration-form">
-
-            <div className="do-title" >
+            <div className="do-title">
               <h1 style={{ color: "white" }}>Doctor Register</h1>
             </div>
-
-
-
 
             <div className="upload-image flex">
               <label for="inputTag">
                 <h4 className="select-file flex">Upload Photo</h4>
-                <input onChange={handleFileChange} id="inputTag" type="file" />
+                <input
+                  onChange={handleFileChange}
+                  id="inputTag"
+                  type="file"
+                  accept="image/*"
+                />
               </label>
 
               <div className="fileNameDisplay-div">
-
-                <h4 id="fileNameDisplay"> {Data?.image} </h4>
-
+                <h6 id="fileNameDisplay"> {Data?.image} </h6>
               </div>
             </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
             {/* <label className="photo-upload">
                <h4>Upload Photo</h4>
@@ -261,17 +198,9 @@ export default function Doctoradminregistration1() {
                </div> */}
 
             <div className="register-input-section">
-
-
-
-
-
               <div className="register-left-section flex">
-
-
-
                 <div>
-                  <h4>Name</h4>
+                  <h4>First Name</h4>
                   <input
                     type="text"
                     name="name"
@@ -290,11 +219,9 @@ export default function Doctoradminregistration1() {
                     onChange={handleChange}
                   />
                 </div>
-
               </div>
 
               <div className="register-right-section flex">
-
                 <div>
                   <h4> Phone Number</h4>
                   <input
@@ -306,17 +233,15 @@ export default function Doctoradminregistration1() {
                   />
                   <div className="main-waring-section">
                     {validationErrors.phone && (
-
-
-
-                      <p className="register-number-warning">{validationErrors.phone}</p>
-
-
-
+                      <p className="register-number-warning">
+                        {validationErrors.phone}
+                      </p>
                     )}
-                    <p className="register-number-warning">Your number will be kept confidential and not shared.</p>
-                  </div>   </div>
-
+                    <p className="register-number-warning">
+                      Your number will be kept confidential and not shared.
+                    </p>
+                  </div>{" "}
+                </div>
 
                 <div style={{ position: "relative" }}>
                   <h4>Email</h4>
@@ -329,31 +254,27 @@ export default function Doctoradminregistration1() {
                     pattern="^[^\s@]+@[^\s@]+\.[^\s@]+$"
                   />
                   {validationErrors.email && (
-                    <p className="register-number-warning">{validationErrors.email}</p>
+                    <p className="register-number-warning">
+                      {validationErrors.email}
+                    </p>
                   )}
                 </div>
-
-
               </div>
 
-
-
-
-
               <div className="register-right-section flex">
-
                 <div style={{ position: "relative" }}>
                   <h4>Password</h4>
                   <div
                     style={{
                       position: "relative",
-
                     }}
                     className="pass-con-Inp"
                   >
                     <input
                       maxLength={50}
-                      value={Data.password} name="password" onChange={handleChange}
+                      value={Data.password}
+                      name="password"
+                      onChange={handleChange}
                       style={{
                         margin: 0,
                         position: "absolute",
@@ -369,6 +290,7 @@ export default function Doctoradminregistration1() {
                     />
 
                     <IconButton
+                      tabIndex={-1}
                       sx={{
                         position: "absolute",
                         top: "50%",
@@ -384,14 +306,11 @@ export default function Doctoradminregistration1() {
                     </IconButton>
                   </div>
                   {validationErrors.password && (
-
                     <div className="main-waring-section main-waring-section-pass">
                       <p className="register-number-warning">
                         {validationErrors.password}
                       </p>
-
                     </div>
-
                   )}
                 </div>
                 <div style={{ position: "relative" }}>
@@ -399,13 +318,14 @@ export default function Doctoradminregistration1() {
                   <div
                     style={{
                       position: "relative",
-
                     }}
                     className="pass-con-Inp"
                   >
                     <input
                       maxLength={50}
-                      value={Data?.confirmPassword} name="confirmPassword" onChange={handleChange}
+                      value={Data?.confirmPassword}
+                      name="confirmPassword"
+                      onChange={handleChange}
                       style={{
                         margin: 0,
                         position: "absolute",
@@ -421,6 +341,7 @@ export default function Doctoradminregistration1() {
                     />
 
                     <IconButton
+                      tabIndex={-1}
                       sx={{
                         position: "absolute",
                         top: "50%",
@@ -434,49 +355,29 @@ export default function Doctoradminregistration1() {
                     >
                       {ShowRePassword ? <VisibilityOff /> : <Visibility />}
                     </IconButton>
-                  </div><div className="main-waring-section">
+                  </div>
+                  <div className="main-waring-section">
                     {validationErrors.confirmPassword && (
-
-
                       <p className="register-number-warning">
                         {validationErrors.confirmPassword}
                       </p>
-
-
-
                     )}
-                  </div></div>
+                  </div>
+                </div>
               </div>
-
-
-
-
-
-
-
-
-
             </div>
 
-
-
-
-
-
-
             <div className="register-button-section flex">
-              <a
+              <button
+                tabIndex={0}
                 className="flex"
                 onClick={handleClick}
                 style={{ cursor: "pointer" }}
               >
-                <h4>Next</h4>
-              </a>
+                Next
+              </button>
             </div>
-
-
           </div>
-
 
           <div className="register-png-div2 register-png-div flex">
             <img src="images/Group 73.png" alt="" />
@@ -484,6 +385,6 @@ export default function Doctoradminregistration1() {
         </div>
       </div>
       <ToastContainer />
-    </div >
+    </div>
   );
 }

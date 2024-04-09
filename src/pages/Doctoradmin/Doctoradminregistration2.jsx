@@ -4,12 +4,10 @@ import { useState, useEffect } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
-import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { MyContext } from "../../contexts/Contexts";
 import { speacializationNames } from "../../pages/doctor/constants/filter.js";
 import { port } from "../../config.js";
-import { Backdrop, CircularProgress } from "@mui/material";
 import { Loader } from "../../components/Loader/Loader.jsx";
 
 export default function Doctoradminregistration2() {
@@ -19,6 +17,20 @@ export default function Doctoradminregistration2() {
   const [postalError, setPostalError] = useState("");
   const [addressdata, setAddressdata] = useState({});
   const [loader, setloader] = useState(false)
+
+  //if  any of these fields empty navigate to home
+  useEffect(() => {
+    const names = ["confirmPassword",
+      "email",
+      "name",
+      "password", "phone",
+      "secondname"]
+    if (names.some((ele) => !Data[ele])) {
+      navigate('/')
+    }
+
+  }, [])
+
   const handleChange = (e) => {
     setData({
       ...Data,
@@ -48,13 +60,13 @@ export default function Doctoradminregistration2() {
     axios.post(`${port}/doctor/dr_registration`, mergedData)
       .then((res) => {
         if (res.data.success === true) {
-          console.log("Registration successful");
           toast.success(res.data.message);
-          navigate("/")
           setloader(false);
-          window.location.reload();
+          setTimeout(() => {
+            setData({})
+            navigate("/")
+          }, 2500);
         } else {
-          console.log("Registration failed");
           toast.error(res.data.message);
           setloader(false);
         }
@@ -69,48 +81,64 @@ export default function Doctoradminregistration2() {
   }
   const updatePosts = (pinCode) => {
     if (pinCode?.length === 6) {
-      console.log(6);
+      setData({
+        ...Data,
+        pincode: pinCode,
+        selectedPlace: ""
+      });
       axios
         .get(`https://api.postalpincode.in/pincode/${pinCode}`)
         .then((res) => {
-          console.log(res.data[0]?.PostOffice);
+          const { PostOffice } = res?.data[0]
+
           setData({
             ...Data,
-            Postoffice: res.data[0]?.PostOffice,
+            Postoffice: PostOffice,
             pincode: pinCode,
+            selectedPlace: ""
           });
-          if (res?.data[0]?.PostOffice === null) {
-            console.log("noo dataaaa");
-            toast.error("Invalid pincode");
+          if (PostOffice === null) {
+            setPostalError("Invalid pincode")
           } else {
+            setPostalError("")
+            const postData = PostOffice[0]
             setAddressdata({
               ...addressdata,
-              district: res.data[0]?.PostOffice[0].District,
-              state: res.data[0]?.PostOffice[0].State,
-              Name: res.data[0]?.PostOffice[0].Name,
-              Block: res.data[0]?.PostOffice[0].Block,
+              district: postData.District,
+              state: postData.State,
+              Name: postData.Name,
+              Block: postData.Block,
               pincode: parseInt(Data?.pincode),
             });
           }
         });
-    } else {
-      console.log("pincode should be 6 digits");
     }
   };
 
   const handlePostChange = (event) => {
     const { value } = event.target;
-    setData({ ...Data, pincode: value });
-    if (value.length === 6) {
+
+    if (value.length > 6) {
+      return;
+    }
+
+    if (!/^\d{6}$/.test(value)) {
+      setData(prevData => ({
+        ...prevData,
+        pincode: value,
+        Postoffice: [],
+        selectedPlace: ""
+      }));
+
+      if (value === "") {
+        setPostalError("");
+      } else {
+        setPostalError("Please enter a 6-digit pincode");
+      }
+    } else {
       updatePosts(value);
     }
-    if (!/^\d+$/.test(value)) {
-      setPostalError("Please enter only digits.");
-    } else if (value.length !== 6) {
-      setPostalError("Pincode must be exactly 6 digits.");
-    } else {
-      setPostalError("");
-    }
+
   };
 
   const handleClose = () => {
@@ -138,6 +166,7 @@ export default function Doctoradminregistration2() {
             <div>
               <h4>Qualification</h4>
               <input
+                maxLength={50}
                 type="text"
                 value={Data?.qualification}
                 onChange={handleChange}
@@ -223,7 +252,8 @@ export default function Doctoradminregistration2() {
               <h4>Practice started year</h4>
               <input
                 type="number"
-                maxLength={4}
+                placeholder="E.g. 2013"
+                max={new Date().getFullYear()}
                 name="experience"
                 value={Data?.experience}
                 onChange={handleChange}
@@ -331,19 +361,25 @@ export default function Doctoradminregistration2() {
                   {" "}
                 </textarea>
                 <div className="doctoradminregistration_input6 flex">
-                  <input
-                    type="text"
-                    value={Data?.pincode ?? ""}
-                    placeholder="Pincode"
-                    maxLength={6}
-                    name="pincode"
-                    onChange={handlePostChange}
-                  />
+                  <div style={{ position: "relative" }} >
+
+                    <input
+                      type="number"
+                      value={Data?.pincode ?? ""}
+                      placeholder="Pincode"
+                      maxLength={6}
+                      onChange={handlePostChange}
+                    />
+                    <p style={{ position: "absolute", fontSize: "12px", color: "white" }}>
+                      {postalError}
+                    </p>
+                  </div>
 
                   <select
                     type="text"
+                    disabled={Data?.Postoffice?.length > 0 ? false : true}
                     onChange={handleChange}
-                    value={Data.selectedPlace}
+                    value={Data.selectedPlace ?? ""}
                     name="selectedPlace"
                     className="doctoradminregistration_gender"
                   >
@@ -588,19 +624,25 @@ export default function Doctoradminregistration2() {
                 </textarea>
                 <div className="doctoradminregistration_input6 ">
                   <div style={{ display: "flex", gap: "20px" }}>
-                    <input
-                      type="number"
-                      value={Data?.pincode ?? ""}
-                      placeholder="Pincode"
-                      style={{ width: "40%" }}
-                      maxLength={6}
-                      onChange={handlePostChange}
-                    />
+                    <div style={{ position: "relative" }}>
+
+                      <input
+                        type="number"
+                        value={Data?.pincode ?? ""}
+                        placeholder="Pincode"
+                        style={{ width: "100%" }}
+                        onChange={handlePostChange}
+                      />
+                      <p style={{ position: "absolute", color: "white", fontSize: "10px" }}>
+                        {postalError}
+                      </p>
+                    </div>
 
                     <select
                       type="text"
                       onChange={handleChange}
-                      value={Data.selectedPlace}
+                      disabled={Data?.Postoffice?.length > 0 ? false : true}
+                      value={Data.selectedPlace ?? ""}
                       style={{ width: "60%" }}
                       name="selectedPlace"
                       className="doctoradminregistration_gender"
