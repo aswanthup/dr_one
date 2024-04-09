@@ -11,12 +11,15 @@ import AddIcon from '@mui/icons-material/Add';
 import 'react-toastify/dist/ReactToastify.css';
 import dayjs from 'dayjs';
 import DeleteIcon from '@mui/icons-material/Delete';
+import RemoveIcon from '@mui/icons-material/Remove';
 import { port } from '../../config';
+import { Loader } from '../../components/Loader/Loader';
 export default function Doctoradmin() {
   const [open, setOpen] = React.useState({});
   const [FormValues, setFormValues] = useState({})
   const [EditValues, setEditValues] = useState({})
   const [deletePopup, setdeletePopUp] = useState(false)
+  const [loading, setloading] = useState(false)
   const [Hospitals, setHospitals] = useState([])
   const [TimePickers, setTimePickers] = useState([
     { day: "Sunday", id: 1, availableTimes: [{ startTime: '', endTime: '' }] },
@@ -32,10 +35,13 @@ export default function Doctoradmin() {
     if (edit?.edit) {
       setOpen({ edit: true });
       changeValues(edit?.id)
+      setFormValues('')
     } else {
-      setOpen({ another: true });
+      setOpen({ another: true }); 
+      setFormValues('')
     }
   }
+  console.log("FormValues>>>>", FormValues)
   const changeValues = (id) => {
     const findData = currentAvailability.find(ele => ele?.hospital_id === id)
     setEditValues(findData)
@@ -57,13 +63,12 @@ export default function Doctoradmin() {
     setTimePickers(tempData);
   };
   const edittime = (e, day) => {
-    const values = dayjs(e).$d; // Convert Day.js object to JavaScript Date object
+    const values = dayjs(e)?.$d; // Convert Day.js object to JavaScript Date object
     const name = day?.name;
     const mainind = day?.mainInd;
     const index = day?.index;
     let tempData = EditValues?.days_timing
     tempData[mainind].availableTimes[index] = { ...tempData[mainind].availableTimes[index], [name]: values }
-    console.log("tempData>>>", tempData)
     setEditValues({ ...EditValues, days_timing: tempData });
   };
 
@@ -107,6 +112,7 @@ export default function Doctoradmin() {
       console.log(res)
     }).catch((err) => {
       console.log(err)
+      toast.info(err?.response?.data?.message)
     })
 
   }
@@ -121,8 +127,19 @@ export default function Doctoradmin() {
   }, [])
 
 
-  const incrementBox = (id) => {
+  const DecrementInput = (MainInd, SubInd) => {
+    const tempPicker = [...TimePickers]
+    tempPicker[MainInd].availableTimes.splice(SubInd, 1)
+    setTimePickers(tempPicker)
+  }
+  const DecrementInputEdit = (MainInd, SubInd) => {
+    const tempPicker = [...EditValues?.days_timing]
+    tempPicker[MainInd].availableTimes.splice(SubInd, 1)
+    setTimePickers(tempPicker)
+  }
 
+  console.log("EditValues>>>>", EditValues)
+  const incrementBox = (id) => {
     const find = TimePickers?.filter(ele => ele.id === id)
     const index = TimePickers?.findIndex(ele => ele.id === id)
     if (find.length > 0 && TimePickers[index].availableTimes.length < 4) {
@@ -141,12 +158,13 @@ export default function Doctoradmin() {
       setEditValues({ ...EditValues, days_timing: temp })
     }
   }
-  console.log("TimePickers>>>>", TimePickers)
   const SaveData = () => {
+    console.log("FormValues?.hospital_id>>>>", FormValues?.hospital_id, TimePickers)
     const data = {
       hospital_id: FormValues?.hospital_id,
       days: TimePickers
     }
+
     const checkingValues = TimePickers?.filter(Values => {
       const CheckStartPoint = Values?.availableTimes?.filter(availableTimes =>
         availableTimes?.startTime
@@ -154,24 +172,29 @@ export default function Doctoradmin() {
       const checkEndPoint = Values?.availableTimes?.filter(ele => ele?.endTime);
       return checkEndPoint?.length === CheckStartPoint?.length
     })
-    console.log("checkingValues>>>>", checkingValues)
+    console.log("data>>>>", data)
     if (!FormValues?.hospital_id) {
       toastify({ msg: "Hospital not default; residential auto-added." })
     }
     if (checkingValues?.length === 7) {
+      setloading(true)
       axios.post(`${port}/hospital/consultation_details`, data).then((res) => {
         console.log(res)
         if (res?.data?.success) {
           toastify({ msg: res?.data?.message, success: true })
           handleClose()
           getitngAllhospitals()
+          setloading(false)
         }
       }).catch((err) => {
         toastify({ msg: err?.response?.data?.message })
+        setloading(true)
       })
     } else {
       toastify({ msg: "Please verify either the start time or the end time" })
+      setloading(false)
     }
+
   }
 
   const EditData = () => {
@@ -184,17 +207,21 @@ export default function Doctoradmin() {
     })
     console.log("checkingValues>>>", checkingValues)
     if (checkingValues.length === 7) {
+      setloading(true)
       axios.post(`${port}/hospital/edit_consultation`, EditValues).then((res) => {
         if (res?.data?.success) {
           toastify({ msg: res?.data?.message, success: true })
           handleClose()
           getitngAllhospitals()
+          setloading(false)
         }
       }).catch((err) => {
         toastify({ msg: err?.response?.data?.message })
+        setloading(false)
       })
     } else {
       toastify({ msg: "Please verify either the start time or the end time" })
+      setloading(false)
     }
 
   }
@@ -207,8 +234,10 @@ export default function Doctoradmin() {
   }
   const ConfirmDelete = () => {
     const data = {
-      id: deletePopup?.id
+      id: deletePopup?.id,
+      doctor_id: 1
     }
+    setloading(true)
     axios.post(`${port}/hospital/delete_availability`, data).then((res) => {
       console.log("res>>>", res)
       if (res?.data?.success) {
@@ -217,11 +246,17 @@ export default function Doctoradmin() {
         setcurrentAvailability(allAvailblity)
         DeleteTimeConfirm({ cls: true })
         toastify({ success: true, msg: res?.data?.message })
+        setloading(false)
       }
+    }).catch((err) => {
+      toast.info(err.response.data.message)
+      setloading(false)
     })
   }
   return (
     <div>
+      {
+        loading ? <Loader /> : ""}
       <div className="hospitaladmin-main flex">
         <ToastContainer />
         <Rightnavbar />
@@ -250,7 +285,7 @@ export default function Doctoradmin() {
               <h1 className='color-blue'>Account</h1>
             </div>
             <div className="hospitaladmin_cards flex">
-              <a href='' className="hospitaladmin_card hospitaladmin_card1 flex">
+              <a className="hospitaladmin_card hospitaladmin_card1 flex">
                 <div>
                   <div className='hospitaladmin_number hospitaladmin_number1 flex' ><h2>24</h2></div>
                 </div>
@@ -258,7 +293,7 @@ export default function Doctoradmin() {
                   <h4>Enquiries</h4>
                 </div>
               </a>
-              <a href='' className="hospitaladmin_card hospitaladmin_card2 flex">
+              <a className="hospitaladmin_card hospitaladmin_card2 flex">
                 <div>
                   <div className='hospitaladmin_number hospitaladmin_number2 flex' ><h2>24</h2></div>
                 </div>
@@ -266,7 +301,7 @@ export default function Doctoradmin() {
                   <h4>Pending</h4>
                 </div>
               </a>
-              <a href='' className="hospitaladmin_card hospitaladmin_card3 flex">
+              <a className="hospitaladmin_card hospitaladmin_card3 flex">
                 <div>
                   <div className='hospitaladmin_number hospitaladmin_number3 flex' ><h2>24</h2></div>
                 </div>
@@ -360,8 +395,9 @@ export default function Doctoradmin() {
                               {!ind > 0 ? <button onClick={() => { incrementBox(ele.id) }} className='viewdataTimeAddEx'>
                                 <AddIcon id="viewdataTimeAddExIcon" />
                               </button> :
-                                <div className='viewdataTimeAddGap'>
-                                </div>
+                                <button onClick={() => { DecrementInput(index, ind) }} className='viewdataTimeRemo'>
+                                  <RemoveIcon id="viewdataTimeAddREmove" />
+                                </button>
                               }
                             </div>
                           )}
@@ -416,8 +452,9 @@ export default function Doctoradmin() {
                               {!ind > 0 ? <button onClick={() => { EditIncrement(ele.id) }} className='viewdataTimeAddEx'>
                                 <AddIcon id="viewdataTimeAddExIcon" />
                               </button> :
-                                <div className='viewdataTimeAddGap'>
-                                </div>
+                                <button onClick={() => { DecrementInputEdit(index, ind) }} className='viewdataTimeRemo'>
+                                  <RemoveIcon id="viewdataTimeAddREmove" />
+                                </button>
                               }
                             </div>
                           )}</>
@@ -437,7 +474,6 @@ export default function Doctoradmin() {
 
 
       </div >
-
     </div >
   )
 }

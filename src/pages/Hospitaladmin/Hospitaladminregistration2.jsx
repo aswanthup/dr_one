@@ -12,7 +12,6 @@ export default function Hospitaladminregistration2() {
 
         const { HospitalAdminRg, setHospitalAdminRg } = useContext(MyContext)
         const [Errors, setErrors] = useState({})
-        const [location, setlocation] = useState([])
         const [ModalOpen, setModalOpen] = useState({
                 features: false,
                 specialties: false
@@ -78,16 +77,14 @@ export default function Hospitaladminregistration2() {
                 }
 
         }
-
         const updatePosts = (pinCode) => {
-                if (pinCode.length === 6) {
-                        console.log(6);
-                        axios
-                                .get(`https://api.postalpincode.in/pincode/${pinCode}`)
+                if (pinCode?.length === 6) {
+                        axios.get(`https://api.postalpincode.in/pincode/${pinCode}`)
                                 .then((res) => {
-                                        console.log("res.data[0]?.PostOffice", res.data[0]?.PostOffice);
+                                        console.log("res.data[0]?.PostOffice", res?.data[0]?.PostOffice);
                                         if (res.data[0]?.PostOffice?.length > 0) {
-                                                setlocation(res.data[0]?.PostOffice)
+                                                const location = res.data[0]?.PostOffice
+                                                setHospitalAdminRg({ ...HospitalAdminRg, pincode: pinCode, findlo: location })
                                         } else {
                                                 toast.info("Pincode not found")
                                         }
@@ -98,20 +95,20 @@ export default function Hospitaladminregistration2() {
         };
         const inputChanges = (e) => {
                 const { name, value } = e.target
-
-                if (name === "pincode") {
-                        if (value.length === 6) {
-                                updatePosts(value);
-                        }
-                }
-
                 setHospitalAdminRg({ ...HospitalAdminRg, [name]: value })
+
         }
         useEffect(() => {
                 CheckValidation()
         }, [HospitalAdminRg.pincode])
 
-
+        const handlePostChange = (event) => {
+                const { value } = event.target;
+                setHospitalAdminRg({ ...HospitalAdminRg, pincode: value });
+                if (value.length === 6) {
+                        updatePosts(value);
+                }
+        };
         const storeArray = (e, which) => {
                 const value = e.target.value;
                 const isChecked = e.target.checked;
@@ -142,7 +139,7 @@ export default function Hospitaladminregistration2() {
                         axios.post(`${port}/hospital/registration`, HospitalAdminRg).then((res) => {
                                 if (res?.data?.success) {
                                         toastifyFun(res?.data?.message, { success: true })
-                                        window.location.reload()
+                                        navigate("/")
                                         setloader(false)
                                 }
                         }).catch((err) => {
@@ -182,7 +179,7 @@ export default function Hospitaladminregistration2() {
 
                 }
         }
-        const CloseModal = (data) => {
+        const CloseModal = () => {
                 setModalOpen({ specialties: false, features: false })
                 setModalOpen()
         }
@@ -270,7 +267,7 @@ export default function Hospitaladminregistration2() {
                                 <div className='hospital-second-section flex'>
                                         <div>
                                                 <h4>License Number</h4>
-                                                <input value={HospitalAdminRg?.lisence_no || ''} onChange={inputChanges} type="number" name='lisence_no' />
+                                                <input value={HospitalAdminRg?.lisence_no || ''} onChange={inputChanges} type="text" maxLength={30} name='lisence_no' />
                                         </div>
 
                                         <div>
@@ -278,7 +275,7 @@ export default function Hospitaladminregistration2() {
                                                 <div onClick={() => { openModal() }} className='hospital-second-section-Div flex'> {HospitalAdminRg?.features?.length > 0 ?
                                                         <div className='hospital-second-section-Div-Map'>
                                                                 {HospitalAdminRg?.features?.map(ele =>
-                                                                        <p>{ele},&nbsp; </p>
+                                                                        <h4>{ele},&nbsp; </h4>
                                                                 )}
                                                         </div>
                                                         : <h4>Select Features</h4>}</div>
@@ -289,7 +286,7 @@ export default function Hospitaladminregistration2() {
                                                 <div onClick={() => { openModal({ specialties: true }) }} className='hospital-second-section-Div flex'>{HospitalAdminRg?.specialties?.length > 0 ?
                                                         <div className='hospital-second-section-Div-Map'>
                                                                 {HospitalAdminRg?.specialties?.map(ele =>
-                                                                        <p>{ele},&nbsp; </p>
+                                                                        <h4>{ele},&nbsp; </h4>
                                                                 )}
                                                         </div>
                                                         : <h4>Select Specialties</h4>}
@@ -303,7 +300,7 @@ export default function Hospitaladminregistration2() {
                                         <div className='flex pin-lo'>
                                                 <div className='pin-input' >
                                                         <h4>Pincode</h4>
-                                                        <input value={HospitalAdminRg?.pincode || ''} onChange={inputChanges} type="number" maxLength={6} name="pincode" />
+                                                        <input value={HospitalAdminRg?.pincode} onChange={handlePostChange} type="number" name="pincode" />
                                                         <div className="main-waring-section main-waring-section4 flex ">
                                                                 <p className="register-number-warning">{Errors?.pincode}</p>
                                                         </div>
@@ -322,7 +319,7 @@ export default function Hospitaladminregistration2() {
                                                                 >
                                                                         Select place
                                                                 </option>
-                                                                {location?.map((types, index) => (
+                                                                {HospitalAdminRg?.findlo?.map((types, index) => (
                                                                         <option style={{ color: "black" }}
                                                                                 key={index}
                                                                                 value={types?.Name}>

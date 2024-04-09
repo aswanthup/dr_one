@@ -121,14 +121,14 @@ export default function Hospitaladminregistration1() {
           </div>
           <div className="registration-form">
             <div>
-              <h1 style={{ color: "white" }}>Hospital Register</h1>
+              <h1 style={{ color: "white" }}>Hospital Registration</h1>
             </div>
             <div className="flex hospital-top">
               <div className="upload-image">
 
                 <h4 className="pass-con">Profile Photo</h4>
                 <label for="inputTag">
-                  <h4 className="select-file flex">Upload Photo</h4>
+                  <h4 className="select-file select-file2 flex">Upload Photo</h4>
                   <input onChange={handleFileChange} id="inputTag" type="file" />
                 </label>
 
@@ -140,14 +140,9 @@ export default function Hospitaladminregistration1() {
                   <input type="file" />
                </div> */}
 
-
-
-
-
-
               <div className="hospitalname_input">
                 <h4 className="pass-con">Hospital Name</h4>
-                <input value={HospitalAdminRg?.name} onChange={inputOnchanges} name="name" type="text" />
+                <input maxLength={100} value={HospitalAdminRg?.name} onChange={inputOnchanges} name="name" type="text" />
 
               </div>
             </div>
@@ -186,7 +181,7 @@ export default function Hospitaladminregistration1() {
 
                 <div>
                   <h4 className="pass-con">Email</h4>
-                  <input value={HospitalAdminRg?.email} pattern="^[^\s@]+@[^\s@]+\.[^\s@]+$" name="email" onChange={inputOnchanges} type="email" />
+                  <input maxLength={50} value={HospitalAdminRg?.email} pattern="^[^\s@]+@[^\s@]+\.[^\s@]+$" name="email" onChange={inputOnchanges} type="email" />
 
                   <div className="main-waring-section">
                     <p className="register-number-warning">{Errors?.email}</p>
@@ -210,11 +205,12 @@ export default function Hospitaladminregistration1() {
                   <div
                     style={{
                       position: "relative",
-                     
+
                     }}
                     className="pass-con-Inp"
                   >
                     <input
+                      maxLength={50}
                       value={HospitalAdminRg.password} name="password" onChange={inputOnchanges}
                       style={{
                         margin: 0,
@@ -259,12 +255,12 @@ export default function Hospitaladminregistration1() {
                   <div
                     style={{
                       position: "relative",
-                     
+
                     }}
                     className="pass-con-Inp"
                   >
                     <input
-                  
+                      maxLength={50}
                       value={HospitalAdminRg.repassword} name="repassword" onChange={inputOnchanges}
                       style={{
                         margin: 0,
@@ -277,7 +273,7 @@ export default function Hospitaladminregistration1() {
                         appearance: "none",
                         WebkitAppearance: "none",
                       }}
-                      type={showPassword ? "text" : "password"}
+                      type={showRePassword ? "text" : "password"}
                     />
 
                     <IconButton

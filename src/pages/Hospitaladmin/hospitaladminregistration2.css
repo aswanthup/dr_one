@@ -402,6 +402,10 @@ input[type="checkbox"]:disabled {
     flex-direction: column;
   }
 
+  .lo-input select {
+    width: 46vw;
+  }
+
   .hospitaladminregistration2 {
     height: auto;
     gap: 30px;

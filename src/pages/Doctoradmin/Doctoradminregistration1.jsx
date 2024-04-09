@@ -16,16 +16,7 @@ export default function Doctoradminregistration1() {
   const { Data, setData } = useContext(MyContext);
   console.log("Data===", Data);
   const [validationErrors, setValidationErrors] = useState({});
-  const toastConfig = {
-    position: "top-center",
-    autoClose: 1700,
-    hideProgressBar: false,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: true,
-    progress: undefined,
-    theme: "light",
-  };
+
   console.log("validationErrors", validationErrors);
   const handleFileChange = (event) => {
     const selectedFile = event.target?.files[0];
@@ -169,9 +160,9 @@ export default function Doctoradminregistration1() {
       validationErrors.phone;
 
     if (isInValid) {
-      toast.warning("All fields required", toastConfig);
+      toast.info("All fields required",);
     } else if (isValidationError) {
-      toast.warning("Check mobile email and password", toastConfig);
+      toast.info("Check mobile email and password",);
     } else {
       navigate("/doctoradminregistration2", { state: Data });
     }
@@ -229,10 +220,7 @@ export default function Doctoradminregistration1() {
 
           <div className="registration-form">
 
-
-
-
-            <div>
+            <div className="do-title" >
               <h1 style={{ color: "white" }}>Doctor Register</h1>
             </div>
 
@@ -247,7 +235,7 @@ export default function Doctoradminregistration1() {
 
               <div className="fileNameDisplay-div">
 
-              <h4 id="fileNameDisplay"> {Data?.image} </h4>
+                <h4 id="fileNameDisplay"> {Data?.image} </h4>
 
               </div>
             </div>
@@ -288,6 +276,7 @@ export default function Doctoradminregistration1() {
                     type="text"
                     name="name"
                     value={Data?.name}
+                    maxLength={100}
                     onChange={handleChange}
                   />
                 </div>
@@ -297,34 +286,35 @@ export default function Doctoradminregistration1() {
                     type="text"
                     name="secondname"
                     value={Data?.secondname}
+                    maxLength={50}
                     onChange={handleChange}
                   />
                 </div>
-                
+
               </div>
 
               <div className="register-right-section flex">
 
-              <div>
+                <div>
                   <h4> Phone Number</h4>
                   <input
-                    type="text"
+                    type="number"
                     maxLength={10}
                     name="phone"
                     value={Data?.phone}
                     onChange={handleChange}
                   />
-<div className="main-waring-section">
-                  {validationErrors.phone && (
+                  <div className="main-waring-section">
+                    {validationErrors.phone && (
 
 
 
-                    <p className="register-number-warning">{validationErrors.phone}</p>
+                      <p className="register-number-warning">{validationErrors.phone}</p>
 
 
 
-                  )}
-                  <p className="register-number-warning">Your number will be kept confidential and not shared.</p>
+                    )}
+                    <p className="register-number-warning">Your number will be kept confidential and not shared.</p>
                   </div>   </div>
 
 
@@ -333,6 +323,7 @@ export default function Doctoradminregistration1() {
                   <input
                     type="email"
                     name="email"
+                    maxLength={50}
                     value={Data?.email}
                     onChange={handleChange}
                     pattern="^[^\s@]+@[^\s@]+\.[^\s@]+$"
@@ -350,17 +341,18 @@ export default function Doctoradminregistration1() {
 
 
               <div className="register-right-section flex">
-               
+
                 <div style={{ position: "relative" }}>
                   <h4>Password</h4>
                   <div
                     style={{
                       position: "relative",
-                    
+
                     }}
                     className="pass-con-Inp"
                   >
                     <input
+                      maxLength={50}
                       value={Data.password} name="password" onChange={handleChange}
                       style={{
                         margin: 0,
@@ -393,12 +385,12 @@ export default function Doctoradminregistration1() {
                   </div>
                   {validationErrors.password && (
 
-<div className="main-waring-section main-waring-section-pass">
-                    <p className="register-number-warning">
-                      {validationErrors.password}
-                    </p>
+                    <div className="main-waring-section main-waring-section-pass">
+                      <p className="register-number-warning">
+                        {validationErrors.password}
+                      </p>
 
-</div>
+                    </div>
 
                   )}
                 </div>
@@ -407,11 +399,12 @@ export default function Doctoradminregistration1() {
                   <div
                     style={{
                       position: "relative",
-                    
+
                     }}
                     className="pass-con-Inp"
                   >
                     <input
+                      maxLength={50}
                       value={Data?.confirmPassword} name="confirmPassword" onChange={handleChange}
                       style={{
                         margin: 0,
@@ -442,17 +435,17 @@ export default function Doctoradminregistration1() {
                       {ShowRePassword ? <VisibilityOff /> : <Visibility />}
                     </IconButton>
                   </div><div className="main-waring-section">
-                  {validationErrors.confirmPassword && (
+                    {validationErrors.confirmPassword && (
 
 
-                    <p className="register-number-warning">
-                      {validationErrors.confirmPassword}
-                    </p>
+                      <p className="register-number-warning">
+                        {validationErrors.confirmPassword}
+                      </p>
 
 
 
-                  )}
-                </div></div>
+                    )}
+                  </div></div>
               </div>
 
 
@@ -482,26 +475,7 @@ export default function Doctoradminregistration1() {
             </div>
 
 
-
-
-
-
           </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
           <div className="register-png-div2 register-png-div flex">

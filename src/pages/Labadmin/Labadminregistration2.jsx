@@ -7,7 +7,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { Bounce, ToastContainer, toast } from 'react-toastify'
 import { port } from '../../config'
 import '../Labadmin/Labadminregistration2.css'
-import { DesktopTimePicker } from '@mui/x-date-pickers'
+import { TimePicker } from '@mui/x-date-pickers/TimePicker';
 import dayjs from 'dayjs'
 import { Backdrop, CircularProgress, Modal } from '@mui/material'
 
@@ -20,7 +20,6 @@ export default function Labadminregistration2() {
     features: false,
     services: false
   })
-  const [location, setlocation] = useState([])
   const Services = [
     { name: "Blood Count Tests" },
     { name: "Genetic Testing" },
@@ -83,7 +82,7 @@ export default function Labadminregistration2() {
         .then((res) => {
           console.log("res.data[0]?.PostOffice", res.data[0]?.PostOffice);
           if (res.data[0]?.PostOffice?.length > 0) {
-            setlocation(res.data[0]?.PostOffice)
+            setLabAdminRg({ ...LabAdminRg, pincode: pinCode, location: res.data[0]?.PostOffice })
           } else {
             toast.info("Pincode not found")
           }
@@ -145,7 +144,7 @@ export default function Labadminregistration2() {
         console.log(res)
         if (res?.data?.success) {
           toastifyFun(res?.data?.message, { success: true })
-          window.location.reload()
+          navigate("/")
           setloader(false)
         }
       }).catch((err) => {
@@ -358,7 +357,7 @@ export default function Labadminregistration2() {
         <div className='hospital-second-section flex'>
           <div>
             <h4>License Number</h4>
-            <input value={LabAdminRg?.lisence_no || ''} onChange={inputChanges} type="text" name='lisence_no' />
+            <input value={LabAdminRg?.lisence_no || ''} maxLength={50} onChange={inputChanges} type="text" name='lisence_no' />
             {/* <input value={LabAdminRg?.lisence_no || ''} onChange={inputChanges} type="number" name='lisence_no' /> */}
           </div>
 
@@ -367,7 +366,7 @@ export default function Labadminregistration2() {
             <div onClick={() => { openModal() }} className='hospital-second-section-Div flex'> {LabAdminRg?.features?.length > 0 ?
               <div className='hospital-second-section-Div-Map'>
                 {LabAdminRg?.features?.map(ele =>
-                  <p>{ele},&nbsp; </p>
+                  <h4>{ele},&nbsp; </h4>
                 )}
               </div>
               : <h4>Select Features</h4>}</div>
@@ -375,10 +374,10 @@ export default function Labadminregistration2() {
 
           <div>
             <h4>Services</h4>
-            <div onClick={() => { openModal({ services: true }) }} className='hospital-second-section-Div flex'>{LabAdminRg?.services?.length > 0 ?
+            <div onClick={() => { openModal({ services: true }) }} className='hospital-second-section-Div flex'>{LabAdminRg?.Services?.length > 0 ?
               <div className='hospital-second-section-Div-Map'>
-                {LabAdminRg?.services?.map(ele =>
-                  <p>{ele},&nbsp; </p>
+                {LabAdminRg?.Services?.map(ele =>
+                  <h4>{ele},&nbsp; </h4>
                 )}
               </div>
               : <h4>Select Specialties</h4>}
@@ -397,19 +396,11 @@ export default function Labadminregistration2() {
 
             <div className='pin-input' >
               <h4>Pincode</h4>
-
               <input className='hospitalAdminInput' value={LabAdminRg?.pincode || ''} onChange={inputChanges} type="number" maxLength={6} name="pincode" />
-
-
-              {/* <input value={LabAdminRg?.pincode || ''} onChange={inputChanges} type="number" maxLength={6} name="pincode" /> */}
-
-
               <div className="main-waring-section main-waring-section4 flex ">
                 <p className="register-number-warning">{Errors?.pincode}</p>
               </div>
             </div>
-
-
             <div className='lo-input'>
               <h4>Location</h4>
               <select
@@ -424,7 +415,7 @@ export default function Labadminregistration2() {
                 >
                   Select place
                 </option>
-                {location?.map((types, index) => (
+                {LabAdminRg.location?.map((types, index) => (
                   <option style={{ color: "black" }}
                     key={index}
                     value={types?.Name}>
@@ -441,14 +432,13 @@ export default function Labadminregistration2() {
 
             <div className='LabAdminPinTimePic'>
               <h4 className="pass-con">Opening Time</h4>
-              <DesktopTimePicker className='hospitalAdminPinTimePic' onChange={(e) => { TimeSetting(e, "opening_time") }} />
+              <TimePicker className='hospitalAdminPinTimePic' defaultValue={LabAdminRg?.timing?.opening_time ? LabAdminRg?.timing?.opening_time : ''} onChange={(e) => { TimeSetting(e, "opening_time") }} />
             </div>
             <div className='LabAdminPinTimePic'>
               <h4 className="pass-con">Closing Time</h4>
-              <DesktopTimePicker className='hospitalAdminPinTimePic' onChange={(e) => { TimeSetting(e, "closing_time") }} />
+              <TimePicker defaultValue={LabAdminRg?.timing?.closing_time ? LabAdminRg?.timing?.closing_time : ''} className='hospitalAdminPinTimePic' onChange={(e) => { TimeSetting(e, "closing_time") }} />
             </div>
           </div>
-
 
         </div>
 
@@ -460,11 +450,11 @@ export default function Labadminregistration2() {
           <div className=''>
             <h4 className="pass-con margin-about">About</h4>
 
-            <textarea value={LabAdminRg?.about || ''} onChange={inputChanges} name="about" id="" cols="30" rows="10"></textarea>
+            <textarea maxLength={500} value={LabAdminRg?.about || ''} onChange={inputChanges} name="about" id="" cols="30" rows="10"></textarea>
           </div>
           <div>
             <h4>Address</h4>
-            <textarea value={LabAdminRg?.address || ''} onChange={inputChanges} name="address" id="" cols="30" rows="5"></textarea>
+            <textarea maxLength={500} value={LabAdminRg?.address || ''} onChange={inputChanges} name="address" id="" cols="30" rows="5"></textarea>
           </div>
         </div>
 

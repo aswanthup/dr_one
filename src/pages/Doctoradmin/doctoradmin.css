@@ -190,8 +190,8 @@ button {
 .viewdataTimeAddEx {
     background-color: #3A65FD;
     color: white;
-    height: 50px;
-    width: 50px;
+    height: 2.5vw;
+    width: 2.5vw;
     border-radius: 6px;
     display: flex;
     justify-content: center;
@@ -199,9 +199,36 @@ button {
     cursor: pointer;
 }
 
+.viewdataTimeRemo {
+    background-color: transparent;
+    color: white;
+    height: 2.5vw;
+    width: 2.5vw;
+    border-radius: 6px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    border: 1px solid #3A65FD;
+}
+
+.viewdataTimePickerDuelAlign .css-o9k5xi-MuiInputBase-root-MuiOutlinedInput-root {
+    height: 2.5vw;
+}
+
+.viewdataTimePickerDuelAlign .css-1jy569b-MuiFormLabel-root-MuiInputLabel-root.Mui-error {
+    font-size: 17px;
+
+}
+
 #viewdataTimeAddExIcon {
     font-size: 30px;
 
+}
+
+#viewdataTimeAddREmove {
+    font-size: 30px;
+    color: #3A65FD;
 }
 
 .viewdataTimeAddGap {
@@ -245,7 +272,7 @@ button {
 
 .css-1jy569b-MuiFormLabel-root-MuiInputLabel-root.Mui-error {
     background-color: white;
-    margin: -2px -4px;
+    margin: 1px -4px;
 }
 
 .viewdataTimePickerCompo {
@@ -289,7 +316,7 @@ button {
     overflow-x: hidden;
     display: flex;
     flex-wrap: wrap;
-    gap: 30px;
+    gap: 20px;
     width: 100%;
     justify-content: center;
 }

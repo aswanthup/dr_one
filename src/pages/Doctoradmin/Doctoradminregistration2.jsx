@@ -10,6 +10,7 @@ import { MyContext } from "../../contexts/Contexts";
 import { speacializationNames } from "../../pages/doctor/constants/filter.js";
 import { port } from "../../config.js";
 import { Backdrop, CircularProgress } from "@mui/material";
+import { Loader } from "../../components/Loader/Loader.jsx";
 
 export default function Doctoradminregistration2() {
   const navigate = useNavigate();
@@ -30,43 +31,49 @@ export default function Doctoradminregistration2() {
     setloader(true)
     // Check if any other validations fail
     if (!Data.name || !Data.email || !Data.phone || !Data.phone_office || !Data?.pincode || !Data.sector) {
+      setloader(false)
       console.log("chekcingggggg", Data.name, Data.email, Data.phone, Data.phone_office, Data?.pincode, Data.sector)
       toast.error("Please fill in all the required fields.");
       return;
     }
     // Check if there are any validation errors
     if (postalError) {
+      setloader(false)
       toast.error("Please fix the pincode error.");
       return;
     }
 
     const mergedData = { ...Data };
     console.log("mergedData", mergedData);
-    axios
-      .post(`${port}/doctor/dr_registration`, mergedData)
+    axios.post(`${port}/doctor/dr_registration`, mergedData)
       .then((res) => {
-        // console.log("resssssssssssssss", res);
-
-        if (res?.data?.success === true) {
-          console.log("errorrrrrrrr");
-          toast.success(res?.data?.message);
-          setloader(false)
-          window.location.reload()
+        if (res.data.success === true) {
+          console.log("Registration successful");
+          toast.success(res.data.message);
+          navigate("/")
+          setloader(false);
+          window.location.reload();
         } else {
-          console.log(res?.data);
-          toast.error(res?.data);
-          setloader(false)
+          console.log("Registration failed");
+          toast.error(res.data.message);
+          setloader(false);
         }
-      });
-  };
+      }).catch((err) => {
+        if (err.response && err.response.data && err.response.data.message) {
+          toast.error(err.response.data.message);
+        } else {
+          toast.error("An error occurred while processing your request");
+        }
+        setloader(false);
+      })
+  }
   const updatePosts = (pinCode) => {
-    if (pinCode.length === 6) {
+    if (pinCode?.length === 6) {
       console.log(6);
       axios
         .get(`https://api.postalpincode.in/pincode/${pinCode}`)
         .then((res) => {
           console.log(res.data[0]?.PostOffice);
-          // console.log(res.data);
           setData({
             ...Data,
             Postoffice: res.data[0]?.PostOffice,
@@ -92,7 +99,6 @@ export default function Doctoradminregistration2() {
   };
 
   const handlePostChange = (event) => {
-    // setData(event.target.value)
     const { value } = event.target;
     setData({ ...Data, pincode: value });
     if (value.length === 6) {
@@ -106,9 +112,7 @@ export default function Doctoradminregistration2() {
       setPostalError("");
     }
   };
-  useEffect(() => {
-    // console.log("postal===", postal);
-  }, []);
+
   const handleClose = () => {
     setloader(false)
   }
@@ -120,16 +124,10 @@ export default function Doctoradminregistration2() {
         newestOnTop={false}
         closeOnClick rtl={false}, pauseOnFocusLoss draggable pauseOnHover
       </ToastContainer>
-      <Backdrop
-        sx={{
-          color: "#fff",
-          zIndex: (theme) => theme.zIndex.drawer + 1,
-        }}
-        open={loader}
-        onClick={handleClose}
-      >
-        <CircularProgress color="inherit" />
-      </Backdrop>
+
+      {
+        loader ? <Loader /> : ''
+      }
 
       <div className="doctoradminregistration flex desktop">
         <div>
@@ -277,6 +275,7 @@ export default function Doctoradminregistration2() {
                   value={Data?.about}
                   id=""
                   onChange={handleChange}
+                  maxLength={500}
                 >
                   {" "}
                 </textarea>
@@ -327,6 +326,7 @@ export default function Doctoradminregistration2() {
                   value={Data?.address}
                   id=""
                   onChange={handleChange}
+                  maxLength={500}
                 >
                   {" "}
                 </textarea>
@@ -385,102 +385,6 @@ export default function Doctoradminregistration2() {
       </div>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      
 
       <div className="doctoradminregistration mobile ">
         <div className="docadminhead">

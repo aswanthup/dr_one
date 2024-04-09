@@ -45,6 +45,7 @@ export default function Labadminregistration1() {
 
   const inputOnchanges = (e) => {
     const { value, name } = e.target
+    
     setLabAdminRg({ ...LabAdminRg, [name]: value })
   }
 
@@ -108,9 +109,6 @@ export default function Labadminregistration1() {
              </div> */}
 
 
-
-
-
             {/* <div id="hospitalname_inputId" className="hospitalname_input">
               <h4>Laboratory Name</h4>
               <input value={LabAdminRg?.name} onChange={inputOnchanges} name="name" type="text" />
@@ -128,7 +126,7 @@ export default function Labadminregistration1() {
 
                 <h4 className="pass-con">Profile Photo</h4>
                 <label for="inputTag">
-                  <h4 className="select-file flex">Upload Photo</h4>
+                  <h4 className="select-file select-file2 flex">Upload Photo</h4>
                   <input onChange={''} id="inputTag" type="file" />
                 </label>
 
@@ -141,13 +139,11 @@ export default function Labadminregistration1() {
  </div> */}
 
 
-
-
-
-
               <div className="hospitalname_input">
                 <h4 className="pass-con">Laboratory Name</h4>
-                <input value={LabAdminRg?.name} onChange={inputOnchanges} name="name" type="text" />
+                <input
+                  maxLength={100}
+                  value={LabAdminRg?.name} onChange={inputOnchanges} name="name" type="text" />
 
               </div>
             </div>
@@ -158,37 +154,21 @@ export default function Labadminregistration1() {
             </div>
 
 
-
-
-
-
-
-
             <div className="register-input-section">
-
-
-
               <div className=" register-left-section flex">
-
-
-
                 <div style={{ position: "relative" }}>
                   <h4 className="pass-con">Phone Number</h4>
                   <input value={LabAdminRg?.contact_no} onChange={inputOnchanges} name="contact_no" type="number" />
-
                   <div className="main-waring-section">
                     <p className="register-number-warning">{Errors?.phone}</p>
                   </div>
                 </div>
 
-
-
-
                 <div style={{ position: "relative" }}>
                   <h4 className="pass-con">Email</h4>
-                  <input value={LabAdminRg?.email} pattern="^[^\s@]+@[^\s@]+\.[^\s@]+$" name="email" onChange={inputOnchanges} type="email" />
-
-
+                  <input
+                    maxLength={50}
+                    value={LabAdminRg?.email} pattern="^[^\s@]+@[^\s@]+\.[^\s@]+$" name="email" onChange={inputOnchanges} type="email" />
                   <div className="main-waring-section">
                     <p className="register-number-warning">{Errors?.email}</p>
                   </div>
@@ -211,12 +191,13 @@ export default function Labadminregistration1() {
                   <div
                     style={{
                       position: "relative",
-                    
+
                     }}
                     className="pass-con-Inp"
                   >
                     <input
-                      value={LabAdminRg.password} name="password" onChange={inputOnchanges}
+                      maxLength={50}
+                      value={LabAdminRg?.password} name="password" onChange={inputOnchanges}
                       style={{
                         margin: 0,
                         position: "absolute",
@@ -257,12 +238,13 @@ export default function Labadminregistration1() {
                   <div
                     style={{
                       position: "relative",
-                    
+
                     }}
                     className="pass-con-Inp"
                   >
                     <input
-                      value={LabAdminRg.repassword} name="repassword" onChange={inputOnchanges}
+                      maxLength={50}
+                      value={LabAdminRg?.repassword} name="repassword" onChange={inputOnchanges}
                       style={{
                         margin: 0,
                         position: "absolute",
@@ -297,20 +279,9 @@ export default function Labadminregistration1() {
                   </div>
                 </div>
 
-
-
               </div>
 
-
-
-
-
-
             </div>
-
-
-
-
             <div
               className="register-button-section flex"
             >
