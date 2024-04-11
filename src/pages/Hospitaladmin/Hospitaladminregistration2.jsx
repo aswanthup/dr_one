@@ -184,7 +184,6 @@ export default function Hospitaladminregistration2() {
 
         }
 
-        console.log("HospitalAdminRg>>>>>>>", HospitalAdminRg)
         const handleClose = () => {
                 setloader(false)
         }
@@ -235,7 +234,7 @@ export default function Hospitaladminregistration2() {
                                                         <div className='image_card_ho_ad_add_image flex'>
                                                                 <label for="inputTag">
                                                                         <i class="ri-add-line"></i>
-                                                                        <input onChange={''} id="inputTag" type="file" />
+                                                                        <input id="inputTag" type="file" />
                                                                 </label>
                                                         </div>
 
@@ -244,49 +243,6 @@ export default function Hospitaladminregistration2() {
                                         </div>
 
                                 </div>
-
-                                {/* <div className='Features_card_ho_ad_media'>
-                                                <h4>Features</h4>
-                                                <div className='Features_card_ho_ad flex'>
-                                                        <div className='Features_card_ho_ad_check '>
-                                                                {Features.map((ele) =>
-                                                                        <label class="form-control flex">
-                                                                                <input value={ele?.name || ''}
-                                                                                        checked={HospitalAdminRg?.features?.includes(ele.name)}
-                                                                                        onChange={(e) => { storeArray(e, { features: true }) }} type="checkbox" name="checkbox" />
-                                                                                <h4>{ele.name}</h4>
-                                                                        </label>
-                                                                )}
-                                                        </div>
-                                                </div>
-                                        </div> */}
-                                {/* 
-                                        <div className='Features_card_ho_ad_media'>
-                                                <h4>Specialties</h4>
-                                                <div className='Features_card_ho_ad flex'>
-                                                        <div className='Features_card_ho_ad_check '>
-                                                                {specialties.map((ele) =>
-                                                                        <label class="form-control flex">
-                                                                                <input
-                                                                                        value={ele?.name}
-                                                                                        checked={HospitalAdminRg?.specialties?.includes(ele.name)}
-                                                                                        onChange={(e) => { storeArray(e, { specialties: true }) }}
-                                                                                        type="checkbox"
-                                                                                        name="checkbox"
-                                                                                />
-                                                                                <h4>{ele.name}</h4>
-                                                                        </label>
-                                                                )}
-                                                        </div>
-                                                </div>
-
-
-                                        </div> */}
-
-                                {/* </div> */}
-
-
-
 
                                 <div className='hospital-second-section flex'>
                                         <div>
@@ -298,8 +254,8 @@ export default function Hospitaladminregistration2() {
                                                 <h4>Features</h4>
                                                 <button type='button' onClick={() => { openModal() }} className='hospital-second-section-Div flex'> {HospitalAdminRg?.features?.length > 0 ?
                                                         <div className='hospital-second-section-Div-Map'>
-                                                                {HospitalAdminRg?.features?.map(ele =>
-                                                                        <h4>{ele},&nbsp; </h4>
+                                                                {HospitalAdminRg?.features?.map((ele, index) =>
+                                                                        <h4>{ele}{index + 1 === HospitalAdminRg?.features?.length ? '' : ","}&nbsp; </h4>
                                                                 )}
                                                         </div>
                                                         : <h4>Select Features</h4>}</button>
@@ -309,8 +265,8 @@ export default function Hospitaladminregistration2() {
                                                 <h4>Specialties</h4>
                                                 <button type='button' onClick={() => { openModal({ specialties: true }) }} className='hospital-second-section-Div flex'>{HospitalAdminRg?.specialties?.length > 0 ?
                                                         <div className='hospital-second-section-Div-Map'>
-                                                                {HospitalAdminRg?.specialties?.map(ele =>
-                                                                        <h4>{ele},&nbsp; </h4>
+                                                                {HospitalAdminRg?.specialties?.map((ele, index) =>
+                                                                        <h4>{ele}{index + 1 === HospitalAdminRg?.specialties?.length ? '' : ","}&nbsp; </h4>
                                                                 )}
                                                         </div>
                                                         : <h4>Select Specialties</h4>}

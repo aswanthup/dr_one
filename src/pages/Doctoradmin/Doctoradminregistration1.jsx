@@ -152,7 +152,7 @@ export default function Doctoradminregistration1() {
   };
   const handleKeyPress = (event) => {
     // Check if the pressed key is '.' or '-'
-    if (event?.key === '.' || event?.key === '-') {
+    if (event?.key === '.' || event?.key === '-' || event?.key === 'e' || event?.key === '+' || event?.key === 'E') {
       // Prevent the default behavior for these keys
       event.preventDefault();
     }
@@ -245,7 +245,7 @@ export default function Doctoradminregistration1() {
                       </p>
                     )}
                     <p className="register-number-warning">
-                      Your number will be kept confidential and not shared.
+                      This number will be kept confidential and shall be used for OTP verifications .
                     </p>
                   </div>{" "}
                 </div>

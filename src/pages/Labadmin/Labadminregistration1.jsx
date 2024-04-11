@@ -100,7 +100,7 @@ export default function Labadminregistration1() {
   };
   const handleKeyPress = (event) => {
     // Check if the pressed key is '.' or '-'
-    if (event?.key === '.' || event?.key === '-') {
+    if (event?.key === '.' || event?.key === '-' || event?.key === 'e' || event?.key === '+' || event?.key === 'E') {
       // Prevent the default behavior for these keys
       event.preventDefault();
     }
@@ -141,7 +141,7 @@ export default function Labadminregistration1() {
                 <h4 className="pass-con">Profile Photo</h4>
                 <label for="inputTag">
                   <h4 className="select-file select-file2 flex">Upload Photo</h4>
-                  <input onChange={''} id="inputTag" type="file" />
+                  <input id="inputTag" type="file" />
                 </label>
 
 

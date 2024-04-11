@@ -11,7 +11,7 @@
 .fileNameDisplay-div {
 
     margin-left: 10px;
-    width:100%; 
+    width: 100%;
 
 }
 
@@ -20,10 +20,11 @@
     height: 3vw;
     align-items: center;
     margin-left: 1vw;
-    
+
 }
-.fileNameDisplay-div{
-    width:50vw;
+
+.fileNameDisplay-div {
+    width: 50vw;
 }
 
 
@@ -144,8 +145,8 @@ label {
 
 .main-waring-section {
     height: 2.5vw;
-   
-   
+
+
 }
 
 
@@ -189,7 +190,7 @@ label {
 .select-file {
     background-color: white;
     color: var(--color-primary);
-    width:12vw;
+    width: 12vw;
     height: 3vw;
     border-radius: .4vw;
     padding-left: 1vw;
@@ -224,22 +225,23 @@ label {
     margin-bottom: 1vw;
 }
 
-#fileNameDisplay{
+#fileNameDisplay {
     width: 100%;
-    overflow: scroll;
+    overflow-x: scroll;
 }
-.main-waring-section{
+
+.main-waring-section {
     width: 100%;
     overflow: scroll;
 }
 
 @media screen and (max-width:1024px) {
-    .select-file{
-        width:18vw;
+    .select-file {
+        width: 18vw;
     }
 
-    .hospitalname_input input{
-        width:46vw;
+    .hospitalname_input input {
+        width: 46vw;
     }
 }
 

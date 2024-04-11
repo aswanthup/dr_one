@@ -95,17 +95,21 @@ export default function Labadminregistration2() {
   const inputChanges = (e) => {
     const { name, value } = e.target
     if (name === "pincode") {
-      if (value.length === 6) {
-        updatePosts(value);
-      } else {
-        setLabAdminRg(prevState => {
-          const newState = { ...prevState };
-          delete newState.location;
-          return newState;
-        });
+      if (value.toString().length <= 6) {
+        setLabAdminRg({ ...LabAdminRg, pincode: value });
+        if (value.length === 6) {
+          updatePosts(value);
+        } else {
+          setLabAdminRg(prevState => {
+            const newState = { ...prevState };
+            delete newState.location;
+            return newState;
+          });
+        }
       }
+    } else {
+      setLabAdminRg({ ...LabAdminRg, [name]: value })
     }
-    setLabAdminRg({ ...LabAdminRg, [name]: value })
   }
   const TimeSetting = (e, name) => {
     const value = dayjs(e)?.format('hh:mm A')
@@ -231,7 +235,7 @@ export default function Labadminregistration2() {
               <div className='image_card_ho_ad_add_image flex'>
                 <label for="inputTag">
                   <i class="ri-add-line"></i>
-                  <input onChange={''} id="inputTag" type="file" />
+                  <input id="inputTag" type="file" />
                 </label>
               </div>
             </div>
@@ -251,8 +255,8 @@ export default function Labadminregistration2() {
             <h4>Features</h4>
             <button type='button' onClick={() => { openModal() }} className='hospital-second-section-Div flex'> {LabAdminRg?.features?.length > 0 ?
               <div className='hospital-second-section-Div-Map'>
-                {LabAdminRg?.features?.map(ele =>
-                  <h4>{ele},&nbsp; </h4>
+                {LabAdminRg?.features?.map((ele, index) =>
+                  <h4>{ele}{index + 1 === LabAdminRg?.features?.length ? '' : ","}&nbsp; </h4>
                 )}
               </div>
               : <h4>Select Features</h4>}</button>
@@ -262,8 +266,8 @@ export default function Labadminregistration2() {
             <h4>Services</h4>
             <button type='button' onClick={() => { openModal({ services: true }) }} className='hospital-second-section-Div flex'>{LabAdminRg?.Services?.length > 0 ?
               <div className='hospital-second-section-Div-Map'>
-                {LabAdminRg?.Services?.map(ele =>
-                  <h4>{ele},&nbsp; </h4>
+                {LabAdminRg?.Services?.map((ele, index) =>
+                  <h4>{ele}{index + 1 === LabAdminRg?.Services?.length ? '' : ","}&nbsp; </h4>
                 )}
               </div>
               : <h4>Select Specialties</h4>}
@@ -338,7 +342,7 @@ export default function Labadminregistration2() {
             <div className='LabAdminPinTimePic'>
               <h4 className="pass-con">Closing Time</h4>
               <TimePicker sx={{
-               border: isMobile ? 'none' : '1px solid white', 
+                border: isMobile ? 'none' : '1px solid white',
                 height: '3vw',
                 color: "white"
               }}

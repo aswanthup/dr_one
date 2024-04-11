@@ -15,21 +15,21 @@ export default function Doctoradminregistration2() {
   const { Data, setData } = useContext(MyContext);
   const [postal, setPostal] = useState();
   const [postalError, setPostalError] = useState("");
+  const [Phone, setPhone] = useState("");
   const [addressdata, setAddressdata] = useState({});
   const [loader, setloader] = useState(false)
 
-  //if  any of these fields empty navigate to home
-  // useEffect(() => {
-  //   const names = ["confirmPassword",
-  //     "email",
-  //     "name",
-  //     "password", "phone",
-  //     "secondname"]
-  //   if (names.some((ele) => !Data[ele])) {
-  //     navigate('/')
-  //   }
+  useEffect(() => {
+    const names = ["confirmPassword",
+      "email",
+      "name",
+      "password", "phone",
+      "secondname"]
+    if (names.some((ele) => !Data[ele])) {
+      navigate('/')
+    }
 
-  // }, [])
+  }, [])
 
   const handleChange = (e) => {
     setData({

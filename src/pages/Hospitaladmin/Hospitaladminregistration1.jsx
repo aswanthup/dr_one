@@ -16,22 +16,22 @@ export default function Hospitaladminregistration1() {
   const [showPassword, setShowPassword] = useState(false);
   const [showRePassword, setShowRePassword] = useState(false);
 
-  const handleFileChange = (event) => {
-    const selectedFile = event.target.files[0];
-    if (selectedFile) {
-      const isImage = selectedFile.type.startsWith("image/");
-      if (isImage) {
-        setFileName(selectedFile.name);
-        // Process the image file or perform additional actions if needed
-      } else {
-        alert("Please select a valid image file.");
-        // Optionally, you can clear the file input
-        event.target.value = null;
-      }
-    } else {
-      setFileName("No file selected");
-    }
-  };
+  // const handleFileChange = (event) => {
+  //   const selectedFile = event.target.files[0];
+  //   if (selectedFile) {
+  //     const isImage = selectedFile.type.startsWith("image/");
+  //     if (isImage) {
+  //       setFileName(selectedFile.name);
+  //       // Process the image file or perform additional actions if needed
+  //     } else {
+  //       alert("Please select a valid image file.");
+  //       // Optionally, you can clear the file input
+  //       event.target.value = null;
+  //     }
+  //   } else {
+  //     setFileName("No file selected");
+  //   }
+  // };
 
   // toast
   console.log("HospitalAdminRg>>>>", HospitalAdminRg)
@@ -106,7 +106,7 @@ export default function Hospitaladminregistration1() {
   //  end checking
   const handleKeyPress = (event) => {
     // Check if the pressed key is '.' or '-'
-    if (event?.key === '.' || event?.key === '-') {
+    if (event?.key === '.' || event?.key === '-' || event?.key === 'e' || event?.key === '+' || event?.key === 'E') {
       // Prevent the default behavior for these keys
       event.preventDefault();
     }
@@ -140,7 +140,7 @@ export default function Hospitaladminregistration1() {
                 <h4 className="pass-con">Profile Photo</h4>
                 <label for="inputTag">
                   <h4 className="select-file select-file2 flex">Upload Photo</h4>
-                  <input onChange={handleFileChange} id="inputTag" type="file" />
+                  <input id="inputTag" type="file" />
                 </label>
 
 
