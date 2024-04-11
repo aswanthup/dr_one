@@ -244,11 +244,43 @@ export default function Hospitaladminregistration2() {
 
                                 </div>
 
+
+
+
+
                                 <div className='hospital-second-section flex'>
+
+
+
                                         <div>
-                                                <h4>License Number</h4>
-                                                <input value={HospitalAdminRg?.lisence_no || ''} onChange={inputChanges} type="text" maxLength={30} name='lisence_no' />
+                                        <h4>Type</h4>
+                                                <select
+                                                        type="text"
+                                                        onChange={inputChanges}
+                                                        value={HospitalAdminRg?.type ? HospitalAdminRg?.type : ''}
+                                                        name="type"
+                                                        className="hospitalRegTypeList"
+                                                >
+                                                        <option
+                                                                disabled selected value=''
+                                                        >
+                                                                Select Type
+                                                        </option>
+                                                        {type.map((types, index) => (
+                                                                <option style={{ color: "black" }}
+                                                                        key={index}
+                                                                        value={types?.name}>
+                                                                        {types?.name}
+                                                                </option>
+                                                        ))}
+                                                </select>
+
+                                              
                                         </div>
+
+
+
+
 
                                         <div>
                                                 <h4>Features</h4>
@@ -260,6 +292,10 @@ export default function Hospitaladminregistration2() {
                                                         </div>
                                                         : <h4>Select Features</h4>}</button>
                                         </div>
+
+
+
+
 
                                         <div>
                                                 <h4>Specialties</h4>
@@ -275,6 +311,10 @@ export default function Hospitaladminregistration2() {
 
 
                                 </div>
+
+
+
+
 
                                 <div className='hospitaladminregistration_second flex' >
                                         <div className='flex pin-lo'>
@@ -320,29 +360,16 @@ export default function Hospitaladminregistration2() {
 
 
 
-                                        <div>
-                                                <h4>Type</h4>
-                                                <select
-                                                        type="text"
-                                                        onChange={inputChanges}
-                                                        value={HospitalAdminRg?.type ? HospitalAdminRg?.type : ''}
-                                                        name="type"
-                                                        className="hospitalRegTypeList"
-                                                >
-                                                        <option
-                                                                disabled selected value=''
-                                                        >
-                                                                Select Type
-                                                        </option>
-                                                        {type.map((types, index) => (
-                                                                <option style={{ color: "black" }}
-                                                                        key={index}
-                                                                        value={types?.name}>
-                                                                        {types?.name}
-                                                                </option>
-                                                        ))}
-                                                </select>
+                                        <div   className='License'>
+                                        <h4>License Number</h4>
+                                                <input value={HospitalAdminRg?.lisence_no || ''} onChange={inputChanges} type="text" maxLength={30} name='lisence_no' />
                                         </div>
+
+
+
+
+
+
                                 </div>
                                 <div className='flex hospital-adress-about'>
 

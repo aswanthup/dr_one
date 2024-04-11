@@ -230,10 +230,7 @@ label {
     overflow-x: scroll;
 }
 
-.main-waring-section {
-    width: 100%;
-    overflow: scroll;
-}
+
 
 @media screen and (max-width:1024px) {
     .select-file {

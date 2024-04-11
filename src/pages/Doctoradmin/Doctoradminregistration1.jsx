@@ -59,7 +59,7 @@ export default function Doctoradminregistration1() {
         setValidationErrors((prevErrors) => ({
           ...prevErrors,
           [name]:
-            "Password must contain at least 1 uppercase letter, 1 number, 1 special character (@.#$!%*?&), and be at least 6 characters long",
+            "Password must be 6+ characters with an uppercase letter, digit, and special character.",
         }));
       } else if (Data.confirmPassword) {
         if (value !== Data.confirmPassword) {

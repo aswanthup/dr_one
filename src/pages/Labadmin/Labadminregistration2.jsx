@@ -246,10 +246,19 @@ export default function Labadminregistration2() {
 
 
         <div className='hospital-second-section flex'>
+
+
+
+
+
           <div>
             <h4>License Number</h4>
             <input value={LabAdminRg?.lisence_no || ''} maxLength={50} onChange={inputChanges} type="text" name='lisence_no' />
           </div>
+
+
+
+
 
           <div>
             <h4>Features</h4>
@@ -262,6 +271,10 @@ export default function Labadminregistration2() {
               : <h4>Select Features</h4>}</button>
           </div>
 
+
+
+
+
           <div>
             <h4>Services</h4>
             <button type='button' onClick={() => { openModal({ services: true }) }} className='hospital-second-section-Div flex'>{LabAdminRg?.Services?.length > 0 ?
@@ -273,6 +286,10 @@ export default function Labadminregistration2() {
               : <h4>Select Specialties</h4>}
             </button>
           </div>
+
+
+
+
 
 
         </div>
@@ -291,6 +308,14 @@ export default function Labadminregistration2() {
                 <p className="register-number-warning">{Errors?.pincode}</p>
               </div>
             </div>
+
+
+
+
+
+
+
+            
             <div className='lo-input'>
               <h4>Location</h4>
               <select

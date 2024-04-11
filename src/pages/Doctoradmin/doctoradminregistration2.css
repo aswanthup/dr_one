@@ -135,7 +135,7 @@
   border-radius: 0.5vw;
   height: 3vw;
   color: white;
-  padding: 1vw;
+  padding-left: 1vw;
   letter-spacing: 2px;
   width: 30vw;
   margin-top: 1vw;
@@ -153,7 +153,7 @@
   border-radius: 0.5vw;
   height: 3vw;
   color: white;
-  padding: 1vw;
+  padding-left: 1vw;
   letter-spacing: 2px;
   width: 30vw;
   margin-top: 1vw;
@@ -165,6 +165,11 @@
   display: none;
 }
 
+
+
+
+
+
 /* Mobile screen ----------------------------------------*/
 
 @media only screen and (max-width:980px) {
@@ -175,6 +180,17 @@
   .mobile {
     display: block;
   }
+
+
+
+  .doctoradminregistration {
+    height:fit-content;
+  
+  }
+
+
+
+
 
   .doctoradminregistration_input {
     height: 100%;
@@ -285,7 +301,3 @@
   }
 }
 
-
-@media only screen and (max-width:1024px) {
-
-}

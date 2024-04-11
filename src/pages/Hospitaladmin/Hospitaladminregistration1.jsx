@@ -86,7 +86,7 @@ export default function Hospitaladminregistration1() {
     const PhonePattern = /^[6-9]\d{9}$/;
 
     if (HospitalAdminRg?.password && !Passwordpattern.test(HospitalAdminRg.password)) {
-      errors.password = "Password must contain at least 1 uppercase letter, 1 number, 1 special character (@.#$!%*?&), and be at least 6 characters long.";
+      errors.password = "Password must be 6+ characters with an uppercase letter, digit, and special character.";
     }
 
     if (HospitalAdminRg?.email && !EmailPattern.test(HospitalAdminRg.email)) {
