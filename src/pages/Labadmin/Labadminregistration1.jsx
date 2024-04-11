@@ -263,7 +263,7 @@ export default function Labadminregistration1() {
                         appearance: "none",
                         WebkitAppearance: "none",
                       }}
-                      type={showPassword ? "text" : "password"}
+                      type={showRePassword ? "text" : "password"}
                     />
 
                     <IconButton

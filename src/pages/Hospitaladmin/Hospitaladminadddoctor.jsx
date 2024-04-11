@@ -8,6 +8,7 @@ import { Backdrop, CircularProgress } from "@mui/material";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { Bounce, ToastContainer, toast } from "react-toastify";
+import { port } from "../../config";
 export default function Hospitaladminadddoctor() {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
@@ -42,7 +43,7 @@ export default function Hospitaladminadddoctor() {
       data.hospital_id = 52;
       setIsLoading(true);
       const response = await axios.post(
-        "http://localhost:3003/hospital/add_doctor",
+        `${port}/hospital/add_doctor`,
         data
       );
       // console.log({ response });
