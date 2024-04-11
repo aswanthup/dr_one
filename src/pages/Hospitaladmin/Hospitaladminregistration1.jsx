@@ -50,18 +50,24 @@ export default function Hospitaladminregistration1() {
   }
 
   // add data to state
-
+  console.log("HospitalAdminRg?.contact_no>>>", HospitalAdminRg?.contact_no?.length)
   const inputOnchanges = (e) => {
-    const { value, name } = e.target
-    setHospitalAdminRg({ ...HospitalAdminRg, [name]: value })
-  }
+    const { value, name } = e.target;
+    if (name === "contact_no") {
+      const sanitizedValue = value.replace(/[.-]/g, '');
+      const truncatedValue = sanitizedValue.slice(0, 10);
+      setHospitalAdminRg({ ...HospitalAdminRg, [name]: truncatedValue });
+    } else if (name === "password") {
+      const trimmedValue = value.trim();
+      setHospitalAdminRg({ ...HospitalAdminRg, [name]: trimmedValue });
+    } else {
+      setHospitalAdminRg({ ...HospitalAdminRg, [name]: value });
+    }
+  };
 
   useEffect(() => {
     checkErrors()
   }, [HospitalAdminRg])
-
-  // checking the erros
-
   const nextPage = () => {
     if (HospitalAdminRg?.name && HospitalAdminRg?.contact_no && HospitalAdminRg?.password && HospitalAdminRg?.email && HospitalAdminRg?.repassword) {
       if (!Errors.password && !Errors.email && !Errors.contact_no && !Errors.password && !Errors.repassword) {
@@ -125,7 +131,6 @@ export default function Hospitaladminregistration1() {
             </div>
             <div className="flex hospital-top">
               <div className="upload-image">
-
                 <h4 className="pass-con">Profile Photo</h4>
                 <label for="inputTag">
                   <h4 className="select-file select-file2 flex">Upload Photo</h4>
@@ -134,11 +139,6 @@ export default function Hospitaladminregistration1() {
 
 
               </div>
-
-              {/* <label className="photo-upload">
-               <h4>Upload Photo</h4>
-                  <input type="file" />
-               </div> */}
 
               <div className="hospitalname_input">
                 <h4 className="pass-con">Hospital Name</h4>
@@ -166,10 +166,8 @@ export default function Hospitaladminregistration1() {
 
                 <div>
                   <h4 className="pass-con">Phone Number</h4>
-                  <input value={HospitalAdminRg?.contact_no} onChange={inputOnchanges} name="contact_no" type="number" />
-
+                  <input value={HospitalAdminRg?.contact_no ? HospitalAdminRg?.contact_no : ''} onChange={inputOnchanges} name="contact_no" type="number" />
                   <div className="main-waring-section">
-
 
 
                     <p className="register-number-warning">{Errors?.phone}</p>
@@ -190,10 +188,6 @@ export default function Hospitaladminregistration1() {
                 </div>
               </div>
 
-
-
-
-
               <div className="register-right-section flex">
 
 
@@ -211,7 +205,7 @@ export default function Hospitaladminregistration1() {
                   >
                     <input
                       maxLength={50}
-                      value={HospitalAdminRg.password} name="password" onChange={inputOnchanges}
+                      value={HospitalAdminRg.password ? HospitalAdminRg.password : ''} name="password" onChange={inputOnchanges}
                       style={{
                         margin: 0,
                         position: "absolute",
@@ -308,9 +302,9 @@ export default function Hospitaladminregistration1() {
 
               className="register-button-section flex"
             >
-              <a onClick={() => { nextPage() }} className="flex" style={{ cursor: "pointer" }}>
-                <h4>Next</h4>
-              </a>
+              <button onClick={() => { nextPage() }} className="flex" style={{ cursor: "pointer" }}>
+                Next
+              </button>
             </div>
           </div>
           <div className="register-png-div2 register-png-div flex">

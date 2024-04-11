@@ -7,10 +7,10 @@ import Navbar from '../../components/Navbar';
 export default function Pharmacy() {
   return (
     <div>
-<Headroom>
-<Navbar /> 
-</Headroom>
-<div>
+      <Headroom>
+        <Navbar />
+      </Headroom>
+      <div>
         {/* Navbar */}
 
         {/*End Navbar */}
@@ -24,7 +24,7 @@ export default function Pharmacy() {
             </div>
           </div>
           <div className="working flex">
-            <div className="pharmacy-video"> 
+            <div className="pharmacy-video">
               <iframe width={560} height={315} src="https://www.youtube.com/embed/6sPRXFtFZd0?si=7c_48dnPbyQNch7K" title="YouTube video player" frameBorder={0} allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen />
             </div>
             <div className="pharmacy-video-text">
@@ -33,14 +33,14 @@ export default function Pharmacy() {
             </div>
           </div>
           <div className="pharmacy-partners">
-            <h1>Our<span className="color-blue"> Featured</span> Partners</h1> 
+            <h1>Our<span className="color-blue"> Featured</span> Partners</h1>
           </div>
-        </div> 
-        
+        </div>
+
 
       </div>
 
-<Footer/>
+      <Footer />
 
     </div>
   )

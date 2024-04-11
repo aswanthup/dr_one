@@ -18,7 +18,7 @@
 }
 
 
-.ho_ad_re_button h4 {
+.ho_ad_re_button button {
   background-color: white;
   width: fit-content;
   color: #3A65FD;
@@ -184,7 +184,6 @@
   gap: 0.5em;
 }
 
-.form-control+.form-control {}
 
 .form-control--disabled {
   color: var(--form-control-disabled);
@@ -220,7 +219,7 @@ input[type="checkbox"]::before {
   transform: scale(0);
   transform-origin: bottom left;
   transition: 120ms transform ease-in-out;
-  box-shadow: inset 1em 1em var(--form-control-color);
+  box-shadow: inset 1em 1em white;
   /* Windows High Contrast Mode */
   background-color: CanvasText;
 }

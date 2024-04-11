@@ -13,6 +13,21 @@
     justify-content: space-between;
 }
 
+
+
+.hospital-second-section-Div:focus,
+.hospital-second-section-Div:active {
+    background-color: rgba(246, 246, 249, .4);
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+}
+
+.hospitalRegTypeList:focus,
+.hospitalRegTypeList:active {
+    background-color: rgba(246, 246, 249, .4);
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+}
+
+
 .labadminregistration_input h4 {
     color: white;
 
@@ -212,7 +227,7 @@
 
 .css-o9k5xi-MuiInputBase-root-MuiOutlinedInput-root {
     height: 3vw;
-    border: 1px solid white;
+    /* border: 1px solid white; */
     color: white;
 }
 
@@ -280,7 +295,7 @@
 
     .css-o9k5xi-MuiInputBase-root-MuiOutlinedInput-root {
         height: 10vw;
-        border: 1px solid white;
+        /* border: 1px solid white; */
         color: white;
         background-color: rgba(246, 246, 249, .4);
 

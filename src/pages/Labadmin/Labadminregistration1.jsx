@@ -45,14 +45,22 @@ export default function Labadminregistration1() {
 
   const inputOnchanges = (e) => {
     const { value, name } = e.target
-    
-    setLabAdminRg({ ...LabAdminRg, [name]: value })
+    if (name === "contact_no") {
+      const sanitizedValue = value.replace(/[.-]/g, '');
+      const truncatedValue = sanitizedValue.slice(0, 10);
+      setLabAdminRg({ ...LabAdminRg, [name]: truncatedValue });
+    } else if (name === "password") {
+      const trimmedValue = value.trim();
+      setLabAdminRg({ ...LabAdminRg, [name]: trimmedValue });
+    } else {
+      setLabAdminRg({ ...LabAdminRg, [name]: value });
+    }
   }
 
   useEffect(() => {
     checkErrors()
   }, [LabAdminRg])
-
+  console.log(LabAdminRg)
   // checking the erros
 
   const nextPage = () => {
@@ -90,7 +98,6 @@ export default function Labadminregistration1() {
 
     setErrors(errors);
   };
-  console.log("LabAdminRg>>>>", LabAdminRg)
   return (
     <div>
       <ToastContainer />
@@ -285,9 +292,9 @@ export default function Labadminregistration1() {
             <div
               className="register-button-section flex"
             >
-              <a onClick={() => { nextPage() }} className="flex" style={{ cursor: "pointer" }}>
+              <button type="button" onClick={() => { nextPage() }} className="flex" style={{ cursor: "pointer" }}>
                 <h4>Next</h4>
-              </a>
+              </button>
             </div>
           </div>
           <div className="register-png-div2 register-png-div flex">
