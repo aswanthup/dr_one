@@ -9,17 +9,23 @@
 }
 
 .fileNameDisplay-div {
-    max-width: 500px;
-    overflow-x: scroll;
+
     margin-left: 10px;
+    width:100%; 
+
 }
 
-.fileNameDisplay-div h6 {
+.fileNameDisplay-div h4 {
     display: flex;
     height: 3vw;
     align-items: center;
     margin-left: 1vw;
+    
 }
+.fileNameDisplay-div{
+    width:50vw;
+}
+
 
 
 .registration-form {
@@ -138,7 +144,11 @@ label {
 
 .main-waring-section {
     height: 2.5vw;
+   
+   
 }
+
+
 
 .main-waring-section-pass {
     width: 32vw;
@@ -179,13 +189,13 @@ label {
 .select-file {
     background-color: white;
     color: var(--color-primary);
-
+    width:12vw;
     height: 3vw;
     border-radius: .4vw;
     padding-left: 1vw;
     padding-right: 1vw;
 
-
+    justify-content: center;
     align-items: center;
 }
 
@@ -213,6 +223,26 @@ label {
 .do-title {
     margin-bottom: 1vw;
 }
+
+#fileNameDisplay{
+    width: 100%;
+    overflow: scroll;
+}
+.main-waring-section{
+    width: 100%;
+    overflow: scroll;
+}
+
+@media screen and (max-width:1024px) {
+    .select-file{
+        width:18vw;
+    }
+
+    .hospitalname_input input{
+        width:46vw;
+    }
+}
+
 
 @media screen and (max-width: 780px) {
 

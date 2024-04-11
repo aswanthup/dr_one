@@ -83,7 +83,7 @@ export default function Hospitaladminregistration1() {
 
     const Passwordpattern = /^(?=.*[A-Z])(?=.*\d)(?=.*[@.#$!%*?&]).{6,}$/;
     const EmailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    const PhonePattern = /^[0-9]{10}$/;
+    const PhonePattern = /^[6-9]\d{9}$/;
 
     if (HospitalAdminRg?.password && !Passwordpattern.test(HospitalAdminRg.password)) {
       errors.password = "Password must contain at least 1 uppercase letter, 1 number, 1 special character (@.#$!%*?&), and be at least 6 characters long.";
@@ -104,7 +104,13 @@ export default function Hospitaladminregistration1() {
     setErrors(errors);
   };
   //  end checking
-
+  const handleKeyPress = (event) => {
+    // Check if the pressed key is '.' or '-'
+    if (event?.key === '.' || event?.key === '-') {
+      // Prevent the default behavior for these keys
+      event.preventDefault();
+    }
+  };
   const handleClickShowPassword = () => setShowPassword((show) => !show);
   const handleClickShowRePassword = () => setShowRePassword((show) => !show);
 
@@ -149,7 +155,7 @@ export default function Hospitaladminregistration1() {
 
 
 
-            <div className="main-waring-section main-waring-section-image " style={{ overflow: "Hidden" }}>
+            <div className="main-waring-section main-waring-section-image " >
               <h4 className="register-number-warning" id="fileNameDisplay"> {fileName} </h4>
             </div>
 
@@ -166,7 +172,7 @@ export default function Hospitaladminregistration1() {
 
                 <div>
                   <h4 className="pass-con">Phone Number</h4>
-                  <input value={HospitalAdminRg?.contact_no ? HospitalAdminRg?.contact_no : ''} onChange={inputOnchanges} name="contact_no" type="number" />
+                  <input onKeyPress={handleKeyPress} value={HospitalAdminRg?.contact_no ? HospitalAdminRg?.contact_no : ''} onChange={inputOnchanges} name="contact_no" type="number" />
                   <div className="main-waring-section">
 
 

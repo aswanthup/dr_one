@@ -10,7 +10,7 @@ import '../Labadmin/Labadminregistration2.css'
 import { TimePicker } from '@mui/x-date-pickers/TimePicker';
 import dayjs from 'dayjs'
 import { Backdrop, CircularProgress, Modal } from '@mui/material'
-
+import { useMediaQuery } from 'react-responsive';
 export default function Labadminregistration2() {
   const { LabAdminRg, setLabAdminRg } = useContext(MyContext)
   const [Errors, setErrors] = useState({})
@@ -20,6 +20,7 @@ export default function Labadminregistration2() {
     features: false,
     services: false
   })
+  const isMobile = useMediaQuery({ maxWidth: 980 })
   const Services = [
     { name: "Blood Count Tests" },
     { name: "Genetic Testing" },
@@ -40,13 +41,13 @@ export default function Labadminregistration2() {
 
   ]
 
-  useEffect(() => {
-    if (!LabAdminRg?.name && !LabAdminRg?.contact_no && !LabAdminRg?.password && !LabAdminRg?.email && !LabAdminRg?.repassword) {
-      navigate("/labadminregistration1")
-    } else {
-      setLabAdminRg({ ...LabAdminRg, timing: { closing_time: '06:00 PM', opening_time: '10:00 AM' } })
-    }
-  }, [])
+  // useEffect(() => {
+  //   if (!LabAdminRg?.name && !LabAdminRg?.contact_no && !LabAdminRg?.password && !LabAdminRg?.email && !LabAdminRg?.repassword) {
+  //     navigate("/labadminregistration1")
+  //   } else {
+  //     setLabAdminRg({ ...LabAdminRg, timing: { closing_time: '06:00 PM', opening_time: '10:00 AM' } })
+  //   }
+  // }, [])
   const toastifyFun = (value, success) => {
     if (!success?.success) {
       toast.info(value, {
@@ -325,7 +326,7 @@ export default function Labadminregistration2() {
               <h4 className="pass-con">Opening Time</h4>
               <TimePicker
                 sx={{
-                  border: '1px solid white',
+                  border: isMobile ? 'none' : '1px solid white', // Apply border only on non-mobile views
                   height: '3vw',
                   color: "white"
                 }}
@@ -337,7 +338,7 @@ export default function Labadminregistration2() {
             <div className='LabAdminPinTimePic'>
               <h4 className="pass-con">Closing Time</h4>
               <TimePicker sx={{
-                border: '1px solid white',
+               border: isMobile ? 'none' : '1px solid white', 
                 height: '3vw',
                 color: "white"
               }}

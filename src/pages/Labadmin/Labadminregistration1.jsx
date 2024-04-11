@@ -78,7 +78,7 @@ export default function Labadminregistration1() {
 
     const Passwordpattern = /^(?=.*[A-Z])(?=.*\d)(?=.*[@.#$!%*?&]).{6,}$/;
     const EmailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    const PhonePattern = /^[0-9]{10}$/;
+    const PhonePattern = /^[6-9]\d{9}$/;
 
     if (LabAdminRg?.password && !Passwordpattern.test(LabAdminRg.password)) {
       errors.password = "Password must contain at least 1 uppercase letter, 1 number, 1 special character (@.#$!%*?&), and be at least 6 characters long.";
@@ -97,6 +97,13 @@ export default function Labadminregistration1() {
     }
 
     setErrors(errors);
+  };
+  const handleKeyPress = (event) => {
+    // Check if the pressed key is '.' or '-'
+    if (event?.key === '.' || event?.key === '-') {
+      // Prevent the default behavior for these keys
+      event.preventDefault();
+    }
   };
   return (
     <div>
@@ -165,7 +172,7 @@ export default function Labadminregistration1() {
               <div className=" register-left-section flex">
                 <div style={{ position: "relative" }}>
                   <h4 className="pass-con">Phone Number</h4>
-                  <input value={LabAdminRg?.contact_no} onChange={inputOnchanges} name="contact_no" type="number" />
+                  <input onKeyPress={handleKeyPress} value={LabAdminRg?.contact_no} onChange={inputOnchanges} name="contact_no" type="number" />
                   <div className="main-waring-section">
                     <p className="register-number-warning">{Errors?.phone}</p>
                   </div>

@@ -150,7 +150,13 @@ export default function Doctoradminregistration1() {
       navigate("/doctoradminregistration2", { state: Data });
     }
   };
-
+  const handleKeyPress = (event) => {
+    // Check if the pressed key is '.' or '-'
+    if (event?.key === '.' || event?.key === '-') {
+      // Prevent the default behavior for these keys
+      event.preventDefault();
+    }
+  };
   const handleClickShowPassword = () => setShowPassword((show) => !show);
   const handleClickShowRePassword = () => setShowRePassword((show) => !show);
 
@@ -188,7 +194,7 @@ export default function Doctoradminregistration1() {
               </label>
 
               <div className="fileNameDisplay-div">
-                <h6 id="fileNameDisplay"> {Data?.image} </h6>
+                <h4 id="fileNameDisplay"> {Data?.image} </h4>
               </div>
             </div>
 
@@ -228,6 +234,7 @@ export default function Doctoradminregistration1() {
                     type="number"
                     maxLength={10}
                     name="phone"
+                    onKeyPress={handleKeyPress}
                     value={Data?.phone}
                     onChange={handleChange}
                   />

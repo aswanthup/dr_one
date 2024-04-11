@@ -43,11 +43,11 @@ export default function Hospitaladminregistration2() {
 
         ]
 
-        useEffect(() => {
-                if (!HospitalAdminRg?.name && !HospitalAdminRg?.contact_no && !HospitalAdminRg?.password && !HospitalAdminRg?.email && !HospitalAdminRg?.repassword) {
-                        navigate("/hospitaladminregistration1")
-                }
-        }, [])
+        // useEffect(() => {
+        //         if (!HospitalAdminRg?.name && !HospitalAdminRg?.contact_no && !HospitalAdminRg?.password && !HospitalAdminRg?.email && !HospitalAdminRg?.repassword) {
+        //                 navigate("/hospitaladminregistration1")
+        //         }
+        // }, [])
 
         const toastifyFun = (value, success) => {
                 if (!success?.success) {
