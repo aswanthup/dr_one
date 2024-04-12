@@ -395,11 +395,18 @@ input[type="checkbox"]:disabled {
 
 
 
+@media only screen and (max-width:1024px) {
+  .pin-lo input{
+    width: 16vw;
+  }
+}
 @media only screen and (max-width:980px) {
   .Features_card_ho_ad {
     width: 100%;
   }
-
+  .License{
+    width: 100%;
+  }
   .margin-about {
     margin-top: 5vw;
   }
