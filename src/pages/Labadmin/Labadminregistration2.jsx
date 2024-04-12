@@ -258,18 +258,36 @@ export default function Labadminregistration2() {
 
 
           <div>
-            <h4>Features {`${LabAdminRg?.features?.length ? LabAdminRg?.features?.length : 0}/${Features?.length}`}</h4>
+
+            <div className='name-progrss flex'> 
+            <h4>Features </h4>
+            <h4>{`${LabAdminRg?.features?.length ? LabAdminRg?.features?.length : 0}/${Features?.length}`}</h4>
+            </div>
+
+
             <button type='button' onClick={() => { openModal() }} className='hospital-second-section-Div flex'> {LabAdminRg?.features?.length > 0 ?
               <div className='hospital-second-section-Div-Map'>
                 {LabAdminRg?.features?.map((ele, index) =>
                   <h4>{ele}{index + 1 === LabAdminRg?.features?.length ? '' : ","}&nbsp; </h4>
                 )}
               </div>
+
+
               : <h4>Select Features</h4>}</button>
           </div>
 
+
+
+
+
+
           <div>
-            <h4>Services {`${LabAdminRg?.Services?.length ? LabAdminRg?.Services?.length : 0}/${Services?.length}`}</h4>
+
+          <div className='name-progrss flex'> 
+            <h4>Services</h4>
+            <h4> {`${LabAdminRg?.Services?.length ? LabAdminRg?.Services?.length : 0}/${Services?.length}`}</h4>
+          </div>
+            
             <button type='button' onClick={() => { openModal({ services: true }) }} className='hospital-second-section-Div flex'>{LabAdminRg?.Services?.length > 0 ?
               <div className='hospital-second-section-Div-Map'>
                 {LabAdminRg?.Services?.map((ele, index) =>

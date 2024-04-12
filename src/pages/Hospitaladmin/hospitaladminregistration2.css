@@ -376,6 +376,10 @@ input[type="checkbox"]:disabled {
 }
 
 
+.name-progrss{
+  justify-content: space-between;
+}
+
 
 
 
