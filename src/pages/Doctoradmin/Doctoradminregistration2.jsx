@@ -9,6 +9,11 @@ import { MyContext } from "../../contexts/Contexts";
 import { speacializationNames } from "../../pages/doctor/constants/filter.js";
 import { port } from "../../config.js";
 import { Loader } from "../../components/Loader/Loader.jsx";
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import dayjs from "dayjs";
+
 
 export default function Doctoradminregistration2() {
   const navigate = useNavigate();
@@ -19,32 +24,49 @@ export default function Doctoradminregistration2() {
   const [addressdata, setAddressdata] = useState({});
   const [loader, setloader] = useState(false)
 
-  useEffect(() => {
-    const names = ["confirmPassword",
-      "email",
-      "name",
-      "password", "phone",
-      "secondname"]
-    if (names.some((ele) => !Data[ele])) {
-      navigate('/')
+  // useEffect(() => {
+  //   const names = ["confirmPassword",
+  //     "email",
+  //     "name",
+  //     "password", "phone",
+  //     "secondname"]
+  //   if (names.some((ele) => !Data[ele])) {
+  //     navigate('/')
+  //   }
+
+  // }, [])
+  const handleKeyPress = (event) => {
+    // Check if the pressed key is '.' or '-'
+    if (event?.key === '.' || event?.key === '-' || event?.key === 'e' || event?.key === '+' || event?.key === 'E') {
+      // Prevent the default behavior for these keys
+      event.preventDefault();
     }
-
-  }, [])
-
+  };
   const handleChange = (e) => {
+    const { name, value } = e.target
+    if (name === "phone_office" && value.length > 11) {
+      return;
+    }
     setData({
       ...Data,
-      [e.target.name]: e.target.value,
+      [name]: value,
     });
   };
+  const handleYearChange = (e) => {
+    console.log(e)
+    setData({
+      ...Data,
+      experience: e.$y,
+    });
+  }
   console.log("dataaaaaaaaaa", Data);
   const handleSubmit = (e) => {
     e.preventDefault();
     setloader(true)
     // Check if any other validations fail
-    if (!Data.name || !Data.email || !Data.phone || !Data.phone_office || !Data?.pincode || !Data.sector) {
+    if (!Data?.name || !Data?.email || !Data?.phone || !Data?.pincode || !Data?.sector || Data?.gender || Data?.type || Data?.experience || Data?.qualification || Data?.registration_no) {
       setloader(false)
-      console.log("chekcingggggg", Data.name, Data.email, Data.phone, Data.phone_office, Data?.pincode, Data.sector)
+      // console.log("chekcingggggg", Data.name, Data.email, Data.phone, Data.phone_office, Data?.pincode, Data.sector)
       toast.error("Please fill in all the required fields.");
       return;
     }
@@ -166,6 +188,7 @@ export default function Doctoradminregistration2() {
             <div>
               <h4>Qualification</h4>
               <input
+                className="inputs"
                 maxLength={50}
                 type="text"
                 value={Data?.qualification}
@@ -248,20 +271,17 @@ export default function Doctoradminregistration2() {
           </div>
 
           <div className="doctoradminregistration_input2 flex">
-            <div>
+            <div style={{ display: "flex", justifyContent: "space-between", flexDirection: "column" }}>
               <h4>Practice started year</h4>
-              <input
-                type="number"
-                placeholder="E.g. 2013"
-                max={new Date().getFullYear()}
-                name="experience"
-                value={Data?.experience}
-                onChange={handleChange}
-              />
+              {/* <LocalizationProvider dateAdapter={AdapterDayjs}> */}
+
+              <DatePicker disableFuture value={dayjs(Data.experience)} name="experience" onChange={handleYearChange} sx={{ width: "30vw", background: "#f6f6f966", border: "none", boxSizing: "border-box", borderRadius: "0.5vw" }} views={['year']} className="date-picker" />
+              {/* </LocalizationProvider> */}
             </div>
             <div>
               <h4>Registration Number</h4>
               <input
+                className="inputs"
                 type="text"
                 name="registration_no"
                 value={Data?.registration_no}
@@ -311,7 +331,8 @@ export default function Doctoradminregistration2() {
                 </textarea>
                 <div className="doctoradminregistration_input6 flex">
                   <input
-                    type="text"
+                    onKeyDown={handleKeyPress}
+                    type="number"
                     value={Data?.phone_office ?? ""}
                     placeholder="Office Number"
                     maxLength={10}
@@ -347,10 +368,11 @@ export default function Doctoradminregistration2() {
               </div>
             </div>
 
-            <div className="doctoradminregistration_input4 flex">
+
+            <div className="doctoradminregistration_input4  flex">
               <h4>Address</h4>
 
-              <div className="doctoradminregistration_input7 flex">
+              <div className="doctoradminregistration_input7  flex">
                 <textarea
                   name="address"
                   value={Data?.address}
@@ -364,6 +386,7 @@ export default function Doctoradminregistration2() {
                   <div style={{ position: "relative" }} >
 
                     <input
+                      onKeyDown={handleKeyPress}
                       type="number"
                       value={Data?.pincode ?? ""}
                       placeholder="Pincode"
@@ -421,7 +444,7 @@ export default function Doctoradminregistration2() {
       </div>
 
 
-
+      {/* mobile ---------------------------------------------------------------- */}
       <div className="doctoradminregistration mobile ">
         <div className="docadminhead">
           <h1>Doctor Registration</h1>
@@ -431,6 +454,7 @@ export default function Doctoradminregistration2() {
             <div>
               <h4>Qualification</h4>
               <input
+                className="mob_inputs"
                 type="text"
                 value={Data?.qualification}
                 onChange={handleChange}
@@ -520,17 +544,13 @@ export default function Doctoradminregistration2() {
               <h4>Practice started year</h4>
 
 
-              <input
-                type="number"
-                maxLength={4}
-                name="experience"
-                value={Data?.experience}
-                onChange={handleChange}
-              />
+              <DatePicker disableFuture value={dayjs(Data.experience)} name="experience" onChange={handleYearChange} sx={{ width: "40vw", background: "#f6f6f966", border: "none", boxSizing: "border-box", borderRadius: "0.5vw" }} views={['year']} className="date-picker" />
+
             </div>
             <div>
               <h4>Registration Number</h4>
               <input
+                className="mob_inputs"
                 type="text"
                 name="registration_no"
                 value={Data?.registration_no}
@@ -577,7 +597,9 @@ export default function Doctoradminregistration2() {
             <div className="doctoradminregistration_input3 ">
               <h4>Office Number</h4>
               <input
-                type="text"
+                onKeyDown={handleKeyPress}
+                type="number"
+                className="mob_inputs"
                 name="phone_office"
                 value={Data?.phone_office}
                 onChange={handleChange}
@@ -625,8 +647,9 @@ export default function Doctoradminregistration2() {
                 <div className="doctoradminregistration_input6 ">
                   <div style={{ display: "flex", gap: "20px" }}>
                     <div style={{ position: "relative" }}>
-
                       <input
+                        className="mob_inputs"
+                        onKeyDown={handleKeyPress}
                         type="number"
                         value={Data?.pincode ?? ""}
                         placeholder="Pincode"

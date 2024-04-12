@@ -105,10 +105,10 @@ export default function Doctoradminregistration1() {
 
     if (name === "phone") {
       if (/^\d{10}$/.test(value) === false) {
-        setValidationErrors((prevErrors) => ({
-          ...prevErrors,
-          [name]: "Please enter a valid 10 digit number",
-        }));
+        // setValidationErrors((prevErrors) => ({
+        //   ...prevErrors,
+        //   [name]: "Please enter a valid 10 digit number",
+        // }));
       } else {
         setValidationErrors((prevErrors) => ({
           ...prevErrors,
