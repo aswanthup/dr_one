@@ -382,6 +382,16 @@ input[type="checkbox"]:disabled {
 
 
 
+.License input{
+  background-color: rgba(246, 246, 249, .4);
+  border-radius: .5vw;
+  width: 44vw;
+  height: 3vw;
+  color: white;
+  padding: 1vw;
+  letter-spacing: 2px;
+  margin-top: 1vw;
+}
 
 
 
@@ -538,16 +548,6 @@ input[type="checkbox"]:disabled {
 
 
 
-.License input{
-  background-color: rgba(246, 246, 249, .4);
-  border-radius: .5vw;
-  width: 44vw;
-  height: 3vw;
-  color: white;
-  padding: 1vw;
-  letter-spacing: 2px;
-  margin-top: 1vw;
-}
 
 
 
