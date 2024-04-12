@@ -28,8 +28,8 @@
   height: 68vh;
 }
 
-.doctoradminregistration_input {
-  .inputs {
+.doctoradminregistration_inputs {
+
 
     background-color: rgba(246, 246, 249, 0.4);
     border-radius: 0.5vw;
@@ -39,7 +39,7 @@
     letter-spacing: 2px;
     width: 30vw;
     margin-top: 1vw;
-  }
+
 }
 
 .DoctorRegInfo {

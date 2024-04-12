@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import "../Doctoradmin/doctoradminregistration2.css";
+import "./doctoradminregistration2.css";
 import { useState, useEffect } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -13,7 +13,7 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import dayjs from "dayjs";
-import { useMediaQuery } from "react-responsive";
+// import { useMediaQuery } from "react-responsive";
 
 
 export default function Doctoradminregistration2() {
@@ -189,7 +189,7 @@ export default function Doctoradminregistration2() {
             <div>
               <h4>Qualification</h4>
               <input
-                className="inputs"
+                className="doctoradminregistration_inputs"
                 maxLength={50}
                 type="text"
                 autoComplete="off"
@@ -287,7 +287,7 @@ export default function Doctoradminregistration2() {
             <div>
               <h4>Registration Number</h4>
               <input
-                className="inputs"
+                className="doctoradminregistration_inputs"
                 type="text"
                 autoComplete="off"
                 name="registration_no"
@@ -559,7 +559,7 @@ export default function Doctoradminregistration2() {
                   field: {
                     readOnly: true
                   }
-                }} name="experience" onChange={handleYearChange} sx={{ width: "30vw", background: "#f6f6f966", border: "none", boxSizing: "border-box", borderRadius: "0.5vw" }} views={['year']} className="date-picker"
+                }} name="experience" onChange={handleYearChange} sx={{ width: "30vw", background: "#f6f6f966", border: "none", boxSizing: "border-box", borderRadius: "1vw" }} views={['year']} className="date-picker"
                 />
               </LocalizationProvider>
             </div>
