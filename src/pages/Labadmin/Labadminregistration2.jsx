@@ -206,6 +206,13 @@ export default function Labadminregistration2() {
       toast.info("Please input your pincode")
     }
   }
+  const handleKeyPress = (event) => {
+    // Check if the pressed key is '.' or '-'
+    if (event?.key === '.' || event?.key === '-' || event?.key === 'e' || event?.key === '+' || event?.key === 'E') {
+      // Prevent the default behavior for these keys
+      event.preventDefault();
+    }
+  };
   return (
 
     <div>
@@ -259,9 +266,9 @@ export default function Labadminregistration2() {
 
           <div>
 
-            <div className='name-progrss flex'> 
-            <h4>Features </h4>
-            <h4>{`${LabAdminRg?.features?.length ? LabAdminRg?.features?.length : 0}/${Features?.length}`}</h4>
+            <div className='name-progrss flex'>
+              <h4>Features </h4>
+              <h4>{`${LabAdminRg?.features?.length ? LabAdminRg?.features?.length : 0}/${Features?.length}`}</h4>
             </div>
 
 
@@ -283,11 +290,11 @@ export default function Labadminregistration2() {
 
           <div>
 
-          <div className='name-progrss flex'> 
-            <h4>Services</h4>
-            <h4> {`${LabAdminRg?.Services?.length ? LabAdminRg?.Services?.length : 0}/${Services?.length}`}</h4>
-          </div>
-            
+            <div className='name-progrss flex'>
+              <h4>Services</h4>
+              <h4> {`${LabAdminRg?.Services?.length ? LabAdminRg?.Services?.length : 0}/${Services?.length}`}</h4>
+            </div>
+
             <button type='button' onClick={() => { openModal({ services: true }) }} className='hospital-second-section-Div flex'>{LabAdminRg?.Services?.length > 0 ?
               <div className='hospital-second-section-Div-Map'>
                 {LabAdminRg?.Services?.map((ele, index) =>
@@ -314,7 +321,7 @@ export default function Labadminregistration2() {
 
             <div className='pin-input' >
               <h4>Pincode</h4>
-              <input className='hospitalAdminInput' value={LabAdminRg?.pincode || ''} onChange={inputChanges} type="number" maxLength={6} name="pincode" />
+              <input onKeyDown={handleKeyPress} className='hospitalAdminInput' value={LabAdminRg?.pincode || ''} onChange={inputChanges} type="number" maxLength={6} name="pincode" />
               <div className="main-waring-section main-waring-section4 flex ">
                 <p className="register-number-warning">{Errors?.pincode}</p>
               </div>

@@ -13,6 +13,7 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import dayjs from "dayjs";
+import { useMediaQuery } from "react-responsive";
 
 
 export default function Doctoradminregistration2() {
@@ -31,7 +32,7 @@ export default function Doctoradminregistration2() {
   //     "password", "phone",
   //     "secondname"]
   //   if (names.some((ele) => !Data[ele])) {
-  //     navigate('/')
+  //     navigate('/doctoradminregistration1')
   //   }
 
   // }, [])
@@ -53,20 +54,22 @@ export default function Doctoradminregistration2() {
     });
   };
   const handleYearChange = (e) => {
-    console.log(e)
+    console.log(e); // Log the entire event object for debugging
+    // Access the year value based on data structure and library
+    const year = e?.$y?.year || e?.$y; // Example: handle nested objects (adjust based on library)
     setData({
       ...Data,
-      experience: e.$y,
+      experience: year,
     });
-  }
+  };
   console.log("dataaaaaaaaaa", Data);
   const handleSubmit = (e) => {
     e.preventDefault();
     setloader(true)
     // Check if any other validations fail
-    if (!Data?.name || !Data?.email || !Data?.phone || !Data?.pincode || !Data?.sector || Data?.gender || Data?.type || Data?.experience || Data?.qualification || Data?.registration_no) {
+    if (!Data?.name || !Data?.email || !Data?.phone || !Data?.pincode || !Data?.sector || !Data?.gender || !Data?.type || !Data?.experience || !Data?.qualification || !Data?.registration_no) {
       setloader(false)
-      // console.log("chekcingggggg", Data.name, Data.email, Data.phone, Data.phone_office, Data?.pincode, Data.sector)
+      console.log("chekcingggggg", Data?.name, Data?.email, Data?.phone, Data?.pincode, Data?.sector, Data?.gender, Data?.type, Data?.experience, Data?.qualification, Data?.registration_no)
       toast.error("Please fill in all the required fields.");
       return;
     }
@@ -166,6 +169,8 @@ export default function Doctoradminregistration2() {
   const handleClose = () => {
     setloader(false)
   }
+  const isMobile = useMediaQuery({ maxWidth: 980 })
+
   return (
     <>
       <ToastContainer>
@@ -273,10 +278,7 @@ export default function Doctoradminregistration2() {
           <div className="doctoradminregistration_input2 flex">
             <div style={{ display: "flex", justifyContent: "space-between", flexDirection: "column" }}>
               <h4>Practice started year</h4>
-              {/* <LocalizationProvider dateAdapter={AdapterDayjs}> */}
-
-              <DatePicker disableFuture value={dayjs(Data.experience)} name="experience" onChange={handleYearChange} sx={{ width: "30vw", background: "#f6f6f966", border: "none", boxSizing: "border-box", borderRadius: "0.5vw" }} views={['year']} className="date-picker" />
-              {/* </LocalizationProvider> */}
+              <DatePicker disableFuture value={dayjs(Data?.experience)} name="experience" onChange={handleYearChange} sx={{ width: isMobile ? "100%" : "30vw", background: "#f6f6f966", border: "none", boxSizing: "border-box", borderRadius: "0.5vw" }} views={['year']} className="date-picker" />
             </div>
             <div>
               <h4>Registration Number</h4>
@@ -370,7 +372,7 @@ export default function Doctoradminregistration2() {
 
 
             <div className="doctoradminregistration_input4  flex">
-              <h4>Address</h4>
+              <h4>Consultation at</h4>
 
               <div className="doctoradminregistration_input7  flex">
                 <textarea
@@ -542,8 +544,6 @@ export default function Doctoradminregistration2() {
           <div className="doctoradminregistration_input2 ">
             <div>
               <h4>Practice started year</h4>
-
-
               <DatePicker disableFuture value={dayjs(Data.experience)} name="experience" onChange={handleYearChange} sx={{ width: "40vw", background: "#f6f6f966", border: "none", boxSizing: "border-box", borderRadius: "0.5vw" }} views={['year']} className="date-picker" />
 
             </div>

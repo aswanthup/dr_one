@@ -154,7 +154,7 @@ export default function Labadminregistration1() {
 
 
               <div className="hospitalname_input">
-                <h4 className="pass-con">Laboratory Name</h4>
+                <h4 className="">Laboratory Name</h4>
                 <input
                   maxLength={100}
                   value={LabAdminRg?.name} onChange={inputOnchanges} name="name" type="text" />

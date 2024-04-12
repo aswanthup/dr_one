@@ -19,6 +19,7 @@
 
 .doctoradminregistration_input h4 {
   color: white;
+  margin-top: 10px;
 }
 
 .doctoradminregistration_input {
@@ -27,8 +28,8 @@
   height: 68vh;
 }
 
-.doctoradminregistration_input  {
-  .inputs{
+.doctoradminregistration_input {
+  .inputs {
 
     background-color: rgba(246, 246, 249, 0.4);
     border-radius: 0.5vw;
@@ -46,23 +47,25 @@
   font-size: 1rem;
   letter-spacing: 1px;
 }
-.text_area_section{
+
+.text_area_section {
   display: flex;
   justify-content: space-between;
 }
 
-.text_area_section input{
+.text_area_section input {
   background-color: rgba(246, 246, 249, 0.4);
-    border-radius: 0.5vw;
-    height: 3vw;
-    color: white;
-    padding: 1vw;
-    letter-spacing: 2px;
-    width: 30vw;
-    margin-top: 1vw;
+  border-radius: 0.5vw;
+  height: 3vw;
+  color: white;
+  padding: 1vw;
+  letter-spacing: 2px;
+  width: 30vw;
+  margin-top: 1vw;
 }
-.date-picker input{
-  color:white;
+
+.date-picker input {
+  color: white;
   border: none;
   border-radius: 0.5vw;
 }
@@ -202,8 +205,8 @@
 
 
   .doctoradminregistration {
-    height:fit-content;
-  
+    height: fit-content;
+
   }
 
 
@@ -225,7 +228,7 @@
   }
 
 
-  .doctoradminregistration_input{
+  .doctoradminregistration_input {
 
     .mob_inputs {
       background-color: rgba(246, 246, 249, 0.4);
@@ -268,6 +271,12 @@
     padding: 1vw;
     letter-spacing: 2px;
     width: 100%;
+  }
+
+  .doctoradminregistration_input2 .css-1lavnwi-MuiFormControl-root-MuiTextField-root {
+    width: 100%;
+    height: 40px;
+    background-color: transparent;
   }
 
   .doctoradminregistration_input4 textarea {
@@ -323,4 +332,3 @@
     color: white;
   }
 }
-

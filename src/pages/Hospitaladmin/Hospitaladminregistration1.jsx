@@ -147,7 +147,7 @@ export default function Hospitaladminregistration1() {
               </div>
 
               <div className="hospitalname_input">
-                <h4 className="pass-con">Hospital Name</h4>
+                <h4 className="">Hospital Name</h4>
                 <input maxLength={100} value={HospitalAdminRg?.name} onChange={inputOnchanges} name="name" type="text" />
 
               </div>

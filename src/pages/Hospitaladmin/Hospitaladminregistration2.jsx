@@ -43,11 +43,11 @@ export default function Hospitaladminregistration2() {
 
         ]
 
-        // useEffect(() => {
-        //         if (!HospitalAdminRg?.name && !HospitalAdminRg?.contact_no && !HospitalAdminRg?.password && !HospitalAdminRg?.email && !HospitalAdminRg?.repassword) {
-        //                 navigate("/hospitaladminregistration1")
-        //         }
-        // }, [])
+        useEffect(() => {
+                if (!HospitalAdminRg?.name && !HospitalAdminRg?.contact_no && !HospitalAdminRg?.password && !HospitalAdminRg?.email && !HospitalAdminRg?.repassword) {
+                        navigate("/hospitaladminregistration1")
+                }
+        }, [])
 
         const toastifyFun = (value, success) => {
                 if (!success?.success) {
@@ -204,6 +204,13 @@ export default function Hospitaladminregistration2() {
                         toast.info("Please input your pincode")
                 }
         }
+        const handleKeyPress = (event) => {
+                // Check if the pressed key is '.' or '-'
+                if (event?.key === '.' || event?.key === '-' || event?.key === 'e' || event?.key === '+' || event?.key === 'E') {
+                        // Prevent the default behavior for these keys
+                        event.preventDefault();
+                }
+        };
         console.log("HospitalAdminRg>>>>", HospitalAdminRg)
         return (
                 <div>
@@ -284,8 +291,8 @@ export default function Hospitaladminregistration2() {
 
                                         <div> <div className='name-progrss flex'>
                                                 <h4>Features</h4>
-                                               <h4> {`${HospitalAdminRg?.features?.length ? HospitalAdminRg?.features?.length : 0}/${Features?.length}`}</h4>
-                                                </div>
+                                                <h4> {`${HospitalAdminRg?.features?.length ? HospitalAdminRg?.features?.length : 0}/${Features?.length}`}</h4>
+                                        </div>
                                                 <button type='button' onClick={() => { openModal() }} className='hospital-second-section-Div flex'> {HospitalAdminRg?.features?.length > 0 ?
                                                         <div className='hospital-second-section-Div-Map'>
                                                                 {HospitalAdminRg?.features?.map((ele, index) =>
@@ -295,10 +302,10 @@ export default function Hospitaladminregistration2() {
                                                         : <h4>Select Features</h4>}</button>
                                         </div>
 
-                                        <div>  
-                                                <div className='name-progrss flex'> 
-                                                <h4>Specialties </h4>
-                                               <h4>{`${HospitalAdminRg?.specialties?.length ? HospitalAdminRg?.specialties?.length : 0}/${specialties?.length}`}</h4>
+                                        <div>
+                                                <div className='name-progrss flex'>
+                                                        <h4>Specialties </h4>
+                                                        <h4>{`${HospitalAdminRg?.specialties?.length ? HospitalAdminRg?.specialties?.length : 0}/${specialties?.length}`}</h4>
                                                 </div>
                                                 <button type='button' onClick={() => { openModal({ specialties: true }) }} className='hospital-second-section-Div flex'>{HospitalAdminRg?.specialties?.length > 0 ?
                                                         <div className='hospital-second-section-Div-Map'>
@@ -321,7 +328,7 @@ export default function Hospitaladminregistration2() {
                                         <div className='flex pin-lo'>
                                                 <div className='pin-input' >
                                                         <h4>Pincode</h4>
-                                                        <input value={HospitalAdminRg?.pincode} onChange={handlePostChange} type="number" name="pincode" />
+                                                        <input onKeyDown={handleKeyPress} value={HospitalAdminRg?.pincode} onChange={handlePostChange} type="number" name="pincode" />
                                                         <div className="main-waring-section main-waring-section4 flex ">
                                                                 <p className="register-number-warning">{Errors?.pincode}</p>
                                                         </div>
