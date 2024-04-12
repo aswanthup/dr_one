@@ -389,7 +389,7 @@ export default function Labadminregistration2() {
         <div className='flex hospital-adress-about'>
 
           <div className=''>
-            <h4 className="pass-con margin-about">About</h4>
+            <h4 className=" margin-about">About</h4>
 
             <textarea maxLength={500} value={LabAdminRg?.about || ''} onChange={inputChanges} name="about" id="" cols="30" rows="10"></textarea>
           </div>
