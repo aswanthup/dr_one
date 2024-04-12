@@ -94,7 +94,7 @@ export default function Hospitaladminregistration1() {
     }
 
     if (HospitalAdminRg?.contact_no && !PhonePattern.test(HospitalAdminRg.contact_no)) {
-      errors.phone = "Please enter a valid phone number.";
+      // errors.phone = "Please enter a valid phone number.";
     }
 
     if (HospitalAdminRg?.password && HospitalAdminRg?.repassword && HospitalAdminRg.password !== HospitalAdminRg.repassword) {

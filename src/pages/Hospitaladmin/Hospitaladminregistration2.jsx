@@ -253,7 +253,7 @@ export default function Hospitaladminregistration2() {
 
 
                                         <div>
-                                        <h4>Type</h4>
+                                                <h4>Type</h4>
                                                 <select
                                                         type="text"
                                                         onChange={inputChanges}
@@ -275,7 +275,7 @@ export default function Hospitaladminregistration2() {
                                                         ))}
                                                 </select>
 
-                                              
+
                                         </div>
 
 
@@ -283,7 +283,7 @@ export default function Hospitaladminregistration2() {
 
 
                                         <div>
-                                                <h4>Features</h4>
+                                                <h4>Features {`${HospitalAdminRg?.features?.length ? HospitalAdminRg?.features?.length : 0}/${Features?.length}`}</h4>
                                                 <button type='button' onClick={() => { openModal() }} className='hospital-second-section-Div flex'> {HospitalAdminRg?.features?.length > 0 ?
                                                         <div className='hospital-second-section-Div-Map'>
                                                                 {HospitalAdminRg?.features?.map((ele, index) =>
@@ -293,12 +293,8 @@ export default function Hospitaladminregistration2() {
                                                         : <h4>Select Features</h4>}</button>
                                         </div>
 
-
-
-
-
                                         <div>
-                                                <h4>Specialties</h4>
+                                                <h4>Specialties {`${HospitalAdminRg?.specialties?.length ? HospitalAdminRg?.specialties?.length : 0}/${specialties?.length}`}</h4>
                                                 <button type='button' onClick={() => { openModal({ specialties: true }) }} className='hospital-second-section-Div flex'>{HospitalAdminRg?.specialties?.length > 0 ?
                                                         <div className='hospital-second-section-Div-Map'>
                                                                 {HospitalAdminRg?.specialties?.map((ele, index) =>
@@ -360,8 +356,8 @@ export default function Hospitaladminregistration2() {
 
 
 
-                                        <div   className='License'>
-                                        <h4>License Number</h4>
+                                        <div className='License'>
+                                                <h4>License Number</h4>
                                                 <input value={HospitalAdminRg?.lisence_no || ''} onChange={inputChanges} type="text" maxLength={30} name='lisence_no' />
                                         </div>
 

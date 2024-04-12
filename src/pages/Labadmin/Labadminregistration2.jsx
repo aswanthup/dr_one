@@ -257,11 +257,8 @@ export default function Labadminregistration2() {
           </div>
 
 
-
-
-
           <div>
-            <h4>Features</h4>
+            <h4>Features {`${LabAdminRg?.features?.length ? LabAdminRg?.features?.length : 0}/${Features?.length}`}</h4>
             <button type='button' onClick={() => { openModal() }} className='hospital-second-section-Div flex'> {LabAdminRg?.features?.length > 0 ?
               <div className='hospital-second-section-Div-Map'>
                 {LabAdminRg?.features?.map((ele, index) =>
@@ -271,12 +268,8 @@ export default function Labadminregistration2() {
               : <h4>Select Features</h4>}</button>
           </div>
 
-
-
-
-
           <div>
-            <h4>Services</h4>
+            <h4>Services {`${LabAdminRg?.Services?.length ? LabAdminRg?.Services?.length : 0}/${Services?.length}`}</h4>
             <button type='button' onClick={() => { openModal({ services: true }) }} className='hospital-second-section-Div flex'>{LabAdminRg?.Services?.length > 0 ?
               <div className='hospital-second-section-Div-Map'>
                 {LabAdminRg?.Services?.map((ele, index) =>
@@ -310,7 +303,7 @@ export default function Labadminregistration2() {
             </div>
 
 
-             <div className='lo-input'>
+            <div className='lo-input'>
               <h4>Location</h4>
               <select
                 type="text"

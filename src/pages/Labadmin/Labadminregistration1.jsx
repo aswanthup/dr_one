@@ -89,7 +89,7 @@ export default function Labadminregistration1() {
     }
 
     if (LabAdminRg?.contact_no && !PhonePattern.test(LabAdminRg.contact_no)) {
-      errors.phone = "Please enter a valid phone number.";
+      // errors.phone = "Please enter a valid phone number.";
     }
 
     if (LabAdminRg?.password && LabAdminRg?.repassword && LabAdminRg.password !== LabAdminRg.repassword) {
