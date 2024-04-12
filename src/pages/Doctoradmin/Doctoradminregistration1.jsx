@@ -172,6 +172,22 @@ export default function Doctoradminregistration1() {
   return (
     <div>
       <div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         <div className="main-register flex">
           <div className="register-png-div">
             <img src="images/Group 72.png" alt="" />
@@ -238,7 +254,7 @@ export default function Doctoradminregistration1() {
                     value={Data?.phone}
                     onChange={handleChange}
                   />
-                  <div className="main-waring-section">
+                  <div className="main-waring-section  main-waring-section4 ">
                     {validationErrors.phone && (
                       <p className="register-number-warning">
                         {validationErrors.phone}
@@ -390,6 +406,14 @@ export default function Doctoradminregistration1() {
             <img src="images/Group 73.png" alt="" />
           </div>
         </div>
+
+
+
+
+
+
+
+
       </div>
       <ToastContainer />
     </div>
