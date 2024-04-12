@@ -7,6 +7,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { Bounce, ToastContainer, toast } from 'react-toastify'
 import { port } from '../../config'
 import { Backdrop, CircularProgress, Modal } from '@mui/material'
+import { Loader } from '../../components/Loader/Loader'
 
 export default function Hospitaladminregistration2() {
 
@@ -43,11 +44,11 @@ export default function Hospitaladminregistration2() {
 
         ]
 
-        // useEffect(() => {
-        //         if (!HospitalAdminRg?.name && !HospitalAdminRg?.contact_no && !HospitalAdminRg?.password && !HospitalAdminRg?.email && !HospitalAdminRg?.repassword) {
-        //                 navigate("/hospitaladminregistration1")
-        //         }
-        // }, [])
+        useEffect(() => {
+                if (!HospitalAdminRg?.name && !HospitalAdminRg?.contact_no && !HospitalAdminRg?.password && !HospitalAdminRg?.email && !HospitalAdminRg?.repassword) {
+                        navigate("/hospitaladminregistration1")
+                }
+        }, [])
 
         const toastifyFun = (value, success) => {
                 if (!success?.success) {
@@ -214,16 +215,7 @@ export default function Hospitaladminregistration2() {
         console.log("HospitalAdminRg>>>>", HospitalAdminRg)
         return (
                 <div>
-                        <Backdrop
-                                sx={{
-                                        color: "#fff",
-                                        zIndex: (theme) => theme.zIndex.drawer + 1,
-                                }}
-                                open={loader}
-                                onClick={handleClose}
-                        >
-                                <CircularProgress color="inherit" />
-                        </Backdrop>
+                        {loader ? <Loader /> : ""}
                         <ToastContainer />
 
                         <div className='hospitaladminregistration2 flex'>
@@ -241,7 +233,7 @@ export default function Hospitaladminregistration2() {
                                                         <div className='image_card_ho_ad_add_image flex'>
                                                                 <label for="inputTag">
                                                                         <i class="ri-add-line"></i>
-                                                                        <input id="inputTag" type="file" />
+                                                                        <input autoComplete="off" id="inputTag" type="file" />
                                                                 </label>
                                                         </div>
 
@@ -325,16 +317,16 @@ export default function Hospitaladminregistration2() {
 
 
                                 <div className='hospitaladminregistration_second flex' >
-                                <div className='License'>
+                                        <div className='License'>
                                                 <h4>License Number</h4>
-                                                <input value={HospitalAdminRg?.lisence_no || ''} onChange={inputChanges} type="text" maxLength={30} name='lisence_no' />
+                                                <input autoComplete="off" value={HospitalAdminRg?.lisence_no || ''} onChange={inputChanges} type="text" maxLength={30} name='lisence_no' />
                                         </div>
 
 
                                         <div className='flex pin-lo'>
                                                 <div className='pin-input' >
                                                         <h4>Pincode</h4>
-                                                        <input onKeyDown={handleKeyPress} value={HospitalAdminRg?.pincode} onChange={handlePostChange} type="number" name="pincode" />
+                                                        <input autoComplete="off" onKeyDown={handleKeyPress} value={HospitalAdminRg?.pincode} onChange={handlePostChange} type="number" name="pincode" />
                                                         <div className="main-waring-section main-waring-section4 flex ">
                                                                 <p className="register-number-warning">{Errors?.pincode}</p>
                                                         </div>
@@ -374,7 +366,7 @@ export default function Hospitaladminregistration2() {
 
 
 
-                                       
+
 
 
 
@@ -418,7 +410,7 @@ export default function Hospitaladminregistration2() {
                                                                 {ModalOpen?.features ?
                                                                         Features.map((ele) =>
                                                                                 <label class="form-control flex">
-                                                                                        <input value={ele?.name || ''}
+                                                                                        <input autoComplete="off" value={ele?.name || ''}
                                                                                                 checked={HospitalAdminRg?.features?.includes(ele.name)}
                                                                                                 onChange={(e) => { storeArray(e, { features: true }) }} type="checkbox" name="checkbox" />
                                                                                         <h4 className='select-new'>{ele.name}</h4>
@@ -427,7 +419,7 @@ export default function Hospitaladminregistration2() {
                                                                         :
                                                                         specialties.map((ele) =>
                                                                                 <label class="form-control flex">
-                                                                                        <input value={ele?.name || ''}
+                                                                                        <input autoComplete="off" value={ele?.name || ''}
                                                                                                 checked={HospitalAdminRg?.specialties?.includes(ele.name)}
                                                                                                 onChange={(e) => { storeArray(e, { specialties: true }) }} type="checkbox" name="checkbox" />
                                                                                         <h4 className='select-new'>{ele.name}</h4>

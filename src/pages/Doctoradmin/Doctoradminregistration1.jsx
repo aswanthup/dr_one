@@ -105,10 +105,10 @@ export default function Doctoradminregistration1() {
 
     if (name === "phone") {
       if (/^\d{10}$/.test(value) === false) {
-        // setValidationErrors((prevErrors) => ({
-        //   ...prevErrors,
-        //   [name]: "Please enter a valid 10 digit number",
-        // }));
+        setValidationErrors((prevErrors) => ({
+          ...prevErrors,
+          [name]: "Please enter a valid 10 digit number",
+        }));
       } else {
         setValidationErrors((prevErrors) => ({
           ...prevErrors,
@@ -145,7 +145,7 @@ export default function Doctoradminregistration1() {
     if (isInValid) {
       toast.info("All fields required");
     } else if (isValidationError) {
-      toast.info("Check mobile email and password");
+      toast.info("Check mobile, email and password");
     } else {
       navigate("/doctoradminregistration2", { state: Data });
     }
@@ -195,7 +195,7 @@ export default function Doctoradminregistration1() {
 
           <div className="registration-form">
             <div className="do-title">
-              <h1 style={{ color: "white" }}>Doctor Register</h1>
+              <h1 style={{ color: "white" }}>Doctor Registeration</h1>
             </div>
 
             <div className="upload-image flex">
@@ -226,6 +226,7 @@ export default function Doctoradminregistration1() {
                   <input
                     type="text"
                     name="name"
+                    autoComplete="off"
                     value={Data?.name}
                     maxLength={100}
                     onChange={handleChange}
@@ -236,6 +237,7 @@ export default function Doctoradminregistration1() {
                   <input
                     type="text"
                     name="secondname"
+                    autoComplete="off"
                     value={Data?.secondname}
                     maxLength={50}
                     onChange={handleChange}
@@ -250,16 +252,17 @@ export default function Doctoradminregistration1() {
                     type="number"
                     maxLength={10}
                     name="phone"
+                    autoComplete="off"
                     onKeyPress={handleKeyPress}
                     value={Data?.phone}
                     onChange={handleChange}
                   />
                   <div className="main-waring-section  main-waring-section4 ">
-                    {validationErrors.phone && (
+                    {/* {validationErrors.phone && (
                       <p className="register-number-warning">
                         {validationErrors.phone}
                       </p>
-                    )}
+                    )} */}
                     <p className="register-number-warning">
                       This number will be kept confidential and shall be used for OTP verifications .
                     </p>
@@ -273,6 +276,7 @@ export default function Doctoradminregistration1() {
                     name="email"
                     maxLength={50}
                     value={Data?.email}
+                    autoComplete="off"
                     onChange={handleChange}
                     pattern="^[^\s@]+@[^\s@]+\.[^\s@]+$"
                   />
@@ -406,12 +410,6 @@ export default function Doctoradminregistration1() {
             <img src="images/Group 73.png" alt="" />
           </div>
         </div>
-
-
-
-
-
-
 
 
       </div>

@@ -25,17 +25,17 @@ export default function Doctoradminregistration2() {
   const [addressdata, setAddressdata] = useState({});
   const [loader, setloader] = useState(false)
 
-  // useEffect(() => {
-  //   const names = ["confirmPassword",
-  //     "email",
-  //     "name",
-  //     "password", "phone",
-  //     "secondname"]
-  //   if (names.some((ele) => !Data[ele])) {
-  //     navigate('/doctoradminregistration1')
-  //   }
+  useEffect(() => {
+    const names = ["confirmPassword",
+      "email",
+      "name",
+      "password", "phone",
+      "secondname"]
+    if (names.some((ele) => !Data[ele])) {
+      navigate('/doctoradminregistration1')
+    }
 
-  // }, [])
+  }, [])
   const handleKeyPress = (event) => {
     // Check if the pressed key is '.' or '-'
     if (event?.key === '.' || event?.key === '-' || event?.key === 'e' || event?.key === '+' || event?.key === 'E') {
@@ -54,14 +54,12 @@ export default function Doctoradminregistration2() {
     });
   };
   const handleYearChange = (e) => {
-    console.log(e); // Log the entire event object for debugging
-    // Access the year value based on data structure and library
-    const year = e?.$y?.year || e?.$y; // Example: handle nested objects (adjust based on library)
+    console.log(e?.$y)
     setData({
       ...Data,
-      experience: year,
+      experience: e?.$y,
     });
-  };
+  }
   console.log("dataaaaaaaaaa", Data);
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -115,7 +113,6 @@ export default function Doctoradminregistration2() {
         .get(`https://api.postalpincode.in/pincode/${pinCode}`)
         .then((res) => {
           const { PostOffice } = res?.data[0]
-
           setData({
             ...Data,
             Postoffice: PostOffice,
@@ -169,7 +166,6 @@ export default function Doctoradminregistration2() {
   const handleClose = () => {
     setloader(false)
   }
-  const isMobile = useMediaQuery({ maxWidth: 980 })
 
   return (
     <>
@@ -196,6 +192,7 @@ export default function Doctoradminregistration2() {
                 className="inputs"
                 maxLength={50}
                 type="text"
+                autoComplete="off"
                 value={Data?.qualification}
                 onChange={handleChange}
                 name="qualification"
@@ -277,14 +274,22 @@ export default function Doctoradminregistration2() {
 
           <div className="doctoradminregistration_input2 flex">
             <div style={{ display: "flex", justifyContent: "space-between", flexDirection: "column" }}>
-              <h4>Practice started year</h4>
-              <DatePicker disableFuture value={dayjs(Data?.experience)} name="experience" onChange={handleYearChange} sx={{ width: isMobile ? "100%" : "30vw", background: "#f6f6f966", border: "none", boxSizing: "border-box", borderRadius: "0.5vw" }} views={['year']} className="date-picker" />
+              <h4>Year Of Graduation</h4>
+              <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <DatePicker disableFuture slotProps={{
+                  field: {
+                    readOnly: true
+                  }
+                }} name="experience" onChange={handleYearChange} sx={{ width: "30vw", background: "#f6f6f966", border: "none", boxSizing: "border-box", borderRadius: "0.5vw" }} views={['year']} className="date-picker"
+                />
+              </LocalizationProvider>
             </div>
             <div>
               <h4>Registration Number</h4>
               <input
                 className="inputs"
                 type="text"
+                autoComplete="off"
                 name="registration_no"
                 value={Data?.registration_no}
                 onChange={handleChange}
@@ -295,6 +300,7 @@ export default function Doctoradminregistration2() {
               <select
                 type="text"
                 name="specialization"
+                autoComplete="off"
                 value={Data?.specialization}
                 onChange={handleChange}
                 className="doctoradminregistration_gender"
@@ -319,13 +325,14 @@ export default function Doctoradminregistration2() {
 
           <div className="text_area_section flex">
             <div className="doctoradminregistration_input4 flex">
-              <h4>About</h4>
+              <h4 className="">About</h4>
 
               <div className="doctoradminregistration_input7 flex">
                 <textarea
                   name="about"
                   value={Data?.about}
                   id=""
+                  autoComplete="off"
                   onChange={handleChange}
                   maxLength={500}
                 >
@@ -338,6 +345,7 @@ export default function Doctoradminregistration2() {
                     value={Data?.phone_office ?? ""}
                     placeholder="Office Number"
                     maxLength={10}
+                    autoComplete="off"
                     name="phone_office"
                     onChange={handleChange}
                   />
@@ -372,10 +380,10 @@ export default function Doctoradminregistration2() {
 
 
             <div className="doctoradminregistration_input4  flex">
-              <h4>Consultation at</h4>
-
+              <h4>Consultation Address</h4>
               <div className="doctoradminregistration_input7  flex">
                 <textarea
+                  autoComplete="off"
                   name="address"
                   value={Data?.address}
                   id=""
@@ -390,6 +398,7 @@ export default function Doctoradminregistration2() {
                     <input
                       onKeyDown={handleKeyPress}
                       type="number"
+                      autoComplete="off"
                       value={Data?.pincode ?? ""}
                       placeholder="Pincode"
                       maxLength={6}
@@ -458,6 +467,7 @@ export default function Doctoradminregistration2() {
               <input
                 className="mob_inputs"
                 type="text"
+                autoComplete="off"
                 value={Data?.qualification}
                 onChange={handleChange}
                 name="qualification"
@@ -543,15 +553,22 @@ export default function Doctoradminregistration2() {
 
           <div className="doctoradminregistration_input2 ">
             <div>
-              <h4>Practice started year</h4>
-              <DatePicker disableFuture value={dayjs(Data.experience)} name="experience" onChange={handleYearChange} sx={{ width: "40vw", background: "#f6f6f966", border: "none", boxSizing: "border-box", borderRadius: "0.5vw" }} views={['year']} className="date-picker" />
-
+              <h4>Year Of Graduation</h4>
+              <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <DatePicker disableFuture slotProps={{
+                  field: {
+                    readOnly: true
+                  }
+                }} name="experience" onChange={handleYearChange} sx={{ width: "30vw", background: "#f6f6f966", border: "none", boxSizing: "border-box", borderRadius: "0.5vw" }} views={['year']} className="date-picker"
+                />
+              </LocalizationProvider>
             </div>
             <div>
               <h4>Registration Number</h4>
               <input
                 className="mob_inputs"
                 type="text"
+                autoComplete="off"
                 name="registration_no"
                 value={Data?.registration_no}
                 onChange={handleChange}
@@ -589,6 +606,7 @@ export default function Doctoradminregistration2() {
               <h4>About</h4>
               <textarea
                 name="about"
+                autoComplete="off"
                 value={Data?.about}
                 id=""
                 onChange={handleChange}
@@ -601,6 +619,7 @@ export default function Doctoradminregistration2() {
                 type="number"
                 className="mob_inputs"
                 name="phone_office"
+                autoComplete="off"
                 value={Data?.phone_office}
                 onChange={handleChange}
               />
@@ -634,10 +653,11 @@ export default function Doctoradminregistration2() {
             </div>
 
             <div className="doctoradminregistration_input4 ">
-              <h4>Address</h4>
+              <h4>Consultation Address</h4>
               <div className="doctoradminregistration_inpu ">
                 <textarea
                   name="address"
+                  autoComplete="off"
                   value={Data?.address}
                   id=""
                   onChange={handleChange}
@@ -651,6 +671,7 @@ export default function Doctoradminregistration2() {
                         className="mob_inputs"
                         onKeyDown={handleKeyPress}
                         type="number"
+                        autoComplete="off"
                         value={Data?.pincode ?? ""}
                         placeholder="Pincode"
                         style={{ width: "100%" }}
@@ -672,7 +693,7 @@ export default function Doctoradminregistration2() {
                     >
                       <option selected disabled>
                         {" "}
-                        select place{" "}
+                        select Place{" "}
                       </option>
                       {Data?.Postoffice &&
                         Data?.Postoffice.map((postData, index) => (

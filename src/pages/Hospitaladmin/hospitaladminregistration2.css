@@ -276,7 +276,7 @@ input[type="checkbox"]:disabled {
 .hospitalRegTypeList {
   background-color: rgba(246, 246, 249, .4);
   border-radius: .5vw;
-  width:26vw;
+  width: 26vw;
   height: 3vw;
   margin-top: 1vw;
   color: white;
@@ -346,14 +346,14 @@ input[type="checkbox"]:disabled {
 
 .pin-lo {
   justify-content: space-between;
-  width:44vw;
+  width: 44vw;
   overflow: hidden;
 }
 
 
 
 .pin-input {
-  width:16vw;
+  width: 16vw;
 }
 
 .lo-input select {
@@ -376,13 +376,13 @@ input[type="checkbox"]:disabled {
 }
 
 
-.name-progrss{
+.name-progrss {
   justify-content: space-between;
 }
 
 
 
-.License input{
+.License input {
   background-color: rgba(246, 246, 249, .4);
   border-radius: .5vw;
   width: 44vw;
@@ -396,17 +396,20 @@ input[type="checkbox"]:disabled {
 
 
 @media only screen and (max-width:1024px) {
-  .pin-lo input{
+  .pin-lo input {
     width: 16vw;
   }
 }
+
 @media only screen and (max-width:980px) {
   .Features_card_ho_ad {
     width: 100%;
   }
-  .License{
+
+  .License {
     width: 100%;
   }
+
   .margin-about {
     margin-top: 5vw;
   }
@@ -505,6 +508,7 @@ input[type="checkbox"]:disabled {
 
   .hospital-second-section {
     flex-direction: column;
+    gap: 2vw;
   }
 
   .hospital-second-section input {

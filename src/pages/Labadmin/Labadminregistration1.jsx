@@ -65,9 +65,14 @@ export default function Labadminregistration1() {
 
   const nextPage = () => {
     if (LabAdminRg?.name && LabAdminRg?.contact_no && LabAdminRg?.password && LabAdminRg?.email && LabAdminRg?.repassword) {
-      if (!Errors.password && !Errors.email && !Errors.contact_no && !Errors.password && !Errors.repassword) {
-        navigate("/labadminregistration2")
+      if (Errors.email || Errors.phone) {
+        toast.info("Check mobile, email and password")
+      } else {
+        if (!Errors.password && !Errors.email && !Errors.phone && !Errors.password && !Errors.repassword) {
+          navigate("/labadminregistration2")
+        }
       }
+
     } else {
       toastifyFun("All fields are required")
     }
@@ -89,7 +94,7 @@ export default function Labadminregistration1() {
     }
 
     if (LabAdminRg?.contact_no && !PhonePattern.test(LabAdminRg.contact_no)) {
-      // errors.phone = "Please enter a valid phone number.";
+      errors.phone = "Please enter a valid phone number.";
     }
 
     if (LabAdminRg?.password && LabAdminRg?.repassword && LabAdminRg.password !== LabAdminRg.repassword) {
@@ -115,17 +120,17 @@ export default function Labadminregistration1() {
           </div>
           <div className="registration-form">
             <div>
-              <h1 style={{ color: "white" }}>Laboratory Register</h1>
+              <h1 style={{ color: "white" }}>Laboratory Registeration</h1>
             </div>
             {/* <label className="photo-upload">
              <h4>Upload Photo</h4>
-                <input type="file" />
+                <input  autoComplete="off"type="file" />  
              </div> */}
 
 
             {/* <div id="hospitalname_inputId" className="hospitalname_input">
               <h4>Laboratory Name</h4>
-              <input value={LabAdminRg?.name} onChange={inputOnchanges} name="name" type="text" />
+              <input  autoComplete="off"value={LabAdminRg?.name} onChange={inputOnchanges} name="name" type="text" />
            
               <div className="main-waring-section">
               </div>
@@ -141,7 +146,7 @@ export default function Labadminregistration1() {
                 <h4 className="pass-con">Profile Photo</h4>
                 <label for="inputTag">
                   <h4 className="select-file select-file2 flex">Upload Photo</h4>
-                  <input id="inputTag" type="file" />
+                  <input autoComplete="off" id="inputTag" type="file" />
                 </label>
 
 
@@ -149,13 +154,14 @@ export default function Labadminregistration1() {
 
               {/* <label className="photo-upload">
  <h4>Upload Photo</h4>
-    <input type="file" />
+    <input  autoComplete="off"type="file" />
  </div> */}
 
 
               <div className="hospitalname_input">
                 <h4 className="">Laboratory Name</h4>
                 <input
+                  autoComplete="off"
                   maxLength={100}
                   value={LabAdminRg?.name} onChange={inputOnchanges} name="name" type="text" />
 
@@ -171,27 +177,22 @@ export default function Labadminregistration1() {
             <div className="register-input-section">
               <div className=" register-left-section flex">
                 <div style={{ position: "relative" }}>
-                  <h4 className="pass-con">Phone Number</h4>
-                  <input onKeyPress={handleKeyPress} value={LabAdminRg?.contact_no} onChange={inputOnchanges} name="contact_no" type="number" />
+                  <h4 className="">Phone Number</h4>
+                  <input autoComplete="off" onKeyPress={handleKeyPress} value={LabAdminRg?.contact_no} onChange={inputOnchanges} name="contact_no" type="number" />
                   <div className="main-waring-section">
-                    <p className="register-number-warning">{Errors?.phone}</p>
+                    {/* <p className="register-number-warning">{Errors?.phone}</p> */}
                   </div>
                 </div>
 
                 <div style={{ position: "relative" }}>
-                  <h4 className="pass-con">Email</h4>
+                  <h4 className="">Email</h4>
                   <input
                     maxLength={50}
                     value={LabAdminRg?.email} pattern="^[^\s@]+@[^\s@]+\.[^\s@]+$" name="email" onChange={inputOnchanges} type="email" />
                   <div className="main-waring-section">
                     <p className="register-number-warning">{Errors?.email}</p>
                   </div>
-
-
                 </div>
-
-
-
               </div>
 
 

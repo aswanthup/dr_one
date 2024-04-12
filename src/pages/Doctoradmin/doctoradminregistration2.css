@@ -95,7 +95,10 @@
   padding: 1vw;
   letter-spacing: 2px;
   width: 46vw;
+  margin-top: 1vw;
 }
+
+
 
 .doctoradminregistration_input4 {
   flex-direction: column;
@@ -202,6 +205,11 @@
     display: block;
   }
 
+  .doctoradminregistration_input2 .css-rxt21e-MuiFormControl-root-MuiTextField-root {
+    width: 100%;
+    background-color: transparent;
+
+  }
 
 
   .doctoradminregistration {

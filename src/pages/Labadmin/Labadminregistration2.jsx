@@ -11,6 +11,7 @@ import { TimePicker } from '@mui/x-date-pickers/TimePicker';
 import dayjs from 'dayjs'
 import { Backdrop, CircularProgress, Modal } from '@mui/material'
 import { useMediaQuery } from 'react-responsive';
+import { Loader } from '../../components/Loader/Loader'
 export default function Labadminregistration2() {
   const { LabAdminRg, setLabAdminRg } = useContext(MyContext)
   const [Errors, setErrors] = useState({})
@@ -41,13 +42,13 @@ export default function Labadminregistration2() {
 
   ]
 
-  // useEffect(() => {
-  //   if (!LabAdminRg?.name && !LabAdminRg?.contact_no && !LabAdminRg?.password && !LabAdminRg?.email && !LabAdminRg?.repassword) {
-  //     navigate("/labadminregistration1")
-  //   } else {
-  //     setLabAdminRg({ ...LabAdminRg, timing: { closing_time: '06:00 PM', opening_time: '10:00 AM' } })
-  //   }
-  // }, [])
+  useEffect(() => {
+    if (!LabAdminRg?.name && !LabAdminRg?.contact_no && !LabAdminRg?.password && !LabAdminRg?.email && !LabAdminRg?.repassword) {
+      navigate("/labadminregistration1")
+    } else {
+      setLabAdminRg({ ...LabAdminRg, timing: { closing_time: '06:00 PM', opening_time: '10:00 AM' } })
+    }
+  }, [])
   const toastifyFun = (value, success) => {
     if (!success?.success) {
       toast.info(value, {
@@ -216,17 +217,7 @@ export default function Labadminregistration2() {
   return (
 
     <div>
-      <Backdrop
-        sx={{
-          color: "#fff",
-          zIndex: (theme) => theme.zIndex.drawer + 1,
-        }}
-        open={loader}
-        onClick={handleClose}
-      >
-        <CircularProgress color="inherit" />
-      </Backdrop>
-      <ToastContainer />
+      {loader ? <Loader /> : ""}
 
       <div className='hospitaladminregistration2 flex'>
 
@@ -242,7 +233,7 @@ export default function Labadminregistration2() {
               <div className='image_card_ho_ad_add_image flex'>
                 <label for="inputTag">
                   <i class="ri-add-line"></i>
-                  <input id="inputTag" type="file" />
+                  <input autoComplete="off" id="inputTag" type="file" />
                 </label>
               </div>
             </div>
@@ -260,7 +251,7 @@ export default function Labadminregistration2() {
 
           <div>
             <h4>License Number</h4>
-            <input value={LabAdminRg?.lisence_no || ''} maxLength={50} onChange={inputChanges} type="text" name='lisence_no' />
+            <input autoComplete="off" value={LabAdminRg?.lisence_no || ''} maxLength={50} onChange={inputChanges} type="text" name='lisence_no' />
           </div>
 
 
@@ -305,15 +296,7 @@ export default function Labadminregistration2() {
             </button>
           </div>
 
-
-
-
-
-
         </div>
-
-
-
         <div className='hospitaladminregistration_second flex' >
 
 
@@ -321,7 +304,7 @@ export default function Labadminregistration2() {
 
             <div className='pin-input' >
               <h4>Pincode</h4>
-              <input onKeyDown={handleKeyPress} className='hospitalAdminInput' value={LabAdminRg?.pincode || ''} onChange={inputChanges} type="number" maxLength={6} name="pincode" />
+              <input autoComplete="off" onKeyDown={handleKeyPress} className='hospitalAdminInput' value={LabAdminRg?.pincode || ''} onChange={inputChanges} type="number" maxLength={6} name="pincode" />
               <div className="main-waring-section main-waring-section4 flex ">
                 <p className="register-number-warning">{Errors?.pincode}</p>
               </div>
@@ -436,7 +419,7 @@ export default function Labadminregistration2() {
               {ModalOpen?.features ?
                 Features.map((ele) =>
                   <label class="form-control flex">
-                    <input value={ele?.name || ''}
+                    <input autoComplete="off" value={ele?.name || ''}
                       checked={LabAdminRg?.features?.includes(ele.name)}
                       onChange={(e) => { storeArray(e, { features: true }) }} type="checkbox" name="checkbox" />
                     <h4 className='select-new'>{ele.name}</h4>
@@ -445,7 +428,7 @@ export default function Labadminregistration2() {
                 :
                 Services.map((ele) =>
                   <label class="form-control flex">
-                    <input value={ele?.name || ''}
+                    <input autoComplete="off" value={ele?.name || ''}
                       checked={LabAdminRg?.Services?.includes(ele.name)}
                       onChange={(e) => { storeArray(e, { Services: true }) }} type="checkbox" name="checkbox" />
                     <h4 className='select-new'>{ele.name}</h4>

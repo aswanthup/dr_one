@@ -70,8 +70,12 @@ export default function Hospitaladminregistration1() {
   }, [HospitalAdminRg])
   const nextPage = () => {
     if (HospitalAdminRg?.name && HospitalAdminRg?.contact_no && HospitalAdminRg?.password && HospitalAdminRg?.email && HospitalAdminRg?.repassword) {
-      if (!Errors.password && !Errors.email && !Errors.contact_no && !Errors.password && !Errors.repassword) {
-        navigate("/hospitaladminregistration2")
+      if (Errors.email || Errors.phone) {
+        toast.info("Check mobile, email and password")
+      } else {
+        if (!Errors.password && !Errors.email && !Errors.phone && !Errors.password && !Errors.repassword) {
+          navigate("/hospitaladminregistration2")
+        }
       }
     } else {
       toastifyFun("All fields are required")
@@ -94,7 +98,7 @@ export default function Hospitaladminregistration1() {
     }
 
     if (HospitalAdminRg?.contact_no && !PhonePattern.test(HospitalAdminRg.contact_no)) {
-      // errors.phone = "Please enter a valid phone number.";
+      errors.phone = "Please enter a valid phone number.";
     }
 
     if (HospitalAdminRg?.password && HospitalAdminRg?.repassword && HospitalAdminRg.password !== HospitalAdminRg.repassword) {
@@ -148,7 +152,7 @@ export default function Hospitaladminregistration1() {
 
               <div className="hospitalname_input">
                 <h4 className="">Hospital Name</h4>
-                <input maxLength={100} value={HospitalAdminRg?.name} onChange={inputOnchanges} name="name" type="text" />
+                <input autoComplete="off" maxLength={100} value={HospitalAdminRg?.name} onChange={inputOnchanges} name="name" type="text" />
 
               </div>
             </div>
@@ -172,11 +176,11 @@ export default function Hospitaladminregistration1() {
 
                 <div>
                   <h4 className="pass-con">Phone Number</h4>
-                  <input onKeyPress={handleKeyPress} value={HospitalAdminRg?.contact_no ? HospitalAdminRg?.contact_no : ''} onChange={inputOnchanges} name="contact_no" type="number" />
+                  <input autoComplete="off" onKeyPress={handleKeyPress} value={HospitalAdminRg?.contact_no ? HospitalAdminRg?.contact_no : ''} onChange={inputOnchanges} name="contact_no" type="number" />
                   <div className="main-waring-section">
 
 
-                    <p className="register-number-warning">{Errors?.phone}</p>
+                    {/* <p className="register-number-warning">{Errors?.phone}</p> */}
 
                   </div>
 
@@ -185,7 +189,7 @@ export default function Hospitaladminregistration1() {
 
                 <div>
                   <h4 className="pass-con">Email</h4>
-                  <input maxLength={50} value={HospitalAdminRg?.email} pattern="^[^\s@]+@[^\s@]+\.[^\s@]+$" name="email" onChange={inputOnchanges} type="email" />
+                  <input autoComplete="off" maxLength={50} value={HospitalAdminRg?.email} pattern="^[^\s@]+@[^\s@]+\.[^\s@]+$" name="email" onChange={inputOnchanges} type="email" />
 
                   <div className="main-waring-section">
                     <p className="register-number-warning">{Errors?.email}</p>
