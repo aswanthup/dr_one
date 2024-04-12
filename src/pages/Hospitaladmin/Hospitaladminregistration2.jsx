@@ -43,11 +43,11 @@ export default function Hospitaladminregistration2() {
 
         ]
 
-        useEffect(() => {
-                if (!HospitalAdminRg?.name && !HospitalAdminRg?.contact_no && !HospitalAdminRg?.password && !HospitalAdminRg?.email && !HospitalAdminRg?.repassword) {
-                        navigate("/hospitaladminregistration1")
-                }
-        }, [])
+        // useEffect(() => {
+        //         if (!HospitalAdminRg?.name && !HospitalAdminRg?.contact_no && !HospitalAdminRg?.password && !HospitalAdminRg?.email && !HospitalAdminRg?.repassword) {
+        //                 navigate("/hospitaladminregistration1")
+        //         }
+        // }, [])
 
         const toastifyFun = (value, success) => {
                 if (!success?.success) {
@@ -325,6 +325,12 @@ export default function Hospitaladminregistration2() {
 
 
                                 <div className='hospitaladminregistration_second flex' >
+                                <div className='License'>
+                                                <h4>License Number</h4>
+                                                <input value={HospitalAdminRg?.lisence_no || ''} onChange={inputChanges} type="text" maxLength={30} name='lisence_no' />
+                                        </div>
+
+
                                         <div className='flex pin-lo'>
                                                 <div className='pin-input' >
                                                         <h4>Pincode</h4>
@@ -368,10 +374,7 @@ export default function Hospitaladminregistration2() {
 
 
 
-                                        <div className='License'>
-                                                <h4>License Number</h4>
-                                                <input value={HospitalAdminRg?.lisence_no || ''} onChange={inputChanges} type="text" maxLength={30} name='lisence_no' />
-                                        </div>
+                                       
 
 
 
