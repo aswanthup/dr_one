@@ -310,13 +310,7 @@ export default function Labadminregistration2() {
             </div>
 
 
-
-
-
-
-
-            
-            <div className='lo-input'>
+             <div className='lo-input'>
               <h4>Location</h4>
               <select
                 type="text"
@@ -346,7 +340,16 @@ export default function Labadminregistration2() {
               </select>
             </div>
 
+
+
+
+
           </div>
+
+
+
+
+
 
           <div className='LabAdminPin flex'>
 

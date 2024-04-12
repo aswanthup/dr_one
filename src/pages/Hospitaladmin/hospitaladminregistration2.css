@@ -346,11 +346,14 @@ input[type="checkbox"]:disabled {
 
 .pin-lo {
   justify-content: space-between;
-  width: 44vw;
+  width:44vw;
+  overflow: hidden;
 }
 
-.pin-input input {
-  width: 16vw;
+
+
+.pin-input {
+  width:16vw;
 }
 
 .lo-input select {
