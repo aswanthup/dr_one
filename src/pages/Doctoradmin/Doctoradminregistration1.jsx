@@ -24,7 +24,7 @@ export default function Doctoradminregistration1() {
     if (selectedFile) {
       const isImage = selectedFile.type.startsWith("image/");
       if (isImage) {
-        setFileName(selectedFile.name);
+        setFileName(selectedFile);
         setData({ ...Data, image: selectedFile.name });
         // Process the image file or perform additional actions if needed
       } else {
@@ -174,20 +174,6 @@ export default function Doctoradminregistration1() {
       <div>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         <div className="main-register flex">
           <div className="register-png-div">
             <img src="images/Group 72.png" alt="" />
@@ -195,7 +181,7 @@ export default function Doctoradminregistration1() {
 
           <div className="registration-form">
             <div className="do-title">
-              <h1 style={{ color: "white" }}>Doctor Registeration</h1>
+              <h1 style={{ color: "white" }}>Doctor Registration</h1>
             </div>
 
             <div className="upload-image flex">

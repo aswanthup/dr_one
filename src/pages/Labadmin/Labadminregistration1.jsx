@@ -15,7 +15,25 @@ export default function Labadminregistration1() {
   })
   const [showPassword, setShowPassword] = useState(false);
   const [showRePassword, setShowRePassword] = useState(false);
+  const [FileName, setFileName] = useState("No file selected")
+  const handleFileChange = (event) => {
+    const selectedFile = event.target?.files[0];
 
+    if (selectedFile) {
+      const isImage = selectedFile.type.startsWith("image/");
+      if (isImage) {
+        setFileName(selectedFile.name);
+        setLabAdminRg({ ...LabAdminRg, image: selectedFile?.name });
+      } else {
+        alert("Please select a valid image file.");
+        // Optionally, you can clear the file input
+        event.target.value = null;
+      }
+    } else {
+      setFileName("No file selected");
+      // setLabAdminRg("No file selected");
+    }
+  };
   const toastifyFun = (value) => {
     toast.info(value, {
       position: "top-right",
@@ -120,13 +138,12 @@ export default function Labadminregistration1() {
           </div>
           <div className="registration-form">
             <div>
-              <h1 style={{ color: "white" }}>Laboratory Registeration</h1>
+              <h1 style={{ color: "white" }}>Laboratory Registration</h1>
             </div>
             {/* <label className="photo-upload">
              <h4>Upload Photo</h4>
                 <input  autoComplete="off"type="file" />  
              </div> */}
-
 
             {/* <div id="hospitalname_inputId" className="hospitalname_input">
               <h4>Laboratory Name</h4>
@@ -138,18 +155,15 @@ export default function Labadminregistration1() {
 
 
             <div className="flex hospital-top">
-
-
-
               <div className="upload-image">
-
                 <h4 className="pass-con">Profile Photo</h4>
                 <label for="inputTag">
                   <h4 className="select-file select-file2 flex">Upload Photo</h4>
-                  <input autoComplete="off" id="inputTag" type="file" />
+                  <input onChange={handleFileChange} autoComplete="off" id="inputTag" type="file" />
                 </label>
-
-
+                <div className="LabFileName-div">
+                  <h4 id="hosNameDisplay"> {LabAdminRg?.image} </h4>
+                </div>
               </div>
 
               {/* <label className="photo-upload">

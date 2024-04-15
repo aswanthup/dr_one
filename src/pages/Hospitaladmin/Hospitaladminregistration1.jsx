@@ -16,22 +16,24 @@ export default function Hospitaladminregistration1() {
   const [showPassword, setShowPassword] = useState(false);
   const [showRePassword, setShowRePassword] = useState(false);
 
-  // const handleFileChange = (event) => {
-  //   const selectedFile = event.target.files[0];
-  //   if (selectedFile) {
-  //     const isImage = selectedFile.type.startsWith("image/");
-  //     if (isImage) {
-  //       setFileName(selectedFile.name);
-  //       // Process the image file or perform additional actions if needed
-  //     } else {
-  //       alert("Please select a valid image file.");
-  //       // Optionally, you can clear the file input
-  //       event.target.value = null;
-  //     }
-  //   } else {
-  //     setFileName("No file selected");
-  //   }
-  // };
+  const handleFileChange = (event) => {
+    const selectedFile = event.target?.files[0];
+
+    if (selectedFile) {
+      const isImage = selectedFile.type.startsWith("image/");
+      if (isImage) {
+        setFileName(selectedFile.name);
+        setHospitalAdminRg({ ...HospitalAdminRg, image: selectedFile.name });
+      } else {
+        alert("Please select a valid image file.");
+        // Optionally, you can clear the file input
+        event.target.value = null;
+      }
+    } else {
+      setFileName("No file selected");
+      // setLabAdminRg("No file selected");
+    }
+  };
 
   // toast
   console.log("HospitalAdminRg>>>>", HospitalAdminRg)
@@ -144,28 +146,21 @@ export default function Hospitaladminregistration1() {
                 <h4 className="pass-con">Profile Photo</h4>
                 <label for="inputTag">
                   <h4 className="select-file select-file2 flex">Upload Photo</h4>
-                  <input id="inputTag" type="file" />
+                  <input onChange={handleFileChange} id="inputTag" type="file" />
                 </label>
-
 
               </div>
 
               <div className="hospitalname_input">
                 <h4 className="">Hospital Name</h4>
                 <input autoComplete="off" maxLength={100} value={HospitalAdminRg?.name} onChange={inputOnchanges} name="name" type="text" />
-
               </div>
             </div>
 
 
-
             <div className="main-waring-section main-waring-section-image " >
-              <h4 className="register-number-warning" id="fileNameDisplay"> {fileName} </h4>
+              <h4 className="register-number-warning" id="hosPagefile"> {HospitalAdminRg?.image} </h4>
             </div>
-
-
-
-
 
             <div className="register-input-section">
 

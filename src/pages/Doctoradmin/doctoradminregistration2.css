@@ -31,14 +31,14 @@
 .doctoradminregistration_inputs {
 
 
-    background-color: rgba(246, 246, 249, 0.4);
-    border-radius: 0.5vw;
-    height: 3vw;
-    color: white;
-    padding: 1vw;
-    letter-spacing: 2px;
-    width: 30vw;
-    margin-top: 1vw;
+  background-color: rgba(246, 246, 249, 0.4);
+  border-radius: 0.5vw;
+  height: 3vw;
+  color: white;
+  padding: 1vw;
+  letter-spacing: 2px;
+  width: 30vw;
+  margin-top: 1vw;
 
 }
 
@@ -199,6 +199,10 @@
 @media only screen and (max-width:980px) {
   .desktop {
     display: none;
+  }
+
+  .date-picker .css-1g35tmv {
+    width: 100%;
   }
 
   .mobile {

@@ -226,15 +226,16 @@ label {
 }
 
 #fileNameDisplay {
-    width: 100%;
+    width: 50%;
     overflow-x: scroll;
 }
+
 .hospitalname_input input {
     width: 46vw;
 }
 
-.main-waring-section4{
-    width:32vw;
+.main-waring-section4 {
+    width: 32vw;
 }
 
 
@@ -251,14 +252,19 @@ label {
 
 @media screen and (max-width: 780px) {
 
-    .main-waring-section4{
-        width:100%;
+    .main-waring-section4 {
+        width: 100%;
     }
+
+    #fileNameDisplay {
+        padding-left: 0px;
+    }
+
     .main-register {
-        height:fit-content;
+        height: fit-content;
         align-items: center;
     }
-    
+
 
     .pass-con-Inp {
         width: 100%;
@@ -272,17 +278,19 @@ label {
 
     }
 
+    #fileNameDisplay {
+        width: 100%;
+    }
+
     .register-right-section input {
         height: 10vw;
     }
 
     .fileNameDisplay-div {
-        max-width: 200px;
+        max-width: 50%;
         display: flex;
-        justify-content: center;
         align-items: center;
         overflow-x: scroll;
-        padding-left: 40px;
     }
 
     .fileNameDisplay-div h6 {
@@ -290,7 +298,7 @@ label {
         margin-left: 10px;
     }
 
-    .registration-form{
+    .registration-form {
         min-height: 100vh;
         /* height: fit-content; */
         /* height: 150dvh; */
@@ -363,7 +371,7 @@ label {
 
     .registration-form {
         width: 100%;
-         padding: 5vw;
+        padding: 5vw;
         border-radius: 0vw;
     }
 

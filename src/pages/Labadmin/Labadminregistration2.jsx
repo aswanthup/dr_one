@@ -11,11 +11,13 @@ import { TimePicker } from '@mui/x-date-pickers/TimePicker';
 import dayjs from 'dayjs'
 import { Backdrop, CircularProgress, Modal } from '@mui/material'
 import { useMediaQuery } from 'react-responsive';
+import CloseIcon from '@mui/icons-material/Close';
 import { Loader } from '../../components/Loader/Loader'
 export default function Labadminregistration2() {
   const { LabAdminRg, setLabAdminRg } = useContext(MyContext)
   const [Errors, setErrors] = useState({})
   const [loader, setloader] = useState(false)
+  const [FileName, setFileName] = useState()
   const navigate = useNavigate()
   const [ModalOpen, setModalOpen] = useState({
     features: false,
@@ -43,11 +45,12 @@ export default function Labadminregistration2() {
   ]
 
   useEffect(() => {
-    if (!LabAdminRg?.name && !LabAdminRg?.contact_no && !LabAdminRg?.password && !LabAdminRg?.email && !LabAdminRg?.repassword) {
-      navigate("/labadminregistration1")
-    } else {
-      setLabAdminRg({ ...LabAdminRg, timing: { closing_time: '06:00 PM', opening_time: '10:00 AM' } })
-    }
+    // if (!LabAdminRg?.name && !LabAdminRg?.contact_no && !LabAdminRg?.password && !LabAdminRg?.email && !LabAdminRg?.repassword) {
+    //   navigate("/labadminregistration1")
+    // } else {
+    //   setLabAdminRg({ ...LabAdminRg, timing: { closing_time: '06:00 PM', opening_time: '10:00 AM' } })
+    // }
+    window.scrollTo(0, 0); // Scrolls to the top of the page
   }, [])
   const toastifyFun = (value, success) => {
     if (!success?.success) {
@@ -201,7 +204,7 @@ export default function Labadminregistration2() {
   const handleClose = () => {
     setloader(false)
   }
-  console.log("LabAdminRg>>>>>>>", LabAdminRg)
+  // console.log("LabAdminRg>>>>>>>", LabAdminRg)
   const PinCodeCheck = () => {
     if (!LabAdminRg?.pincode) {
       toast.info("Please input your pincode")
@@ -214,30 +217,51 @@ export default function Labadminregistration2() {
       event.preventDefault();
     }
   };
+  const handleFileChange = (event) => {
+    console.log(event.target?.files)
+    const selectedFile = event.target?.files[0];
+    if (selectedFile) {
+      const isImage = selectedFile.type.startsWith("image/");
+      if (isImage) {
+        setFileName(selectedFile);
+        setLabAdminRg({ ...LabAdminRg, subImages: [...(LabAdminRg?.subImages || []), selectedFile] });
+      } else {
+        alert("Please select a valid image file.");
+        event.target.value = null;
+      }
+    } else {
+    }
+  };
   return (
 
     <div>
+      <ToastContainer />
       {loader ? <Loader /> : ""}
-
       <div className='hospitaladminregistration2 flex'>
-
         <h1>Laboratory Registration</h1>
 
         <div className='image_card_ho_ad flex'>
           <h4>Add Photos</h4>
           <div className='image_card_ho_ad2 flex' >
             <div className='image_card_ho_ad_section flex'>
-              {/* <img src="images/hosptal1 (1).jpg" alt="" />
-              <img src="images/hosptal1 (1).jpg" alt="" />
-              <img src="images/hosptal1 (1).jpg" alt="" /> */}
+              {LabAdminRg?.subImages?.map((image, index) =>
+                <div className='LabImageAb'>
+                  <img key={index} // Ensure each image has a unique key
+                    src={URL.createObjectURL(image)} // Use createObjectURL to generate a URL for the image
+                    alt={`Image ${index}`} />
+                  <div >
+                    <CloseIcon />
+                  </div>
+                </div>
+
+              )}
               <div className='image_card_ho_ad_add_image flex'>
                 <label for="inputTag">
                   <i class="ri-add-line"></i>
-                  <input autoComplete="off" id="inputTag" type="file" />
+                  <input onChange={handleFileChange} autoComplete="off" id="inputTag" type="file" />
                 </label>
               </div>
             </div>
-
           </div>
 
         </div>
@@ -358,11 +382,6 @@ export default function Labadminregistration2() {
             <div className='LabAdminPinTimePic'>
               <h4 className="pass-con">Opening Time</h4>
               <TimePicker
-                sx={{
-                  border: isMobile ? 'none' : '1px solid white', // Apply border only on non-mobile views
-                  height: '3vw',
-                  color: "white"
-                }}
                 className='hospitalAdminPinTimePic'
                 value={LabAdminRg?.timing?.opening_time ? dayjs(LabAdminRg?.timing?.opening_time, 'hh:mm A') : null}
                 onChange={(e) => { TimeSetting(e, "opening_time") }}
@@ -370,13 +389,8 @@ export default function Labadminregistration2() {
             </div>
             <div className='LabAdminPinTimePic'>
               <h4 className="pass-con">Closing Time</h4>
-              <TimePicker sx={{
-                border: isMobile ? 'none' : '1px solid white',
-                height: '3vw',
-                color: "white"
-              }}
+              <TimePicker className="hospitalAdminPinTimePic"
                 value={LabAdminRg?.timing?.closing_time ? dayjs(LabAdminRg?.timing?.closing_time, 'hh:mm A') : null}
-                className='hospitalAdminPinTimePic'
                 onChange={(e) => { TimeSetting(e, "closing_time") }}
               />
             </div>

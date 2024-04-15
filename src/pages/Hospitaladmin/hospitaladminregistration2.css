@@ -106,7 +106,7 @@
 
 .image_card_ho_ad_section {
   margin-top: 1vw;
-  justify-content: space-between;
+  gap: 10px;
 }
 
 .image_card_ho_ad_section img {
@@ -524,6 +524,10 @@ input[type="checkbox"]:disabled {
 
   .pin-input input {
     width: 36vw;
+  }
+
+  .pin-input {
+    width: 100%;
   }
 
   .lo-input input {

@@ -10,14 +10,23 @@
     margin-top: 1vw;
 }
 
+#hosPagefile {
+    width: 18vw;
+    overflow: scroll;
+}
+
 @media screen and (max-width: 780px) {
 
     .hospitalname_input input {
         height: 9vw;
     }
 
+    #hosPagefile {
+        width: 100%;
+        overflow: scroll;
+    }
 
-    .new{
+    .new {
         height: 10vw;
     }
 

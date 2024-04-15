@@ -37,7 +37,7 @@ export default function Hospitaladminregistration2() {
         ]
         const Features = [
                 { name: "Casualty" },
-                { name: "Op" },
+                { name: "OPD" },
                 { name: "Palliative" },
                 { name: "Care" },
                 { name: "Other Services " },
@@ -45,9 +45,10 @@ export default function Hospitaladminregistration2() {
         ]
 
         useEffect(() => {
-                if (!HospitalAdminRg?.name && !HospitalAdminRg?.contact_no && !HospitalAdminRg?.password && !HospitalAdminRg?.email && !HospitalAdminRg?.repassword) {
-                        navigate("/hospitaladminregistration1")
-                }
+                // if (!HospitalAdminRg?.name && !HospitalAdminRg?.contact_no && !HospitalAdminRg?.password && !HospitalAdminRg?.email && !HospitalAdminRg?.repassword) {
+                //         navigate("/hospitaladminregistration1")
+                // }
+                window.scrollTo(0, 0); // Scrolls to the top of the page
         }, [])
 
         const toastifyFun = (value, success) => {
@@ -141,7 +142,6 @@ export default function Hospitaladminregistration2() {
                 setHospitalAdminRg({ ...HospitalAdminRg, features: features, specialties: specialties });
         };
 
-
         const Finish = () => {
                 setloader(true)
                 if (HospitalAdminRg?.pincode && HospitalAdminRg?.about && HospitalAdminRg?.lisence_no && HospitalAdminRg?.type && HospitalAdminRg.features.length > 0 && HospitalAdminRg.specialties.length > 0 && !Errors?.pincode) {
@@ -166,8 +166,6 @@ export default function Hospitaladminregistration2() {
                 }
 
         }
-
-
         const CheckValidation = () => {
                 const Pincode = /^\d{6}$/;
                 if (HospitalAdminRg?.pincode) {
@@ -243,13 +241,7 @@ export default function Hospitaladminregistration2() {
 
                                 </div>
 
-
-
-
-
                                 <div className='hospital-second-section flex'>
-
-
 
                                         <div>
                                                 <h4>Type</h4>

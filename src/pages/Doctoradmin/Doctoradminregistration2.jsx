@@ -26,14 +26,17 @@ export default function Doctoradminregistration2() {
   const [loader, setloader] = useState(false)
 
   useEffect(() => {
-    const names = ["confirmPassword",
+    const names = [
+      "confirmPassword",
       "email",
       "name",
-      "password", "phone",
+      "password",
+      "phone",
       "secondname"]
     if (names.some((ele) => !Data[ele])) {
       navigate('/doctoradminregistration1')
     }
+    window.scrollTo(0, 0); // Scrolls to the top of the page
 
   }, [])
   const handleKeyPress = (event) => {
@@ -77,10 +80,10 @@ export default function Doctoradminregistration2() {
       toast.error("Please fix the pincode error.");
       return;
     }
-
-    const mergedData = { ...Data };
-    console.log("mergedData", mergedData);
-    axios.post(`${port}/doctor/dr_registration`, mergedData)
+    const formData = new FormData();
+    formData.append("image", Data.docImage);
+    formData.append("data", JSON.stringify(Data));
+    axios.post(`${port}/doctor/dr_registration`, formData)
       .then((res) => {
         if (res.data.success === true) {
           toast.success(res.data.message);

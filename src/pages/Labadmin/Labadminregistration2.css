@@ -34,6 +34,7 @@
 
 }
 
+
 .labadminregistration_input1 {
     gap: 2vw;
 }
@@ -72,6 +73,20 @@
     width: 100%;
     height: 2vw;
     color: white;
+    background-color: rgba(246, 246, 249, .4);
+    border-radius: .5vw;
+    border: none;
+}
+
+.hospitalAdminPinTimePic input {
+    color: white;
+    border-radius: .5vw;
+    border: 0px solid black;
+}
+
+.LabFileName-div {
+    width: 18vw;
+    overflow: scroll;
 }
 
 .LabAdminPin .css-i4bv87-MuiSvgIcon-root {
@@ -116,12 +131,12 @@
 .LabAdminPinTimePic {
     display: flex;
     flex-direction: column;
-  
+
 }
 
 
-.pass-con{
-    margin-bottom:1vw;
+.pass-con {
+    margin-bottom: 1vw;
 }
 
 
@@ -141,9 +156,9 @@
     color: white;
 }
 
-.hospitalAdminPinTimePic .css-nxo287-MuiInputBase-input-MuiOutlinedInput-input {
+/* .hospitalAdminPinTimePic .css-nxo287-MuiInputBase-input-MuiOutlinedInput-input {
     color: rgb(255, 255, 255) !important;
-}
+} */
 
 
 .labadminregistration_input input {
@@ -229,6 +244,10 @@
     height: 3vw;
 }
 
+.hospitalAdminPinTimePic .css-1bn53lx {
+    color: white;
+}
+
 .css-o9k5xi-MuiInputBase-root-MuiOutlinedInput-root {
     height: 3vw;
     /* border: 1px solid white; */
@@ -238,7 +257,7 @@
 .pin-lo input {
     background-color: rgba(246, 246, 249, .4);
     border-radius: .5vw;
-    width:16vw;
+    width: 16vw;
     height: 3vw;
     color: white;
     padding: 1vw;
@@ -247,7 +266,11 @@
 }
 
 
-
+.LabImageAb {
+    position: relative;
+    display: flex;
+    justify-content: flex-end;
+}
 
 @media only screen and (max-width:980px) {
     .LabPinType {
@@ -256,6 +279,10 @@
 
     .LabPinTypeDiv {
         width: 100%;
+    }
+
+    .ho_ad_re_button button {
+        height: 30px;
     }
 
     .LabAdminPin {
@@ -279,6 +306,20 @@
         height: 100px;
     }
 
+    .hospitalAdminPinTimePic .css-1bn53lx {
+        height: 10vw;
+    }
+
+    .hospitalAdminPinTimePic {
+        height: 10vw;
+        border-radius: 6px;
+
+    }
+
+    .LabFileName-div {
+        width: 100%;
+    }
+
     .Labregistration_second input {
         height: 10vw;
     }
@@ -295,17 +336,11 @@
 
     .pin-lo input {
         height: 10vw;
-        width:35vw;
+        width: 35vw;
         border-radius: 1vw;
     }
 
-    .css-o9k5xi-MuiInputBase-root-MuiOutlinedInput-root {
-        height: 10vw;
-        /* border: 1px solid white; */
-        color: white;
-        background-color: rgba(246, 246, 249, .4);
 
-    }
 
     .LabAdminPinTimePic {
         height: 10vw;
@@ -317,14 +352,6 @@
         flex-direction: column;
         height: fit-content;
     }
-
-    .hospitalAdminPinTimePic {
-        height: 10vw;
-
-    }
-
-
-
 
 
 }
