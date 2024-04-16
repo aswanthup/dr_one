@@ -8,6 +8,7 @@ import { Bounce, ToastContainer, toast } from 'react-toastify'
 import { port } from '../../config'
 import { Backdrop, CircularProgress, Modal } from '@mui/material'
 import { Loader } from '../../components/Loader/Loader'
+import CloseIcon from '@mui/icons-material/Close';
 
 export default function Hospitaladminregistration2() {
 
@@ -143,23 +144,55 @@ export default function Hospitaladminregistration2() {
         };
 
         const Finish = () => {
-                setloader(true)
+
                 if (HospitalAdminRg?.pincode && HospitalAdminRg?.about && HospitalAdminRg?.lisence_no && HospitalAdminRg?.type && HospitalAdminRg.features.length > 0 && HospitalAdminRg.specialties.length > 0 && !Errors?.pincode) {
+                        setloader(true)
                         CheckValidation()
-                        axios.post(`${port}/hospital/registration`, HospitalAdminRg).then((res) => {
-                                if (res?.data?.success) {
-                                        toastifyFun(res?.data?.message, { success: true })
-                                        setHospitalAdminRg('')
-                                        setTimeout(() => {
-                                                navigate("/")
-                                        }, 1000);
-                                        setloader(false)
+                        let temp = []
+                        if (HospitalAdminRg && HospitalAdminRg?.image) {
+                                // Check if subImages is not empty
+                                if (HospitalAdminRg?.subImages?.length > 0) {
+                                        for (let i = 0; i < HospitalAdminRg?.subImages?.length; i++) {
+                                                const imageIndex = HospitalAdminRg?.image?.length > 0 ? 1 : 0;
+                                                temp[i + imageIndex] = HospitalAdminRg?.subImages[i];
+                                        }
+                                        // If there's a main image, add it to temp[0]
+                                        if (HospitalAdminRg.image.length > 0) {
+                                                temp[0] = HospitalAdminRg.image[0];
+                                        }
+                                } else {
+                                        // Handle empty subImages (optional: log a message or take other actions)
+                                        console.log("HospitalAdminRg.subImages is empty. No sub-images to add.");
                                 }
-                        }).catch((err) => {
-                                console.log(err)
-                                toastifyFun(err?.response?.data?.message, { info: true })
-                                setloader(false)
-                        })
+
+                        } else {
+                                // Handle invalid HospitalAdminRg data (optional: log a message or take other actions)
+                                console.error("HospitalAdminRg object or its properties (image, subImages) are missing.");
+                        }
+                        console.log(temp); // You can uncomment this line to see the contents of temp
+                        console.log("temp>>>>", temp)
+                        if (temp?.[0]) {
+                                const formData = new FormData()
+                                temp.forEach((image, index) => {
+                                        formData.append("image", image);
+                                });
+                                formData.append("data", JSON.stringify(HospitalAdminRg));
+                                CheckValidation()
+                                axios.post(`${port}/hospital/registration`, formData).then((res) => {
+                                        if (res?.data?.success) {
+                                                toastifyFun(res?.data?.message, { success: true })
+                                                setHospitalAdminRg('')
+                                                setTimeout(() => {
+                                                        navigate("/")
+                                                }, 1000);
+                                                setloader(false)
+                                        }
+                                }).catch((err) => {
+                                        console.log(err)
+                                        toastifyFun(err?.response?.data?.message, { info: true })
+                                        setloader(false)
+                                })
+                        }
                 } else {
                         setloader(false)
                         toastifyFun("All fields are mandatory", { info: true })
@@ -211,6 +244,30 @@ export default function Hospitaladminregistration2() {
                 }
         };
         console.log("HospitalAdminRg>>>>", HospitalAdminRg)
+        const handleFileChange = (event) => {
+                const FilterImg = HospitalAdminRg?.subImages?.filter(ele => ele?.name === event?.target?.files[0]?.name)
+                if (!FilterImg?.length > 0) {
+                        const selectedFile = event.target?.files[0];
+                        if (selectedFile) {
+                                const isImage = selectedFile.type.startsWith("image/");
+                                if (isImage) {
+                                        setHospitalAdminRg({ ...HospitalAdminRg, subImages: [...(HospitalAdminRg?.subImages || []), selectedFile] });
+                                } else {
+                                        alert("Please select a valid image file.");
+                                        event.target.value = null;
+                                }
+                        } else {
+                        }
+                } else {
+                        toast.info("Already image selected")
+                }
+        };
+        const imageSplicerFn = (index) => {
+                let images = HospitalAdminRg?.subImages
+                images?.splice(index, 1)
+                setHospitalAdminRg({ ...HospitalAdminRg, subImages: images })
+
+        }
         return (
                 <div>
                         {loader ? <Loader /> : ""}
@@ -221,19 +278,27 @@ export default function Hospitaladminregistration2() {
                                 <h1>Hospital Registration</h1>
 
                                 <div className='image_card_ho_ad flex'>
-                                        <h4>Add Photos</h4>
+                                        <h4>{!HospitalAdminRg?.subImages || HospitalAdminRg?.subImages?.length < 3 ? "Add" : ""} Photos</h4>
                                         <div className='image_card_ho_ad2 flex' >
                                                 <div className='image_card_ho_ad_section flex'>
-                                                        {/* 
-                                                        <img src="images/hosptal1 (1).jpg" alt="" />
-                                                        <img src="images/hosptal1 (1).jpg" alt="" />
-                                                        <img src="images/hosptal1 (1).jpg" alt="" /> */}
-                                                        <div className='image_card_ho_ad_add_image flex'>
-                                                                <label for="inputTag">
-                                                                        <i class="ri-add-line"></i>
-                                                                        <input autoComplete="off" id="inputTag" type="file" />
-                                                                </label>
-                                                        </div>
+                                                        {HospitalAdminRg?.subImages?.map((image, index) =>
+                                                                <div className='LabImageAb'>
+                                                                        <img key={index} // Ensure each image has a unique key
+                                                                                src={URL.createObjectURL(image)} // Use createObjectURL to generate a URL for the image
+                                                                                alt={`Image ${index}`} />
+                                                                        <div onClick={() => { imageSplicerFn(index) }} className='LabImageAbRemIcon'>
+                                                                                <CloseIcon />
+                                                                        </div>
+                                                                </div>
+                                                        )}
+                                                        {!HospitalAdminRg?.subImages || HospitalAdminRg?.subImages?.length < 3 ?
+                                                                <div className='image_card_ho_ad_add_image flex'>
+                                                                        <label for="inputTag">
+                                                                                <i class="ri-add-line"></i>
+                                                                                <input onChange={handleFileChange} autoComplete="off" id="inputTag" type="file" />
+                                                                        </label>
+                                                                </div>
+                                                                : ''}
 
                                                 </div>
 

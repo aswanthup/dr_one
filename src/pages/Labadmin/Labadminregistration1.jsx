@@ -15,23 +15,16 @@ export default function Labadminregistration1() {
   })
   const [showPassword, setShowPassword] = useState(false);
   const [showRePassword, setShowRePassword] = useState(false);
-  const [FileName, setFileName] = useState("No file selected")
   const handleFileChange = (event) => {
     const selectedFile = event.target?.files[0];
-
     if (selectedFile) {
       const isImage = selectedFile.type.startsWith("image/");
       if (isImage) {
-        setFileName(selectedFile.name);
-        setLabAdminRg({ ...LabAdminRg, image: selectedFile?.name });
+        setLabAdminRg({ ...LabAdminRg, image: [selectedFile] });
       } else {
         alert("Please select a valid image file.");
-        // Optionally, you can clear the file input
         event.target.value = null;
       }
-    } else {
-      setFileName("No file selected");
-      // setLabAdminRg("No file selected");
     }
   };
   const toastifyFun = (value) => {
@@ -79,10 +72,8 @@ export default function Labadminregistration1() {
     checkErrors()
   }, [LabAdminRg])
   console.log(LabAdminRg)
-  // checking the erros
-
   const nextPage = () => {
-    if (LabAdminRg?.name && LabAdminRg?.contact_no && LabAdminRg?.password && LabAdminRg?.email && LabAdminRg?.repassword) {
+    if (LabAdminRg?.name && LabAdminRg?.contact_no && LabAdminRg?.password && LabAdminRg?.email && LabAdminRg?.repassword && LabAdminRg?.image?.length > 0) {
       if (Errors.email || Errors.phone) {
         toast.info("Check mobile, email and password")
       } else {
@@ -90,7 +81,6 @@ export default function Labadminregistration1() {
           navigate("/labadminregistration2")
         }
       }
-
     } else {
       toastifyFun("All fields are required")
     }
@@ -98,7 +88,6 @@ export default function Labadminregistration1() {
   }
   const checkErrors = () => {
     const errors = {};
-
     const Passwordpattern = /^(?=.*[A-Z])(?=.*\d)(?=.*[@.#$!%*?&]).{6,}$/;
     const EmailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const PhonePattern = /^[6-9]\d{9}$/;
@@ -162,7 +151,9 @@ export default function Labadminregistration1() {
                   <input onChange={handleFileChange} autoComplete="off" id="inputTag" type="file" />
                 </label>
                 <div className="LabFileName-div">
-                  <h4 id="hosNameDisplay"> {LabAdminRg?.image} </h4>
+                  {LabAdminRg?.image?.map(ele =>
+                    <h4 id="hosNameDisplay"> {ele?.name} </h4>
+                  )}
                 </div>
               </div>
 
@@ -208,13 +199,7 @@ export default function Labadminregistration1() {
                   </div>
                 </div>
               </div>
-
-
-
               <div className="register-right-section  flex">
-
-
-
                 <div style={{ position: "relative" }}>
                   <h4 className="pass-con">Password</h4>
                   <div

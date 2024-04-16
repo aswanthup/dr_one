@@ -147,27 +147,58 @@ export default function Labadminregistration2() {
 
     setLabAdminRg({ ...LabAdminRg, features: features, Services: Services });
   };
-
-
   const Finish = () => {
     if (LabAdminRg?.pincode && LabAdminRg?.about && LabAdminRg?.lisence_no && LabAdminRg?.features?.length > 0 && LabAdminRg?.Services?.length > 0 && !Errors?.pincode && LabAdminRg?.timing?.opening_time && LabAdminRg?.timing?.closing_time && LabAdminRg?.place) {
       setloader(true)
       CheckValidation()
-      axios.post(`${port}/lab/addlab`, LabAdminRg).then((res) => {
-        console.log(res)
-        if (res?.data?.success) {
-          toastifyFun(res?.data?.message, { success: true })
-          setLabAdminRg('')
-          setTimeout(() => {
-            navigate("/")
-          }, 1000);
-          setloader(false)
+      let temp = []
+      // Check for LabAdminRg existence and its properties
+      if (LabAdminRg && LabAdminRg?.image) {
+        // Check if subImages is not empty
+        if (LabAdminRg?.subImages?.length > 0) {
+          for (let i = 0; i < LabAdminRg?.subImages?.length; i++) {
+            const imageIndex = LabAdminRg?.image?.length > 0 ? 1 : 0;
+            temp[i + imageIndex] = LabAdminRg?.subImages[i];
+          }
+          // If there's a main image, add it to temp[0]
+          if (LabAdminRg.image.length > 0) {
+            temp[0] = LabAdminRg.image[0];
+          }
+        } else {
+          // Handle empty subImages (optional: log a message or take other actions)
+          console.log("LabAdminRg.subImages is empty. No sub-images to add.");
         }
-      }).catch((err) => {
-        console.log(err)
-        setloader(false)
-        toastifyFun(err?.response?.data?.message, { info: true })
-      })
+
+      } else {
+        // Handle invalid LabAdminRg data (optional: log a message or take other actions)
+        console.error("LabAdminRg object or its properties (image, subImages) are missing.");
+      }
+
+      // Now the temp array contains the main image at index 0 followed by sub-images
+      console.log(temp); // You can uncomment this line to see the contents of temp
+      console.log("temp>>>>", temp)
+      if (temp?.[0]) {
+        const formData = new FormData()
+        temp.forEach((image, index) => {
+          formData.append("image", image);
+        });
+        formData.append("data", JSON.stringify(LabAdminRg));
+        axios.post(`${port}/lab/addlab`, formData).then((res) => {
+          console.log(res)
+          if (res?.data?.success) {
+            toastifyFun(res?.data?.message, { success: true })
+            setLabAdminRg('')
+            setTimeout(() => {
+              navigate("/")
+            }, 1000);
+            setloader(false)
+          }
+        }).catch((err) => {
+          console.log(err)
+          setloader(false)
+          toastifyFun(err?.response?.data?.message, { info: true })
+        })
+      }
     } else {
       setloader(false)
       toastifyFun("All fields are mandatory", { info: true })
@@ -204,34 +235,39 @@ export default function Labadminregistration2() {
   const handleClose = () => {
     setloader(false)
   }
-  // console.log("LabAdminRg>>>>>>>", LabAdminRg)
   const PinCodeCheck = () => {
     if (!LabAdminRg?.pincode) {
       toast.info("Please input your pincode")
     }
   }
   const handleKeyPress = (event) => {
-    // Check if the pressed key is '.' or '-'
     if (event?.key === '.' || event?.key === '-' || event?.key === 'e' || event?.key === '+' || event?.key === 'E') {
-      // Prevent the default behavior for these keys
       event.preventDefault();
     }
   };
   const handleFileChange = (event) => {
-    console.log(event.target?.files)
-    const selectedFile = event.target?.files[0];
-    if (selectedFile) {
-      const isImage = selectedFile.type.startsWith("image/");
-      if (isImage) {
-        setFileName(selectedFile);
-        setLabAdminRg({ ...LabAdminRg, subImages: [...(LabAdminRg?.subImages || []), selectedFile] });
-      } else {
-        alert("Please select a valid image file.");
-        event.target.value = null;
+    const FilterImg = LabAdminRg?.subImages?.filter(ele => ele?.name === event?.target?.files[0]?.name)
+    if (!FilterImg?.length > 0) {
+      const selectedFile = event.target?.files[0];
+      if (selectedFile) {
+        const isImage = selectedFile.type.startsWith("image/");
+        if (isImage) {
+          setLabAdminRg({ ...LabAdminRg, subImages: [...(LabAdminRg?.subImages || []), selectedFile] });
+        } else {
+          alert("Please select a valid image file.");
+          event.target.value = null;
+        }
       }
     } else {
+      toast.info("Already image selected")
     }
   };
+  const imageSplicerFn = (index) => {
+    let images = LabAdminRg?.subImages
+    images?.splice(index, 1)
+    setLabAdminRg({ ...LabAdminRg, subImages: images })
+
+  }
   return (
 
     <div>
@@ -241,7 +277,7 @@ export default function Labadminregistration2() {
         <h1>Laboratory Registration</h1>
 
         <div className='image_card_ho_ad flex'>
-          <h4>Add Photos</h4>
+          <h4>{!LabAdminRg?.subImages || LabAdminRg?.subImages?.length < 3 ? "Add" : ""} Photos</h4>
           <div className='image_card_ho_ad2 flex' >
             <div className='image_card_ho_ad_section flex'>
               {LabAdminRg?.subImages?.map((image, index) =>
@@ -249,21 +285,23 @@ export default function Labadminregistration2() {
                   <img key={index} // Ensure each image has a unique key
                     src={URL.createObjectURL(image)} // Use createObjectURL to generate a URL for the image
                     alt={`Image ${index}`} />
-                  <div >
+                  <div onClick={() => { imageSplicerFn(index) }} className='LabImageAbRemIcon'>
                     <CloseIcon />
                   </div>
                 </div>
-
               )}
-              <div className='image_card_ho_ad_add_image flex'>
-                <label for="inputTag">
-                  <i class="ri-add-line"></i>
-                  <input onChange={handleFileChange} autoComplete="off" id="inputTag" type="file" />
-                </label>
-              </div>
+              {!LabAdminRg?.subImages || LabAdminRg?.subImages?.length < 3 ?
+                <div className='image_card_ho_ad_add_image flex'>
+                  <label for="inputTag">
+                    <i class="ri-add-line"></i>
+                    <input onChange={handleFileChange} autoComplete="off" id="inputTag" type="file" />
+                  </label>
+                </div>
+                : ''
+              }
+
             </div>
           </div>
-
         </div>
 
 
@@ -285,23 +323,14 @@ export default function Labadminregistration2() {
               <h4>Features </h4>
               <h4>{`${LabAdminRg?.features?.length ? LabAdminRg?.features?.length : 0}/${Features?.length}`}</h4>
             </div>
-
-
             <button type='button' onClick={() => { openModal() }} className='hospital-second-section-Div flex'> {LabAdminRg?.features?.length > 0 ?
               <div className='hospital-second-section-Div-Map'>
                 {LabAdminRg?.features?.map((ele, index) =>
                   <h4>{ele}{index + 1 === LabAdminRg?.features?.length ? '' : ","}&nbsp; </h4>
                 )}
               </div>
-
-
               : <h4>Select Features</h4>}</button>
           </div>
-
-
-
-
-
 
           <div>
 

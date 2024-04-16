@@ -23,7 +23,7 @@ export default function Hospitaladminregistration1() {
       const isImage = selectedFile.type.startsWith("image/");
       if (isImage) {
         setFileName(selectedFile.name);
-        setHospitalAdminRg({ ...HospitalAdminRg, image: selectedFile.name });
+        setHospitalAdminRg({ ...HospitalAdminRg, image: [selectedFile] });
       } else {
         alert("Please select a valid image file.");
         // Optionally, you can clear the file input
@@ -52,7 +52,6 @@ export default function Hospitaladminregistration1() {
   }
 
   // add data to state
-  console.log("HospitalAdminRg?.contact_no>>>", HospitalAdminRg?.contact_no?.length)
   const inputOnchanges = (e) => {
     const { value, name } = e.target;
     if (name === "contact_no") {
@@ -71,7 +70,7 @@ export default function Hospitaladminregistration1() {
     checkErrors()
   }, [HospitalAdminRg])
   const nextPage = () => {
-    if (HospitalAdminRg?.name && HospitalAdminRg?.contact_no && HospitalAdminRg?.password && HospitalAdminRg?.email && HospitalAdminRg?.repassword) {
+    if (HospitalAdminRg?.name && HospitalAdminRg?.contact_no && HospitalAdminRg?.password && HospitalAdminRg?.email && HospitalAdminRg?.repassword && HospitalAdminRg?.image?.length > 0) {
       if (Errors.email || Errors.phone) {
         toast.info("Check mobile, email and password")
       } else {
@@ -127,8 +126,7 @@ export default function Hospitaladminregistration1() {
     event.preventDefault();
   };
 
-  console.log("errorss>>>", Errors)
-
+  console.log("HospitalAdminRg>>>", HospitalAdminRg)
   return (
     <div>
       <ToastContainer />
@@ -148,7 +146,6 @@ export default function Hospitaladminregistration1() {
                   <h4 className="select-file select-file2 flex">Upload Photo</h4>
                   <input onChange={handleFileChange} id="inputTag" type="file" />
                 </label>
-
               </div>
 
               <div className="hospitalname_input">
@@ -156,10 +153,10 @@ export default function Hospitaladminregistration1() {
                 <input autoComplete="off" maxLength={100} value={HospitalAdminRg?.name} onChange={inputOnchanges} name="name" type="text" />
               </div>
             </div>
-
-
             <div className="main-waring-section main-waring-section-image " >
-              <h4 className="register-number-warning" id="hosPagefile"> {HospitalAdminRg?.image} </h4>
+              {HospitalAdminRg?.image?.map(ele =>
+                <h4 className="register-number-warning" id="hosPagefile"> {ele?.name} </h4>
+              )}
             </div>
 
             <div className="register-input-section">
