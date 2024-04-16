@@ -71,7 +71,7 @@ export default function Doctoradminregistration2() {
     if (!Data?.name || !Data?.email || !Data?.phone || !Data?.pincode || !Data?.sector || !Data?.gender || !Data?.type || !Data?.experience || !Data?.qualification || !Data?.registration_no) {
       setloader(false)
       console.log("chekcingggggg", Data?.name, Data?.email, Data?.phone, Data?.pincode, Data?.sector, Data?.gender, Data?.type, Data?.experience, Data?.qualification, Data?.registration_no)
-      toast.error("Please fill in all the required fields.");
+      toast.error("Please fill in all required fields.");
       return;
     }
     // Check if there are any validation errors
@@ -83,7 +83,7 @@ export default function Doctoradminregistration2() {
     const formData = new FormData();
     formData.append("image", Data.docImage);
     formData.append("data", JSON.stringify(Data));
-    axios.post(`${port}/doctor/dr_registration`, formData)
+    axios.post(`http://192.168.1.3:3003/doctor/dr_registration`,formData)
       .then((res) => {
         if (res.data.success === true) {
           toast.success(res.data.message);
@@ -97,11 +97,9 @@ export default function Doctoradminregistration2() {
           setloader(false);
         }
       }).catch((err) => {
-        if (err.response && err.response.data && err.response.data.message) {
-          toast.error(err.response.data.message);
-        } else {
+      
           toast.error("An error occurred while processing your request");
-        }
+        
         setloader(false);
       })
   }
@@ -343,6 +341,7 @@ export default function Doctoradminregistration2() {
                 </textarea>
                 <div className="doctoradminregistration_input6 flex">
                   <input
+                  className="red-asterisk"
                     onKeyDown={handleKeyPress}
                     type="number"
                     value={Data?.phone_office ?? ""}
@@ -632,7 +631,7 @@ export default function Doctoradminregistration2() {
               <select
                 type="text"
                 onChange={handleChange}
-                value={Data.sector}
+                value={Data?.sector}
                 name="sector"
                 className="doctoradminregistration_gender"
               >

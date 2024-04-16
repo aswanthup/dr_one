@@ -25,16 +25,13 @@ export default function Doctoradminregistration1() {
       const isImage = selectedFile.type.startsWith("image/");
       if (isImage) {
         setFileName(selectedFile);
-        setData({ ...Data, image: selectedFile.name });
+        setData({ ...Data, image: selectedFile.name,docImage:selectedFile });
         // Process the image file or perform additional actions if needed
       } else {
         alert("Please select a valid image file.");
         // Optionally, you can clear the file input
         event.target.value = null;
       }
-    } else {
-      setFileName("No file selected");
-      setData("No file selected");
     }
   };
 
@@ -134,7 +131,8 @@ export default function Doctoradminregistration1() {
       !Data.phone ||
       !Data.email ||
       !Data.password ||
-      !Data.confirmPassword;
+      !Data.confirmPassword||
+      !Data.docImage;
 
     const isValidationError =
       validationErrors.confirmPassword ||
