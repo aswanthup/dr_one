@@ -9,12 +9,11 @@ import { MyContext } from "../../contexts/Contexts";
 import { speacializationNames } from "../../pages/doctor/constants/filter.js";
 import { port } from "../../config.js";
 import { Loader } from "../../components/Loader/Loader.jsx";
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import dayjs from "dayjs";
 // import { useMediaQuery } from "react-responsive";
-
 
 export default function Doctoradminregistration2() {
   const navigate = useNavigate();
@@ -23,7 +22,7 @@ export default function Doctoradminregistration2() {
   const [postalError, setPostalError] = useState("");
   const [Phone, setPhone] = useState("");
   const [addressdata, setAddressdata] = useState({});
-  const [loader, setloader] = useState(false)
+  const [loader, setloader] = useState(false);
 
   useEffect(() => {
     const names = [
@@ -41,13 +40,19 @@ export default function Doctoradminregistration2() {
   }, [])
   const handleKeyPress = (event) => {
     // Check if the pressed key is '.' or '-'
-    if (event?.key === '.' || event?.key === '-' || event?.key === 'e' || event?.key === '+' || event?.key === 'E') {
+    if (
+      event?.key === "." ||
+      event?.key === "-" ||
+      event?.key === "e" ||
+      event?.key === "+" ||
+      event?.key === "E"
+    ) {
       // Prevent the default behavior for these keys
       event.preventDefault();
     }
   };
   const handleChange = (e) => {
-    const { name, value } = e.target
+    const { name, value } = e.target;
     if (name === "phone_office" && value.length > 11) {
       return;
     }
@@ -57,74 +62,98 @@ export default function Doctoradminregistration2() {
     });
   };
   const handleYearChange = (e) => {
-    console.log(e?.$y)
+    console.log(e?.$y);
     setData({
       ...Data,
       experience: e?.$y,
     });
-  }
-  console.log("dataaaaaaaaaa", Data);
+  };
   const handleSubmit = (e) => {
     e.preventDefault();
-    setloader(true)
+    setloader(true);
     // Check if any other validations fail
-    if (!Data?.name || !Data?.email || !Data?.phone || !Data?.pincode || !Data?.sector || !Data?.gender || !Data?.type || !Data?.experience || !Data?.qualification || !Data?.registration_no) {
-      setloader(false)
-      console.log("chekcingggggg", Data?.name, Data?.email, Data?.phone, Data?.pincode, Data?.sector, Data?.gender, Data?.type, Data?.experience, Data?.qualification, Data?.registration_no)
-      toast.error("Please fill in all required fields.");
+    const checkFields = [
+      "name",
+      "phone",
+      "email",
+      "password",
+      "qualification",
+      "specialization",
+      "type",
+      "gender",
+      "address",
+      "experience",
+      "about",
+      "registration_no",
+      "pincode",
+      "sector",
+      "phone_office",
+    ];
+    if (
+      checkFields.some(
+        (ele) =>
+          Data[ele] === null ||
+          Data[ele] === undefined ||
+          Data[ele] === "" ||
+          !(ele in Data)
+      )
+    ) {
+      setloader(false);
+      toast.info("Please fill in all fields.");
       return;
     }
     // Check if there are any validation errors
     if (postalError) {
-      setloader(false)
+      setloader(false);
       toast.error("Please fix the pincode error.");
       return;
     }
     const formData = new FormData();
     formData.append("image", Data.docImage);
     formData.append("data", JSON.stringify(Data));
-    axios.post(`http://192.168.1.3:3003/doctor/dr_registration`,formData)
+    axios
+      .post(`${port}/doctor/dr_registration`, formData)
       .then((res) => {
         if (res.data.success === true) {
           toast.success(res.data.message);
           setloader(false);
           setTimeout(() => {
-            setData({})
-            navigate("/")
+            setData({});
+            navigate("/");
           }, 2500);
         } else {
           toast.error(res.data.message);
           setloader(false);
         }
-      }).catch((err) => {
-      
-          toast.error("An error occurred while processing your request");
-        
-        setloader(false);
       })
-  }
+      .catch((err) => {
+        toast.error("An error occurred while processing your request");
+
+        setloader(false);
+      });
+  };
   const updatePosts = (pinCode) => {
     if (pinCode?.length === 6) {
       setData({
         ...Data,
         pincode: pinCode,
-        selectedPlace: ""
+        selectedPlace: "",
       });
       axios
         .get(`https://api.postalpincode.in/pincode/${pinCode}`)
         .then((res) => {
-          const { PostOffice } = res?.data[0]
+          const { PostOffice } = res?.data[0];
           setData({
             ...Data,
             Postoffice: PostOffice,
             pincode: pinCode,
-            selectedPlace: ""
+            selectedPlace: "",
           });
           if (PostOffice === null) {
-            setPostalError("Invalid pincode")
+            setPostalError("Invalid pincode");
           } else {
-            setPostalError("")
-            const postData = PostOffice[0]
+            setPostalError("");
+            const postData = PostOffice[0];
             setAddressdata({
               ...addressdata,
               district: postData.District,
@@ -146,11 +175,11 @@ export default function Doctoradminregistration2() {
     }
 
     if (!/^\d{6}$/.test(value)) {
-      setData(prevData => ({
+      setData((prevData) => ({
         ...prevData,
         pincode: value,
         Postoffice: [],
-        selectedPlace: ""
+        selectedPlace: "",
       }));
 
       if (value === "") {
@@ -161,12 +190,11 @@ export default function Doctoradminregistration2() {
     } else {
       updatePosts(value);
     }
-
   };
 
   const handleClose = () => {
-    setloader(false)
-  }
+    setloader(false);
+  };
 
   return (
     <>
@@ -177,9 +205,7 @@ export default function Doctoradminregistration2() {
         closeOnClick rtl={false}, pauseOnFocusLoss draggable pauseOnHover
       </ToastContainer>
 
-      {
-        loader ? <Loader /> : ''
-      }
+      {loader ? <Loader /> : ""}
 
       <div className="doctoradminregistration flex desktop">
         <div>
@@ -274,14 +300,33 @@ export default function Doctoradminregistration2() {
           </div>
 
           <div className="doctoradminregistration_input2 flex">
-            <div style={{ display: "flex", justifyContent: "space-between", flexDirection: "column" }}>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                flexDirection: "column",
+              }}
+            >
               <h4>Year Of Graduation</h4>
               <LocalizationProvider dateAdapter={AdapterDayjs}>
-                <DatePicker disableFuture slotProps={{
-                  field: {
-                    readOnly: true
-                  }
-                }} name="experience" onChange={handleYearChange} sx={{ width: "30vw", background: "#f6f6f966", border: "none", boxSizing: "border-box", borderRadius: "0.5vw" }} views={['year']} className="date-picker"
+                <DatePicker
+                  disableFuture
+                  slotProps={{
+                    field: {
+                      readOnly: true,
+                    },
+                  }}
+                  name="experience"
+                  onChange={handleYearChange}
+                  sx={{
+                    width: "30vw",
+                    background: "#f6f6f966",
+                    border: "none",
+                    boxSizing: "border-box",
+                    borderRadius: "0.5vw",
+                  }}
+                  views={["year"]}
+                  className="date-picker"
                 />
               </LocalizationProvider>
             </div>
@@ -319,7 +364,6 @@ export default function Doctoradminregistration2() {
                     {value}
                   </option>
                 ))}
-
               </select>
             </div>
           </div>
@@ -341,7 +385,7 @@ export default function Doctoradminregistration2() {
                 </textarea>
                 <div className="doctoradminregistration_input6 flex">
                   <input
-                  className="red-asterisk"
+                    className="red-asterisk"
                     onKeyDown={handleKeyPress}
                     type="number"
                     value={Data?.phone_office ?? ""}
@@ -363,23 +407,16 @@ export default function Doctoradminregistration2() {
                       {" "}
                       Sector{" "}
                     </option>
-                    <option
-                      style={{ color: "black" }}
-                      value="goverment"
-                    >
-                      Goverment
+                    <option style={{ color: "black" }} value="government">
+                      Government
                     </option>
-                    <option
-                      style={{ color: "black" }}
-                      value="private"
-                    >
+                    <option style={{ color: "black" }} value="private">
                       Private
                     </option>
                   </select>
                 </div>
               </div>
             </div>
-
 
             <div className="doctoradminregistration_input4  flex">
               <h4>Consultation Address</h4>
@@ -395,8 +432,7 @@ export default function Doctoradminregistration2() {
                   {" "}
                 </textarea>
                 <div className="doctoradminregistration_input6 flex">
-                  <div style={{ position: "relative" }} >
-
+                  <div style={{ position: "relative" }}>
                     <input
                       onKeyDown={handleKeyPress}
                       type="number"
@@ -406,7 +442,13 @@ export default function Doctoradminregistration2() {
                       maxLength={6}
                       onChange={handlePostChange}
                     />
-                    <p style={{ position: "absolute", fontSize: "12px", color: "white" }}>
+                    <p
+                      style={{
+                        position: "absolute",
+                        fontSize: "12px",
+                        color: "white",
+                      }}
+                    >
                       {postalError}
                     </p>
                   </div>
@@ -456,7 +498,6 @@ export default function Doctoradminregistration2() {
         </div>
       </div>
 
-
       {/* mobile ---------------------------------------------------------------- */}
       <div className="doctoradminregistration mobile ">
         <div className="docadminhead">
@@ -483,7 +524,7 @@ export default function Doctoradminregistration2() {
                   name="gender"
                   className="doctoradminregistration_gender"
                   value={Data?.gender}
-                  style={{ paddingLeft: "15px" }}
+                  style={{ paddingLeft: "10px" }}
                   onChange={handleChange}
                 >
                   <option
@@ -513,7 +554,7 @@ export default function Doctoradminregistration2() {
               <div style={{ width: "48%" }}>
                 <h4>Type</h4>
                 <select
-                  style={{ paddingLeft: "15px" }}
+                   style={{ paddingLeft: "10px" }}
                   type="text"
                   name="type"
                   value={Data?.type}
@@ -557,11 +598,24 @@ export default function Doctoradminregistration2() {
             <div>
               <h4>Year Of Graduation</h4>
               <LocalizationProvider dateAdapter={AdapterDayjs}>
-                <DatePicker disableFuture slotProps={{
-                  field: {
-                    readOnly: true
-                  }
-                }} name="experience" onChange={handleYearChange} sx={{ width: "30vw", background: "#f6f6f966", border: "none", boxSizing: "border-box", borderRadius: "1vw" }} views={['year']} className="date-picker"
+                <DatePicker
+                  disableFuture
+                  slotProps={{
+                    field: {
+                      readOnly: true,
+                    },
+                  }}
+                  name="experience"
+                  onChange={handleYearChange}
+                  sx={{
+                    width: "30vw",
+                    background: "#f6f6f966",
+                    border: "none",
+                    boxSizing: "border-box",
+                    borderRadius: "1vw",
+                  }}
+                  views={["year"]}
+                  className="date-picker"
                 />
               </LocalizationProvider>
             </div>
@@ -581,6 +635,7 @@ export default function Doctoradminregistration2() {
               <select
                 type="text"
                 name="specialization"
+                style={{ paddingLeft: "10px" }}
                 value={Data?.specialization}
                 onChange={handleChange}
                 className="doctoradminregistration_gender"
@@ -598,7 +653,6 @@ export default function Doctoradminregistration2() {
                     {value}
                   </option>
                 ))}
-
               </select>
             </div>
           </div>
@@ -630,6 +684,7 @@ export default function Doctoradminregistration2() {
               <h4>Select Sector</h4>
               <select
                 type="text"
+                style={{ paddingLeft: "10px" }}
                 onChange={handleChange}
                 value={Data?.sector}
                 name="sector"
@@ -639,16 +694,10 @@ export default function Doctoradminregistration2() {
                   {" "}
                   Select{" "}
                 </option>
-                <option
-                  style={{ color: "black" }}
-                  value="goverment"
-                >
+                <option style={{ color: "black" }} value="goverment">
                   Goverment
                 </option>
-                <option
-                  style={{ color: "black" }}
-                  value="private"
-                >
+                <option style={{ color: "black" }} value="private">
                   Private
                 </option>
               </select>
@@ -679,7 +728,13 @@ export default function Doctoradminregistration2() {
                         style={{ width: "100%" }}
                         onChange={handlePostChange}
                       />
-                      <p style={{ position: "absolute", color: "white", fontSize: "10px" }}>
+                      <p
+                        style={{
+                          position: "absolute",
+                          color: "white",
+                          fontSize: "10px",
+                        }}
+                      >
                         {postalError}
                       </p>
                     </div>
@@ -727,16 +782,9 @@ export default function Doctoradminregistration2() {
                 <h4>Submit</h4>
               </a>
             </div>
-
           </div>
-
-
-
-
         </div>
-
       </div>
-
     </>
   );
 }

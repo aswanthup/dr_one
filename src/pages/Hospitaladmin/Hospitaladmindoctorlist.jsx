@@ -8,6 +8,7 @@ import { Backdrop, CircularProgress } from "@mui/material";
 import { DoctorCard } from "./DoctorCard/DoctorCard";
 import HospitalSidebar from "./HospitalSidebar";
 import { useNavigate } from "react-router-dom";
+import { port } from "../../config";
 
 export default function Hospitaladmindoctorlist() {
   const navigate = useNavigate();
@@ -22,7 +23,7 @@ export default function Hospitaladmindoctorlist() {
     try {
       setLoading(true);
       const response = await axios.post(
-        `http://localhost:3003/hospital/getdoctorlist`,
+        `${port}/hospital/getdoctorlist`,
         {
           id: 52,
         }

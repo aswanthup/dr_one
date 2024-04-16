@@ -45,11 +45,11 @@ export default function Labadminregistration2() {
   ]
 
   useEffect(() => {
-    // if (!LabAdminRg?.name && !LabAdminRg?.contact_no && !LabAdminRg?.password && !LabAdminRg?.email && !LabAdminRg?.repassword) {
-    //   navigate("/labadminregistration1")
-    // } else {
-    //   setLabAdminRg({ ...LabAdminRg, timing: { closing_time: '06:00 PM', opening_time: '10:00 AM' } })
-    // }
+    if (!LabAdminRg?.name && !LabAdminRg?.contact_no && !LabAdminRg?.password && !LabAdminRg?.email && !LabAdminRg?.repassword) {
+      navigate("/labadminregistration1")
+    } else {
+      setLabAdminRg({ ...LabAdminRg, timing: { closing_time: '06:00 PM', opening_time: '10:00 AM' } })
+    }
     window.scrollTo(0, 0); // Scrolls to the top of the page
   }, [])
   const toastifyFun = (value, success) => {

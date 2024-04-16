@@ -46,9 +46,9 @@ export default function Hospitaladminregistration2() {
         ]
 
         useEffect(() => {
-                // if (!HospitalAdminRg?.name && !HospitalAdminRg?.contact_no && !HospitalAdminRg?.password && !HospitalAdminRg?.email && !HospitalAdminRg?.repassword) {
-                //         navigate("/hospitaladminregistration1")
-                // }
+                if (!HospitalAdminRg?.name && !HospitalAdminRg?.contact_no && !HospitalAdminRg?.password && !HospitalAdminRg?.email && !HospitalAdminRg?.repassword) {
+                        navigate("/hospitaladminregistration1")
+                }
                 window.scrollTo(0, 0); // Scrolls to the top of the page
         }, [])
 

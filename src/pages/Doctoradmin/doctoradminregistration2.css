@@ -245,8 +245,8 @@
     .mob_inputs {
       background-color: rgba(246, 246, 249, 0.4);
       border-radius: 5px;
+      padding-left: 10px;
       color: white;
-      padding: 1vw;
       width: 100%;
       height: 40px;
       letter-spacing: 2px;
