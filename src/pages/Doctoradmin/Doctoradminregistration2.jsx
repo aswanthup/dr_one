@@ -12,7 +12,7 @@ import { Loader } from "../../components/Loader/Loader.jsx";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-import dayjs from "dayjs";
+import dayjs, { Dayjs } from 'dayjs';
 // import { useMediaQuery } from "react-responsive";
 
 export default function Doctoradminregistration2() {
@@ -62,11 +62,12 @@ export default function Doctoradminregistration2() {
     });
   };
   const handleYearChange = (e) => {
-    console.log(e?.$y);
+ console.log(e)
     setData({
       ...Data,
-      experience: e?.$y,
-    });
+      selectedYear:e.$d,
+      experience: e.$y,
+    })
   };
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -192,9 +193,7 @@ export default function Doctoradminregistration2() {
     }
   };
 
-  const handleClose = () => {
-    setloader(false);
-  };
+console.log({Data})
 
   return (
     <>
@@ -325,6 +324,8 @@ export default function Doctoradminregistration2() {
                     boxSizing: "border-box",
                     borderRadius: "0.5vw",
                   }}
+                  value={Data.selectedYear ? dayjs(Data.selectedYear) : null}
+                  
                   views={["year"]}
                   className="date-picker"
                 />
@@ -608,12 +609,13 @@ export default function Doctoradminregistration2() {
                   name="experience"
                   onChange={handleYearChange}
                   sx={{
-                    width: "30vw",
+                    width: "100%",
                     background: "#f6f6f966",
                     border: "none",
                     boxSizing: "border-box",
                     borderRadius: "1vw",
                   }}
+                  value={Data.selectedYear ? dayjs(Data.selectedYear) : null}
                   views={["year"]}
                   className="date-picker"
                 />

@@ -248,7 +248,7 @@ export default function Doctoradminregistration1() {
                       </p>
                     )} */}
                     <p className="register-number-warning">
-                      This number will be kept confidential and shall be used for OTP verifications .
+                      This number will be kept confidential and shall be used for OTP verifications
                     </p>
                   </div>{" "}
                 </div>
