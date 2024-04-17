@@ -13,14 +13,11 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import dayjs, { Dayjs } from 'dayjs';
-// import { useMediaQuery } from "react-responsive";
 
 export default function Doctoradminregistration2() {
   const navigate = useNavigate();
   const { Data, setData } = useContext(MyContext);
-  const [postal, setPostal] = useState();
   const [postalError, setPostalError] = useState("");
-  const [Phone, setPhone] = useState("");
   const [addressdata, setAddressdata] = useState({});
   const [loader, setloader] = useState(false);
 
@@ -320,7 +317,7 @@ console.log({Data})
                   sx={{
                     width: "30vw",
                     background: "#f6f6f966",
-                    border: "none",
+                    // border: "1px solid white",
                     boxSizing: "border-box",
                     borderRadius: "0.5vw",
                   }}
@@ -663,6 +660,7 @@ console.log({Data})
             <div className="doctoradminregistration_input3 ">
               <h4>About</h4>
               <textarea
+              style={{paddingLeft:"10px"}}
                 name="about"
                 autoComplete="off"
                 value={Data?.about}

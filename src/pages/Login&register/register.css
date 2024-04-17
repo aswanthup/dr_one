@@ -80,6 +80,9 @@ label {
     background-color: rgba(246, 246, 249, .4);
     padding: 1vw;
     color: white;
+    &:focus{
+        border: 1px solid white;
+    }
 }
 
 .register-left-section input {
@@ -91,6 +94,9 @@ label {
     background-color: rgba(246, 246, 249, .4);
     padding: 1vw;
     color: white;
+    &:focus{
+        border: 1px solid white;
+    }
 }
 
 .register-button-section {

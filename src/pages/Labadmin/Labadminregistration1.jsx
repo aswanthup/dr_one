@@ -192,6 +192,7 @@ export default function Labadminregistration1() {
                 <div style={{ position: "relative" }}>
                   <h4 className="">Email</h4>
                   <input
+                  autoComplete="off"
                     maxLength={50}
                     value={LabAdminRg?.email} pattern="^[^\s@]+@[^\s@]+\.[^\s@]+$" name="email" onChange={inputOnchanges} type="email" />
                   <div className="main-waring-section">
