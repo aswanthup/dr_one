@@ -188,8 +188,9 @@ export default function SearchDoc() {
   };
   //handle location click and filter docs function
   const updateDocByPlace = (data) => {
-    if (data.length === 0) {
+    if (data?.length === 0) {
       setEmptyResults(true);
+      setDocsBySearch([])
       return;
     }
     if (passedSpecialization) {
@@ -288,7 +289,7 @@ export default function SearchDoc() {
                       <FormControlLabel
                         name={name}
                         checked={
-                          filters.specializations.length !== 0 &&
+                          filters?.specializations?.length !== 0 &&
                           filters.specializations.includes(name.toLowerCase())
                         }
                         disabled={

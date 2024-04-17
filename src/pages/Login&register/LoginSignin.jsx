@@ -62,7 +62,7 @@ export const LoginSignin = () => {
               </div>
               <div className='forgot-password flex'>
                 <a onClick={openModal} >
-                  <h4>Forgot Password.?</h4> </a>
+                  <h4>Forgot Password ?</h4> </a>
               </div>
             </div>
             <div className="login-button-section flex">

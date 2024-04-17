@@ -2,7 +2,7 @@
   padding: 2.5rem;
   min-height: 100dvh;
   font-family: "Outfit", sans-serif;
-  background-color: rgba(231, 236, 253,0.4);
+  background-color: rgba(231, 236, 253, 0.4);
   /* border: 1px solid red; */
 }
 
@@ -12,10 +12,12 @@
   align-items: center;
   justify-content: center;
 }
+
 .section2 {
   /* border: 1px Solid grey; */
   height: 2.5rem;
 }
+
 .section3 {
   display: flex;
   /* border: 1px solid red; */
@@ -31,22 +33,26 @@
   /* border: 1px solid #e7e5e4; */
   border-radius: 23px;
 }
+
 .rightSide {
   flex: 3;
   /* border: 1px solid green; */
 }
-.leftHeadings{
+
+.leftHeadings {
   font-weight: 400;
 }
-.types > :nth-child(1) {
+
+.types> :nth-child(1) {
   padding-bottom: 1rem;
 }
-.types > :nth-child(2) {
+
+.types> :nth-child(2) {
   padding-bottom: 2.5rem;
   padding-left: 30px;
 }
 
-.specialization > :nth-child(2) {
+.specialization> :nth-child(2) {
   margin-top: 1rem;
   padding-top: 1rem;
   /* border: 1px solid red; */
@@ -56,15 +62,17 @@
 
   padding-bottom: 2.5rem;
 }
-.gender > :nth-child(1) {
+
+.gender> :nth-child(1) {
   padding-bottom: 1rem;
 }
 
-.gender > :nth-child(2) {
+.gender> :nth-child(2) {
   padding-bottom: 2.5rem;
   padding-left: 30px;
 }
-.exp > :nth-child(1) {
+
+.exp> :nth-child(1) {
   padding-bottom: 2.5rem;
 }
 
@@ -75,11 +83,11 @@
   /* padding-bottom: .1rem; */
   padding-right: 2rem;
   display: flex;
+  justify-content: center;
   flex-wrap: wrap;
   gap: 2rem;
   overflow-x: scroll;
   max-height: 870px;
-  justify-content: space-between;
 }
 
 /* ----------------- Card */
@@ -87,7 +95,7 @@
 .cardContainer {
   box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
   background-color: white;
-  cursor:pointer;
+  cursor: pointer;
   padding: 1.5rem;
   display: flex;
   gap: 10px;
@@ -97,25 +105,28 @@
   width: calc(49% - 10px);
   /* margin-top: 2rem; */
   box-sizing: border-box;
-  &:hover{
+
+  &:hover {
     /* border: 1px solid rgba(58, 101, 253,0.5); */
-    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(58, 101, 253,0.5) 0px 0px 0px 1px;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(58, 101, 253, 0.5) 0px 0px 0px 1px;
 
   }
 }
 
-.cardContainer > :nth-child(1) {
+.cardContainer> :nth-child(1) {
   flex: 1;
   display: flex;
   align-items: center;
   justify-content: center;
-  & > span {
+
+  &>span {
     font-weight: 200;
   }
 
   /* border: 1px solid red; */
 }
-.cardContainer > :nth-child(2) {
+
+.cardContainer> :nth-child(2) {
   flex: 3;
   display: flex;
   flex-direction: column;
@@ -125,7 +136,7 @@
   /* border: 1px solid red; */
 }
 
-.docImage{
+.docImage {
   height: 100px;
   width: 100px;
   border-radius: 50%;

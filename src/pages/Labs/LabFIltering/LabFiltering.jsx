@@ -21,7 +21,6 @@ export const LabFiltering = () => {
     });
     const [lab, setlab] = useState([])
     const [labFilter, setlabFilter] = useState([])
-
     const updateDocByPlace = (value) => {
         setlab(value)
     }
@@ -54,7 +53,7 @@ export const LabFiltering = () => {
     console.log("Lab>>>>", labFilter.length > 0 ? labFilter : lab)
     const handleDocNameSearch = (value) => {
         const query = value.toLowerCase();
-        if (labFilter.length > 0) {
+        if (labFilter?.length > 0) {
             const filteredData = labFilter.filter((data) =>
                 data.name.toLowerCase().includes(query)
             );

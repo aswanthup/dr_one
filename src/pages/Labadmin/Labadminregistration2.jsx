@@ -166,7 +166,8 @@ export default function Labadminregistration2() {
           }
         } else {
           // Handle empty subImages (optional: log a message or take other actions)
-          console.log("LabAdminRg.subImages is empty. No sub-images to add.");
+          setloader(false)
+          toast.info("Please include at least one image as a minimum requirement.")
         }
 
       } else {

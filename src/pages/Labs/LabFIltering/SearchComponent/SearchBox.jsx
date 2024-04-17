@@ -3,18 +3,21 @@ import { React, useState, useEffect, useRef } from "react";
 import { useOutsideClick } from "../../../../hooks/useOutsideClick";
 import { port } from "../../../../config";
 import { Bounce, ToastContainer, toast } from "react-toastify";
+import { Loader } from "../../../../components/Loader/Loader";
 
 export const SearchBox = ({ updateDocs, docNames }) => {
     const [showSearchList, setShowSearchList] = useState(false);
     const [placeLists, setplaceLists] = useState([]);
     const [searchPlace, setSearchPlace] = useState("");
     const [selectedPlace, setSelectedPlace] = useState("");
+    const [loading, setLoading] = useState(false);
 
     const boxRef = useRef();
 
     useEffect(() => {
         const handleSearch = setTimeout(() => {
             const fetchData = async () => {
+
                 try {
                     const response = await axios.post(
                         `${port}/doctor/suggest`,
@@ -23,7 +26,11 @@ export const SearchBox = ({ updateDocs, docNames }) => {
                         }
                     );
                     const placeLists = response.data.data;
-                    setplaceLists(placeLists);
+                    setplaceLists(placeLists)
+                    console.log("placeLists>>", placeLists);
+                    if (!placeLists?.length > 0) {
+                        toast.info("Location not found")
+                    }
                 } catch (err) {
                     console.error("Error fetching data:", err);
                 }
@@ -42,6 +49,7 @@ export const SearchBox = ({ updateDocs, docNames }) => {
         const placeName = `${data.postname}, ${data.district}`;
         setSelectedPlace(placeName);
         setShowSearchList(false);
+        setLoading(true)
         try {
             const response = await axios.post(
                 // `http://192.168.1.12:3003/lab/pincode_result`,
@@ -51,12 +59,14 @@ export const SearchBox = ({ updateDocs, docNames }) => {
                 }
             );
             const docData = response.data.data;
-            updateDocs(docData);//run function on searchdoc
             console.log("docData>>>>", docData)
+            updateDocs(docData);//run function on searchdoc
+            setLoading(false)
         } catch (err) {
             console.log(err);
             toast.info(err?.response?.data?.message)
-
+            updateDocs(err?.response?.data?.data);
+            setLoading(false)
         }
     };
     const searchNames = (event) => {
@@ -69,6 +79,10 @@ export const SearchBox = ({ updateDocs, docNames }) => {
     }, boxRef);
     return (
         <div className="Doctor-search-box flex" style={{ paddingTop: 0 }}>
+            {loading ?
+                <Loader />
+                : ''
+            }
             <div className="Doctor-container-search flex">
                 <div className="Doctor-Search-box flex">
                     <div className="Doctor-location-section flex">

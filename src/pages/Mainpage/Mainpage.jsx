@@ -58,7 +58,7 @@ export default function Mainpage() {
                   onChange={handleSearch}
                   className="search-input"
                   type="text"
-                  placeholder="Search doctor,labs,hospitals,pharmacys"
+                  placeholder="Search Doctor,Labs,Hospitals,Pharmacy"
                 />
                 <div className="search-section flex">
                   <i className="ri-search-2-line" />

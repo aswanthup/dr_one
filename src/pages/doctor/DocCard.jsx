@@ -9,7 +9,7 @@ export default function DocCard({ data }) {
     <>
       <div onClick={() => navigate("/doctorprofile", { state: details })} className={styles.cardContainer}>
         <div>
-          <img className={styles.docImage} src='./images/hospital.jpg' alt="" />
+          <img className={styles.docImage} src={details.photo?.image1} alt="" />
         </div>
         <div>
           <div>

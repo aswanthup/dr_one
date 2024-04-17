@@ -3,13 +3,14 @@ import { React, useState, useEffect, useRef } from "react";
 import { useOutsideClick } from "../../../hooks/useOutsideClick";
 import { port } from "../../../config";
 import { toast } from "react-toastify";
+import { Loader } from "../../../components/Loader/Loader";
 
 export const SearchBox = ({ updateDocs, docNames }) => {
     const [showSearchList, setShowSearchList] = useState(false);
     const [placeLists, setplaceLists] = useState([]);
     const [searchPlace, setSearchPlace] = useState("");
     const [selectedPlace, setSelectedPlace] = useState("");
-
+    const [loading, setLoading] = useState(false);
     const boxRef = useRef();
 
     useEffect(() => {
@@ -39,6 +40,7 @@ export const SearchBox = ({ updateDocs, docNames }) => {
     console.log(placeLists);
 
     const handleClickPlace = async (data) => {
+        setLoading(true)
         const placeName = `${data.postname}, ${data.district}`;
         setSelectedPlace(placeName);
         setShowSearchList(false);
@@ -52,8 +54,12 @@ export const SearchBox = ({ updateDocs, docNames }) => {
             const docData = response.data.data;
             // console.log({ docData });
             updateDocs(docData);//run function on searchdoc
+            setLoading(false)
+
         } catch (err) {
+            setLoading(false)
             toast.info(err?.response?.data?.message)
+            updateDocs([]);//run function on searchdoc
         }
     };
     const searchNames = (event) => {
@@ -67,6 +73,10 @@ export const SearchBox = ({ updateDocs, docNames }) => {
     }, boxRef);
     return (
         <div className="Doctor-search-box flex" style={{ paddingTop: 0 }}>
+            {loading ?
+                <Loader />
+                : ''
+            }
             <div className="Doctor-container-search flex">
                 <div className="Doctor-Search-box flex">
                     <div className="Doctor-location-section flex">

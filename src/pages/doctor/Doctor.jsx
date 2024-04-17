@@ -70,7 +70,7 @@ export default function Doctor() {
                   <h1 style={{ color: "white" }}>34 +</h1>
                 </div>
                 <div>
-                  <h3>Specialties</h3>
+                  <h3>Specialities</h3>
                 </div>
               </div>
             </div>
@@ -343,7 +343,7 @@ export default function Doctor() {
 
         <div className="second-main-head">
           <h1>
-            Find Doctor by <span className="color-blue">Specialties </span>
+            Find Doctor by <span className="color-blue">Specialities </span>
           </h1>
         </div>
 

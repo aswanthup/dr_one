@@ -59,10 +59,10 @@ export default function Doctoradminregistration2() {
     });
   };
   const handleYearChange = (e) => {
- console.log(e)
+    console.log(e)
     setData({
       ...Data,
-      selectedYear:e.$d,
+      selectedYear: e.$d,
       experience: e.$y,
     })
   };
@@ -190,7 +190,7 @@ export default function Doctoradminregistration2() {
     }
   };
 
-console.log({Data})
+  console.log({ Data })
 
   return (
     <>
@@ -322,7 +322,7 @@ console.log({Data})
                     borderRadius: "0.5vw",
                   }}
                   value={Data.selectedYear ? dayjs(Data.selectedYear) : null}
-                  
+
                   views={["year"]}
                   className="date-picker"
                 />
@@ -552,7 +552,7 @@ console.log({Data})
               <div style={{ width: "48%" }}>
                 <h4>Type</h4>
                 <select
-                   style={{ paddingLeft: "10px" }}
+                  style={{ paddingLeft: "10px" }}
                   type="text"
                   name="type"
                   value={Data?.type}
@@ -660,7 +660,7 @@ console.log({Data})
             <div className="doctoradminregistration_input3 ">
               <h4>About</h4>
               <textarea
-              style={{paddingLeft:"10px"}}
+                style={{ paddingLeft: "10px" }}
                 name="about"
                 autoComplete="off"
                 value={Data?.about}

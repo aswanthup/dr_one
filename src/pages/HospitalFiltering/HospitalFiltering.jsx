@@ -24,9 +24,14 @@ export const HospitalFiltering = () => {
     });
     const [hospitals, sethospitals] = useState([])
     const [hospitalsFilter, sethospitalsFilter] = useState([])
+    const [loading, setloading] = useState(false)
 
     const updateDocByPlace = (value) => {
-        sethospitals(value)
+        if (value?.length > 0) {
+            sethospitals(value)
+        } else {
+            sethospitals([])
+        }
     }
     useEffect(() => {
         let FinalData = [...hospitals] || [];
@@ -35,16 +40,15 @@ export const HospitalFiltering = () => {
             let typeMatched = ele?.type.toLowerCase() === filters?.type.toLowerCase(); // Check if ele.type matches or if filters.type is not set
             let specialityMatched = true; // Assume speciality matches by default
             let featureMatched = true;
-
             if (typeMatched) {
                 if (filters.speciality && filters.speciality.length > 0) {
-                    specialityMatched = filters.speciality.every(spec => {
+                    specialityMatched = filters?.speciality.every(spec => {
                         return ele.speciality && ele.speciality.includes(spec);
                     });
                 }
 
                 if (filters.features && filters.features.length > 0) {
-                    featureMatched = filters.features.every(feature => {
+                    featureMatched = filters?.features.every(feature => {
                         return ele.feature && ele.feature.includes(feature);
                     });
                 }
@@ -81,8 +85,10 @@ export const HospitalFiltering = () => {
 
     }
     useEffect(() => {
+        setloading(true)
         axios.get(`${port}/hospital/list`).then((res) => {
             sethospitals(res.data.data)
+            setloading(false)
         })
     }, [])
 
@@ -225,33 +231,39 @@ export const HospitalFiltering = () => {
 
                     </div>
                     <div className='HospitalFilterHosSec'>
-                        {hospitals.length > 0 ?
-                            <div className={styles.rightSide}>
-                                <div className={styles.cardMainContainer}>
-                                    {hospitalsFilter.length > 0 || filters.type || filters?.speciality?.length > 0 || filters?.features?.length > 0 ?
-                                        hospitalsFilter.length > 0 ?
-                                            hospitalsFilter.map((details, index) =>
+
+                        <div className={styles.rightSide}>
+                            <div className={styles.cardMainContainer}>
+                                {hospitalsFilter.length > 0 || filters.type || filters?.speciality?.length > 0 || filters?.features?.length > 0 ?
+                                    hospitalsFilter.length > 0 ?
+                                        hospitalsFilter.map((details, index) =>
+                                            <DocCard key={index} data={{ details: details, hospitals: true }} />
+                                        )
+                                        :
+                                        <div className='HospitalNotfound'>
+                                            <h3>
+                                                Hospitals were not found.</h3>
+
+                                        </div>
+
+                                    :
+                                    <>
+                                        {hospitals.length > 0 ?
+                                            hospitals.map((details, index) =>
                                                 <DocCard key={index} data={{ details: details, hospitals: true }} />
                                             )
                                             :
                                             <div className='HospitalNotfound'>
                                                 <h3>
                                                     Hospitals were not found.</h3>
-
-                                            </div>
-
-                                        :
-                                        <>
-                                            {hospitals.map((details, index) =>
-                                                <DocCard key={index} data={{ details: details, hospitals: true }} />
-                                            )
-                                            }
-                                        </>
-                                    }
-                                </div>
+                                            </div>}
+                                    </>
+                                }
                             </div>
-                            :
-                            <Loader />
+                        </div>
+                        {loading
+                            &&
+                            < Loader />
                         }
                     </div>
                 </div>

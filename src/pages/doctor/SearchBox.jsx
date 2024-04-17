@@ -3,12 +3,14 @@ import { React, useState, useEffect, useRef } from "react";
 import { useOutsideClick } from "../../hooks/useOutsideClick";
 import { port } from "../../config";
 import { toast } from "react-toastify";
+import { Loader } from "../../components/Loader/Loader";
 
 export default function SearchBox({ updateDocs, docNames }) {
   const [showSearchList, setShowSearchList] = useState(false);
   const [placeLists, setplaceLists] = useState([]);
   const [searchPlace, setSearchPlace] = useState("");
   const [selectedPlace, setSelectedPlace] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const boxRef = useRef();
 
@@ -23,6 +25,9 @@ export default function SearchBox({ updateDocs, docNames }) {
             }
           );
           const placeLists = response.data.data;
+          if (!placeLists?.length > 0) {
+            toast.info("Location not found")
+          }
           setplaceLists(placeLists);
         } catch (err) {
           console.error("Error fetching data:", err);
@@ -39,6 +44,7 @@ export default function SearchBox({ updateDocs, docNames }) {
   console.log(placeLists);
 
   const handleClickPlace = async (data) => {
+    setLoading(true)
     const placeName = `${data.postname}, ${data.district}`;
     setSelectedPlace(placeName);
     setShowSearchList(false);
@@ -51,10 +57,13 @@ export default function SearchBox({ updateDocs, docNames }) {
       );
       const docData = response.data.data;
       console.log({ docData });
-
+      setLoading(false)
       updateDocs(docData);//run function on searchdoc
     } catch (err) {
+      setLoading(false)
       toast.info(err?.response?.data?.message)
+      console.log(err?.response?.data)
+      updateDocs([]);//run function on searchdoc
     }
   };
   const searchNames = (event) => {
@@ -67,6 +76,10 @@ export default function SearchBox({ updateDocs, docNames }) {
   }, boxRef);
   return (
     <div className="Doctor-search-box flex" style={{ paddingTop: 0 }}>
+      {loading ?
+        <Loader />
+        : ''
+      }
       <div className="Doctor-container-search flex">
         <div className="Doctor-Search-box flex">
           <div className="Doctor-location-section flex">

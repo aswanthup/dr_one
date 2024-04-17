@@ -161,8 +161,9 @@ export default function Hospitaladminregistration2() {
                                                 temp[0] = HospitalAdminRg.image[0];
                                         }
                                 } else {
+                                        setloader(false)
                                         // Handle empty subImages (optional: log a message or take other actions)
-                                        console.log("HospitalAdminRg.subImages is empty. No sub-images to add.");
+                                        toast.info("Please include at least one image as a minimum requirement.")
                                 }
 
                         } else {
