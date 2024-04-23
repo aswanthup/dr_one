@@ -14,6 +14,7 @@ export default function Hospitaladminregistration1() {
   const [Errors, setErrors] = useState({
   })
   const [showPassword, setShowPassword] = useState(false);
+
   const [showRePassword, setShowRePassword] = useState(false);
 
   const handleFileChange = (event) => {
@@ -70,11 +71,26 @@ export default function Hospitaladminregistration1() {
     checkErrors()
   }, [HospitalAdminRg])
   const nextPage = () => {
-    if (HospitalAdminRg?.name && HospitalAdminRg?.contact_no && HospitalAdminRg?.password && HospitalAdminRg?.email && HospitalAdminRg?.repassword && HospitalAdminRg?.image?.length > 0) {
-      if (Errors.email || Errors.phone) {
-        toast.info("Check mobile, email and password")
+    const validData = !HospitalAdminRg?.name ||
+      !HospitalAdminRg?.contact_no ||
+      !HospitalAdminRg?.password ||
+      !HospitalAdminRg?.email ||
+      !HospitalAdminRg?.repassword ||
+      !HospitalAdminRg?.image?.length > 0
+    const errorCheck =
+      Errors.email ||
+      Errors.phone ||
+      Errors.password ||
+      Errors.repassword
+    if (!validData) {
+      if (errorCheck) {
+        if (Errors?.password) {
+          toast.info("Please check password")
+        } else {
+          toast.info(errorCheck)
+        }
       } else {
-        if (!Errors.password && !Errors.email && !Errors.phone && !Errors.password && !Errors.repassword) {
+        if (!errorCheck) {
           navigate("/hospitaladminregistration2")
         }
       }
@@ -85,13 +101,12 @@ export default function Hospitaladminregistration1() {
   }
   const checkErrors = () => {
     const errors = {};
-
     const Passwordpattern = /^(?=.*[A-Z])(?=.*\d)(?=.*[@.#$!%*?&]).{6,}$/;
     const EmailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const PhonePattern = /^[6-9]\d{9}$/;
 
     if (HospitalAdminRg?.password && !Passwordpattern.test(HospitalAdminRg.password)) {
-      errors.password = "Password must be 6+ characters with an uppercase letter, digit, and special character.";
+      errors.password = "Password must be 6+ characters with an uppercase letter, digit, and special character";
     }
 
     if (HospitalAdminRg?.email && !EmailPattern.test(HospitalAdminRg.email)) {
@@ -168,7 +183,15 @@ export default function Hospitaladminregistration1() {
 
                 <div>
                   <h4 className="pass-con">Phone Number</h4>
-                  <input autoComplete="off" onKeyPress={handleKeyPress} value={HospitalAdminRg?.contact_no ? HospitalAdminRg?.contact_no : ''} onChange={inputOnchanges} name="contact_no" type="number" />
+                  <input autoComplete="off"
+                    onKeyPress={handleKeyPress}
+                    value={HospitalAdminRg?.contact_no ? HospitalAdminRg?.contact_no : ''}
+                    onChange={inputOnchanges} name="contact_no"
+                    type="number"
+                    style={{
+                      border: Errors?.phone ? "2px solid red" : ''
+                    }}
+                  />
                   <div className="main-waring-section">
 
 
@@ -181,7 +204,15 @@ export default function Hospitaladminregistration1() {
 
                 <div>
                   <h4 className="pass-con">Email</h4>
-                  <input autoComplete="off" maxLength={50} value={HospitalAdminRg?.email} pattern="^[^\s@]+@[^\s@]+\.[^\s@]+$" name="email" onChange={inputOnchanges} type="email" />
+                  <input autoComplete="off"
+                    maxLength={50} value={HospitalAdminRg?.email}
+                    pattern="^[^\s@]+@[^\s@]+\.[^\s@]+$" name="email"
+                    onChange={inputOnchanges}
+                    type="email"
+                    style={{
+                      border: Errors?.email ? "2px solid red" : ''
+                    }}
+                  />
 
                   <div className="main-waring-section">
                     <p className="register-number-warning">{Errors?.email}</p>
@@ -218,6 +249,7 @@ export default function Hospitaladminregistration1() {
                         padding: "0 10px",
                         appearance: "none",
                         WebkitAppearance: "none",
+                        border: Errors?.password ? "2px solid red" : ''
                       }}
                       type={showPassword ? "text" : "password"}
                     />
@@ -268,6 +300,8 @@ export default function Hospitaladminregistration1() {
                         padding: "0 10px",
                         appearance: "none",
                         WebkitAppearance: "none",
+                        border: Errors?.repassword ? "2px solid red" : ''
+
                       }}
                       type={showRePassword ? "text" : "password"}
                     />

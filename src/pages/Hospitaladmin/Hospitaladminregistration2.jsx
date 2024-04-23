@@ -384,7 +384,13 @@ export default function Hospitaladminregistration2() {
                                         <div className='flex pin-lo'>
                                                 <div className='pin-input' >
                                                         <h4>Pincode</h4>
-                                                        <input autoComplete="off" onKeyDown={handleKeyPress} value={HospitalAdminRg?.pincode} onChange={handlePostChange} type="number" name="pincode" />
+                                                        <input autoComplete="off"
+                                                                onKeyDown={handleKeyPress}
+                                                                value={HospitalAdminRg?.pincode}
+                                                                onChange={handlePostChange}
+                                                                type="number" name="pincode"
+                                                                style={{ border: Errors?.pincode && '2px solid red' }}
+                                                        />
                                                         <div className="main-waring-section main-waring-section4 flex ">
                                                                 <p className="register-number-warning">{Errors?.pincode}</p>
                                                         </div>
@@ -398,24 +404,22 @@ export default function Hospitaladminregistration2() {
                                                                 value={HospitalAdminRg?.place ? HospitalAdminRg?.place : ''}
                                                                 name="place"
                                                                 className="hospitalRegTypeList"
+                                                                disabled={HospitalAdminRg?.location?.length > 0 ? false : true}
                                                         >
-                                                                {HospitalAdminRg?.location?.length > 0 &&
-                                                                        <>
-                                                                                <option
-                                                                                        disabled selected value=''
-                                                                                >
-                                                                                        Select place
+                                                                <>
+                                                                        <option
+                                                                                disabled selected value=''
+                                                                        >
+                                                                                Select place
+                                                                        </option>
+                                                                        {HospitalAdminRg?.location?.map((types, index) => (
+                                                                                <option style={{ color: "black" }}
+                                                                                        key={index}
+                                                                                        value={types?.Name}>
+                                                                                        {types?.Name}
                                                                                 </option>
-                                                                                {HospitalAdminRg?.location?.map((types, index) => (
-                                                                                        <option style={{ color: "black" }}
-                                                                                                key={index}
-                                                                                                value={types?.Name}>
-                                                                                                {types?.Name}
-                                                                                        </option>
-                                                                                ))}
-                                                                        </>
-
-                                                                }
+                                                                        ))}
+                                                                </>
 
                                                         </select>
                                                 </div>

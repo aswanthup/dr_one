@@ -73,11 +73,26 @@ export default function Labadminregistration1() {
   }, [LabAdminRg])
   console.log(LabAdminRg)
   const nextPage = () => {
-    if (LabAdminRg?.name && LabAdminRg?.contact_no && LabAdminRg?.password && LabAdminRg?.email && LabAdminRg?.repassword && LabAdminRg?.image?.length > 0) {
-      if (Errors.email || Errors.phone) {
-        toast.info("Check mobile, email and password")
+    const validData = !LabAdminRg?.name ||
+      !LabAdminRg?.contact_no ||
+      !LabAdminRg?.password ||
+      !LabAdminRg?.email ||
+      !LabAdminRg?.repassword ||
+      !LabAdminRg?.image?.length > 0
+    const errorCheck =
+      Errors.email ||
+      Errors.phone ||
+      Errors.password ||
+      Errors.repassword
+    if (!validData) {
+      if (errorCheck) {
+        if (Errors?.password) {
+          toast.info("Please check password")
+        } else {
+          toast.info(errorCheck)
+        }
       } else {
-        if (!Errors.password && !Errors.email && !Errors.phone && !Errors.password && !Errors.repassword) {
+        if (!errorCheck) {
           navigate("/labadminregistration2")
         }
       }
@@ -168,7 +183,8 @@ export default function Labadminregistration1() {
                 <input
                   autoComplete="off"
                   maxLength={100}
-                  value={LabAdminRg?.name} onChange={inputOnchanges} name="name" type="text" />
+                  value={LabAdminRg?.name} onChange={inputOnchanges} name="name" type="text"
+                />
 
               </div>
             </div>
@@ -183,7 +199,14 @@ export default function Labadminregistration1() {
               <div className=" register-left-section flex">
                 <div style={{ position: "relative" }}>
                   <h4 className="">Phone Number</h4>
-                  <input autoComplete="off" onKeyPress={handleKeyPress} value={LabAdminRg?.contact_no} onChange={inputOnchanges} name="contact_no" type="number" />
+                  <input autoComplete="off"
+                    onKeyPress={handleKeyPress}
+                    value={LabAdminRg?.contact_no}
+                    onChange={inputOnchanges}
+                    name="contact_no"
+                    type="number"
+                    style={{ border: Errors?.phone && '2px solid red' }}
+                  />
                   <div className="main-waring-section">
                     {/* <p className="register-number-warning">{Errors?.phone}</p> */}
                   </div>
@@ -192,9 +215,13 @@ export default function Labadminregistration1() {
                 <div style={{ position: "relative" }}>
                   <h4 className="">Email</h4>
                   <input
-                  autoComplete="off"
+                    autoComplete="off"
                     maxLength={50}
-                    value={LabAdminRg?.email} pattern="^[^\s@]+@[^\s@]+\.[^\s@]+$" name="email" onChange={inputOnchanges} type="email" />
+                    value={LabAdminRg?.email} pattern="^[^\s@]+@[^\s@]+\.[^\s@]+$" name="email"
+                    onChange={inputOnchanges} type="email"
+                    style={{ border: Errors?.email && '2px solid red' }}
+
+                  />
                   <div className="main-waring-section">
                     <p className="register-number-warning">{Errors?.email}</p>
                   </div>
@@ -223,6 +250,8 @@ export default function Labadminregistration1() {
                         padding: "0 10px",
                         appearance: "none",
                         WebkitAppearance: "none",
+                        border: Errors?.password && '2px solid red'
+
                       }}
                       type={showPassword ? "text" : "password"}
                     />
@@ -270,6 +299,7 @@ export default function Labadminregistration1() {
                         padding: "0 10px",
                         appearance: "none",
                         WebkitAppearance: "none",
+                        border: Errors?.repassword && '2px solid red'
                       }}
                       type={showRePassword ? "text" : "password"}
                     />

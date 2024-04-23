@@ -25,7 +25,7 @@ export default function Doctoradminregistration1() {
       const isImage = selectedFile.type.startsWith("image/");
       if (isImage) {
         setFileName(selectedFile);
-        setData({ ...Data, image: selectedFile.name,docImage:selectedFile });
+        setData({ ...Data, image: selectedFile.name, docImage: selectedFile });
         // Process the image file or perform additional actions if needed
       } else {
         alert("Please select a valid image file.");
@@ -131,7 +131,7 @@ export default function Doctoradminregistration1() {
       !Data.phone ||
       !Data.email ||
       !Data.password ||
-      !Data.confirmPassword||
+      !Data.confirmPassword ||
       !Data.docImage;
 
     const isValidationError =
@@ -143,7 +143,11 @@ export default function Doctoradminregistration1() {
     if (isInValid) {
       toast.info("All fields required");
     } else if (isValidationError) {
-      toast.info("Check mobile, email and password");
+      if (validationErrors.password) {
+        toast.info("Please check password");
+      } else {
+        toast.info(isValidationError);
+      }
     } else {
       navigate("/doctoradminregistration2", { state: Data });
     }
@@ -240,6 +244,9 @@ export default function Doctoradminregistration1() {
                     onKeyPress={handleKeyPress}
                     value={Data?.phone}
                     onChange={handleChange}
+                    style={{
+                      border: validationErrors?.phone ? "2px solid red" : ''
+                    }}
                   />
                   <div className="main-waring-section  main-waring-section4 ">
                     {/* {validationErrors.phone && (
@@ -263,6 +270,9 @@ export default function Doctoradminregistration1() {
                     autoComplete="off"
                     onChange={handleChange}
                     pattern="^[^\s@]+@[^\s@]+\.[^\s@]+$"
+                    style={{
+                      border: validationErrors?.email ? "2px solid red" : ''
+                    }}
                   />
                   {validationErrors.email && (
                     <p className="register-number-warning">
@@ -296,6 +306,7 @@ export default function Doctoradminregistration1() {
                         padding: "0 10px",
                         appearance: "none",
                         WebkitAppearance: "none",
+                        border: validationErrors?.password ? "2px solid red" : ''
                       }}
                       type={showPassword ? "text" : "password"}
                     />
@@ -319,7 +330,7 @@ export default function Doctoradminregistration1() {
                   {validationErrors.password && (
                     <div className="main-waring-section main-waring-section-pass">
                       <p className="register-number-warning">
-                        {validationErrors.password}
+                        {validationErrors?.password}
                       </p>
                     </div>
                   )}
@@ -347,6 +358,7 @@ export default function Doctoradminregistration1() {
                         padding: "0 10px",
                         appearance: "none",
                         WebkitAppearance: "none",
+                        border: validationErrors?.confirmPassword ? "2px solid red" : ''
                       }}
                       type={ShowRePassword ? "text" : "password"}
                     />

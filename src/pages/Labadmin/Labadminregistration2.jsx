@@ -358,13 +358,18 @@ export default function Labadminregistration2() {
 
             <div className='pin-input' >
               <h4>Pincode</h4>
-              <input autoComplete="off" onKeyDown={handleKeyPress} className='hospitalAdminInput' value={LabAdminRg?.pincode || ''} onChange={inputChanges} type="number" maxLength={6} name="pincode" />
+              <input autoComplete="off"
+                onKeyDown={handleKeyPress}
+                className='hospitalAdminInput'
+                value={LabAdminRg?.pincode || ''}
+                onChange={inputChanges} type="number"
+                maxLength={6} name="pincode"
+                style={{ border: Errors?.pincode && '2px solid red' }}
+              />
               <div className="main-waring-section main-waring-section4 flex ">
                 <p className="register-number-warning">{Errors?.pincode}</p>
               </div>
             </div>
-
-
             <div className='lo-input'>
               <h4>Location</h4>
               <select
@@ -374,41 +379,27 @@ export default function Labadminregistration2() {
                 value={LabAdminRg?.place ? LabAdminRg?.place : ''}
                 name="place"
                 className="hospitalRegTypeList"
+                disabled={LabAdminRg?.location?.length > 0 ? false : true}
               >
-                {LabAdminRg?.location?.length > 0 &&
-                  <>
-                    <option
-                      disabled selected value=''
-                    >
-                      Select place
+                <>
+                  <option
+                    disabled selected value=''
+                  >
+                    Select place
+                  </option>
+                  {LabAdminRg?.location?.map((types, index) => (
+                    <option style={{ color: "black" }}
+                      key={index}
+                      value={types?.Name}>
+                      {types?.Name}
                     </option>
-                    {LabAdminRg?.location?.map((types, index) => (
-                      <option style={{ color: "black" }}
-                        key={index}
-                        value={types?.Name}>
-                        {types?.Name}
-                      </option>
-                    ))}
-                  </>
-                }
+                  ))}
+                </>
 
               </select>
             </div>
-
-
-
-
-
           </div>
-
-
-
-
-
-
           <div className='LabAdminPin flex'>
-
-
             <div className='LabAdminPinTimePic'>
               <h4 className="pass-con">Opening Time</h4>
               <TimePicker

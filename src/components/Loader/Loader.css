@@ -29,6 +29,15 @@
     animation-delay: 1s;
 }
 
+.InnerLoaderAlign {
+    height: 100%;
+    justify-content: center;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 @keyframes dash_682 {
     72.5% {
         opacity: 0;

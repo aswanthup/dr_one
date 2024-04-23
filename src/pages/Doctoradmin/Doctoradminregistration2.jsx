@@ -148,7 +148,7 @@ export default function Doctoradminregistration2() {
             selectedPlace: "",
           });
           if (PostOffice === null) {
-            setPostalError("Invalid pincode");
+            toast.info("Pincode not found")
           } else {
             setPostalError("");
             const postData = PostOffice[0];
@@ -439,12 +439,15 @@ export default function Doctoradminregistration2() {
                       placeholder="Pincode"
                       maxLength={6}
                       onChange={handlePostChange}
+                      style={{ border: postalError && '2px solid red' }}
                     />
                     <p
                       style={{
                         position: "absolute",
                         fontSize: "12px",
-                        color: "white",
+                        color: "#ffffffb8",
+                        letterSpacing: '1px',
+                        padding: "5px 00px"
                       }}
                     >
                       {postalError}
@@ -725,14 +728,17 @@ export default function Doctoradminregistration2() {
                         autoComplete="off"
                         value={Data?.pincode ?? ""}
                         placeholder="Pincode"
-                        style={{ width: "100%" }}
+                        style={{ width: "100%", border: postalError && '2px solid red' }}
                         onChange={handlePostChange}
+
                       />
                       <p
                         style={{
                           position: "absolute",
-                          color: "white",
+                          color: "#ffffffb8",
                           fontSize: "10px",
+                          letterSpacing: '1px',
+                          padding: "5px 00px"
                         }}
                       >
                         {postalError}

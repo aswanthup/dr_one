@@ -42,8 +42,18 @@
 
 .input-box-section {
     flex-direction: column;
-    gap: 2vw;
-    /* margin-top:3vw; */
+    gap: 1vw;
+}
+
+.login-pass-con-Inp {
+    width: 100%;
+    height: 3vw;
+    border: none;
+    border-radius: 5px;
+    margin-top: 1vw;
+    background-color: rgba(95, 95, 255, 0.447);
+    padding: 1vw;
+    color: white;
 }
 
 .login-button-section {
@@ -53,7 +63,7 @@
 
 }
 
-.login-button-section a {
+.login-button-section button {
     align-items: center;
     justify-content: center;
     background-color: white;
@@ -137,13 +147,25 @@
 
 }
 
-.login-InnerModal button {
+.loginBUttonStyle {
     background-color: blue;
     border-radius: 10px;
     width: 120px;
     padding: 10px;
     color: white;
     letter-spacing: 1px;
+}
+
+.login-pass-con-Change-pwd {
+    width: 100%;
+    height: 3vw;
+    border: none;
+    border-radius: 5px;
+    margin-top: 1vw;
+    /* background-color: rgba(95, 95, 255, 0.447); */
+    padding: 1vw;
+    color: white;
+    background-color: transparent;
 }
 
 .login-InnerModal-Button {
@@ -153,9 +175,55 @@
 }
 
 .login-InnerModal p {
-    font-size: 20px;
+    font-size: 15px;
     font-weight: 400;
     color: rgba(0, 0, 0, 0.651);
+}
+
+.LoginPageGoogleAuthBtn {
+    max-width: 320px;
+    display: flex;
+    width: 70%;
+    padding: 0.5rem 1.4rem;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    font-weight: 700;
+    text-align: center;
+    text-transform: uppercase;
+    vertical-align: middle;
+    align-items: center;
+    border-radius: 0.5rem;
+    border: 1px solid rgba(0, 0, 0, 0.25);
+    gap: 0.75rem;
+    color: rgb(65, 63, 63);
+    background-color: #fff;
+    cursor: pointer;
+    justify-content: center;
+    transition: all .6s ease;
+}
+
+.LoginPageGoogleAuthBtnAlignDiv label {
+    font-size: 15px;
+}
+
+.LoginPageGoogleAuthBtnAlignDiv h4 {
+    cursor: pointer;
+}
+
+.LoginPageGoogleAuthBtnAlignDiv {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.LoginPageGoogleAuthBtn svg {
+    height: 24px;
+}
+
+.LoginPageGoogleAuthBtn:hover {
+    transform: scale(1.02);
 }
 
 .login-InnerModal-close {
@@ -190,6 +258,51 @@ input::-webkit-inner-spin-button {
     margin: 0;
 }
 
+.login-InnerModal-Inputs-Ptag {
+    font-size: 15px;
+}
+
+.login-InnerModal-Inputs-Ptag a {
+    color: blue;
+    cursor: pointer;
+}
+
+.login-InnerModal-Change-pwd {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.loginpwdErrorSetting {
+    height: 40px;
+}
+
+.loginpwdErrorSetting p {
+    font-size: 13px;
+    color: blue;
+    letter-spacing: 1px;
+}
+
+.ogin-InnerModal-resetPass {
+    display: flex;
+    flex-direction: column;
+    gap: 1vw;
+}
+
+.ogin-InnerModal-resetPass input {
+    height: 3vw;
+    border-radius: 10px;
+    border: 1px solid blue;
+    padding-left: 5px;
+    font-size: 17px;
+}
+
+.ogin-InnerModal-resetPass-NextDiv {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+}
+
 @media screen and (max-width:780px) {
     .main-login {
         flex-direction: column;
@@ -212,8 +325,23 @@ input::-webkit-inner-spin-button {
         width: 85%;
         padding: 0vw;
         border-radius: 5vw;
-        height: 75vh;
         justify-content: space-between;
+    }
+
+    .LoginPageGoogleAuthBtn {
+        width: 100%;
+    }
+
+    .login-InnerModal {
+        width: 100%;
+    }
+
+    .login-modal-Align {
+        padding: 10px;
+    }
+
+    .ogin-InnerModal-resetPass input {
+        height: 7vw;
     }
 
     /* 
@@ -226,7 +354,15 @@ input::-webkit-inner-spin-button {
         padding-left: 4 vw;
     }
 
-    .login-button-section a {
+    .input-box-section {
+        gap: 2vw;
+    }
+
+    .login-pass-con-Inp {
+        height: 11vw;
+    }
+
+    .login-button-section button {
         height: 11vw;
         border-radius: 2vw;
     }
