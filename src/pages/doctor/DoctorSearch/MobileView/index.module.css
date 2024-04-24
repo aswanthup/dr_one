@@ -1,0 +1,37 @@
+.mainContainer{
+    font-size: 16px;
+    border: 1px solid red;
+    padding: 2rem;
+    min-height: 100dvh;
+    font-family: "Outfit", sans-serif;
+    background-color: rgba(231, 236, 253, 0.4);
+}
+.searchBox{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
+}
+.filterSection{
+    display: flex;
+    margin-top: 2rem;
+    padding: .4rem;
+    gap: 2rem;
+    overflow-x: scroll;
+    
+}
+.filterSection select{
+    padding: 1rem;
+    width: fit-content;
+    border: 1px solid var(--color-primary);
+    background-color: white;
+    border-radius: 10px;
+    height: 40px;
+}
+
+.cardSection{
+    display: flex;
+    margin-top: 2rem;
+    flex-direction: column;
+    gap: 20px;
+}

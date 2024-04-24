@@ -40,7 +40,7 @@ import Pharmacyadminregister2 from "./pages/Pharmacyadmin/Pharmacyadminregister2
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import Pharmacyregistration1 from "./pages/Pharmacyadmin/Pharmacyregistration1";
-import SearchDoc from "./pages/doctor/SearchDoc";
+import SearchDoc from "./pages/doctor/DoctorSearch/Index";
 import Registerlanding from "./pages/registerlanding/Registerlanding";
 import { HospitalFiltering } from "./pages/HospitalFiltering/HospitalFiltering";
 import { LabFiltering } from "./pages/Labs/LabFIltering/LabFiltering";
