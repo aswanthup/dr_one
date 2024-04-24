@@ -15,9 +15,10 @@
 .filterSection{
     display: flex;
     margin-top: 2rem;
-    padding: .4rem;
+    padding: 0.4rem 0.3rem;
     gap: 2rem;
     overflow-x: scroll;
+    scroll-behavior: smooth;
     
 }
 .filterSection select{
@@ -30,6 +31,10 @@
 }
 
 .cardSection{
+    padding: .3rem;
+    height: 70vh;
+    overflow-y: scroll;
+    scroll-behavior: smooth;
     display: flex;
     margin-top: 2rem;
     flex-direction: column;
