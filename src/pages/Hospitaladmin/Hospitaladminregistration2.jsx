@@ -145,7 +145,7 @@ export default function Hospitaladminregistration2() {
 
         const Finish = () => {
 
-                if (HospitalAdminRg?.pincode && HospitalAdminRg?.about && HospitalAdminRg?.lisence_no && HospitalAdminRg?.type && HospitalAdminRg.features.length > 0 && HospitalAdminRg.specialties.length > 0 && !Errors?.pincode) {
+                if (HospitalAdminRg?.pincode && HospitalAdminRg?.about && HospitalAdminRg?.address && HospitalAdminRg?.lisence_no && HospitalAdminRg?.type && HospitalAdminRg.features.length > 0 && HospitalAdminRg.specialties.length > 0 && !Errors?.pincode) {
                         setloader(true)
                         CheckValidation()
                         let temp = []

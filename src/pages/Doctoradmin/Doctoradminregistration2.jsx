@@ -125,8 +125,7 @@ export default function Doctoradminregistration2() {
         }
       })
       .catch((err) => {
-        toast.error("An error occurred while processing your request");
-
+        toast.error(err?.response?.data?.message);
         setloader(false);
       });
   };
