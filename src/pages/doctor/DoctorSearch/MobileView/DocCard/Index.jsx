@@ -3,11 +3,11 @@ import styles from "./index.module.css";
 import { useNavigate } from "react-router-dom";
 
 export default function DocCard({ data }) {
-  const details = data
+  const details = data?.details
   const navigate = useNavigate()
   return (
     <>
-      <div onClick={() => navigate("/doctorprofile", { state: details })} className={styles.cardContainer}>
+      <div className={styles.cardContainer}>
         <div>
           <img className={styles.docImage} src={details?.photo?.image1 || details?.image} alt="" />
         </div>

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import "./HospitalFiltering.css"
 import Footer from "../../components/Footer";
 import axios from "axios";
-import styles from "../doctor/searchdoc.module.css";
+import styles from "../doctor/DoctorSearch/DesktopView/searchdoc.module.css";
 import {
     Checkbox,
     FormControlLabel,
@@ -13,7 +13,7 @@ import {
 import Navbar from '../../components/Navbar';
 import { SearchBox } from './SearchComponent/SearchBox';
 import { features, speciality, type } from './constants/Filter';
-import DocCard from '../doctor/DocCard';
+import DocCard from '../doctor/DoctorSearch/DesktopView/DocCard/DocCard';
 import { port } from '../../config';
 import { Loader } from '../../components/Loader/Loader';
 export const HospitalFiltering = () => {

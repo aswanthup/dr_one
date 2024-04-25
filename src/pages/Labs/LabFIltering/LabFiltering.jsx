@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Footer from "../../../components/Footer";
 import axios from "axios";
-import styles from "../../doctor/searchdoc.module.css";
+import styles from "../../doctor/DoctorSearch/DesktopView/searchdoc.module.css";
 import {
     Checkbox,
     FormControlLabel,
@@ -10,7 +10,7 @@ import {
 import Navbar from '../../../components/Navbar';
 import { SearchBox } from '../LabFIltering/SearchComponent/SearchBox';
 import { features, services } from '../LabFIltering/constatnts/Filter';
-import DocCard from '../../doctor/DocCard';
+import DocCard from '../../doctor/DoctorSearch/DesktopView/DocCard/DocCard';
 import { port } from '../../../config';
 import { Loader } from '../../../components/Loader/Loader';
 export const LabFiltering = () => {

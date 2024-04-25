@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./searchdoc.module.css";
+import styles from "../searchdoc.module.css";
 import { useNavigate } from "react-router-dom";
 
 export default function DocCard({ data }) {

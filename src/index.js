@@ -4,6 +4,7 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import Contexts from "./contexts/Contexts";
+import SearchDoctorProvider from "./contexts/Doctor/SearchDoctorProvider";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
@@ -11,11 +12,12 @@ root.render(
   <GoogleOAuthProvider clientId="953927151453-fk1lv5f5gk7c72ll8npeekj0qi60430h.apps.googleusercontent.com">
     <React.StrictMode>
       <Contexts>
-        <App />
+        <SearchDoctorProvider>
+          <App />
+        </SearchDoctorProvider>
       </Contexts>
     </React.StrictMode>
   </GoogleOAuthProvider>
-
 );
 
 // If you want to start measuring performance in your app, pass a function

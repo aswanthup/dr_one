@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import axios from "axios";
 import MobileView from "./MobileView/Index";
-import DesktopView from "../SearchDoc";
-
+import DesktopView from "./DesktopView/SearchDoc";
+import { MyContext } from "../../../contexts/Contexts";
+import { SearchDocContext } from "../../../contexts/Doctor/SearchDoctorProvider";
+import { port } from "../../../config";
 const Index = () => {
   const [isMobile, setIsMobile] = useState(false);
-
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 768);
@@ -18,6 +20,7 @@ const Index = () => {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
+
   return <>{isMobile ? <MobileView /> : <DesktopView />}</>;
 };
 

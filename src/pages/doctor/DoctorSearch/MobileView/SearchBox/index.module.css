@@ -8,10 +8,11 @@
   flex-direction: row;
   justify-content: space-between;
   color: white;
+  position :relative
 }
 
 .left {
-  width: fit-content;
+  width: 54%;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -20,15 +21,22 @@
   background-color: var(--color-primary);
   border-radius: 40px;
   padding: 1rem;
-  padding-right: 2rem;
+  /* padding-right: 2rem; */
 }
 .left i {
   font-weight: 100;
 }
-.left span {
+.left input {
+  width: 90%;
+  background-color: var(--color-primary);
+  color: white;
   font-weight: 300;
   font-size: 14px;
+  &::placeholder {
+    color: white;
+  }
 }
+
 .center {
   flex: 2;
   display: flex;
@@ -62,4 +70,29 @@
 }
 .right i {
   font-weight: 100;
+}
+.placeContainer{
+  padding: 1rem;
+  position: absolute;
+ 
+  bottom: -325px;
+  /* width: 95%; */
+  background-color: white;
+  border-radius: 15px;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+.data{
+  overflow-x: scroll;
+  height: 300px;
+}
+
+.places {
+  color: black;
+  font-weight: 400;
+  padding: 1rem;
+  cursor: pointer;
+  font-size: 18px;
+  &:hover{
+    background-color: #fafaf9;
+  }
 }

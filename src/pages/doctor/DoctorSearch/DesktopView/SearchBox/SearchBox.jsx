@@ -1,9 +1,11 @@
 import axios from "axios";
 import { React, useState, useEffect, useRef } from "react";
-import { useOutsideClick } from "../../hooks/useOutsideClick";
-import { port } from "../../config";
+import { useOutsideClick } from "../../../../../hooks/useOutsideClick";
+import { port } from "../../../../../config";
 import { toast } from "react-toastify";
-import { Loader } from "../../components/Loader/Loader";
+import { Loader } from "../../../../../components/Loader/Loader";
+import { useDebounce } from "../../../../../hooks/useDebounce";
+import { Divider } from "@mui/material";
 
 export default function SearchBox({ updateDocs, docNames }) {
   const [showSearchList, setShowSearchList] = useState(false);
@@ -18,15 +20,12 @@ export default function SearchBox({ updateDocs, docNames }) {
     const handleSearch = setTimeout(() => {
       const fetchData = async () => {
         try {
-          const response = await axios.post(
-            `${port}/doctor/suggest`,
-            {
-              searchitem: searchPlace,
-            }
-          );
+          const response = await axios.post(`${port}/doctor/suggest`, {
+            searchitem: searchPlace,
+          });
           const placeLists = response.data.data;
           if (!placeLists?.length > 0) {
-            toast.info("Location not found")
+            toast.info("Location not found");
           }
           setplaceLists(placeLists);
         } catch (err) {
@@ -44,31 +43,30 @@ export default function SearchBox({ updateDocs, docNames }) {
   console.log(placeLists);
 
   const handleClickPlace = async (data) => {
-    setLoading(true)
+    setLoading(true);
     const placeName = `${data.postname}, ${data.district}`;
     setSelectedPlace(placeName);
     setShowSearchList(false);
     try {
-      const response = await axios.post(
-        `${port}/doctor/get_pincode`,
-        {
-          selectedArea_id: data.id,
-        }
-      );
+      const response = await axios.post(`${port}/doctor/get_pincode`, {
+        selectedArea_id: data.id,
+      });
       const docData = response.data.data;
       console.log({ docData });
-      setLoading(false)
-      updateDocs(docData);//run function on searchdoc
+      setLoading(false);
+      updateDocs(docData); //run function on searchdoc
     } catch (err) {
-      setLoading(false)
-      toast.info(err?.response?.data?.message)
-      console.log(err?.response?.data)
-      updateDocs([]);//run function on searchdoc
+      setLoading(false);
+      toast.info(err?.response?.data?.message);
+      console.log(err?.response?.data);
+      updateDocs([]); //run function on searchdoc
     }
   };
+  const debouncedDocNames = useDebounce(docNames, 500);
+
   const searchNames = (event) => {
     const { value } = event.target;
-    docNames(value);
+    debouncedDocNames(value);
   };
 
   useOutsideClick(() => {
@@ -76,15 +74,13 @@ export default function SearchBox({ updateDocs, docNames }) {
   }, boxRef);
   return (
     <div className="Doctor-search-box flex" style={{ paddingTop: 0 }}>
-      {loading ?
-        <Loader />
-        : ''
-      }
+      {loading ? <Loader /> : ""}
       <div className="Doctor-container-search flex">
         <div className="Doctor-Search-box flex">
           <div className="Doctor-location-section flex">
             <i className="ri-map-pin-2-line" />
-            < input ref={boxRef}
+            <input
+              ref={boxRef}
               onChange={(event) => {
                 setSelectedPlace("");
                 setSearchPlace(event.target.value);
@@ -111,13 +107,16 @@ export default function SearchBox({ updateDocs, docNames }) {
         <div className="searchBox_rslt_mainContainer">
           <div className="searchBox_rslt_container">
             {placeLists.map((data, index) => (
-              <div
-                key={index}
-                onClick={() => handleClickPlace(data)}
-                className="searchBox_rslt_items"
-              >
-                {data?.postname}, {data?.district}
-              </div>
+              <>
+                <div
+                  key={index}
+                  onClick={() => handleClickPlace(data)}
+                  className="searchBox_rslt_items"
+                >
+                  {data?.postname}, {data?.district}
+                </div>
+                <Divider />
+              </>
             ))}
           </div>
         </div>
