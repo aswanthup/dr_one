@@ -13,9 +13,9 @@ import {
 import Navbar from '../../components/Navbar';
 import { SearchBox } from './SearchComponent/SearchBox';
 import { features, speciality, type } from './constants/Filter';
-import DocCard from '../doctor/DoctorSearch/DesktopView/DocCard/DocCard';
 import { port } from '../../config';
 import { Loader } from '../../components/Loader/Loader';
+import { HospitalCard } from './HospitalCard/HospitalCard';
 export const HospitalFiltering = () => {
     const [filters, setFilters] = useState({
         speciality: "",
@@ -237,7 +237,7 @@ export const HospitalFiltering = () => {
                                 {hospitalsFilter.length > 0 || filters.type || filters?.speciality?.length > 0 || filters?.features?.length > 0 ?
                                     hospitalsFilter.length > 0 ?
                                         hospitalsFilter.map((details, index) =>
-                                            <DocCard key={index} data={{ details: details, hospitals: true }} />
+                                            <HospitalCard key={index} data={{ details: details, hospitals: true }} />
                                         )
                                         :
                                         <div className='HospitalNotfound'>
@@ -250,7 +250,7 @@ export const HospitalFiltering = () => {
                                     <>
                                         {hospitals.length > 0 ?
                                             hospitals.map((details, index) =>
-                                                <DocCard key={index} data={{ details: details, hospitals: true }} />
+                                                <HospitalCard key={index} data={{ details: details, hospitals: true }} />
                                             )
                                             :
                                             <div className='HospitalNotfound'>

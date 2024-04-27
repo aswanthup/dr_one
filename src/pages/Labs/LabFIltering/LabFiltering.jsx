@@ -10,9 +10,9 @@ import {
 import Navbar from '../../../components/Navbar';
 import { SearchBox } from '../LabFIltering/SearchComponent/SearchBox';
 import { features, services } from '../LabFIltering/constatnts/Filter';
-import DocCard from '../../doctor/DoctorSearch/DesktopView/DocCard/DocCard';
 import { port } from '../../../config';
 import { Loader } from '../../../components/Loader/Loader';
+import { LabCard } from './LabCard/LabCard';
 export const LabFiltering = () => {
     const [filters, setFilters] = useState({
         services: "",
@@ -216,39 +216,41 @@ export const LabFiltering = () => {
                     </div>
 
                     <div className='HospitalFilterHosSec'>
-                        {lab.length > 0 ?
-                            <div className={styles.rightSide}>
-                                <div className={styles.cardMainContainer}>
-                                    {labFilter.length > 0 || filters.type || filters?.services?.length > 0 || filters?.features?.length > 0 ?
-                                        labFilter.length > 0 ?
-                                            labFilter.map((details, index) =>
-                                                <DocCard key={index} data={{ details: details, lab: true }} />
-                                            )
-                                            :
-                                            <div className='HospitalNotfound'>
-                                                <h3>
-                                                    lab were not found.</h3>
-
-                                            </div>
-
+                        <div className={styles.rightSide}>
+                            <div className={styles.cardMainContainer}>
+                                {labFilter.length > 0 || filters.type || filters?.services?.length > 0 || filters?.features?.length > 0 ?
+                                    labFilter.length > 0 ?
+                                        labFilter.map((details, index) =>
+                                            <LabCard key={index} data={{ details: details, lab: true }} />
+                                        )
                                         :
-                                        <>
-                                            {lab.map((details, index) =>
-                                                <DocCard key={index} data={{ details: details, lab: true }} />
-                                            )
-                                            }
-                                        </>
-                                    }
-                                </div>
-                            </div>
+                                        <div className='HospitalNotfound'>
+                                            <h3>
+                                                lab were not found.</h3>
 
-                            :
-                            < Loader />
-                        }
+                                        </div>
+
+                                    :
+                                    <>
+                                        {lab.map((details, index) =>
+                                            <LabCard key={index} data={{ details: details, lab: true }} />
+                                        )
+                                        }
+                                    </>
+                                }
+                            </div>
+                        </div>
+
+
                     </div>
                 </div>
 
             </div >
+
+            {!lab.length > 0 &&
+                <Loader />
+            }
+
 
             <Footer />
         </>

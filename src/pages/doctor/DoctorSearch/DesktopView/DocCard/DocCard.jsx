@@ -5,11 +5,12 @@ import { useNavigate } from "react-router-dom";
 export default function DocCard({ data }) {
   const details = data?.details
   const navigate = useNavigate()
+  const tempImg = "./images/TempDocImg.jpg"
   return (
     <>
       <div onClick={() => navigate("/doctorprofile", { state: details })} className={styles.cardContainer}>
         <div>
-          <img className={styles.docImage} src={details?.photo?.image1 || details?.image} alt="" />
+          <img className={styles.docImage} src={details?.image || tempImg} alt="" />
         </div>
         <div>
           <div>

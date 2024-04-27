@@ -125,7 +125,7 @@ export default function Doctoradminregistration2() {
         }
       })
       .catch((err) => {
-        toast.error(err?.response?.data?.message);
+        toast.info(err?.response?.data?.message);
         setloader(false);
       });
   };

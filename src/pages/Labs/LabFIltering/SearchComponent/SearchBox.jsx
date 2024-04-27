@@ -29,7 +29,7 @@ export const SearchBox = ({ updateDocs, docNames }) => {
                     setplaceLists(placeLists)
                     console.log("placeLists>>", placeLists);
                     if (!placeLists?.length > 0) {
-                        toast.info("Location not found")
+                        // toast.info("Location not found")
                     }
                 } catch (err) {
                     console.error("Error fetching data:", err);
