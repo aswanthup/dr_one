@@ -221,6 +221,18 @@ export default function Doctoradminregistration2() {
               />
             </div>
             <div>
+              <h4>Qualification</h4>
+              <input
+                className="doctoradminregistration_inputs"
+                maxLength={50}
+                type="text"
+                autoComplete="off"
+                value={Data?.qualification}
+                onChange={handleChange}
+                name="qualification"
+              />
+            </div>
+            <div>
               <h4>Gender</h4>
               <select
                 type="text"
@@ -314,7 +326,7 @@ export default function Doctoradminregistration2() {
                   name="experience"
                   onChange={handleYearChange}
                   sx={{
-                    width: "30vw",
+                    width: "22vw",
                     background: "#f6f6f966",
                     // border: "1px solid white",
                     boxSizing: "border-box",
@@ -363,6 +375,20 @@ export default function Doctoradminregistration2() {
                 ))}
               </select>
             </div>
+
+            <div>
+              <h4>Qualification</h4>
+              <input
+                className="doctoradminregistration_inputs"
+                maxLength={50}
+                type="text"
+                autoComplete="off"
+                value={Data?.qualification}
+                onChange={handleChange}
+                name="qualification"
+              />
+            </div>
+
           </div>
 
           <div className="text_area_section flex">

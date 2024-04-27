@@ -37,7 +37,7 @@
   color: white;
   padding: 1vw;
   letter-spacing: 2px;
-  width: 30vw;
+  width: 22vw;
   margin-top: 1vw;
   &:focus{
     border: 1px solid white;
@@ -63,7 +63,7 @@
   color: white;
   padding: 1vw;
   letter-spacing: 2px;
-  width: 30vw;
+  width: 22vw;
   margin-top: 1vw;
   &:focus{
     border: 1px solid white;
@@ -177,7 +177,7 @@
   color: white;
   padding-left: 1vw;
   letter-spacing: 2px;
-  width: 30vw;
+  width: 22vw;
   margin-top: 1vw;
   &:focus{
     border: 1px solid white;
@@ -198,7 +198,7 @@
   color: white;
   padding-left: 1vw;
   letter-spacing: 2px;
-  width: 30vw;
+  width: 22vw;
   margin-top: 1vw;
 }
 
