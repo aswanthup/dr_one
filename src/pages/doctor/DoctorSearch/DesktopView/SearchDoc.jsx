@@ -1,6 +1,6 @@
 import { React, useContext } from "react";
 import Navbar from "../../../../components/Navbar";
-import SearchBox from "./SearchBox/SearchBox";
+import SearchBox from "../MobileView/SearchBox/Index";
 import styles from "./searchdoc.module.css";
 import {
   Checkbox,
@@ -27,14 +27,13 @@ import { SearchDocContext } from "../../../../contexts/Doctor/SearchDoctorProvid
 export default function SearchDoc() {
   const {
     loading,
-    allDocData,
     filteredDoctors,
     docsBySearch,
     emptyResults,
     passedSpecialization,
     filters,
-    selectedFilter,setSelectedFilter,
-    // functions
+    selectedFilter,
+    // functions---------------------------------------
     handleTypeChanges,
     handleSpecializationChanges,
     handleGenderChanges,
@@ -42,22 +41,21 @@ export default function SearchDoc() {
     handleExpChangeBtn,
     updateDocByPlace,
     handleDocNameSearch,
-    handleSelectFilter
   } = useContext(SearchDocContext);
 
-  console.log({ allDocData });
-  console.log({ filteredDoctors });
-  console.log({ filters });
+
 
   return (
     <>
       <Navbar />
       <div className={styles.container}>
         <div className={styles.section1}>
+          <div className={styles.box}>
           <SearchBox
             updateDocs={updateDocByPlace}
             docNames={handleDocNameSearch}
           />
+          </div>
         </div>
         <div className={styles.section2}></div>
         <div className={styles.section3}>
@@ -71,6 +69,7 @@ export default function SearchDoc() {
                   aria-labelledby="demo-radio-buttons-group-label"
                   defaultValue=""
                   name="radio-buttons-group"
+                  value={selectedFilter?.type ?? ""}
                 >
                   {types.map((type, index) => (
                     <FormControlLabel
@@ -164,6 +163,7 @@ export default function SearchDoc() {
                   aria-labelledby="demo-radio-buttons-group-label"
                   defaultValue=""
                   name="radio-buttons-group"
+                  value={selectedFilter?.gender ?? ""}
                 >
                   {genderData.map((gender, index) => (
                     <FormControlLabel

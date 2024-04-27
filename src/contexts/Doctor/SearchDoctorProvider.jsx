@@ -12,7 +12,7 @@ export default function SearchDoctorProvider({ children }) {
   const [docsBySearch, setDocsBySearch] = useState([]);
   const [allDocsBySearch, setAllDocsBySearch] = useState([]);
   const [emptyResults, setEmptyResults] = useState(false);
-  const [selectedFilter,setSelectedFilter]=useState({type:"",gender:""})
+  const [selectedFilter,setSelectedFilter]=useState({type:"",gender:""})//for maintaining selected items in both screens
   const { passedSpecialization } = useContext(MyContext);
   const [filters, setFilters] = useState({
     type: "",
@@ -52,6 +52,7 @@ setSelectedFilter({
   const handleGenderChanges = (event) => {
     const { value } = event.target;
     setFilters({ ...filters, gender: value });
+    setSelectedFilter({ ...selectedFilter,gender: value });
   };
 
   useEffect(() => {
@@ -184,9 +185,7 @@ setSelectedFilter({
   const handleDocNameSearch = (value) => {
     setFilters({ ...filters, name: value });
   };
-const handleSelectFilter=()=>{
-  alert("popo")
-}
+
   const value = {
     loading,
     setLoading,
@@ -214,7 +213,6 @@ const handleSelectFilter=()=>{
     handleExpChangeBtn,
     updateDocByPlace,
     handleDocNameSearch,
-    handleSelectFilter,
   };
 
   return (

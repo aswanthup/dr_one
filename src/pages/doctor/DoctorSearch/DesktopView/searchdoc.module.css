@@ -12,6 +12,9 @@
   align-items: center;
   justify-content: center;
 }
+.box{
+  width: 35%;
+}
 
 .section2 {
   /* border: 1px Solid grey; */

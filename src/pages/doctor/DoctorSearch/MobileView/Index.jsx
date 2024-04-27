@@ -24,14 +24,12 @@ const SearchDocMobileScreen = () => {
   const [isShowModal, setIsShowModal] = useState(false);
   const {
     loading,
-    allDocData,
     filteredDoctors,
     docsBySearch,
     emptyResults,
     passedSpecialization,
     filters,
     selectedFilter,
-    setSelectedFilter,
     // functions
     handleTypeChanges,
     handleSpecializationChanges,
@@ -40,7 +38,6 @@ const SearchDocMobileScreen = () => {
     handleExpChangeBtn,
     updateDocByPlace,
     handleDocNameSearch,
-    handleSelectFilter,
   } = useContext(SearchDocContext);
 
   return (
@@ -162,7 +159,7 @@ const SearchDocMobileScreen = () => {
               </FormControl>
             </div>
           </Modal>
-          <select name="" id="" onChange={handleGenderChanges}>
+          <select name="" id="" onChange={handleGenderChanges}      value={selectedFilter.gender ?? ""}>
             <option value="" disabled selected>
               Gender
             </option>

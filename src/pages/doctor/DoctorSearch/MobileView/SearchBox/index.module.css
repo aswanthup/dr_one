@@ -12,7 +12,7 @@
 }
 
 .left {
-  width: 54%;
+  width: 50%;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -34,6 +34,7 @@
   font-size: 14px;
   &::placeholder {
     color: white;
+    letter-spacing: 1.2px;
   }
 }
 
@@ -49,8 +50,8 @@
   width: 100%;
   letter-spacing: 2px;
   &::placeholder {
-    color: white;
-    letter-spacing: 2px;
+    color: Black;
+    letter-spacing: 1px;
   }
 }
 .right {
@@ -70,13 +71,14 @@
 }
 .right i {
   font-weight: 100;
+  cursor: pointer;
 }
 .placeContainer{
   padding: 1rem;
   position: absolute;
- 
+  left: 0;
+  right: 0;
   bottom: -325px;
-  /* width: 95%; */
   background-color: white;
   border-radius: 15px;
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
@@ -94,5 +96,15 @@
   font-size: 18px;
   &:hover{
     background-color: #fafaf9;
+  }
+}
+/* Laptop------------------------------------------------ */
+@media screen and (min-width: 769px) {
+  /* For desktop and larger screens */
+  .center input {
+    padding-left: 1rem;
+    &::placeholder {
+      letter-spacing: 2.5px;
+    }
   }
 }
