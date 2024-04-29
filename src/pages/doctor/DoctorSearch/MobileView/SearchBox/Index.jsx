@@ -4,8 +4,8 @@ import { useOutsideClick } from "../../../../../hooks/useOutsideClick";
 import { port } from "../../../../../config";
 import { toast } from "react-toastify";
 import { Loader } from "../../../../../components/Loader/Loader";
-import axios from "axios";
 import { useDebounce } from "../../../../../hooks/useDebounce";
+import axios from "axios";
 import { Divider } from "@mui/material";
 const Box = ({ updateDocs, docNames }) => {
   const [showSearchList, setShowSearchList] = useState(false);
@@ -13,6 +13,7 @@ const Box = ({ updateDocs, docNames }) => {
   const [searchPlace, setSearchPlace] = useState("");
   const [selectedPlace, setSelectedPlace] = useState("");
   const [loading, setLoading] = useState(false);
+  const [debouncedInputValue, setDebouncedInputValue] = useDebounce(500);
 
   const boxRef = useRef();
 
@@ -63,19 +64,34 @@ const Box = ({ updateDocs, docNames }) => {
     }
   };
 
-  const debouncedDocNames = useDebounce(docNames, 500);
-
+  const debounce = (func, delay) => {
+    let timer;
+    return function (...args) {
+      clearTimeout(timer);
+      timer = setTimeout(() => func.apply(this, args), delay);
+    };
+  };
   const searchNames = (event) => {
     const { value } = event.target;
-    debouncedDocNames(value);
+    docNames(value);
   };
+  const debouncedSearchChanges = debounce(searchNames, 500);
+  // const searchNames = (event) => {
+  //   const { value } = event.target;
+  //   setDebouncedInputValue(value);
+  // };
+  // useEffect(() => {
+  //   if (docNames) {
+  //     docNames(debouncedInputValue);
+  //   }
+  // }, [debouncedInputValue]);
 
   useOutsideClick(() => {
     setShowSearchList(false);
   }, boxRef);
-  
+
   return (
-    loading ?  <Loader /> : 
+    // loading ?  <Loader /> :
     <div className={styles.container}>
       <div className={styles.left}>
         <i className="ri-map-pin-2-line" />
@@ -90,7 +106,11 @@ const Box = ({ updateDocs, docNames }) => {
         />
       </div>
       <div className={styles.center}>
-        <input placeholder="Search doctor" onChange={searchNames} type="text" />
+        <input
+          placeholder="Search doctor"
+          onChange={debouncedSearchChanges}
+          type="text"
+        />
       </div>
       <div className={styles.right}>
         <div>
