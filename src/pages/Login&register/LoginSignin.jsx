@@ -108,6 +108,9 @@ export const LoginSignin = () => {
           console.log("res>>>", res)
           if (res?.data?.success) {
             toast.success(res?.data?.message)
+            setTimeout(() => {
+              navigate("/checking")
+            }, 1000);
           } else {
             toast.info(res?.data?.message)
           }

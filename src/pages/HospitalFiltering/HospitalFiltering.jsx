@@ -22,6 +22,7 @@ export const HospitalFiltering = () => {
         type: "",
         features: ""
     });
+    const [notFound, setnotFound] = useState(false)
     const [hospitals, sethospitals] = useState([])
     const [hospitalsFilter, sethospitalsFilter] = useState([])
     const [loading, setloading] = useState(false)
@@ -64,25 +65,41 @@ export const HospitalFiltering = () => {
 
     console.log("Hopitals>>>>", hospitalsFilter.length > 0 ? hospitalsFilter : hospitals)
     const handleDocNameSearch = (value) => {
-        const query = value.toLowerCase();
-        if (hospitalsFilter.length > 0) {
-            const filteredData = hospitalsFilter.filter((data) =>
-                data.name.toLowerCase().includes(query)
-            );
-            const remainingData = hospitalsFilter.filter(
-                (data) => !data.name.toLowerCase().includes(query)
-            );
-            sethospitalsFilter([...filteredData, ...remainingData]);
-        } else {
-            const filteredData = hospitals.filter((data) =>
-                data.name.toLowerCase().includes(query)
-            );
-            const remainingData = hospitals.filter(
-                (data) => !data.name.toLowerCase().includes(query)
-            );
-            sethospitals([...filteredData, ...remainingData]);
-        }
 
+        const query = value.toLowerCase();
+        if (hospitalsFilter?.length > 0) {
+            const filteredData = hospitalsFilter.filter((data) => {
+                const lowerCaseName = data?.name?.toLowerCase();
+                return lowerCaseName?.startsWith(query[0]) &&
+                    lowerCaseName.includes(query);
+            });
+            if (filteredData?.length > 0) {
+                setnotFound(false)
+            } else {
+                if (!query) {
+                    sethospitalsFilter(hospitals);
+                } else {
+                    setnotFound(true)
+                }
+            }
+            sethospitalsFilter(filteredData);
+        } else {
+            const filteredData = hospitals?.filter((data) => {
+                const lowerCaseName = data?.name?.toLowerCase();
+                return lowerCaseName?.startsWith(query[0]) &&
+                    lowerCaseName?.includes(query);
+            });
+            if (filteredData?.length > 0) {
+                setnotFound(false)
+            } else {
+                if (!query) {
+                    sethospitalsFilter(hospitals);
+                } else {
+                    setnotFound(true)
+                }
+            }
+            sethospitalsFilter(filteredData);
+        }
     }
     useEffect(() => {
         setloading(true)
@@ -139,8 +156,6 @@ export const HospitalFiltering = () => {
                         docNames={handleDocNameSearch}
                     />
                 </div>
-
-
                 <div className={styles.section2}></div>
                 <div className={styles.section3}>
                     <div className={styles.leftSide}>
@@ -235,7 +250,7 @@ export const HospitalFiltering = () => {
                         <div className={styles.rightSide}>
                             <div className={styles.cardMainContainer}>
                                 {hospitalsFilter.length > 0 || filters.type || filters?.speciality?.length > 0 || filters?.features?.length > 0 ?
-                                    hospitalsFilter.length > 0 ?
+                                    hospitalsFilter.length > 0 && !notFound ?
                                         hospitalsFilter.map((details, index) =>
                                             <HospitalCard key={index} data={{ details: details, hospitals: true }} />
                                         )
@@ -243,12 +258,10 @@ export const HospitalFiltering = () => {
                                         <div className='HospitalNotfound'>
                                             <h3>
                                                 Hospitals were not found.</h3>
-
                                         </div>
-
                                     :
                                     <>
-                                        {hospitals.length > 0 ?
+                                        {hospitals.length > 0 && !notFound ?
                                             hospitals.map((details, index) =>
                                                 <HospitalCard key={index} data={{ details: details, hospitals: true }} />
                                             )
@@ -261,13 +274,19 @@ export const HospitalFiltering = () => {
                                 }
                             </div>
                         </div>
-                        {loading
-                            &&
-                            < Loader />
-                        }
+
                     </div>
                 </div>
             </div>
+            {loading &&
+                <Loader />
+            }
+            {
+                notFound && < div className='HospitalNotfound'>
+                    <h3>
+                        lab were not found.</h3>
+                </div >
+            }
             <Footer />
         </>
     )

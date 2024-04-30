@@ -5,10 +5,10 @@ import Headroom from "react-headroom";
 import "../Labs/labdetails.css";
 
 
-
 import { useLocation, useNavigate } from 'react-router-dom'
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import ChatBot from "../../components/ChatBot/ChatBot";
 
 export default function Mainpage() {
   const navigate = useNavigate()
@@ -35,6 +35,7 @@ export default function Mainpage() {
             <Navbar />
           </Headroom>
 
+          {/* <ChatBot /> */}
           {/*End Navbar */}
           {/* Hero section */}
           <div className="container-second hero-main">

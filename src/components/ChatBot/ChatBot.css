@@ -1,0 +1,147 @@
+.ChatBotAlignBotIcon {
+    display: flex;
+    flex-direction: column;
+}
+
+.ChatBotAlignBotShape {
+    height: 70px;
+    width: 70px;
+    background-color: #3A65FD;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    bottom: 50px;
+    right: 50px;
+    z-index: 999999999999;
+
+}
+
+.ChatBotAlignBotShape svg {
+    color: white;
+    height: 40px;
+    width: 40px;
+}
+
+
+.ChatBotAlignBotChat {
+    height: 30vw;
+    width: 25%;
+    background-color: #ECF0FF;
+    position: fixed;
+    bottom: 130px;
+    right: 50px;
+    z-index: 999999999999;
+    border-radius: 20px;
+}
+
+.ChatBotAlignBotChatModal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.ChatBotChatHeader {
+    height: 15%;
+    width: 100%;
+    padding: 10px;
+    display: flex;
+    gap: 20px;
+    background-color: #3A65FD;
+    border-radius: 20px 20px 00px 00px;
+    align-items: center;
+}
+
+.ChatBotChatHeaderImg {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+}
+
+.ChatBotChatHeaderText {
+    display: flex;
+    flex-direction: column;
+}
+
+.ChatBotChatHeaderTextPtag1 {
+    font-size: 15px;
+    font-weight: 200;
+    color: rgb(255, 255, 255);
+}
+
+.ChatBotChatHeaderTextPtag2 {
+    font-size: 17px;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.871);
+}
+
+.ChatBotChatsSec {
+    padding: 10px;
+    height: 70%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.ChatBotChatsSecUserBot {
+    margin-left: auto;
+    padding: 7px;
+    max-width: 70%;
+    height: auto;
+    background-color: #CED9FF;
+    border-radius: 15px 15px 1px 15px
+}
+
+.ChatBotChatsSecUserBot p {
+    color: #3A65FD;
+    font-size: 15px;
+    font-weight: 400;
+}
+
+.ChatBotChatsSecChatBot {
+    padding: 7px;
+    max-width: 70%;
+    height: auto;
+    background-color: #CED9FF;
+    border-radius: 15px 15px 15px 1px;
+}
+
+.ChatBotChatsSecChatBot p {
+    color: #3A65FD;
+    font-size: 15px;
+    font-weight: 400;
+}
+
+.ChatBotInputSec {
+    height: 15%;
+    padding: 10px;
+    width: 100%;
+    gap: 10px;
+    display: flex;
+}
+
+.ChatBotInputSec input {
+    height: 90%;
+    width: 85%;
+    border-radius: 10px;
+    background-color: #CED9FF;
+    color: #3A65FD;
+    padding-left: 20px;
+}
+
+.ChatBotInputSecIcon {
+    border-radius: 50%;
+    padding: 10px;
+    height: 45px;
+    width: 45px;
+    background-color: #3A65FD;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#ChatBotInputSecOrgIcon {
+    font-size: 30px;
+    color: white;
+}

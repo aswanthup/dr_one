@@ -12,7 +12,8 @@
   align-items: center;
   justify-content: center;
 }
-.box{
+
+.box {
   width: 35%;
 }
 
@@ -24,6 +25,7 @@
 .section3 {
   display: flex;
   /* border: 1px solid red; */
+  width: 100%;
 }
 
 .leftSide {
@@ -86,7 +88,7 @@
   padding-bottom: .1rem;
   padding-right: 2rem;
   display: flex;
-  justify-content: space-between; 
+  justify-content: space-between;
   flex-wrap: wrap;
   gap: 2rem;
   overflow-x: scroll;

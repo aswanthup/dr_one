@@ -8,7 +8,9 @@ export default function DocCard({ data }) {
   const tempImg = "./images/TempDocImg.jpg"
   return (
     <>
-      <div onClick={() => navigate("/doctorprofile", { state: details })} className={styles.cardContainer}>
+      <div
+      //  onClick={() => navigate("/doctorprofile", { state: details })}
+        className={styles.cardContainer}>
         <div>
           <img className={styles.docImage} src={details?.image || tempImg} alt="" />
         </div>

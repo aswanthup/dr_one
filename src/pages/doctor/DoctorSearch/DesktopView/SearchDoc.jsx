@@ -51,10 +51,10 @@ export default function SearchDoc() {
       <div className={styles.container}>
         <div className={styles.section1}>
           <div className={styles.box}>
-          <SearchBox
-            updateDocs={updateDocByPlace}
-            docNames={handleDocNameSearch}
-          />
+            <SearchBox
+              updateDocs={updateDocByPlace}
+              docNames={handleDocNameSearch}
+            />
           </div>
         </div>
         <div className={styles.section2}></div>
@@ -95,62 +95,62 @@ export default function SearchDoc() {
                   Specialization{" "}
                   {(filters.type === "Unani" ||
                     filters.type === "Homeopathy") && (
-                    <span style={{ fontSize: "14px", fontWeight: 300 }}>
-                      (Not Applicable)
-                    </span>
-                  )}
+                      <span style={{ fontSize: "14px", fontWeight: 300 }}>
+                        (Not Applicable)
+                      </span>
+                    )}
                 </span>
               </div>
               <div>
                 <FormGroup>
                   {filters.type === "Ayurvedic"
                     ? ayurSpec.map((name, index) => (
-                        <FormControlLabel
-                          name={name}
-                          checked={
-                            filters.specializations.length !== 0 &&
-                            filters.specializations.includes(name.toLowerCase())
-                          }
-                          disabled={
-                            filters.type === "Homeopathy" ||
+                      <FormControlLabel
+                        name={name}
+                        checked={
+                          filters.specializations.length !== 0 &&
+                          filters.specializations.includes(name.toLowerCase())
+                        }
+                        disabled={
+                          filters.type === "Homeopathy" ||
                             filters.type === "Unani"
-                              ? true
-                              : false
-                          }
-                          onChange={handleSpecializationChanges}
-                          key={index}
-                          control={
-                            <Checkbox
-                              sx={{ "& .MuiSvgIcon-root": { fontSize: 22 } }}
-                            />
-                          }
-                          label={<span style={{ fontSize: 16 }}>{name}</span>}
-                        />
-                      ))
+                            ? true
+                            : false
+                        }
+                        onChange={handleSpecializationChanges}
+                        key={index}
+                        control={
+                          <Checkbox
+                            sx={{ "& .MuiSvgIcon-root": { fontSize: 22 } }}
+                          />
+                        }
+                        label={<span style={{ fontSize: 16 }}>{name}</span>}
+                      />
+                    ))
                     : speacializationNames.map((name, index) => (
-                        <FormControlLabel
-                          name={name}
-                          checked={
-                            filters?.specializations?.length !== 0 &&
-                            filters.specializations.includes(name.toLowerCase())
-                          }
-                          disabled={
-                            filters.type === "Homeopathy" ||
+                      <FormControlLabel
+                        name={name}
+                        checked={
+                          filters?.specializations?.length !== 0 &&
+                          filters.specializations.includes(name.toLowerCase())
+                        }
+                        disabled={
+                          filters.type === "Homeopathy" ||
                             filters.type === "Unani" ||
                             !filters.type
-                              ? true
-                              : false
-                          }
-                          onChange={handleSpecializationChanges}
-                          key={index}
-                          control={
-                            <Checkbox
-                              sx={{ "& .MuiSvgIcon-root": { fontSize: 22 } }}
-                            />
-                          }
-                          label={<span style={{ fontSize: 16 }}>{name}</span>}
-                        />
-                      ))}
+                            ? true
+                            : false
+                        }
+                        onChange={handleSpecializationChanges}
+                        key={index}
+                        control={
+                          <Checkbox
+                            sx={{ "& .MuiSvgIcon-root": { fontSize: 22 } }}
+                          />
+                        }
+                        label={<span style={{ fontSize: 16 }}>{name}</span>}
+                      />
+                    ))}
                 </FormGroup>
               </div>
             </div>

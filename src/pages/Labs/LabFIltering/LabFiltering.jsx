@@ -21,24 +21,25 @@ export const LabFiltering = () => {
     });
     const [lab, setlab] = useState([])
     const [labFilter, setlabFilter] = useState([])
+    const [loading, setloading] = useState(false)
+    const [notFound, setnotFound] = useState(false)
+
     const updateDocByPlace = (value) => {
         setlab(value)
     }
     useEffect(() => {
-        let FinalData = [...lab] || [];
+        let FinalData = lab || [];
         let updatedArray = [];
-        FinalData.forEach(ele => {
+        FinalData?.forEach(ele => {
             let servicesMatched = true;
             let featureMatched = true;
-            if (filters.services && filters.services.length > 0) {
-                servicesMatched = filters.services.every(spec => {
+            if (filters?.services && filters?.services?.length > 0) {
+                servicesMatched = filters?.services?.every(spec => {
                     return ele.services && ele.services.includes(spec);
                 });
             }
-
-            if (filters.features && filters.features.length > 0) {
+            if (filters.features && filters?.features?.length > 0) {
                 featureMatched = filters.features.every(feature => {
-                    console.log("FinalData>>>>", ele)
                     return ele.features && ele.features.includes(feature);
                 });
             }
@@ -50,32 +51,50 @@ export const LabFiltering = () => {
         setlabFilter(updatedArray);
     }, [filters, lab]);
 
-    console.log("Lab>>>>", labFilter.length > 0 ? labFilter : lab)
+    // console.log("Lab>>>>", labFilter.length > 0 ? labFilter : lab)
     const handleDocNameSearch = (value) => {
         const query = value.toLowerCase();
         if (labFilter?.length > 0) {
-            const filteredData = labFilter.filter((data) =>
-                data.name.toLowerCase().includes(query)
-            );
-            const remainingData = labFilter.filter(
-                (data) => !data.name.toLowerCase().includes(query)
-            );
-            setlabFilter([...filteredData, ...remainingData]);
+            const filteredData = labFilter.filter((data) => {
+                const lowerCaseName = data?.name?.toLowerCase();
+                return lowerCaseName?.startsWith(query[0]) &&
+                    lowerCaseName.includes(query);
+            });
+            if (filteredData?.length > 0) {
+                setnotFound(false)
+            } else {
+                if (!query) {
+                    setlabFilter(labFilter);
+                } else {
+                    setnotFound(true)
+                }
+            }
+            setlabFilter(filteredData);
         } else {
-            const filteredData = lab.filter((data) =>
-                data.name.toLowerCase().includes(query)
-            );
-            const remainingData = lab.filter(
-                (data) => !data.name.toLowerCase().includes(query)
-            );
-            setlab([...filteredData, ...remainingData]);
+            const filteredData = lab?.filter((data) => {
+                const lowerCaseName = data?.name?.toLowerCase();
+                return lowerCaseName?.startsWith(query[0]) &&
+                    lowerCaseName?.includes(query);
+            });
+            if (filteredData?.length > 0) {
+                setnotFound(false)
+            } else {
+                if (!query) {
+                    setlabFilter(lab);
+                } else {
+                    setnotFound(true)
+                }
+            }
+            setlabFilter(filteredData);
         }
-
     }
+
     useEffect(() => {
+        setloading(true)
         axios.get(`${port}/lab/getlab`).then((res) => {
             console.log("res>>>", res)
             setlab(res.data.data)
+            setloading(false)
         })
     }, [])
 
@@ -218,39 +237,43 @@ export const LabFiltering = () => {
                     <div className='HospitalFilterHosSec'>
                         <div className={styles.rightSide}>
                             <div className={styles.cardMainContainer}>
-                                {labFilter.length > 0 || filters.type || filters?.services?.length > 0 || filters?.features?.length > 0 ?
-                                    labFilter.length > 0 ?
-                                        labFilter.map((details, index) =>
+                                {labFilter?.length > 0 || filters.type || filters?.services?.length > 0 || filters?.features?.length > 0 ?
+                                    labFilter?.length > 0 && !notFound ?
+                                        labFilter?.map((details, index) =>
                                             <LabCard key={index} data={{ details: details, lab: true }} />
                                         )
-                                        :
-                                        <div className='HospitalNotfound'>
+                                        : <div className='HospitalNotfound'>
                                             <h3>
                                                 lab were not found.</h3>
-
                                         </div>
-
                                     :
                                     <>
-                                        {lab.map((details, index) =>
-                                            <LabCard key={index} data={{ details: details, lab: true }} />
-                                        )
+                                        {lab?.length > 0 && !notFound ?
+                                            lab?.map((details, index) =>
+                                                <LabCard key={index} data={{ details: details, lab: true }} />
+                                            )
+                                            : <div className='HospitalNotfound'>
+                                                <h3>
+                                                    lab were not found.</h3>
+                                            </div>
                                         }
                                     </>
                                 }
                             </div>
                         </div>
-
-
                     </div>
                 </div>
-
             </div >
 
-            {!lab.length > 0 &&
+            {loading &&
                 <Loader />
             }
-
+            {
+                notFound && < div className='HospitalNotfound'>
+                    <h3>
+                        lab were not found.</h3>
+                </div >
+            }
 
             <Footer />
         </>
