@@ -86,9 +86,9 @@ const SearchDocMobileScreen = () => {
                 <FormGroup>
                   {filters.type === "Ayurvedic"
                     ? ayurSpec.map((specialization, index) => (
-                        <>
+                        <React.Fragment    key={index}>
                           <FormControlLabel
-                            key={index}
+                       
                             name={specialization}
                             checked={
                               filters.specializations.length !== 0 &&
@@ -118,10 +118,10 @@ const SearchDocMobileScreen = () => {
                             value={specialization}
                           />
                           <Divider />
-                        </>
+                        </React.Fragment>
                       ))
                     : speacializationNames.map((specialization, index) => (
-                        <>
+                        <React.Fragment      key={index}>
                           <FormControlLabel
                             key={index}
                             name={specialization}
@@ -153,7 +153,7 @@ const SearchDocMobileScreen = () => {
                             value={specialization}
                           />
                           <Divider />
-                        </>
+                        </React.Fragment>
                       ))}
                 </FormGroup>
               </FormControl>

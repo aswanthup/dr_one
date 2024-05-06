@@ -32,6 +32,7 @@ export default function SearchDoc() {
     emptyResults,
     passedSpecialization,
     filters,
+    setFilters,
     selectedFilter,
     // functions---------------------------------------
     handleTypeChanges,
@@ -61,8 +62,17 @@ export default function SearchDoc() {
         <div className={styles.section3}>
           <div className={styles.leftSide}>
             <div className={styles.types}>
-              <div>
+              <div className={styles.typeDiv}>
                 <span className={styles.leftHeadings}>Type</span>
+                <span onClick={()=>setFilters(prev=>
+                  ({
+                    type: "",
+                    specializations: [],
+                    gender: "",
+                    experience: 0,
+                    name: prev.name,
+                  
+                }))} className={styles.clear}>CLEAR ALL</span>
               </div>
               <div>
                 <RadioGroup
@@ -132,7 +142,7 @@ export default function SearchDoc() {
                         name={name}
                         checked={
                           filters?.specializations?.length !== 0 &&
-                          filters.specializations.includes(name.toLowerCase())
+                          filters?.specializations?.includes(name?.toLowerCase())
                         }
                         disabled={
                           filters.type === "Homeopathy" ||
