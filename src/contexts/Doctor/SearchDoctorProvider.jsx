@@ -2,6 +2,12 @@ import { useState, createContext, useContext, useEffect } from "react";
 import { MyContext } from "../Contexts";
 import axios from "axios";
 import { port } from "../../config";
+import {
+  ayurSpec,
+  homeoDept,
+  speacializationNames,
+} from "../../pages/doctor/constants/filter";
+import { Checkbox, FormControlLabel } from "@mui/material";
 
 export const SearchDocContext = createContext();
 
@@ -12,7 +18,10 @@ export default function SearchDoctorProvider({ children }) {
   const [docsBySearch, setDocsBySearch] = useState([]);
   const [allDocsBySearch, setAllDocsBySearch] = useState([]);
   const [emptyResults, setEmptyResults] = useState(false);
-  const [selectedFilter,setSelectedFilter]=useState({type:"",gender:""})//for maintaining selected items in both screens
+  const [selectedFilter, setSelectedFilter] = useState({
+    type: "",
+    gender: "",
+  }); //for maintaining selected items in both screens
   const { passedSpecialization } = useContext(MyContext);
   const [filters, setFilters] = useState({
     type: "",
@@ -24,9 +33,10 @@ export default function SearchDoctorProvider({ children }) {
 
   const handleTypeChanges = (event) => {
     const { value } = event.target;
-setSelectedFilter({
-  ...selectedFilter,type:value
-})
+    setSelectedFilter({
+      ...selectedFilter,
+      type: value,
+    });
     setFilters({ ...filters, specializations: [], type: value });
   };
   const handleSpecializationChanges = (event) => {
@@ -52,7 +62,7 @@ setSelectedFilter({
   const handleGenderChanges = (event) => {
     const { value } = event.target;
     setFilters({ ...filters, gender: value });
-    setSelectedFilter({ ...selectedFilter,gender: value });
+    setSelectedFilter({ ...selectedFilter, gender: value });
   };
 
   useEffect(() => {
@@ -186,6 +196,82 @@ setSelectedFilter({
     setFilters({ ...filters, name: value });
   };
 
+  // return specializations based on the selected type//
+  const getSpecializationOptions = () => {
+    // if (!filters.type) return null; now showing default specs allopathy if no stype selected
+
+    switch (filters.type) {
+      case "Allopathy":
+        return speacializationNames.map((name, index) => (
+          <FormControlLabel
+            name={name}
+            checked={
+              filters.specializations.length !== 0 &&
+              filters.specializations.includes(name.toLowerCase())
+            }
+            disabled={filters.type === "Unani" && true}
+            onChange={handleSpecializationChanges}
+            key={index}
+            control={
+              <Checkbox sx={{ "& .MuiSvgIcon-root": { fontSize: 22 } }} />
+            }
+            label={<span style={{ fontSize: 16 }}>{name}</span>}
+          />
+        ));
+      case "Ayurvedic":
+        return ayurSpec.map((name, index) => (
+          <FormControlLabel
+            name={name}
+            checked={
+              filters.specializations.length !== 0 &&
+              filters.specializations.includes(name.toLowerCase())
+            }
+            disabled={filters.type === "Unani" && true}
+            onChange={handleSpecializationChanges}
+            key={index}
+            control={
+              <Checkbox sx={{ "& .MuiSvgIcon-root": { fontSize: 22 } }} />
+            }
+            label={<span style={{ fontSize: 16 }}>{name}</span>}
+          />
+        ));
+      case "Homeopathy":
+        return homeoDept.map((name, index) => (
+          <FormControlLabel
+            name={name}
+            checked={
+              filters.specializations.length !== 0 &&
+              filters.specializations.includes(name.toLowerCase())
+            }
+            disabled={filters.type === "Unani" && true}
+            onChange={handleSpecializationChanges}
+            key={index}
+            control={
+              <Checkbox sx={{ "& .MuiSvgIcon-root": { fontSize: 22 } }} />
+            }
+            label={<span style={{ fontSize: 16 }}>{name}</span>}
+          />
+        ));
+      default:
+        return speacializationNames.map((name, index) => (
+          <FormControlLabel
+            name={name}
+            checked={
+              filters.specializations.length !== 0 &&
+              filters.specializations.includes(name.toLowerCase())
+            }
+            disabled={filters.type === "Unani" && true}
+            onChange={handleSpecializationChanges}
+            key={index}
+            control={
+              <Checkbox sx={{ "& .MuiSvgIcon-root": { fontSize: 22 } }} />
+            }
+            label={<span style={{ fontSize: 16 }}>{name}</span>}
+          />
+        ));
+    }
+  };
+
   const value = {
     loading,
     setLoading,
@@ -202,7 +288,8 @@ setSelectedFilter({
     passedSpecialization,
     filters,
     setFilters,
-    selectedFilter,setSelectedFilter,
+    selectedFilter,
+    setSelectedFilter,
     // functions
     handleTypeChanges,
     handleSpecializationChanges,
@@ -213,6 +300,7 @@ setSelectedFilter({
     handleExpChangeBtn,
     updateDocByPlace,
     handleDocNameSearch,
+    getSpecializationOptions,
   };
 
   return (

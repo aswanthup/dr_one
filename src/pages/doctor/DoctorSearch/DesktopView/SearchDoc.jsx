@@ -41,6 +41,7 @@ export default function SearchDoc() {
     handleExpChangeBtn,
     updateDocByPlace,
     handleDocNameSearch,
+    getSpecializationOptions
   } = useContext(SearchDocContext);
 
 
@@ -92,9 +93,8 @@ export default function SearchDoc() {
             <div className={styles.specialization}>
               <div>
                 <span className={styles.leftHeadings}>
-                  Specialization{" "}
-                  {(filters.type === "Unani" ||
-                    filters.type === "Homeopathy") && (
+                  Specializations{" "}
+                  {(filters.type === "Unani" && 
                       <span style={{ fontSize: "14px", fontWeight: 300 }}>
                         (Not Applicable)
                       </span>
@@ -103,55 +103,7 @@ export default function SearchDoc() {
               </div>
               <div>
                 <FormGroup>
-                  {filters.type === "Ayurvedic"
-                    ? ayurSpec.map((name, index) => (
-                      <FormControlLabel
-                        name={name}
-                        checked={
-                          filters.specializations.length !== 0 &&
-                          filters.specializations.includes(name.toLowerCase())
-                        }
-                        disabled={
-                          filters.type === "Homeopathy" ||
-                            filters.type === "Unani"
-                            ? true
-                            : false
-                        }
-                        onChange={handleSpecializationChanges}
-                        key={index}
-                        control={
-                          <Checkbox
-                            sx={{ "& .MuiSvgIcon-root": { fontSize: 22 } }}
-                          />
-                        }
-                        label={<span style={{ fontSize: 16 }}>{name}</span>}
-                      />
-                    ))
-                    : speacializationNames.map((name, index) => (
-                      <FormControlLabel
-                      sx={{paddingTop:"1rem"}}
-                        name={name}
-                        checked={
-                          filters?.specializations?.length !== 0 &&
-                          filters.specializations.includes(name.toLowerCase())
-                        }
-                        disabled={
-                          filters.type === "Homeopathy" ||
-                            filters.type === "Unani" ||
-                            !filters.type
-                            ? true
-                            : false
-                        }
-                        onChange={handleSpecializationChanges}
-                        key={index}
-                        control={
-                          <Checkbox
-                            sx={{ "& .MuiSvgIcon-root": { fontSize: 22 } }}
-                          />
-                        }
-                        label={<span style={{ fontSize: 16 }}>{name}</span>}
-                      />
-                    ))}
+                 {getSpecializationOptions()}
                 </FormGroup>
               </div>
             </div>
