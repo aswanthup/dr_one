@@ -129,6 +129,7 @@ export default function SearchDoc() {
                     ))
                     : speacializationNames.map((name, index) => (
                       <FormControlLabel
+                      sx={{paddingTop:"1rem"}}
                         name={name}
                         checked={
                           filters?.specializations?.length !== 0 &&

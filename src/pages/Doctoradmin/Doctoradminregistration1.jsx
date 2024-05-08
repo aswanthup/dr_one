@@ -131,8 +131,8 @@ export default function Doctoradminregistration1() {
       !Data.phone ||
       !Data.email ||
       !Data.password ||
-      !Data.confirmPassword ||
-      !Data.docImage;
+      !Data.confirmPassword 
+      // !Data.docImage;
 
     const isValidationError =
       validationErrors.confirmPassword ||

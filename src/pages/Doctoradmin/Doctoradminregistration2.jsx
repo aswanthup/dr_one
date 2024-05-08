@@ -126,8 +126,10 @@ export default function Doctoradminregistration2() {
       })
       .catch((err) => {
         toast.info(err?.response?.data?.message);
-        setloader(false);
-      });
+      
+      }).finally(()=>{
+        setloader(false)
+      })
   };
   const updatePosts = (pinCode) => {
     if (pinCode?.length === 6) {
@@ -221,15 +223,15 @@ export default function Doctoradminregistration2() {
               />
             </div>
             <div>
-              <h4>Qualification</h4>
+              <h4>Additional qualification</h4>
               <input
                 className="doctoradminregistration_inputs"
                 maxLength={50}
                 type="text"
                 autoComplete="off"
-                value={Data?.qualification}
+                value={Data?.additionalQualification}
                 onChange={handleChange}
-                name="qualification"
+                name="additionalQualification"
               />
             </div>
             <div>
@@ -351,7 +353,7 @@ export default function Doctoradminregistration2() {
               />
             </div>
             <div>
-              <h4>Specialization</h4>
+              <h4>Department</h4>
               <select
                 type="text"
                 name="specialization"
@@ -377,15 +379,15 @@ export default function Doctoradminregistration2() {
             </div>
 
             <div>
-              <h4>Qualification</h4>
+              <h4>Additional speciality</h4>
               <input
                 className="doctoradminregistration_inputs"
                 maxLength={50}
                 type="text"
                 autoComplete="off"
-                value={Data?.qualification}
+                value={Data?.additionalSpeciality}
                 onChange={handleChange}
-                name="qualification"
+                name="additionalSpeciality"
               />
             </div>
 
@@ -542,6 +544,17 @@ export default function Doctoradminregistration2() {
                 name="qualification"
               />
             </div>
+            <div>
+              <h4>Additional qualification</h4>
+              <input
+                className="mob_inputs"
+                type="text"
+                autoComplete="off"
+                value={Data?.additionalQualification}
+                onChange={handleChange}
+                name="additionalQualification"
+              />
+            </div>
             <div style={{ display: "flex", justifyContent: "space-between" }}>
               <div style={{ width: "48%" }}>
                 <h4>Gender</h4>
@@ -598,16 +611,16 @@ export default function Doctoradminregistration2() {
                     Allopathy
                   </option>
                   <option
-                    value="Homeopathy"
-                    className="doctoradminregistration_gender_font"
-                  >
-                    Homeopathy
-                  </option>
-                  <option
                     value="Ayurveda"
                     className="doctoradminregistration_gender_font"
                   >
                     Ayurveda
+                  </option>
+                  <option
+                    value="Homeopathy"
+                    className="doctoradminregistration_gender_font"
+                  >
+                    Homeopathy
                   </option>
                   <option
                     value="Unani"
@@ -658,7 +671,7 @@ export default function Doctoradminregistration2() {
               />
             </div>
             <div>
-              <h4>Specialization</h4>
+              <h4>Department</h4>
               <select
                 type="text"
                 name="specialization"
@@ -681,6 +694,18 @@ export default function Doctoradminregistration2() {
                   </option>
                 ))}
               </select>
+            </div>
+            <div>
+              <h4>Additional speciality</h4>
+              <input
+               className="mob_inputs"
+                maxLength={50}
+                type="text"
+                autoComplete="off"
+                value={Data?.additionalSpeciality}
+                onChange={handleChange}
+                name="additionalSpeciality"
+              />
             </div>
           </div>
 
