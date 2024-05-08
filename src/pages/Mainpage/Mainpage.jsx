@@ -35,43 +35,51 @@ export default function Mainpage() {
             <Navbar />
           </Headroom>
 
-          {/* <ChatBot /> */}
+          <ChatBot />
           {/*End Navbar */}
           {/* Hero section */}
-          <div className="container-second hero-main">
-            <div className="hero">
-              <h1>Find the good life by</h1>
-              <h1>good health</h1>
-            </div>
-            {/* Search Box */}
-            <div className="container container-search flex">
-              <div className="Search-box flex">
-                <div className="location-section flex">
-                  <i className="ri-map-pin-2-line" />
+          <div className="container-second hero-main2 flex">
 
-                  <input
-                    className="Location-input"
-                    type="text"
-                    placeholder="Kozhikode"
-                  />
-                </div>
-                <input
-                  onChange={handleSearch}
-                  className="search-input"
-                  type="text"
-                  placeholder="Search Doctor,Labs,Hospitals,Pharmacy"
-                />
-                <div className="search-section flex">
-                  <i className="ri-search-2-line" />
-                </div>
+            <div className="hero2left flex">
+
+              <div>
+                <h1>Wellness Wise: <span>Your</span> Path to</h1>
+                <h1>Better <span>Health</span></h1>
               </div>
+              <div><h4>A doctor is a medical professional who diagnoses, treats, and prevents illnesses, injuries, and various medical conditions in individuals. Doctors play a crucial role in maintaining and improving the health and well-being of their patients. </h4></div>
+
+              <div className="main_bts flex">
+                <a href="" className="main_btns flex"><h4>Find Doctor</h4><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M16.0037 9.41421L7.39712 18.0208L5.98291 16.6066L14.5895 8H7.00373V6H18.0037V17H16.0037V9.41421Z"></path></svg></a>
+                <a href="" className="main_btns flex"><h4>Find Hospital</h4><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M16.0037 9.41421L7.39712 18.0208L5.98291 16.6066L14.5895 8H7.00373V6H18.0037V17H16.0037V9.41421Z"></path></svg></a>
+                <a href="" className="main_btns flex"><h4>Find Labs</h4><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M16.0037 9.41421L7.39712 18.0208L5.98291 16.6066L14.5895 8H7.00373V6H18.0037V17H16.0037V9.41421Z"></path></svg></a>
+                <a href="" className="main_btns flex"><h4>Find Pharmacy</h4><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M16.0037 9.41421L7.39712 18.0208L5.98291 16.6066L14.5895 8H7.00373V6H18.0037V17H16.0037V9.41421Z"></path></svg></a>
+              </div>
+
+            </div>
+
+            <div className="hero2right flex">
+              <img src="images\mainright.png" alt="" />
+            </div>
+
+          </div>
+
+
+          <div className="hero_images wrapper">
+            <div class="track">
+              <div className="logo"><img src="images/main (1).jpg" alt="" /></div>
+              <div className="logo"><img src="images/main (2).jpg" alt="" /></div>
+              <div className="logo"><img src="images/main (4).jpg" alt="" /></div>
+              <div className="logo"><img src="images/main (3).jpg" alt="" /></div>
+              <div className="logo"><img src="images/main (5).jpg" alt="" /></div>
+              <div className="logo"><img src="images/main (6).jpg" alt="" /></div>
+              <div className="logo"><img src="images/ph1 (1).jpg" alt="" /></div>
             </div>
           </div>
           {/*End Search box */}
 
           {/*End Hero */}
           {/* Features */}
-          <div className="container-second Features">
+          {/* <div className="container-second Features">
             <div className="second-main-head">
               <h1>
                 Explore Our <span>Features</span>
@@ -137,7 +145,7 @@ export default function Mainpage() {
                 </a>
               </div>
             </div>
-          </div>
+          </div> */}
           {/*End Features */}
           {/* Specialties */}
           <div className=" container-second Specialties">
@@ -497,7 +505,10 @@ export default function Mainpage() {
         </div>
 
         {/* Mobile Screen */}
+
         <div className="mobile-screen container">
+          <ChatBot />
+
           <div className="mobile-hero-section">
             <img src="images/mobile.png" alt="" />
           </div>
