@@ -6,13 +6,18 @@ import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { MyContext } from "../../contexts/Contexts";
-import { speacializationNames } from "../../pages/doctor/constants/filter.js";
+import {
+  ayurSpec,
+  homeoDept,
+  speacializationNames,
+  types,
+} from "../../pages/doctor/constants/filter.js";
 import { port } from "../../config.js";
 import { Loader } from "../../components/Loader/Loader.jsx";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-import dayjs, { Dayjs } from 'dayjs';
+import dayjs, { Dayjs } from "dayjs";
 
 export default function Doctoradminregistration2() {
   const navigate = useNavigate();
@@ -58,13 +63,20 @@ export default function Doctoradminregistration2() {
       [name]: value,
     });
   };
+  const handleTypeChanges = (e) => {
+    const { name, value } = e.target;
+    setData({
+      ...Data,
+      [name]: value,
+    });
+  };
   const handleYearChange = (e) => {
-    console.log(e)
+    console.log(e);
     setData({
       ...Data,
       selectedYear: e.$d,
       experience: e.$y,
-    })
+    });
   };
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -126,10 +138,10 @@ export default function Doctoradminregistration2() {
       })
       .catch((err) => {
         toast.info(err?.response?.data?.message);
-      
-      }).finally(()=>{
-        setloader(false)
       })
+      .finally(() => {
+        setloader(false);
+      });
   };
   const updatePosts = (pinCode) => {
     if (pinCode?.length === 6) {
@@ -149,7 +161,7 @@ export default function Doctoradminregistration2() {
             selectedPlace: "",
           });
           if (PostOffice === null) {
-            toast.info("Pincode not found")
+            toast.info("Pincode not found");
           } else {
             setPostalError("");
             const postData = PostOffice[0];
@@ -191,7 +203,47 @@ export default function Doctoradminregistration2() {
     }
   };
 
-  console.log({ Data })
+  // return specializations based on the selected type//
+  const getSpecializationOptions = () => {
+    if (!Data) return null;
+
+    switch (Data.type) {
+      case "Allopathy":
+        return speacializationNames.map((value, index) => (
+          <option
+            key={index}
+            value={value}
+            className="doctoradminregistration_gender_font"
+          >
+            {value}
+          </option>
+        ));
+      case "Ayurvedic":
+        return ayurSpec.map((value, index) => (
+          <option
+            key={index}
+            value={value}
+            className="doctoradminregistration_gender_font"
+          >
+            {value}
+          </option>
+        ));
+      case "Homeopathy":
+        return homeoDept.map((value, index) => (
+          <option
+            key={index}
+            value={value}
+            className="doctoradminregistration_gender_font"
+          >
+            {value}
+          </option>
+        ));
+      default:
+        return null;
+    }
+  };
+
+  console.log({ Data });
 
   return (
     <>
@@ -273,37 +325,26 @@ export default function Doctoradminregistration2() {
                 type="text"
                 name="type"
                 value={Data?.type}
-                onChange={handleChange}
+                onChange={handleTypeChanges}
                 className="doctoradminregistration_gender"
               >
                 <option
+                  disabled
+                  selected
                   value=""
                   className="doctoradminregistration_gender_font"
-                ></option>
-                <option
-                  value="Allopathy"
-                  className="doctoradminregistration_gender_font"
                 >
-                  Allopathy
+                  Select type
                 </option>
-                <option
-                  value="Homeopathy"
-                  className="doctoradminregistration_gender_font"
-                >
-                  Homeopathy
-                </option>
-                <option
-                  value="Ayurvedic"
-                  className="doctoradminregistration_gender_font"
-                >
-                  Ayurvedic
-                </option>
-                <option
-                  value="Unani"
-                  className="doctoradminregistration_gender_font"
-                >
-                  Unani
-                </option>
+                {types.map((data, index) => (
+                  <option
+                    key={index}
+                    value={data}
+                    className="doctoradminregistration_gender_font"
+                  >
+                    {data}
+                  </option>
+                ))}
               </select>
             </div>
           </div>
@@ -335,7 +376,6 @@ export default function Doctoradminregistration2() {
                     borderRadius: "0.5vw",
                   }}
                   value={Data.selectedYear ? dayjs(Data.selectedYear) : null}
-
                   views={["year"]}
                   className="date-picker"
                 />
@@ -366,15 +406,7 @@ export default function Doctoradminregistration2() {
                   value=""
                   className="doctoradminregistration_gender_font"
                 ></option>
-                {speacializationNames.map((value, index) => (
-                  <option
-                    value={value}
-                    key={index}
-                    className="doctoradminregistration_gender_font"
-                  >
-                    {value}
-                  </option>
-                ))}
+                {getSpecializationOptions()}
               </select>
             </div>
 
@@ -390,7 +422,6 @@ export default function Doctoradminregistration2() {
                 name="additionalSpeciality"
               />
             </div>
-
           </div>
 
           <div className="text_area_section flex">
@@ -466,15 +497,15 @@ export default function Doctoradminregistration2() {
                       placeholder="Pincode"
                       maxLength={6}
                       onChange={handlePostChange}
-                      style={{ border: postalError && '2px solid red' }}
+                      style={{ border: postalError && "2px solid red" }}
                     />
                     <p
                       style={{
                         position: "absolute",
                         fontSize: "12px",
                         color: "#ffffffb8",
-                        letterSpacing: '1px',
-                        padding: "5px 00px"
+                        letterSpacing: "1px",
+                        padding: "5px 00px",
                       }}
                     >
                       {postalError}
@@ -698,7 +729,7 @@ export default function Doctoradminregistration2() {
             <div>
               <h4>Additional speciality</h4>
               <input
-               className="mob_inputs"
+                className="mob_inputs"
                 maxLength={50}
                 type="text"
                 autoComplete="off"
@@ -778,17 +809,19 @@ export default function Doctoradminregistration2() {
                         autoComplete="off"
                         value={Data?.pincode ?? ""}
                         placeholder="Pincode"
-                        style={{ width: "100%", border: postalError && '2px solid red' }}
+                        style={{
+                          width: "100%",
+                          border: postalError && "2px solid red",
+                        }}
                         onChange={handlePostChange}
-
                       />
                       <p
                         style={{
                           position: "absolute",
                           color: "#ffffffb8",
                           fontSize: "10px",
-                          letterSpacing: '1px',
-                          padding: "5px 00px"
+                          letterSpacing: "1px",
+                          padding: "5px 00px",
                         }}
                       >
                         {postalError}
