@@ -815,6 +815,24 @@ small {
   background-color: var(--color-primary);
 }
 
+
+.hero2mobile{
+  justify-content: center;
+  padding:10vw;
+}
+
+.mobhead{
+  margin-top:8vw;
+}
+
+.mobhead h1{
+  font-weight: bolder;
+}
+
+.mobhead span{
+  color: var(--color-primary);
+}
+
 /* Responsive */
 @media screen and (max-width: 1280px) {
   html {

@@ -512,9 +512,23 @@ export default function Mainpage() {
         <div className="mobile-screen container">
           <ChatBot />
 
-          <div className="mobile-hero-section">
-            <img src="images/mobile.png" alt="" />
+
+          <div className="mobhead">
+                <h1>Wellness Wise: <span>Your</span> </h1>
+                <h1>Path to</h1>
+                <h1>Better <span>Health</span></h1>
           </div>
+
+          <div className="hero2mobile flex">
+              <img src="images\mainright.png" alt="" />
+          </div>
+
+
+         
+              <div><h4>A doctor is a medical professional who diagnoses, treats, and prevents illnesses, injuries, and various medical conditions in individuals. Doctors play a crucial role in maintaining and improving the health and well-being of their patients. </h4></div>
+
+
+     
 
           {/* Search Bar */}
 
