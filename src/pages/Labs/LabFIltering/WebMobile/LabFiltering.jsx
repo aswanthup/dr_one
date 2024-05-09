@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from 'react'
-import Footer from "../../../components/Footer";
+import Footer from "../../../../components/Footer";
 import axios from "axios";
-import styles from "../../doctor/DoctorSearch/DesktopView/searchdoc.module.css";
+import styles from "../../../doctor/DoctorSearch/DesktopView/searchdoc.module.css";
 import {
     Checkbox,
     FormControlLabel,
     FormGroup,
 } from "@mui/material";
-import Navbar from '../../../components/Navbar';
-import { SearchBox } from '../LabFIltering/SearchComponent/SearchBox';
-import { features, services } from '../LabFIltering/constatnts/Filter';
-import { port } from '../../../config';
-import { Loader } from '../../../components/Loader/Loader';
-import { LabCard } from './LabCard/LabCard';
+import Navbar from '../../../../components/Navbar';
+import { SearchBox } from '../SearchComponent/SearchBox';
+import { features, services } from '../constatnts/Filter';
+import { port } from '../../../../config';
+import { Loader } from '../../../../components/Loader/Loader';
+import { LabCard } from '../LabCard/LabCard';
 export const LabFiltering = () => {
     const [filters, setFilters] = useState({
         services: "",
@@ -43,7 +43,12 @@ export const LabFiltering = () => {
                     return ele.features && ele.features.includes(feature);
                 });
             }
-            if (servicesMatched && featureMatched) {
+
+            if (filters.CheckingName && servicesMatched && featureMatched) {
+                if (ele.name.includes(filters.CheckingName)) { // Check if name includes CheckingName
+                    updatedArray.push(ele);
+                }
+            } else if (servicesMatched && featureMatched) {
                 updatedArray.push(ele);
             }
         });
@@ -51,42 +56,43 @@ export const LabFiltering = () => {
         setlabFilter(updatedArray);
     }, [filters, lab]);
 
-    // console.log("Lab>>>>", labFilter.length > 0 ? labFilter : lab)
+    console.log("Lab>>>>", labFilter.length > 0 ? labFilter : lab)
     const handleDocNameSearch = (value) => {
         const query = value.toLowerCase();
-        if (labFilter?.length > 0) {
-            const filteredData = labFilter.filter((data) => {
-                const lowerCaseName = data?.name?.toLowerCase();
-                return lowerCaseName?.startsWith(query[0]) &&
-                    lowerCaseName.includes(query);
-            });
-            if (filteredData?.length > 0) {
-                setnotFound(false)
-            } else {
-                if (!query) {
-                    setlabFilter(labFilter);
-                } else {
-                    setnotFound(true)
-                }
-            }
-            setlabFilter(filteredData);
-        } else {
-            const filteredData = lab?.filter((data) => {
-                const lowerCaseName = data?.name?.toLowerCase();
-                return lowerCaseName?.startsWith(query[0]) &&
-                    lowerCaseName?.includes(query);
-            });
-            if (filteredData?.length > 0) {
-                setnotFound(false)
-            } else {
-                if (!query) {
-                    setlabFilter(lab);
-                } else {
-                    setnotFound(true)
-                }
-            }
-            setlabFilter(filteredData);
-        }
+        setFilters({ ...filters, CheckingName: query })
+        // if (labFilter?.length > 0) {
+        //     const filteredData = labFilter.filter((data) => {
+        //         const lowerCaseName = data?.name?.toLowerCase();
+        //         return lowerCaseName?.startsWith(query[0]) &&
+        //             lowerCaseName.includes(query);
+        //     });
+        //     if (filteredData?.length > 0) {
+        //         setnotFound(false)
+        //     } else {
+        //         if (!query) {
+        //             setlabFilter(labFilter);
+        //         } else {
+        //             setnotFound(true)
+        //         }
+        //     }
+        //     setlabFilter(filteredData);
+        // } else {
+        //     const filteredData = lab?.filter((data) => {
+        //         const lowerCaseName = data?.name?.toLowerCase();
+        //         return lowerCaseName?.startsWith(query[0]) &&
+        //             lowerCaseName?.includes(query);
+        //     });
+        //     if (filteredData?.length > 0) {
+        //         setnotFound(false)
+        //     } else {
+        //         if (!query) {
+        //             setlabFilter(lab);
+        //         } else {
+        //             setnotFound(true)
+        //         }
+        //     }
+        //     setlabFilter(filteredData);
+        // }
     }
 
     useEffect(() => {

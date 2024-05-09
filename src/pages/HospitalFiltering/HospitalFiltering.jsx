@@ -53,10 +53,14 @@ export const HospitalFiltering = () => {
                         return ele.feature && ele.feature.includes(feature);
                     });
                 }
-
-                if (specialityMatched && featureMatched) {
+                if (filters.CheckingName && specialityMatched && featureMatched) {
+                    if (ele.name.includes(filters.CheckingName)) { // Check if name includes CheckingName
+                        updatedArray.push(ele);
+                    }
+                } else if (specialityMatched && featureMatched) {
                     updatedArray.push(ele);
                 }
+
             }
         });
 
@@ -67,6 +71,7 @@ export const HospitalFiltering = () => {
     const handleDocNameSearch = (value) => {
 
         const query = value.toLowerCase();
+        setFilters({ ...filters, CheckingName: query })
         if (hospitalsFilter?.length > 0) {
             const filteredData = hospitalsFilter.filter((data) => {
                 const lowerCaseName = data?.name?.toLowerCase();

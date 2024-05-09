@@ -43,9 +43,8 @@ import Pharmacyregistration1 from "./pages/Pharmacyadmin/Pharmacyregistration1";
 import SearchDoc from "./pages/doctor/DoctorSearch/Index";
 import Registerlanding from "./pages/registerlanding/Registerlanding";
 import { HospitalFiltering } from "./pages/HospitalFiltering/HospitalFiltering";
-import { LabFiltering } from "./pages/Labs/LabFIltering/LabFiltering";
+import { LabFiltering } from "./pages/Labs/LabFIltering/WebMobile/LabFiltering";
 import { Loader } from "./components/Loader/Loader";
-import { ToastContainer } from "react-toastify";
 import { ToastifyComponent } from "./components/ToastifyComponent/ToastifyComponent";
 
 function App() {
