@@ -27,13 +27,16 @@ export default function Mainpage() {
   }, [location.pathname]);
   return (
     <div>
-      <div>
-        <div className="desktop">
-          {/* Navbar */}
 
           <Headroom>
             <Navbar />
           </Headroom>
+
+      <div>
+        <div className="desktop">
+          {/* Navbar */}
+
+         
 
           <ChatBot />
           {/*End Navbar */}

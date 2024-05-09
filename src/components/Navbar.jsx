@@ -19,6 +19,8 @@ export default function Navbar() {
         <h2>DOCTOR ONE</h2>
       </a>
     </div>
+
+
     <div className="nav-links flex">
       <a href="/">
         <h3>Home</h3>
@@ -36,11 +38,18 @@ export default function Navbar() {
         <h3>Hospital</h3>
       </a>
     </div>
+
+
     <div className="nav-buttons flex">
       <div className="nav-button">
         <button onClick={()=>window.location.href='/login'}>
           <h3 className="nav-button1" >Login</h3>
         </button>
+
+
+      </div>
+      <div className='menubutton flex'>
+     <i class="ri-menu-2-fill"></i>
       </div>
     </div>
   </nav>
