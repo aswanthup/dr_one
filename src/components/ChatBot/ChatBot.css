@@ -113,12 +113,12 @@
     padding: 7px;
     max-width: 70%;
     height: auto;
-    background-color: #CED9FF;
+    background-color: #3A65FD;
     border-radius: 15px 15px 1px 15px
 }
 
 .ChatBotChatsSecUserBot p {
-    color: #3A65FD;
+    color: #ffffff;
     font-size: 15px;
     font-weight: 400;
 }
@@ -194,7 +194,7 @@
     border-radius: 20px;
     letter-spacing: 1px;
     background-color: white;
-    width: 80px;
+    width: 100px;
 }
 
 .ChatBotChatsSec3QnmBtn {
@@ -260,7 +260,8 @@
         height: 50px;
         width: 50px;
     }
-    .ChatBotAlignBotShape svg{
+
+    .ChatBotAlignBotShape svg {
         height: 30px;
         width: 30px;
     }

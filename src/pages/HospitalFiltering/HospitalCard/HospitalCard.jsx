@@ -33,7 +33,6 @@ export const HospitalCard = ({ data }) => {
                 </div> */}
                 </div>
             </div>
-
         </>
     )
 }

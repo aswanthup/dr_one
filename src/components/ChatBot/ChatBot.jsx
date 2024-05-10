@@ -22,20 +22,29 @@ const ChatBot = () => {
         if (ChatSec) {
             setChatSec(false)
             setTempUserInput('')
-            const FIndLastAns = Chats?.find(ele => ele?.Qnm === 5)
-            console.log("FIndLastAns>>>>", FIndLastAns)
-            if (FIndLastAns) {
-                setChats([{
-                    bot: "Hello, Thank you for your interest in partnering with us.",
-                    ExtraBot: 'Please choose the category',
-                    Qnm: 1
-                }])
+            if (Chats.find(ele => ele.Qnm === 1 && ele.answer === "Doctor")) {
+                if (Chats.find(ele => ele.Qnm === 4)) {
+                    setChats([{
+                        bot: "Hello, Thank you for your interest in partnering with us.",
+                        ExtraBot: 'Please choose the category',
+                        Qnm: 1
+                    }])
+                }
+            } else if (Chats.find(ele => ele.Qnm === 1 && ele.answer === "Hospital" || ele.answer === "Laboratory")) {
+                if (Chats.find(ele => ele.Qnm === 5)) {
+                    setChats([{
+                        bot: "Hello, Thank you for your interest in partnering with us.",
+                        ExtraBot: 'Please choose the category',
+                        Qnm: 1
+                    }])
+                }
             }
+
         } else {
             setChatSec(true)
         }
     }
-
+    console.log("Chats>>>", Chats)
     const ChooseFn = (e) => {
         const value = e?.target?.value
         console.log("value>>>>", value)
@@ -56,7 +65,6 @@ const ChatBot = () => {
         const chatContainer = document.getElementById('chatContainer');
         if (chatContainer) {
             chatContainer.scrollTop = chatContainer?.scrollHeight;
-
         }
     }, [Chats, TempUserInput])
 
@@ -105,7 +113,7 @@ const ChatBot = () => {
                             Qnm: 2
                         }]
                     break;
-                case 'Lab':
+                case 'Laboratory':
                     TempChat = [...TempChat,
                     {
                         bot: botLab1Q,
@@ -138,7 +146,7 @@ const ChatBot = () => {
                         }
                     ]
                     break;
-                case 'Lab':
+                case 'Laboratory':
                     TempChat = [
                         ...TempChat,
                         {
@@ -209,24 +217,24 @@ const ChatBot = () => {
             if (FindCheckAnswer?.bot && !CheckingNull) {
                 axios.post(`${port}/user/messagesave`, FinalData).then((res => {
                     console.log("res>>>>>", res)
-                    if (res?.data?.success) {
-                        setTimeout(() => {
-                            CloseAndClear()
-                        }, 2000);
-                    }
+                    // if (res?.data?.success) {
+                    //     setTimeout(() => {
+                    //         CloseAndClear()
+                    //     }, 2000);
+                    // }
                 }))
             }
-        } else if (FinalData.type === "Hospital" || FinalData.type === "Lab") {
+        } else if (FinalData.type === "Hospital" || FinalData.type === "Laboratory") {
             const FindCheckAnswer = TempChat.find(ele => ele.Qnm === 5)
             console.log("FindCheckAnswer>>>>", FindCheckAnswer)
             if (FindCheckAnswer?.bot && !CheckingNull) {
                 axios.post(`${port}/user/messagesave`, FinalData).then((res => {
                     console.log("res>>>>>", res)
-                    if (res?.data?.success) {
-                        setTimeout(() => {
-                            CloseAndClear()
-                        }, 2000);
-                    }
+                    // if (res?.data?.success) {
+                    //     setTimeout(() => {
+                    //         CloseAndClear()
+                    //     }, 2000);
+                    // }
                 }))
             }
         }
@@ -296,11 +304,11 @@ const ChatBot = () => {
                                                             disabled={Chats?.find(ele => ele.Qnm === 2 || ele.Qnm === 3 || ele.Qnm === 4) ? true : false}
                                                             onClick={ChooseFn} className='ChatBotChatsSecSuggetionsBtn'
                                                         >Hospital</button>
-                                                        <button value="Lab"
+                                                        <button value="Laboratory"
                                                             disabled={Chats?.find(ele => ele.Qnm === 2 || ele.Qnm === 3 || ele.Qnm === 4) ? true : false}
                                                             onClick={ChooseFn}
                                                             className='ChatBotChatsSecSuggetionsBtn'
-                                                        >Lab</button>
+                                                        >Laboratory</button>
                                                     </div>
                                                 }
                                                 {/* {ele?.Qnm == 3 &&
@@ -315,7 +323,7 @@ const ChatBot = () => {
                                                             className='ChatBotChatsSecSuggetionsBtn'>YES</button>
                                                     </div>
                                                 } */}
-                                                {ele?.Qnm == 4 && Chats.find(ele => ele.Qnm === 1 && ele?.answer === "Hospital" || ele?.answer === "Lab") &&
+                                                {ele?.Qnm == 4 && Chats.find(ele => ele.Qnm === 1 && ele?.answer === "Hospital" || ele?.answer === "Laboratory") &&
                                                     < div className='ChatBotChatsSecSuggetions'>
                                                         {ele?.Qnm === 4 && Chats.find(ele => ele.Qnm === 1 && ele?.answer === "Hospital")
                                                             ?
@@ -326,7 +334,7 @@ const ChatBot = () => {
                                                                     className='ChatBotChatsSec3QnmBtn'>Registration link</button>
                                                             </div>
                                                             :
-                                                            ele?.Qnm === 4 && Chats.find(ele => ele.Qnm === 1 && ele?.answer === "Lab") ?
+                                                            ele?.Qnm === 4 && Chats.find(ele => ele.Qnm === 1 && ele?.answer === "Laboratory") ?
 
                                                                 <div className='ChatBotChatsSecSuggetions'>
                                                                     <button
