@@ -9,6 +9,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { Bounce, ToastContainer, toast } from "react-toastify";
 import { port } from "../../../config";
+import dayjs from "dayjs";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
@@ -16,7 +17,12 @@ export default function Hospitaladminadddoctor() {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
   const [fileName, setFileName] = useState("No file selected");
-  const [data, setData] = useState({ image: "", docImage: "" });
+  const [data, setData] = useState({
+    image: "",
+    docImage: "",
+    experience: 0,
+    selectedYear: 0,
+  });
   const schema = yup.object({
     name: yup.string().trim().max(25, "Name cannot exceed 25 characters"),
     email: yup.string().email("Invalid email format"),
@@ -32,7 +38,6 @@ export default function Hospitaladminadddoctor() {
       .max(20, "cannot exceed 20 characters"),
     gender: yup.string(),
     type: yup.string(),
-    experience: yup.number().min(1950, "Must be greater than 1950"),
     registration_no: yup.string(),
     specialization: yup.string(),
   });
@@ -42,12 +47,19 @@ export default function Hospitaladminadddoctor() {
     formState: { errors },
     reset,
   } = useForm({ resolver: yupResolver(schema) });
-  const onSubmit = async (data) => {
-    console.log({ data });
+  const onSubmit = async (dataForm) => {
+    console.log({ dataForm });
     try {
-      data.hospital_id = 52;
+      dataForm.hospital_id = 52;
+      dataForm.experience = data.experience;
+      const formData = new FormData();
+      formData.append("image", data.docImage);
+      formData.append("data", JSON.stringify(dataForm));
       setIsLoading(true);
-      const response = await axios.post(`${port}/hospital/add_doctor`, data);
+      const response = await axios.post(
+        `http://localhost:3003/hospital/add_doctor`,
+        formData
+      );
       // console.log({ response });
       if (response.status === 200) {
         reset();
@@ -83,6 +95,15 @@ export default function Hospitaladminadddoctor() {
         event.target.value = null;
       }
     }
+  };
+
+  const handleYearChange = (e) => {
+    console.log(e);
+    setData({
+      ...data,
+      selectedYear: e.$d,
+      experience: e.$y,
+    });
   };
   return (
     <div>
@@ -164,9 +185,8 @@ export default function Hospitaladminadddoctor() {
                       },
                     }}
                     name="experience"
-                    // onChange={handleYearChange}
-
-                    // value={Data.selectedYear ? dayjs(Data.selectedYear) : null}
+                    onChange={handleYearChange}
+                    value={data.selectedYear ? dayjs(data.selectedYear) : null}
                     views={["year"]}
                     className="add_doctor_date-picker"
                   />
