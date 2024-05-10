@@ -26,7 +26,7 @@ import Hospitaladmindoctorlist from "./pages/Hospitaladmin/Hospitaladmindoctorli
 import Hospitaladmin_doctor_card from "./components/Hospitaladmin_doctor_card";
 import Hospitaladminregistration2 from "./pages/Hospitaladmin/Hospitaladminregistration2";
 import Hospitaladmindoctordetails from "./pages/Hospitaladmin/Hospitaladmindoctordetails";
-import Hospitaladminadddoctor from "./pages/Hospitaladmin/Hospitaladminadddoctor";
+import Hospitaladminadddoctor from "./pages/Hospitaladmin/AddDoctor/Hospitaladminadddoctor";
 import Map from "./pages/Mainpage/Map";
 import Doctoradmin from "./pages/Doctoradmin/Doctoradmin";
 import Pharmacyadmin from "./pages/Pharmacyadmin/Pharmacyadmin";

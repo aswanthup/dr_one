@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import "../Hospitaladmin/hospitaladminadddoctor.css";
-import { types, speacializationNames } from "../doctor/constants/filter";
+import "./hospitaladminadddoctor.css";
+import { types, speacializationNames } from "../../doctor/constants/filter";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -8,10 +8,21 @@ import { Backdrop, CircularProgress } from "@mui/material";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { Bounce, ToastContainer, toast } from "react-toastify";
-import { port } from "../../config";
+import { port } from "../../../config";
+import dayjs from "dayjs";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 export default function Hospitaladminadddoctor() {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
+  const [fileName, setFileName] = useState("No file selected");
+  const [data, setData] = useState({
+    image: "",
+    docImage: "",
+    experience: 0,
+    selectedYear: 0,
+  });
   const schema = yup.object({
     name: yup.string().trim().max(25, "Name cannot exceed 25 characters"),
     email: yup.string().email("Invalid email format"),
@@ -27,7 +38,6 @@ export default function Hospitaladminadddoctor() {
       .max(20, "cannot exceed 20 characters"),
     gender: yup.string(),
     type: yup.string(),
-    experience: yup.number().min(1950, "Must be greater than 1950"),
     registration_no: yup.string(),
     specialization: yup.string(),
   });
@@ -37,14 +47,18 @@ export default function Hospitaladminadddoctor() {
     formState: { errors },
     reset,
   } = useForm({ resolver: yupResolver(schema) });
-  const onSubmit = async (data) => {
-    console.log({ data });
+  const onSubmit = async (dataForm) => {
+    console.log({ dataForm });
     try {
-      data.hospital_id = 52;
+      dataForm.hospital_id = 52;
+      dataForm.experience = data.experience;
+      const formData = new FormData();
+      formData.append("image", data.docImage);
+      formData.append("data", JSON.stringify(dataForm));
       setIsLoading(true);
       const response = await axios.post(
-        `${port}/hospital/add_doctor`,
-        data
+        `http://localhost:3003/hospital/add_doctor`,
+        formData
       );
       // console.log({ response });
       if (response.status === 200) {
@@ -67,21 +81,46 @@ export default function Hospitaladminadddoctor() {
       setIsLoading(false);
     }
   };
+
+  const handleFileChange = (event) => {
+    const selectedFile = event.target?.files[0];
+
+    if (selectedFile) {
+      const isImage = selectedFile.type.startsWith("image/");
+      if (isImage) {
+        setFileName(selectedFile);
+        setData({ ...data, image: selectedFile.name, docImage: selectedFile });
+      } else {
+        alert("Please select a valid image file.");
+        event.target.value = null;
+      }
+    }
+  };
+
+  const handleYearChange = (e) => {
+    console.log(e);
+    setData({
+      ...data,
+      selectedYear: e.$d,
+      experience: e.$y,
+    });
+  };
   return (
     <div>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="adddoctor flex">
+        <div className="adddoctor">
           <div>
             <h1>Add Doctor</h1>
           </div>
 
-          <div className="adddoctor_inputsection flex">
-            <div className="adddoctor_inputsection1 flex">
+          <div className="adddoctor_inputsection">
+            <div className="adddoctor_inputsection1">
               <h2>
                 Name <span style={{ color: "red" }}>*</span>
               </h2>
               <div style={{ position: "relative" }}>
                 <input
+                  className="adddoctor_inputsection1_inputs"
                   name="name"
                   type="text"
                   maxLength={25}
@@ -98,10 +137,20 @@ export default function Hospitaladminadddoctor() {
                 Photo <span style={{ color: "red" }}></span>
               </h2>
 
-              <div className="flex upload_button">
-                {" "}
-                <input type="text" />{" "}
-                <h4 className="flex upload_button2 ">Upload</h4>{" "}
+              <div className="hos_add_doc_upload-images">
+                <label for="inputTag">
+                  <h4 className="hos-add-doc-select-file">Upload Photo</h4>
+                  <input
+                    onChange={handleFileChange}
+                    id="inputTag"
+                    type="file"
+                    accept="image/*"
+                  />
+                </label>
+                <input
+                  value={data?.image}
+                  className="adddoctor_inputsection1_inputs"
+                />
               </div>
 
               <h2>
@@ -109,6 +158,7 @@ export default function Hospitaladminadddoctor() {
               </h2>
               <div style={{ position: "relative" }}>
                 <input
+                  className="adddoctor_inputsection1_inputs"
                   {...register("qualification")}
                   name="qualification"
                   required={true}
@@ -123,21 +173,24 @@ export default function Hospitaladminadddoctor() {
               </div>
 
               <h2>
-                Started year <span style={{ color: "red" }}>*</span>
+                Year of graduation <span style={{ color: "red" }}>*</span>
               </h2>
               <div style={{ position: "relative" }}>
-                <input
-                  {...register("experience")}
-                  name="experience"
-                  type="number"
-                  required={true}
-                  max={new Date().getFullYear()}
-                />
-                {errors.experience && (
-                  <p className="error-message error-p">
-                    {errors.experience.message}
-                  </p>
-                )}
+                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                  <DatePicker
+                    disableFuture
+                    slotProps={{
+                      field: {
+                        readOnly: true,
+                      },
+                    }}
+                    name="experience"
+                    onChange={handleYearChange}
+                    value={data.selectedYear ? dayjs(data.selectedYear) : null}
+                    views={["year"]}
+                    className="add_doctor_date-picker"
+                  />
+                </LocalizationProvider>
               </div>
             </div>
 
@@ -147,6 +200,7 @@ export default function Hospitaladminadddoctor() {
               </h2>
               <div style={{ position: "relative" }}>
                 <input
+                  className="adddoctor_inputsection1_inputs"
                   {...register("email")}
                   name="email"
                   type="text"
@@ -165,6 +219,7 @@ export default function Hospitaladminadddoctor() {
               </h2>
               <div style={{ position: "relative" }}>
                 <input
+                  className="adddoctor_inputsection1_inputs"
                   {...register("phone_no")}
                   name="phone_no"
                   required={true}
@@ -225,6 +280,7 @@ export default function Hospitaladminadddoctor() {
               </h2>
               <div style={{ position: "relative" }}>
                 <input
+                  className="adddoctor_inputsection1_inputs"
                   {...register("registration_no")}
                   name="registration_no"
                   type="text"
@@ -292,7 +348,7 @@ export default function Hospitaladminadddoctor() {
               </div>
 
               <h2>
-                Specialization <span style={{ color: "red" }}>*</span>
+                Department <span style={{ color: "red" }}>*</span>
               </h2>
               <div style={{ position: "relative" }}>
                 <select
