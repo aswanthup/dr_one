@@ -43,7 +43,7 @@ export default function Doctor() {
 
   return (
     <div>
-      <Headroom className="head">
+      <Headroom>
         <Navbar />
       </Headroom>
 
@@ -104,6 +104,9 @@ export default function Doctor() {
             </div>
           </div>
         </div>
+
+
+        
 
         <div className="our-specialities">
           <div className="second-main-head">
@@ -570,6 +573,37 @@ export default function Doctor() {
             </div>
           </div>
         </div>
+
+
+
+        <div className="hospital-search-box flex">
+
+<div className="Hospital-container-search flex">
+  <div className="Hospital-Search-box flex">
+    <div className="Hospital-location-section flex">
+
+      <i className="ri-map-pin-2-line" />
+
+      <input className="Hospital-Location-input" type="text" placeholder='Kozhikode' />
+
+    </div>
+    <input className="Hospital-search-input" type="text" placeholder="Search Doctor" />
+    <div className="Hospital-search-section flex">
+      <i className="ri-search-2-line" />
+    </div>
+  </div>
+
+</div>
+
+</div>
+
+
+
+
+
+
+
+
 
         <div className="mobile-doctor-specialties">
           <div className="mobile-second-heading">

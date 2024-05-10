@@ -308,6 +308,11 @@
 
 /*End Specialties */
 
+
+.doctor-mobile-content{
+  margin-bottom: 5vw;
+}
+
 @media screen and (max-width: 1280px) {
   .spec_main_card {
     width: 230px;

@@ -876,7 +876,7 @@ small {
 
 @media screen and (max-width: 780px) {
   h1 {
-    font-size: 3.1rem;
+    font-size:2.5rem;
   }
 
   h4 {
@@ -964,6 +964,7 @@ small {
     width: 25vw;
     height: 25vw;
     border-radius: 10px;
+    object-fit: cover;
   }
 
   .mobile-specialties-card {
