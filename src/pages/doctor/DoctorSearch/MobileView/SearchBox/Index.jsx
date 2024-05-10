@@ -58,10 +58,10 @@ const Box = ({ updateDocs, docNames }) => {
       setLoading(false);
       updateDocs(docData); //run function on searchdoc
     } catch (err) {
-      setLoading(false);
-      toast.info(err?.response?.data?.message);
-      // console.log(err?.response?.data);
+      console.error(err)
       updateDocs([]); //run function on searchdoc
+    }finally{
+      setLoading(false);
     }
   };
 

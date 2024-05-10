@@ -57,7 +57,7 @@ export default function Hospitaladminadddoctor() {
       formData.append("data", JSON.stringify(dataForm));
       setIsLoading(true);
       const response = await axios.post(
-        `http://localhost:3003/hospital/add_doctor`,
+        `${port}/hospital/add_doctor`,
         formData
       );
       // console.log({ response });
