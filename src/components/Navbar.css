@@ -136,18 +136,18 @@
 }
 
 .menubuttonNavModalSec {
-   margin-top:80px;
-   width:fit-content;
+   margin-top: 80px;
+   width: fit-content;
    background-color: white;
-   height:fit-content;
-   padding:20px;
+   height: fit-content;
+   padding: 20px;
    flex-direction: column;
-   gap:10px;
-   border-radius:10px;
+   gap: 10px;
+   border-radius: 10px;
 }
 
-.menubuttonNavModalSec a{
- color:black;
+.menubuttonNavModalSec a {
+   color: black;
 }
 
 @media screen and (max-width: 780px) {
@@ -155,6 +155,9 @@
       display: none;
    }
 
+   .nav-button1 {
+      font-size: 13px;
+   }
 
    .nav-bar {
       height: 10vw;
@@ -162,6 +165,13 @@
 
    .menubutton {
       display: flex;
+   }
+
+   .nav-button button {
+      font-size: 13px;
+   }
+   .nav-logo h2{
+      font-size: 14px;
    }
 }
 

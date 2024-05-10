@@ -13,16 +13,18 @@ export const LabCard = ({ data }) => {
             </div>
             <div>
                 <div>
-                    <span style={{ fontWeight: 400, fontSize: 22 }}>
+                    <span className='LabCardSpanHeader' >
                         {details?.name}
                     </span>
                 </div>
-                <div style={{ fontWeight: 300, fontSize: 18 }}>Rating</div>
                 <div>
                     {" "}
-                    <span style={{ fontWeight: 300, fontSize: 18, color: "#3A65FD", textTransform: "capitalize" }}>
-                        {details?.specialization}
+                    <span className='LabCardSpan'>
+                        Timing : {details?.timing?.opening_time} to  {details?.timing?.closing_time}
                     </span>
+                </div>
+                <div>
+                    {" "}
                 </div>
                 {/* <div style={{ fontWeight: 300, fontSize: 18 }}>
                     {new Date().getFullYear() - (details?.experience || new Date().getFullYear())}

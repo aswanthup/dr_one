@@ -1,13 +1,12 @@
 import { React, useState, useEffect, useRef } from "react";
 import styles from "./index.module.css";
-import { useOutsideClick } from "../../../../../hooks/useOutsideClick";
-import { port } from "../../../../../config";
+import { useOutsideClick } from "../../../../hooks/useOutsideClick";
+import { port } from "../../../../config";
 import { toast } from "react-toastify";
-import { Loader } from "../../../../../components/Loader/Loader";
-import { useDebounce } from "../../../../../hooks/useDebounce";
+import { Loader } from "../../../../components/Loader/Loader";
+import { useDebounce } from "../../../../hooks/useDebounce";
 import axios from "axios";
 import { Divider } from "@mui/material";
-import Navbar from "../../../../../components/Navbar";
 const Box = ({ updateDocs, docNames }) => {
   const [showSearchList, setShowSearchList] = useState(false);
   const [placeLists, setplaceLists] = useState([]);
@@ -50,7 +49,7 @@ const Box = ({ updateDocs, docNames }) => {
     setSelectedPlace(placeName);
     setShowSearchList(false);
     try {
-      const response = await axios.post(`${port}/doctor/get_pincode`, {
+      const response = await axios.post(`${port}/hospital/pincode_result`, {
         selectedArea_id: data.id,
       });
       const docData = response.data.data;
@@ -60,7 +59,7 @@ const Box = ({ updateDocs, docNames }) => {
     } catch (err) {
       setLoading(false);
       toast.info(err?.response?.data?.message);
-      // console.log(err?.response?.data);
+      console.log(err?.response?.data);
       updateDocs([]); //run function on searchdoc
     }
   };
@@ -77,22 +76,12 @@ const Box = ({ updateDocs, docNames }) => {
     docNames(value);
   };
   const debouncedSearchChanges = debounce(searchNames, 500);
-  // const searchNames = (event) => {
-  //   const { value } = event.target;
-  //   setDebouncedInputValue(value);
-  // };
-  // useEffect(() => {
-  //   if (docNames) {
-  //     docNames(debouncedInputValue);
-  //   }
-  // }, [debouncedInputValue]);
 
   useOutsideClick(() => {
     setShowSearchList(false);
   }, boxRef);
 
   return (
-    // loading ?  <Loader /> :
     <div className={styles.container}>
       <div className={styles.left}>
         <i className="ri-map-pin-2-line" />
@@ -108,7 +97,7 @@ const Box = ({ updateDocs, docNames }) => {
       </div>
       <div className={styles.center}>
         <input
-          placeholder="Search doctor"
+          placeholder="Search Hospital"
           onChange={debouncedSearchChanges}
           type="text"
         />

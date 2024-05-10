@@ -62,10 +62,6 @@ export default function Hospital() {
           </div>
 
 
-
-
-
-
           {/* Medical field */}
 
           <div className='medical_field flex'>
@@ -435,7 +431,7 @@ export default function Hospital() {
 
         <div className="hospital-search-box flex">
 
-          <div className="Hospital-container-search flex">
+          <div onClick={() => { navigate('/hospitalfilter') }} className="Hospital-container-search flex">
             <div className="Hospital-Search-box flex">
               <div className="Hospital-location-section flex">
 

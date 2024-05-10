@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import "./HospitalFiltering.css"
-import Footer from "../../components/Footer";
+import Footer from "../../../components/Footer";
 import axios from "axios";
-import styles from "../doctor/DoctorSearch/DesktopView/searchdoc.module.css";
+import styles from "../../doctor/DoctorSearch/DesktopView/searchdoc.module.css";
 import {
     Checkbox,
     FormControlLabel,
@@ -10,12 +10,12 @@ import {
     Radio,
     RadioGroup,
 } from "@mui/material";
-import Navbar from '../../components/Navbar';
-import { SearchBox } from './SearchComponent/SearchBox';
-import { features, speciality, type } from './constants/Filter';
-import { port } from '../../config';
-import { Loader } from '../../components/Loader/Loader';
-import { HospitalCard } from './HospitalCard/HospitalCard';
+import Navbar from '../../../components/Navbar';
+import { SearchBox } from '../SearchComponent/SearchBox';
+import { features, speciality, type } from '../constants/Filter';
+import { port } from '../../../config';
+import { Loader } from '../../../components/Loader/Loader';
+import { HospitalCard } from '../HospitalCard/HospitalCard';
 export const HospitalFiltering = () => {
     const [filters, setFilters] = useState({
         speciality: "",
@@ -27,92 +27,144 @@ export const HospitalFiltering = () => {
     const [hospitalsFilter, sethospitalsFilter] = useState([])
     const [loading, setloading] = useState(false)
 
-    const updateDocByPlace = (value) => {
+    const updateDocByPlace = (value, Place) => {
+        console.log("Place>>>", Place)
         if (value?.length > 0) {
             sethospitals(value)
         } else {
             sethospitals([])
+            sethospitalsFilter([])
         }
     }
+    console.log("filters>>>", filters, "hospitalsFilter>>>>>", hospitalsFilter)
     useEffect(() => {
-        let FinalData = [...hospitals] || [];
-        let updatedArray = [];
-        FinalData.forEach(ele => {
-            let typeMatched = ele?.type.toLowerCase() === filters?.type.toLowerCase(); // Check if ele.type matches or if filters.type is not set
-            let specialityMatched = true; // Assume speciality matches by default
-            let featureMatched = true;
-            if (typeMatched) {
-                if (filters.speciality && filters.speciality.length > 0) {
-                    specialityMatched = filters?.speciality.every(spec => {
-                        return ele.speciality && ele.speciality.includes(spec);
-                    });
-                }
-
-                if (filters.features && filters.features.length > 0) {
-                    featureMatched = filters?.features.every(feature => {
-                        return ele.feature && ele.feature.includes(feature);
-                    });
-                }
-                if (filters.CheckingName && specialityMatched && featureMatched) {
-                    if (ele.name.includes(filters.CheckingName)) { // Check if name includes CheckingName
-                        updatedArray.push(ele);
-                    }
-                } else if (specialityMatched && featureMatched) {
-                    updatedArray.push(ele);
-                }
-
-            }
+        if (hospitals.length === 0) {
+            return;
+        }
+        const targetArray = [...hospitals];
+        const filteredDocs = targetArray.filter((hospital) => {
+            const typeMatch =
+                !filters?.type ||
+                hospital?.type?.toLowerCase() === filters?.type?.toLowerCase();
+            const speciality =
+                filters?.speciality.length === 0 ||
+                filters?.speciality?.every(spec => {
+                    return hospital?.speciality && hospital?.speciality?.includes(spec);
+                })
+            const features =
+                filters?.features.length === 0 ||
+                filters?.features?.every(spec => {
+                    return hospital?.feature && hospital?.feature?.includes(spec);
+                })
+            const nameMatch =
+                !filters.CheckingName ||
+                hospital.name.toLowerCase().includes(filters.CheckingName.toLowerCase());
+            return (
+                typeMatch &&
+                speciality &&
+                nameMatch &&
+                features
+            );
         });
 
-        sethospitalsFilter(updatedArray);
+        if (hospitalsFilter.length > 0) {
+            if (filteredDocs.length === 0) {
+                setnotFound(true);
+            } else {
+                console.log({ filteredDocs });
+                sethospitalsFilter(filteredDocs);
+                setnotFound(false);
+            }
+        } else {
+            if (filteredDocs.length === 0) {
+                setnotFound(true);
+            } else {
+                console.log({ filteredDocs });
+                sethospitalsFilter(filteredDocs);
+                setnotFound(false);
+            }
+        }
     }, [filters, hospitals]);
+    // console.log("hospitals>>>>", hospitals, hospitalsFilter)
+    // useEffect(() => {
+    //     let FinalData = [...hospitals] || [];
+    //     let updatedArray = [];
+    //     FinalData.forEach(ele => {
+    //         let typeMatched = ele?.type.toLowerCase() === filters?.type.toLowerCase(); // Check if ele.type matches or if filters.type is not set
+    //         let specialityMatched = true; // Assume speciality matches by default
+    //         let featureMatched = true;
+    //         if (typeMatched) {
+    //             if (filters.speciality && filters.speciality.length > 0) {
+    //                 specialityMatched = filters?.speciality.every(spec => {
+    //                     return ele.speciality && ele.speciality.includes(spec);
+    //                 });
+    //             }
 
-    console.log("Hopitals>>>>", hospitalsFilter.length > 0 ? hospitalsFilter : hospitals)
+    //             if (filters.features && filters.features.length > 0) {
+    //                 featureMatched = filters?.features.every(feature => {
+    //                     return ele.feature && ele.feature.includes(feature);
+    //                 });
+    //             }
+    //             if (filters.CheckingName && specialityMatched && featureMatched) {
+    //                 if (ele.name.toLowerCase().includes(filters?.CheckingName.toLowerCase())) { // Check if name includes CheckingName
+    //                     updatedArray.push(ele);
+    //                 }
+    //             } else if (specialityMatched && featureMatched) {
+    //                 updatedArray.push(ele);
+    //             }
+    //         }
+    //     });
+
+    //     sethospitalsFilter(updatedArray);
+    // }, [filters, hospitals]);
+
     const handleDocNameSearch = (value) => {
-
         const query = value.toLowerCase();
         setFilters({ ...filters, CheckingName: query })
-        if (hospitalsFilter?.length > 0) {
-            const filteredData = hospitalsFilter.filter((data) => {
-                const lowerCaseName = data?.name?.toLowerCase();
-                return lowerCaseName?.startsWith(query[0]) &&
-                    lowerCaseName.includes(query);
-            });
-            if (filteredData?.length > 0) {
-                setnotFound(false)
-            } else {
-                if (!query) {
-                    sethospitalsFilter(hospitals);
-                } else {
-                    setnotFound(true)
-                }
-            }
-            sethospitalsFilter(filteredData);
-        } else {
-            const filteredData = hospitals?.filter((data) => {
-                const lowerCaseName = data?.name?.toLowerCase();
-                return lowerCaseName?.startsWith(query[0]) &&
-                    lowerCaseName?.includes(query);
-            });
-            if (filteredData?.length > 0) {
-                setnotFound(false)
-            } else {
-                if (!query) {
-                    sethospitalsFilter(hospitals);
-                } else {
-                    setnotFound(true)
-                }
-            }
-            sethospitalsFilter(filteredData);
-        }
+        // if (hospitalsFilter?.length > 0) {
+        //     const filteredData = hospitalsFilter.filter((data) => {
+        //         const lowerCaseName = data?.name?.toLowerCase();
+        //         return lowerCaseName?.startsWith(query[0]) &&
+        //             lowerCaseName.includes(query);
+        //     });
+        //     if (filteredData?.length > 0) {
+        //         setnotFound(false)
+        //     } else {
+        //         if (!query) {
+        //             sethospitalsFilter(hospitals);
+        //         } else {
+        //             setnotFound(true)
+        //         }
+        //     }
+        //     sethospitalsFilter(filteredData);
+        // } else {
+        //     const filteredData = hospitals?.filter((data) => {
+        //         const lowerCaseName = data?.name?.toLowerCase();
+        //         return lowerCaseName?.startsWith(query[0]) &&
+        //             lowerCaseName?.includes(query);
+        //     });
+        //     if (filteredData?.length > 0) {
+        //         setnotFound(false)
+        //     } else {
+        //         if (!query) {
+        //             sethospitalsFilter(hospitals);
+        //         } else {
+        //             setnotFound(true)
+        //         }
+        //     }
+        //     sethospitalsFilter(filteredData);
+        // }
     }
     useEffect(() => {
         setloading(true)
+        callApi()
+    }, [])
+    const callApi = () => {
         axios.get(`${port}/hospital/list`).then((res) => {
             sethospitals(res.data.data)
             setloading(false)
         })
-    }, [])
+    }
 
     const handleTypeChanges = (e) => {
         const { name, value } = e?.target;
@@ -146,9 +198,7 @@ export const HospitalFiltering = () => {
             setFilters({ ...filters, [name]: value });
         }
     }
-
-
-    console.log("Filters>>>>>>", filters)
+    // console.log("Filters>>>>>>", filters)
 
     return (
         <>

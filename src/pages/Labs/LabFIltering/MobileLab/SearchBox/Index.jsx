@@ -7,7 +7,6 @@ import { Loader } from "../../../../../components/Loader/Loader";
 import { useDebounce } from "../../../../../hooks/useDebounce";
 import axios from "axios";
 import { Divider } from "@mui/material";
-import Navbar from "../../../../../components/Navbar";
 const Box = ({ updateDocs, docNames }) => {
   const [showSearchList, setShowSearchList] = useState(false);
   const [placeLists, setplaceLists] = useState([]);
@@ -50,7 +49,7 @@ const Box = ({ updateDocs, docNames }) => {
     setSelectedPlace(placeName);
     setShowSearchList(false);
     try {
-      const response = await axios.post(`${port}/doctor/get_pincode`, {
+      const response = await axios.post(`${port}/lab/pincode_result`, {
         selectedArea_id: data.id,
       });
       const docData = response.data.data;
@@ -60,7 +59,7 @@ const Box = ({ updateDocs, docNames }) => {
     } catch (err) {
       setLoading(false);
       toast.info(err?.response?.data?.message);
-      // console.log(err?.response?.data);
+      console.log(err?.response?.data);
       updateDocs([]); //run function on searchdoc
     }
   };
@@ -108,7 +107,7 @@ const Box = ({ updateDocs, docNames }) => {
       </div>
       <div className={styles.center}>
         <input
-          placeholder="Search doctor"
+          placeholder="Search Laboratory"
           onChange={debouncedSearchChanges}
           type="text"
         />

@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import styles from "./index.module.css";
 import Navbar from "../../../../components/Navbar";
-import SearchBox from "./SearchBox/Index";
+import SearchBox from "../MobileView/SearchBox/Index";
 import {
   speacializationNames,
   types,
@@ -42,7 +42,7 @@ const SearchDocMobileScreen = () => {
 
   return (
     <>
-      {/* <Navbar /> */}
+      <Navbar />
       <div className={styles.mainContainer}>
         <div className={styles.searchBox}>
           <SearchBox
@@ -86,80 +86,80 @@ const SearchDocMobileScreen = () => {
                 <FormGroup>
                   {filters.type === "Ayurvedic"
                     ? ayurSpec.map((specialization, index) => (
-                        <>
-                          <FormControlLabel
-                            key={index}
-                            name={specialization}
-                            checked={
-                              filters.specializations.length !== 0 &&
-                              filters.specializations.includes(
-                                specialization.toLowerCase()
-                              )
-                            }
-                            sx={{
-                              "& .MuiFormControlLabel-label": {
-                                fontSize: "16px", // Set font size for the label
-                              },
-                              "& .MuiSvgIcon-root": {
-                                width: "1.7em", // Set checkbox size
-                                height: "2em", // Set checkbox size
-                              },
-                            }}
-                            control={
-                              <Checkbox
-                                disabled={
-                                  filters.type === "Homeopathy" ||
-                                  filters.type === "Unani"
-                                }
-                                onChange={handleSpecializationChanges}
-                              />
-                            }
-                            label={specialization}
-                            value={specialization}
-                          />
-                          <Divider />
-                        </>
-                      ))
+                      <>
+                        <FormControlLabel
+                          key={index}
+                          name={specialization}
+                          checked={
+                            filters.specializations.length !== 0 &&
+                            filters.specializations.includes(
+                              specialization.toLowerCase()
+                            )
+                          }
+                          sx={{
+                            "& .MuiFormControlLabel-label": {
+                              fontSize: "16px", // Set font size for the label
+                            },
+                            "& .MuiSvgIcon-root": {
+                              width: "1.7em", // Set checkbox size
+                              height: "2em", // Set checkbox size
+                            },
+                          }}
+                          control={
+                            <Checkbox
+                              disabled={
+                                filters.type === "Homeopathy" ||
+                                filters.type === "Unani"
+                              }
+                              onChange={handleSpecializationChanges}
+                            />
+                          }
+                          label={specialization}
+                          value={specialization}
+                        />
+                        <Divider />
+                      </>
+                    ))
                     : speacializationNames.map((specialization, index) => (
-                        <>
-                          <FormControlLabel
-                            key={index}
-                            name={specialization}
-                            checked={
-                              filters?.specializations?.length !== 0 &&
-                              filters.specializations.includes(
-                                specialization.toLowerCase()
-                              )
-                            }
-                            sx={{
-                              "& .MuiFormControlLabel-label": {
-                                fontSize: "16px", // Set font size for the label
-                              },
-                              "& .MuiSvgIcon-root": {
-                                width: "1.7em", // Set checkbox size
-                                height: "2em", // Set checkbox size
-                              },
-                            }}
-                            control={
-                              <Checkbox
-                                disabled={
-                                  filters.type === "Homeopathy" ||
-                                  filters.type === "Unani"
-                                }
-                                onChange={handleSpecializationChanges}
-                              />
-                            }
-                            label={specialization}
-                            value={specialization}
-                          />
-                          <Divider />
-                        </>
-                      ))}
+                      <>
+                        <FormControlLabel
+                          key={index}
+                          name={specialization}
+                          checked={
+                            filters?.specializations?.length !== 0 &&
+                            filters.specializations.includes(
+                              specialization.toLowerCase()
+                            )
+                          }
+                          sx={{
+                            "& .MuiFormControlLabel-label": {
+                              fontSize: "16px", // Set font size for the label
+                            },
+                            "& .MuiSvgIcon-root": {
+                              width: "1.7em", // Set checkbox size
+                              height: "2em", // Set checkbox size
+                            },
+                          }}
+                          control={
+                            <Checkbox
+                              disabled={
+                                filters.type === "Homeopathy" ||
+                                filters.type === "Unani"
+                              }
+                              onChange={handleSpecializationChanges}
+                            />
+                          }
+                          label={specialization}
+                          value={specialization}
+                        />
+                        <Divider />
+                      </>
+                    ))}
                 </FormGroup>
               </FormControl>
             </div>
           </Modal>
-          <select name="" id="" onChange={handleGenderChanges}      value={selectedFilter.gender ?? ""}>
+          <select name="" id="" onChange={handleGenderChanges} value={selectedFilter.gender ?? ""}>
             <option value="" disabled selected>
               Gender
             </option>

@@ -1,5 +1,87 @@
-.MobileLabAlignFilter{
+.MobileLabAlignFilter {
     width: 100%;
     padding: 20px;
-    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 50px;
+
+}
+
+.MobileLabAlignFilterSearch {
+    width: 100%;
+}
+
+.MobileLabAlignFilterSec {
+    width: 100%;
+    overflow: scroll;
+    display: flex;
+    gap: 20px;
+}
+
+.MobileLabAlignFilterSelection {
+    width: 150px;
+    border: 1px solid black;
+}
+
+.MobileLabAlignModal {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.MobileLabAlignFilterSecButton {
+    padding: 10px;
+    font-size: 17px;
+    color: black;
+    border-radius: 15px;
+    border: 1px solid blue;
+    background-color: white;
+    width: 200px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.MobileLabAlignFilterSecButton2 {
+    padding: 10px;
+    font-size: 17px;
+    color: rgba(0, 0, 0, 0.331);
+    border-radius: 15px;
+    border: 1px solid rgba(0, 0, 255, 0.221);
+    background-color: white;
+    width: 200px;
+    text-align: center;
+}
+
+.MobileLabAlignModalSec {
+    max-height: 60%;
+    overflow-y: scroll;
+    border-radius: 20px;
+    width: 80%;
+    background-color: white;
+    padding: 20px;
+}
+
+.MobileLabAlignShowSec {
+    height: 70vh;
+    overflow: scroll;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+}
+
+@media screen and (max-width: 769px) {
+    .MobileLabAlignFilterSecButton{
+        font-size: 14px;
+        padding: 0px;
+        height: 40px;
+    }
+    .MobileLabAlignFilterSecButton2{
+        font-size: 14px;
+        padding: 0px;
+        height: 40px;
+    }
 }

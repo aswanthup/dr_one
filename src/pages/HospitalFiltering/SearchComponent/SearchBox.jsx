@@ -53,7 +53,7 @@ export const SearchBox = ({ updateDocs, docNames }) => {
             );
             const docData = response.data.data;
             // console.log({ docData });
-            updateDocs(docData);//run function on searchdoc
+            updateDocs(docData, data.district);
             setLoading(false)
 
         } catch (err) {
@@ -64,7 +64,6 @@ export const SearchBox = ({ updateDocs, docNames }) => {
     };
     const searchNames = (event) => {
         const { value } = event.target;
-
         docNames(value);
     };
 

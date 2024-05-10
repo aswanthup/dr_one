@@ -42,10 +42,12 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import Pharmacyregistration1 from "./pages/Pharmacyadmin/Pharmacyregistration1";
 import SearchDoc from "./pages/doctor/DoctorSearch/Index";
 import Registerlanding from "./pages/registerlanding/Registerlanding";
-import { HospitalFiltering } from "./pages/HospitalFiltering/HospitalFiltering";
+import { HospitalFiltering } from "./pages/HospitalFiltering/WebMobile/HospitalFiltering";
 import { LabFiltering } from "./pages/Labs/LabFIltering/WebMobile/LabFiltering";
 import { Loader } from "./components/Loader/Loader";
 import { ToastifyComponent } from "./components/ToastifyComponent/ToastifyComponent";
+import { Connect } from "./pages/Labs/LabFIltering/WebMobileConnect/Connect";
+import { Hosconnect } from "./pages/HospitalFiltering/WebMobileConnect/Hosconnect";
 
 function App() {
   return (
@@ -75,7 +77,7 @@ function App() {
             <Route path="/nav" element={<Navbar2 />}></Route>
             <Route path="/hospitaladmin" element={<Hospitaladmin />}></Route>
             <Route path="/rightnav" element={<Rightnavbar />}></Route>
-            <Route path="/hosPitalfilter" element={<HospitalFiltering />}></Route>
+            <Route path="/hosPitalfilter" element={<Hosconnect />}></Route>
             <Route
               path="/hospitaladminnotification"
               element={<Hospitaladminnotification />}
@@ -147,7 +149,7 @@ function App() {
             ></Route>
 
             <Route path="/labadmin" element={<Labadmin />}></Route>
-            <Route path="/labfiltering" element={<LabFiltering />}></Route>
+            <Route path="/labfiltering" element={<Connect />}></Route>
             <Route path="/loader" element={<Loader />}></Route>
             <Route path='/' element={<Registerlanding />} ></Route>
           </Routes>

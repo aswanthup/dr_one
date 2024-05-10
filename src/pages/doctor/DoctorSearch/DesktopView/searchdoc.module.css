@@ -149,3 +149,9 @@
   object-fit: cover;
 
 }
+
+@media screen and (max-width: 769px) {
+  .cardContainer{
+    width: 100%;
+  }
+}

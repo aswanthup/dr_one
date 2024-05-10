@@ -25,75 +25,87 @@ export const LabFiltering = () => {
     const [notFound, setnotFound] = useState(false)
 
     const updateDocByPlace = (value) => {
-        setlab(value)
+        if (value?.length > 0) {
+            setlab(value)
+        } else {
+            setlab([])
+            setlabFilter([])
+        }
     }
-    useEffect(() => {
-        let FinalData = lab || [];
-        let updatedArray = [];
-        FinalData?.forEach(ele => {
-            let servicesMatched = true;
-            let featureMatched = true;
-            if (filters?.services && filters?.services?.length > 0) {
-                servicesMatched = filters?.services?.every(spec => {
-                    return ele.services && ele.services.includes(spec);
-                });
-            }
-            if (filters.features && filters?.features?.length > 0) {
-                featureMatched = filters.features.every(feature => {
-                    return ele.features && ele.features.includes(feature);
-                });
-            }
+    // useEffect(() => {
+    //     let FinalData = lab || [];
+    //     let updatedArray = [];
+    //     FinalData?.forEach(ele => {
+    //         let servicesMatched = true;
+    //         let featureMatched = true;
+    //         if (filters?.services && filters?.services?.length > 0) {
+    //             servicesMatched = filters?.services?.every(spec => {
+    //                 return ele.services && ele.services.includes(spec);
+    //             });
+    //         }
+    //         if (filters.features && filters?.features?.length > 0) {
+    //             featureMatched = filters.features.every(feature => {
+    //                 return ele.features && ele.features.includes(feature);
+    //             });
+    //         }
 
-            if (filters.CheckingName && servicesMatched && featureMatched) {
-                if (ele.name.includes(filters.CheckingName)) { // Check if name includes CheckingName
-                    updatedArray.push(ele);
-                }
-            } else if (servicesMatched && featureMatched) {
-                updatedArray.push(ele);
-            }
+    //         if (filters?.CheckingName && servicesMatched && featureMatched) {
+    //             if (ele.name.toLowerCase().includes(filters?.CheckingName.toLowerCase())) { // Check if name includes CheckingName
+    //                 updatedArray.push(ele);
+    //             }
+    //         } else if (servicesMatched && featureMatched) {
+    //             updatedArray.push(ele);
+    //         }
+    //     });
+
+    //     setlabFilter(updatedArray);
+    // }, [filters, lab]);
+    useEffect(() => {
+        if (lab.length === 0) {
+            return;
+        }
+        const targetArray = [...lab];
+        const filteredDocs = targetArray.filter((hospital) => {
+            const services =
+                filters?.services?.length === 0 ||
+                filters?.services?.every(spec => {
+                    return hospital?.services && hospital?.services?.includes(spec);
+                })
+            const features =
+                filters?.features?.length === 0 ||
+                filters?.features?.every(spec => {
+                    return hospital?.feature && hospital?.feature?.includes(spec);
+                })
+            const nameMatch =
+                !filters.CheckingName ||
+                hospital.name.toLowerCase().includes(filters.CheckingName.toLowerCase());
+            return (
+                services &&
+                nameMatch &&
+                features
+            );
         });
 
-        setlabFilter(updatedArray);
+        if (labFilter.length > 0) {
+            if (filteredDocs.length === 0) {
+                setnotFound(true);
+            } else {
+                console.log({ filteredDocs });
+                setlabFilter(filteredDocs);
+                setnotFound(false);
+            }
+        } else {
+            if (filteredDocs.length === 0) {
+                setnotFound(true);
+            } else {
+                console.log({ filteredDocs });
+                setlabFilter(filteredDocs);
+                setnotFound(false);
+            }
+        }
     }, [filters, lab]);
-
     console.log("Lab>>>>", labFilter.length > 0 ? labFilter : lab)
-    const handleDocNameSearch = (value) => {
-        const query = value.toLowerCase();
-        setFilters({ ...filters, CheckingName: query })
-        // if (labFilter?.length > 0) {
-        //     const filteredData = labFilter.filter((data) => {
-        //         const lowerCaseName = data?.name?.toLowerCase();
-        //         return lowerCaseName?.startsWith(query[0]) &&
-        //             lowerCaseName.includes(query);
-        //     });
-        //     if (filteredData?.length > 0) {
-        //         setnotFound(false)
-        //     } else {
-        //         if (!query) {
-        //             setlabFilter(labFilter);
-        //         } else {
-        //             setnotFound(true)
-        //         }
-        //     }
-        //     setlabFilter(filteredData);
-        // } else {
-        //     const filteredData = lab?.filter((data) => {
-        //         const lowerCaseName = data?.name?.toLowerCase();
-        //         return lowerCaseName?.startsWith(query[0]) &&
-        //             lowerCaseName?.includes(query);
-        //     });
-        //     if (filteredData?.length > 0) {
-        //         setnotFound(false)
-        //     } else {
-        //         if (!query) {
-        //             setlabFilter(lab);
-        //         } else {
-        //             setnotFound(true)
-        //         }
-        //     }
-        //     setlabFilter(filteredData);
-        // }
-    }
+
 
     useEffect(() => {
         setloading(true)
@@ -136,7 +148,43 @@ export const LabFiltering = () => {
             setFilters({ ...filters, [name]: value });
         }
     }
-
+    const handleDocNameSearch = (value) => {
+        const query = value.toLowerCase();
+        setFilters({ ...filters, CheckingName: query })
+        // if (labFilter?.length > 0) {
+        //     const filteredData = labFilter.filter((data) => {
+        //         const lowerCaseName = data?.name?.toLowerCase();
+        //         return lowerCaseName?.startsWith(query[0]) &&
+        //             lowerCaseName.includes(query);
+        //     });
+        //     if (filteredData?.length > 0) {
+        //         setnotFound(false)
+        //     } else {
+        //         if (!query) {
+        //             setlabFilter(lab);
+        //         } else {
+        //             setnotFound(true)
+        //         }
+        //     }
+        //     setlabFilter(filteredData);
+        // } else {
+        //     const filteredData = lab?.filter((data) => {
+        //         const lowerCaseName = data?.name?.toLowerCase();
+        //         return lowerCaseName?.startsWith(query[0]) &&
+        //             lowerCaseName?.includes(query);
+        //     });
+        //     if (filteredData?.length > 0) {
+        //         setnotFound(false)
+        //     } else {
+        //         if (!query) {
+        //             setlabFilter(lab);
+        //         } else {
+        //             setnotFound(true)
+        //         }
+        //     }
+        //     setlabFilter(filteredData);
+        // }
+    }
 
     console.log("Filters>>>>>>", filters)
     return (
@@ -243,7 +291,7 @@ export const LabFiltering = () => {
                     <div className='HospitalFilterHosSec'>
                         <div className={styles.rightSide}>
                             <div className={styles.cardMainContainer}>
-                                {labFilter?.length > 0 || filters.type || filters?.services?.length > 0 || filters?.features?.length > 0 ?
+                                {labFilter?.length > 0 || filters?.services?.length > 0 || filters?.features?.length > 0 ?
                                     labFilter?.length > 0 && !notFound ?
                                         labFilter?.map((details, index) =>
                                             <LabCard key={index} data={{ details: details, lab: true }} />
@@ -274,13 +322,6 @@ export const LabFiltering = () => {
             {loading &&
                 <Loader />
             }
-            {
-                notFound && < div className='HospitalNotfound'>
-                    <h3>
-                        lab were not found.</h3>
-                </div >
-            }
-
             <Footer />
         </>
     )

@@ -1,14 +1,14 @@
 import React from 'react'
-import "./WebMobile.css"
+import "./ConnectSites.css"
 import { LabFiltering } from '../WebMobile/LabFiltering'
 import { MobileLabFilter } from '../MobileLab/MobileLabFilter'
-export const WebMobile = () => {
+export const Connect = () => {
     return (
         <>
-            <div className='WebFilter'>
+            <div className='ConnectWeb'>
                 <LabFiltering />
             </div>
-            <div className='MobileFilter'>
+            <div className='ConnectMob'>
                 <MobileLabFilter />
             </div>
         </>

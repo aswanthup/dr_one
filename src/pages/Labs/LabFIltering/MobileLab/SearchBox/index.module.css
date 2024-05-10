@@ -8,7 +8,7 @@
   flex-direction: row;
   justify-content: space-between;
   color: white;
-  position: relative
+  position :relative
 }
 
 .left {
@@ -23,18 +23,15 @@
   padding: 1rem;
   /* padding-right: 2rem; */
 }
-
 .left i {
   font-weight: 100;
 }
-
 .left input {
   width: 90%;
   background-color: var(--color-primary);
   color: white;
   font-weight: 300;
   font-size: 14px;
-
   &::placeholder {
     color: white;
     letter-spacing: 1.2px;
@@ -47,7 +44,6 @@
   justify-content: center;
   align-items: center;
 }
-
 .center input {
   padding: 0.5rem;
   color: black;
@@ -58,13 +54,11 @@
     letter-spacing: 1px;
   }
 }
-
 .right {
   flex: 1;
   display: flex;
   justify-content: end;
 }
-
 .right div {
   padding: 1rem;
   display: flex;
@@ -75,13 +69,11 @@
   border-radius: 50%;
   background-color: var(--color-primary);
 }
-
 .right i {
   font-weight: 100;
   cursor: pointer;
 }
-
-.placeContainer {
+.placeContainer{
   padding: 1rem;
   position: absolute;
   left: 0;
@@ -91,8 +83,7 @@
   border-radius: 15px;
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
-
-.data {
+.data{
   overflow-x: scroll;
   height: 300px;
 }
@@ -103,19 +94,17 @@
   padding: 1rem;
   cursor: pointer;
   font-size: 18px;
-
-  &:hover {
+  &:hover{
     background-color: #fafaf9;
   }
 }
-
 /* Laptop------------------------------------------------ */
 @media screen and (min-width: 769px) {
-
   /* For desktop and larger screens */
   .center input {
-    font-size: 14px;
     padding-left: 1rem;
-    letter-spacing: 1px;
+    &::placeholder {
+      letter-spacing: 2.5px;
+    }
   }
 }
