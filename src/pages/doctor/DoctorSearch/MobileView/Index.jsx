@@ -18,11 +18,16 @@ import {
   FormControl,
   FormControlLabel,
   FormGroup,
+  IconButton,
   Modal,
+  Slider,
+  Stack,
 } from "@mui/material";
+import { Add, Remove } from "@mui/icons-material";
 
 const SearchDocMobileScreen = () => {
   const [isShowModal, setIsShowModal] = useState(false);
+  const [isShowExpModal, setIsShowExpModal] = useState(false);
   const {
     loading,
     filteredDoctors,
@@ -211,9 +216,37 @@ const SearchDocMobileScreen = () => {
               </option>
             ))}
           </select>
-          <select name="" id="">
-            <option value="">Experience</option>
-          </select>
+          <button onClick={() => setIsShowExpModal(true)}>
+            Experience
+          </button>
+          <Modal open={isShowExpModal} onClose={() => setIsShowExpModal(false)}>
+            <div className={styles.modalContainer}>
+            <Stack
+                spacing={2}
+                direction="row"
+                sx={{ mb: 1 }}
+                alignItems="center"
+              >
+                <IconButton onClick={() => handleExpChangeBtn("minus")}>
+                  <Remove />
+                </IconButton>
+                <Slider
+                  aria-label="experience"
+                  defaultValue={0}
+                  shiftstep={30}
+                  valueLabelDisplay="on"
+                  step={1}
+                  value={filters?.experience}
+                  onChange={handleExpChange}
+                  min={0}
+                  max={10}
+                />
+                <IconButton onClick={() => handleExpChangeBtn("add")}>
+                  <Add />
+                </IconButton>
+              </Stack>
+            </div>
+          </Modal>
         </div>
         <div className={styles.cardSection}>
           {loading ? (

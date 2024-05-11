@@ -20,7 +20,7 @@
     scroll-behavior: smooth;
 
 }
-.filterSection select{
+.filterSection select,button{
     padding: 1rem;
     width: fit-content;
     border: 1px solid var(--color-primary);
