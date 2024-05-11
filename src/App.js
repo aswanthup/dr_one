@@ -151,7 +151,7 @@ function App() {
             <Route path="/labadmin" element={<Labadmin />}></Route>
             <Route path="/labfiltering" element={<Connect />}></Route>
             <Route path="/loader" element={<Loader />}></Route>
-            <Route path='/registeration' element={<Registerlanding />} ></Route>
+            <Route path='/registration' element={<Registerlanding />} ></Route>
           </Routes>
         </LocalizationProvider>
       </BrowserRouter>

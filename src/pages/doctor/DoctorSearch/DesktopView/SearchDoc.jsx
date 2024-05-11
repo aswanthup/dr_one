@@ -92,7 +92,7 @@ export default function SearchDoc() {
               <div>
                 <span className={styles.leftHeadings}>
                   Specializations{" "}
-                  {(filters.type === "Unani" && 
+                  {(filters.type === "Others" && 
                       <span style={{ fontSize: "14px", fontWeight: 300 }}>
                         (Not Applicable)
                       </span>

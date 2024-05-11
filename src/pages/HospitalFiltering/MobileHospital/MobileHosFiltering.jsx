@@ -130,6 +130,7 @@ export const MobileHosFiltering = () => {
     }
     useEffect(() => {
         setloading(true)
+        window.scrollTo(0, 0);
         axios.get(`${port}/hospital/list`).then((res) => {
             sethospitals(res.data.data)
             setloading(false)

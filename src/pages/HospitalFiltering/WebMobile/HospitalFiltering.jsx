@@ -92,6 +92,7 @@ export const HospitalFiltering = () => {
         setFilters({ ...filters, CheckingName: query })
     }
     useEffect(() => {
+        window.scrollTo(0, 0);
         setloading(true)
         callApi()
     }, [])

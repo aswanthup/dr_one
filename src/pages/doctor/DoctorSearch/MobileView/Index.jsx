@@ -71,7 +71,7 @@ const SearchDocMobileScreen = () => {
           <select
             onClick={() => setIsShowModal(!isShowModal)}
             disabled={
-              filters.type === "Homeopathy" || filters.type === "Unani"
+              filters.type === "Homeopathy" || filters.type === "Others"
                 ? true
                 : false
             }
@@ -109,7 +109,7 @@ const SearchDocMobileScreen = () => {
                             <Checkbox
                               disabled={
                                 filters.type === "Homeopathy" ||
-                                filters.type === "Unani"
+                                filters.type === "Others"
                               }
                               onChange={handleSpecializationChanges}
                             />
@@ -144,7 +144,7 @@ const SearchDocMobileScreen = () => {
                             <Checkbox
                               disabled={
                                 filters.type === "Homeopathy" ||
-                                filters.type === "Unani"
+                                filters.type === "Others"
                               }
                               onChange={handleSpecializationChanges}
                             />

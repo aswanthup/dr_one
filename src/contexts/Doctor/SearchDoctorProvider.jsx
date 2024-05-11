@@ -154,7 +154,7 @@ export default function SearchDoctorProvider({ children }) {
 
     setFilters((prev) => ({
       specializations: [passedSpecialization],
-      type:"Allopathy"
+      type: "Allopathy"
     }));
     setAllDocData(DoctorsDetails);
     setFilteredDoctors(DoctorsDetails);
@@ -217,7 +217,7 @@ export default function SearchDoctorProvider({ children }) {
               filters.specializations.length !== 0 &&
               filters.specializations.includes(name.toLowerCase())
             }
-            disabled={filters.type === "Unani" && true}
+            disabled={filters.type === "Others" && true}
             onChange={handleSpecializationChanges}
             key={index}
             control={
@@ -234,7 +234,7 @@ export default function SearchDoctorProvider({ children }) {
               filters.specializations.length !== 0 &&
               filters.specializations.includes(name.toLowerCase())
             }
-            disabled={filters.type === "Unani" && true}
+            disabled={filters.type === "Others" || !filters.type && true}
             onChange={handleSpecializationChanges}
             key={index}
             control={
@@ -251,7 +251,7 @@ export default function SearchDoctorProvider({ children }) {
               filters.specializations.length !== 0 &&
               filters.specializations.includes(name.toLowerCase())
             }
-            disabled={filters.type === "Unani" && true}
+            disabled={filters.type === "Others" || !filters.type && true}
             onChange={handleSpecializationChanges}
             key={index}
             control={
@@ -268,7 +268,7 @@ export default function SearchDoctorProvider({ children }) {
               filters.specializations.length !== 0 &&
               filters.specializations.includes(name.toLowerCase())
             }
-            disabled={filters.type === "Unani" && true}
+            disabled={filters.type === "Others" || !filters.type && true}
             onChange={handleSpecializationChanges}
             key={index}
             control={

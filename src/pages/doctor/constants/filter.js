@@ -14,7 +14,7 @@ export const speacializationNames = [
     "Gastroenterology",
     "General medicine",
     "Geriatrics",
-    "Gynecology",   
+    "Gynecology",
     "Head and Neck sciences",
     "Hair transplantation",
     "IVF and Fertility Centre",
@@ -45,7 +45,7 @@ export const speacializationNames = [
 ]
 export const ayurSpec = [
     "Agada Tantra and Vyavaharayurveda",
-    "Dravyaguna",   
+    "Dravyaguna",
     "Kaumarabhritya",
     "Kayachikitsa",
     "Kriya Sharir",
@@ -56,7 +56,7 @@ export const ayurSpec = [
     "Roga Nidan and Vikriti Vigyan",
     "Shalakya Tantra",
     "Shalya Tantra",
-    "Stri Roga and Prasuti Tantra",    
+    "Stri Roga and Prasuti Tantra",
     "Swasthyavritta"
 ]
 
@@ -67,18 +67,18 @@ export const homeoDept = [
     "Organon of Medicine with Homeopathic Philosophy",
     "Pediatrics and Psychiatry",
     "Practice of Medicine",
-    "Repertory"   
-   
+    "Repertory"
+
 ]
 
-export const types=[
+export const types = [
     "Allopathy",
     "Ayurvedic",
     "Homeopathy",
-    "Unani",
+    "Others",
 ]
-export const genderData=[
+export const genderData = [
     "Male",
     "Female",
-    "Other", 
+    "Other",
 ]

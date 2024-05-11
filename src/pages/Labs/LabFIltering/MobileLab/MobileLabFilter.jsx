@@ -170,6 +170,8 @@ export const MobileLabFilter = () => {
 
     useEffect(() => {
         setloading(true)
+        window.scrollTo(0, 0);
+
         axios.get(`${port}/lab/getlab`).then((res) => {
             console.log("res>>>", res)
             setlab(res.data.data)

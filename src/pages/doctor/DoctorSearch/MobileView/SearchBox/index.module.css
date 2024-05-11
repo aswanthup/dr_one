@@ -51,6 +51,7 @@
 .center input {
   padding: 0.5rem;
   color: black;
+  background-color: transparent;
   width: 100%;
   letter-spacing: 2px;
   &::placeholder {
