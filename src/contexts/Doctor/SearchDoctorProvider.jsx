@@ -141,24 +141,23 @@ export default function SearchDoctorProvider({ children }) {
   }, [passedSpecialization]);
 
   const handlePassedSpecialization = (DoctorsDetails) => {
-    console.log({ DoctorsDetails });
-    const docsBySpecialization = DoctorsDetails.filter(
-      (doc) =>
-        doc?.specialization?.toLowerCase() ===
-        passedSpecialization.toLowerCase()
-    );
-    console.log({ docsBySpecialization });
-    if (docsBySpecialization.length === 0) {
-      setEmptyResults(true);
-    }
+    // console.log({ DoctorsDetails });
+    // const docsBySpecialization = DoctorsDetails.filter(
+    //   (doc) =>
+    //     doc?.specialization?.toLowerCase() ===
+    //     passedSpecialization.toLowerCase()
+    // );
+    // console.log({ docsBySpecialization });
+    // if (docsBySpecialization.length === 0) {
+    //   setEmptyResults(true);
+    // }
 
     setFilters((prev) => ({
-      ...prev,
-      specializations: [...prev.specializations, passedSpecialization],
+      specializations: [passedSpecialization],
       type:"Allopathy"
     }));
-    setAllDocData(docsBySpecialization);
-    setFilteredDoctors(docsBySpecialization);
+    setAllDocData(DoctorsDetails);
+    setFilteredDoctors(DoctorsDetails);
   };
 
   console.log({ allDocData });
