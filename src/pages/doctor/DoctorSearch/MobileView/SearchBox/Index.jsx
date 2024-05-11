@@ -3,42 +3,37 @@ import styles from "./index.module.css";
 import { useOutsideClick } from "../../../../../hooks/useOutsideClick";
 import { port } from "../../../../../config";
 import { toast } from "react-toastify";
-import { Loader } from "../../../../../components/Loader/Loader";
-import { useDebounce } from "../../../../../hooks/useDebounce";
 import axios from "axios";
 import { Divider } from "@mui/material";
-import Navbar from "../../../../../components/Navbar";
+
 const Box = ({ updateDocs, docNames }) => {
   const [showSearchList, setShowSearchList] = useState(false);
   const [placeLists, setplaceLists] = useState([]);
   const [searchPlace, setSearchPlace] = useState("");
   const [selectedPlace, setSelectedPlace] = useState("");
   const [loading, setLoading] = useState(false);
-  const [debouncedInputValue, setDebouncedInputValue] = useDebounce(500);
 
   const boxRef = useRef();
 
   useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.post(`${port}/doctor/suggest`, {
+          searchitem: searchPlace,
+        });
+        const placeLists = response.data.data;
+        setplaceLists(placeLists);
+        setShowSearchList(placeLists?.length > 0);
+      } catch (err) {
+        console.error("Error fetching data:", err);
+      }
+    };
+    
     const handleSearch = setTimeout(() => {
-      const fetchData = async () => {
-        try {
-          const response = await axios.post(`${port}/doctor/suggest`, {
-            searchitem: searchPlace,
-          });
-          const placeLists = response.data.data;
-          if (!placeLists?.length > 0) {
-            toast.info("Location not found");
-          }
-          setplaceLists(placeLists);
-        } catch (err) {
-          console.error("Error fetching data:", err);
-        }
-        setShowSearchList(true);
-      };
       if (searchPlace) {
         fetchData();
       }
-    }, 400);
+    }, 500);
 
     return () => clearTimeout(handleSearch);
   }, [searchPlace]);
@@ -58,9 +53,9 @@ const Box = ({ updateDocs, docNames }) => {
       setLoading(false);
       updateDocs(docData); //run function on searchdoc
     } catch (err) {
-      console.error(err)
+      console.error(err);
       updateDocs([]); //run function on searchdoc
-    }finally{
+    } finally {
       setLoading(false);
     }
   };
