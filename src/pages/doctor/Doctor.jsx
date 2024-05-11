@@ -134,7 +134,7 @@ export default function Doctor() {
                     <h4>Pregnancy</h4>
                   </div>
                   <div
-                    onClick={() => handleSelectSpecialization("gynaecology")}
+                    onClick={() => handleSelectSpecialization("gynecology")}
                     className="home-specialties-button"
                   >
                     <h4>Consult Now</h4>
@@ -358,7 +358,7 @@ export default function Doctor() {
               <div className="spec_main_card flex" >
                 <h4>Gynaecology</h4>
 
-                <div onClick={() => handleSelectSpecialization("gynaecology")} className="spec_main_card_button flex">
+                <div onClick={() => handleSelectSpecialization("gynecology")} className="spec_main_card_button flex">
                   <i className="ri-arrow-right-line"></i>
                 </div>
               </div>
