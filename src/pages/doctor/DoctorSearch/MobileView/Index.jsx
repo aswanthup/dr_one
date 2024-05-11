@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styles from "./index.module.css";
 import Navbar from "../../../../components/Navbar";
 import SearchBox from "../MobileView/SearchBox/Index";
@@ -39,6 +39,10 @@ const SearchDocMobileScreen = () => {
     updateDocByPlace,
     handleDocNameSearch,
   } = useContext(SearchDocContext);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [])
 
   return (
     <>
