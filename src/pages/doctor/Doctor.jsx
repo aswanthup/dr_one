@@ -576,7 +576,7 @@ export default function Doctor() {
 
 
 
-        <div className="hospital-search-box flex">
+        <div onClick={()=>navigate("/searchdoctor")} className="hospital-search-box flex">
 
 <div className="Hospital-container-search flex">
   <div className="Hospital-Search-box flex">

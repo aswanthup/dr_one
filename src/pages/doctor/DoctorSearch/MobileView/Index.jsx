@@ -75,7 +75,7 @@ const SearchDocMobileScreen = () => {
           <select
             onClick={() => setIsShowModal(!isShowModal)}
             disabled={
-              filters.type === "Homeopathy" || filters.type === "Others"
+              !filters.type || filters.type === "Others"
                 ? true
                 : false
             }
