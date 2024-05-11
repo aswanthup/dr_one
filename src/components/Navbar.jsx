@@ -23,7 +23,7 @@ export default function Navbar() {
       <div className='nav-background'>
         <nav className="nav-bar container flex ">
           <div className="nav-logo">
-            <a href="">
+            <a href="/">
               <h2>DOCTOR ONE</h2>
             </a>
           </div>
@@ -39,9 +39,9 @@ export default function Navbar() {
             <a href="/labs">
               <h3>Labs</h3>
             </a>
-            <a href="/pharmacy">
+            {/* <a href="/pharmacy">
               <h3>Pharmacy</h3>
-            </a>
+            </a> */}
             <a href="/hospital">
               <h3>Hospital</h3>
             </a>
@@ -64,23 +64,23 @@ export default function Navbar() {
           <Modal className='menubuttonNavModal container' open={open} onClose={SelectOpen} >
             <>
               <div className='menubuttonNavModalSec flex '>
-              
-            <a href="/">
-              <h3>Home</h3>
-            </a>
-            <a href="/doctor">
-              <h3>Doctor</h3>
-            </a>
-            <a href="/labs">
-              <h3>Labs</h3>
-            </a>
-            <a href="/pharmacy">
+
+                <a href="/">
+                  <h3>Home</h3>
+                </a>
+                <a href="/doctor">
+                  <h3>Doctor</h3>
+                </a>
+                <a href="/labs">
+                  <h3>Labs</h3>
+                </a>
+                {/* <a href="/pharmacy">
               <h3>Pharmacy</h3>
-            </a>
-            <a href="/hospital">
-              <h3>Hospital</h3>
-            </a>
-        
+            </a> */}
+                <a href="/hospital">
+                  <h3>Hospital</h3>
+                </a>
+
               </div>
             </>
           </Modal>

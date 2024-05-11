@@ -37,7 +37,7 @@ export default function Labadminregistration2() {
   ]
   const Features = [
     { name: "Home collection" },
-    { name: "Onilne report" },
+    { name: "Online report" }, 
     { name: "Cashless" },
     { name: "24 hours services" },
     { name: "Doctor available" },

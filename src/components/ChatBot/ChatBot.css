@@ -4,17 +4,20 @@
 }
 
 .ChatBotAlignBotShape {
-    height: 70px;
-    width: 70px;
+    padding: 10px;
+    height: 40px;
+    width: 230px;
     background-color: #3A65FD;
-    border-radius: 50%;
+    border-radius: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
     position: fixed;
     bottom: 50px;
     right: 50px;
+    gap: 10px;
     z-index: 999999999999;
+    cursor: pointer;
     box-shadow: rgba(0, 0, 0, 0.2) 0px 12px 28px 0px, rgba(0, 0, 0, 0.1) 0px 2px 4px 0px, rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset;
 }
 
@@ -34,8 +37,15 @@
 
 .ChatBotAlignBotShape svg {
     color: white;
-    height: 40px;
-    width: 40px;
+    height: 25px;
+    width: 25px;
+}
+
+.ChatBotAlignBotShape p {
+    font-size: 13px;
+    font-weight: 400;
+    color: white;
+    letter-spacing: 1px;
 }
 
 @keyframes heartbeat {
@@ -257,8 +267,8 @@
     }
 
     .ChatBotAlignBotShape {
-        height: 50px;
-        width: 50px;
+        height: 40px;
+        width: 250px;
     }
 
     .ChatBotAlignBotShape svg {

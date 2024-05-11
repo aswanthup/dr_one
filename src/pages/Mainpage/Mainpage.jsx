@@ -28,15 +28,15 @@ export default function Mainpage() {
   return (
     <div>
 
-          <Headroom>
-            <Navbar />
-          </Headroom>
+      <Headroom>
+        <Navbar />
+      </Headroom>
 
       <div>
         <div className="desktop">
           {/* Navbar */}
 
-         
+
 
           <ChatBot />
           {/*End Navbar */}
@@ -52,10 +52,10 @@ export default function Mainpage() {
               <div><h4>A doctor is a medical professional who diagnoses, treats, and prevents illnesses, injuries, and various medical conditions in individuals. Doctors play a crucial role in maintaining and improving the health and well-being of their patients. </h4></div>
 
               <div className="main_bts flex">
-                <a href="" className="main_btns flex"><h4>Find Doctor</h4><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M16.0037 9.41421L7.39712 18.0208L5.98291 16.6066L14.5895 8H7.00373V6H18.0037V17H16.0037V9.41421Z"></path></svg></a>
-                <a href="" className="main_btns flex"><h4>Find Hospital</h4><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M16.0037 9.41421L7.39712 18.0208L5.98291 16.6066L14.5895 8H7.00373V6H18.0037V17H16.0037V9.41421Z"></path></svg></a>
-                <a href="" className="main_btns flex"><h4>Find Labs</h4><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M16.0037 9.41421L7.39712 18.0208L5.98291 16.6066L14.5895 8H7.00373V6H18.0037V17H16.0037V9.41421Z"></path></svg></a>
-                <a href="" className="main_btns flex"><h4>Find Pharmacy</h4><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M16.0037 9.41421L7.39712 18.0208L5.98291 16.6066L14.5895 8H7.00373V6H18.0037V17H16.0037V9.41421Z"></path></svg></a>
+                <a href="/doctor" className="main_btns flex"><h4>Find Doctor</h4><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M16.0037 9.41421L7.39712 18.0208L5.98291 16.6066L14.5895 8H7.00373V6H18.0037V17H16.0037V9.41421Z"></path></svg></a>
+                <a href="/hospital" className="main_btns flex"><h4>Find Hospital</h4><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M16.0037 9.41421L7.39712 18.0208L5.98291 16.6066L14.5895 8H7.00373V6H18.0037V17H16.0037V9.41421Z"></path></svg></a>
+                <a href="/labs" className="main_btns flex"><h4>Find Labs</h4><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M16.0037 9.41421L7.39712 18.0208L5.98291 16.6066L14.5895 8H7.00373V6H18.0037V17H16.0037V9.41421Z"></path></svg></a>
+                {/* <a href="" className="main_btns flex"><h4>Find Pharmacy</h4><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M16.0037 9.41421L7.39712 18.0208L5.98291 16.6066L14.5895 8H7.00373V6H18.0037V17H16.0037V9.41421Z"></path></svg></a> */}
               </div>
 
             </div>
@@ -158,7 +158,7 @@ export default function Mainpage() {
               </h1>
 
               <div className="explore-more">
-                <a href="">
+                <a href="/searchdoctor">
                   <h4>Explore More</h4>
                 </a>
               </div>
@@ -428,7 +428,7 @@ export default function Mainpage() {
                 Top Booked <span> Diagnostic</span> Tests
               </h1>
               <div className="explore-more">
-                <a href="">
+                <a href="/hospitalfilter">
                   <h4>Explore More</h4>
                 </a>
               </div>
@@ -514,21 +514,21 @@ export default function Mainpage() {
 
 
           <div className="mobhead">
-                <h1>Wellness Wise: <span>Your</span> </h1>
-                <h1>Path to</h1>
-                <h1>Better <span>Health</span></h1>
+            <h1>Wellness Wise: <span>Your</span> </h1>
+            <h1>Path to</h1>
+            <h1>Better <span>Health</span></h1>
           </div>
 
           <div className="hero2mobile flex">
-              <img src="images\mainright.png" alt="" />
+            <img src="images\mainright.png" alt="" />
           </div>
 
 
-         
-              <div><h4>A doctor is a medical professional who diagnoses, treats, and prevents illnesses, injuries, and various medical conditions in individuals. Doctors play a crucial role in maintaining and improving the health and well-being of their patients. </h4></div>
+
+          <div><h4>A doctor is a medical professional who diagnoses, treats, and prevents illnesses, injuries, and various medical conditions in individuals. Doctors play a crucial role in maintaining and improving the health and well-being of their patients. </h4></div>
 
 
-     
+
 
           {/* Search Bar */}
 

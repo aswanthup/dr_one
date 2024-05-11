@@ -8,7 +8,7 @@ export default function Hospital() {
   const navigate = useNavigate()
 
   const SearchHostpital = () => {
-    navigate("/hosPitalfilter")
+    navigate("/hospitalfilter")
   }
 
 

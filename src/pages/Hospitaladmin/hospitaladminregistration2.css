@@ -67,6 +67,7 @@
   overflow-y: scroll;
   overflow-x: hidden;
   align-items: center;
+
 }
 
 .image_card_ho_ad {
@@ -259,8 +260,9 @@ input[type="checkbox"]:disabled {
   display: flex;
   flex-wrap: wrap;
   gap: 25px;
-
   justify-content: space-between;
+  height: 40vh;
+  overflow: scroll;
 }
 
 .Features_card_ho_ad_check input {

@@ -10,6 +10,7 @@ import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
 import { error } from 'jquery';
 import { InnerLoader } from '../../components/Loader/InnerLoader';
+import { port } from '../../config';
 export const LoginSignin = () => {
   const [Open, setOpen] = useState(false)
   const [loading, setloading] = useState(false)
@@ -104,7 +105,7 @@ export const LoginSignin = () => {
         }
       }
       if (CheckingFields) {
-        axios.post(`http://192.168.1.12:3003/user/login`, inputedValues).then((res) => {
+        axios.post(`${port}/user/login`, inputedValues).then((res) => {
           console.log("res>>>", res)
           if (res?.data?.success) {
             toast.success(res?.data?.message)
@@ -179,7 +180,7 @@ export const LoginSignin = () => {
         const data = {
           email: FrgtState?.email
         }
-        axios.post(`http://192.168.1.12:3003/user/forgotpwd`, data).then((res) => {
+        axios.post(`${port}/user/forgotpwd`, data).then((res) => {
           if (res?.data?.success) {
             console.log("res>>>", res)
             setOtp({ ...otp, sentedOtp: res?.data?.otp })
@@ -206,7 +207,7 @@ export const LoginSignin = () => {
     setloading(true)
     if (FrgtState?.confirmPwd && FrgtState?.password) {
       if (!Errors?.confirmPwd && !Errors?.password) {
-        axios.post("http://192.168.1.12:3003/user/resetpassword", FrgtState).then((res) => {
+        axios.post(`${port}/user/resetpassword`, FrgtState).then((res) => {
           if (res.data.success) {
             toast.success(res?.data?.message)
             setOpen(false)

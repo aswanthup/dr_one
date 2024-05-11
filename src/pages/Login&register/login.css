@@ -313,12 +313,20 @@ input::-webkit-inner-spin-button {
         height: 100vh;
     }
 
+    .loginpwdErrorSetting p {
+        font-size: 10px ;
+    }
+
     .pngdiv {
         display: none;
     }
 
     .login-image-section {
         width: 100%;
+    }
+
+    .login-pass-con-Change-pwd {
+        height: 10vw;
     }
 
     .login-form {
@@ -334,6 +342,11 @@ input::-webkit-inner-spin-button {
 
     .login-InnerModal {
         width: 100%;
+        padding: 10px;
+    }
+
+    .ogin-InnerModal-resetPass {
+        gap: 5vw;
     }
 
     .login-modal-Align {
@@ -341,7 +354,15 @@ input::-webkit-inner-spin-button {
     }
 
     .ogin-InnerModal-resetPass input {
-        height: 7vw;
+        height: 10vw;
+    }
+
+    .login-InnerModal-H3 {
+        font-size: 25px;
+    }
+
+    .login-InnerModal-Inputs-Align {
+        width: 70%;
     }
 
     /* 

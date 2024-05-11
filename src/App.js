@@ -59,7 +59,7 @@ function App() {
 
           <Routes>
             <Route path="/footer" element={<Footer />}></Route>
-            <Route path="/checking" element={<Mainpage />}></Route>
+            <Route path="/" element={<Mainpage />}></Route>
             <Route path="/doctor" element={<Doctor />}></Route>
             <Route path="/labs" element={<Labs />}></Route>
             <Route path="/Pharmacy" element={<Pharmacy />}></Route>
@@ -151,7 +151,7 @@ function App() {
             <Route path="/labadmin" element={<Labadmin />}></Route>
             <Route path="/labfiltering" element={<Connect />}></Route>
             <Route path="/loader" element={<Loader />}></Route>
-            <Route path='/' element={<Registerlanding />} ></Route>
+            <Route path='/registeration' element={<Registerlanding />} ></Route>
           </Routes>
         </LocalizationProvider>
       </BrowserRouter>

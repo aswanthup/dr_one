@@ -14,8 +14,9 @@ import { port } from '../../../config';
 import SearchBox from '../../HospitalFiltering/MobileHospital/SearchBox/Index';
 import { HospitalCard } from '../HospitalCard/HospitalCard';
 import { Loader } from '../../../components/Loader/Loader';
-import { features, speciality, type } from '../constants/Filter';
+import { ayurSpec, features, homeoDept, speacializationNames, type } from '../constants/Filter';
 import Navbar from '../../../components/Navbar';
+
 
 
 export const MobileHosFiltering = () => {
@@ -27,6 +28,7 @@ export const MobileHosFiltering = () => {
     const [notFound, setnotFound] = useState(false)
     const [hospitals, sethospitals] = useState([])
     const [hospitalsFilter, sethospitalsFilter] = useState([])
+    const [speciality, setspeciality] = useState([])
     const [loading, setloading] = useState(false)
     const [OpenModals, setOpenModals] = useState({
         speciality: false,
@@ -186,7 +188,15 @@ export const MobileHosFiltering = () => {
     const closeModal = () => {
         setOpenModals({ speciality: false, features: false })
     }
-
+    useEffect(() => {
+        if (filters?.type === "Allopathy") {
+            setspeciality(speacializationNames)
+        } else if (filters?.type === "Ayurvedic") {
+            setspeciality(ayurSpec)
+        } else {
+            setspeciality(homeoDept)
+        }
+    }, [filters])
     return (
         <>
             <div className='MobileLabAlign'>
@@ -207,12 +217,12 @@ export const MobileHosFiltering = () => {
                         </select>
                         <button onClick={openModal} value={"speciality"}
                             disabled={
-                                !filters.type || !hospitalsFilter.length > 0 && !filters.speciality.length > 0 ? true : false
-                            } className={!filters.type || !hospitalsFilter.length > 0 && !filters.speciality.length > 0 ? 'MobileLabAlignFilterSecButton2' : 'MobileLabAlignFilterSecButton'}>Speciality</button>
+                                !filters.type || filters.type === "Unani" || !hospitalsFilter.length > 0 && !filters.speciality.length > 0 ? true : false
+                            } className={!filters.type || !hospitalsFilter.length > 0 && !filters.speciality.length > 0 || filters.type === "Unani" ? 'MobileLabAlignFilterSecButton2' : 'MobileLabAlignFilterSecButton'}>Speciality</button>
                         <button
                             onClick={openModal} value={"features"} disabled={
-                                !filters.type || !hospitalsFilter.length > 0 && !filters.features.length > 0 ? true : false
-                            } className={!filters.type || !hospitalsFilter.length > 0 && !filters.features.length > 0 ? 'MobileLabAlignFilterSecButton2' : 'MobileLabAlignFilterSecButton'}>Features</button>
+                                !filters.type || !hospitalsFilter.length > 0 && !filters.features.length > 0 || filters.type === "Unani" ? true : false
+                            } className={!filters.type || !hospitalsFilter.length > 0 && !filters.features.length > 0 || filters.type === "Unani" ? 'MobileLabAlignFilterSecButton2' : 'MobileLabAlignFilterSecButton'}>Features</button>
                     </div>
                 </div>
 

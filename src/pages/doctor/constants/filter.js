@@ -14,7 +14,7 @@ export const speacializationNames = [
     "Gastroenterology",
     "General medicine",
     "Geriatrics",
-    "Gynecology",
+    "Gynecology",   
     "Head and Neck sciences",
     "Hair transplantation",
     "IVF and Fertility Centre",

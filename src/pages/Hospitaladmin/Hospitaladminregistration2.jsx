@@ -9,11 +9,12 @@ import { port } from '../../config'
 import { Backdrop, CircularProgress, Modal } from '@mui/material'
 import { Loader } from '../../components/Loader/Loader'
 import CloseIcon from '@mui/icons-material/Close';
+import { ayurSpec, homeoDept, speacializationNames, type } from '../HospitalFiltering/constants/Filter'
 
 export default function Hospitaladminregistration2() {
-
         const { HospitalAdminRg, setHospitalAdminRg } = useContext(MyContext)
         const [Errors, setErrors] = useState({})
+        const [specialties, setspecialties] = useState([])
         const [ModalOpen, setModalOpen] = useState({
                 features: false,
                 specialties: false
@@ -21,21 +22,15 @@ export default function Hospitaladminregistration2() {
         const navigate = useNavigate()
         const [loader, setloader] = useState(false)
 
-        const specialties = [
-                { name: "Gynaecology" },
-                { name: "Dermatology" },
-                { name: "General medicine" },
-                { name: "Mental health" },
-                { name: "Pediatrics" },
-                { name: "Cardiology" },
+        // const specialties = [
+        //         { name: "Gynaecology" },
+        //         { name: "Dermatology" },
+        //         { name: "General medicine" },
+        //         { name: "Mental health" },
+        //         { name: "Pediatrics" },
+        //         { name: "Cardiology" },
 
-        ]
-        const type = [
-                { name: "Allopathy" },
-                { name: "Homeopathy" },
-                { name: "Unani" },
-                { name: "Ayurvedic" },
-        ]
+        // ]
         const Features = [
                 { name: "Casualty" },
                 { name: "OPD" },
@@ -44,7 +39,15 @@ export default function Hospitaladminregistration2() {
                 { name: "Other Services " },
 
         ]
-
+        useEffect(() => {
+                if (HospitalAdminRg?.type === "Allopathy") {
+                        setspecialties(speacializationNames)
+                } else if (HospitalAdminRg?.type === "Ayurvedic") {
+                        setspecialties(ayurSpec)
+                } else {
+                        setspecialties(homeoDept)
+                }
+        }, [HospitalAdminRg])
         useEffect(() => {
                 if (!HospitalAdminRg?.name && !HospitalAdminRg?.contact_no && !HospitalAdminRg?.password && !HospitalAdminRg?.email && !HospitalAdminRg?.repassword) {
                         navigate("/hospitaladminregistration1")
@@ -217,15 +220,16 @@ export default function Hospitaladminregistration2() {
 
         }
 
-        const handleClose = () => {
-                setloader(false)
-        }
+
         const openModal = (data) => {
                 if (data?.specialties) {
-                        setModalOpen({ specialties: true })
+                        if (HospitalAdminRg?.type) {
+                                setModalOpen({ specialties: true })
+                        } else {
+                                toast.info("Please select type")
+                        }
                 } else {
                         setModalOpen({ features: true })
-
                 }
         }
         const CloseModal = () => {
@@ -326,8 +330,8 @@ export default function Hospitaladminregistration2() {
                                                         {type.map((types, index) => (
                                                                 <option style={{ color: "black" }}
                                                                         key={index}
-                                                                        value={types?.name}>
-                                                                        {types?.name}
+                                                                        value={types}>
+                                                                        {types}
                                                                 </option>
                                                         ))}
                                                 </select>
@@ -336,21 +340,6 @@ export default function Hospitaladminregistration2() {
                                         </div>
 
 
-
-
-
-                                        <div> <div className='name-progrss flex'>
-                                                <h4>Features</h4>
-                                                <h4> {`${HospitalAdminRg?.features?.length ? HospitalAdminRg?.features?.length : 0}/${Features?.length}`}</h4>
-                                        </div>
-                                                <button type='button' onClick={() => { openModal() }} className='hospital-second-section-Div flex'> {HospitalAdminRg?.features?.length > 0 ?
-                                                        <div className='hospital-second-section-Div-Map'>
-                                                                {HospitalAdminRg?.features?.map((ele, index) =>
-                                                                        <h4>{ele}{index + 1 === HospitalAdminRg?.features?.length ? '' : ","}&nbsp; </h4>
-                                                                )}
-                                                        </div>
-                                                        : <h4>Select Features</h4>}</button>
-                                        </div>
 
                                         <div>
                                                 <div className='name-progrss flex'>
@@ -366,6 +355,21 @@ export default function Hospitaladminregistration2() {
                                                         : <h4>Select Specialties</h4>}
                                                 </button>
                                         </div>
+
+                                        <div> <div className='name-progrss flex'>
+                                                <h4>Features</h4>
+                                                <h4> {`${HospitalAdminRg?.features?.length ? HospitalAdminRg?.features?.length : 0}/${Features?.length}`}</h4>
+                                        </div>
+                                                <button type='button' onClick={() => { openModal() }} className='hospital-second-section-Div flex'> {HospitalAdminRg?.features?.length > 0 ?
+                                                        <div className='hospital-second-section-Div-Map'>
+                                                                {HospitalAdminRg?.features?.map((ele, index) =>
+                                                                        <h4>{ele}{index + 1 === HospitalAdminRg?.features?.length ? '' : ","}&nbsp; </h4>
+                                                                )}
+                                                        </div>
+                                                        : <h4>Select Features</h4>}</button>
+                                        </div>
+
+
 
 
                                 </div>
@@ -481,10 +485,10 @@ export default function Hospitaladminregistration2() {
                                                                         :
                                                                         specialties.map((ele) =>
                                                                                 <label class="form-control flex">
-                                                                                        <input autoComplete="off" value={ele?.name || ''}
-                                                                                                checked={HospitalAdminRg?.specialties?.includes(ele.name)}
+                                                                                        <input autoComplete="off" value={ele || ''}
+                                                                                                checked={HospitalAdminRg?.specialties?.includes(ele)}
                                                                                                 onChange={(e) => { storeArray(e, { specialties: true }) }} type="checkbox" name="checkbox" />
-                                                                                        <h4 className='select-new'>{ele.name}</h4>
+                                                                                        <h4 className='select-new'>{ele}</h4>
                                                                                 </label>
                                                                         )
                                                                 }

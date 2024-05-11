@@ -12,7 +12,7 @@ import {
 } from "@mui/material";
 import Navbar from '../../../components/Navbar';
 import { SearchBox } from '../SearchComponent/SearchBox';
-import { features, speciality, type } from '../constants/Filter';
+import { ayurSpec, homeoDept, speacializationNames, type, features } from '../constants/Filter';
 import { port } from '../../../config';
 import { Loader } from '../../../components/Loader/Loader';
 import { HospitalCard } from '../HospitalCard/HospitalCard';
@@ -24,6 +24,7 @@ export const HospitalFiltering = () => {
     });
     const [notFound, setnotFound] = useState(false)
     const [hospitals, sethospitals] = useState([])
+    const [speciality, setspeciality] = useState([])
     const [hospitalsFilter, sethospitalsFilter] = useState([])
     const [loading, setloading] = useState(false)
 
@@ -85,75 +86,10 @@ export const HospitalFiltering = () => {
             }
         }
     }, [filters, hospitals]);
-    // console.log("hospitals>>>>", hospitals, hospitalsFilter)
-    // useEffect(() => {
-    //     let FinalData = [...hospitals] || [];
-    //     let updatedArray = [];
-    //     FinalData.forEach(ele => {
-    //         let typeMatched = ele?.type.toLowerCase() === filters?.type.toLowerCase(); // Check if ele.type matches or if filters.type is not set
-    //         let specialityMatched = true; // Assume speciality matches by default
-    //         let featureMatched = true;
-    //         if (typeMatched) {
-    //             if (filters.speciality && filters.speciality.length > 0) {
-    //                 specialityMatched = filters?.speciality.every(spec => {
-    //                     return ele.speciality && ele.speciality.includes(spec);
-    //                 });
-    //             }
-
-    //             if (filters.features && filters.features.length > 0) {
-    //                 featureMatched = filters?.features.every(feature => {
-    //                     return ele.feature && ele.feature.includes(feature);
-    //                 });
-    //             }
-    //             if (filters.CheckingName && specialityMatched && featureMatched) {
-    //                 if (ele.name.toLowerCase().includes(filters?.CheckingName.toLowerCase())) { // Check if name includes CheckingName
-    //                     updatedArray.push(ele);
-    //                 }
-    //             } else if (specialityMatched && featureMatched) {
-    //                 updatedArray.push(ele);
-    //             }
-    //         }
-    //     });
-
-    //     sethospitalsFilter(updatedArray);
-    // }, [filters, hospitals]);
 
     const handleDocNameSearch = (value) => {
         const query = value.toLowerCase();
         setFilters({ ...filters, CheckingName: query })
-        // if (hospitalsFilter?.length > 0) {
-        //     const filteredData = hospitalsFilter.filter((data) => {
-        //         const lowerCaseName = data?.name?.toLowerCase();
-        //         return lowerCaseName?.startsWith(query[0]) &&
-        //             lowerCaseName.includes(query);
-        //     });
-        //     if (filteredData?.length > 0) {
-        //         setnotFound(false)
-        //     } else {
-        //         if (!query) {
-        //             sethospitalsFilter(hospitals);
-        //         } else {
-        //             setnotFound(true)
-        //         }
-        //     }
-        //     sethospitalsFilter(filteredData);
-        // } else {
-        //     const filteredData = hospitals?.filter((data) => {
-        //         const lowerCaseName = data?.name?.toLowerCase();
-        //         return lowerCaseName?.startsWith(query[0]) &&
-        //             lowerCaseName?.includes(query);
-        //     });
-        //     if (filteredData?.length > 0) {
-        //         setnotFound(false)
-        //     } else {
-        //         if (!query) {
-        //             sethospitalsFilter(hospitals);
-        //         } else {
-        //             setnotFound(true)
-        //         }
-        //     }
-        //     sethospitalsFilter(filteredData);
-        // }
     }
     useEffect(() => {
         setloading(true)
@@ -165,6 +101,15 @@ export const HospitalFiltering = () => {
             setloading(false)
         })
     }
+    useEffect(() => {
+        if (filters?.type === "Allopathy") {
+            setspeciality(speacializationNames)
+        } else if (filters?.type === "Ayurvedic") {
+            setspeciality(ayurSpec)
+        } else {
+            setspeciality(homeoDept)
+        }
+    }, [filters])
 
     const handleTypeChanges = (e) => {
         const { name, value } = e?.target;
@@ -245,13 +190,13 @@ export const HospitalFiltering = () => {
                             <div>
                                 <span className={styles.leftHeadings}>Specialties</span>
                             </div>
-                            <div>
-                                <FormGroup>
+                            <div className='HosFilteringSpeciHeight'>
+                                <FormGroup sx={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
                                     {speciality.map((name, index) => (
                                         <FormControlLabel
                                             name="speciality"
                                             disabled={
-                                                !filters.type || !hospitalsFilter.length > 0 && !filters.speciality.length > 0 ? true : false
+                                                !filters.type || !hospitalsFilter.length > 0 && !filters.speciality.length > 0 || filters.type === "Unani" ? true : false
                                             }
                                             value={name}
                                             onChange={handleTypeChanges}
