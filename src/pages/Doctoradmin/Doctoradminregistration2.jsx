@@ -628,7 +628,7 @@ export default function Doctoradminregistration2() {
                   type="text"
                   name="type"
                   value={Data?.type}
-                  onChange={handleChange}
+                  onChange={handleTypeChanges}
                   className="doctoradminregistration_gender"
                 >
                   <option
@@ -642,10 +642,10 @@ export default function Doctoradminregistration2() {
                     Allopathy
                   </option>
                   <option
-                    value="Ayurveda"
+                    value="Ayurvedic"
                     className="doctoradminregistration_gender_font"
                   >
-                    Ayurveda
+                    Ayurvedic
                   </option>
                   <option
                     value="Homeopathy"
@@ -654,10 +654,10 @@ export default function Doctoradminregistration2() {
                     Homeopathy
                   </option>
                   <option
-                    value="Unani"
+                    value="Others"
                     className="doctoradminregistration_gender_font"
                   >
-                    Unani
+                    Others
                   </option>
                 </select>
               </div>
@@ -715,15 +715,7 @@ export default function Doctoradminregistration2() {
                   value=""
                   className="doctoradminregistration_gender_font"
                 ></option>
-                {speacializationNames.map((value, index) => (
-                  <option
-                    value={value}
-                    key={index}
-                    className="doctoradminregistration_gender_font"
-                  >
-                    {value}
-                  </option>
-                ))}
+               {getSpecializationOptions()}
               </select>
             </div>
             <div>
