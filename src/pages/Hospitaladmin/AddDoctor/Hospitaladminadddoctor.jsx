@@ -1,6 +1,11 @@
 import React, { useState } from "react";
 import "./hospitaladminadddoctor.css";
-import { types, speacializationNames } from "../../doctor/constants/filter";
+import {
+  types,
+  speacializationNames,
+  ayurSpec,
+  homeoDept,
+} from "../../doctor/constants/filter";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -43,6 +48,7 @@ export default function Hospitaladminadddoctor() {
   });
   const {
     register,
+    watch,
     handleSubmit,
     formState: { errors },
     reset,
@@ -57,7 +63,7 @@ export default function Hospitaladminadddoctor() {
       formData.append("data", JSON.stringify(dataForm));
       setIsLoading(true);
       const response = await axios.post(
-        `http://localhost:3003/hospital/add_doctor`,
+        `${port}/hospital/add_doctor`,
         formData
       );
       // console.log({ response });
@@ -105,6 +111,36 @@ export default function Hospitaladminadddoctor() {
       experience: e.$y,
     });
   };
+
+  // return specializations based on the selected type//
+  const getSpecializationOptions = () => {
+    const selectedType = watch("type");
+    if (!selectedType) return null;
+    let mappingArray = [];
+    switch (selectedType) {
+      case "Allopathy":
+        mappingArray = speacializationNames;
+        break;
+      case "Ayurvedic":
+        mappingArray = ayurSpec;
+        break;
+      case "Homeopathy":
+        mappingArray = homeoDept;
+        break;
+      default:
+        return null;
+    }
+    return mappingArray.map((value, index) => (
+      <option
+        key={index}
+        value={value}
+        className="doctoradminregistration_gender_font"
+      >
+        {value}
+      </option>
+    ));
+  };
+
   return (
     <div>
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -361,15 +397,7 @@ export default function Hospitaladminadddoctor() {
                     value=""
                     className="doctoradminregistration_gender_font"
                   ></option>
-                  {speacializationNames.map((specialization, index) => (
-                    <option
-                      key={index}
-                      value={specialization}
-                      className="doctoradminregistration_gender_font"
-                    >
-                      {specialization}
-                    </option>
-                  ))}
+                  {getSpecializationOptions()}
                 </select>
                 {errors.specialization && (
                   <p className="error-message error-p">
