@@ -22,7 +22,7 @@ export default function SearchDoctorProvider({ children }) {
     type: "",
     gender: "",
   }); //for maintaining selected items in both screens
-  const { passedSpecialization } = useContext(MyContext);
+  const { passedSpecialization } = useContext(MyContext); //coming from doctor main page..by selecting specialization
   const [filters, setFilters] = useState({
     type: "",
     specializations: [],
@@ -131,23 +131,32 @@ export default function SearchDoctorProvider({ children }) {
         setFilteredDoctors(allDoctorsDetails);
       }
     } catch (err) {
-      alert("server error");
+      console.error(err);
     } finally {
       setLoading(false);
     }
   };
   useEffect(() => {
     getAllDoctorsData();
-  }, []);
+  }, [passedSpecialization]);
 
   const handlePassedSpecialization = (DoctorsDetails) => {
+    console.log({ DoctorsDetails });
     const docsBySpecialization = DoctorsDetails.filter(
       (doc) =>
-        doc.specialization.toLowerCase() === passedSpecialization.toLowerCase()
+        doc?.specialization?.toLowerCase() ===
+        passedSpecialization.toLowerCase()
     );
+    console.log({ docsBySpecialization });
     if (docsBySpecialization.length === 0) {
       setEmptyResults(true);
     }
+
+    setFilters((prev) => ({
+      ...prev,
+      specializations: [...prev.specializations, passedSpecialization],
+      type:"Allopathy"
+    }));
     setAllDocData(docsBySpecialization);
     setFilteredDoctors(docsBySpecialization);
   };

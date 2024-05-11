@@ -3,7 +3,6 @@ import Navbar from "../../../../components/Navbar";
 import SearchBox from "../MobileView/SearchBox/Index";
 import styles from "./searchdoc.module.css";
 import {
-  Checkbox,
   FormControlLabel,
   FormGroup,
   IconButton,
@@ -13,10 +12,8 @@ import {
   Stack,
 } from "@mui/material";
 import {
-  speacializationNames,
   types,
   genderData,
-  ayurSpec,
 } from "../../constants/filter";
 import Footer from "../../../../components/Footer";
 import DocCard from "./DocCard/DocCard";
@@ -30,12 +27,10 @@ export default function SearchDoc() {
     filteredDoctors,
     docsBySearch,
     emptyResults,
-    passedSpecialization,
     filters,
     selectedFilter,
     // functions---------------------------------------
     handleTypeChanges,
-    handleSpecializationChanges,
     handleGenderChanges,
     handleExpChange,
     handleExpChangeBtn,
@@ -74,7 +69,6 @@ export default function SearchDoc() {
                 >
                   {types.map((type, index) => (
                     <FormControlLabel
-                      disabled={passedSpecialization ? true : false}
                       key={index}
                       value={type}
                       checked={filters.type === type}
