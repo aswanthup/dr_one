@@ -18,11 +18,11 @@ export default function Labs() {
   return (
     <div>
 
-      <Headroom className='head'>
+      <Headroom>
         <Navbar />
       </Headroom>
 
-      <div>
+      <div className='desktoplab'>
 
         <div className="container labs-banner flex">
           <div>
@@ -304,6 +304,147 @@ export default function Labs() {
         </div>
 
       </div>
+
+
+
+      <div className='container mobilelab'>
+
+      <div className="labs-banner flex">
+          <div>
+            <h1 style={{ color: 'white' }}>
+              Find Your <span className="color-blue"> Labs From</span> </h1>
+            <h1 style={{ color: 'white' }}>  Your Location </h1>
+          </div>
+
+          {/* Search Box */}
+
+
+
+          
+
+
+
+
+      </div>
+
+        <div onClick={()=>navigate("/searchdoctor")} className="hospital-search-box flex">
+
+<div className="Hospital-container-search flex">
+  <div className="Hospital-Search-box flex">
+    <div className="Hospital-location-section flex">
+
+      <i className="ri-map-pin-2-line" />
+
+      <input className="Hospital-Location-input" type="text" placeholder='Kozhikode' />
+
+    </div>
+    <input className="Hospital-search-input" type="text" placeholder="Search Doctor" />
+    <div className="Hospital-search-section flex">
+      <i className="ri-search-2-line" />
+    </div>
+  </div>
+
+</div>
+
+</div>
+
+<div className="mobile-doctor-specialties">
+          <div className="mobile-second-heading">
+            <h1>
+              Find Test by<span className="color-blue ">Health Concern</span>
+            </h1>
+          </div>
+
+          <div className="mobile-specialties-card mobile-specialties-card flex">
+            <div className="mobile-specialties-image">
+              <img src="images/lab2.jpg" alt="" />
+            </div>
+
+            <div className="mobile-specialties-data flex">
+              <h4>Period doubts or</h4>
+              <h4> Pregnancy</h4>
+              <a href="">
+                <h4 className="mobile-specialties-button">Consult Now</h4>
+              </a>
+            </div>
+          </div>
+
+          <div className="mobile-specialties-card2 mobile-specialties-card flex">
+            <div className="mobile-specialties-image">
+              <img src="images/lab2.jpg" alt="" />
+            </div>
+
+            <div className="mobile-specialties-data flex">
+              <h4>Period doubts or</h4>
+              <h4> Pregnancy</h4>
+              <a href="">
+                <h4 className="mobile-specialties-button">Consult Now</h4>
+              </a>
+            </div>
+          </div>
+
+          <div className="mobile-specialties-card2 mobile-specialties-card flex">
+            <div className="mobile-specialties-image">
+              <img src="images/lab2.jpg" alt="" />
+            </div>
+
+            <div className="mobile-specialties-data flex">
+              <h4>Period doubts or</h4>
+              <h4> Pregnancy</h4>
+              <a href="">
+                <h4 className="mobile-specialties-button">Consult Now</h4>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div className="mobile-second-heading">
+            <h1>
+              Top Booked<span className="color-blue ">Diagnostic Tests</span>
+            </h1>
+          </div>
+
+          <div className="diagnostic-card">
+            <h2>Gastroscopy</h2>
+            <div className="diagnostic-paragraph">
+              <h4>
+                Generate Lorem Ipsum favorite writing, design and blogging
+                tools. Explore the origins, history and meaning of the famous pa
+              </h4>
+            </div>
+            <div className="flex price-section">
+              <h2>₹ 456</h2>
+              <a href>
+                <h4 className="diagnostic-button">Add</h4>
+              </a>
+            </div>
+          </div>
+
+          <div className="diagnostic-card diagnostic-card2 ">
+            <h2>Gastroscopy</h2>
+            <div className="diagnostic-paragraph">
+              <h4>
+                Generate Lorem Ipsum favorite writing, design and blogging
+                tools. Explore the origins, history and meaning of the famous pa
+              </h4>
+            </div>
+            <div className="flex price-section">
+              <h2>₹ 456</h2>
+              <a href>
+                <h4 className="diagnostic-button">Add</h4>
+              </a>
+            </div>
+          </div>
+      
+      
+      </div>
+
+
+
+
+
+
+
+
 
       <Footer />
 

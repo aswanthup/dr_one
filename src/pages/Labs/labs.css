@@ -154,18 +154,34 @@
 
 
 
+.desktoplab{
+    display:block;
+}
 
+.mobilelab{
+    display:none;
+}
 
 
       /* End Search box */
   
 
-      @media screen and (max-width:780px){
+      @media screen and (max-width:980px){
+
+
+        .desktoplab{
+            display:none;
+        }
+
+        .mobilelab{
+            display:block;
+        }
 
 
         .labs-banner{
             height:45vw;  
             padding:3vw;
+            margin-bottom:20px;
         }
 
 
