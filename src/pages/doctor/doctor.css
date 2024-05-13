@@ -331,7 +331,7 @@
   }
 }
 
-@media screen and (max-width: 780px) {
+@media screen and (max-width: 980px) {
 
 
   .head{
@@ -339,7 +339,7 @@
   }
 
   .doctor-banner-image img {
-    width: 60vw;
+    width:30vw;
   }
   .doctor-banner-image {
     justify-content: center;
