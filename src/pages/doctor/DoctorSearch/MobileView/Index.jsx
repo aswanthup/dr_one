@@ -26,8 +26,9 @@ import {
 import { Add, Remove } from "@mui/icons-material";
 
 const SearchDocMobileScreen = () => {
-  const [isShowModal, setIsShowModal] = useState(false);
+  const [isShowSpecModal, setIsShowSpecModal] = useState(false);
   const [isShowExpModal, setIsShowExpModal] = useState(false);
+  const [selectedSpecs, setSelectedSpecs] = useState([]);
   const {
     loading,
     filteredDoctors,
@@ -35,10 +36,10 @@ const SearchDocMobileScreen = () => {
     emptyResults,
     passedSpecialization,
     filters,
+    setFilters,
     selectedFilter,
     // functions
     handleTypeChanges,
-    handleSpecializationChanges,
     handleGenderChanges,
     handleExpChange,
     handleExpChangeBtn,
@@ -49,6 +50,76 @@ const SearchDocMobileScreen = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  const handleTempSelectedSpecs = (event) => {
+    const { checked, name } = event.target;
+    const specialization = name.toLowerCase();
+    let data = [...selectedSpecs];
+    if (checked) {
+      data.push(specialization);
+      setSelectedSpecs(data);
+    } else {
+      const specIndex = selectedSpecs.indexOf(specialization);
+      data.splice(specIndex, 1);
+      setSelectedSpecs(data);
+    }
+  };
+  console.log(selectedSpecs);
+  //apply button
+  const handleMoveTempSpecs = () => {
+    setFilters({...filters,specializations:selectedSpecs});
+    setIsShowSpecModal(false);
+  };
+  //return true or false..manage checkbox is checked or not
+  const handleCheckBoxChecked = (specialization) => {
+    const lowerCasedSpec = specialization.toLowerCase();
+    if (
+      selectedSpecs.includes(lowerCasedSpec)
+    ) {
+      return true;
+    }
+    return false;
+  };
+
+  const getSpecsBasedOnTypes = () => {
+    if (!filters.type) return null;
+    let targetArray = [];
+    switch (filters.type) {
+      case "Allopathy":
+        targetArray = speacializationNames;
+        break;
+      case "Ayurvedic":
+        targetArray = ayurSpec;
+        break;
+      case "Homeopathy":
+        targetArray = homeoDept;
+        break;
+      default:
+        return null;
+    }
+    return targetArray.map((specialization, index) => (
+      <>
+        <FormControlLabel
+          key={index}
+          name={specialization}
+          checked={handleCheckBoxChecked(specialization)}
+          sx={{
+            "& .MuiFormControlLabel-label": {
+              fontSize: "16px", // Set font size for the label
+            },
+            "& .MuiSvgIcon-root": {
+              width: "1.7em", // Set checkbox size
+              height: "2em", // Set checkbox size
+            },
+          }}
+          control={<Checkbox onChange={handleTempSelectedSpecs} />}
+          label={specialization}
+          value={specialization}
+        />
+        <Divider />
+      </>
+    ));
+  };
 
   return (
     <>
@@ -63,7 +134,10 @@ const SearchDocMobileScreen = () => {
         <div className={styles.filterSection}>
           <select
             disabled={passedSpecialization ? true : false}
-            onChange={handleTypeChanges}
+            onChange={(e) => {
+              handleTypeChanges(e);
+              setSelectedSpecs([]);
+            }}
             name=""
             value={selectedFilter.type ?? ""}
             id=""
@@ -79,126 +153,29 @@ const SearchDocMobileScreen = () => {
           </select>
 
           <select
-            onClick={() => setIsShowModal(!isShowModal)}
+            onClick={() => setIsShowSpecModal(!isShowSpecModal)}
             disabled={!filters.type || filters.type === "Others" ? true : false}
           >
             <option value="" disabled selected>
               Specializations
             </option>
           </select>
-          <Modal open={isShowModal} onClose={() => setIsShowModal(false)}>
+          <Modal
+            open={isShowSpecModal}
+            onClose={() => {
+              setIsShowSpecModal(false);
+              // setSelectedSpecs([])
+            }}
+          >
             <div className={styles.modalContainer}>
               <FormControl className={styles.formControl} component="fieldset">
-                <FormGroup>
-                  {filters.type === "Ayurvedic"
-                    ? ayurSpec.map((specialization, index) => (
-                        <>
-                          <FormControlLabel
-                            key={index}
-                            name={specialization}
-                            checked={
-                              filters.specializations.length !== 0 &&
-                              filters.specializations.includes(
-                                specialization.toLowerCase()
-                              )
-                            }
-                            sx={{
-                              "& .MuiFormControlLabel-label": {
-                                fontSize: "16px", // Set font size for the label
-                              },
-                              "& .MuiSvgIcon-root": {
-                                width: "1.7em", // Set checkbox size
-                                height: "2em", // Set checkbox size
-                              },
-                            }}
-                            control={
-                              <Checkbox
-                                // disabled={
-                                //   filters.type === "Homeopathy" ||
-                                //   filters.type === "Others"
-                                // }
-                                onChange={handleSpecializationChanges}
-                              />
-                            }
-                            label={specialization}
-                            value={specialization}
-                          />
-                          <Divider />
-                        </>
-                      ))
-                    : filters.type === "Homeopathy"
-                    ? homeoDept.map((specialization, index) => (
-                        <>
-                          <FormControlLabel
-                            key={index}
-                            name={specialization}
-                            checked={
-                              filters?.specializations?.length !== 0 &&
-                              filters.specializations.includes(
-                                specialization.toLowerCase()
-                              )
-                            }
-                            sx={{
-                              "& .MuiFormControlLabel-label": {
-                                fontSize: "16px", // Set font size for the label
-                              },
-                              "& .MuiSvgIcon-root": {
-                                width: "1.7em", // Set checkbox size
-                                height: "2em", // Set checkbox size
-                              },
-                            }}
-                            control={
-                              <Checkbox
-                                // disabled={
-                                //   filters.type === "Homeopathy" ||
-                                //   filters.type === "Others"
-                                // }
-                                onChange={handleSpecializationChanges}
-                              />
-                            }
-                            label={specialization}
-                            value={specialization}
-                          />
-                          <Divider />
-                        </>
-                      ))
-                    : speacializationNames.map((specialization, index) => (
-                        <>
-                          <FormControlLabel
-                            key={index}
-                            name={specialization}
-                            checked={
-                              filters?.specializations?.length !== 0 &&
-                              filters.specializations.includes(
-                                specialization.toLowerCase()
-                              )
-                            }
-                            sx={{
-                              "& .MuiFormControlLabel-label": {
-                                fontSize: "16px", // Set font size for the label
-                              },
-                              "& .MuiSvgIcon-root": {
-                                width: "1.7em", // Set checkbox size
-                                height: "2em", // Set checkbox size
-                              },
-                            }}
-                            control={
-                              <Checkbox
-                                // disabled={
-                                //   filters.type === "Homeopathy" ||
-                                //   filters.type === "Others"
-                                // }
-                                onChange={handleSpecializationChanges}
-                              />
-                            }
-                            label={specialization}
-                            value={specialization}
-                          />
-                          <Divider />
-                        </>
-                      ))}
-                </FormGroup>
+                <FormGroup>{getSpecsBasedOnTypes()}</FormGroup>
               </FormControl>
+              <div className={styles.specSaveBtnContainer}>
+                <button type="button" onClick={handleMoveTempSpecs}>
+                  Apply
+                </button>
+              </div>
             </div>
           </Modal>
           <select
@@ -216,12 +193,10 @@ const SearchDocMobileScreen = () => {
               </option>
             ))}
           </select>
-          <button onClick={() => setIsShowExpModal(true)}>
-            Experience
-          </button>
+          <button onClick={() => setIsShowExpModal(true)}>Experience</button>
           <Modal open={isShowExpModal} onClose={() => setIsShowExpModal(false)}>
             <div className={styles.modalContainer}>
-            <Stack
+              <Stack
                 spacing={2}
                 direction="row"
                 sx={{ mb: 1 }}

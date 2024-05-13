@@ -53,9 +53,21 @@
 
   .formControl{
     width: 100%;
-    border: 1px solid red;
     max-height: 60vh;
     overflow-y: scroll;
     scroll-behavior: smooth;
+  }
+  .specSaveBtnContainer{
+    margin-top: 10px;
+    display: flex;
+    justify-content: end;
+  }
+  .specSaveBtnContainer button{
+    border: 1px solid grey;
+    background-color:var(--color-primary);
+    color: white;
+    width: 8rem;
+    font-size: 16px;
+    text-transform: capitalize;
   }
  
