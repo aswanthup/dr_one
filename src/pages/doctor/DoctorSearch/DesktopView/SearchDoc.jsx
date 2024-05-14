@@ -154,7 +154,7 @@ export default function SearchDoc() {
                   value={filters?.experience}
                   onChange={handleExpChange}
                   min={0}
-                  max={10}
+                  max={50}
                 />
                 <IconButton onClick={() => handleExpChangeBtn("add")}>
                   <Add />
