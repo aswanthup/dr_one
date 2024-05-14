@@ -152,14 +152,12 @@ const SearchDocMobileScreen = () => {
             ))}
           </select>
 
-          <select
+          <button 
             onClick={() => setIsShowSpecModal(!isShowSpecModal)}
             disabled={!filters.type || filters.type === "Others" ? true : false}
-          >
-            <option value="" disabled selected>
-              Specializations
-            </option>
-          </select>
+            >
+            Specializations
+          </button>
           <Modal
             open={isShowSpecModal}
             onClose={() => {
