@@ -152,14 +152,12 @@ const SearchDocMobileScreen = () => {
             ))}
           </select>
 
-          <select
+          <button 
             onClick={() => setIsShowSpecModal(!isShowSpecModal)}
             disabled={!filters.type || filters.type === "Others" ? true : false}
-          >
-            <option value="" disabled selected>
-              Specializations
-            </option>
-          </select>
+            >
+            Specializations
+          </button>
           <Modal
             open={isShowSpecModal}
             onClose={() => {
@@ -214,7 +212,7 @@ const SearchDocMobileScreen = () => {
                   value={filters?.experience}
                   onChange={handleExpChange}
                   min={0}
-                  max={10}
+                  max={50}
                 />
                 <IconButton onClick={() => handleExpChangeBtn("add")}>
                   <Add />
