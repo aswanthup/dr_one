@@ -16,12 +16,14 @@ import { ayurSpec, homeoDept, speacializationNames, type, features } from '../co
 import { port } from '../../../config';
 import { Loader } from '../../../components/Loader/Loader';
 import { HospitalCard } from '../HospitalCard/HospitalCard';
+import { useLocation } from 'react-router-dom';
 export const HospitalFiltering = () => {
     const [filters, setFilters] = useState({
         speciality: "",
         type: "",
         features: ""
     });
+    const location = useLocation()
     const [notFound, setnotFound] = useState(false)
     const [hospitals, sethospitals] = useState([])
     const [speciality, setspeciality] = useState([])
@@ -29,7 +31,6 @@ export const HospitalFiltering = () => {
     const [loading, setloading] = useState(false)
 
     const updateDocByPlace = (value, Place) => {
-        console.log("Place>>>", Place)
         if (value?.length > 0) {
             sethospitals(value)
         } else {
@@ -37,8 +38,9 @@ export const HospitalFiltering = () => {
             sethospitalsFilter([])
         }
     }
-    console.log("filters>>>", filters, "hospitalsFilter>>>>>", hospitalsFilter)
+    console.log("hospitalsFilter>>>>>", hospitalsFilter)
     useEffect(() => {
+
         if (hospitals.length === 0) {
             return;
         }
@@ -72,7 +74,6 @@ export const HospitalFiltering = () => {
             if (filteredDocs.length === 0) {
                 setnotFound(true);
             } else {
-                console.log({ filteredDocs });
                 sethospitalsFilter(filteredDocs);
                 setnotFound(false);
             }
@@ -80,7 +81,6 @@ export const HospitalFiltering = () => {
             if (filteredDocs.length === 0) {
                 setnotFound(true);
             } else {
-                console.log({ filteredDocs });
                 sethospitalsFilter(filteredDocs);
                 setnotFound(false);
             }
@@ -98,10 +98,12 @@ export const HospitalFiltering = () => {
     }, [])
     const callApi = () => {
         axios.get(`${port}/hospital/list`).then((res) => {
+            console.log(res)
             sethospitals(res.data.data)
             setloading(false)
         })
     }
+    console.log("hospitals>>>", hospitals)
     useEffect(() => {
         if (filters?.type === "Allopathy") {
             setspeciality(speacializationNames)
@@ -122,7 +124,6 @@ export const HospitalFiltering = () => {
                     speciality: filters.speciality.filter(item => item !== value)
                 });
             } else {
-                // If it doesn't exist, add it
                 setFilters({
                     ...filters,
                     speciality: [...filters.speciality, value]
@@ -144,7 +145,18 @@ export const HospitalFiltering = () => {
             setFilters({ ...filters, [name]: value });
         }
     }
-    // console.log("Filters>>>>>>", filters)
+    console.log("Filters>>>>>>", filters)
+    useEffect(() => {
+        // Set initial filters based on location state
+        if (location?.state?.type || location?.state?.speciality) {
+            setFilters({
+                type: location?.state?.type,
+                speciality: location?.state?.speciality ? [location?.state?.speciality] : [],
+                features: [] // You might want to set other properties here too
+            });
+        }
+    }, [location]);
+   
 
     return (
         <>
@@ -172,12 +184,13 @@ export const HospitalFiltering = () => {
                                 >
                                     {type.map((types, index) => (
                                         <FormControlLabel
+                                            disabled={location?.state?.type ? true : false}
                                             onChange={handleTypeChanges}
                                             key={index}
                                             value={types}
                                             name='type'
                                             control={
-                                                <Radio
+                                                <Radio checked={types === filters?.type}
                                                     sx={{ "& .MuiSvgIcon-root": { fontSize: 22 } }}
                                                 />
                                             }
@@ -197,13 +210,13 @@ export const HospitalFiltering = () => {
                                         <FormControlLabel
                                             name="speciality"
                                             disabled={
-                                                !filters.type || !hospitalsFilter.length > 0 && !filters.speciality.length > 0 || filters.type === "Unani" ? true : false
+                                                !filters.type || !hospitalsFilter.length > 0 && !filters.speciality.length > 0 || filters.type === "Others" || location?.state?.type ? true : false
                                             }
                                             value={name}
                                             onChange={handleTypeChanges}
                                             key={index}
                                             control={
-                                                <Checkbox
+                                                <Checkbox checked={filters?.speciality.includes(name)}
                                                     sx={{ "& .MuiSvgIcon-root": { fontSize: 22 } }}
                                                 />
                                             }
@@ -282,12 +295,7 @@ export const HospitalFiltering = () => {
             {loading &&
                 <Loader />
             }
-            {
-                notFound && < div className='HospitalNotfound'>
-                    <h3>
-                        lab were not found.</h3>
-                </div >
-            }
+
             <Footer />
         </>
     )

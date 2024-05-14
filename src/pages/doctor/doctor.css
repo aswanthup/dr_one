@@ -3,8 +3,7 @@
   justify-content: space-between;
 }
 
-.home-specialties-card2 {
-}
+.home-specialties-card2 {}
 
 .doctor-banner {
   margin-top: 2vw;
@@ -13,6 +12,7 @@
 #app {
   width: 100%;
 }
+
 /* html,
   body {
     position: relative;
@@ -33,6 +33,7 @@
   position: relative;
   z-index: -9999;
 }
+
 .swiper-slide {
   /* text-align: center; */
   font-size: 18px;
@@ -85,7 +86,7 @@
   /* height: 100%; */
   align-items: flex-end;
   justify-content: center;
-  padding-top: 2vw; 
+  padding-top: 2vw;
 }
 
 .Doctor-container-search {
@@ -150,6 +151,7 @@
 .Doctor-location-section {
   gap: 1vw;
 }
+
 .searchBox_rslt_mainContainer {
   padding: 1rem;
   position: absolute;
@@ -162,14 +164,16 @@
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
   /* border: 1px solid blue; */
 }
-.searchBox_rslt_container {
-}
+
+.searchBox_rslt_container {}
+
 .searchBox_rslt_items {
   font-weight: 400;
   padding: .5rem;
   cursor: pointer;
   font-size: 18px;
-  &:hover{
+
+  &:hover {
     background-color: #fafaf9;
   }
 }
@@ -199,6 +203,9 @@
   background-color: rgb(255, 255, 255);
   border-radius: 1.5vw;
   padding: 2.5vw;
+  display: flex;
+  width: 70%;
+  overflow: scroll;
   box-shadow: rgba(255, 255, 255, 0.1) 0px 1px 1px 0px inset,
     rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
     rgba(144, 150, 255, 0.3) 0px 30px 60px -30px;
@@ -208,17 +215,17 @@
   border: 1px solid rgba(110, 110, 110, 0.4);
   padding: 0.2vw;
   border-radius: 0.3vw;
-  width: 250px;
+  width: 300px;
   justify-content: space-between;
   align-items: center;
+  height: 60px;
 }
 
 .spec_main_card_button {
   background-color: #3a65fd;
   color: white;
   height: 2vw;
-  width: 2vw;
-  align-items: center;
+   align-items: center;
   justify-content: center;
   border-radius: 0.3vw;
   cursor: pointer;
@@ -226,12 +233,18 @@
 
 .spec_main_cards {
   gap: 1vw;
+  display: flex;
+  flex-wrap: wrap;
+  min-width: 100%;
+  justify-content: start;
+  align-items: flex-start;
 }
 
 .spec_main_card h4 {
   padding: 0vw 1vw;
   color: rgba(0, 0, 0, 0.6);
 }
+
 .spec_main_card_button i {
   font-weight: 100;
 }
@@ -309,18 +322,20 @@
 /*End Specialties */
 
 
-.doctor-mobile-content{
+.doctor-mobile-content {
   margin-bottom: 5vw;
 }
 
 @media screen and (max-width: 1280px) {
   .spec_main_card {
-    width: 230px;
+    width: 270px;
   }
+
   .doctor_spec_card {
     margin-top: -100px;
   }
 }
+
 @media screen and (max-width: 1100px) {
   .spec_main_card {
     width: 200px;
@@ -334,13 +349,14 @@
 @media screen and (max-width: 980px) {
 
 
-  .head{
+  .head {
     display: none;
   }
 
   .doctor-banner-image img {
-    width:30vw;
+    width: 30vw;
   }
+
   .doctor-banner-image {
     justify-content: center;
   }
@@ -355,11 +371,13 @@
     justify-content: center;
     align-items: center;
   }
+
   .content {
     margin-top: 4vw;
     width: 100%;
     display: none;
   }
+
   #loadMore {
     width: 200px;
     color: #fff;
@@ -372,12 +390,14 @@
     background-color: blue;
     transition: 0.3s;
   }
+
   #loadMore:hover {
     color: blue;
     background-color: #fff;
     border: 1px solid blue;
     text-decoration: none;
   }
+
   .noContent {
     color: #000 !important;
     background-color: transparent !important;
@@ -393,6 +413,7 @@
     width: 100%;
     height: auto;
   }
+
   .pharmacy-image img {
     width: 50vw;
   }
@@ -426,32 +447,32 @@
 
 
 
-.mobile_partner_card{
-  padding: 2vw;
-  box-shadow: rgba(3, 102, 214, 0.3) 0px 0px 0px 2px;
-  border-radius: 2vw;
-  gap: 4vw;
-  margin-top:5vw;
-}
+  .mobile_partner_card {
+    padding: 2vw;
+    box-shadow: rgba(3, 102, 214, 0.3) 0px 0px 0px 2px;
+    border-radius: 2vw;
+    gap: 4vw;
+    margin-top: 5vw;
+  }
 
-.mobile_partner_card_img img{
-  width: 14vw;
-  height: 14vw;
-  border-radius:2vw;
-}
+  .mobile_partner_card_img img {
+    width: 14vw;
+    height: 14vw;
+    border-radius: 2vw;
+  }
 
-.mobile_partner_card_img{
-  align-items: center;
-}
+  .mobile_partner_card_img {
+    align-items: center;
+  }
 
 
-.mobile_partner_card_data{
-  flex-direction: column;
- justify-content: center;
+  .mobile_partner_card_data {
+    flex-direction: column;
+    justify-content: center;
 
-}
+  }
 
-.mobile_partner_card1{
-  margin-top: 0px;
-}
+  .mobile_partner_card1 {
+    margin-top: 0px;
+  }
 }

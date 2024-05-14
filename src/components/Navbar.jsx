@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import '../components/Navbar.css'
 import { Modal } from '@mui/material'
+import { useLocation } from 'react-router-dom'
 
 
 export default function Navbar() {
@@ -14,8 +15,9 @@ export default function Navbar() {
     }
   }
 
-
-
+  const location = useLocation()
+  console.log("location>>>>", location)
+  const path = location?.pathname
 
   return (
 
@@ -24,26 +26,26 @@ export default function Navbar() {
         <nav className="nav-bar container flex ">
           <div className="nav-logo">
             <a href="/">
-              <h2>DOCTOR ONE</h2>
+              <h2 >DOCTOR ONE</h2 >
             </a>
           </div>
 
 
           <div className="nav-links flex">
             <a href="/">
-              <h3>Home</h3>
+              <h3 style={{ color: path === "/" ? "blue" : '' }} >Home</h3>
             </a>
             <a href="/doctor">
-              <h3>Doctor</h3>
+              <h3 style={{ color: path === "/doctor" ? "blue" : '' }} >Doctor</h3>
             </a>
             <a href="/labs">
-              <h3>Labs</h3>
+              <h3 style={{ color: path === "/labs" ? "blue" : '' }}>Labs</h3>
             </a>
             {/* <a href="/pharmacy">
               <h3>Pharmacy</h3>
             </a> */}
             <a href="/hospital">
-              <h3>Hospital</h3>
+              <h3 style={{ color: path === "/hospital" ? "blue" : '' }}>Hospital</h3>
             </a>
           </div>
 
@@ -84,8 +86,8 @@ export default function Navbar() {
               </div>
             </>
           </Modal>
-        </nav>
-      </div>
+        </nav >
+      </div >
     </>
   )
 }

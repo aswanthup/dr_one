@@ -16,6 +16,7 @@ import { Filter } from '@mui/icons-material';
 import { LabCard } from '../LabCard/LabCard';
 import { Loader } from '../../../../components/Loader/Loader';
 import Navbar from '../../../../components/Navbar';
+import { useLocation } from 'react-router-dom';
 export const MobileLabFilter = () => {
     const [filters, setFilters] = useState({
         services: "",
@@ -27,6 +28,7 @@ export const MobileLabFilter = () => {
     const [loading, setloading] = useState(false)
     const [notFound, setnotFound] = useState(false)
     const [OpenModals, setOpenModals] = useState(false)
+    const location = useLocation()
     const updateDocByPlace = (value) => {
         if (value?.length > 0) {
             setlab(value)
@@ -200,7 +202,16 @@ export const MobileLabFilter = () => {
     const closeModal = () => {
         setOpenModals({ services: false, features: false })
     }
-
+    useEffect(() => {
+        // Set initial filters based on location state
+        if (location?.state?.services) {
+            setFilters({
+                type: location?.state?.type,
+                services: location?.state?.services ? [location?.state?.services] : [],
+                features: [] // You might want to set other properties here too
+            });
+        }
+    }, [location]);
     return (
         <div className='MobileLabAlign'>
             <Navbar />

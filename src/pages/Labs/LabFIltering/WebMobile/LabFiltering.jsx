@@ -13,6 +13,7 @@ import { features, services } from '../constatnts/Filter';
 import { port } from '../../../../config';
 import { Loader } from '../../../../components/Loader/Loader';
 import { LabCard } from '../LabCard/LabCard';
+import { useLocation } from 'react-router-dom';
 export const LabFiltering = () => {
     const [filters, setFilters] = useState({
         services: "",
@@ -23,7 +24,7 @@ export const LabFiltering = () => {
     const [labFilter, setlabFilter] = useState([])
     const [loading, setloading] = useState(false)
     const [notFound, setnotFound] = useState(false)
-
+    const location = useLocation()
     const updateDocByPlace = (value) => {
         if (value?.length > 0) {
             setlab(value)
@@ -116,7 +117,6 @@ export const LabFiltering = () => {
             setloading(false)
         })
     }, [])
-
     const handleTypeChanges = (e) => {
         const { name, value } = e?.target;
         if (name === "services") {
@@ -188,6 +188,16 @@ export const LabFiltering = () => {
     }
 
     console.log("Filters>>>>>>", filters)
+    useEffect(() => {
+        // Set initial filters based on location state
+        if (location?.state?.services) {
+            setFilters({
+                type: location?.state?.type,
+                services: location?.state?.services ? [location?.state?.services] : [],
+                features: [] // You might want to set other properties here too
+            });
+        }
+    }, [location]);
     return (
         <>
             <Navbar />
@@ -238,14 +248,14 @@ export const LabFiltering = () => {
                                     {services.map((name, index) => (
                                         <FormControlLabel
                                             name="services"
-                                            // disabled={
-                                            //     !filters.type || !labFilter.length > 0 && !filters.services.length > 0 ? true : false
-                                            // }
+                                            disabled={
+                                                location?.state?.services ? true : false
+                                            }
                                             value={name}
                                             onChange={handleTypeChanges}
                                             key={index}
                                             control={
-                                                <Checkbox
+                                                <Checkbox checked={filters?.services?.includes(name)}
                                                     sx={{ "& .MuiSvgIcon-root": { fontSize: 22 } }}
                                                 />
                                             }
@@ -268,14 +278,12 @@ export const LabFiltering = () => {
                                             //     filters.specializations.length !== 0 &&
                                             //     filters.specializations.includes(name.toLowerCase())
                                             // }
-                                            // disabled={
-                                            //     !filters.type || !labFilter.length > 0 && !filters.features.length > 0 ? true : false
-                                            // }
+
                                             onChange={handleTypeChanges}
                                             key={index}
                                             value={name}
                                             control={
-                                                <Checkbox
+                                                <Checkbox checked={filters?.features?.includes(name)}
                                                     sx={{ "& .MuiSvgIcon-root": { fontSize: 22 } }}
                                                 />
                                             }

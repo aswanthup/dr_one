@@ -52,7 +52,8 @@
    padding: 10px 30px;
    border-radius: 50px;
    color: white;
-
+   display: flex;
+   align-items: center;
 }
 
 .nav-button1 {
@@ -170,7 +171,8 @@
    .nav-button button {
       font-size: 13px;
    }
-   .nav-logo h2{
+
+   .nav-logo h2 {
       font-size: 14px;
    }
 }

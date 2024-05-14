@@ -16,10 +16,12 @@ import { HospitalCard } from '../HospitalCard/HospitalCard';
 import { Loader } from '../../../components/Loader/Loader';
 import { ayurSpec, features, homeoDept, speacializationNames, type } from '../constants/Filter';
 import Navbar from '../../../components/Navbar';
+import { useLocation } from 'react-router-dom';
 
 
 
 export const MobileHosFiltering = () => {
+
     const [filters, setFilters] = useState({
         speciality: "",
         type: "",
@@ -35,6 +37,7 @@ export const MobileHosFiltering = () => {
         features: false,
         type: false
     })
+    const location = useLocation()
     const updateDocByPlace = (value) => {
         if (value?.length > 0) {
             sethospitals(value)
@@ -198,6 +201,16 @@ export const MobileHosFiltering = () => {
             setspeciality(homeoDept)
         }
     }, [filters])
+    useEffect(() => {
+        // Set initial filters based on location state
+        if (location?.state?.type || location?.state?.speciality) {
+            setFilters({
+                type: location?.state?.type,
+                speciality: location?.state?.speciality ? [location?.state?.speciality] : [],
+                features: [] // You might want to set other properties here too
+            });
+        }
+    }, [location]);
     return (
         <>
             <div className='MobileLabAlign'>
@@ -218,12 +231,12 @@ export const MobileHosFiltering = () => {
                         </select>
                         <button onClick={openModal} value={"speciality"}
                             disabled={
-                                !filters.type || filters.type === "Unani" || !hospitalsFilter.length > 0 && !filters.speciality.length > 0 ? true : false
-                            } className={!filters.type || !hospitalsFilter.length > 0 && !filters.speciality.length > 0 || filters.type === "Unani" ? 'MobileLabAlignFilterSecButton2' : 'MobileLabAlignFilterSecButton'}>Speciality</button>
+                                !filters.type || filters.type === "Others" || !hospitalsFilter.length > 0 && !filters.speciality.length > 0 ? true : false
+                            } className={!filters.type || !hospitalsFilter.length > 0 && !filters.speciality.length > 0 || filters.type === "Others" ? 'MobileLabAlignFilterSecButton2' : 'MobileLabAlignFilterSecButton'}>Speciality</button>
                         <button
                             onClick={openModal} value={"features"} disabled={
-                                !filters.type || !hospitalsFilter.length > 0 && !filters.features.length > 0 || filters.type === "Unani" ? true : false
-                            } className={!filters.type || !hospitalsFilter.length > 0 && !filters.features.length > 0 || filters.type === "Unani" ? 'MobileLabAlignFilterSecButton2' : 'MobileLabAlignFilterSecButton'}>Features</button>
+                                !filters.type || !hospitalsFilter.length > 0 && !filters.features.length > 0 || filters.type === "Others" ? true : false
+                            } className={!filters.type || !hospitalsFilter.length > 0 && !filters.features.length > 0 || filters.type === "Others" ? 'MobileLabAlignFilterSecButton2' : 'MobileLabAlignFilterSecButton'}>Features</button>
                     </div>
                 </div>
 
@@ -256,48 +269,57 @@ export const MobileHosFiltering = () => {
                 }
 
                 <Modal open={OpenModals?.speciality || OpenModals?.features} onClose={closeModal} className='MobileLabAlignModal'>
-                    <div className='MobileLabAlignModalSec'>
-                        <FormGroup>
-                            {OpenModals?.speciality ?
-                                speciality.map((name, index) => (
-                                    <FormControlLabel
-                                        name="speciality"
-                                        // disabled={
-                                        //     !filters.type || !hospitalsFilter.length > 0 && !filters.services.length > 0 ? true : false
-                                        // }
-                                        sx={{ borderBottom: '1px solid #00000021' }}
-                                        value={name}
-                                        onChange={handleTypeChanges}
-                                        key={index}
-                                        control={
-                                            <Checkbox checked={filters?.speciality.includes(name)}
-                                                sx={{ "& .MuiSvgIcon-root": { fontSize: 26 } }}
+                    <>
+                        <div className='MobileLabAlignModalSec'>
+                            <div className='MobileLabAlignModalSecScroll'>
+                                <FormGroup>
+                                    {OpenModals?.speciality ?
+                                        speciality.map((name, index) => (
+                                            <FormControlLabel
+                                                name="speciality"
+                                                // disabled={
+                                                //     !filters.type || !hospitalsFilter.length > 0 && !filters.services.length > 0 ? true : false
+                                                // }
+                                                sx={{ borderBottom: '1px solid #00000021' }}
+                                                value={name}
+                                                onChange={handleTypeChanges}
+                                                key={index}
+                                                control={
+                                                    <Checkbox checked={filters?.speciality.includes(name)}
+                                                        sx={{ "& .MuiSvgIcon-root": { fontSize: 26 } }}
+                                                    />
+                                                }
+                                                label={<span style={{ fontSize: 20 }}>{name}</span>}
                                             />
-                                        }
-                                        label={<span style={{ fontSize: 20 }}>{name}</span>}
-                                    />
-                                ))
-                                :
-                                OpenModals?.features &&
-                                features.map((name, index) => (
-                                    <FormControlLabel
-                                        name="features"
-                                        value={name}
-                                        sx={{ borderBottom: '1px solid #00000021' }}
-                                        onChange={handleTypeChanges}
-                                        key={index}
-                                        control={
-                                            <Checkbox checked={filters?.features.includes(name)}
-                                                sx={{ "& .MuiSvgIcon-root": { fontSize: 26 } }}
+                                        ))
+                                        :
+                                        OpenModals?.features &&
+                                        features.map((name, index) => (
+                                            <FormControlLabel
+                                                name="features"
+                                                value={name}
+                                                sx={{ borderBottom: '1px solid #00000021' }}
+                                                onChange={handleTypeChanges}
+                                                key={index}
+                                                control={
+                                                    <Checkbox checked={filters?.features.includes(name)}
+                                                        sx={{ "& .MuiSvgIcon-root": { fontSize: 26 } }}
+                                                    />
+                                                }
+                                                label={<span style={{ fontSize: 20 }}>{name}</span>}
                                             />
-                                        }
-                                        label={<span style={{ fontSize: 20 }}>{name}</span>}
-                                    />
-                                ))
+                                        ))
 
-                            }
-                        </FormGroup>
-                    </div>
+                                    }
+                                </FormGroup>
+                            </div>
+                            <div className='MobileLabAlignModalSecBtnApply'>
+                                <button>Apply</button>
+                            </div>
+                        </div>
+                    </>
+
+
                 </Modal>
             </div >
             <Footer />

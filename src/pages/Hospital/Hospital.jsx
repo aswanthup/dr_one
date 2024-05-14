@@ -1,16 +1,83 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import '../Hospital/hospital.css'
 import Headroom from 'react-headroom';
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
 import { useNavigate } from 'react-router-dom';
+import { ayurSpec, homeoDept, speacializationNames } from '../HospitalFiltering/constants/Filter';
 export default function Hospital() {
   const navigate = useNavigate()
-
+  const [SpecialisationBatch, setSpecialisationBatch] = useState([])
+  const [ayurvedic, setayruvedic] = useState([])
+  const [Homeo, setHomeo] = useState([])
   const SearchHostpital = () => {
     navigate("/hospitalfilter")
   }
 
+  const renderHosFilteringBYType = (Value) => {
+    navigate("/hospitalfilter", { state: { type: Value } })
+  }
+  const renderHosFilteringBYSpeciality = (Value) => {
+    navigate("/hospitalfilter", { state: Value })
+  }
+
+
+
+  useEffect(() => {
+    let settingAllopathy = 0;
+    let AllopathyUpdatingBatch = [];
+    speacializationNames.forEach((ele, index) => {
+      if (!AllopathyUpdatingBatch[settingAllopathy] || AllopathyUpdatingBatch[settingAllopathy].length < 12) {
+        AllopathyUpdatingBatch[settingAllopathy] = [...(AllopathyUpdatingBatch[settingAllopathy] || []), ele];
+      } else {
+        settingAllopathy += 1;
+        AllopathyUpdatingBatch[settingAllopathy] = [ele];
+      }
+      setSpecialisationBatch(AllopathyUpdatingBatch)
+    });
+    let HomeoSettingIndex = 0;
+    let HomeoUpdatingBatch = [];
+    speacializationNames.forEach((ele, index) => {
+      if (!HomeoUpdatingBatch[HomeoSettingIndex] || HomeoUpdatingBatch[HomeoSettingIndex].length < 12) {
+        HomeoUpdatingBatch[HomeoSettingIndex] = [...(HomeoUpdatingBatch[HomeoSettingIndex] || []), ele];
+      } else {
+        HomeoSettingIndex += 1;
+        HomeoUpdatingBatch[HomeoSettingIndex] = [ele];
+      }
+      setHomeo(HomeoUpdatingBatch)
+    });
+    let AyurvedicSettingIndex = 0;
+    let AyurvedicUpdatingBatch = [];
+    speacializationNames.forEach((ele, index) => {
+      if (!AyurvedicUpdatingBatch[AyurvedicSettingIndex] || AyurvedicUpdatingBatch[AyurvedicSettingIndex].length < 12) {
+        AyurvedicUpdatingBatch[AyurvedicSettingIndex] = [...(AyurvedicUpdatingBatch[AyurvedicSettingIndex] || []), ele];
+      } else {
+        AyurvedicSettingIndex += 1;
+        AyurvedicUpdatingBatch[AyurvedicSettingIndex] = [ele];
+      }
+      setayruvedic(AyurvedicUpdatingBatch)
+    });
+  }, [speacializationNames, ayurSpec, homeoDept]);
+
+
+
+  useEffect(() => {
+    const array = [1, 1]
+    let Check = []
+    let finalRe = []
+    let FinishData = ''
+    array?.map(ele => {
+      if (!Check?.includes(ele)) {
+        Check.push(ele)
+      } else if (Check?.includes(ele)) {
+        finalRe.push(ele)
+      }
+      if (!finalRe.includes(ele)) {
+        FinishData = ele
+      }
+    })
+    console.log(FinishData)
+  }, [])
 
   return (
 
@@ -72,34 +139,25 @@ export default function Hospital() {
                 <h1><span className='color-blue'>Medical Field</span></h1>
               </div>
 
-
               <div>
-
                 <div className='medical_images_1'>
 
                 </div>
 
-                <a href='' className='medical_data_1 flex'>
-
+                <a href='' onClick={() => { renderHosFilteringBYType("Allopathy") }} className='medical_data_1 flex'>
                   <div className='flex new'>
                     <h4>Allopathy</h4>
                     <i class="ri-arrow-right-circle-line"></i>
                   </div>
-
-
                 </a>
 
               </div>
 
               <div>
-
                 <div className='medical_images_1 medical_images_2'>
-
                 </div>
-
                 <a href='' className='medical_data_1 flex'>
-
-                  <div className='flex new'>
+                  <div onClick={() => { renderHosFilteringBYType("Homeopathy") }} className='flex new'>
                     <h4>Homeopathy</h4>
                     <i class="ri-arrow-right-circle-line"></i>
                   </div>
@@ -123,13 +181,13 @@ export default function Hospital() {
 
             <div className='medical_right flex'>
 
-              <div className='new2'>
+              <div style={{ visibility: 'hidden' }} className='new2'>
 
                 <div className='medical_images_1 medical_images_3'>
 
                 </div>
 
-                <a href='' className='medical_data_1 flex'>
+                <a href='' onClick={() => { renderHosFilteringBYType("Unani") }} className='medical_data_1 flex'>
 
                   <div className='flex new'>
                     <h4>Unani</h4>
@@ -148,7 +206,7 @@ export default function Hospital() {
 
                 </div>
 
-                <a href='' className='medical_data_1 flex'>
+                <a href='' onClick={() => { renderHosFilteringBYType("Ayurvedic") }} className='medical_data_1 flex'>
 
                   <div className='flex new'>
                     <h4>Ayurvedic</h4>
@@ -166,7 +224,7 @@ export default function Hospital() {
 
                 </div>
 
-                <a href='' className='medical_data_1 flex'>
+                <a href='' onClick={() => { renderHosFilteringBYType("Others") }} className='medical_data_1 flex'>
 
                   <div className='flex new'>
                     <h4>Other</h4>
@@ -203,201 +261,53 @@ export default function Hospital() {
           </div>
 
 
-
-
           <div className='doctor_spec flex'>
 
             <div className='doctor_spec_card'>
 
-              <div className='spec_main_cards flex'>
-
-                <div className='spec_main_card flex'>
-
-                  <h4>Gynaecology</h4>
-
-                  <div className='spec_main_card_button flex'>
-
-                    <i class="ri-arrow-right-line"></i>
-
-                  </div>
-
+              {SpecialisationBatch?.map((ele, index) =>
+                <div className='spec_main_cards flex'>
+                  {
+                    ele?.map(speciality =>
+                      <div onClick={() => { renderHosFilteringBYSpeciality({ speciality: speciality, type: "Allopathy" }) }} className='spec_main_card flex'>
+                        <h4>{speciality}</h4>
+                        <div className='spec_main_card_button flex'>
+                          <i class="ri-arrow-right-line"></i>
+                        </div>
+                      </div>
+                    )
+                  }
                 </div>
-
-
-
-                <div className='spec_main_card flex'>
-
-                  <h4>Dermatology</h4>
-
-                  <div className='spec_main_card_button flex'>
-
-                    <i class="ri-arrow-right-line"></i>
-
-                  </div>
-
+              )}
+              {ayurvedic?.map((ele, index) =>
+                <div className='spec_main_cards flex'>
+                  {
+                    ele?.map(speciality =>
+                      <div onClick={() => { renderHosFilteringBYSpeciality({ speciality: speciality, type: "Ayurvedic" }) }} className='spec_main_card flex'>
+                        <h4>{speciality}</h4>
+                        <div className='spec_main_card_button flex'>
+                          <i class="ri-arrow-right-line"></i>
+                        </div>
+                      </div>
+                    )
+                  }
                 </div>
-
-
-                <div className='spec_main_card flex'>
-
-                  <h4>General medicine</h4>
-
-                  <div className='spec_main_card_button flex'>
-
-                    <i class="ri-arrow-right-line"></i>
-
-                  </div>
-
+              )}
+              {Homeo?.map((ele, index) =>
+                <div className='spec_main_cards flex'>
+                  {
+                    ele?.map(speciality =>
+                      <div onClick={() => { renderHosFilteringBYSpeciality({ speciality: speciality, type: "Homeopathy" }) }} className='spec_main_card flex'>
+                        <h4>{speciality}</h4>
+                        <div className='spec_main_card_button flex'>
+                          <i class="ri-arrow-right-line"></i>
+                        </div>
+                      </div>
+                    )
+                  }
                 </div>
-
-
-
-              </div>
-
-
-              <div className='spec_main_cards spec_main_cards2 flex'>
-
-                <div className='spec_main_card flex'>
-
-                  <h4>Mental health</h4>
-
-                  <div className='spec_main_card_button flex'>
-
-                    <i class="ri-arrow-right-line"></i>
-
-                  </div>
-
-                </div>
-
-
-
-                <div className='spec_main_card flex'>
-
-                  <h4>Pediatrics</h4>
-
-                  <div className='spec_main_card_button flex'>
-
-                    <i class="ri-arrow-right-line"></i>
-
-                  </div>
-
-                </div>
-
-
-                <div className='spec_main_card flex'>
-
-                  <h4>Cardiology</h4>
-
-                  <div className='spec_main_card_button flex'>
-
-                    <i class="ri-arrow-right-line"></i>
-
-                  </div>
-
-                </div>
-
-
-
-              </div>
-
-              <div className='spec_main_cards spec_main_cards2 flex'>
-
-                <div className='spec_main_card flex'>
-
-                  <h4>Orthopedic</h4>
-
-                  <div className='spec_main_card_button flex'>
-
-                    <i class="ri-arrow-right-line"></i>
-
-                  </div>
-
-                </div>
-
-
-
-                <div className='spec_main_card flex'>
-
-                  <h4>Neurology</h4>
-
-                  <div className='spec_main_card_button flex'>
-
-                    <i class="ri-arrow-right-line"></i>
-
-                  </div>
-
-                </div>
-
-
-                <div className='spec_main_card flex'>
-
-                  <h4>Pulmonology</h4>
-
-                  <div className='spec_main_card_button flex'>
-
-                    <i class="ri-arrow-right-line"></i>
-
-                  </div>
-
-                </div>
-
-
-
-              </div>
-
-
-
-
-              <div className='spec_main_cards spec_main_cards2 flex'>
-
-                <div className='spec_main_card flex'>
-
-                  <h4>Gastrology</h4>
-
-                  <div className='spec_main_card_button flex'>
-
-                    <i class="ri-arrow-right-line"></i>
-
-                  </div>
-
-                </div>
-
-
-
-                <div className='spec_main_card flex'>
-
-                  <h4>Ophthalmology</h4>
-
-                  <div className='spec_main_card_button flex'>
-
-                    <i class="ri-arrow-right-line"></i>
-
-                  </div>
-
-                </div>
-
-
-                <div className='spec_main_card flex'>
-
-                  <h4>ENT</h4>
-
-                  <div className='spec_main_card_button flex'>
-
-                    <i class="ri-arrow-right-line"></i>
-
-                  </div>
-
-                </div>
-
-
-
-              </div>
-
+              )}
             </div>
-
-
-
-
           </div>
 
 

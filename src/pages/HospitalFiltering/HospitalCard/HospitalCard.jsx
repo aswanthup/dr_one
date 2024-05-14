@@ -3,7 +3,6 @@ import styles from "../../doctor/DoctorSearch/DesktopView/searchdoc.module.css";
 export const HospitalCard = ({ data }) => {
     const details = data?.details
     const TemPImg = "./images/TempHosImg.jpg"
-    console.log("details>>>>", details)
     return (
         <>
             <div

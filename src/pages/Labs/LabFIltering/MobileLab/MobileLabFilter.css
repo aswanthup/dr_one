@@ -56,12 +56,27 @@
 }
 
 .MobileLabAlignModalSec {
-    max-height: 60%;
-    overflow-y: scroll;
     border-radius: 20px;
     width: 80%;
+    height: 60%;
     background-color: white;
     padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.MobileLabAlignModalSecScroll {
+    overflow: scroll;
+    max-height: 90%;
+    width: 80%;
+}
+
+.MobileLabAlignModalSecBtnApply button {
+    width: 100px;
+    color: white;
+    background-color: blue;
+    letter-spacing: 1px;
 }
 
 .MobileLabAlignShowSec {
@@ -74,12 +89,13 @@
 }
 
 @media screen and (max-width: 769px) {
-    .MobileLabAlignFilterSecButton{
+    .MobileLabAlignFilterSecButton {
         font-size: 14px;
         padding: 0px;
         height: 40px;
     }
-    .MobileLabAlignFilterSecButton2{
+
+    .MobileLabAlignFilterSecButton2 {
         font-size: 14px;
         padding: 0px;
         height: 40px;

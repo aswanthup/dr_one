@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Footer from '../../components/Footer'
 import '../Labs/labs.css'
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -11,10 +11,29 @@ import 'swiper/css/navigation';
 import { Navigation } from 'swiper/modules';
 import Navbar from '../../components/Navbar';
 import { useNavigate } from 'react-router-dom';
+import { services } from './LabFIltering/constatnts/Filter';
 
 export default function Labs() {
   const navigate = useNavigate()
-
+  const [LabServicesData, setLabServicesData] = useState([])
+  useEffect(() => {
+    let labServicesInd = 0;
+    let AllopathyUpdatingBatch = [];
+    services.forEach((ele, index) => {
+      if (!AllopathyUpdatingBatch[labServicesInd] || AllopathyUpdatingBatch[labServicesInd].length < 4) {
+        AllopathyUpdatingBatch[labServicesInd] = [...(AllopathyUpdatingBatch[labServicesInd] || []), ele];
+      } else {
+        labServicesInd += 1;
+        AllopathyUpdatingBatch[labServicesInd] = [ele];
+      }
+      setLabServicesData(AllopathyUpdatingBatch)
+    });
+  }, [])
+  console.log(LabServicesData)
+  const navigateElements = (value) => {
+    console.log("value>>>>>", value)
+    navigate("/labfiltering", { state: { services: value } })
+  }
   return (
     <div>
 
@@ -134,154 +153,32 @@ export default function Labs() {
               prevEl: ".prevButton"
             }
           } modules={[Navigation]} className="mySwiper">
-            <SwiperSlide>
-
-
-              <div className="lab-diagnostic-cards flex">
-
-
-                <div className="lab-diagnostic-card">
-                  <h2>Gastroscopy</h2>
-                  <div className="lab-diagnostic-paragraph">
-                    <h4>Generate Lorem Ipsum favorite writing, design and blogging tools. Explore the origins,
-                      history and meaning of the famous pa
-                    </h4>
-                  </div>
-                  <div className="flex lab-price-section">
-                    <h2>₹ 456</h2>
-                    <a href>
-                      <h4 className="lab-diagnostic-button">Add</h4>
-                    </a>
-                  </div>
+            {LabServicesData.map(ServiceEle =>
+              <SwiperSlide>
+                <div className='lab-diagnostic-cards-Map'>
+                  {ServiceEle.map(ele =>
+                    <div onClick={() => { navigateElements(ele) }} className="lab-diagnostic-cards flex">
+                      <div className="lab-diagnostic-card">
+                        <h2>{ele}</h2>
+                        <div className="lab-diagnostic-paragraph">
+                          <h4>Generate Lorem Ipsum favorite writing, design and blogging tools. Explore the origins,
+                            history and meaning of the famous pa
+                          </h4>
+                        </div>
+                        <div className="flex lab-price-section">
+                          <h2>₹ 456</h2>
+                          {/* <a href>
+                        <h4 className="lab-diagnostic-button">Add</h4>
+                      </a> */}
+                        </div>
+                      </div>
+                    </div>)}
                 </div>
 
-
-                <div className="lab-diagnostic-card">
-                  <h2>Electrocardiogram</h2>
-                  <div className="lab-diagnostic-paragraph">
-                    <h4>Generate Lorem Ipsum favorite writing, design and blogging tools. Explore the origins,
-                      history and meaning of the famous pa
-                    </h4>
-                  </div>
-                  <div className="flex lab-price-section">
-                    <h2>₹ 416</h2>
-                    <a href>
-                      <h4 className="lab-diagnostic-button">Add</h4>
-                    </a>
-                  </div>
-                </div>
+              </SwiperSlide>
+            )}
 
 
-
-                <div className="lab-diagnostic-card">
-                  <h2>Electrocardiogram</h2>
-                  <div className="lab-diagnostic-paragraph">
-                    <h4>Generate Lorem Ipsum favorite writing, design and blogging tools. Explore the origins,
-                      history and meaning of the famous pa
-                    </h4>
-                  </div>
-                  <div className="flex lab-price-section">
-                    <h2>₹ 786</h2>
-                    <a href>
-                      <h4 className="diagnostic-button">Add</h4>
-                    </a>
-                  </div>
-                </div>
-
-
-
-
-                <div className="diagnostic-card">
-                  <h2>Electrocardiogram</h2>
-                  <div className="diagnostic-paragraph">
-                    <h4>Generate Lorem Ipsum favorite writing, design and blogging tools. Explore the origins,
-                      history and meaning of the famous pa
-                    </h4>
-                  </div>
-                  <div className="flex price-section">
-                    <h2>₹ 876</h2>
-                    <a href>
-                      <h4 className="diagnostic-button">Add</h4>
-                    </a>
-                  </div>
-                </div>
-
-
-              </div>
-
-            </SwiperSlide>
-
-            <SwiperSlide>
-              <div className="lab-diagnostic-cards flex">
-
-
-                <div className="diagnostic-card">
-                  <h2>Gastroscopy</h2>
-                  <div className="diagnostic-paragraph">
-                    <h4>Generate Lorem Ipsum favorite writing, design and blogging tools. Explore the origins,
-                      history and meaning of the famous pa
-                    </h4>
-                  </div>
-                  <div className="flex price-section">
-                    <h2>₹ 236</h2>
-                    <a href>
-                      <h4 className="diagnostic-button">Add</h4>
-                    </a>
-                  </div>
-                </div>
-
-
-                <div className="diagnostic-card">
-                  <h2>Gastroscopy</h2>
-                  <div className="diagnostic-paragraph">
-                    <h4>Generate Lorem Ipsum favorite writing, design and blogging tools. Explore the origins,
-                      history and meaning of the famous pa
-                    </h4>
-                  </div>
-                  <div className="flex price-section">
-                    <h2>₹ 780</h2>
-                    <a href>
-                      <h4 className="diagnostic-button">Add</h4>
-                    </a>
-                  </div>
-                </div>
-
-
-
-                <div className="diagnostic-card">
-                  <h2>Gastroscopy</h2>
-                  <div className="diagnostic-paragraph">
-                    <h4>Generate Lorem Ipsum favorite writing, design and blogging tools. Explore the origins,
-                      history and meaning of the famous pa
-                    </h4>
-                  </div>
-                  <div className="flex price-section">
-                    <h2>₹ 890</h2>
-                    <a href>
-                      <h4 className="diagnostic-button">Add</h4>
-                    </a>
-                  </div>
-                </div>
-
-
-
-
-                <div className="diagnostic-card">
-                  <h2>Gastroscopy</h2>
-                  <div className="diagnostic-paragraph">
-                    <h4>Generate Lorem Ipsum favorite writing, design and blogging tools. Explore the origins,
-                      history and meaning of the famous pa
-                    </h4>
-                  </div>
-                  <div className="flex price-section">
-                    <h2>₹ 120</h2>
-                    <a href>
-                      <h4 className="diagnostic-button">Add</h4>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </SwiperSlide>
 
           </Swiper>
 
@@ -309,7 +206,7 @@ export default function Labs() {
 
       <div className='container mobilelab'>
 
-      <div className="labs-banner flex">
+        <div className="labs-banner flex">
           <div>
             <h1 style={{ color: 'white' }}>
               Find Your <span className="color-blue"> Labs From</span> </h1>
@@ -320,35 +217,35 @@ export default function Labs() {
 
 
 
-          
 
 
 
 
-      </div>
 
-        <div onClick={()=>navigate("/searchdoctor")} className="hospital-search-box flex">
+        </div>
 
-<div className="Hospital-container-search flex">
-  <div className="Hospital-Search-box flex">
-    <div className="Hospital-location-section flex">
+        <div onClick={() => navigate("/searchdoctor")} className="hospital-search-box flex">
 
-      <i className="ri-map-pin-2-line" />
+          <div className="Hospital-container-search flex">
+            <div className="Hospital-Search-box flex">
+              <div className="Hospital-location-section flex">
 
-      <input className="Hospital-Location-input" type="text" placeholder='Kozhikode' />
+                <i className="ri-map-pin-2-line" />
 
-    </div>
-    <input className="Hospital-search-input" type="text" placeholder="Search Doctor" />
-    <div className="Hospital-search-section flex">
-      <i className="ri-search-2-line" />
-    </div>
-  </div>
+                <input className="Hospital-Location-input" type="text" placeholder='Kozhikode' />
 
-</div>
+              </div>
+              <input className="Hospital-search-input" type="text" placeholder="Search Doctor" />
+              <div className="Hospital-search-section flex">
+                <i className="ri-search-2-line" />
+              </div>
+            </div>
 
-</div>
+          </div>
 
-<div className="mobile-doctor-specialties">
+        </div>
+
+        <div className="mobile-doctor-specialties">
           <div className="mobile-second-heading">
             <h1>
               Find Test by<span className="color-blue ">Health Concern</span>
@@ -398,44 +295,44 @@ export default function Labs() {
           </div>
         </div>
         <div className="mobile-second-heading">
-            <h1>
-              Top Booked<span className="color-blue ">Diagnostic Tests</span>
-            </h1>
-          </div>
+          <h1>
+            Top Booked<span className="color-blue ">Diagnostic Tests</span>
+          </h1>
+        </div>
 
-          <div className="diagnostic-card">
-            <h2>Gastroscopy</h2>
-            <div className="diagnostic-paragraph">
-              <h4>
-                Generate Lorem Ipsum favorite writing, design and blogging
-                tools. Explore the origins, history and meaning of the famous pa
-              </h4>
-            </div>
-            <div className="flex price-section">
-              <h2>₹ 456</h2>
-              <a href>
-                <h4 className="diagnostic-button">Add</h4>
-              </a>
-            </div>
+        <div className="diagnostic-card">
+          <h2>Gastroscopy</h2>
+          <div className="diagnostic-paragraph">
+            <h4>
+              Generate Lorem Ipsum favorite writing, design and blogging
+              tools. Explore the origins, history and meaning of the famous pa
+            </h4>
           </div>
+          <div className="flex price-section">
+            <h2>₹ 456</h2>
+            <a href>
+              <h4 className="diagnostic-button">Add</h4>
+            </a>
+          </div>
+        </div>
 
-          <div className="diagnostic-card diagnostic-card2 ">
-            <h2>Gastroscopy</h2>
-            <div className="diagnostic-paragraph">
-              <h4>
-                Generate Lorem Ipsum favorite writing, design and blogging
-                tools. Explore the origins, history and meaning of the famous pa
-              </h4>
-            </div>
-            <div className="flex price-section">
-              <h2>₹ 456</h2>
-              <a href>
-                <h4 className="diagnostic-button">Add</h4>
-              </a>
-            </div>
+        <div className="diagnostic-card diagnostic-card2 ">
+          <h2>Gastroscopy</h2>
+          <div className="diagnostic-paragraph">
+            <h4>
+              Generate Lorem Ipsum favorite writing, design and blogging
+              tools. Explore the origins, history and meaning of the famous pa
+            </h4>
           </div>
-      
-      
+          <div className="flex price-section">
+            <h2>₹ 456</h2>
+            <a href>
+              <h4 className="diagnostic-button">Add</h4>
+            </a>
+          </div>
+        </div>
+
+
       </div>
 
 
