@@ -156,7 +156,7 @@ export const HospitalFiltering = () => {
             });
         }
     }, [location]);
-   
+
 
     return (
         <>
@@ -210,7 +210,7 @@ export const HospitalFiltering = () => {
                                         <FormControlLabel
                                             name="speciality"
                                             disabled={
-                                                !filters.type || !hospitalsFilter.length > 0 && !filters.speciality.length > 0 || filters.type === "Others" || location?.state?.type ? true : false
+                                                !filters.type || !hospitalsFilter.length > 0 && !filters.speciality.length > 0 || filters.type === "Others" || location?.state?.speciality ? true : false
                                             }
                                             value={name}
                                             onChange={handleTypeChanges}
@@ -240,7 +240,7 @@ export const HospitalFiltering = () => {
                                             //     filters.specializations.includes(name.toLowerCase())
                                             // }
                                             disabled={
-                                                !filters.type || !hospitalsFilter.length > 0 && !filters.features.length > 0 ? true : false
+                                                !filters.type || notFound ? true : false
                                             }
                                             onChange={handleTypeChanges}
                                             key={index}

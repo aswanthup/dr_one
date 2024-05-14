@@ -225,7 +225,7 @@
   background-color: #3a65fd;
   color: white;
   height: 2vw;
-   align-items: center;
+  align-items: center;
   justify-content: center;
   border-radius: 0.3vw;
   cursor: pointer;
@@ -236,7 +236,7 @@
   display: flex;
   flex-wrap: wrap;
   min-width: 100%;
-  justify-content: start;
+  justify-content: space-around;
   align-items: flex-start;
 }
 
