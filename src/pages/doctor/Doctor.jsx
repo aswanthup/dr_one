@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import Footer from "../../components/Footer";
 import "../doctor/doctor.css";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -14,9 +14,13 @@ import $ from "jquery"; // Import jQuery
 import Navbar from "../../components/Navbar";
 import { useNavigate } from "react-router-dom";
 import { MyContext } from "../../contexts/Contexts";
+import { ayurSpec, homeoDept, speacializationNames } from "../HospitalFiltering/constants/Filter";
 export default function Doctor() {
   const [visibleContent, setVisibleContent] = useState(2);
+  const [SpecialisationBatch, setSpecialisationBatch] = useState([]);
   const { passedSpecialization, setPassedSpecialization } = useContext(MyContext)
+  const [ayurvedic, setayruvedic] = useState([])
+  const [Homeo, setHomeo] = useState([])
   const navigate = useNavigate()
   const content = [
     $(document).ready(function () {
@@ -40,6 +44,44 @@ export default function Doctor() {
     setPassedSpecialization(specialization)
     navigate("/searchdoctor")
   }
+
+  useEffect(() => {
+    let settingAllopathy = 0;
+    let AllopathyUpdatingBatch = [];
+    speacializationNames.forEach((ele, index) => {
+      if (!AllopathyUpdatingBatch[settingAllopathy] || AllopathyUpdatingBatch[settingAllopathy].length < 12) {
+        AllopathyUpdatingBatch[settingAllopathy] = [...(AllopathyUpdatingBatch[settingAllopathy] || []), ele];
+      } else {
+        settingAllopathy += 1;
+        AllopathyUpdatingBatch[settingAllopathy] = [ele];
+      }
+      setSpecialisationBatch(AllopathyUpdatingBatch)
+    });
+    let HomeoSettingIndex = 0;
+    let HomeoUpdatingBatch = [];
+    speacializationNames.forEach((ele, index) => {
+      if (!HomeoUpdatingBatch[HomeoSettingIndex] || HomeoUpdatingBatch[HomeoSettingIndex].length < 12) {
+        HomeoUpdatingBatch[HomeoSettingIndex] = [...(HomeoUpdatingBatch[HomeoSettingIndex] || []), ele];
+      } else {
+        HomeoSettingIndex += 1;
+        HomeoUpdatingBatch[HomeoSettingIndex] = [ele];
+      }
+      setHomeo(HomeoUpdatingBatch)
+    });
+    let AyurvedicSettingIndex = 0;
+    let AyurvedicUpdatingBatch = [];
+    speacializationNames.forEach((ele, index) => {
+      if (!AyurvedicUpdatingBatch[AyurvedicSettingIndex] || AyurvedicUpdatingBatch[AyurvedicSettingIndex].length < 12) {
+        AyurvedicUpdatingBatch[AyurvedicSettingIndex] = [...(AyurvedicUpdatingBatch[AyurvedicSettingIndex] || []), ele];
+      } else {
+        AyurvedicSettingIndex += 1;
+        AyurvedicUpdatingBatch[AyurvedicSettingIndex] = [ele];
+      }
+      setayruvedic(AyurvedicUpdatingBatch)
+    });
+  }, [speacializationNames, ayurSpec, homeoDept]);
+
+
 
   return (
     <div>
@@ -106,7 +148,7 @@ export default function Doctor() {
         </div>
 
 
-        
+
 
         <div className="our-specialities">
           <div className="second-main-head">
@@ -352,111 +394,52 @@ export default function Doctor() {
 
         <div className="doctor_spe"></div>
 
-        <div className="doctor_spec flex">
-          <div className="doctor_spec_card">
-            <div className="spec_main_cards flex">
-              <div className="spec_main_card flex" >
-                <h4>Gynaecology</h4>
+        <div className='doctor_spec flex'>
 
-                <div onClick={() => handleSelectSpecialization("gynecology")} className="spec_main_card_button flex">
-                  <i className="ri-arrow-right-line"></i>
-                </div>
+          <div className='doctor_spec_card'>
+
+            {SpecialisationBatch?.map((ele, index) =>
+              <div className='spec_main_cards flex'>
+                {
+                  ele?.map(speciality =>
+                    <div className='spec_main_card flex'>
+                      <h4>{speciality}</h4>
+                      <div className='spec_main_card_button flex'>
+                        <i class="ri-arrow-right-line"></i>
+                      </div>
+                    </div>
+                  )
+                }
               </div>
-
-              <div className="spec_main_card flex">
-                <h4>Dermatology</h4>
-
-                <div className="spec_main_card_button flex">
-                  <i className="ri-arrow-right-line"></i>
-                </div>
+            )}
+            {ayurvedic?.map((ele, index) =>
+              <div className='spec_main_cards flex'>
+                {
+                  ele?.map(speciality =>
+                    <div className='spec_main_card flex'>
+                      <h4>{speciality}</h4>
+                      <div className='spec_main_card_button flex'>
+                        <i class="ri-arrow-right-line"></i>
+                      </div>
+                    </div>
+                  )
+                }
               </div>
-
-              <div className="spec_main_card flex">
-                <h4>General medicine</h4>
-
-                <div className="spec_main_card_button flex">
-                  <i className="ri-arrow-right-line"></i>
-                </div>
+            )}
+            {Homeo?.map((ele, index) =>
+              <div className='spec_main_cards flex'>
+                {
+                  ele?.map(speciality =>
+                    <div className='spec_main_card flex'>
+                      <h4>{speciality}</h4>
+                      <div className='spec_main_card_button flex'>
+                        <i class="ri-arrow-right-line"></i>
+                      </div>
+                    </div>
+                  )
+                }
               </div>
-            </div>
-
-            <div className="spec_main_cards spec_main_cards2 flex">
-              <div className="spec_main_card flex">
-                <h4>Mental health</h4>
-
-                <div className="spec_main_card_button flex">
-                  <i className="ri-arrow-right-line"></i>
-                </div>
-              </div>
-
-              <div className="spec_main_card flex">
-                <h4>Pediatrics</h4>
-
-                <div className="spec_main_card_button flex">
-                  <i className="ri-arrow-right-line"></i>
-                </div>
-              </div>
-
-              <div className="spec_main_card flex">
-                <h4>Cardiology</h4>
-
-                <div className="spec_main_card_button flex">
-                  <i className="ri-arrow-right-line"></i>
-                </div>
-              </div>
-            </div>
-
-            <div className="spec_main_cards spec_main_cards2 flex">
-              <div className="spec_main_card flex">
-                <h4>Orthopedic</h4>
-
-                <div className="spec_main_card_button flex">
-                  <i className="ri-arrow-right-line"></i>
-                </div>
-              </div>
-
-              <div className="spec_main_card flex">
-                <h4>Neurology</h4>
-
-                <div className="spec_main_card_button flex">
-                  <i className="ri-arrow-right-line"></i>
-                </div>
-              </div>
-
-              <div className="spec_main_card flex">
-                <h4>Pulmonology</h4>
-
-                <div className="spec_main_card_button flex">
-                  <i className="ri-arrow-right-line"></i>
-                </div>
-              </div>
-            </div>
-
-            <div className="spec_main_cards spec_main_cards2 flex">
-              <div className="spec_main_card flex">
-                <h4>Gastrology</h4>
-
-                <div className="spec_main_card_button flex">
-                  <i className="ri-arrow-right-line"></i>
-                </div>
-              </div>
-
-              <div className="spec_main_card flex">
-                <h4>Ophthalmology</h4>
-
-                <div className="spec_main_card_button flex">
-                  <i className="ri-arrow-right-line"></i>
-                </div>
-              </div>
-
-              <div className="spec_main_card flex">
-                <h4>ENT</h4>
-
-                <div className="spec_main_card_button flex">
-                  <i className="ri-arrow-right-line"></i>
-                </div>
-              </div>
-            </div>
+            )}
           </div>
         </div>
 
@@ -576,26 +559,26 @@ export default function Doctor() {
 
 
 
-        <div onClick={()=>navigate("/searchdoctor")} className="hospital-search-box flex">
+        <div onClick={() => navigate("/searchdoctor")} className="hospital-search-box flex">
 
-<div className="Hospital-container-search flex">
-  <div className="Hospital-Search-box flex">
-    <div className="Hospital-location-section flex">
+          <div className="Hospital-container-search flex">
+            <div className="Hospital-Search-box flex">
+              <div className="Hospital-location-section flex">
 
-      <i className="ri-map-pin-2-line" />
+                <i className="ri-map-pin-2-line" />
 
-      <input className="Hospital-Location-input" type="text" placeholder='Kozhikode' />
+                <input className="Hospital-Location-input" type="text" placeholder='Kozhikode' />
 
-    </div>
-    <input className="Hospital-search-input" type="text" placeholder="Search Doctor" />
-    <div className="Hospital-search-section flex">
-      <i className="ri-search-2-line" />
-    </div>
-  </div>
+              </div>
+              <input className="Hospital-search-input" type="text" placeholder="Search Doctor" />
+              <div className="Hospital-search-section flex">
+                <i className="ri-search-2-line" />
+              </div>
+            </div>
 
-</div>
+          </div>
 
-</div>
+        </div>
 
 
 
