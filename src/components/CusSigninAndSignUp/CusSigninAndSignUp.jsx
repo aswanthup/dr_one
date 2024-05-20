@@ -20,7 +20,7 @@ export const CusSigninAndSignUp = ({ Caller: { ReCallF, OpenModal } }) => {
     return (
         <div>
             <Modal
-                className='CusSigninAndSignUpModal'
+                className='CusSigninAndSignUpModal container'
                 open={openModal}
                 onClose={handleClose}
             >
