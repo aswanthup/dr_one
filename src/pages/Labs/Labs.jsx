@@ -374,15 +374,6 @@ export default function Labs() {
 
 
       </div>
-
-
-
-
-
-
-
-
-
       <Footer />
 
     </div>

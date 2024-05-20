@@ -5,8 +5,105 @@
 }
 
 .CusSigninAndSignUpModalAdjst {
-    height: 20vh;
+    height:fit-content;
     background-color: white;
-    width: 30vh;
+    width:45vw;
     margin-top: 30px;
+    padding:2.5vw;
+    border-radius:15px;
+}
+
+.toploginnav{
+    justify-content: space-between;
+}
+
+.toplogindatainput input{
+    height:30px;
+    width:100%;
+    background-color:#EEF1FF;
+    border-radius:6px;
+    height:40px;
+    margin-top:10px;
+    padding-left:10px;
+}
+
+.toplogindatainput{
+    flex-direction: column;
+    
+}
+
+.toplogindatabutton{
+    background-color:#3A65FD;
+    color: white;
+    width:100%;
+    align-items: center;
+    justify-content: center;
+    border-radius:6px;
+    height:40px;
+    margin-top:30px;
+}
+
+.toplogindatatext{
+    margin-top:15px;
+}
+
+.toplogindata{
+    justify-content: space-between;
+    margin-top: 30px;
+}
+
+.toplogindataimg img{
+    width:16vw;
+    object-fit: cover;
+}
+
+.toplogindatainput{
+    width: 50%;
+}
+
+.smallh4{
+    color:#0000005e ;
+    letter-spacing:2px;
+}
+.smallh3{
+    font-weight:700;
+}
+
+.toplogindataimg{
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+}
+
+
+.registerpopup{
+    margin-top:25px;
+}
+
+
+.registerpopup input{
+    height:30px;
+    width:100%;
+    background-color:#EEF1FF;
+    border-radius:6px;
+    height:40px;
+    margin-top:10px;
+    padding-left:10px;
+}
+
+.registerpopupleftright {
+    justify-content: space-between;
+}
+
+.registerpopupright{
+    width: 100%;
+    justify-content: space-between;
+}
+.registerpopupleft{
+    width: 100%;
+    justify-content: space-between;
+}
+
+.registerpopuinputs{
+    width: 48%;
 }
