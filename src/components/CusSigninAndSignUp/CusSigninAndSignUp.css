@@ -1,0 +1,12 @@
+.CusSigninAndSignUpModal {
+    display: flex;
+    justify-content: end;
+    padding: 50px;
+}
+
+.CusSigninAndSignUpModalAdjst {
+    height: 20vh;
+    background-color: white;
+    width: 30vh;
+    margin-top: 30px;
+}

@@ -2,11 +2,12 @@ import React, { useState } from 'react'
 import '../components/Navbar.css'
 import { Modal } from '@mui/material'
 import { useLocation } from 'react-router-dom'
+import { CusSigninAndSignUp } from './CusSigninAndSignUp/CusSigninAndSignUp'
 
 
 export default function Navbar() {
   const [open, setopen] = useState(false)
-
+  const [signInModalOpen, setSignInModalOpen] = useState(false);
   const SelectOpen = () => {
     if (open) {
       setopen(false)
@@ -18,7 +19,9 @@ export default function Navbar() {
   const location = useLocation()
   console.log("location>>>>", location)
   const path = location?.pathname
-
+  const toggleSignInModal = () => {
+    setSignInModalOpen(!signInModalOpen);
+  }
   return (
 
     <>
@@ -50,7 +53,7 @@ export default function Navbar() {
 
           <div className="nav-buttons flex">
             <div className="nav-button">
-              <button onClick={() => window.location.href = '/login'}>
+              <button onClick={toggleSignInModal}>
                 <h3 className="nav-button1" >Login</h3>
               </button>
 
@@ -61,6 +64,7 @@ export default function Navbar() {
             </div>
 
           </div>
+          <CusSigninAndSignUp Caller={{ ReCallF: toggleSignInModal, OpenModal: signInModalOpen }} />
           <Modal className='menubuttonNavModal container' open={open} onClose={SelectOpen} >
             <>
               <div className='menubuttonNavModalSec flex '>
