@@ -346,7 +346,7 @@ export default function Labadminregistration2() {
                   <h4>{ele}{index + 1 === LabAdminRg?.Services?.length ? '' : ","}&nbsp; </h4>
                 )}
               </div>
-              : <h4>Select Specialties</h4>}
+              : <h4>Select Specialities</h4>}
             </button>
           </div>
 

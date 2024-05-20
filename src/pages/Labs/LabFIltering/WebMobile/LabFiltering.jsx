@@ -248,9 +248,9 @@ export const LabFiltering = () => {
                                     {services.map((name, index) => (
                                         <FormControlLabel
                                             name="services"
-                                            disabled={
-                                                location?.state?.services ? true : false
-                                            }
+                                            // disabled={
+                                            //     location?.state?.services ? true : false
+                                            // }
                                             value={name}
                                             onChange={handleTypeChanges}
                                             key={index}

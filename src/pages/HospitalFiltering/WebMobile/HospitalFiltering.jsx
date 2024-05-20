@@ -184,7 +184,7 @@ export const HospitalFiltering = () => {
                                 >
                                     {type.map((types, index) => (
                                         <FormControlLabel
-                                            disabled={location?.state?.type ? true : false}
+                                            // disabled={location?.state?.type ? true : false}
                                             onChange={handleTypeChanges}
                                             key={index}
                                             value={types}
@@ -210,7 +210,7 @@ export const HospitalFiltering = () => {
                                         <FormControlLabel
                                             name="speciality"
                                             disabled={
-                                                !filters.type || !hospitalsFilter.length > 0 && !filters.speciality.length > 0 || filters.type === "Others" || location?.state?.speciality ? true : false
+                                                !filters.type || !hospitalsFilter.length > 0 && !filters.speciality.length > 0 || filters.type === "Others" ? true : false
                                             }
                                             value={name}
                                             onChange={handleTypeChanges}

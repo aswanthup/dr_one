@@ -9,12 +9,12 @@ export default function DocCard({ data }) {
   return (
     <>
       <div
-        // onClick={() => navigate("/doctorprofile", { state: details })}
+        onClick={() => navigate("/doctorprofile", { state: details })}
         className={styles.cardContainer}>
         <div>
           <img className={styles.docImage} src={details?.image || tempImg} alt="" />
         </div>
-        <div>
+        <div >
           <div>
             <span style={{ fontWeight: 400, fontSize: 22 }}>
               {details?.name}

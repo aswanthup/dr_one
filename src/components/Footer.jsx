@@ -20,8 +20,8 @@ export default function Footer() {
                 <a href="">
                   <h4>Contact Us</h4>
                 </a>
-                <a href="/registration">
-                  <h4>Become a Health Partner</h4>
+                <a href="/login">
+                  <h4>Health Partner Login</h4>
                 </a>
               </div>
               <div>

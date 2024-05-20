@@ -62,6 +62,9 @@ export default function Hospitaladminregistration1() {
     } else if (name === "password") {
       const trimmedValue = value.trim();
       setHospitalAdminRg({ ...HospitalAdminRg, [name]: trimmedValue });
+    } else if (name === "name") {
+      const filteredValue = value.replace(/[0-9]/g, '');
+      setHospitalAdminRg({ ...HospitalAdminRg, [name]: filteredValue });
     } else {
       setHospitalAdminRg({ ...HospitalAdminRg, [name]: value });
     }

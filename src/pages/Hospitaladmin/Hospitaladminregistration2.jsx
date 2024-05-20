@@ -171,7 +171,8 @@ export default function Hospitaladminregistration2() {
 
                         } else {
                                 // Handle invalid HospitalAdminRg data (optional: log a message or take other actions)
-                                console.error("HospitalAdminRg object or its properties (image, subImages) are missing.");
+                                toast.info("Hospital Admin Registration object or its properties (image, subImages) are missing.")
+
                         }
                         console.log(temp); // You can uncomment this line to see the contents of temp
                         console.log("temp>>>>", temp)
@@ -343,7 +344,7 @@ export default function Hospitaladminregistration2() {
 
                                         <div>
                                                 <div className='name-progrss flex'>
-                                                        <h4>Specialties </h4>
+                                                        <h4>Specialities </h4>
                                                         <h4>{`${HospitalAdminRg?.specialties?.length ? HospitalAdminRg?.specialties?.length : 0}/${specialties?.length}`}</h4>
                                                 </div>
                                                 <button type='button' onClick={() => { openModal({ specialties: true }) }} className='hospital-second-section-Div flex'>{HospitalAdminRg?.specialties?.length > 0 ?
@@ -352,7 +353,7 @@ export default function Hospitaladminregistration2() {
                                                                         <h4>{ele}{index + 1 === HospitalAdminRg?.specialties?.length ? '' : ","}&nbsp; </h4>
                                                                 )}
                                                         </div>
-                                                        : <h4>Select Specialties</h4>}
+                                                        : <h4>Select Specialities</h4>}
                                                 </button>
                                         </div>
 

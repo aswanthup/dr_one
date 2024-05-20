@@ -399,7 +399,7 @@ export default function Doctor() {
           <div className='doctor_spec_card'>
 
             {SpecialisationBatch?.map((ele, index) =>
-              <div className='spec_main_cards flex'>
+              <div className='spec_main_cards_align flex'>
                 {
                   ele?.map(speciality =>
                     <div className='spec_main_card flex'>
@@ -413,7 +413,7 @@ export default function Doctor() {
               </div>
             )}
             {ayurvedic?.map((ele, index) =>
-              <div className='spec_main_cards flex'>
+              <div className='spec_main_cards_align flex'>
                 {
                   ele?.map(speciality =>
                     <div className='spec_main_card flex'>
@@ -427,7 +427,7 @@ export default function Doctor() {
               </div>
             )}
             {Homeo?.map((ele, index) =>
-              <div className='spec_main_cards flex'>
+              <div className='spec_main_cards_align flex'>
                 {
                   ele?.map(speciality =>
                     <div className='spec_main_card flex'>
@@ -550,7 +550,7 @@ export default function Doctor() {
                   <h1 style={{ color: "white" }}>34 +</h1>
                 </div>
                 <div>
-                  <h4>Specialties</h4>
+                  <h4>Specialities</h4>
                 </div>
               </div>
             </div>

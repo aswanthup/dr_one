@@ -63,6 +63,9 @@ export default function Labadminregistration1() {
     } else if (name === "password") {
       const trimmedValue = value.trim();
       setLabAdminRg({ ...LabAdminRg, [name]: trimmedValue });
+    } else if (name === "name") {
+      const filteredValue = value.replace(/[0-9]/g, '');
+      setLabAdminRg({ ...LabAdminRg, [name]: filteredValue });
     } else {
       setLabAdminRg({ ...LabAdminRg, [name]: value });
     }

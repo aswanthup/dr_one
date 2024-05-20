@@ -36,18 +36,25 @@ export default function Doctoradminregistration1() {
   };
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
+    const { name, value } = e?.target;  
     if ((name === "phone") & (value.toString().length > 10)) {
       setData({
         ...Data,
         [name]: Data.phone,
       });
       return;
+    } else if (name === "secondname" || name === "name") {
+      setData({
+        ...Data,
+        [name]: value,
+      });
+      const filteredValue = value.replace(/[0-9]/g, '');
+      setData({ ...Data, [name]: filteredValue });
+    } else {
+      setData({ ...Data, [name]: value });
     }
-    setData({
-      ...Data,
-      [name]: value,
-    });
+
+
 
     setValidationErrors({ ...validationErrors, [e.target.name]: "" });
 
@@ -131,8 +138,8 @@ export default function Doctoradminregistration1() {
       !Data.phone ||
       !Data.email ||
       !Data.password ||
-      !Data.confirmPassword 
-      // !Data.docImage;
+      !Data.confirmPassword
+    // !Data.docImage;
 
     const isValidationError =
       validationErrors.confirmPassword ||

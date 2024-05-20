@@ -154,7 +154,7 @@ export default function Mainpage() {
           <div className=" container-second Specialties">
             <div className="second-main-head second-main-head2 flex">
               <h1>
-                Our <span>Specialties</span>
+                Our <span>Specialities</span>
               </h1>
 
               <div className="explore-more">
@@ -175,7 +175,7 @@ export default function Mainpage() {
                 </div>
                 <div className="home-specialties-button">
                   <a href="">
-                    <h4>Consult Now</h4>
+                    <h4>Find doctor</h4>
                   </a>
                 </div>
               </div>
@@ -189,7 +189,7 @@ export default function Mainpage() {
                   <h4>Pregnancy</h4>
                 </div>
                 <a className="home-specialties-button" href="">
-                  <h4>Consult Now</h4>
+                  <h4>Find doctor</h4>
                 </a>
               </div>
 
@@ -202,7 +202,7 @@ export default function Mainpage() {
                   <h4>skin issues</h4>
                 </div>
                 <a className="home-specialties-button" href="">
-                  <h4>Consult Now</h4>
+                  <h4>Find doctor</h4>
                 </a>
               </div>
 
@@ -215,7 +215,7 @@ export default function Mainpage() {
                   <h4>Fever</h4>
                 </div>
                 <a className="home-specialties-button" href="">
-                  <h4>Consult Now</h4>
+                  <h4>Find doctor</h4>
                 </a>
               </div>
             </div>
@@ -233,7 +233,7 @@ export default function Mainpage() {
                   <h4>Fever</h4>
                 </div>
                 <a className="home-specialties-button" href="">
-                  <h4>Consult Now</h4>
+                  <h4>Find doctor</h4>
                 </a>
               </div>
 
@@ -246,7 +246,7 @@ export default function Mainpage() {
                   <h4>Anxiety</h4>
                 </div>
                 <a className="home-specialties-button" href="">
-                  <h4>Consult Now</h4>
+                  <h4>Find doctor</h4>
                 </a>
               </div>
 
@@ -259,7 +259,7 @@ export default function Mainpage() {
                   <h4>Fever</h4>
                 </div>
                 <a className="home-specialties-button" href="">
-                  <h4>Consult Now</h4>
+                  <h4>Find doctor</h4>
                 </a>
               </div>
 
@@ -272,7 +272,7 @@ export default function Mainpage() {
                   <h4>well</h4>
                 </div>
                 <a className="home-specialties-button" href="">
-                  <h4>Consult Now</h4>
+                  <h4>Find doctor</h4>
                 </a>
               </div>
             </div>
@@ -286,7 +286,7 @@ export default function Mainpage() {
               </h1>
             </div>
 
-            <div className="lab-content flex" data-aos="fade-up"
+            <div onClick={() => { navigate('/labfiltering') }} className="lab-content flex" data-aos="fade-up"
               data-aos-anchor-placement="top-bottom" data-aos-duration="3000">
               <div className="lab-left">
                 <div className="home-lab-title">
@@ -428,7 +428,7 @@ export default function Mainpage() {
                 Top Booked <span> Diagnostic</span> Tests
               </h1>
               <div className="explore-more">
-                <a href="/hospitalfilter">
+                <a href="/labfiltering">
                   <h4>Explore More</h4>
                 </a>
               </div>
@@ -446,9 +446,9 @@ export default function Mainpage() {
                 </div>
                 <div className="flex price-section">
                   <h2>₹ 456</h2>
-                  <a href>
+                  {/* <a href>
                     <h4 className="diagnostic-button">Add</h4>
-                  </a>
+                  </a> */}
                 </div>
               </div>
               <div className="diagnostic-card">
@@ -462,9 +462,9 @@ export default function Mainpage() {
                 </div>
                 <div className="flex price-section">
                   <h2>₹ 556</h2>
-                  <a href>
+                  {/* <a href>
                     <h4 className="diagnostic-button">Add</h4>
-                  </a>
+                  </a> */}
                 </div>
               </div>
               <div className="diagnostic-card">
@@ -478,9 +478,9 @@ export default function Mainpage() {
                 </div>
                 <div className="flex price-section">
                   <h2>₹ 556</h2>
-                  <a href>
+                  {/* <a href>
                     <h4 className="diagnostic-button">Add</h4>
-                  </a>
+                  </a> */}
                 </div>
               </div>
               <div className="diagnostic-card">
@@ -494,9 +494,9 @@ export default function Mainpage() {
                 </div>
                 <div className="flex price-section">
                   <h2>₹ 556</h2>
-                  <a href>
+                  {/* <a href>
                     <h4 className="diagnostic-button">Add</h4>
-                  </a>
+                  </a> */}
                 </div>
               </div>
             </div>
@@ -592,7 +592,7 @@ export default function Mainpage() {
               <h4>Period doubts or</h4>
               <h4> Pregnancy</h4>
               <a href="">
-                <h4 className="mobile-specialties-button">Consult Now</h4>
+                <h4 className="mobile-specialties-button">Find doctor</h4>
               </a>
 
 
@@ -608,7 +608,7 @@ export default function Mainpage() {
               <h4>Period doubts or</h4>
               <h4> Pregnancy</h4>
               <a href="">
-                <h4 className="mobile-specialties-button">Consult Now</h4>
+                <h4 className="mobile-specialties-button">Find doctor</h4>
               </a>
             </div>
           </div>
@@ -623,7 +623,7 @@ export default function Mainpage() {
               <h4>Period doubts or</h4>
               <h4> Pregnancy</h4>
               <a href="">
-                <h4 className="mobile-specialties-button">Consult Now</h4>
+                <h4 className="mobile-specialties-button">Find doctor</h4>
               </a>
 
 

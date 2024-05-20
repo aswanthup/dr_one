@@ -54,7 +54,7 @@ export const SearchBox = ({ updateDocs, docNames }) => {
             const docData = response.data.data;
             // console.log({ docData });
             updateDocs(docData, data.district);
-            setLoading(false)
+            setLoading(false)  
 
         } catch (err) {
             setLoading(false)

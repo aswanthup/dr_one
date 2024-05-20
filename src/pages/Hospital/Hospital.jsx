@@ -5,9 +5,13 @@ import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
 import { useNavigate } from 'react-router-dom';
 import { ayurSpec, homeoDept, speacializationNames } from '../HospitalFiltering/constants/Filter';
+import SearchIcon from '@mui/icons-material/Search';
+import axios from 'axios';
 export default function Hospital() {
   const navigate = useNavigate()
   const [SpecialisationBatch, setSpecialisationBatch] = useState([])
+  const [position, setPosition] = useState({})
+  const [location, setlocation] = useState()
   const [ayurvedic, setayruvedic] = useState([])
   const [Homeo, setHomeo] = useState([])
   const SearchHostpital = () => {
@@ -21,12 +25,12 @@ export default function Hospital() {
     navigate("/hospitalfilter", { state: Value })
   }
 
-
+  const FullSpecialisation = [...speacializationNames, ...homeoDept, ...ayurSpec]
 
   useEffect(() => {
     let settingAllopathy = 0;
     let AllopathyUpdatingBatch = [];
-    speacializationNames.forEach((ele, index) => {
+    FullSpecialisation.forEach((ele, index) => {
       if (!AllopathyUpdatingBatch[settingAllopathy] || AllopathyUpdatingBatch[settingAllopathy].length < 12) {
         AllopathyUpdatingBatch[settingAllopathy] = [...(AllopathyUpdatingBatch[settingAllopathy] || []), ele];
       } else {
@@ -35,29 +39,7 @@ export default function Hospital() {
       }
       setSpecialisationBatch(AllopathyUpdatingBatch)
     });
-    let HomeoSettingIndex = 0;
-    let HomeoUpdatingBatch = [];
-    speacializationNames.forEach((ele, index) => {
-      if (!HomeoUpdatingBatch[HomeoSettingIndex] || HomeoUpdatingBatch[HomeoSettingIndex].length < 12) {
-        HomeoUpdatingBatch[HomeoSettingIndex] = [...(HomeoUpdatingBatch[HomeoSettingIndex] || []), ele];
-      } else {
-        HomeoSettingIndex += 1;
-        HomeoUpdatingBatch[HomeoSettingIndex] = [ele];
-      }
-      setHomeo(HomeoUpdatingBatch)
-    });
-    let AyurvedicSettingIndex = 0;
-    let AyurvedicUpdatingBatch = [];
-    speacializationNames.forEach((ele, index) => {
-      if (!AyurvedicUpdatingBatch[AyurvedicSettingIndex] || AyurvedicUpdatingBatch[AyurvedicSettingIndex].length < 12) {
-        AyurvedicUpdatingBatch[AyurvedicSettingIndex] = [...(AyurvedicUpdatingBatch[AyurvedicSettingIndex] || []), ele];
-      } else {
-        AyurvedicSettingIndex += 1;
-        AyurvedicUpdatingBatch[AyurvedicSettingIndex] = [ele];
-      }
-      setayruvedic(AyurvedicUpdatingBatch)
-    });
-  }, [speacializationNames, ayurSpec, homeoDept]);
+  }, []);
 
 
 
@@ -78,6 +60,67 @@ export default function Hospital() {
     })
     console.log(FinishData)
   }, [])
+  useEffect(() => {
+    if ('geolocation' in navigator) {
+      navigator.geolocation.getCurrentPosition(
+        (pos) => {
+          setPosition({
+            latitude: pos.coords.latitude,
+            longitude: pos.coords.longitude,
+          });
+        },
+        (error) => {
+          console.error('Error getting geolocation: ', error);
+        }
+      );
+    } else {
+      console.log('Geolocation is not available in your browser.');
+    }
+  }, []);
+
+  useEffect(() => {
+    if (position.latitude && position.longitude) {
+      const { latitude, longitude } = position;
+      console.log('Latitude:', latitude, 'Longitude:', longitude);
+      axios
+        .get(`https://nominatim.openstreetmap.org/reverse?lat=${latitude}&lon=${longitude}&format=json`)
+        .then((response) => {
+          console.log('response.data>', response.data);
+          setlocation(response?.data?.address?.suburb)
+        })
+        .catch((error) => {
+          console.error('Error fetching the reverse geocoding data:', error);
+        });
+    } else {
+      console.error('Latitude or Longitude is undefined.');
+    }
+  }, [position]);
+
+  const SearchSpeciality = (e) => {
+    const query = e?.target?.value.toLowerCase();
+    let settingAllopathy = 0;
+    let AllopathyUpdatingBatch = [];
+    const queryLowerCase = query.toLowerCase();
+
+    const filteredData = FullSpecialisation.filter((data) =>
+      data.toLowerCase().startsWith(queryLowerCase)
+    );
+
+    const remainingData = FullSpecialisation.filter(
+      (data) => !data.toLowerCase().startsWith(queryLowerCase)
+    );
+    const finalFilter = [...filteredData, ...remainingData]
+    finalFilter.forEach((ele, index) => {
+      if (!AllopathyUpdatingBatch[settingAllopathy] || AllopathyUpdatingBatch[settingAllopathy].length < 12) {
+        AllopathyUpdatingBatch[settingAllopathy] = [...(AllopathyUpdatingBatch[settingAllopathy] || []), ele];
+      } else {
+        settingAllopathy += 1;
+        AllopathyUpdatingBatch[settingAllopathy] = [ele];
+      }
+      setSpecialisationBatch(AllopathyUpdatingBatch)
+    });
+    // console.log("SearchData>>>>", SearchData);
+  }
 
   return (
 
@@ -108,7 +151,7 @@ export default function Hospital() {
 
                     <i className="ri-map-pin-2-line" />
 
-                    <input className="Hospital-Location-input" type="text" placeholder='Kozhikode' />
+                    <input className="Hospital-Location-input" type="text" placeholder={location} />
 
                   </div>
                   <input className="Hospital-search-input" type="text" placeholder="Search Hospitals" />
@@ -262,51 +305,31 @@ export default function Hospital() {
 
 
           <div className='doctor_spec flex'>
-
             <div className='doctor_spec_card'>
-
-              {SpecialisationBatch?.map((ele, index) =>
-                <div className='spec_main_cards flex'>
-                  {
-                    ele?.map(speciality =>
+              <div className='spec_main_cards_SearchBox'>
+                <div className='spec_main_cards_SearchBox'>
+                  <div className='search-input-wrapper'>
+                    <span className='search-icon'><SearchIcon /></span>
+                    <input onChange={SearchSpeciality} type="text" placeholder='Search your specialities' />
+                  </div>
+                </div>
+              </div>
+              <div className='doctor_spec_SectionSetting'>
+                {SpecialisationBatch?.map((ele) =>
+                  <div className='spec_main_cards_align flex'>
+                    {ele?.map(speciality =>
                       <div onClick={() => { renderHosFilteringBYSpeciality({ speciality: speciality, type: "Allopathy" }) }} className='spec_main_card flex'>
                         <h4>{speciality}</h4>
                         <div className='spec_main_card_button flex'>
                           <i class="ri-arrow-right-line"></i>
                         </div>
                       </div>
-                    )
-                  }
-                </div>
-              )}
-              {ayurvedic?.map((ele, index) =>
-                <div className='spec_main_cards flex'>
-                  {
-                    ele?.map(speciality =>
-                      <div onClick={() => { renderHosFilteringBYSpeciality({ speciality: speciality, type: "Ayurvedic" }) }} className='spec_main_card flex'>
-                        <h4>{speciality}</h4>
-                        <div className='spec_main_card_button flex'>
-                          <i class="ri-arrow-right-line"></i>
-                        </div>
-                      </div>
-                    )
-                  }
-                </div>
-              )}
-              {Homeo?.map((ele, index) =>
-                <div className='spec_main_cards flex'>
-                  {
-                    ele?.map(speciality =>
-                      <div onClick={() => { renderHosFilteringBYSpeciality({ speciality: speciality, type: "Homeopathy" }) }} className='spec_main_card flex'>
-                        <h4>{speciality}</h4>
-                        <div className='spec_main_card_button flex'>
-                          <i class="ri-arrow-right-line"></i>
-                        </div>
-                      </div>
-                    )
-                  }
-                </div>
-              )}
+                    )}
+                  </div>
+                )}
+              </div>
+
+
             </div>
           </div>
 
@@ -347,7 +370,7 @@ export default function Hospital() {
 
                 <i className="ri-map-pin-2-line" />
 
-                <input className="Hospital-Location-input" type="text" placeholder='Kozhikode' />
+                <input className="Hospital-Location-input" type="text" placeholder={location} />
 
               </div>
               <input className="Hospital-search-input" type="text" placeholder="Search Hospitals" />

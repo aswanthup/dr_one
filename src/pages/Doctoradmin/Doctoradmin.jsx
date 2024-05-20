@@ -6,7 +6,6 @@ import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
 import { TimePicker } from '@mui/x-date-pickers';
 import axios from 'axios';
-import { Bounce, ToastContainer, toast } from 'react-toastify';
 import AddIcon from '@mui/icons-material/Add';
 import 'react-toastify/dist/ReactToastify.css';
 import dayjs from 'dayjs';
@@ -14,6 +13,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import RemoveIcon from '@mui/icons-material/Remove';
 import { port } from '../../config';
 import { Loader } from '../../components/Loader/Loader';
+import { toast } from 'react-toastify';
 export default function Doctoradmin() {
   const [open, setOpen] = React.useState({});
   const [FormValues, setFormValues] = useState({})
@@ -30,6 +30,18 @@ export default function Doctoradmin() {
     { day: "Friday", id: 6, availableTimes: [{ startTime: '', endTime: '' }] },
     { day: "Saturday", id: 7, availableTimes: [{ startTime: '', endTime: '' }] }
   ])
+  const ResetTimePicker = () => {
+    setTimePickers([
+      { day: "Sunday", id: 1, availableTimes: [{ startTime: '', endTime: '' }] },
+      { day: "Monday", id: 2, availableTimes: [{ startTime: '', endTime: '' }] },
+      { day: "Tuesday", id: 3, availableTimes: [{ startTime: '', endTime: '' }] },
+      { day: "Wednesday", id: 4, availableTimes: [{ startTime: '', endTime: '' }] },
+      { day: "Thursday", id: 5, availableTimes: [{ startTime: '', endTime: '' }] },
+      { day: "Friday", id: 6, availableTimes: [{ startTime: '', endTime: '' }] },
+      { day: "Saturday", id: 7, availableTimes: [{ startTime: '', endTime: '' }] }
+    ])
+
+  }
   const [currentAvailability, setcurrentAvailability] = useState([])
   const handleOpen = (edit) => {
     if (edit?.edit) {
@@ -37,7 +49,7 @@ export default function Doctoradmin() {
       changeValues(edit?.id)
       setFormValues('')
     } else {
-      setOpen({ another: true }); 
+      setOpen({ another: true });
       setFormValues('')
     }
   }
@@ -72,37 +84,26 @@ export default function Doctoradmin() {
     setEditValues({ ...EditValues, days_timing: tempData });
   };
 
-
-
   const NameOnchange = (e) => {
-    setFormValues({ ...FormValues, hospital_id: parseInt(e?.target?.value), })
-  }
+    const selectedOption = e.target.options[e.target.selectedIndex];
+    const hospital_id = parseInt(e.target.value);
+    const hospital_name = selectedOption.getAttribute('data-name');
+
+    console.log("Selected ID:", hospital_id);
+    console.log("Selected Name:", hospital_name);
+
+    setFormValues({
+      ...FormValues,
+      hospital_id: hospital_id,
+      hospital_name: hospital_name,
+    });
+  };
 
   const toastify = (data) => {
     if (data?.success) {
-      toast.success(data?.msg, {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-        transition: Bounce,
-      });
+      toast.success(data?.msg)
     } else {
-      toast.info(data?.msg, {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-        transition: Bounce,
-      });
+      toast.info(data?.msg)
     }
   }
   console.log("EditValues>>>", EditValues)
@@ -158,37 +159,63 @@ export default function Doctoradmin() {
       setEditValues({ ...EditValues, days_timing: temp })
     }
   }
+  console.log("FormValues>>>", FormValues)
+
   const SaveData = () => {
-    console.log("FormValues?.hospital_id>>>>", FormValues?.hospital_id, TimePickers)
     const data = {
       hospital_id: FormValues?.hospital_id,
       days: TimePickers
     }
 
-    const checkingValues = TimePickers?.filter(Values => {
-      const CheckStartPoint = Values?.availableTimes?.filter(availableTimes =>
-        availableTimes?.startTime
-      );
-      const checkEndPoint = Values?.availableTimes?.filter(ele => ele?.endTime);
-      return checkEndPoint?.length === CheckStartPoint?.length
-    })
-    console.log("data>>>>", data)
-    if (!FormValues?.hospital_id) {
+    // const checkingValues = TimePickers?.filter(Values => {
+    //   const CheckStartPoint = Values?.availableTimes?.filter(availableTimes =>
+    //     availableTimes?.startTime
+    //   );
+    //   const checkEndPoint = Values?.availableTimes?.filter(ele => ele?.endTime);
+    //   return checkEndPoint?.length === CheckStartPoint?.length
+    // })
+    // console.log("checkingValues>>>>", checkingValues)
+    // if (!FormValues?.hospital_id && checkingValues?.length > 0) {
+    //   toastify({ msg: "Hospital not default; residential auto-added." })
+    // }
+
+    let hasStartTime = [];
+    let hasEndTime = [];
+    let FindEndTime = [];
+    let FindStartTime = [];
+    let checkingValues = false;
+    if (TimePickers && Array.isArray(TimePickers)) {
+      TimePickers.forEach((Values) => {
+        // Filter out undefined values while adding to hasStartTime and hasEndTime
+        const startTime = Values?.availableTimes?.find(availableTime => availableTime?.startTime);
+        const endTime = Values?.availableTimes?.find(availableTime => availableTime?.endTime);
+        if (startTime) hasStartTime.push(startTime);
+        if (endTime) hasEndTime.push(endTime);
+        FindStartTime = hasStartTime.filter(ele => ele?.endTime);
+        FindEndTime = hasEndTime.filter(ele => ele?.startTime);
+        // console.log("FindStartEndTime>>>", FindStartEndTime);
+      });
+    }
+    if (hasStartTime.length === FindStartTime.length && hasEndTime.length === FindEndTime.length) {
+      checkingValues = true;
+    }
+    console.log("checkingValues>>>>", checkingValues)
+    if (checkingValues && !FormValues?.hospital_id && !FormValues?.hospital_name) {
       toastify({ msg: "Hospital not default; residential auto-added." })
     }
-    if (checkingValues?.length === 7) {
+    if (checkingValues) {
       setloading(true)
       axios.post(`${port}/hospital/consultation_details`, data).then((res) => {
-        console.log(res)
         if (res?.data?.success) {
           toastify({ msg: res?.data?.message, success: true })
           handleClose()
+          ResetTimePicker()
           getitngAllhospitals()
           setloading(false)
         }
       }).catch((err) => {
         toastify({ msg: err?.response?.data?.message })
-        setloading(true)
+        setloading(false)
       })
     } else {
       toastify({ msg: "Please verify either the start time or the end time" })
@@ -196,7 +223,7 @@ export default function Doctoradmin() {
     }
 
   }
-
+  console.log("data>>>>", FormValues)
   const EditData = () => {
     const checkingValues = EditValues.days_timing?.filter(Values => {
       const CheckStartPoint = Values?.availableTimes?.filter(availableTimes =>
@@ -258,7 +285,6 @@ export default function Doctoradmin() {
       {
         loading ? <Loader /> : ""}
       <div className="hospitaladmin-main flex">
-        <ToastContainer />
         <Rightnavbar />
         <Modal
           onClose={() => { DeleteTimeConfirm({ cls: true }) }}
@@ -317,11 +343,23 @@ export default function Doctoradmin() {
               {currentAvailability.length > 0 ?
                 currentAvailability?.map((ele, index) =>
                   <div className="available flex">
-                    <div className="hospitalname">
-                      <h4>
-                        {ele?.hospital_name}
-                      </h4>
+                    <div className='available_flexData'>
+                      <div className="hospitalname">
+                        <h4>
+                          {ele?.hospital_name}
+                        </h4>
+                      </div>
+                      <div className='availabilityDays'>
+                        {ele?.days_timing.map((TimingByDay, index) =>
+                          <>
+                            <p className='availabilityDaysPtag' style={{ color: TimingByDay.availableTimes[0]?.startTime ? '' : 'rgb(128 128 128 / 91%)' }}>{TimingByDay?.day.slice(0, 3)} </p>
+                            <p className='availabilityDaysPtag2'>{ele?.days_timing.length === index + 1 ? '' : ","}</p>
+                            &nbsp;
+                          </>
+                        )}
+                      </div>
                     </div>
+
                     <div className="hospitalname_button">
                       <button onClick={() => handleOpen({ edit: true, id: ele.hospital_id })}>
                         Edit
@@ -357,14 +395,14 @@ export default function Doctoradmin() {
                     className="modalInputOpenDiv">
                     <option selected disabled >Choose Hospitals or Residence</option>
                     <optgroup label="Select Residence or">
-                      <option value=''>Residential</option>
+                      <option data-name="Residential" value=''>Residential</option>
                       <>
                         <p className='modalInputPtag'><span className='modalInputPtagSpan'>+</span> Add Hospital</p>
                       </>
                     </optgroup>
                     <optgroup label="Hospitals">
                       {Hospitals.map((ele, index) =>
-                        <option value={ele?.id}>{ele?.name}</option>
+                        <option data-name={ele.name} value={ele?.id}>{ele?.name}</option>
                       )}
                     </optgroup>
                   </select>

@@ -12,9 +12,12 @@ import { Navigation } from 'swiper/modules';
 import Navbar from '../../components/Navbar';
 import { useNavigate } from 'react-router-dom';
 import { services } from './LabFIltering/constatnts/Filter';
+import axios from 'axios';
 
 export default function Labs() {
   const navigate = useNavigate()
+  const [position, setPosition] = useState({})
+  const [location, setlocation] = useState()
   const [LabServicesData, setLabServicesData] = useState([])
   useEffect(() => {
     let labServicesInd = 0;
@@ -34,6 +37,43 @@ export default function Labs() {
     console.log("value>>>>>", value)
     navigate("/labfiltering", { state: { services: value } })
   }
+  useEffect(() => {
+    if ('geolocation' in navigator) {
+      navigator.geolocation.getCurrentPosition(
+        (pos) => {
+          setPosition({
+            latitude: pos.coords.latitude,
+            longitude: pos.coords.longitude,
+          });
+        },
+        (error) => {
+          console.error('Error getting geolocation: ', error);
+        }
+      );
+    } else {
+      console.log('Geolocation is not available in your browser.');
+    }
+  }, []);
+
+  useEffect(() => {
+    if (position.latitude && position.longitude) {
+      const { latitude, longitude } = position;
+      console.log('Latitude:', latitude, 'Longitude:', longitude);
+      axios
+        .get(`https://nominatim.openstreetmap.org/reverse?lat=${latitude}&lon=${longitude}&format=json`)
+        .then((response) => {
+          console.log('response.data>', response.data);
+          setlocation(response?.data?.address?.suburb)
+        })
+        .catch((error) => {
+          console.error('Error fetching the reverse geocoding data:', error);
+        });
+    } else {
+      console.error('Latitude or Longitude is undefined.');
+    }
+  }, [position]);
+
+
   return (
     <div>
 
@@ -59,7 +99,7 @@ export default function Labs() {
               <div onClick={() => { navigate('/labfiltering') }} className="Lab-Search-box flex">
                 <div className="Lab-location-section flex">
                   <i className="ri-map-pin-2-line" />
-                  <input className="Lab-Location-input" type="text" placeholder='Kozhikode' />
+                  <input className="Lab-Location-input" type="text" placeholder={location} />
 
                 </div>
                 <div className="Lab-search-input flex">
@@ -140,7 +180,7 @@ export default function Labs() {
 
         <div className="diagnostic container">
           <div className="second-main-head">
-            <h1>Top Booked <span className="color-blue">Diagnotic Test</span></h1>
+            <h1>Top Booked <span className="color-blue">Diagnostic Test</span></h1>
           </div>
 
 
@@ -232,7 +272,7 @@ export default function Labs() {
 
                 <i className="ri-map-pin-2-line" />
 
-                <input className="Hospital-Location-input" type="text" placeholder='Kozhikode' />
+                <input className="Hospital-Location-input" type="text" placeholder={location} />
 
               </div>
               <input className="Hospital-search-input" type="text" placeholder="Search Doctor" />

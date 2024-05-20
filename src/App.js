@@ -48,6 +48,7 @@ import { Loader } from "./components/Loader/Loader";
 import { ToastifyComponent } from "./components/ToastifyComponent/ToastifyComponent";
 import { Connect } from "./pages/Labs/LabFIltering/WebMobileConnect/Connect";
 import { Hosconnect } from "./pages/HospitalFiltering/WebMobileConnect/Hosconnect";
+import { LabAdminProfile } from "./pages/Labadmin/LabAdminProfile/LabAdminProfile";
 
 function App() {
   return (
@@ -152,6 +153,7 @@ function App() {
             <Route path="/labfiltering" element={<Connect />}></Route>
             <Route path="/loader" element={<Loader />}></Route>
             <Route path='/registration' element={<Registerlanding />} ></Route>
+            <Route path='/LabProfile' element={<LabAdminProfile />} ></Route>
           </Routes>
         </LocalizationProvider>
       </BrowserRouter>

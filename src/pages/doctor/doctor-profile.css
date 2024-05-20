@@ -14,7 +14,9 @@
     gap:1vw;
     justify-content: center;
 }
-
+.doctor-profile-left-right{
+    margin-top: 30px;
+}
 .doctor-profile-right{
     width:60%;
 }
