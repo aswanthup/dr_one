@@ -1,0 +1,121 @@
+.EditLaboratory {
+    width: 100%;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+}
+
+.EditLaboratoryH1 span {
+    color: #3A65FD;
+}
+
+.EditLaboratoryH1 {
+    font-weight: 600;
+
+}
+
+.EditLaboratoryImagesSec {
+    display: flex;
+    gap: 80px;
+}
+
+.EditLabProfileImg {
+    display: flex;
+    gap: 20px;
+    flex-direction: column;
+
+}
+
+.EditLabProfileImgRela {
+    position: relative;
+
+}
+
+.EditLabProfileImgCloseicn {
+    position: absolute;
+    z-index: 9;
+    width: 100%;
+    display: flex;
+    justify-content: end;
+
+}
+
+#EditLabProfileImgicn {
+    font-size: 30px;
+    color: #3A65FD;
+    background-color: rgb(255, 255, 255);
+    border-radius: 50%;
+    margin: -15px -10px;
+}
+
+.EditLabProfileImg p {
+    font-size: 20px;
+    font-weight: 400;
+    color: black;
+    letter-spacing: 1px;
+}
+
+.EditLabProfileImg img {
+    height: 150px;
+    border-radius: 15px;
+}
+
+.EditLabSubImg {
+    display: flex;
+    gap: 20px;
+
+}
+
+.EditLabSubImg img {
+    height: 150px;
+
+}
+
+.EditLabInputsSec1 {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.EditLabInputsSec2 {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.EditLabInputsSec1InnerSec {
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.EditLabInputsSec1InnerSec2 {
+    width: 22%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.EditLabInputsSec1InnerSec p {
+    font-size: 18px;
+    font-weight: 400;
+}
+
+.EditLabInputsSec1InnerSec2 p {
+    font-size: 18px;
+    font-weight: 400;
+}
+
+.EditLabInputsSec1InnerSec input {
+    border-radius: 15px;
+    background-color: #DBE3FF;
+    height: 40px;
+}
+
+.EditLabInputsSec1InnerSec2 input {
+    border-radius: 15px;
+    background-color: #DBE3FF;
+    height: 40px;
+}

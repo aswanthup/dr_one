@@ -37,7 +37,7 @@ export default function Labadminregistration2() {
   ]
   const Features = [
     { name: "Home collection" },
-    { name: "Online report" }, 
+    { name: "Online report" },
     { name: "Cashless" },
     { name: "24 hours services" },
     { name: "Doctor available" },
@@ -83,7 +83,7 @@ export default function Labadminregistration2() {
   const updatePosts = (pinCode) => {
     if (pinCode.length === 6) {
       axios
-        .get(`https://api.postalpincode.in/pincode/${pinCode}`)
+        .get(`${port}/pincode/${pinCode}`)
         .then((res) => {
           console.log("res.data[0]?.PostOffice", res.data[0]?.PostOffice);
           if (res.data[0]?.PostOffice?.length > 0) {
@@ -160,7 +160,6 @@ export default function Labadminregistration2() {
             const imageIndex = LabAdminRg?.image?.length > 0 ? 1 : 0;
             temp[i + imageIndex] = LabAdminRg?.subImages[i];
           }
-          // If there's a main image, add it to temp[0]
           if (LabAdminRg.image.length > 0) {
             temp[0] = LabAdminRg.image[0];
           }

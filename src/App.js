@@ -49,6 +49,8 @@ import { ToastifyComponent } from "./components/ToastifyComponent/ToastifyCompon
 import { Connect } from "./pages/Labs/LabFIltering/WebMobileConnect/Connect";
 import { Hosconnect } from "./pages/HospitalFiltering/WebMobileConnect/Hosconnect";
 import { LabAdminProfile } from "./pages/Labadmin/LabAdminProfile/LabAdminProfile";
+import { AnalyzeLabAdmin } from "./pages/Labadmin/AnalyzeLabAdmin/AnalyzeLabAdmin";
+import { EditLaboratory } from "./pages/Labadmin/EditLaboratory/EditLaboratory";
 
 function App() {
   return (
@@ -154,6 +156,8 @@ function App() {
             <Route path="/loader" element={<Loader />}></Route>
             <Route path='/registration' element={<Registerlanding />} ></Route>
             <Route path='/LabProfile' element={<LabAdminProfile />} ></Route>
+            <Route path='/analyzelab' element={<AnalyzeLabAdmin />} ></Route>
+            <Route path='/editLaboratory' element={<EditLaboratory />} ></Route>
           </Routes>
         </LocalizationProvider>
       </BrowserRouter>

@@ -56,13 +56,10 @@ export default function Navbar() {
               <button onClick={toggleSignInModal}>
                 <h3 className="nav-button1" >Login</h3>
               </button>
-
-
             </div>
             <div onClick={SelectOpen} className='menubutton flex'>
               <i class="ri-menu-2-fill"></i>
             </div>
-
           </div>
           <CusSigninAndSignUp Caller={{ ReCallF: toggleSignInModal, OpenModal: signInModalOpen }} />
           <Modal className='menubuttonNavModal container' open={open} onClose={SelectOpen} >
