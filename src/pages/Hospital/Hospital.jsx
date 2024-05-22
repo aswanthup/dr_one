@@ -4,14 +4,13 @@ import Headroom from 'react-headroom';
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
 import { useNavigate } from 'react-router-dom';
-import { ayurSpec, homeoDept, speacializationNames } from '../HospitalFiltering/constants/Filter';
+import { ayurSpec, homeoDept, speacializationNames, type } from '../HospitalFiltering/constants/Filter';
 import SearchIcon from '@mui/icons-material/Search';
 import axios from 'axios';
 export default function Hospital() {
   const navigate = useNavigate()
   const [SpecialisationBatch, setSpecialisationBatch] = useState([])
   const [position, setPosition] = useState({})
-  const [location, setlocation] = useState()
   const [ayurvedic, setayruvedic] = useState([])
   const [Homeo, setHomeo] = useState([])
   const SearchHostpital = () => {
@@ -22,7 +21,13 @@ export default function Hospital() {
     navigate("/hospitalfilter", { state: { type: Value } })
   }
   const renderHosFilteringBYSpeciality = (Value) => {
-    navigate("/hospitalfilter", { state: Value })
+    if (speacializationNames.includes(Value?.speciality)) {
+      navigate("/hospitalfilter", { state: { speciality: Value?.speciality, type: "Allopathy" } })
+    } else if (ayurSpec.includes(Value?.speciality)) {
+      navigate("/hospitalfilter", { state: { speciality: Value?.speciality, type: "Ayurvedic" } })
+    } else if (homeoDept.includes(Value?.speciality)) {
+      navigate("/hospitalfilter", { state: { speciality: Value?.speciality, type: "Homeopathy" } })
+    }
   }
 
   const FullSpecialisation = [...speacializationNames, ...homeoDept, ...ayurSpec]
@@ -78,23 +83,7 @@ export default function Hospital() {
     }
   }, []);
 
-  useEffect(() => {
-    if (position.latitude && position.longitude) {
-      const { latitude, longitude } = position;
-      console.log('Latitude:', latitude, 'Longitude:', longitude);
-      axios
-        .get(`https://nominatim.openstreetmap.org/reverse?lat=${latitude}&lon=${longitude}&format=json`)
-        .then((response) => {
-          console.log('response.data>', response.data);
-          setlocation(response?.data?.address?.suburb)
-        })
-        .catch((error) => {
-          console.error('Error fetching the reverse geocoding data:', error);
-        });
-    } else {
-      console.error('Latitude or Longitude is undefined.');
-    }
-  }, [position]);
+
 
   const SearchSpeciality = (e) => {
     const query = e?.target?.value.toLowerCase();
@@ -151,7 +140,7 @@ export default function Hospital() {
 
                     <i className="ri-map-pin-2-line" />
 
-                    <input className="Hospital-Location-input" type="text" placeholder={location} />
+                    <input className="Hospital-Location-input" type="text" placeholder="Select your location" />
 
                   </div>
                   <input className="Hospital-search-input" type="text" placeholder="Search Hospitals" />
@@ -318,7 +307,7 @@ export default function Hospital() {
                 {SpecialisationBatch?.map((ele) =>
                   <div className='spec_main_cards_align flex'>
                     {ele?.map(speciality =>
-                      <div onClick={() => { renderHosFilteringBYSpeciality({ speciality: speciality, type: "Allopathy" }) }} className='spec_main_card flex'>
+                      <div onClick={() => { renderHosFilteringBYSpeciality({ speciality: speciality }) }} className='spec_main_card flex'>
                         <h4>{speciality}</h4>
                         <div className='spec_main_card_button flex'>
                           <i class="ri-arrow-right-line"></i>
@@ -370,7 +359,7 @@ export default function Hospital() {
 
                 <i className="ri-map-pin-2-line" />
 
-                <input className="Hospital-Location-input" type="text" placeholder={location} />
+                <input className="Hospital-Location-input" type="text" placeholder='Select your location' />
 
               </div>
               <input className="Hospital-search-input" type="text" placeholder="Search Hospitals" />

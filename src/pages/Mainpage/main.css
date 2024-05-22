@@ -11,9 +11,11 @@
   box-sizing: border-box;
   font-family: "Outfit", sans-serif;
 }
+
 .debug {
   border: 1px solid red;
 }
+
 .blue {
   border: 1px solid blue;
 }
@@ -62,13 +64,16 @@ body {
 .flex {
   display: flex;
 }
+
 .flex-center {
   display: flex;
   align-items: center;
 }
+
 .pointer {
   cursor: pointer;
 }
+
 .error-p {
   font-size: 13px;
   color: white;
@@ -206,34 +211,35 @@ small {
   margin-top: 2vw;
   height: 35vw;
 }
-.hero-main2{
-  padding:3vw 0vw;
+
+.hero-main2 {
+  padding: 3vw 0vw;
 }
 
-.hero2left{
+.hero2left {
   width: 70%;
   flex-direction: column;
-  gap:2vw;
+  gap: 2vw;
 }
 
-.hero2left h1{
+.hero2left h1 {
   font-weight: bolder;
 }
 
-.main_bts{
-  gap:2vw;
+.main_bts {
+  gap: 2vw;
   flex-wrap: wrap;
 }
 
-.main_bts svg{
- width: 24px;
+.main_bts svg {
+  width: 24px;
 }
 
-.main_btns{
+.main_btns {
   background-color: #4c72fb;
   color: white;
-  border-radius:50px;
-  padding:10px 20px;
+  border-radius: 50px;
+  padding: 10px 20px;
   border: 1px solid var(--color-primary);
 }
 
@@ -244,29 +250,30 @@ small {
   transition: 500ms ease-in-out;
 }
 
-.main_btns h4{
+.main_btns h4 {
   font-weight: 300;
 }
 
 
 
-.hero2right{
-  width:30%;
-  justify-content:flex-end;
+.hero2right {
+  width: 30%;
+  justify-content: flex-end;
   align-items: center;
 }
 
-.hero2right img{
-  width:220px;
+.hero2right img {
+  width: 220px;
+  border-radius: 50%;
 }
 
 
 
 .hero_images img {
   width: 16vw;
-  height:20vw;
+  height: 20vw;
   object-fit: cover;
- 
+
 }
 
 
@@ -816,20 +823,20 @@ small {
 }
 
 
-.hero2mobile{
+.hero2mobile {
   justify-content: center;
-  padding:10vw;
+  padding: 10vw;
 }
 
-.mobhead{
-  margin-top:8vw;
+.mobhead {
+  margin-top: 8vw;
 }
 
-.mobhead h1{
+.mobhead h1 {
   font-weight: bolder;
 }
 
-.mobhead span{
+.mobhead span {
   color: var(--color-primary);
 }
 
@@ -876,7 +883,7 @@ small {
 
 @media screen and (max-width: 980px) {
   h1 {
-    font-size:2.5rem;
+    font-size: 2.5rem;
   }
 
   h4 {
@@ -1065,5 +1072,4 @@ small {
   }
 }
 
-@media screen and (max-width: 420px) {
-}
+@media screen and (max-width: 420px) {}

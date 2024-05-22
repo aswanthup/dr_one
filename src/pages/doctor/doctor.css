@@ -236,7 +236,7 @@
   border: 1px solid rgba(110, 110, 110, 0.4);
   padding: 0.2vw;
   border-radius: 0.3vw;
-  width: 300px;
+  width: 30%;
   justify-content: space-between;
   align-items: center;
   height: 60px;
@@ -353,7 +353,7 @@
 
 @media screen and (max-width: 1280px) {
   .spec_main_card {
-    width: 270px;
+    width: 30%;
   }
 
   .doctor_spec_card {

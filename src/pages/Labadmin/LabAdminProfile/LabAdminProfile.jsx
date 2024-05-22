@@ -14,10 +14,11 @@ import { useNavigate } from 'react-router-dom';
 export const LabAdminProfile = () => {
     const navigate = useNavigate()
     const [Details, setDetails] = useState()
+    const data = {
+        id: 44
+    }
     useEffect(() => {
-        const data = {
-            id: 44
-        }
+
         if (data?.id) {
             axios.post(`${port}/lab/labdetails`, data).then((res) => {
                 console.log("res>>>>>", res)
@@ -40,20 +41,20 @@ export const LabAdminProfile = () => {
                         <div className='LabAdminProfileTopManage'>
                             <p className='LabAdminProfileTopPtag'>Manage Your <br /><span>Lab</span></p>
                             <div className='LabAdminProfileTopSecondSec'>
-                                <div className='LabAdminProfileTopSecondSecCounter'>
+                                <div onClick={() => { FnNavigate() }} className='LabAdminProfileTopSecondSecCounter'>
                                     <div className='LabAdminProfileTopIconDiv'>
                                         <SavedSearchIcon id="LabAdminProfileTopIconDivIcon" />
                                     </div>
-                                    <div onClick={() => { FnNavigate() }} className='LabAdminProfileTopSecondCounter'>
+                                    <div className='LabAdminProfileTopSecondCounter'>
                                         <h4>200</h4>
                                         <p>Views Last 30 in days</p>
                                     </div>
                                 </div>
-                                <div className='LabAdminProfileTopSecondSecCounter'>
+                                <div onClick={() => { FnNavigate() }} className='LabAdminProfileTopSecondSecCounter'>
                                     <div className='LabAdminProfileTopIconDiv'>
                                         <CallOutlinedIcon id="LabAdminProfileTopIconDivIcon" />
                                     </div>
-                                    <div onClick={() => { FnNavigate() }} className='LabAdminProfileTopSecondCounter'>
+                                    <div className='LabAdminProfileTopSecondCounter'>
                                         <h4>20</h4>
                                         <p>Contacts in Last 30 days</p>
                                     </div>
@@ -70,7 +71,7 @@ export const LabAdminProfile = () => {
                     <div className='LabAdminProButtonSec'>
                         <button className='LabAdminProButton'>Add Discount</button>
                         <button className='LabAdminProButton'>Add Price</button>
-                        <button className='LabAdminProButton'> <EditIcon /> Edit</button>
+                        <button onClick={() => { navigate("/editLaboratory", { state: { id: data?.id } }) }} className='LabAdminProButton'> <EditIcon /> Edit</button>
                     </div>
                     <div className='LabAdminProMainSec'>
                         <div className='LabAdminProMainSecImgOther'>
@@ -142,7 +143,7 @@ export const LabAdminProfile = () => {
                             </div>
                         </div>
                     </div>
-                </div>
+                </div >
             </>
         )
     } else {

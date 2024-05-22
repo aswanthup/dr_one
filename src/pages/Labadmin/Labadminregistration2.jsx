@@ -266,8 +266,8 @@ export default function Labadminregistration2() {
     let images = LabAdminRg?.subImages
     images?.splice(index, 1)
     setLabAdminRg({ ...LabAdminRg, subImages: images })
-
   }
+
   return (
 
     <div>

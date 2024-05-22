@@ -12,11 +12,6 @@ import ChatBot from "../../components/ChatBot/ChatBot";
 
 export default function Mainpage() {
   const navigate = useNavigate()
-  const handleSearch = () => {
-
-
-  };
-
   const location = useLocation();
 
   useEffect(() => {
@@ -61,7 +56,7 @@ export default function Mainpage() {
             </div>
 
             <div className="hero2right flex">
-              <img src="images\mainright.png" alt="" />
+              <img src="images/mainImgForLandingPage.jpg" alt="" />
             </div>
 
           </div>

@@ -17,7 +17,6 @@ import axios from 'axios';
 export default function Labs() {
   const navigate = useNavigate()
   const [position, setPosition] = useState({})
-  const [location, setlocation] = useState()
   const [LabServicesData, setLabServicesData] = useState([])
   useEffect(() => {
     let labServicesInd = 0;
@@ -55,23 +54,7 @@ export default function Labs() {
     }
   }, []);
 
-  useEffect(() => {
-    if (position.latitude && position.longitude) {
-      const { latitude, longitude } = position;
-      console.log('Latitude:', latitude, 'Longitude:', longitude);
-      axios
-        .get(`https://nominatim.openstreetmap.org/reverse?lat=${latitude}&lon=${longitude}&format=json`)
-        .then((response) => {
-          console.log('response.data>', response.data);
-          setlocation(response?.data?.address?.suburb)
-        })
-        .catch((error) => {
-          console.error('Error fetching the reverse geocoding data:', error);
-        });
-    } else {
-      console.error('Latitude or Longitude is undefined.');
-    }
-  }, [position]);
+
 
 
   return (
@@ -99,7 +82,7 @@ export default function Labs() {
               <div onClick={() => { navigate('/labfiltering') }} className="Lab-Search-box flex">
                 <div className="Lab-location-section flex">
                   <i className="ri-map-pin-2-line" />
-                  <input className="Lab-Location-input" type="text" placeholder={location} />
+                  <input className="Lab-Location-input" type="text" placeholder='Select your location' />
 
                 </div>
                 <div className="Lab-search-input flex">
@@ -269,11 +252,8 @@ export default function Labs() {
           <div className="Hospital-container-search flex">
             <div className="Hospital-Search-box flex">
               <div className="Hospital-location-section flex">
-
                 <i className="ri-map-pin-2-line" />
-
-                <input className="Hospital-Location-input" type="text" placeholder={location} />
-
+                <input className="Hospital-Location-input" type="text" placeholder='Select your location' />
               </div>
               <input className="Hospital-search-input" type="text" placeholder="Search Doctor" />
               <div className="Hospital-search-section flex">

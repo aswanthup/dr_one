@@ -3,6 +3,7 @@ import Footer from "../../components/Footer";
 import "../doctor/doctor.css";
 import { Swiper, SwiperSlide } from "swiper/react";
 import Headroom from "react-headroom";
+import SearchIcon from '@mui/icons-material/Search';
 
 // Import Swiper styles
 import "swiper/css";
@@ -45,10 +46,23 @@ export default function Doctor() {
     navigate("/searchdoctor")
   }
 
+
+  const renderHosFilteringBYSpeciality = (Value) => {
+    if (speacializationNames.includes(Value?.speciality)) {
+      navigate("/hospitalfilter", { state: { speciality: Value?.speciality, type: "Allopathy" } })
+    } else if (ayurSpec.includes(Value?.speciality)) {
+      navigate("/hospitalfilter", { state: { speciality: Value?.speciality, type: "Ayurvedic" } })
+    } else if (homeoDept.includes(Value?.speciality)) {
+      navigate("/hospitalfilter", { state: { speciality: Value?.speciality, type: "Homeopathy" } })
+    }
+  }
+
+  const FullSpecialisation = [...speacializationNames, ...homeoDept, ...ayurSpec]
+
   useEffect(() => {
     let settingAllopathy = 0;
     let AllopathyUpdatingBatch = [];
-    speacializationNames.forEach((ele, index) => {
+    FullSpecialisation.forEach((ele, index) => {
       if (!AllopathyUpdatingBatch[settingAllopathy] || AllopathyUpdatingBatch[settingAllopathy].length < 12) {
         AllopathyUpdatingBatch[settingAllopathy] = [...(AllopathyUpdatingBatch[settingAllopathy] || []), ele];
       } else {
@@ -57,30 +71,33 @@ export default function Doctor() {
       }
       setSpecialisationBatch(AllopathyUpdatingBatch)
     });
-    let HomeoSettingIndex = 0;
-    let HomeoUpdatingBatch = [];
-    speacializationNames.forEach((ele, index) => {
-      if (!HomeoUpdatingBatch[HomeoSettingIndex] || HomeoUpdatingBatch[HomeoSettingIndex].length < 12) {
-        HomeoUpdatingBatch[HomeoSettingIndex] = [...(HomeoUpdatingBatch[HomeoSettingIndex] || []), ele];
-      } else {
-        HomeoSettingIndex += 1;
-        HomeoUpdatingBatch[HomeoSettingIndex] = [ele];
-      }
-      setHomeo(HomeoUpdatingBatch)
-    });
-    let AyurvedicSettingIndex = 0;
-    let AyurvedicUpdatingBatch = [];
-    speacializationNames.forEach((ele, index) => {
-      if (!AyurvedicUpdatingBatch[AyurvedicSettingIndex] || AyurvedicUpdatingBatch[AyurvedicSettingIndex].length < 12) {
-        AyurvedicUpdatingBatch[AyurvedicSettingIndex] = [...(AyurvedicUpdatingBatch[AyurvedicSettingIndex] || []), ele];
-      } else {
-        AyurvedicSettingIndex += 1;
-        AyurvedicUpdatingBatch[AyurvedicSettingIndex] = [ele];
-      }
-      setayruvedic(AyurvedicUpdatingBatch)
-    });
-  }, [speacializationNames, ayurSpec, homeoDept]);
+  }, []);
 
+  const SearchSpeciality = (e) => {
+    const query = e?.target?.value.toLowerCase();
+    let settingAllopathy = 0;
+    let AllopathyUpdatingBatch = [];
+    const queryLowerCase = query.toLowerCase();
+
+    const filteredData = FullSpecialisation.filter((data) =>
+      data.toLowerCase().startsWith(queryLowerCase)
+    );
+
+    const remainingData = FullSpecialisation.filter(
+      (data) => !data.toLowerCase().startsWith(queryLowerCase)
+    );
+    const finalFilter = [...filteredData, ...remainingData]
+    finalFilter.forEach((ele, index) => {
+      if (!AllopathyUpdatingBatch[settingAllopathy] || AllopathyUpdatingBatch[settingAllopathy].length < 12) {
+        AllopathyUpdatingBatch[settingAllopathy] = [...(AllopathyUpdatingBatch[settingAllopathy] || []), ele];
+      } else {
+        settingAllopathy += 1;
+        AllopathyUpdatingBatch[settingAllopathy] = [ele];
+      }
+      setSpecialisationBatch(AllopathyUpdatingBatch)
+    });
+    // console.log("SearchData>>>>", SearchData);
+  }
 
 
   return (
@@ -395,51 +412,31 @@ export default function Doctor() {
         <div className="doctor_spe"></div>
 
         <div className='doctor_spec flex'>
-
           <div className='doctor_spec_card'>
+            <div className='spec_main_cards_SearchBox'>
+              <div className='spec_main_cards_SearchBox'>
+                <div className='search-input-wrapper'>
+                  <span className='search-icon'><SearchIcon /></span>
+                  <input onChange={SearchSpeciality} type="text" placeholder='Search your specialities' />
+                </div>
+              </div>
+            </div>
+            <div className='doctor_spec_SectionSetting'>
+              {SpecialisationBatch?.map((ele) =>
+                <div className='spec_main_cards_align flex'>
+                  {ele?.map(speciality =>
+                    <div onClick={() => { renderHosFilteringBYSpeciality({ speciality: speciality }) }} className='spec_main_card flex'>
+                      <h4>{speciality}</h4>
+                      <div className='spec_main_card_button flex'>
+                        <i class="ri-arrow-right-line"></i>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
 
-            {SpecialisationBatch?.map((ele, index) =>
-              <div className='spec_main_cards_align flex'>
-                {
-                  ele?.map(speciality =>
-                    <div className='spec_main_card flex'>
-                      <h4>{speciality}</h4>
-                      <div className='spec_main_card_button flex'>
-                        <i class="ri-arrow-right-line"></i>
-                      </div>
-                    </div>
-                  )
-                }
-              </div>
-            )}
-            {ayurvedic?.map((ele, index) =>
-              <div className='spec_main_cards_align flex'>
-                {
-                  ele?.map(speciality =>
-                    <div className='spec_main_card flex'>
-                      <h4>{speciality}</h4>
-                      <div className='spec_main_card_button flex'>
-                        <i class="ri-arrow-right-line"></i>
-                      </div>
-                    </div>
-                  )
-                }
-              </div>
-            )}
-            {Homeo?.map((ele, index) =>
-              <div className='spec_main_cards_align flex'>
-                {
-                  ele?.map(speciality =>
-                    <div className='spec_main_card flex'>
-                      <h4>{speciality}</h4>
-                      <div className='spec_main_card_button flex'>
-                        <i class="ri-arrow-right-line"></i>
-                      </div>
-                    </div>
-                  )
-                }
-              </div>
-            )}
+
           </div>
         </div>
 
