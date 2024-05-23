@@ -14,8 +14,10 @@ import { useNavigate } from 'react-router-dom';
 export const LabAdminProfile = () => {
     const navigate = useNavigate()
     const [Details, setDetails] = useState()
+    const storedLoginData = localStorage.getItem("loginData")
+    const LoggedData = JSON.parse(storedLoginData);
     const data = {
-        id: 44
+        id: LoggedData?.id
     }
     useEffect(() => {
 

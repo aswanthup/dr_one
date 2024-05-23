@@ -53,10 +53,12 @@ export default function Hospitaladminadddoctor() {
     formState: { errors },
     reset,
   } = useForm({ resolver: yupResolver(schema) });
+  const storedLoginData = localStorage.getItem("loginData")
+  const LoggedData = JSON.parse(storedLoginData);
   const onSubmit = async (dataForm) => {
     console.log({ dataForm });
     try {
-      dataForm.hospital_id = 52;
+      dataForm.hospital_id = LoggedData?.id;
       dataForm.experience = data.experience;
       const formData = new FormData();
       formData.append("image", data.docImage);

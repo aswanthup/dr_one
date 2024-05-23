@@ -3,11 +3,13 @@ import '../components/Navbar.css'
 import { Modal } from '@mui/material'
 import { useLocation } from 'react-router-dom'
 import { CusSigninAndSignUp } from './CusSigninAndSignUp/CusSigninAndSignUp'
+import { ProfileView } from './ProfileView/ProfileView'
 
 
 export default function Navbar() {
   const [open, setopen] = useState(false)
   const [signInModalOpen, setSignInModalOpen] = useState(false);
+  const [OpenProfile, setOpenProfile] = useState(false)
   const SelectOpen = () => {
     if (open) {
       setopen(false)
@@ -21,6 +23,12 @@ export default function Navbar() {
   const path = location?.pathname
   const toggleSignInModal = () => {
     setSignInModalOpen(!signInModalOpen);
+  }
+  const CloserModal = () => {
+    setOpenProfile(false)
+  }
+  const openProFn = () => {
+    setOpenProfile(!OpenProfile)
   }
   return (
 
@@ -56,12 +64,17 @@ export default function Navbar() {
               <button onClick={toggleSignInModal}>
                 <h3 className="nav-button1" >Login</h3>
               </button>
+
+            </div>
+            <div onClick={openProFn} className='NavbarProfileDiv'>
+              <img src="/images/TempDocImg.jpg" alt="" />
             </div>
             <div onClick={SelectOpen} className='menubutton flex'>
               <i class="ri-menu-2-fill"></i>
             </div>
           </div>
           <CusSigninAndSignUp Caller={{ ReCallF: toggleSignInModal, OpenModal: signInModalOpen }} />
+          <ProfileView data={{ CloserModal: CloserModal, OpenPro: OpenProfile }} />
           <Modal className='menubuttonNavModal container' open={open} onClose={SelectOpen} >
             <>
               <div className='menubuttonNavModalSec flex '>

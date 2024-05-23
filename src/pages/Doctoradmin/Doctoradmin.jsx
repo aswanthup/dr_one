@@ -17,6 +17,7 @@ import { toast } from 'react-toastify';
 export default function Doctoradmin() {
   const [open, setOpen] = React.useState({});
   const [FormValues, setFormValues] = useState({})
+  const [DoctorData, setDoctorData] = useState()
   const [EditValues, setEditValues] = useState({})
   const [deletePopup, setdeletePopUp] = useState(false)
   const [loading, setloading] = useState(false)
@@ -42,6 +43,8 @@ export default function Doctoradmin() {
     ])
 
   }
+  const storedLoginData = localStorage.getItem("loginData")
+  const LoggedData = JSON.parse(storedLoginData);
   const [currentAvailability, setcurrentAvailability] = useState([])
   const handleOpen = (edit) => {
     if (edit?.edit) {
@@ -106,20 +109,33 @@ export default function Doctoradmin() {
       toast.info(data?.msg)
     }
   }
-  console.log("EditValues>>>", EditValues)
   const getitngAllhospitals = () => {
-    axios.post(`${port}/hospital/consultationdata`).then((res) => {
-      setcurrentAvailability(res.data.data)
-      console.log(res)
-    }).catch((err) => {
-      console.log(err)
-      toast.info(err?.response?.data?.message)
-    })
+    const data = {
+      id: LoggedData?.id
+    }
+    if (data?.id) {
+      axios.post(`${port}/hospital/consultationdata`, data).then((res) => {
+        setcurrentAvailability(res.data.data)
+        console.log(res)
+      }).catch((err) => {
+        console.log(err)
+        toast.info(err?.response?.data?.message)
+      })
+    }
 
   }
   useEffect(() => {
     axios.get(`${port}/hospital/list`).then((res) => {
       setHospitals(res.data.data)
+      console.log(res)
+    }).catch((err) => {
+      console.log(err)
+    })
+    const data = {
+      id: LoggedData?.id
+    }
+    axios.post(`${port}/doctor/doctordetails`, data).then((res) => {
+      setDoctorData(res.data.data)
       console.log(res)
     }).catch((err) => {
       console.log(err)
@@ -164,7 +180,8 @@ export default function Doctoradmin() {
   const SaveData = () => {
     const data = {
       hospital_id: FormValues?.hospital_id,
-      days: TimePickers
+      days: TimePickers,
+      doctor_id: LoggedData?.id
     }
 
     // const checkingValues = TimePickers?.filter(Values => {
@@ -223,7 +240,6 @@ export default function Doctoradmin() {
     }
 
   }
-  console.log("data>>>>", FormValues)
   const EditData = () => {
     const checkingValues = EditValues.days_timing?.filter(Values => {
       const CheckStartPoint = Values?.availableTimes?.filter(availableTimes =>
@@ -262,7 +278,7 @@ export default function Doctoradmin() {
   const ConfirmDelete = () => {
     const data = {
       id: deletePopup?.id,
-      doctor_id: 1
+      doctor_id: LoggedData?.id
     }
     setloading(true)
     axios.post(`${port}/hospital/delete_availability`, data).then((res) => {
@@ -285,7 +301,7 @@ export default function Doctoradmin() {
       {
         loading ? <Loader /> : ""}
       <div className="hospitaladmin-main flex">
-        <Rightnavbar />
+        <Rightnavbar data={DoctorData} />
         <Modal
           onClose={() => { DeleteTimeConfirm({ cls: true }) }}
           open={deletePopup.condition}

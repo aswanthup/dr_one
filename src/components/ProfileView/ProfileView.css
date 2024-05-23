@@ -1,0 +1,144 @@
+.ProfileViewAlign {
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+    margin-top: 80px;
+    padding: 30px;
+}
+
+.ProfileViewAlignCard {
+    width: 30%;
+    background-color: white;
+    height: fit-content;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    border-radius: 10px;
+}
+
+.ProfileAlignCardImg img {
+    height: 70px;
+    width: 70px;
+    border-radius: 50%;
+
+}
+
+.ProfileViewAlignCardEditBtnAlign {
+    width: 100%;
+    display: flex;
+    justify-content: end;
+
+}
+
+#ProfileViewAlignCardEditBtnAlignEditIcon {
+    font-size: 20px;
+    color: white;
+}
+
+.ProfileViewAlignCardEditBtnAlign button {
+    background-color: #7E83FF;
+    border-radius: 6px;
+    color: white;
+    display: flex;
+    gap: 5px;
+    font-size: 17px;
+    align-items: center;
+}
+
+.ProfileAlignCardImg {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    flex-direction: column;
+    align-items: center;
+}
+
+.ProfileAlignCardPInCode {
+    background-color: #3A65FD;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+
+}
+
+.ProfileAlignCardPInCode p {
+    color: rgba(255, 255, 255, 0.761);
+    font-weight: 300;
+    font-size: 15px;
+}
+
+.ProfileAlignCardImg p {
+    font-size: 20px;
+    letter-spacing: 2px;
+    font-weight: 500;
+}
+
+.ProfileAlignCardDetailSec {
+    display: flex;
+    gap: 20px;
+
+}
+
+.ProfileAlignCardDetGender {
+    display: flex;
+    gap: 2px;
+    background-color: #FB8500;
+    border-radius: 17px;
+    padding: 5px;
+    align-items: center;
+}
+
+#ProfileAlignCardDetGenderIcon {
+    color: white;
+    font-size: 20px;
+}
+
+#ProfileAlignCardDetPhoneIcon {
+    color: #3A65FD;
+    font-size: 20px;
+}
+
+.ProfileAlignCardAge {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+
+}
+
+.ProfileAlignLogoutSec {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+
+}
+
+.ProfileAlignCardAge img {
+    height: 25px;
+    width: 25px;
+    object-fit: cover;
+    background-size: cover;
+}
+
+.ProfileAlignCardDetGender p {
+    font-weight: 400;
+    color: white;
+    font-size: 12px;
+}
+
+.ProfileAlignCardAge p {
+    font-size: 15px;
+    font-weight: 400;
+}
+
+#ProfileAlignCardDetLogoutIcon {
+    color: rgba(255, 0, 0, 0.634);
+    font-size: 25px;
+}
+
+.ProfileAlignLogoutSec p {
+    color: rgba(255, 0, 0, 0.634);
+    font-size: 20px;
+    letter-spacing: 2px;
+}

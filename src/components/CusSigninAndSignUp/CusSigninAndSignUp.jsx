@@ -4,7 +4,7 @@ import { Modal } from '@mui/material';
 import { toast } from 'react-toastify';
 import axios from 'axios';
 import { port } from '../../config';
-
+import ErrorIcon from '@mui/icons-material/Error';
 export const CusSigninAndSignUp = ({ Caller: { ReCallF, OpenModal } }) => {
     const [openModal, setOpenModal] = useState(OpenModal);
     const [FormData, setFormData] = useState({})
@@ -127,7 +127,7 @@ export const CusSigninAndSignUp = ({ Caller: { ReCallF, OpenModal } }) => {
 
 
                     {/* LOGIN */}
-                    {ChangeBoxes.signIn ?
+                    {ChangeBoxes?.signIn ?
                         <>
                             <div className="toploginnav flex">
                                 <div className="toploginnavlogo">
@@ -167,7 +167,7 @@ export const CusSigninAndSignUp = ({ Caller: { ReCallF, OpenModal } }) => {
                             </div>
                         </>
                         :
-                        ChangeBoxes.signUp ?
+                        ChangeBoxes?.signUp ?
                             <>
 
 
@@ -198,18 +198,19 @@ export const CusSigninAndSignUp = ({ Caller: { ReCallF, OpenModal } }) => {
                                     <h2 className='smallh3'>
                                         Create your account
                                     </h2>
-                                    <h4 className="toplogindatatext">Name</h4>
-                                    <input value={FormData?.phone_no} onChange={handlechanges} name='name' type="text" />
+                                    <div>
+                                        <h4 className="toplogindatatext">Name</h4>
+                                        <input value={FormData?.name} onChange={handlechanges} name='name' type="text" />
+                                    </div>
+
                                     <div className="registerpopupleft flex">
                                         <div className='registerpopuinputs'>
                                             <h4 className="toplogindatatext">Phone Number</h4>
                                             <input value={FormData?.phone_no} onKeyDown={handleKeyPress} style={{ border: Errors?.phone ? '1px solid red' : '' }} onChange={handlechanges} name='phone_no' type="number" />
-                                            <p>{Errors?.phone}</p>
                                         </div>
                                         <div className='registerpopuinputs'>
                                             <h4 className="toplogindatatext">Email</h4>
                                             <input value={FormData?.email} style={{ border: Errors?.email ? '1px solid red' : '' }} onChange={handlechanges} name='email' type="email" />
-                                            <p>{Errors?.email}</p>
                                         </div>
 
                                     </div>
@@ -218,16 +219,43 @@ export const CusSigninAndSignUp = ({ Caller: { ReCallF, OpenModal } }) => {
                                         <div className='registerpopuinputs'>
                                             <h4 className="toplogindatatext">Password</h4>
                                             <input value={FormData?.password} style={{ border: Errors?.password ? '1px solid red' : '' }} onChange={handlechanges} name='password' type="Password" />
-                                            <p>{Errors?.password}</p>
 
                                         </div>
                                         <div className='registerpopuinputs'>
                                             <h4 className="toplogindatatext">Confirm Password</h4>
                                             <input value={FormData?.repassword} style={{ border: Errors.repassword ? '1px solid red' : '' }} onChange={handlechanges} name='repassword' type="Password" />
-                                            <p>{Errors?.repassword}</p>
                                         </div>
                                     </div>
+                                    {Errors?.phone || Errors?.email || Errors?.password || Errors?.repassword ?
+                                        <div className='registerpopuinputsErrorSec'>
+                                            {Errors?.phone &&
+                                                <div className='registerpopuinputsErrorSecFlex'>
+                                                    <ErrorIcon id="registerpopuinputsErrorSecFlexIcon" />
+                                                    <p>{Errors?.phone}</p>
+                                                </div>
+                                            }
+                                            {Errors?.email &&
 
+                                                <div className='registerpopuinputsErrorSecFlex'>
+                                                    <ErrorIcon id="registerpopuinputsErrorSecFlexIcon" />
+                                                    <p>{Errors?.email}</p>
+                                                </div>
+                                            }
+                                            {Errors?.password &&
+                                                <div className='registerpopuinputsErrorSecFlex'>
+                                                    <ErrorIcon id="registerpopuinputsErrorSecFlexIcon" />
+                                                    <p>{Errors?.password}</p>
+                                                </div>
+                                            }
+                                            {Errors?.repassword &&
+                                                <div className='registerpopuinputsErrorSecFlex'>
+                                                    <ErrorIcon id="registerpopuinputsErrorSecFlexIcon" />
+                                                    <p>{Errors?.repassword}</p>
+                                                </div>
+                                            }
+                                        </div>
+                                        : ''
+                                    }
                                     <button onClick={onSignUp} className="toplogindatabutton flex" ><h4>Sign Up</h4></button>
 
                                 </div>
@@ -237,16 +265,6 @@ export const CusSigninAndSignUp = ({ Caller: { ReCallF, OpenModal } }) => {
                             </>
                             : ''
                     }
-
-
-
-
-
-
-
-
-
-
 
                 </div>
             </Modal >

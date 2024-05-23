@@ -12,6 +12,7 @@ import ModeEditIcon from '@mui/icons-material/ModeEdit';
 import { toast } from 'react-toastify';
 import { Loader } from '../../../components/Loader/Loader';
 export const EditLaboratory = () => {
+    const [loading, setLoading] = useState(false)
     const [DetailedData, setDetailedData] = useState({})
     const location = useLocation()
     const navigate = useNavigate()
@@ -92,12 +93,14 @@ export const EditLaboratory = () => {
         setDetailedData({ ...DetailedData, [name]: value })
     }
     const SubmitData = () => {
+        setLoading(true)
         axios.post(`${port}/lab/editlab`, DetailedData).then((res) => {
             if (res?.data?.success) {
+                setLoading(false)
                 toast.success(res?.data?.message)
             }
         }).catch((err) => {
-            toast.success(err?.response?.data?.message)
+            toast.info(err?.response?.data?.message)
         })
     }
     const handleFileChange = (event, data) => {
@@ -119,7 +122,7 @@ export const EditLaboratory = () => {
     }
 
     console.log("DetailedData>>>>", DetailedData)
-    if (DetailedData?.name) {
+    if (DetailedData?.name && !loading) {
         return (
             <>
                 <NavBarAnalyze />

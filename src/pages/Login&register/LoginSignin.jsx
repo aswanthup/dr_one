@@ -82,38 +82,45 @@ export const LoginSignin = () => {
   const handleClickShowResetPassword = () => setShowResetPassword((show) => !show);
   const handleClickShowResetConfPassword = () => setResetConfShowPassword((show) => !show);
   const loginNow = (values) => {
-    const data = values || inputedValues
+    setloading(true)
+    const data = values?.googleVerified ? values : inputedValues
+    console.log("values>>>>", values)
     let CheckingFields = true
-    if (!Errors?.email && !Errors?.password) {
-      if (data?.googleVerified) {
+    if (data?.googleVerified) {
+      CheckingFields = true
+    } else {
+      if (data?.email && data?.password) {
         CheckingFields = true
       } else {
-        console.log(data?.contact_number, data?.email, data?.password)
-        if (data?.email && data?.password) {
-          CheckingFields = true
+        CheckingFields = false
+      }
+    }
+    if (CheckingFields) {
+      axios.post(`${port}/user/login`, data).then((res) => {
+        console.log("res>>>", res)
+        const loginData = { id: res?.data?.logged_id };
+        localStorage.setItem("loginData", JSON.stringify(loginData))
+        if (res?.data?.success) {
+          toast.success(res?.data?.message)
+
+          setTimeout(() => {
+            setloading(false)
+            if (res?.data?.type === "doctor") {
+              navigate("/doctoradmin")
+            } else if (res?.data?.type === "hospital") {
+              navigate("/hospitaladmin")
+            } else if (res?.data?.type === "laboratory" || res?.data?.type === "lab") {
+              navigate("/LabProfile")
+            }
+          }, 1000);
         } else {
-          CheckingFields = false
+          toast.info(res?.data?.message)
         }
-      }
-      if (CheckingFields) {
-        axios.post(`${port}/user/login`, data).then((res) => {
-          console.log("res>>>", res)
-          if (res?.data?.success) {
-            toast.success(res?.data?.message)
-            setTimeout(() => {
-              navigate("/")
-            }, 1000);
-          } else {
-            toast.info(res?.data?.message)
-          }
-        }).catch((error) => {
-          toast.info(error?.response?.data?.message)
-        })
-      } else {
-        toast.info("All fields are mandatory")
-      }
+      }).catch((error) => {
+        toast.info(error?.response?.data?.message)
+      })
     } else {
-      toast.info("Check email or phone number")
+      toast.info("All fields are mandatory")
     }
   }
 
@@ -216,7 +223,7 @@ export const LoginSignin = () => {
   const resetAuth = () => {
     setinputedValues({ ...inputedValues, googleVerified: false, email: '' })
   }
-  if (!inputedValues?.googleVerified) {
+  if (!inputedValues?.googleVerified && !loading) {
     return (
       <div>
         <div className="main-login flex">
@@ -268,7 +275,6 @@ export const LoginSignin = () => {
                   <div
                     style={{
                       position: "relative",
-
                     }}
                     className="login-pass-con-Inp"
                   >
