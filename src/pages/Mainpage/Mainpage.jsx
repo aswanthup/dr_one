@@ -285,12 +285,12 @@ export default function Mainpage() {
                 <div className="MainPageTypeAndSpecialityContentSec">
                   <div className="MainPageTypeAndSpecialityContentType">
                     {types.map(ele =>
-                      ele !== "Others" ?
+                      // ele !== "Others" ?
                         <div onClick={() => { clickChangeTypes(ele) }} className={selectTypes[ele] ? "MainPageTypeAndSpeTypeFlex MainPageTypeAndSpeTypeFlexselected " : "MainPageTypeAndSpeTypeFlex"}>
                           <p>{ele}</p>
                           <ArrowCircleRightOutlinedIcon id="MainPageTypeAndSpeTypeIcon" />
                         </div>
-                        : ''
+                        // : ''
                     )}
                   </div>
                   <div className="MainPageTypeAndSpecialityContentServices">

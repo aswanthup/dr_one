@@ -66,9 +66,9 @@ export default function Navbar() {
               </button>
 
             </div>
-            {/* <div onClick={openProFn} className='NavbarProfileDiv'>
+            <div onClick={openProFn} className='NavbarProfileDiv'>
               <img src="/images/TempDocImg.jpg" alt="" />
-            </div> */}
+            </div>
             <div onClick={SelectOpen} className='menubutton flex'>
               <i class="ri-menu-2-fill"></i>
             </div>

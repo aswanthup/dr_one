@@ -8,6 +8,7 @@ export default function Contexts({ children }) {
     const [HospitalAdminRg, setHospitalAdminRg] = useState({})
     const [LabAdminRg, setLabAdminRg] = useState({})
     const [passedSpecialization, setPassedSpecialization] = useState("")
+    const [passedType, setPassedType] = useState("")
     const value = {
         Data,
         setData,
@@ -16,7 +17,8 @@ export default function Contexts({ children }) {
         passedSpecialization,
         LabAdminRg,
         setLabAdminRg,
-        setPassedSpecialization
+        setPassedSpecialization,
+        passedType, setPassedType
     }
     return (
         <>

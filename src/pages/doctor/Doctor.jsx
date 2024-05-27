@@ -19,7 +19,7 @@ import { ayurSpec, homeoDept, speacializationNames } from "../HospitalFiltering/
 export default function Doctor() {
   const [visibleContent, setVisibleContent] = useState(2);
   const [SpecialisationBatch, setSpecialisationBatch] = useState([]);
-  const { passedSpecialization, setPassedSpecialization } = useContext(MyContext)
+  const {setPassedSpecialization ,setPassedType} = useContext(MyContext)
   const [ayurvedic, setayruvedic] = useState([])
   const [Homeo, setHomeo] = useState([])
   const navigate = useNavigate()
@@ -41,8 +41,9 @@ export default function Doctor() {
     setVisibleContent((prev) => prev + 1); // Increase visible content count by 4 on click
   };
 
-  const handleSelectSpecialization = (specialization) => {
+  const handleSelectSpecialization = (type,specialization) => {
     setPassedSpecialization(specialization)
+    setPassedType(type)
     navigate("/searchdoctor")
   }
 
@@ -193,7 +194,7 @@ export default function Doctor() {
                     <h4>Pregnancy</h4>
                   </div>
                   <div
-                    onClick={() => handleSelectSpecialization("gynecology")}
+                    onClick={() => handleSelectSpecialization("Allopathy","gynecology")}
                     className="home-specialties-button"
                   >
                     <h4>Consult Now</h4>
@@ -208,7 +209,7 @@ export default function Doctor() {
                     <h4>Acne, pimple or</h4>
                     <h4>skin issues</h4>
                   </div>
-                  <div onClick={() => handleSelectSpecialization("dermatology")} className="home-specialties-button">
+                  <div onClick={() => handleSelectSpecialization("Allopathy","dermatology")} className="home-specialties-button">
                     <h4>Consult Now</h4>
                   </div>
                 </div>
@@ -221,7 +222,7 @@ export default function Doctor() {
                     <h4>Cold, cough or</h4>
                     <h4>Fever</h4>
                   </div>
-                  <div onClick={() => handleSelectSpecialization("general medicine")} className="home-specialties-button">
+                  <div onClick={() => handleSelectSpecialization("Allopathy","general medicine")} className="home-specialties-button">
                     <h4>Consult Now</h4>
                   </div>
                 </div>
@@ -234,7 +235,7 @@ export default function Doctor() {
                     <h4>Depression or</h4>
                     <h4>Anxiety</h4>
                   </div>
-                  <div onClick={() => handleSelectSpecialization("mental health")} className="home-specialties-button">
+                  <div onClick={() => handleSelectSpecialization("Allopathy","mental health")} className="home-specialties-button">
                     <h4>Consult Now</h4>
                   </div>
                 </div>
@@ -247,7 +248,7 @@ export default function Doctor() {
                     <h4>Child not feeling</h4>
                     <h4>well</h4>
                   </div>
-                  <div className="home-specialties-button">
+                  <div onClick={() => handleSelectSpecialization("Allopathy","pediatrics")} className="home-specialties-button">
                     <h4>Consult Now</h4>
                   </div>
                 </div>
