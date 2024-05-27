@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Footer from "../../components/Footer";
 import Navbar from "../../components/Navbar";
 import Headroom from "react-headroom";
@@ -9,17 +9,84 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import ChatBot from "../../components/ChatBot/ChatBot";
-
+import { services } from "../Labs/LabFIltering/constatnts/Filter";
+import ArrowCircleRightOutlinedIcon from '@mui/icons-material/ArrowCircleRightOutlined';
+import { ayurSpec, homeoDept, speacializationNames, types } from "../doctor/constants/filter";
 export default function Mainpage() {
   const navigate = useNavigate()
   const location = useLocation();
+  const [selectTypes, setselectTypes] = useState({
+    [types?.[0]]: true
+  })
+  const [SpecialisationBatch, setSpecialisationBatch] = useState([])
 
+  console.log("selectTypes>>", selectTypes)
   useEffect(() => {
     AOS.init({
       once: false,
     });
     AOS.refresh();
   }, [location.pathname]);
+  const navigateElements = (value) => {
+    navigate("/labfiltering", { state: { services: value } })
+  }
+
+  const clickChangeTypes = (data) => {
+    setselectTypes({
+      [data]: true
+    })
+  }
+
+  useEffect(() => {
+    if (selectTypes?.Allopathy) {
+      let settingAllopathy = 0;
+      let AllopathyUpdatingBatch = [];
+      speacializationNames.forEach((ele, index) => {
+        if (!AllopathyUpdatingBatch[settingAllopathy] || AllopathyUpdatingBatch[settingAllopathy].length < 12) {
+          AllopathyUpdatingBatch[settingAllopathy] = [...(AllopathyUpdatingBatch[settingAllopathy] || []), ele];
+        } else {
+          settingAllopathy += 1;
+          AllopathyUpdatingBatch[settingAllopathy] = [ele];
+        }
+        setSpecialisationBatch(AllopathyUpdatingBatch)
+      });
+    } else if (selectTypes.Ayurvedic) {
+      let settingAllopathy = 0;
+      let AllopathyUpdatingBatch = [];
+      ayurSpec.forEach((ele, index) => {
+        if (!AllopathyUpdatingBatch[settingAllopathy] || AllopathyUpdatingBatch[settingAllopathy].length < 12) {
+          AllopathyUpdatingBatch[settingAllopathy] = [...(AllopathyUpdatingBatch[settingAllopathy] || []), ele];
+        } else {
+          settingAllopathy += 1;
+          AllopathyUpdatingBatch[settingAllopathy] = [ele];
+        }
+        setSpecialisationBatch(AllopathyUpdatingBatch)
+      });
+    }
+    else if (selectTypes.Homeopathy) {
+      let settingAllopathy = 0;
+      let AllopathyUpdatingBatch = [];
+      homeoDept.forEach((ele, index) => {
+        if (!AllopathyUpdatingBatch[settingAllopathy] || AllopathyUpdatingBatch[settingAllopathy].length < 12) {
+          AllopathyUpdatingBatch[settingAllopathy] = [...(AllopathyUpdatingBatch[settingAllopathy] || []), ele];
+        } else {
+          settingAllopathy += 1;
+          AllopathyUpdatingBatch[settingAllopathy] = [ele];
+        }
+        setSpecialisationBatch(AllopathyUpdatingBatch)
+      });
+    }
+  }, [selectTypes])
+  const renderHosFilteringBYSpeciality = (Value) => {
+    if (speacializationNames.includes(Value?.speciality)) {
+      navigate("/hospitalfilter", { state: { speciality: Value?.speciality, type: "Allopathy" } })
+    } else if (ayurSpec.includes(Value?.speciality)) {
+      navigate("/hospitalfilter", { state: { speciality: Value?.speciality, type: "Ayurvedic" } })
+    } else if (homeoDept.includes(Value?.speciality)) {
+      navigate("/hospitalfilter", { state: { speciality: Value?.speciality, type: "Homeopathy" } })
+    }
+  }
+  console.log("SpecialisationBatch>>>>>", SpecialisationBatch)
   return (
     <div>
 
@@ -30,8 +97,6 @@ export default function Mainpage() {
       <div>
         <div className="desktop">
           {/* Navbar */}
-
-
 
           <ChatBot />
           {/*End Navbar */}
@@ -73,79 +138,8 @@ export default function Mainpage() {
               <div className="logo"><img src="images/ph1 (1).jpg" alt="" /></div>
             </div>
           </div>
-          {/*End Search box */}
 
-          {/*End Hero */}
-          {/* Features */}
-          {/* <div className="container-second Features">
-            <div className="second-main-head">
-              <h1>
-                Explore Our <span>Features</span>
-              </h1>
-            </div>
-            <div className="home-cards flex ">
-              <div className="home-card" data-aos="zoom-in" data-aos-duration="3000" >
-                <div className="image-section">
-                  <img src="/images/doc.jpg" alt="" />
-                </div>
-                <div className="button-section flex">
-                  <div className="card-icon flex">
-                    <img src="images/doc-icon.svg" alt="" />
-                  </div>
-                  <a onClick={() => { navigate("/searchdoctor") }} className="card-button flex" href>
-                    <h4>Search Doctor</h4>
-                  </a>
-                </div>
-              </div>
-              <div className="home-card" data-aos="zoom-in" data-aos-duration="3000">
-                <div className="image-section">
-                  <img src="/images/lab.jpg" alt="" />
-                </div>
-                <div className="button-section flex">
-                  <div className="card-icon flex">
-                    <img src="images/test.png" alt="" />
-                  </div>
-                  <a onClick={() => { navigate("/labfiltering") }} className="card-button flex" href>
-                    <h4>Find Labs</h4>
-                  </a>
-                </div>
-              </div>
-              <div className="home-card" data-aos="zoom-in" data-aos-duration="3000">
-                <div className="image-section">
-                  <img src="/images/med.jpg" alt="" />
-                </div>
-                <div className="button-section flex">
-                  <div className="card-icon flex">
-                    <img src="images/med1.svg" alt="" />
-                  </div>
-                  <a className="card-button flex" >
-                    <h4>Get Medicines</h4>
-                  </a>
-                </div>
-              </div>
-            </div>
-            <div className="home-hospital flex" data-aos="fade-up"
-              data-aos-anchor-placement="top-bottom" data-aos-duration="3000">
-              <div className="home-hospital-images flex">
-                <img src="/images/hosptal1 (1).jpg" alt="" />
-                <img src="/images/hosptal1 (2).jpg" alt="" />
-                <img src="/images/hosptal1 (3).jpg" alt="" />
-              </div>
-              <div className="home-hospital-title">
-                <h2>
-                  Find Best <span>Hospital</span>
-                </h2>
-                <h2>Near You</h2>
-              </div>
-              <div className="home-hospital-button flex">
-                <a onClick={() => { navigate("/hospitalfilter") }} href=" " className="card-button flex">
-                  <h4>Hospital</h4>
-                </a>
-              </div>
-            </div>
-          </div> */}
-          {/*End Features */}
-          {/* Specialties */}
+
           <div className=" container-second Specialties">
             <div className="second-main-head second-main-head2 flex">
               <h1>
@@ -274,6 +268,51 @@ export default function Mainpage() {
           </div>
           {/*End Specialties */}
           {/* Lab Tests */}
+
+
+
+
+          <div className="MainPageTypeAndSpeciality">
+            <div className="MainPageTypeAndSpecialityImgSec">
+              <div className="second-main-head second-main-head2 flex">
+                <h1>
+                  Select our <span>Types</span> and <span>Specialities</span>
+                </h1>
+              </div>
+
+              <div className="MainPageTypeAndSpecialityImgSecAlign">
+                <img src="/images/SecImg.jpg" className="MainPageTypeAndSpecialityImg" alt="" />
+                <div className="MainPageTypeAndSpecialityContentSec">
+                  <div className="MainPageTypeAndSpecialityContentType">
+                    {types.map(ele =>
+                      ele !== "Others" ?
+                        <div onClick={() => { clickChangeTypes(ele) }} className={selectTypes[ele] ? "MainPageTypeAndSpeTypeFlex MainPageTypeAndSpeTypeFlexselected " : "MainPageTypeAndSpeTypeFlex"}>
+                          <p>{ele}</p>
+                          <ArrowCircleRightOutlinedIcon id="MainPageTypeAndSpeTypeIcon" />
+                        </div>
+                        : ''
+                    )}
+                  </div>
+                  <div className="MainPageTypeAndSpecialityContentServices">
+                    {SpecialisationBatch?.map((ele) =>
+                      <div className='spec_main_cards_align flex'>
+                        {ele?.map(speciality =>
+                          <div onClick={() => { renderHosFilteringBYSpeciality({ speciality: speciality }) }} className='spec_main_card flex'>
+                            <h4>{speciality}</h4>
+                            <div className='spec_main_card_button flex'>
+                              <i class="ri-arrow-right-line"></i>
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
           <div className="container-second home-lab">
             <div className="second-main-head">
               <h1>
@@ -416,6 +455,9 @@ export default function Mainpage() {
             </div>
           </div>
           {/*End Lab tests */}
+
+
+
           {/* Diagnostic */}
           <div className="container-second diagnostic">
             <div className="second-main-head second-main-head2 flex">
@@ -430,70 +472,29 @@ export default function Mainpage() {
             </div>
 
             <div className="diagnostic-cards flex">
-              <div className="diagnostic-card">
-                <h2>Gastroscopy</h2>
-                <div className="diagnostic-paragraph">
-                  <h4>
-                    Generate Lorem Ipsum favorite writing, design and blogging
-                    tools. Explore the origins, history and meaning of the
-                    famous pa
-                  </h4>
-                </div>
-                <div className="flex price-section">
-                  <h2>₹ 456</h2>
-                  {/* <a href>
+              {services.map((ele, index) =>
+                index < 4 ?
+                  <div onClick={() => { navigateElements(ele) }} className="diagnostic-card">
+                    <h2>{ele}</h2>
+                    <div className="diagnostic-paragraph">
+                      <h4>
+                        Generate Lorem Ipsum favorite writing, design and blogging
+                        tools. Explore the origins, history and meaning of the
+                        famous pa
+                      </h4>
+                    </div>
+                    <div className="flex price-section">
+                      <h2>₹ 456</h2>
+                      {/* <a href>
                     <h4 className="diagnostic-button">Add</h4>
                   </a> */}
-                </div>
-              </div>
-              <div className="diagnostic-card">
-                <h2>Electrocardiogram</h2>
-                <div className="diagnostic-paragraph">
-                  <h4>
-                    Generate Lorem Ipsum favorite writing, design and blogging
-                    tools. Explore the origins, history and meaning of the
-                    famous pa
-                  </h4>
-                </div>
-                <div className="flex price-section">
-                  <h2>₹ 556</h2>
-                  {/* <a href>
-                    <h4 className="diagnostic-button">Add</h4>
-                  </a> */}
-                </div>
-              </div>
-              <div className="diagnostic-card">
-                <h2>Electrocardiogram</h2>
-                <div className="diagnostic-paragraph">
-                  <h4>
-                    Generate Lorem Ipsum favorite writing, design and blogging
-                    tools. Explore the origins, history and meaning of the
-                    famous pa
-                  </h4>
-                </div>
-                <div className="flex price-section">
-                  <h2>₹ 556</h2>
-                  {/* <a href>
-                    <h4 className="diagnostic-button">Add</h4>
-                  </a> */}
-                </div>
-              </div>
-              <div className="diagnostic-card">
-                <h2>Electrocardiogram</h2>
-                <div className="diagnostic-paragraph">
-                  <h4>
-                    Generate Lorem Ipsum favorite writing, design and blogging
-                    tools. Explore the origins, history and meaning of the
-                    famous pa
-                  </h4>
-                </div>
-                <div className="flex price-section">
-                  <h2>₹ 556</h2>
-                  {/* <a href>
-                    <h4 className="diagnostic-button">Add</h4>
-                  </a> */}
-                </div>
-              </div>
+                    </div>
+                  </div>
+                  : ""
+
+              )
+
+              }
             </div>
           </div>
           {/*End Diagnostic */}
@@ -506,8 +507,6 @@ export default function Mainpage() {
 
         <div className="mobile-screen container">
           <ChatBot />
-
-
           <div className="mobhead">
             <h1>Wellness Wise: <span>Your</span> </h1>
             <h1>Path to</h1>
@@ -626,6 +625,10 @@ export default function Mainpage() {
           </div>
 
           {/* End Specialties */}
+
+
+
+
 
           {/* tests */}
           <div className="mobile-second-heading">
@@ -818,6 +821,6 @@ export default function Mainpage() {
       </div>
 
       <Footer />
-    </div>
+    </div >
   );
 }
