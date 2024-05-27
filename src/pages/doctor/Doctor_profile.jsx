@@ -15,8 +15,8 @@ export default function Doctor_profile() {
     "Saturday"
   ]
   const location = useLocation();
-  // const doctor = location?.state
-  const doctor = ''
+  const doctor = location?.state
+  // const doctor = ''
   console.log(doctor)
   const viewDetailedData = (data) => {
     const id = data?.id
