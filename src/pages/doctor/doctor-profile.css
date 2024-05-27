@@ -77,7 +77,7 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
-
+    height: 300px;
 }
 
 .DoctorAvailableAvailableSec {
@@ -86,7 +86,7 @@
     flex-wrap: wrap;
     justify-content: space-between;
     row-gap: 30px;
-    height: 300px;
+    height: fit-content;
     overflow: scroll;
 }
 
@@ -102,6 +102,7 @@
     display: flex;
     height: fit-content;
     justify-content: space-between;
+
 }
 
 
@@ -157,6 +158,111 @@
     justify-content: center;
     gap: 30px;
     width: 80%;
+}
+
+.doc_profileModal {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 40px;
+}
+
+.doc_profileSec {
+    width: 40%;
+    background-color: white;
+    border-radius: 20px;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.doc_profileModalLocTimingSec {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    row-gap: 20px;
+    flex-wrap: wrap;
+}
+
+.doc_profileModalLocTimging {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    width: 46%;
+}
+
+.doc_profileModalAlignCont {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+
+}
+
+.doc_profileModalAlignCont button {
+    border: none;
+    background-color: #7E83FF;
+    color: rgba(255, 255, 255, 0.879);
+    font-size: 17px;
+    letter-spacing: 1px;
+    border-radius: 2vw;
+    font-weight: 400;
+    align-items: center;
+    display: flex;
+    gap: 5px;
+
+}
+
+#doc_profileModalBtnIcon {
+    font-size: 23px;
+    color: rgba(255, 255, 255, 0.818);
+}
+
+.doc_profileModalLocTimging button {
+    border: none;
+    background-color: #2A9D8F;
+    color: white;
+    letter-spacing: 1px;
+
+}
+
+.doc_profileModalLocTimging p {
+    font-size: 17px;
+    color: rgba(0, 0, 0, 0.604);
+    font-weight: 400;
+}
+
+.doc_profileFirstTag p {
+    font-size: 20px;
+    letter-spacing: 1px;
+    font-weight: 400;
+    letter-spacing: 1px;
+    color: rgba(0, 0, 0, 0.644);
+    font-weight: 400;
+}
+
+.doc_profileModalLocSec {
+    display: flex;
+    gap: 10px;
+    background-color: #7E83FF30;
+    padding: 10px;
+    align-items: center;
+    border-radius: 0.5vw;
+
+
+}
+
+#doc_profileModalLocSecIcon {
+    font-size: 40px;
+    color: #7E83FF;
+}
+
+.doc_profileModalLocSec p {
+    font-size: 15px;
+    font-weight: 400;
+    color: rgba(0, 0, 0, 0.543);
+    letter-spacing: 1px;
+
 }
 
 @media screen and (max-width:1100px) {

@@ -1,17 +1,31 @@
-import React from 'react'
+import React, { useState } from 'react'
 import '../doctor/doctor-profile.css'
 import Footer from '../../components/Footer'
 import Navbar from '../../components/Navbar'
 import { useLocation } from 'react-router-dom';
-
+import { Modal } from '@mui/material';
+import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
+import CallIcon from '@mui/icons-material/Call';
 export default function Doctor_profile() {
+  const [open, setopen] = useState(false)
   const days = [
-    "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"
+    "Sunday", "Monday",
+    "Tuesday", "Wednesday",
+    "Thursday", "Friday",
+    "Saturday"
   ]
   const location = useLocation();
   // const doctor = location?.state
   const doctor = ''
   console.log(doctor)
+  const viewDetailedData = (data) => {
+    const id = data?.id
+    openModal()
+  }
+
+  const openModal = () => {
+    setopen(!open)
+  }
   return (
     <div>
       <Navbar />
@@ -73,7 +87,7 @@ export default function Doctor_profile() {
                     )}
                   </div>
                 </div>
-                <button>View Details</button>
+                <button onClick={() => { viewDetailedData() }}>View Details</button>
               </div>
               <div className='DoctorAvailableSecSettingSec'>
                 <div className='DoctorAvailableTiming'>
@@ -101,6 +115,49 @@ export default function Doctor_profile() {
 
           </div>
         </div>
+
+        <Modal open={open} onClose={openModal} className='doc_profileModal'>
+          <>
+            <div className='doc_profileSec'>
+              <div className='doc_profileFirstTag'>
+                <p>Caritas hospital, Kotayam</p>
+              </div>
+              <div className='doc_profileModalLocSec'>
+                <LocationOnOutlinedIcon id="doc_profileModalLocSecIcon" />
+                <p>
+                  Shop No 3, Empire House, Irla, S V Road, Vile Parle West, Mumbai - 400056 (Opposite Irla Petrol Pump)
+                </p>
+              </div>
+              <div className='doc_profileModalLocTimingSec'>
+                <div className='doc_profileModalLocTimging'>
+                  <button>Sun</button>
+                  <p>10.00 am to 11.00 pm
+                  </p>
+                </div>
+                <div className='doc_profileModalLocTimging'>
+                  <button>Sun</button>
+                  <p>10.00 am to 11.00 pm
+                  </p>
+                </div>
+                <div className='doc_profileModalLocTimging'>
+                  <button>Sun</button>
+                  <p>10.00 am to 11.00 pm
+                  </p>
+                </div>
+                <div className='doc_profileModalLocTimging'>
+                  <button>Sun</button>
+                  <p>10.00 am to 11.00 pm
+                  </p>
+                </div>
+              </div>
+              <div className='doc_profileModalAlignCont'>
+                <button>
+                  <CallIcon id="doc_profileModalBtnIcon" />
+                  Contact now</button>
+              </div>
+            </div>
+          </>
+        </Modal>
 
       </div>
 

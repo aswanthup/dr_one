@@ -58,12 +58,12 @@
 
 .search-input-wrapper input {
     padding-left: 30px;
-    /* Adjust the padding to make space for the icon */
     height: 35px;
-    border: 1px solid #3A65FD;
+    border-bottom: 1px solid;
+    /* border: 1px solid #3A65FD; */
     border-radius: 4px;
     font-size: 15px;
-    border-radius: 10px;
+    border-radius: 0px;
     letter-spacing: 1px;
 }
 
