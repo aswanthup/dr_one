@@ -8,6 +8,7 @@ import {
   speacializationNames,
 } from "../../pages/doctor/constants/filter";
 import { Checkbox, FormControlLabel } from "@mui/material";
+import { useLocation } from "react-router-dom";
 
 export const SearchDocContext = createContext();
 
@@ -22,7 +23,7 @@ export default function SearchDoctorProvider({ children }) {
     type: "",
     gender: "",
   }); //for maintaining selected items in both screens
-  const { passedSpecialization } = useContext(MyContext); //coming from doctor main page..by selecting specialization
+  const { passedSpecialization,passedType } = useContext(MyContext); //coming from doctor main page..by selecting specialization
   const [filters, setFilters] = useState({
     type: "",
     specializations: [],
@@ -30,6 +31,8 @@ export default function SearchDoctorProvider({ children }) {
     experience: 0,
     name: "",
   });
+
+
 
   const handleTypeChanges = (event) => {
     const { value } = event.target;
@@ -141,20 +144,10 @@ export default function SearchDoctorProvider({ children }) {
   }, [passedSpecialization]);
 
   const handlePassedSpecialization = (DoctorsDetails) => {
-    // console.log({ DoctorsDetails });
-    // const docsBySpecialization = DoctorsDetails.filter(
-    //   (doc) =>
-    //     doc?.specialization?.toLowerCase() ===
-    //     passedSpecialization.toLowerCase()
-    // );
-    // console.log({ docsBySpecialization });
-    // if (docsBySpecialization.length === 0) {
-    //   setEmptyResults(true);
-    // }
-
+ 
     setFilters((prev) => ({
       specializations: [passedSpecialization],
-      type: "Allopathy"
+      type: passedType
     }));
     setAllDocData(DoctorsDetails);
     setFilteredDoctors(DoctorsDetails);
@@ -191,7 +184,7 @@ export default function SearchDoctorProvider({ children }) {
       setDocsBySearch([]);
       return;
     }
-    if (passedSpecialization) {
+    if (passedSpecialization && passedType) {
       //if specialization coming from doc page filter the search results also
       handlePassedSpecialization(data);
     } else {
