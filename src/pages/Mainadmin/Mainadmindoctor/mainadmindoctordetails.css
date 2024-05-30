@@ -1,0 +1,313 @@
+.doctoradminnavbar{
+    height:64px;
+    border-bottom:1px solid #6B8CFE;  
+}
+
+.containeradmin{
+    max-width:100vw;
+    margin-inline: auto;
+    padding-inline:20px;
+}
+
+.doctoradminnavbar2{
+    justify-content: space-between;
+    align-items: center;
+    height:64px;
+}
+
+.adminnotification{
+    height: 40px;
+    width:40px;
+    background-color: #6B8CFE;
+    border-radius:50px;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+
+.adminnotification i{
+    font-size:18px;
+    font-weight: 100;
+}
+
+.adminonboarding{
+    height: 40px;
+    width:fit-content;
+    background-color: #6B8CFE;
+    border-radius:50px;
+    justify-content: center;
+    align-items: center;
+    padding:0vw 1.2vw;
+    color: white;
+}
+
+.adminlogodiv{
+    align-items: center;
+}
+
+.doctoradminnavbar2 img{
+    height: 40px;
+    width:40px;
+    object-fit: cover;
+    border-radius:50px;
+}
+
+
+
+
+
+
+
+
+
+
+/* Sidebar */
+
+
+
+.mainadminsidebar{
+    width:10vw;
+    padding-inline:20px;
+    border-right:1px solid #6B8CFE;
+  
+}
+
+
+
+.admimmenuicon{
+    height:calc(10vw - 40px);
+    width:100%;
+    background-color: #6B8CFE;
+    border-radius:9px;
+    margin-top:20px;
+}
+
+
+
+
+
+
+
+.mainadminsection{
+    height:100vh;
+}
+
+.scroll{
+   overflow-y:scroll;
+   height:calc(100vh - 64px);
+}
+
+.table_2{
+    height:500px;
+    background-color: #6B8CFE;
+}
+
+
+
+
+
+
+
+
+
+.mainadmindoctordatas h2{
+    font-weight: 600;
+}
+
+
+
+
+.mainadmindoctorsection{
+    
+    overflow: hidden;
+}
+
+
+.mainadmincontainer{
+    max-width:90vw;
+    margin-inline: auto;
+    padding-inline:20px;
+    overflow: hidden;
+   
+}
+.mainadmindoctordatas{
+    justify-content: space-between;
+    padding-top:2vw;
+    padding-bottom:2vw;
+}
+
+.mainadmindoctordatas_profile_data{
+    margin-left:2vw;
+}
+
+
+.mainadmindoctordatas_profile_photo{
+    height:10vw;
+    width: 10vw;
+    object-fit: cover;
+    border-radius:10px;
+}
+
+
+
+.mainadmindoctordatas_chart1{
+    height:fit-content;
+    width:16vw;
+    background-color:#F0EFFC;
+    border:0.6px solid #bdbff7;
+    border-radius:10px;
+    padding:1.5vw;
+    align-items: center;
+}
+
+.mainadmindoctordatas_chart_icon{
+    width:4vw;
+    background-color: #3A65FD;
+    height: 4vw;
+    border-radius:50px;
+    justify-content: center;
+    align-items: center;
+}
+
+.mainadmindoctordatas_chart_icon i{
+    color: white;
+
+}
+
+.mainadmindoctordatas_chart2{
+    margin-left:20px;
+}
+
+.mainadmindoctoraboutavail{
+    justify-content: space-between;
+}
+
+.highlight_data{
+    padding:.2vw 1vw;
+    border-radius:50px;
+    width:fit-content;
+}
+
+.mainadmindoctordatas_profile_data{
+    flex-direction: column;
+    height:10vw;
+    justify-content: space-between;
+}
+.texticonset i{
+ font-size:16px;
+ color:#3A65FD;
+}
+
+.texticonset{
+    align-items:center;
+}
+
+
+.mainadmindoctoravilability{
+    width:50%;
+    height: fit-content;
+    background-color: #F3F6FF;
+    border-radius:1vw;
+    padding:1.5vw 1.5vw 0vw 1.5vw;
+}
+
+.mainadmindoctorabout{
+    width:45%;
+}
+
+.admin_disable_section{
+    width:100%;
+    background-color: #F3F6FF;
+    padding:2vw;
+    border-radius:1vw;
+    margin:2vw 0vw;
+}
+
+.admin_disable_section i{
+    color:#6B8CFE;
+    
+}
+
+
+.admin_disable_section{
+    justify-content: space-between;
+    align-items: center;
+}
+
+.admin_disable_button h4{
+ background-color:#F35454 ;
+ color: white ;
+ padding:.2vw 1.5vw;
+ border-radius:5px;
+}
+
+.hospitaltime{
+    justify-content: space-between;
+    margin-bottom:1.5vw;
+}
+
+.hospitaltimebutton h4{
+     background-color: #6B8CFE;
+     color:white;
+     border-radius:50px;
+     padding:.4vw 1vw;
+     height:fit-content;
+     font-size:1rem;
+}
+
+.hospitaltime_name h3{
+    font-size:1.4rem;
+    letter-spacing:1px;
+    font-weight:500;
+    margin-bottom:4px;
+}
+
+.hospitaltime_name h4{
+     color:#6B8CFE;
+}
+
+.adimindoctorpin h4{
+     
+      padding:.3vw 1.2vw;
+}
+
+
+
+.mainadmindoctoraddress{
+    width:50%;
+}
+
+
+
+.photosdivadminsection{
+    gap: 1vw;
+    margin-bottom:1.3vw;
+}
+
+.photosdivadminsection img{
+    height:10vw;
+    width: 16vw;
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+.admin_fea_avai{
+    justify-content: space-between;
+}
+
+.admin_fea_avai i{
+   margin-right:8px;
+   color: #3A65FD;
+}
+
+.admin_fea_avai_left{
+    width: 48%;
+}
+.admin_fea_avai_right{
+    width: 48%;
+}
+
+
+.mainadmindoctoravilability2{
+    width:35%;
+}

@@ -58,6 +58,29 @@ export default function Map() {
         <a href="/pharmacyadminregister2"><h4>Registration 2</h4></a>
         <a href="/hospitaladmin"><h4>Dashboard</h4></a>
 
+
+        <h2>MAIN ADMIN</h2>
+
+        <a href=""><h4>Doctor List</h4></a>
+        <a href="/mainadmindoctordetails"><h4>Doctor Profile</h4></a>
+        <a href=""><h4>Doctor Approve</h4></a>
+
+
+        <a href=""><h4>Hospita List</h4></a>
+        <a href=""><h4>Hospital Profile</h4></a>
+        <a href=""><h4>Hospital Approve</h4></a>
+
+
+        <a href=""><h4>Labs List</h4></a>
+        <a href=""><h4>Labs Profile</h4></a>
+        <a href=""><h4>Labs Approve</h4></a>
+
+        <a href=""><h4>Onboarding</h4></a>
+        <a href=""><h4>Feedback Approve</h4></a>
+
+
+
+
       </div>
 
 
