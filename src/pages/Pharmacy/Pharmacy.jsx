@@ -33,7 +33,7 @@ export default function Pharmacy() {
             </div>
           </div>
           <div className="pharmacy-partners">
-            <h1>Our<span className="color-blue"> Featured</span> Partners</h1>
+            <h1>Our<span className="color-blue">Featured</span>Partners</h1>
           </div>
         </div>
 

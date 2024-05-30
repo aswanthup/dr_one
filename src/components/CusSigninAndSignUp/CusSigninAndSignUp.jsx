@@ -20,14 +20,17 @@ export const CusSigninAndSignUp = ({ Caller: { ReCallF, OpenModal } }) => {
     const handleClose = () => {
         setOpenModal(false);
         setChangeBoxes({ signIn: true })
+        setFormData('')
         ReCallF();
     };
 
     const BoxChangeFungtinion = (data) => {
         if (data.signIn) {
             setChangeBoxes({ signIn: true })
+            setFormData('')
         } else {
             setChangeBoxes({ signUp: true })
+            setFormData('')
         }
     }
     const handlechanges = (e) => {

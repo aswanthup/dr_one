@@ -2,6 +2,7 @@
     display: flex;
     justify-content: end;
     margin-top: 80px;
+    overflow: scroll;
 }
 
 .CusSigninAndSignUpModalAdjst {
@@ -137,4 +138,41 @@
 #registerpopuinputsErrorSecFlexIcon {
     font-size: 20px;
     color: rgba(255, 0, 0, 0.805)
+}
+
+@media screen and (max-width: 979px) {
+    .toplogindata {
+        flex-direction: column;
+    }
+
+    .toplogindataimg {
+        width: 100%;
+    }
+
+    .CusSigninAndSignUpModalAdjst {
+        width: 100%;
+    }
+
+    .toplogindatainput {
+        width: 100%;
+    }
+
+    .toplogindataimg img {
+        width: fit-content;
+        height: 200px;
+    }
+
+    .smallh4 {
+        font-size: 12px;
+    }
+
+    .toploginnav {
+        flex-direction: column;
+
+    }
+
+    .toploginnavlogo {
+        width: 100%;
+
+    }
 }

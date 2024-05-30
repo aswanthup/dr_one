@@ -142,3 +142,9 @@
     font-size: 20px;
     letter-spacing: 2px;
 }
+
+@media screen and (max-width: 979px) {
+    .ProfileViewAlignCard {
+        width: 100%;
+    }
+}
