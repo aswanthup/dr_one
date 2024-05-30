@@ -1,9 +1,7 @@
 import React, { useState } from 'react'
 
-export default function Mainadminsidebar({ SentData }) {
-  const [ChangeDashboards, setChangeDashboards] = useState({
-
-  })
+export default function Mainadminsidebar({ data: { SentData, selected } }) {
+  console.log("selected>>>>", selected)
   const FindButtonValue = (data) => {
     SentData(data)
   }
@@ -12,10 +10,10 @@ export default function Mainadminsidebar({ SentData }) {
 
       <div onClick={() => {
         FindButtonValue("overview")
-      }} className="admimmenuicon flex">
+      }} className={selected?.overview ? "admimmenuicon admimmenuicon2 flex" : "admimmenuicon flex"}>
 
         <i class="ri-file-chart-fill"></i>
-        <h4>OverView</h4>
+        <h4>Overview</h4>
 
       </div>
 
@@ -23,7 +21,7 @@ export default function Mainadminsidebar({ SentData }) {
         onClick={() => {
           FindButtonValue("doctor")
         }}
-        className="admimmenuicon admimmenuicon2 flex">
+        className={selected?.doctor ? "admimmenuicon admimmenuicon2 flex" : "admimmenuicon flex"}>
 
         <i class="fi fi-sr-stethoscope"></i>
         <h4>Doctor</h4>
@@ -35,7 +33,7 @@ export default function Mainadminsidebar({ SentData }) {
         onClick={() => {
           FindButtonValue("hospital")
         }}
-        className="admimmenuicon flex">
+        className={selected?.hospital ? "admimmenuicon admimmenuicon2 flex" : "admimmenuicon flex"}>
 
         <i class="fi fi-sr-hospital"></i>
         <h4>Hospital</h4>
@@ -47,7 +45,7 @@ export default function Mainadminsidebar({ SentData }) {
         onClick={() => {
           FindButtonValue("lab")
         }}
-        className="admimmenuicon flex">
+        className={selected.lab ? "admimmenuicon admimmenuicon2 flex" : "admimmenuicon flex"}>
 
         <i class="fi fi-sr-syringe"></i>
         <h4>Labs</h4>
@@ -56,6 +54,6 @@ export default function Mainadminsidebar({ SentData }) {
 
 
 
-    </div>
+    </div >
   )
 }

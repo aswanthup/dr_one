@@ -13,7 +13,7 @@ import Mainadminlabslist from '../Mainadminlabs/Mainadminlabslist'
 
 export default function Mainadmin() {
   const [ChangeDashboards, setChangeDashboards] = useState({
-
+    overview: true
   })
   const SentData = (data) => {
     setChangeDashboards({ [data]: true })
@@ -23,8 +23,7 @@ export default function Mainadmin() {
     <div className="mainadminsection">
       <Mainadminnavbar />
       <div className="mainadmindoctorsection flex">
-
-        <Mainadminsidebar SentData={SentData} />
+        <Mainadminsidebar data={{ SentData: SentData, selected: ChangeDashboards }} />
         <div className="mainadmindoctordetails mainadmincontainer">
           <div className="scroll">
             {ChangeDashboards?.doctor &&
@@ -40,7 +39,6 @@ export default function Mainadmin() {
             {ChangeDashboards?.hospital &&
               <>
                 <Mainadminhospitallist />
-
                 <br /><br /><br /><br /><br /><br /><br /><br />
                 <Mainadminhospitaldetails />
                 <br /><br /><br /><br /><br /><br /><br /><br />
@@ -55,21 +53,12 @@ export default function Mainadmin() {
                 <Mainadminlabsdetails />
                 <br /><br /><br /><br /><br /><br /><br /><br />
                 <Mainadminlabsapprove />
-               
+
               </>
 
             }
-
-
-
-
-
-
           </div>
         </div>
-
-
-
 
       </div>
 
