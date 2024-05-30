@@ -12,7 +12,13 @@ import ChatBot from "../../components/ChatBot/ChatBot";
 import { services } from "../Labs/LabFIltering/constatnts/Filter";
 import ArrowCircleRightOutlinedIcon from '@mui/icons-material/ArrowCircleRightOutlined';
 import { ayurSpec, homeoDept, speacializationNames, types } from "../doctor/constants/filter";
+import axios from "axios";
 export default function Mainpage() {
+  const [latitude, setLatitude] = useState(null);
+  const [longitude, setLongitude] = useState(null);
+  const [error, setError] = useState(null);
+  const [locationData, setlocationData] = useState('');
+
   const navigate = useNavigate()
   const location = useLocation();
   const [selectTypes, setselectTypes] = useState({
@@ -26,7 +32,7 @@ export default function Mainpage() {
       once: false,
     });
     AOS.refresh();
-  }, [location.pathname]);
+  }, [location?.pathname]);
   const navigateElements = (value) => {
     navigate("/labfiltering", { state: { services: value } })
   }
@@ -75,6 +81,8 @@ export default function Mainpage() {
         }
         setSpecialisationBatch(AllopathyUpdatingBatch)
       });
+    } else {
+      setSpecialisationBatch()
     }
   }, [selectTypes])
   const renderHosFilteringBYSpeciality = (Value) => {
@@ -87,6 +95,60 @@ export default function Mainpage() {
     }
   }
   console.log("SpecialisationBatch>>>>>", SpecialisationBatch)
+
+
+  // Measure page render time
+  useEffect(() => {
+    const t0 = performance.now();
+
+    const handleLoad = () => {
+      const t1 = performance.now();
+      console.log(`Page rendered in ${t1 - t0} milliseconds`);
+    };
+
+    window.addEventListener('load', handleLoad);
+
+    return () => {
+      window.removeEventListener('load', handleLoad);
+    };
+  }, []);
+
+  // Get geolocation
+  useEffect(() => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          setLatitude(position.coords.latitude);
+          setLongitude(position.coords.longitude);
+          setError(null);
+        },
+        (err) => {
+          setError(err.message);
+        }
+      );
+    } else {
+      setError('Geolocation is not supported by this browser.');
+    }
+  }, []);
+
+  // Fetch address from coordinates
+  useEffect(() => {
+    if (latitude !== null && longitude !== null) {
+      axios.get(`https://nominatim.openstreetmap.org/reverse?lat=${latitude}&lon=${longitude}&format=json`)
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((error) => {
+          console.error('Error fetching address:', error);
+        });
+    }
+  }, [latitude, longitude]);
+
+
+  console.log("location>>>", latitude, longitude)
+
+
+
   return (
     <div>
 
@@ -286,11 +348,11 @@ export default function Mainpage() {
                   <div className="MainPageTypeAndSpecialityContentType">
                     {types.map(ele =>
                       // ele !== "Others" ?
-                        <div onClick={() => { clickChangeTypes(ele) }} className={selectTypes[ele] ? "MainPageTypeAndSpeTypeFlex MainPageTypeAndSpeTypeFlexselected " : "MainPageTypeAndSpeTypeFlex"}>
-                          <p>{ele}</p>
-                          <ArrowCircleRightOutlinedIcon id="MainPageTypeAndSpeTypeIcon" />
-                        </div>
-                        // : ''
+                      <div onClick={() => { clickChangeTypes(ele) }} className={selectTypes[ele] ? "MainPageTypeAndSpeTypeFlex MainPageTypeAndSpeTypeFlexselected " : "MainPageTypeAndSpeTypeFlex"}>
+                        <p>{ele}</p>
+                        <ArrowCircleRightOutlinedIcon id="MainPageTypeAndSpeTypeIcon" />
+                      </div>
+                      // : ''
                     )}
                   </div>
                   <div className="MainPageTypeAndSpecialityContentServices">

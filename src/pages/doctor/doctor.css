@@ -241,6 +241,7 @@
   align-items: center;
   height: 60px;
   display: flex;
+  cursor: pointer;
 }
 
 .spec_main_card_button {
@@ -268,10 +269,14 @@
   padding: 0vw 1vw;
   color: rgba(0, 0, 0, 0.6);
   width: 90%;
-  white-space: nowrap;          /* Prevents the text from wrapping to the next line */
-  overflow: hidden;             /* Hides the overflowed content */
-  text-overflow: ellipsis;      /* Adds "..." at the end of the overflowed content */
+  white-space: nowrap;
+  /* Prevents the text from wrapping to the next line */
+  overflow: hidden;
+  /* Hides the overflowed content */
+  text-overflow: ellipsis;
+  /* Adds "..." at the end of the overflowed content */
 }
+
 .spec_main_card_button i {
   font-weight: 100;
 
