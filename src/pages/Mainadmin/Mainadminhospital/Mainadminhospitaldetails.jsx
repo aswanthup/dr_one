@@ -4,22 +4,8 @@ import Mainadminsidebar from '../../../components/Mainadminsidebar/Mainadminside
 
 export default function Mainadminhospitaldetails() {
   return (
-    <div>
- <div className="mainadminsection">
-<Mainadminnavbar />
-        <div className="mainadmindoctorsection flex">
-
-        <Mainadminsidebar />
-
-
-
-
-
-
-
-
-           <div className="mainadmindoctordetails mainadmincontainer">
-               <div className="scroll">
+ 
+          <>
            <div className="mainadmindoctordatas flex">
 
            <div className="mainadmindoctordatas_profile flex">
@@ -213,32 +199,6 @@ All of the icons are free for both personal and commercial use.</h4>
 
 
             
-            </div>
-            </div>
-
-
- 
-
-        </div>
-
-
-    </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    </div>
+            </>
   )
 }

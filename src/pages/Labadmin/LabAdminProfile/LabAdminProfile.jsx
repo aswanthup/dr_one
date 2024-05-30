@@ -31,7 +31,7 @@ export const LabAdminProfile = () => {
     const FnNavigate = () => {
         navigate("/analyzelab")
     }
-    if (Details) {
+    // if (Details) {
         return (
             <>
                 <div className='LabAdminProfile'>
@@ -79,7 +79,7 @@ export const LabAdminProfile = () => {
                         <div className='LabAdminProMainSecImgOther'>
                             <img src={Details?.photo?.image1 || "/images/lab2.jpg"} className='LabAdminProMainSecImg' alt="" />
                             <div className='LabAdminProMainFontSec'>
-                                <p className='LabAdminProMainFont'>{Details.name}</p>
+                                <p className='LabAdminProMainFont'>{Details?.name}</p>
                                 <div className='LabAdminProMainTimeSec'>
                                     <p>{Details?.timing?.opening_time} to {Details?.timing?.closing_time}</p>
                                 </div>
@@ -148,9 +148,9 @@ export const LabAdminProfile = () => {
                 </div >
             </>
         )
-    } else {
-        return (
-            <Loader />
-        )
-    }
+    // } else {
+    //     return (
+    //         <Loader />
+    //     )
+    // }
 }

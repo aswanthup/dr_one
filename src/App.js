@@ -62,6 +62,7 @@ import Mainadminlabsdetails from "./pages/Mainadmin/Mainadminlabs/Mainadminlabsd
 import Mainadminlabsapprove from "./pages/Mainadmin/Mainadminlabs/Mainadminlabsapprove";
 import Mainadminnavbar from "./components/Mainadminnavbar/Mainadminnavbar";
 import Mainadminsidebar from "./components/Mainadminsidebar/Mainadminsidebar";
+import Mainadmin from "./pages/Mainadmin/Mainadmin/Mainadmin";
 
 function App() {
   return (
@@ -172,6 +173,8 @@ function App() {
 
 
  {/* Main admin */}
+
+             <Route path='/mainadmin' element={<Mainadmin />}></Route>
              
              
              <Route path='/mainadmindoctordetails' element={<Mainadmindoctordetails />}></Route>

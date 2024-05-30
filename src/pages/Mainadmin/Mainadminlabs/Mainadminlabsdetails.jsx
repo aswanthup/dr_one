@@ -4,21 +4,8 @@ import Mainadminsidebar from '../../../components/Mainadminsidebar/Mainadminside
 
 export default function Mainadminlabsdetails() {
   return (
-    <div className="mainadminsection">
-    <Mainadminnavbar />
-            <div className="mainadmindoctorsection flex">
-    
-            <Mainadminsidebar />
-    
-    
-    
-    
-    
-    
-    
-    
-               <div className="mainadmindoctordetails mainadmincontainer">
-                   <div className="scroll">
+ 
+        <>
                <div className="mainadmindoctordatas flex">
     
                <div className="mainadmindoctordatas_profile flex">
@@ -103,7 +90,7 @@ export default function Mainadminlabsdetails() {
     
     
                <div className="photosdivadmin">
-               <h3 style={{marginBottom:"1.3vw"}}>About</h3>
+               <h3 style={{marginBottom:"1.3vw"}}>Images</h3>
                <div className="photosdivadminsection flex">
                        
                        <img  src="/images/doc.jpg" alt="" />
@@ -212,15 +199,7 @@ export default function Mainadminlabsdetails() {
     
     
                 
-                </div>
-                </div>
-    
-    
-     
-    
-            </div>
-    
-    
-        </div>
+                </>
+
   )
 }

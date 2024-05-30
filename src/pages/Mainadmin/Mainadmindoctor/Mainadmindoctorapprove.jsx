@@ -3,27 +3,8 @@ import React from 'react'
 export default function Mainadmindoctorapprove() {
   return (
    
- <div>
 
-<div className="doctoradminnavbar">
-      navbar 
-</div>
-
-
-<div className="mainadmindoctorsection flex">
-
-   <div className="mainadminsidebar">
-Side Navbar
-   </div>
-
-
-
-
-
-
-
-
-   <div className="mainadmindoctordetails mainadmincontainer">
+   <>
        
    <div className="mainadmindoctordatas flex">
 
@@ -99,7 +80,7 @@ All of the icons are free for both personal and commercial use.</h4>
 
 
 
-   <div className='admin_disable_section flex'>
+   <div className='admin_disable_section admin_disable_section2 flex'>
     <div className='flex'>
    <i class="fi fi-sr-exclamation"></i>
    <h4 style={{marginLeft:"0.6vw"}} >Waiting for your response</h4>
@@ -111,31 +92,7 @@ All of the icons are free for both personal and commercial use.</h4>
    </div>
    </div>
 
+</>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
-    </div>
-
-
-</div>
-
-
-</div>
-   
   )
 }

@@ -11,7 +11,11 @@ export default function Mainadminnavbar() {
 
       <div className="adminlogodiv flex">
       <div style={{marginLeft:"18px"}} className="adminonboarding flex">
-              <h4>Onboarding</h4>
+             
+     
+      <i class="fi fi-sr-introduction-handshake"></i>
+              <h4 style={{marginLeft:"10px"}} >Onboarding</h4>
+
         </div>
         <div style={{marginLeft:"18px"}} className="adminnotification flex">
         <i class="ri-notification-2-line"></i>

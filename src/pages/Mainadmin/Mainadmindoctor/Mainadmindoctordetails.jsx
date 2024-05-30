@@ -5,108 +5,94 @@ import Mainadminsidebar from '../../../components/Mainadminsidebar/Mainadminside
 
 export default function Mainadmindoctordetails() {
   return (
-    <div className="mainadminsection">
-<Mainadminnavbar />
-        <div className="mainadmindoctorsection flex">
+    <>
+    <div className="mainadmindoctordatas flex">
 
-        <Mainadminsidebar />
+    <div className="mainadmindoctordatas_profile flex">
 
+          <img className='mainadmindoctordatas_profile_photo' src="/images/doc.jpg" alt="" />
 
+                 <div className="mainadmindoctordatas_profile_data flex">
 
+                   <div className='flex'>  <h2>Dr.Anil Yadav</h2> <h4 className='highlight_data' style={{background:"#2A9D8F", color:"white",marginLeft:"10px"}}>Gov</h4></div>
 
+                     <h4 className='highlight_data' style={{background:"#3A65FD", color:"white",}}>MBBS.M.D(Phychiatry)</h4>
 
+                     <div className='flex'>
+                         <div className='flex texticonset'>
+                             <i class="fi fi-sr-call-outgoing"></i>
+                             <h4 style={{marginLeft:"10px"}}>+91 9878898346</h4>
 
+                         </div>
+                         <div className='flex texticonset' style={{marginLeft:"20px"}}>
+                         <i class="fi fi-sr-city"></i>    <h4 style={{marginLeft:"10px"}}>+91 9878898346</h4>
+                         </div>
+                     </div>
 
-
-           <div className="mainadmindoctordetails mainadmincontainer">
-               <div className="scroll">
-           <div className="mainadmindoctordatas flex">
-
-           <div className="mainadmindoctordatas_profile flex">
-
-                 <img className='mainadmindoctordatas_profile_photo' src="/images/doc.jpg" alt="" />
-
-                        <div className="mainadmindoctordatas_profile_data flex">
-
-                          <div className='flex'>  <h2>Dr.Anil Yadav</h2> <h4 className='highlight_data' style={{background:"#2A9D8F", color:"white",marginLeft:"10px"}}>Gov</h4></div>
-
-                            <h4 className='highlight_data' style={{background:"#3A65FD", color:"white",}}>MBBS.M.D(Phychiatry)</h4>
-
-                            <div className='flex'>
-                                <div className='flex texticonset'>
-                                    <i class="fi fi-sr-call-outgoing"></i>
-                                    <h4 style={{marginLeft:"10px"}}>+91 9878898346</h4>
-
-                                </div>
-                                <div className='flex texticonset' style={{marginLeft:"20px"}}>
-                                <i class="fi fi-sr-city"></i>    <h4 style={{marginLeft:"10px"}}>+91 9878898346</h4>
-                                </div>
-                            </div>
-
-                            <div className='flex texticonset'>
-                                <i class="fi fi-sr-envelope"></i>
-                                <h4 style={{marginLeft:"10px"}}>anilyadhav@gmail.com</h4>
-                            </div>
-                            
+                     <div className='flex texticonset'>
+                         <i class="fi fi-sr-envelope"></i>
+                         <h4 style={{marginLeft:"10px"}}>anilyadhav@gmail.com</h4>
+                     </div>
+                     
 
 
-                        </div>
+                 </div>
 
 
-            
-         </div>
+     
+  </div>
 
-         <div className="mainadmindoctordatas_chart flex">
+  <div className="mainadmindoctordatas_chart flex">
 
-            
-         <div className="mainadmindoctordatas_chart1 flex">
+     
+  <div className="mainadmindoctordatas_chart1 flex">
 
-            <div className="mainadmindoctordatas_chart_icon flex">
-            <i class="fi fi-sr-call-outgoing"></i>
-            </div>
+     <div className="mainadmindoctordatas_chart_icon flex">
+     <i class="fi fi-sr-call-outgoing"></i>
+     </div>
 
-            <div style={{marginLeft:"18px"}}>
-                <h2>200</h2>
-                <h4>Views</h4>
-            </div>
+     <div style={{marginLeft:"18px"}}>
+         <h2>200</h2>
+         <h4>Views</h4>
+     </div>
 
-            
+     
 
-                        
-            
-          </div>
+                 
+     
+   </div>
 
-          <div className="mainadmindoctordatas_chart1 mainadmindoctordatas_chart2 flex">
+   <div className="mainadmindoctordatas_chart1 mainadmindoctordatas_chart2 flex">
 
-          <div className="mainadmindoctordatas_chart_icon flex">
-            <i class="fi fi-sr-call-outgoing"></i>
-            </div>
+   <div className="mainadmindoctordatas_chart_icon flex">
+     <i class="fi fi-sr-call-outgoing"></i>
+     </div>
 
-            <div style={{marginLeft:"18px"}}>
-                <h2>200</h2>
-                <h4>Views</h4>
-            </div>
+     <div style={{marginLeft:"18px"}}>
+         <h2>200</h2>
+         <h4>Views</h4>
+     </div>
 
-            
+     
 
-                        
-            
-          </div>
-            
+                 
+     
+   </div>
+     
 
-                        
-            
-         </div>
+                 
+     
+  </div>
 
 
 
-                        
-            
-           </div>
+                 
+     
+    </div>
 
-           <div className="mainadmindoctoraboutavail flex">
+    <div className="mainadmindoctoraboutavail flex">
 
-           <div className="mainadmindoctorabout ">
+    <div className="mainadmindoctorabout ">
 
 
 <h3 style={{marginBottom:"1.3vw"}}>About</h3>
@@ -119,8 +105,8 @@ All of the icons are free for both personal and commercial use.</h4>
 
 <h4 style={{marginBottom:"1vw"}}>Fifth Floor Arcadia Market Sec 49 South City 2, Gurgaon</h4>
 <div className='flex adimindoctorpin'>
-    <h4 style={{background:"#3A65FD" , color:"white"}}>986744</h4>
-    <h4 style={{background:"#F3F6FF" , color:"#6B8CFE"}}>Kozhikode</h4>
+<h4 style={{background:"#3A65FD" , color:"white"}}>986744</h4>
+<h4 style={{background:"#F3F6FF" , color:"#6B8CFE"}}>Kozhikode</h4>
 </div>
 </div>
 
@@ -133,104 +119,94 @@ All of the icons are free for both personal and commercial use.</h4>
 <div className="hospitaltime flex">
 <div className="hospitaltime_name">
 
-    <h3>Caritas hospital, Kotayam</h3>
-    <h4>Sun,Mon,Tue,Wed,Thu,Fri,Sat</h4>
-    
-    </div>
-    <div className="hospitaltimebutton">
-        <h4>View Details</h4>
-    
+<h3>Caritas hospital, Kotayam</h3>
+<h4>Sun,Mon,Tue,Wed,Thu,Fri,Sat</h4>
+
+</div>
+<div className="hospitaltimebutton">
+ <h4>View Details</h4>
+
 </div>
 </div>
 
 <div className="hospitaltime flex">
 <div className="hospitaltime_name">
 
-    <h3>Amrita School of Medicine, Kochi</h3>
-    <h4>Sun,Mon,Tue,Wed,Thu,Fri,Sat</h4>
-    
-    </div>
-    <div className="hospitaltimebutton">
-        <h4>View Details</h4>
-    
+<h3>Amrita School of Medicine, Kochi</h3>
+<h4>Sun,Mon,Tue,Wed,Thu,Fri,Sat</h4>
+
+</div>
+<div className="hospitaltimebutton">
+ <h4>View Details</h4>
+
 </div>
 </div>
 <div className="hospitaltime flex">
 <div className="hospitaltime_name">
 
-    <h3>Kottayam Medical College</h3>
-    <h4>Sun,Mon,Tue,Wed,Thu,Fri,Sat</h4>
-    
-    </div>
-    <div className="hospitaltimebutton">
-        <h4>View Details</h4>
-    
+<h3>Kottayam Medical College</h3>
+<h4>Sun,Mon,Tue,Wed,Thu,Fri,Sat</h4>
+
+</div>
+<div className="hospitaltimebutton">
+ <h4>View Details</h4>
+
 </div>
 </div>
 <div className="hospitaltime flex">
 <div className="hospitaltime_name">
 
-    <h3>Caritas hospital, Kotayam</h3>
-    <h4>Sun,Mon,Tue,Wed,Thu,Fri,Sat</h4>
-    
+<h3>Caritas hospital, Kotayam</h3>
+<h4>Sun,Mon,Tue,Wed,Thu,Fri,Sat</h4>
+
+</div>
+<div className="hospitaltimebutton">
+ <h4>View Details</h4>
+
+</div>
+</div>
+
+
+
+     
+</div>
+
+
+
     </div>
-    <div className="hospitaltimebutton">
-        <h4>View Details</h4>
-    
-</div>
-</div>
-
-
-
-            
-</div>
-
-
-
-           </div>
 
 
 
 
-           <div className='admin_disable_section flex'>
-            <div>
-           <i class="fi fi-sr-exclamation"></i>
-           </div>
+    <div className='admin_disable_section flex'>
+     <div>
+    <i class="fi fi-sr-exclamation"></i>
+    </div>
 
-           <div className='admin_disable_button'>
-             <h4>Disable</h4>
-           </div>
-           </div>
+    <div className='admin_disable_button'>
+      <h4>Disable</h4>
+    </div>
+    </div>
 
 
-           <h3 style={{marginBottom:"1.3vw"}}>Views</h3>
+    <h3 style={{marginBottom:"1.3vw"}}>Views</h3>
 
 
 
 
 
 <div className='table_2'>
- Table
+Table
 </div>
 
 
 
 
 
+</>
 
 
 
 
-            
-            </div>
-            </div>
-
-
- 
-
-        </div>
-
-
-    </div>
   )
 }

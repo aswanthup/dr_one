@@ -1,6 +1,7 @@
 .doctoradminnavbar{
     height:64px;
-    border-bottom:1px solid #6B8CFE;  
+    background-color: #f5f3ff;
+    border:1px solid #ede9fe;
 }
 
 .containeradmin{
@@ -52,11 +53,11 @@
     border-radius:50px;
 }
 
-
-
-
-
-
+.adminonboarding i{
+    height:16px;
+    width:16px;
+    font-size:16px; 
+}
 
 
 
@@ -68,19 +69,61 @@
 .mainadminsidebar{
     width:10vw;
     padding-inline:20px;
-    border-right:1px solid #6B8CFE;
+    border-right:1px solid #6b8bfe5b;
   
 }
 
 
 
 .admimmenuicon{
-    height:calc(10vw - 40px);
+    /* height:calc(10vw - 40px); */
+    height:70px;
     width:100%;
     background-color: #6B8CFE;
-    border-radius:9px;
+    border-radius:8px;
     margin-top:20px;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
+
+.admimmenuicon{
+    background-color: #ffffff;
+    border:1px solid rgb(255, 255, 255);
+    color: #6B8CFE;
+    transition: ease-in-out 200ms;
+}
+
+.admimmenuicon:hover{
+    background-color:#e4eaff;
+    border:1px solid rgb(255, 255, 255);
+   
+}
+
+
+
+.admimmenuicon i{
+    font-size:18px;
+}
+
+.admimmenuicon2{
+    background-color: #e4eaff;
+    border:1px solid #a4b7fc;
+    color: #6B8CFE;
+}
+
+
+
+
+.admimmenuicon h4{
+    font-size:1rem;
+  
+    line-height:1rem;
+    margin-top:6px;
+}
+
+
+
 
 
 
@@ -153,8 +196,8 @@
 .mainadmindoctordatas_chart1{
     height:fit-content;
     width:16vw;
-    background-color:#F0EFFC;
-    border:0.6px solid #bdbff7;
+    background-color:#d8e0ff93;
+    border:0.6px solid #02061615;
     border-radius:10px;
     padding:1.5vw;
     align-items: center;
@@ -206,7 +249,8 @@
 .mainadmindoctoravilability{
     width:50%;
     height: fit-content;
-    background-color: #F3F6FF;
+    background-color: #f5f3ff;
+    border:1px solid #ede9fe;
     border-radius:1vw;
     padding:1.5vw 1.5vw 0vw 1.5vw;
 }
@@ -217,7 +261,8 @@
 
 .admin_disable_section{
     width:100%;
-    background-color: #F3F6FF;
+    background-color: #f5f3ff;
+    border:1px solid #ede9fe;
     padding:2vw;
     border-radius:1vw;
     margin:2vw 0vw;
@@ -311,3 +356,89 @@
 .mainadmindoctoravilability2{
     width:35%;
 }
+.admin_disable_section2{
+    background-color: #fff7ed;
+    border:1px solid #fed7aa;
+
+}
+
+
+
+
+
+
+
+
+
+
+/* Doctor List */
+
+.mainadmindoctordatas_chart_doctor{
+    margin-top:1.3vw;
+    margin-bottom:1.3vw;
+}
+
+
+.doctortable {
+    width: 100%;
+    border-collapse: collapse;
+    /* margin: 30px 0; */
+    font-size: 1.2rem;
+    font-weight: 300;
+  }
+
+  /* Table header styling */
+  th, td {
+    border: 1px solid #a4b7fc;
+    text-align: left;
+    padding: 8px;
+  }
+
+  /* Header row background color */
+  th {
+    background-color: #e4eaff;
+    font-weight: 600;
+  }
+
+  /* Zebra stripe rows */
+  tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+
+  /* Hover effect for rows */
+  tr:hover {
+    background-color: #f1f1f1;
+  }
+
+  /* Column width */
+  th:nth-child(1), td:nth-child(1) {
+    width:2%;
+  }
+
+  th:nth-child(2), td:nth-child(2) {
+    width: 12.5%;
+  }
+
+  th:nth-child(3), td:nth-child(3) {
+    width: 12.5%;
+  }
+
+  th:nth-child(4), td:nth-child(4) {
+    width: 12.5%;
+  }
+
+  th:nth-child(5), td:nth-child(5) {
+    width: 12.5%;
+  }
+
+  th:nth-child(6), td:nth-child(6) {
+    width: 12.5%;
+  }
+
+  th:nth-child(7), td:nth-child(7) {
+    width: 12.5%;
+  }
+
+  th:nth-child(8), td:nth-child(8) {
+    width: 12.5%;
+  }
