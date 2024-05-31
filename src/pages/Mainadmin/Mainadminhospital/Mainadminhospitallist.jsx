@@ -60,6 +60,7 @@ export default function Mainadminhospitallist() {
       <th>PIN & Location</th>
       <th>Specialities</th>
       <th>Clicks</th>
+      <th>Contacts</th>
       <th>Join Date</th>
       <th>Status</th>
     </tr>
@@ -68,7 +69,8 @@ export default function Mainadminhospitallist() {
       <td>Maria Anders</td><td>+49 30 123456</td>
       <td>Germany</td>
       <td>Berlin</td>
-      <td>maria.anders@alfreds.de</td>
+      <td>100</td>
+      <td>10</td>
       
       <td>9/5/2024</td>
       <td>Active</td>
@@ -78,8 +80,8 @@ export default function Mainadminhospitallist() {
       <td>Francisco Chang</td><td>+52 55 987654</td>
       <td>Mexico</td>
       <td>Mexico City</td>
-      <td>francisco.chang@moctezuma.mx</td>
-      
+      <td>100</td>
+      <td>10</td>
       <td>2/5/2024</td>
       <td>Approved</td>
     </tr>
@@ -88,7 +90,8 @@ export default function Mainadminhospitallist() {
       <td>Helen Bennett</td> <td>+44 20 7654321</td>
       <td>UK</td>
       <td>London</td>
-      <td>helen.bennett@islandtrading.co.uk</td>
+      <td>100</td>
+      <td>10</td>
      
       <td>4/5/2024</td>
       <td>Rejected</td>
@@ -98,8 +101,8 @@ export default function Mainadminhospitallist() {
       <td>Yoshi Tannamuri</td> <td>+1 604 1234567</td>
       <td>Canada</td>
       <td>Vancouver</td>
-      <td>yoshi.tannamuri@bacchuswine.ca</td>
-     
+      <td>100</td>
+      <td>10</td>
       <td>4/5/2024</td>
       <td>Actived</td>
     </tr>
@@ -108,8 +111,8 @@ export default function Mainadminhospitallist() {
       <td>Yoshi Tannamuri</td><td>+1 604 1234567</td>
       <td>Canada</td>
       <td>Vancouver</td>
-      <td>yoshi.tannamuri@bacchuswine.ca</td>
-      
+      <td>100</td>
+      <td>10</td>
       <td>4/5/2024</td>
       <td>Disabled</td>
     </tr>
