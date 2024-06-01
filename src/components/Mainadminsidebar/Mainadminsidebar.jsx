@@ -17,6 +17,18 @@ export default function Mainadminsidebar({ data: { SentData, selected } }) {
 
       </div>
 
+
+      <div
+        onClick={() => {
+          FindButtonValue("customer")
+        }}
+        className={selected?.customer ? "admimmenuicon admimmenuicon2 flex" : "admimmenuicon flex"}>
+
+        <i class="fi fi-sr-users-alt"></i>
+        <h4>Customer</h4>
+
+      </div>
+
       <div
         onClick={() => {
           FindButtonValue("doctor")
@@ -45,12 +57,25 @@ export default function Mainadminsidebar({ data: { SentData, selected } }) {
         onClick={() => {
           FindButtonValue("lab")
         }}
-        className={selected.lab ? "admimmenuicon admimmenuicon2 flex" : "admimmenuicon flex"}>
+        className={selected?.lab ? "admimmenuicon admimmenuicon2 flex" : "admimmenuicon flex"}>
 
         <i class="fi fi-sr-syringe"></i>
         <h4>Labs</h4>
 
       </div>
+
+      <div
+        onClick={() => {
+          FindButtonValue("feedback")
+        }}
+        className={selected?.feedback ? "admimmenuicon admimmenuicon2 flex" : "admimmenuicon flex"}>
+        <i class="fi fi-sr-feedback-review"></i>
+       
+        <h4>Feedback</h4>
+
+      </div>
+
+    
 
 
 

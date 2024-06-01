@@ -10,6 +10,10 @@ import Mainadminhospitallist from '../Mainadminhospital/Mainadminhospitallist'
 import Mainadminlabsdetails from '../Mainadminlabs/Mainadminlabsdetails'
 import Mainadminlabsapprove from '../Mainadminlabs/Mainadminlabsapprove'
 import Mainadminlabslist from '../Mainadminlabs/Mainadminlabslist'
+import Mainadmincustomer from '../Mainadmincustomer/Mainadmincustomer'
+import Mainadminfeedback from '../Mainadminfeedback/Mainadminfeedback'
+import Mainadminonboarding from '../Mainadminonboarding/Mainadminonboarding'
+import Mainadminoverview from '../Mainadminoverview/Mainadminoverview'
 
 export default function Mainadmin() {
   const [ChangeDashboards, setChangeDashboards] = useState({
@@ -21,11 +25,25 @@ export default function Mainadmin() {
   console.log("ChangeDashboards>>>>", ChangeDashboards)
   return (
     <div className="mainadminsection">
-      <Mainadminnavbar />
+      <Mainadminnavbar data={{ SentData: SentData, selected: ChangeDashboards }} />
       <div className="mainadmindoctorsection flex">
         <Mainadminsidebar data={{ SentData: SentData, selected: ChangeDashboards }} />
         <div className="mainadmindoctordetails mainadmincontainer">
           <div className="scroll">
+          {ChangeDashboards?.overview &&
+              <>
+                <Mainadminoverview />
+                <br /><br /><br /><br /><br /><br /><br /><br />
+             
+              </>
+
+            }
+            
+
+
+
+
+
             {ChangeDashboards?.doctor &&
               <>
                 <Mainadmindoctorlist />
@@ -54,6 +72,24 @@ export default function Mainadmin() {
                 <br /><br /><br /><br /><br /><br /><br /><br />
                 <Mainadminlabsapprove />
 
+              </>
+
+            }
+            {ChangeDashboards?.customer &&
+              <>
+                <Mainadmincustomer />
+              </>
+
+            }
+            {ChangeDashboards?.feedback &&
+              <>
+                <Mainadminfeedback />
+              </>
+
+            }
+            {ChangeDashboards?.onboarding &&
+              <>
+                <Mainadminonboarding />
               </>
 
             }

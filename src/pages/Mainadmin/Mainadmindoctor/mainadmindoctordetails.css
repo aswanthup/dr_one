@@ -203,6 +203,9 @@
     align-items: center;
 }
 
+
+
+
 .mainadmindoctordatas_chart_icon{
     width:4vw;
     background-color: #3A65FD;
@@ -212,10 +215,46 @@
     align-items: center;
 }
 
+
+.mainadmindoctordatas_chart10{
+    background-color: #C0E2DE;
+}
+
+.mainadmindoctordatas_chart11{
+    background-color: #FED8AD;
+}
+
+.mainadmindoctordatas_chart12{
+    background-color: #FCD9D9;
+}
+
+
+
+
+.mainadmindoctordatas_chart_icon10{
+    background-color: #2A9D8F;
+}
+
+.mainadmindoctordatas_chart_icon11{
+    background-color: #FB8500;
+}
+.mainadmindoctordatas_chart_icon12{
+    background-color: #F35454;
+}
+
 .mainadmindoctordatas_chart_icon i{
     color: white;
+    height:21px ;
 
 }
+
+.mainadmindoctordatas_chart h2{
+      font-weight: 700;
+}
+
+
+
+
 
 .mainadmindoctordatas_chart2{
     margin-left:20px;

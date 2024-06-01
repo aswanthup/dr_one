@@ -8,15 +8,15 @@ export default function Mainadmindoctorlist() {
 <div className="mainadmindoctordatas_chart mainadmindoctordatas_chart_doctor flex">
 
      
-<div className="mainadmindoctordatas_chart1 flex">
+<div className="mainadmindoctordatas_chart1 mainadmindoctordatas_chart10 flex">
 
-   <div className="mainadmindoctordatas_chart_icon flex">
-   <i class="fi fi-sr-call-outgoing"></i>
+   <div className="mainadmindoctordatas_chart_icon mainadmindoctordatas_chart_icon10 flex">
+   <i class="fi fi-sr-stethoscope"></i>
    </div>
 
    <div style={{marginLeft:"18px"}}>
        <h2>200</h2>
-       <h4>Views</h4>
+       <h4>Doctors</h4>
    </div>
 
    
@@ -25,27 +25,27 @@ export default function Mainadmindoctorlist() {
    
  </div>
 
- <div className="mainadmindoctordatas_chart1 mainadmindoctordatas_chart2 flex">
+ <div className="mainadmindoctordatas_chart1 mainadmindoctordatas_chart2 mainadmindoctordatas_chart11  flex">
 
- <div className="mainadmindoctordatas_chart_icon flex">
-   <i class="fi fi-sr-call-outgoing"></i>
+ <div className="mainadmindoctordatas_chart_icon mainadmindoctordatas_chart_icon11 flex">
+ <i class="fi fi-ss-volume-mute"></i>
    </div>
 
    <div style={{marginLeft:"18px"}}>
        <h2>200</h2>
-       <h4>Views</h4>
+       <h4>Inactive</h4>
    </div>   
  </div>
 
- <div className="mainadmindoctordatas_chart1 mainadmindoctordatas_chart2 flex">
+ <div className="mainadmindoctordatas_chart1 mainadmindoctordatas_chart2 mainadmindoctordatas_chart12 flex">
 
-<div className="mainadmindoctordatas_chart_icon flex">
+<div className="mainadmindoctordatas_chart_icon mainadmindoctordatas_chart_icon12 flex">
   <i class="fi fi-sr-call-outgoing"></i>
   </div>
 
   <div style={{marginLeft:"18px"}}>
       <h2>200</h2>
-      <h4>Views</h4>
+      <h4>Disabled</h4>
   </div>   
 </div>
 </div>

@@ -63,6 +63,10 @@ import Mainadminlabsapprove from "./pages/Mainadmin/Mainadminlabs/Mainadminlabsa
 import Mainadminnavbar from "./components/Mainadminnavbar/Mainadminnavbar";
 import Mainadminsidebar from "./components/Mainadminsidebar/Mainadminsidebar";
 import Mainadmin from "./pages/Mainadmin/Mainadmin/Mainadmin";
+import Mainadminfeedback from "./pages/Mainadmin/Mainadminfeedback/Mainadminfeedback";
+import Mainadminonboarding from "./pages/Mainadmin/Mainadminonboarding/Mainadminonboarding";
+import Mainadmincustomer from "./pages/Mainadmin/Mainadmincustomer/Mainadmincustomer";
+import Mainadmincustomerdetails from "./pages/Mainadmin/Mainadmincustomer/Mainadmincustomerdetails";
 
 function App() {
   return (
@@ -196,10 +200,10 @@ function App() {
              
              <Route path='/mainadminsidebar' element={<Mainadminsidebar />}></Route>
 
-             {/* <Route path='/mainadminonboading' element={<Mainadminonboarding />}></Route>
-             <Route path='/mainadminfeedback' element={<Mainadminfeedback />}></Route> */}
-
-             
+             <Route path='/mainadminonboading' element={<Mainadminonboarding />}></Route>
+             <Route path='/mainadminfeedback' element={<Mainadminfeedback />}></Route>
+             <Route path='/mainadminfeedback' element={<Mainadmincustomer />}></Route>
+             <Route path='/mainadminfeedback' element={<Mainadmincustomerdetails />}></Route>
  {/*End Main admin */}
 
           </Routes>
