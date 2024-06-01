@@ -1,62 +1,62 @@
-.doctoradminnavbar{
-    height:64px;
+.doctoradminnavbar {
+    height: 64px;
     background-color: #f5f3ff;
-    border:1px solid #ede9fe;
+    border: 1px solid #ede9fe;
 }
 
-.containeradmin{
-    max-width:100vw;
+.containeradmin {
+    max-width: 100vw;
     margin-inline: auto;
-    padding-inline:20px;
+    padding-inline: 20px;
 }
 
-.doctoradminnavbar2{
+.doctoradminnavbar2 {
     justify-content: space-between;
     align-items: center;
-    height:64px;
+    height: 64px;
 }
 
-.adminnotification{
+.adminnotification {
     height: 40px;
-    width:40px;
+    width: 40px;
     background-color: #6B8CFE;
-    border-radius:50px;
+    border-radius: 50px;
     justify-content: center;
     align-items: center;
     color: white;
 }
 
-.adminnotification i{
-    font-size:18px;
+.adminnotification i {
+    font-size: 18px;
     font-weight: 100;
 }
 
-.adminonboarding{
+.adminonboarding {
     height: 40px;
-    width:fit-content;
+    width: fit-content;
     background-color: #6B8CFE;
-    border-radius:50px;
+    border-radius: 50px;
     justify-content: center;
     align-items: center;
-    padding:0vw 1.2vw;
+    padding: 0vw 1.2vw;
     color: white;
 }
 
-.adminlogodiv{
+.adminlogodiv {
     align-items: center;
 }
 
-.doctoradminnavbar2 img{
+.doctoradminnavbar2 img {
     height: 40px;
-    width:40px;
+    width: 40px;
     object-fit: cover;
-    border-radius:50px;
+    border-radius: 50px;
 }
 
-.adminonboarding i{
-    height:16px;
-    width:16px;
-    font-size:16px; 
+.adminonboarding i {
+    height: 16px;
+    width: 16px;
+    font-size: 16px;
 }
 
 
@@ -66,60 +66,60 @@
 
 
 
-.mainadminsidebar{
-    width:10vw;
-    padding-inline:20px;
-    border-right:1px solid #6b8bfe5b;
-  
+.mainadminsidebar {
+    width: 10vw;
+    padding-inline: 20px;
+    border-right: 1px solid #6b8bfe5b;
+
 }
 
 
 
-.admimmenuicon{
+.admimmenuicon {
     /* height:calc(10vw - 40px); */
-    height:70px;
-    width:100%;
+    height: 70px;
+    width: 100%;
     background-color: #6B8CFE;
-    border-radius:8px;
-    margin-top:20px;
+    border-radius: 8px;
+    margin-top: 20px;
     justify-content: center;
     align-items: center;
     flex-direction: column;
 }
 
-.admimmenuicon{
+.admimmenuicon {
     background-color: #ffffff;
-    border:1px solid rgb(255, 255, 255);
+    border: 1px solid rgb(255, 255, 255);
     color: #6B8CFE;
     transition: ease-in-out 200ms;
 }
 
-.admimmenuicon:hover{
-    background-color:#e4eaff;
-    border:1px solid rgb(255, 255, 255);
-   
-}
-
-
-
-.admimmenuicon i{
-    font-size:18px;
-}
-
-.admimmenuicon2{
+.admimmenuicon:hover {
     background-color: #e4eaff;
-    border:1px solid #a4b7fc;
+    border: 1px solid rgb(255, 255, 255);
+
+}
+
+
+
+.admimmenuicon i {
+    font-size: 18px;
+}
+
+.admimmenuicon2 {
+    background-color: #e4eaff;
+    border: 1px solid #a4b7fc;
     color: #6B8CFE;
 }
 
 
 
 
-.admimmenuicon h4{
-    font-size:1rem;
-  
-    line-height:1rem;
-    margin-top:6px;
+.admimmenuicon h4 {
+    font-size: 1rem;
+
+    line-height: 1rem;
+    margin-top: 6px;
 }
 
 
@@ -131,17 +131,17 @@
 
 
 
-.mainadminsection{
-    height:100vh;
+.mainadminsection {
+    height: 100vh;
 }
 
-.scroll{
-   overflow-y:scroll;
-   height:calc(100vh - 64px);
+.scroll {
+    overflow-y: scroll;
+    height: calc(100vh - 64px);
 }
 
-.table_2{
-    height:500px;
+.table_2 {
+    height: 500px;
     background-color: #6B8CFE;
 }
 
@@ -153,251 +153,256 @@
 
 
 
-.mainadmindoctordatas h2{
+.mainadmindoctordatas h2 {
     font-weight: 600;
 }
 
 
 
 
-.mainadmindoctorsection{
-    
+.mainadmindoctorsection {
+
     overflow: hidden;
 }
 
 
-.mainadmincontainer{
-    max-width:90vw;
+.mainadmincontainer {
+    max-width: 90vw;
     margin-inline: auto;
-    padding-inline:20px;
+    padding-inline: 20px;
     overflow: hidden;
-   
+
 }
-.mainadmindoctordatas{
+
+.mainadmindoctordatas {
     justify-content: space-between;
-    padding-top:2vw;
-    padding-bottom:2vw;
+    padding-top: 2vw;
+    padding-bottom: 2vw;
 }
 
-.mainadmindoctordatas_profile_data{
-    margin-left:2vw;
+.mainadmindoctordatas_profile_data {
+    margin-left: 2vw;
 }
 
 
-.mainadmindoctordatas_profile_photo{
-    height:10vw;
+.mainadmindoctordatas_profile_photo {
+    height: 10vw;
     width: 10vw;
     object-fit: cover;
-    border-radius:10px;
+    border-radius: 10px;
 }
 
 
 
-.mainadmindoctordatas_chart1{
-    height:fit-content;
-    width:16vw;
-    background-color:#d8e0ff93;
-    border:0.6px solid #02061615;
-    border-radius:10px;
-    padding:1.5vw;
+.mainadmindoctordatas_chart1 {
+    height: fit-content;
+    width: 16vw;
+    background-color: #d8e0ff93;
+    border: 0.6px solid #02061615;
+    border-radius: 10px;
+    padding: 1.5vw;
     align-items: center;
 }
 
 
 
 
-.mainadmindoctordatas_chart_icon{
-    width:4vw;
+.mainadmindoctordatas_chart_icon {
+    width: 4vw;
     background-color: #3A65FD;
     height: 4vw;
-    border-radius:50px;
+    border-radius: 50px;
     justify-content: center;
     align-items: center;
 }
 
 
-.mainadmindoctordatas_chart10{
+.mainadmindoctordatas_chart10 {
     background-color: #C0E2DE;
 }
 
-.mainadmindoctordatas_chart11{
+.mainadmindoctordatas_chart11 {
     background-color: #FED8AD;
 }
 
-.mainadmindoctordatas_chart12{
+.mainadmindoctordatas_chart12 {
     background-color: #FCD9D9;
 }
 
 
 
 
-.mainadmindoctordatas_chart_icon10{
+.mainadmindoctordatas_chart_icon10 {
     background-color: #2A9D8F;
 }
 
-.mainadmindoctordatas_chart_icon11{
+.mainadmindoctordatas_chart_icon11 {
     background-color: #FB8500;
 }
-.mainadmindoctordatas_chart_icon12{
+
+.mainadmindoctordatas_chart_icon12 {
     background-color: #F35454;
 }
 
-.mainadmindoctordatas_chart_icon i{
+.mainadmindoctordatas_chart_icon i {
     color: white;
-    height:21px ;
+    height: 21px;
 
 }
 
-.mainadmindoctordatas_chart h2{
-      font-weight: 700;
+.mainadmindoctordatas_chart h2 {
+    font-weight: 700;
 }
 
 
 
 
 
-.mainadmindoctordatas_chart2{
-    margin-left:20px;
+.mainadmindoctordatas_chart2 {
+    margin-left: 20px;
 }
 
-.mainadmindoctoraboutavail{
+.mainadmindoctoraboutavail {
     justify-content: space-between;
 }
 
-.highlight_data{
-    padding:.2vw 1vw;
-    border-radius:50px;
-    width:fit-content;
+.highlight_data {
+    padding: .2vw 1vw;
+    border-radius: 50px;
+    width: fit-content;
 }
 
-.mainadmindoctordatas_profile_data{
+.mainadmindoctordatas_profile_data {
     flex-direction: column;
-    height:10vw;
+    height: 10vw;
     justify-content: space-between;
 }
-.texticonset i{
- font-size:16px;
- color:#3A65FD;
+
+.texticonset i {
+    font-size: 16px;
+    color: #3A65FD;
 }
 
-.texticonset{
-    align-items:center;
+.texticonset {
+    align-items: center;
 }
 
 
-.mainadmindoctoravilability{
-    width:50%;
+.mainadmindoctoravilability {
+    width: 50%;
     height: fit-content;
     background-color: #f5f3ff;
-    border:1px solid #ede9fe;
-    border-radius:1vw;
-    padding:1.5vw 1.5vw 0vw 1.5vw;
+    border: 1px solid #ede9fe;
+    border-radius: 1vw;
+    padding: 1.5vw 1.5vw 1.5vw 1.5vw;
 }
 
-.mainadmindoctorabout{
-    width:45%;
+.mainadmindoctorabout {
+    width: 45%;
 }
 
-.admin_disable_section{
-    width:100%;
+.admin_disable_section {
+    width: 100%;
     background-color: #f5f3ff;
-    border:1px solid #ede9fe;
-    padding:2vw;
-    border-radius:1vw;
-    margin:2vw 0vw;
+    border: 1px solid #ede9fe;
+    padding: 2vw;
+    border-radius: 1vw;
+    margin: 2vw 0vw;
 }
 
-.admin_disable_section i{
-    color:#6B8CFE;
-    
+.admin_disable_section i {
+    color: #6B8CFE;
+
 }
 
 
-.admin_disable_section{
+.admin_disable_section {
     justify-content: space-between;
     align-items: center;
 }
 
-.admin_disable_button h4{
- background-color:#F35454 ;
- color: white ;
- padding:.2vw 1.5vw;
- border-radius:5px;
+.admin_disable_button h4 {
+    background-color: #F35454;
+    color: white;
+    padding: .2vw 1.5vw;
+    border-radius: 5px;
 }
 
-.hospitaltime{
+.hospitaltime {
     justify-content: space-between;
-    margin-bottom:1.5vw;
+    margin-bottom: 1.5vw;
 }
 
-.hospitaltimebutton h4{
-     background-color: #6B8CFE;
-     color:white;
-     border-radius:50px;
-     padding:.4vw 1vw;
-     height:fit-content;
-     font-size:1rem;
+.hospitaltimebutton h4 {
+    background-color: #6B8CFE;
+    color: white;
+    border-radius: 50px;
+    padding: .4vw 1vw;
+    height: fit-content;
+    font-size: 1rem;
 }
 
-.hospitaltime_name h3{
-    font-size:1.4rem;
-    letter-spacing:1px;
-    font-weight:500;
-    margin-bottom:4px;
+.hospitaltime_name h3 {
+    font-size: 1.4rem;
+    letter-spacing: 1px;
+    font-weight: 500;
+    margin-bottom: 4px;
 }
 
-.hospitaltime_name h4{
-     color:#6B8CFE;
+.hospitaltime_name h4 {
+    color: #6B8CFE;
 }
 
-.adimindoctorpin h4{
-     
-      padding:.3vw 1.2vw;
-}
+.adimindoctorpin h4 {
 
-
-
-.mainadmindoctoraddress{
-    width:50%;
+    padding: .3vw 1.2vw;
 }
 
 
 
-.photosdivadminsection{
+.mainadmindoctoraddress {
+    width: 50%;
+}
+
+
+
+.photosdivadminsection {
     gap: 1vw;
-    margin-bottom:1.3vw;
+    margin-bottom: 1.3vw;
 }
 
-.photosdivadminsection img{
-    height:10vw;
+.photosdivadminsection img {
+    height: 10vw;
     width: 16vw;
     border-radius: 10px;
     object-fit: cover;
 }
 
-.admin_fea_avai{
+.admin_fea_avai {
     justify-content: space-between;
 }
 
-.admin_fea_avai i{
-   margin-right:8px;
-   color: #3A65FD;
+.admin_fea_avai i {
+    margin-right: 8px;
+    color: #3A65FD;
 }
 
-.admin_fea_avai_left{
-    width: 48%;
-}
-.admin_fea_avai_right{
+.admin_fea_avai_left {
     width: 48%;
 }
 
-
-.mainadmindoctoravilability2{
-    width:35%;
+.admin_fea_avai_right {
+    width: 48%;
 }
-.admin_disable_section2{
+
+
+.mainadmindoctoravilability2 {
+    width: 35%;
+}
+
+.admin_disable_section2 {
     background-color: #fff7ed;
-    border:1px solid #fed7aa;
+    border: 1px solid #fed7aa;
 
 }
 
@@ -412,9 +417,9 @@
 
 /* Doctor List */
 
-.mainadmindoctordatas_chart_doctor{
-    margin-top:1.3vw;
-    margin-bottom:1.3vw;
+.mainadmindoctordatas_chart_doctor {
+    margin-top: 1.3vw;
+    margin-bottom: 1.3vw;
 }
 
 
@@ -424,68 +429,79 @@
     /* margin: 30px 0; */
     font-size: 1.2rem;
     font-weight: 300;
-  }
+}
 
-  /* Table header styling */
-  th, td {
+/* Table header styling */
+th,
+td {
     border: 1px solid #a4b7fc;
     text-align: left;
     padding: 8px;
-  }
+}
 
-  /* Header row background color */
-  th {
+/* Header row background color */
+th {
     background-color: #e4eaff;
     font-weight: 600;
-  }
+}
 
-  /* Zebra stripe rows */
-  tr:nth-child(even) {
+/* Zebra stripe rows */
+tr:nth-child(even) {
     background-color: #f9f9f9;
-  }
+}
 
-  /* Hover effect for rows */
-  tr:hover {
+/* Hover effect for rows */
+tr:hover {
     background-color: #f1f1f1;
-  }
+}
 
-  /* Column width */
-  th:nth-child(1), td:nth-child(1) {
-    width:2%;
-  }
+/* Column width */
+th:nth-child(1),
+td:nth-child(1) {
+    width: 2%;
+}
 
-  th:nth-child(2), td:nth-child(2) {
+th:nth-child(2),
+td:nth-child(2) {
     width: 12.5%;
-  }
+}
 
-  th:nth-child(3), td:nth-child(3) {
+th:nth-child(3),
+td:nth-child(3) {
     width: 12.5%;
-  }
+}
 
-  th:nth-child(4), td:nth-child(4) {
+th:nth-child(4),
+td:nth-child(4) {
     width: 12.5%;
-  }
+}
 
-  th:nth-child(5), td:nth-child(5) {
+th:nth-child(5),
+td:nth-child(5) {
     width: 12.5%;
-  }
+}
 
-  th:nth-child(6), td:nth-child(6) {
-    width:8%;
-  }
-
-  th:nth-child(7), td:nth-child(7) {
+th:nth-child(6),
+td:nth-child(6) {
     width: 8%;
-  }
+}
 
-  th:nth-child(8), td:nth-child(8) {
-    width:12%;
-  }
-  th:nth-child(9), td:nth-child(9) {
-    width:8%;
-  }
+th:nth-child(7),
+td:nth-child(7) {
+    width: 8%;
+}
+
+th:nth-child(8),
+td:nth-child(8) {
+    width: 12%;
+}
+
+th:nth-child(9),
+td:nth-child(9) {
+    width: 8%;
+}
 
 
 
-  
+
 /* Doctor Views List */

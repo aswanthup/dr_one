@@ -1,0 +1,59 @@
+.mainadmindoctoraboutDiv {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+#mainadmindoctoraboutDivIcon {
+    color: black;
+    font-size: 20px;
+}
+
+.mainadmindoctoravilabilityHeight {
+    height: 10%;
+}
+
+.mainadmindoctoravilabilityContent {
+    height: 75%;
+    overflow: scroll;
+}
+
+.mainadmindoctoravilabilityAdd {
+    height: 15%;
+    align-items: center;
+    display: flex;
+}
+
+.modalInputOpenDiv optgroup {
+    font-weight: 400;
+    color: rgba(0, 0, 0, 0.802);
+}
+
+.modalInputOpenDiv {
+    color: rgba(0, 0, 0, 0.541);
+}
+
+.mainadmindoctoravilabilityAdd button {
+    height: 40px;
+    color: white;
+    background-color: #2A9D8F;
+    border: none;
+    letter-spacing: 1px;
+    border-radius: 10px;
+}
+
+.viewdataTimePickerDuelStart {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    color: black;
+}
+
+.viewdataTimePickerCompo {
+    width: 100%;
+}
+
+.viewdataTimePickerDuelStart label {
+    font-size: 15px;
+
+}

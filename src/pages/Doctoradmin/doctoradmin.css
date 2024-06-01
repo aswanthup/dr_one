@@ -164,7 +164,7 @@ button {
 
 
 .viewdetails {
-    padding: 20px;
+    padding: 30px;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -172,16 +172,17 @@ button {
     border-radius: 1vw;
     background-color: white;
     width: 50%;
-    gap: 30px;
+    gap: 20px;
     display: flex;
     flex-direction: column;
-    height: 90vh;
+    height: fit-content;
     overflow-x: scroll;
 }
 
 .viewdataTimePickerDuelAlign {
     display: flex;
     gap: 10px;
+    align-items: end;
 }
 
 .viewdetails label {
@@ -201,14 +202,19 @@ button {
 
 .viewdataTimeSec label {
     font-size: 20px;
+
 }
 
+.modalInputdivlabel {
+    font-weight: 600;
+    letter-spacing: 1px;
+}
 
 
 .modalInputOpenDiv {
     width: 100%;
     padding: 5px;
-    border: 1px solid black;
+    border: 1px solid rgba(0, 0, 0, 0.214);
     height: 40px;
     border-radius: 6px;
     font-family: 'Outfit', sans-serif;
@@ -357,5 +363,5 @@ button {
     flex-wrap: wrap;
     gap: 20px;
     width: 100%;
-    justify-content: center;
+    justify-content: space-between;
 }

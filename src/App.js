@@ -67,6 +67,7 @@ import Mainadminfeedback from "./pages/Mainadmin/Mainadminfeedback/Mainadminfeed
 import Mainadminonboarding from "./pages/Mainadmin/Mainadminonboarding/Mainadminonboarding";
 import Mainadmincustomer from "./pages/Mainadmin/Mainadmincustomer/Mainadmincustomer";
 import Mainadmincustomerdetails from "./pages/Mainadmin/Mainadmincustomer/Mainadmincustomerdetails";
+import { DocProfileMainSec } from "./pages/doctor/DocProfileMainSec/DocProfileMainSec";
 
 function App() {
   return (
@@ -176,35 +177,37 @@ function App() {
             <Route path='/editLaboratory' element={<EditLaboratory />} ></Route>
 
 
- {/* Main admin */}
+            {/* Main admin */}
 
-             <Route path='/mainadmin' element={<Mainadmin />}></Route>
-             
-             
-             <Route path='/mainadmindoctordetails' element={<Mainadmindoctordetails />}></Route>
-             <Route path='/mainadmindoctorapprove' element={<Mainadmindoctorapprove />}></Route>
-             <Route path='/mainadmindoctorlist' element={<Mainadmindoctorlist />}></Route>
+            <Route path='/mainadmin' element={<Mainadmin />}></Route>
 
 
-             <Route path='/mainadminhospitallist' element={<Mainadminhospitallist />}></Route>
-             <Route path='/mainadminhospitaldetails' element={<Mainadminhospitaldetails/>}></Route>
-             <Route path='/mainadminhospitalapprove' element={<Mainadminhospitalapprove/>}></Route>
+            <Route path='/mainadmindoctordetails' element={<Mainadmindoctordetails />}></Route>
+            <Route path='/mainadmindoctorapprove' element={<Mainadmindoctorapprove />}></Route>
+            <Route path='/mainadmindoctorlist' element={<Mainadmindoctorlist />}></Route>
 
 
-             <Route path='/mainadminlabslist' element={<Mainadminlabslist />}></Route>
-             <Route path='/mainadminlabsdetails' element={<Mainadminlabsdetails />}></Route>
-             <Route path='/mainadminlabsapprove' element={<Mainadminlabsapprove />}></Route>
+            <Route path='/mainadminhospitallist' element={<Mainadminhospitallist />}></Route>
+            <Route path='/mainadminhospitaldetails' element={<Mainadminhospitaldetails />}></Route>
+            <Route path='/mainadminhospitalapprove' element={<Mainadminhospitalapprove />}></Route>
 
 
-             <Route path='/mainadminnavbar' element={<Mainadminnavbar />}></Route>
-             
-             <Route path='/mainadminsidebar' element={<Mainadminsidebar />}></Route>
+            <Route path='/mainadminlabslist' element={<Mainadminlabslist />}></Route>
+            <Route path='/mainadminlabsdetails' element={<Mainadminlabsdetails />}></Route>
+            <Route path='/mainadminlabsapprove' element={<Mainadminlabsapprove />}></Route>
 
-             <Route path='/mainadminonboading' element={<Mainadminonboarding />}></Route>
-             <Route path='/mainadminfeedback' element={<Mainadminfeedback />}></Route>
-             <Route path='/mainadminfeedback' element={<Mainadmincustomer />}></Route>
-             <Route path='/mainadminfeedback' element={<Mainadmincustomerdetails />}></Route>
- {/*End Main admin */}
+
+            <Route path='/mainadminnavbar' element={<Mainadminnavbar />}></Route>
+
+            <Route path='/mainadminsidebar' element={<Mainadminsidebar />}></Route>
+
+            <Route path='/mainadminonboading' element={<Mainadminonboarding />}></Route>
+            <Route path='/mainadminfeedback' element={<Mainadminfeedback />}></Route>
+            <Route path='/mainadminfeedback' element={<Mainadmincustomer />}></Route>
+            <Route path='/mainadminfeedback' element={<Mainadmincustomerdetails />}></Route>
+            <Route path='/doctoradminprofile' element={<DocProfileMainSec />}></Route>
+
+            {/*End Main admin */}
 
           </Routes>
         </LocalizationProvider>
