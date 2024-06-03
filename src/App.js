@@ -22,7 +22,7 @@ import Hospitaladmin from "./pages/Hospitaladmin/Hospitaladmin";
 import Rightnavbar from "./components/Rightnavbar";
 import Hospitaldetails from "./pages/Hospitaladmin/Hospitaldetails";
 import Hospitaladminnotification from "./components/Hospitaladminnotification";
-import Hospitaladmindoctorlist from "./pages/Hospitaladmin/Hospitaladmindoctorlist";
+import Hospitaladmindoctorlist from "./pages/Hospitaladmin/Doctors/Hospitaladmindoctorlist";
 import Hospitaladmin_doctor_card from "./components/Hospitaladmin_doctor_card";
 import Hospitaladminregistration2 from "./pages/Hospitaladmin/Hospitaladminregistration2";
 import Hospitaladmindoctordetails from "./pages/Hospitaladmin/Hospitaladmindoctordetails";
