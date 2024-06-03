@@ -75,7 +75,7 @@ export const LabFiltering = () => {
             const features =
                 filters?.features?.length === 0 ||
                 filters?.features?.every(spec => {
-                    return hospital?.feature && hospital?.feature?.includes(spec);
+                    return hospital?.features && hospital?.features?.includes(spec);
                 })
             const nameMatch =
                 !filters.CheckingName ||

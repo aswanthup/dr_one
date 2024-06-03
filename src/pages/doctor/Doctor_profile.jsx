@@ -16,7 +16,6 @@ export default function Doctor_profile() {
   ]
   const location = useLocation();
   const doctor = location?.state
-  // const doctor = ''
   console.log(doctor)
   const viewDetailedData = (data) => {
     const id = data?.id
