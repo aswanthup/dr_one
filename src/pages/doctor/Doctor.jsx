@@ -64,12 +64,17 @@ export default function Doctor() {
     setFilteredDoctors([]);
     const lowerCasedSpecialization = specialization.toLowerCase();
     let type = "Allopathy";
-    if (ayurSpec.includes(lowerCasedSpecialization)) {
+    if (
+      ayurSpec.includes(lowerCasedSpecialization) ||
+      ayurSpec.includes(specialization)
+    ) {
       type = "Ayurvedic";
-    } else if (homeoDept.includes(lowerCasedSpecialization)) {
+    } else if (
+      homeoDept.includes(lowerCasedSpecialization) ||
+      homeoDept.includes(specialization)
+    ) {
       type = "Homeopathy";
     }
-
     setFilters({
       type: type,
       specializations: [lowerCasedSpecialization],
@@ -281,7 +286,6 @@ export default function Doctor() {
                   <div
                     onClick={() =>
                       handleSelectSpecialization(
-                        "Allopathy",
                         "general medicine"
                       )
                     }
