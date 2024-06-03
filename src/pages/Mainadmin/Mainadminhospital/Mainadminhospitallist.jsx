@@ -3,18 +3,18 @@ import React from 'react'
 export default function Mainadminhospitallist() {
   return (
     <div>
-      <div className="mainadmindoctordatas_chart mainadmindoctordatas_chart_doctor flex">
+<div className="mainadmindoctordatas_chart mainadmindoctordatas_chart_doctor flex">
 
      
-<div className="mainadmindoctordatas_chart1 flex">
+<div className="mainadmindoctordatas_chart1 mainadmindoctordatas_chart10 flex">
 
-   <div className="mainadmindoctordatas_chart_icon flex">
-   <i class="fi fi-sr-call-outgoing"></i>
+   <div className="mainadmindoctordatas_chart_icon mainadmindoctordatas_chart_icon10 flex">
+   <i class="fi fi-sr-hospital"></i>
    </div>
 
    <div style={{marginLeft:"18px"}}>
        <h2>200</h2>
-       <h4>Views</h4>
+       <h4>Hospital</h4>
    </div>
 
    
@@ -23,27 +23,27 @@ export default function Mainadminhospitallist() {
    
  </div>
 
- <div className="mainadmindoctordatas_chart1 mainadmindoctordatas_chart2 flex">
+ <div className="mainadmindoctordatas_chart1 mainadmindoctordatas_chart2 mainadmindoctordatas_chart11  flex">
 
- <div className="mainadmindoctordatas_chart_icon flex">
-   <i class="fi fi-sr-call-outgoing"></i>
+ <div className="mainadmindoctordatas_chart_icon mainadmindoctordatas_chart_icon11 flex">
+ <i class="ri-rest-time-line"></i>
    </div>
 
    <div style={{marginLeft:"18px"}}>
        <h2>200</h2>
-       <h4>Views</h4>
+       <h4>Inactive</h4>
    </div>   
  </div>
 
- <div className="mainadmindoctordatas_chart1 mainadmindoctordatas_chart2 flex">
+ <div className="mainadmindoctordatas_chart1 mainadmindoctordatas_chart2 mainadmindoctordatas_chart12 flex">
 
-<div className="mainadmindoctordatas_chart_icon flex">
-  <i class="fi fi-sr-call-outgoing"></i>
+<div className="mainadmindoctordatas_chart_icon mainadmindoctordatas_chart_icon12 flex">
+   <i class="ri-close-circle-line"></i> 
   </div>
 
   <div style={{marginLeft:"18px"}}>
       <h2>200</h2>
-      <h4>Views</h4>
+      <h4>Disabled</h4>
   </div>   
 </div>
 </div>
@@ -58,7 +58,7 @@ export default function Mainadminhospitallist() {
       <th>Hospital Name</th>
       <th>Mobile Number</th>
       <th>PIN & Location</th>
-      <th>Specialities</th>
+      <th>Medical Field</th>
       <th>Clicks</th>
       <th>Contacts</th>
       <th>Join Date</th>

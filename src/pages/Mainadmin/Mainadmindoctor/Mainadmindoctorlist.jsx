@@ -28,7 +28,7 @@ export default function Mainadmindoctorlist() {
  <div className="mainadmindoctordatas_chart1 mainadmindoctordatas_chart2 mainadmindoctordatas_chart11  flex">
 
  <div className="mainadmindoctordatas_chart_icon mainadmindoctordatas_chart_icon11 flex">
- <i class="fi fi-ss-volume-mute"></i>
+ <i class="ri-rest-time-line"></i>
    </div>
 
    <div style={{marginLeft:"18px"}}>
@@ -40,7 +40,7 @@ export default function Mainadmindoctorlist() {
  <div className="mainadmindoctordatas_chart1 mainadmindoctordatas_chart2 mainadmindoctordatas_chart12 flex">
 
 <div className="mainadmindoctordatas_chart_icon mainadmindoctordatas_chart_icon12 flex">
-  <i class="fi fi-sr-call-outgoing"></i>
+   <i class="ri-close-circle-line"></i> 
   </div>
 
   <div style={{marginLeft:"18px"}}>
@@ -106,7 +106,7 @@ export default function Mainadmindoctorlist() {
       <td>100</td>
       <td>10</td>
       <td>4/5/2024</td>
-      <td>Actived</td>
+      <td>Active</td>
     </tr>
     <tr>
       <td>5</td>

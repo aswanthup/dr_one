@@ -70,7 +70,7 @@ export default function Mainadmindoctordetails() {
 
      <div style={{marginLeft:"18px"}}>
          <h2>200</h2>
-         <h4>Views</h4>
+         <h4>Contact</h4>
      </div>
 
      
@@ -179,9 +179,26 @@ All of the icons are free for both personal and commercial use.</h4>
 
 
     <div className='admin_disable_section flex'>
-     <div>
-    <i class="fi fi-sr-exclamation"></i>
+    
+    
+
+    <div className='admin_disable_section_left flex'>
+      <i class="fi fi-sr-exclamation"></i>
+      <div style={{marginLeft:"1.3vw"}}>
+          <h2>Date of join</h2>
+          <h4>2/4/2023</h4>
+      </div>
+
+      <div style={{marginLeft:"1.5vw"}}>
+          <h2>Last Actived</h2>
+          <h4>2/4/2023</h4>
+      </div>
+
+
+
+
     </div>
+ 
 
     <div className='admin_disable_button'>
       <h4>Disable</h4>
@@ -267,7 +284,7 @@ All of the icons are free for both personal and commercial use.</h4>
 
 
 
-  </table>
+    </table>
 
 
 
