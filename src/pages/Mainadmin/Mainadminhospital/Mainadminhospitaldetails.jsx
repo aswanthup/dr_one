@@ -107,7 +107,6 @@ export default function Mainadminhospitaldetails() {
 
 
 <h3 style={{marginBottom:"1.3vw"}}>About</h3>
-<div className='flex' style={{marginBottom:"1vw"}}><h4 className='highlight_data' style={{background:"#2A9D8F", color:"white",}}>Allopathy</h4> <h4 className='highlight_data' style={{marginLeft:"20px", background:"#FB8500", color:"white",}}>Epilepsy</h4></div>
 
 
 <h4 style={{marginBottom:"1.3vw"}}>Open-source neutral-style system symbols elaborately crafted for designers and developers.
@@ -170,10 +169,24 @@ All of the icons are free for both personal and commercial use.</h4>
 
 
            <div className='admin_disable_section flex'>
-            <div>
-           <i class="fi fi-sr-exclamation"></i>
-           </div>
+         
+    <div className='admin_disable_section_left flex'>
+      <i class="fi fi-sr-exclamation"></i>
+      <div style={{marginLeft:"1.3vw"}}>
+          <h2>Date of join</h2>
+          <h4>2/4/2023</h4>
+      </div>
 
+      <div style={{marginLeft:"1.5vw"}}>
+          <h2>Last Actived</h2>
+          <h4>2/4/2023</h4>
+      </div>
+
+
+
+
+    </div>
+ 
            <div className='admin_disable_button'>
              <h4>Disable</h4>
            </div>

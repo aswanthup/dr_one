@@ -1,7 +1,9 @@
 .doctoradminnavbar {
     height: 64px;
-    background-color: #f5f3ff;
-    border: 1px solid #ede9fe;
+    /* background-color: #f5f3ff;
+    border: 1px solid #ede9fe; */
+    background-color: #e4eaff;
+    border-bottom: 1px solid #a4b7fc94;
 }
 
 .containeradmin {
@@ -69,8 +71,8 @@
 .mainadminsidebar {
     width: 10vw;
     padding-inline: 20px;
-    border-right: 1px solid #6b8bfe5b;
-
+   
+    border-right: 1px solid #a4b7fca2;
 }
 
 
@@ -244,11 +246,15 @@
     background-color: #F35454;
 }
 
-.mainadmindoctordatas_chart_icon i {
+.mainadmindoctordatas_chart_icon i{
     color: white;
-    height: 21px;
-
+    height:24px ;
+    font-size:24px;
+    font-weight: 100;
 }
+
+
+
 
 .mainadmindoctordatas_chart h2 {
     font-weight: 700;
@@ -305,7 +311,7 @@
     width: 100%;
     background-color: #f5f3ff;
     border: 1px solid #ede9fe;
-    padding: 2vw;
+    padding: 1.4vw;
     border-radius: 1vw;
     margin: 2vw 0vw;
 }
@@ -327,6 +333,29 @@
     padding: .2vw 1.5vw;
     border-radius: 5px;
 }
+
+.admin_disable_section_left{
+    align-items: center;
+}
+
+
+.admin_disable_section_left h2{
+    font-size:1.4rem;
+    letter-spacing:1px;
+}
+
+
+.admin_disable_section_left h4{
+    margin-top:.3vw;
+    color: #6B8CFE;
+}
+
+
+
+
+
+
+
 
 .hospitaltime {
     justify-content: space-between;
@@ -455,6 +484,8 @@ tr:hover {
     background-color: #f1f1f1;
 }
 
+.doctortable {
+
 /* Column width */
 th:nth-child(1),
 td:nth-child(1) {
@@ -501,7 +532,199 @@ td:nth-child(9) {
     width: 8%;
 }
 
+}
+
 
 
 
 /* Doctor Views List */
+
+
+
+
+
+
+/* Onboarding table */
+
+.onboardingtable{
+    width: 100%;
+    border-collapse: collapse;
+    /* margin: 30px 0; */
+    font-size: 1.2rem;
+    font-weight: 300;
+  }
+
+  /* Table header styling */
+  th, td {
+    border: 1px solid #a4b7fc;
+    text-align: left;
+    padding: 8px;
+  }
+
+  /* Header row background color */
+  th {
+    background-color: #e4eaff;
+    font-weight: 600;
+  }
+
+  /* Zebra stripe rows */
+  tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+
+  /* Hover effect for rows */
+  tr:hover {
+    background-color: #f1f1f1;
+  }
+  .onboardingtable{
+
+  th:nth-child(1), td:nth-child(1) {
+    width:2%;
+  }
+
+  th:nth-child(2), td:nth-child(2) {
+    width: 12.5%;
+  }
+
+  th:nth-child(3), td:nth-child(3) {
+    width: 19.5%;
+  }
+
+  th:nth-child(4), td:nth-child(4) {
+    width: 12.5%;
+  }
+
+  th:nth-child(5), td:nth-child(5) {
+    width: 12.5%;
+  }
+
+  th:nth-child(6), td:nth-child(6) {
+    width:8%;
+  }
+
+  th:nth-child(7), td:nth-child(7) {
+    width: 5%;
+  }
+  td:nth-child(7) {
+    color: #3A65FD;
+  }
+
+
+  }
+
+
+
+
+  
+
+/*End Onboarding table */
+
+
+
+/* Customer */
+   
+.do_la_ho_card{
+    margin-top:1.3vw;
+    width: 300px;
+    height:fit-content;
+    border-radius:6px;
+    border:1px solid #a4b7fca2;
+    padding:1.2vw;
+  
+    /* box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px, rgb(209, 213, 219) 0px 0px 0px 1px inset; */
+} 
+
+.do_la_ho_card_doctor{
+    justify-content: space-between;
+    margin-bottom:1vw;
+}
+
+.do_la_ho_card_data{
+    justify-content: space-between;
+}
+
+.do_la_ho_card2{
+    margin-left:10px;
+}
+
+
+
+
+.customertable{
+    width: 100%;
+    border-collapse: collapse;
+    /* margin: 30px 0; */
+    font-size: 1.2rem;
+    font-weight: 300;
+  }
+
+  /* Table header styling */
+  th, td {
+    border: 1px solid #a4b7fc;
+    text-align: left;
+    padding: 8px;
+  }
+
+  /* Header row background color */
+  th {
+    background-color: #e4eaff;
+    font-weight: 600;
+  }
+
+  /* Zebra stripe rows */
+  tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+
+  /* Hover effect for rows */
+  tr:hover {
+    background-color: #f1f1f1;
+  }
+
+  
+  /* Column width */
+  .customertable th:nth-child(1), .onboardingtable td:nth-child(1) {
+    width: 2%;
+  }
+  
+  .customertable th:nth-child(2), .onboardingtable td:nth-child(2) {
+    width: 12.5%;
+  }
+  
+  .customertable th:nth-child(3), .onboardingtable td:nth-child(3) {
+    width: 12.5%;
+  }
+  .customertable th:nth-child(4), .onboardingtable td:nth-child(4) {
+    width: 12.5%;
+  }
+  
+  .customertable th:nth-child(5), .onboardingtable td:nth-child(5) {
+    width: 12.5%;
+  }
+  
+  .customertable th:nth-child(6), .onboardingtable td:nth-child(6) {
+    width: 8%;
+  }
+  
+  .customertable th:nth-child(7), .onboardingtable td:nth-child(7) {
+    width: 6%;
+  }
+
+  .customertable th:nth-child(8), .onboardingtable td:nth-child(8) {
+    width:6%;
+  }
+  
+  .customertable td:nth-child(8) {
+    color: #3A65FD;
+  }
+  
+
+
+
+
+
+
+
+
+
+/*End Customer */
