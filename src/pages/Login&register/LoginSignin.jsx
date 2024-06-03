@@ -106,7 +106,7 @@ export const LoginSignin = () => {
           setTimeout(() => {
             setloading(false)
             if (res?.data?.type === "doctor") {
-              navigate("/doctoradmin")
+              navigate("/doctoradminprofile")
             } else if (res?.data?.type === "hospital") {
               navigate("/hospitaladmin")
             } else if (res?.data?.type === "laboratory" || res?.data?.type === "lab") {
@@ -115,12 +115,15 @@ export const LoginSignin = () => {
           }, 1000);
         } else {
           toast.info(res?.data?.message)
+          setloading(false)
         }
       }).catch((error) => {
         toast.info(error?.response?.data?.message)
+        setloading(false)
       })
     } else {
       toast.info("All fields are mandatory")
+      setloading(false)
     }
   }
 
