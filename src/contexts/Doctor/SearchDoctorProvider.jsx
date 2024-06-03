@@ -121,6 +121,7 @@ export default function SearchDoctorProvider({ children }) {
       }
     }
   }, [filters]);
+  
 
   const getAllDoctorsData = async () => {
     try {

@@ -35,9 +35,9 @@ export default function Hospitaladmindoctorlist() {
   };
 
   return (
-    <div>
-      <div className="hospitaladmin-main flex">
-        <div className="hospitaladmin_right">
+    <>
+      <div className="hospitaladmin-main flex ">
+        <div className="hospitaladmin_right" style={{width:"100%"}}>
           <div className="manage_doctor ">
             <div className="flex-center">
               <h1>Manage Doctors</h1>
@@ -54,7 +54,7 @@ export default function Hospitaladmindoctorlist() {
               </div>
             </div>
           </div>
-          <div className="hospitaladmin-doclist ">
+          <div className="hospitaladmin-doclist">
             <div className="hospitaladmin-doclist-cardcontainer">
               {doctorsData.map((value, index) => (
                 <div className="hospital-admin-card" key={index}>
@@ -75,6 +75,6 @@ export default function Hospitaladmindoctorlist() {
       >
         <CircularProgress color="inherit" />
       </Backdrop>
-    </div>
+    </>
   );
 }
