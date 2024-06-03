@@ -5,6 +5,7 @@
     padding-top: 5vw;
     border-radius: 2vw;
     margin-top: 7vw;
+    width: 100%;
 }
 
 .doctor-profile-left {
@@ -163,7 +164,7 @@
 .doc_profileModal {
     display: flex;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: center;
     padding: 40px;
 }
 
