@@ -14,6 +14,7 @@ import Mainadmincustomer from '../Mainadmincustomer/Mainadmincustomer'
 import Mainadminfeedback from '../Mainadminfeedback/Mainadminfeedback'
 import Mainadminonboarding from '../Mainadminonboarding/Mainadminonboarding'
 import Mainadminoverview from '../Mainadminoverview/Mainadminoverview'
+import Mainadmincustomerdetails from '../Mainadmincustomer/Mainadmincustomerdetails'
 
 export default function Mainadmin() {
   const [ChangeDashboards, setChangeDashboards] = useState({
@@ -51,6 +52,7 @@ export default function Mainadmin() {
                 <Mainadmindoctordetails />
                 <br /><br /><br /><br /><br /><br /><br /><br />
                 <Mainadmindoctorapprove />
+                <br /><br /><br /><br /><br /><br /><br /><br />
               </>
 
             }
@@ -78,6 +80,10 @@ export default function Mainadmin() {
             {ChangeDashboards?.customer &&
               <>
                 <Mainadmincustomer />
+                <br /><br /><br /><br /><br /><br /><br /><br />
+                <br /><br /><br /><br /><br /><br /><br /><br />
+                <Mainadmincustomerdetails />
+                <br /><br /><br /><br /><br /><br /><br /><br />
               </>
 
             }

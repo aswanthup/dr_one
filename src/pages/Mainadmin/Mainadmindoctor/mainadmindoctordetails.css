@@ -1,3 +1,5 @@
+@import url('https://cdn-uicons.flaticon.com/2.4.0/uicons-bold-rounded/css/uicons-bold-rounded.css');
+
 .doctoradminnavbar {
     height: 64px;
     /* background-color: #f5f3ff;
@@ -436,6 +438,18 @@
 }
 
 
+.admin_view_more{
+    justify-content: space-between;
+    margin-bottom: 1vw;
+}
+
+
+.admin_view_more h4{
+    background-color: #3A65FD;
+    color: white;
+    padding:0.2vw .6vw;
+    border-radius: 5px;
+}
 
 
 
@@ -719,6 +733,47 @@ td:nth-child(9) {
   }
   
 
+
+
+/* Customer Activity */
+
+.customer_view{
+  
+    width:60%;
+    justify-content:space-between;
+}
+.customer_view_type{
+    width:100px;
+    border-right:4px solid #a5b7fa;
+    margin-bottom:1vw;
+    margin-right:1vw;
+    color: rgb(107, 107, 107);
+}
+
+.customer_view_contact{
+    background-color: #6B8CFE;
+    color: white;
+    height: fit-content;
+    padding:0px 10px;
+    border-radius:50px;
+    font-size:1rem;
+    margin-left:1.3vw;
+}
+
+.customer_view_time{
+    color: #3A65FD;
+    font-size:1rem;
+}
+
+.customer_view_contact2{
+    background-color: #2A9D8F;
+}
+
+
+
+
+
+/*End Customer Activity */
 
 
 

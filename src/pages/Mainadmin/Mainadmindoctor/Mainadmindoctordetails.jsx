@@ -205,9 +205,10 @@ All of the icons are free for both personal and commercial use.</h4>
     </div>
     </div>
 
-
-    <h3 style={{marginBottom:"1.3vw"}}>Views</h3>
-
+    <div className='flex admin_view_more'>
+    <h3>Views</h3>
+    <h4>View More<i style={{marginLeft:"0.5vw"}} class="ri-arrow-right-up-line"></i></h4>
+    </div>
 
 
 
@@ -218,7 +219,7 @@ All of the icons are free for both personal and commercial use.</h4>
       <th>Customer Name</th>
       <th>Mobile Number</th>
       <th>Date & Time</th>
-      <th>PIN & Location</th>
+      <th>Location</th>
       <th>Status</th>
     </tr>
     <tr>

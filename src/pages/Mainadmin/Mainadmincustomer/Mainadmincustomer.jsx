@@ -48,7 +48,7 @@ export default function Mainadmincustomer() {
     <th>No</th>
     <th>Customer Name</th>
     <th>Phone Number</th>
-    <th>PIN & Location</th>
+    <th>Location</th>
     <th>Join Date</th>
     <th>Age Group</th>
     <th>Gender</th>
@@ -62,7 +62,7 @@ export default function Mainadmincustomer() {
     <td>1</td>
     <td>Maria Anders</td>
     <td>+49 30 123456</td>
-    <td>678454-Kozhikode</td>
+    <td>Kozhikode</td>
     <td>3/5/2024</td>
     <td>19-24</td>
     <td>Male</td>
@@ -73,7 +73,7 @@ export default function Mainadmincustomer() {
     <td>1</td>
     <td>Maria Anders</td>
     <td>+49 30 123456</td>
-    <td>678454-Kozhikode</td>
+    <td>Kozhikode</td>
     <td>3/5/2024</td>
     <td>19-24</td>
     <td>Male</td>
@@ -84,7 +84,7 @@ export default function Mainadmincustomer() {
     <td>1</td>
     <td>Maria Anders</td>
     <td>+49 30 123456</td>
-    <td>678454-Kozhikode</td>
+    <td>Kozhikode</td>
     <td>3/5/2024</td>
     <td>19-24</td>
     <td>Male</td>
@@ -95,7 +95,73 @@ export default function Mainadmincustomer() {
     <td>1</td>
     <td>Maria Anders</td>
     <td>+49 30 123456</td>
-    <td>678454-Kozhikode</td>
+    <td>Kozhikode</td>
+    <td>3/5/2024</td>
+    <td>19-24</td>
+    <td>Male</td>
+    <td>Active</td>
+  </tr>
+
+  <tr>
+    <td>1</td>
+    <td>Maria Anders</td>
+    <td>+49 30 123456</td>
+    <td>Kozhikode</td>
+    <td>3/5/2024</td>
+    <td>19-24</td>
+    <td>Male</td>
+    <td>Active</td>
+  </tr>
+
+  <tr>
+    <td>1</td>
+    <td>Maria Anders</td>
+    <td>+49 30 123456</td>
+    <td>Kozhikode</td>
+    <td>3/5/2024</td>
+    <td>19-24</td>
+    <td>Male</td>
+    <td>Active</td>
+  </tr>
+
+  <tr>
+    <td>1</td>
+    <td>Maria Anders</td>
+    <td>+49 30 123456</td>
+    <td>Kozhikode</td>
+    <td>3/5/2024</td>
+    <td>19-24</td>
+    <td>Male</td>
+    <td>Active</td>
+  </tr>
+
+  <tr>
+    <td>1</td>
+    <td>Maria Anders</td>
+    <td>+49 30 123456</td>
+    <td>Kozhikode</td>
+    <td>3/5/2024</td>
+    <td>19-24</td>
+    <td>Male</td>
+    <td>Active</td>
+  </tr>
+
+  <tr>
+    <td>1</td>
+    <td>Maria Anders</td>
+    <td>+49 30 123456</td>
+    <td>Kozhikode</td>
+    <td>3/5/2024</td>
+    <td>19-24</td>
+    <td>Male</td>
+    <td>Active</td>
+  </tr>
+
+  <tr>
+    <td>1</td>
+    <td>Maria Anders</td>
+    <td>+49 30 123456</td>
+    <td>Kozhikode</td>
     <td>3/5/2024</td>
     <td>19-24</td>
     <td>Male</td>

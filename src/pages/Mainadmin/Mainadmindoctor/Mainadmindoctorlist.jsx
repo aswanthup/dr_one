@@ -57,7 +57,7 @@ export default function Mainadmindoctorlist() {
 <table className='doctortable'>
     <tr>
       <th>No</th>
-      <th>Hospital Name</th>
+      <th>Doctor Name</th>
       <th>Mobile Number</th>
       <th>PIN & Location</th>
       <th>Specialities</th>
