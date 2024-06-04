@@ -36,7 +36,7 @@ export const LabAdminProfile = () => {
         <>
             <div className='LabAdminProfile'>
                 <div className='LabAdminProfileTop'>
-                    <div className='LabAdminProfileLogoutSec'>
+                    <div onClick={()=>navigate("/login")} className='LabAdminProfileLogoutSec'>
                         <p>Logout</p>
                         <LogoutIcon id="LabAdminProfileLogoutSecIcon" />
                     </div>
