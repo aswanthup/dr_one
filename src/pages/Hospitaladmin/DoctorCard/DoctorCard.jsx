@@ -9,7 +9,7 @@ const tempImage='./images/TempDocImg.jpg'
   return (
     <>
       <div
-        onClick={() => navigate("/hospitaladmindoctordetails", { state: data })}
+       onClick={() => navigate("/doctorprofile", { state: data })}
         className={styles.cardContainer}
       >
         <div>
