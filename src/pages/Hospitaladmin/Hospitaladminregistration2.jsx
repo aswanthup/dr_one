@@ -37,7 +37,6 @@ export default function Hospitaladminregistration2() {
                 { name: "Palliative" },
                 { name: "Care" },
                 { name: "Other Services " },
-
         ]
         useEffect(() => {
                 if (HospitalAdminRg?.type === "Allopathy") {
@@ -147,7 +146,6 @@ export default function Hospitaladminregistration2() {
         };
 
         const Finish = () => {
-
                 if (HospitalAdminRg?.pincode && HospitalAdminRg?.about && HospitalAdminRg?.address && HospitalAdminRg?.lisence_no && HospitalAdminRg?.type && HospitalAdminRg.features.length > 0 && HospitalAdminRg.specialties.length > 0 && !Errors?.pincode) {
                         setloader(true)
                         CheckValidation()
@@ -220,7 +218,6 @@ export default function Hospitaladminregistration2() {
                 }
 
         }
-
 
         const openModal = (data) => {
                 if (data?.specialties) {

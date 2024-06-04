@@ -293,9 +293,8 @@ export const DocAdminProfile = () => {
             setloading(false)
         })
     }
-    console.log("DoctorData>>>>", DoctorData)
-    if (DoctorData) {
-
+    // console.log("DoctorData>>>>", DoctorData)
+    if (DoctorData?.name) {
         return (
             <>
                 <div className="mainadmindoctordatas flex">
@@ -332,7 +331,7 @@ export const DocAdminProfile = () => {
                     <div className="mainadmindoctordatas_chart flex">
                         <div className="mainadmindoctordatas_chart1 flex">
                             <div className="mainadmindoctordatas_chart_icon flex">
-                                <i class="fi fi-sr-call-outgoing"></i>
+                                <i class="fi fi-sr-overview"></i>
                             </div>
                             <div style={{ marginLeft: "18px" }}>
                                 <h2>200</h2>
@@ -346,8 +345,8 @@ export const DocAdminProfile = () => {
                             </div>
 
                             <div style={{ marginLeft: "18px" }}>
-                                <h2>200</h2>
-                                <h4>Views</h4>
+                                <h2>199</h2>
+                                <h4>Contacted</h4>
                             </div>
 
 
