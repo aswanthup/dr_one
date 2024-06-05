@@ -113,6 +113,33 @@ export default function Doctor_profile() {
             </div>
 
           </div>
+
+
+          <div className='doc_profileSecFeedBack'>
+
+            <h2 clas>Rating & Reviews</h2>
+            <div className='doc_profileSecFeedBackAndRatingBox'>
+              <div className='doc_profileSecFeedBackAndRatingBoxFlex'>
+                <h1>5K</h1>
+                <p>Total Reviews</p>
+              </div>
+              <div className='doc_profileSecFeedBackAndRatingBoxFlex'>
+                <h1>4.6</h1>
+                <p>Average Rating</p>
+              </div>
+            </div>
+
+            <div className='doc_profileSecFeedBackStart'>
+              <div className='doc_profileSecFeedBItem'>
+
+              </div>
+            </div>
+
+
+          </div>
+
+
+
         </div>
 
         <Modal open={open} onClose={openModal} className='doc_profileModal'>

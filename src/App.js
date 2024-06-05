@@ -68,6 +68,7 @@ import Mainadminonboarding from "./pages/Mainadmin/Mainadminonboarding/Mainadmin
 import Mainadmincustomer from "./pages/Mainadmin/Mainadmincustomer/Mainadmincustomer";
 import Mainadmincustomerdetails from "./pages/Mainadmin/Mainadmincustomer/Mainadmincustomerdetails";
 import { DocProfileMainSec } from "./pages/doctor/DocProfileMainSec/DocProfileMainSec";
+import HospitalDetailed from "./pages/Hospital/HospitalDetailed/HospitalDetailed";
 
 function App() {
   return (
@@ -175,7 +176,7 @@ function App() {
             <Route path='/LabProfile' element={<LabAdminProfile />} ></Route>
             <Route path='/analyzelab' element={<AnalyzeLabAdmin />} ></Route>
             <Route path='/editLaboratory' element={<EditLaboratory />} ></Route>
-
+            <Route path='/hospitaldetailed' element={<HospitalDetailed />} ></Route>
 
             {/* Main admin */}
 

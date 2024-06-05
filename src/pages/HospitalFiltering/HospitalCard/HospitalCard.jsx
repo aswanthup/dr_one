@@ -1,12 +1,14 @@
 import React from 'react'
 import styles from "../../doctor/DoctorSearch/DesktopView/searchdoc.module.css";
+import { useNavigate } from 'react-router-dom';
 export const HospitalCard = ({ data }) => {
+    const navigate = useNavigate()
     const details = data?.details
     const TemPImg = "./images/TempHosImg.jpg"
     return (
         <>
             <div
-                // onClick={() => navigate("/doctorprofile", { state: details })}
+                onClick={() => navigate("/hospitaldetailed", { state: { id: details?.id } })}
                 className={styles.cardContainer}>
                 <div>
                     <img className={styles.docImage} src={details.photo?.image1 || TemPImg} alt="" />

@@ -10,7 +10,7 @@ import AddIcon from '@mui/icons-material/Add';
 import DeleteIcon from '@mui/icons-material/Delete';
 import RemoveIcon from '@mui/icons-material/Remove';
 import { port } from '../../../../config';
-import { Loader } from '../../../../components/Loader/Loader';
+import { Loader } from '../../../../components/Loader/Loader'
 export const DocAdminProfile = () => {
     const [open, setOpen] = React.useState({});
     const [FormValues, setFormValues] = useState({})
@@ -18,6 +18,7 @@ export const DocAdminProfile = () => {
     const [EditValues, setEditValues] = useState({})
     const [deletePopup, setdeletePopUp] = useState(false)
     const [loading, setloading] = useState(false)
+    const [editAboutProfile, seteditAboutProfile] = useState(false)
     const [Hospitals, setHospitals] = useState([])
     const [TimePickers, setTimePickers] = useState([
         { day: "Sunday", id: 1, availableTimes: [{ startTime: '', endTime: '' }] },
@@ -294,6 +295,27 @@ export const DocAdminProfile = () => {
         })
     }
     // console.log("DoctorData>>>>", DoctorData)
+    const editAbout = () => {
+        seteditAboutProfile(!editAboutProfile)
+    }
+    const upadteAbout = () => {
+        const data = {
+            doctor_id: DoctorData?.id,
+            about: DoctorData?.about
+        }
+        axios.post(`${port}/doctor/edit`, data).then((res) => {
+            console.log(res)
+            toast.success(res?.data?.message)
+            editAbout()
+        })
+    }
+
+    const changeAbout = (e) => {
+        const { name, value } = e?.target
+        setDoctorData({ ...DoctorData, [name]: value })
+
+    }
+    console.log(DoctorData)
     if (DoctorData?.name) {
         return (
             <>
@@ -302,7 +324,6 @@ export const DocAdminProfile = () => {
                     <div className="mainadmindoctordatas_profile flex">
 
                         <img className='mainadmindoctordatas_profile_photo' src="/images/doc.jpg" alt="" />
-
                         <div className="mainadmindoctordatas_profile_data flex">
 
                             <div className='flex'>  <h2>
@@ -348,15 +369,7 @@ export const DocAdminProfile = () => {
                                 <h2>199</h2>
                                 <h4>Contacted</h4>
                             </div>
-
-
-
-
-
                         </div>
-
-
-
 
                     </div>
 
@@ -371,13 +384,23 @@ export const DocAdminProfile = () => {
                     <div className="mainadmindoctorabout ">
                         <div style={{ marginBottom: "1.3vw" }} className='mainadmindoctoraboutDiv'>
                             <h3>About</h3>
-                            <EditIcon id="mainadmindoctoraboutDivIcon" />
+                            <div onClick={editAbout}>
+                                <EditIcon style={{ color: editAboutProfile ? 'blue' : 'black' }} id="mainadmindoctoraboutDivIcon" />
+                            </div>
                         </div>
 
                         <div className='flex' style={{ marginBottom: "1vw" }}><h4 className='highlight_data' style={{ background: "#2A9D8F", color: "white", }}>{DoctorData?.type}</h4> <h4 className='highlight_data' style={{ marginLeft: "20px", background: "#FB8500", color: "white", }}>{DoctorData?.specialization}</h4></div>
 
-
-                        <h4 style={{ marginBottom: "1.3vw" }}>{DoctorData?.about}</h4>
+                        {!editAboutProfile ?
+                            <h4 onClick={editAbout} style={{ marginBottom: "1.3vw" }}>{DoctorData?.about}</h4>
+                            :
+                            <textarea onChange={changeAbout} className='adimindoctorpinAbout' value={DoctorData?.about} name="about" ></textarea>
+                        }
+                        {editAboutProfile &&
+                            <div className='mainadmindoctoraboutConfirmBtn'>
+                                <button onClick={upadteAbout}>Update</button>
+                            </div>
+                        }
                         <h3 style={{ marginBottom: "1.3vw" }}>{DoctorData?.address}</h3>
                         <div className='flex adimindoctorpin'>
                             <h4 style={{ background: "#3A65FD", color: "white" }}>{DoctorData?.pincode}</h4>
@@ -432,7 +455,7 @@ export const DocAdminProfile = () => {
 
 
 
-                </div>
+                </div >
 
 
 
@@ -596,16 +619,14 @@ export const DocAdminProfile = () => {
                         </div>
                     </div>
                 </Modal>
-
-
             </>
 
         )
     } else {
-        return
-        <>
-            <Loader />
-        </>
+        return (
+            <>
+                <Loader />
+            </>)
     }
 
 }
