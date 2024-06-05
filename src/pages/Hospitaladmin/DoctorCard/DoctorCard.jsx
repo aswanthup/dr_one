@@ -4,16 +4,16 @@ import { useNavigate } from "react-router-dom";
 
 export const DoctorCard = ({ data }) => {
   console.log({ data });
-
+const tempImage='./images/TempDocImg.jpg'
   const navigate = useNavigate();
   return (
     <>
       <div
-        onClick={() => navigate("/hospitaladmindoctordetails", { state: data })}
+       onClick={() => navigate("/doctorprofile", { state: data })}
         className={styles.cardContainer}
       >
         <div>
-          <img className={styles.docImage} src={data?.image} alt="" />
+          <img className={styles.docImage} src={data?.image || tempImage} alt="" />
         </div>
         <div>
           <div>

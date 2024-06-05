@@ -1,6 +1,10 @@
 import React from "react";
+import LogoutIcon from "@mui/icons-material/Logout";
+import { useNavigate } from "react-router-dom";
+
 
 function HospitalTopbar({ data: { SentData, selected } }) {
+  const navigate=useNavigate()
   const FindButtonValue = (data) => {
     SentData(data);
   };
@@ -21,6 +25,9 @@ function HospitalTopbar({ data: { SentData, selected } }) {
           </div>
 
           <img style={{ marginLeft: "18px" }} src="/images/doc.jpg" alt="" />
+          <div  style={{paddingLeft:"1rem",cursor:"pointer"}} onClick={()=>navigate("/login")}>
+              <LogoutIcon style={{color:"blue",fontSize:"25px"}} id="LabAdminProfileLogoutSecIcon" />
+            </div>
         </div>
       </div>
     </div>

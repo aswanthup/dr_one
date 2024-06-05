@@ -3,7 +3,7 @@ import Footer from "../../components/Footer";
 import "../doctor/doctor.css";
 import { Swiper, SwiperSlide } from "swiper/react";
 import Headroom from "react-headroom";
-import SearchIcon from '@mui/icons-material/Search';
+import SearchIcon from "@mui/icons-material/Search";
 
 // Import Swiper styles
 import "swiper/css";
@@ -15,14 +15,22 @@ import $ from "jquery"; // Import jQuery
 import Navbar from "../../components/Navbar";
 import { useNavigate } from "react-router-dom";
 import { MyContext } from "../../contexts/Contexts";
-import { ayurSpec, homeoDept, speacializationNames } from "../HospitalFiltering/constants/Filter";
+import {
+  ayurSpec,
+  homeoDept,
+  speacializationNames,
+} from "../HospitalFiltering/constants/Filter";
+import { SearchDocContext } from "../../contexts/Doctor/SearchDoctorProvider";
 export default function Doctor() {
   const [visibleContent, setVisibleContent] = useState(2);
   const [SpecialisationBatch, setSpecialisationBatch] = useState([]);
-  const {setPassedSpecialization ,setPassedType} = useContext(MyContext)
-  const [ayurvedic, setayruvedic] = useState([])
-  const [Homeo, setHomeo] = useState([])
-  const navigate = useNavigate()
+  const {
+    setFilters,
+    setFilteredDoctors,
+    setDocsBySearch,
+    setAllDocsBySearch,
+  } = useContext(SearchDocContext);
+  const navigate = useNavigate();
   const content = [
     $(document).ready(function () {
       $(".content").slice(0, 2).show();
@@ -35,42 +43,87 @@ export default function Doctor() {
       });
     }),
   ];
+  useEffect(() => {
+    setFilters({
+      type: "",
+      specializations: [],
+      gender: "",
+      experience: 0,
+      name: "",
+    });
+    setAllDocsBySearch([]);
+    setDocsBySearch([]);
+  }, []);
 
   const showMoreContent = () => {
     console.log("first");
     setVisibleContent((prev) => prev + 1); // Increase visible content count by 4 on click
   };
 
-  const handleSelectSpecialization = (type,specialization) => {
-    setPassedSpecialization(specialization)
-    setPassedType(type)
-    navigate("/searchdoctor")
-  }
-
+  const handleSelectSpecialization = (specialization) => {
+    setFilteredDoctors([]);
+    const lowerCasedSpecialization = specialization.toLowerCase();
+    let type = "Allopathy";
+    if (
+      ayurSpec.includes(lowerCasedSpecialization) ||
+      ayurSpec.includes(specialization)
+    ) {
+      type = "Ayurvedic";
+    } else if (
+      homeoDept.includes(lowerCasedSpecialization) ||
+      homeoDept.includes(specialization)
+    ) {
+      type = "Homeopathy";
+    }
+    setFilters({
+      type: type,
+      specializations: [lowerCasedSpecialization],
+      gender: "",
+      experience: 0,
+      name: "",
+    });
+    navigate("/searchdoctor", { state: "hi" });
+  };
 
   const renderHosFilteringBYSpeciality = (Value) => {
     if (speacializationNames.includes(Value?.speciality)) {
-      navigate("/hospitalfilter", { state: { speciality: Value?.speciality, type: "Allopathy" } })
+      navigate("/hospitalfilter", {
+        state: { speciality: Value?.speciality, type: "Allopathy" },
+      });
     } else if (ayurSpec.includes(Value?.speciality)) {
-      navigate("/hospitalfilter", { state: { speciality: Value?.speciality, type: "Ayurvedic" } })
+      navigate("/hospitalfilter", {
+        state: { speciality: Value?.speciality, type: "Ayurvedic" },
+      });
     } else if (homeoDept.includes(Value?.speciality)) {
-      navigate("/hospitalfilter", { state: { speciality: Value?.speciality, type: "Homeopathy" } })
+      navigate("/hospitalfilter", {
+        state: { speciality: Value?.speciality, type: "Homeopathy" },
+      });
     }
-  }
+  };
 
-  const FullSpecialisation = [...speacializationNames, ...homeoDept, ...ayurSpec]
+  const FullSpecialisation = [
+    ...speacializationNames,
+    ...homeoDept,
+    ...ayurSpec,
+  ];
 
   useEffect(() => {
     let settingAllopathy = 0;
     let AllopathyUpdatingBatch = [];
     FullSpecialisation.forEach((ele, index) => {
-      if (!AllopathyUpdatingBatch[settingAllopathy] || AllopathyUpdatingBatch[settingAllopathy].length < 12) {
-        AllopathyUpdatingBatch[settingAllopathy] = [...(AllopathyUpdatingBatch[settingAllopathy] || []), ele];
+      if (
+        !AllopathyUpdatingBatch[settingAllopathy] ||
+        AllopathyUpdatingBatch[settingAllopathy].length < 12
+      ) {
+        AllopathyUpdatingBatch[settingAllopathy] = [
+          ...(AllopathyUpdatingBatch[settingAllopathy] || []),
+          ele,
+        ];
       } else {
         settingAllopathy += 1;
         AllopathyUpdatingBatch[settingAllopathy] = [ele];
       }
-      setSpecialisationBatch(AllopathyUpdatingBatch)
+      setSpecialisationBatch(AllopathyUpdatingBatch);
     });
   }, []);
 
@@ -87,19 +140,24 @@ export default function Doctor() {
     const remainingData = FullSpecialisation.filter(
       (data) => !data.toLowerCase().startsWith(queryLowerCase)
     );
-    const finalFilter = [...filteredData, ...remainingData]
+    const finalFilter = [...filteredData, ...remainingData];
     finalFilter.forEach((ele, index) => {
-      if (!AllopathyUpdatingBatch[settingAllopathy] || AllopathyUpdatingBatch[settingAllopathy].length < 12) {
-        AllopathyUpdatingBatch[settingAllopathy] = [...(AllopathyUpdatingBatch[settingAllopathy] || []), ele];
+      if (
+        !AllopathyUpdatingBatch[settingAllopathy] ||
+        AllopathyUpdatingBatch[settingAllopathy].length < 12
+      ) {
+        AllopathyUpdatingBatch[settingAllopathy] = [
+          ...(AllopathyUpdatingBatch[settingAllopathy] || []),
+          ele,
+        ];
       } else {
         settingAllopathy += 1;
         AllopathyUpdatingBatch[settingAllopathy] = [ele];
       }
-      setSpecialisationBatch(AllopathyUpdatingBatch)
+      setSpecialisationBatch(AllopathyUpdatingBatch);
     });
     // console.log("SearchData>>>>", SearchData);
-  }
-
+  };
 
   return (
     <div>
@@ -144,7 +202,10 @@ export default function Doctor() {
           </div>
         </div>
 
-        <div className="Doctor-search-box flex" onClick={() => navigate("/searchdoctor")}>
+        <div
+          className="Doctor-search-box flex"
+          onClick={() => navigate("/searchdoctor")}
+        >
           <div className="Doctor-container-search flex">
             <div className="Doctor-Search-box flex">
               <div className="Doctor-location-section flex">
@@ -164,9 +225,6 @@ export default function Doctor() {
             </div>
           </div>
         </div>
-
-
-
 
         <div className="our-specialities">
           <div className="second-main-head">
@@ -194,7 +252,7 @@ export default function Doctor() {
                     <h4>Pregnancy</h4>
                   </div>
                   <div
-                    onClick={() => handleSelectSpecialization("Allopathy","gynecology")}
+                    onClick={() => handleSelectSpecialization("gynecology")}
                     className="home-specialties-button"
                   >
                     <h4>Consult Now</h4>
@@ -209,7 +267,10 @@ export default function Doctor() {
                     <h4>Acne, pimple or</h4>
                     <h4>skin issues</h4>
                   </div>
-                  <div onClick={() => handleSelectSpecialization("Allopathy","dermatology")} className="home-specialties-button">
+                  <div
+                    onClick={() => handleSelectSpecialization("dermatology")}
+                    className="home-specialties-button"
+                  >
                     <h4>Consult Now</h4>
                   </div>
                 </div>
@@ -222,7 +283,14 @@ export default function Doctor() {
                     <h4>Cold, cough or</h4>
                     <h4>Fever</h4>
                   </div>
-                  <div onClick={() => handleSelectSpecialization("Allopathy","general medicine")} className="home-specialties-button">
+                  <div
+                    onClick={() =>
+                      handleSelectSpecialization(
+                        "general medicine"
+                      )
+                    }
+                    className="home-specialties-button"
+                  >
                     <h4>Consult Now</h4>
                   </div>
                 </div>
@@ -235,7 +303,10 @@ export default function Doctor() {
                     <h4>Depression or</h4>
                     <h4>Anxiety</h4>
                   </div>
-                  <div onClick={() => handleSelectSpecialization("Allopathy","mental health")} className="home-specialties-button">
+                  <div
+                    onClick={() => handleSelectSpecialization("mental health")}
+                    className="home-specialties-button"
+                  >
                     <h4>Consult Now</h4>
                   </div>
                 </div>
@@ -248,7 +319,10 @@ export default function Doctor() {
                     <h4>Child not feeling</h4>
                     <h4>well</h4>
                   </div>
-                  <div onClick={() => handleSelectSpecialization("Allopathy","pediatrics")} className="home-specialties-button">
+                  <div
+                    onClick={() => handleSelectSpecialization("pediatrics")}
+                    className="home-specialties-button"
+                  >
                     <h4>Consult Now</h4>
                   </div>
                 </div>
@@ -412,32 +486,39 @@ export default function Doctor() {
 
         <div className="doctor_spe"></div>
 
-        <div className='doctor_spec flex'>
-          <div className='doctor_spec_card'>
-            <div className='spec_main_cards_SearchBox'>
-              <div className='spec_main_cards_SearchBox'>
-                <div className='search-input-wrapper'>
-                  <span className='search-icon'><SearchIcon /></span>
-                  <input onChange={SearchSpeciality} type="text" placeholder='Search your specialities' />
+        <div className="doctor_spec flex">
+          <div className="doctor_spec_card">
+            <div className="spec_main_cards_SearchBox">
+              <div className="spec_main_cards_SearchBox">
+                <div className="search-input-wrapper">
+                  <span className="search-icon">
+                    <SearchIcon />
+                  </span>
+                  <input
+                    onChange={SearchSpeciality}
+                    type="text"
+                    placeholder="Search your specialities"
+                  />
                 </div>
               </div>
             </div>
-            <div className='doctor_spec_SectionSetting'>
-              {SpecialisationBatch?.map((ele) =>
-                <div className='spec_main_cards_align flex'>
-                  {ele?.map(speciality =>
-                    <div onClick={() => { renderHosFilteringBYSpeciality({ speciality: speciality }) }} className='spec_main_card flex'>
+            <div className="doctor_spec_SectionSetting">
+              {SpecialisationBatch?.map((ele) => (
+                <div className="spec_main_cards_align flex">
+                  {ele?.map((speciality) => (
+                    <div
+                      onClick={() => handleSelectSpecialization(speciality)}
+                      className="spec_main_card flex"
+                    >
                       <h4>{speciality}</h4>
-                      <div className='spec_main_card_button flex'>
+                      <div className="spec_main_card_button flex">
                         <i class="ri-arrow-right-line"></i>
                       </div>
                     </div>
-                  )}
+                  ))}
                 </div>
-              )}
+              ))}
             </div>
-
-
           </div>
         </div>
 
@@ -555,36 +636,32 @@ export default function Doctor() {
           </div>
         </div>
 
-
-
-        <div onClick={() => navigate("/searchdoctor")} className="hospital-search-box flex">
-
+        <div
+          onClick={() => navigate("/searchdoctor")}
+          className="hospital-search-box flex"
+        >
           <div className="Hospital-container-search flex">
             <div className="Hospital-Search-box flex">
               <div className="Hospital-location-section flex">
-
                 <i className="ri-map-pin-2-line" />
 
-                <input className="Hospital-Location-input" type="text" placeholder='Kozhikode' />
-
+                <input
+                  className="Hospital-Location-input"
+                  type="text"
+                  placeholder="Kozhikode"
+                />
               </div>
-              <input className="Hospital-search-input" type="text" placeholder="Search Doctor" />
+              <input
+                className="Hospital-search-input"
+                type="text"
+                placeholder="Search Doctor"
+              />
               <div className="Hospital-search-section flex">
                 <i className="ri-search-2-line" />
               </div>
             </div>
-
           </div>
-
         </div>
-
-
-
-
-
-
-
-
 
         <div className="mobile-doctor-specialties">
           <div className="mobile-second-heading">

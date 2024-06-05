@@ -25,6 +25,7 @@ export default function Hospitaladmin() {
             {ChangeDashboards?.overview && <HospitalAdminDashBoard />}
             {ChangeDashboards?.doctor && <Hospitaladmindoctorlist />}
             {ChangeDashboards?.viewers && <Viewers />}
+            {ChangeDashboards?.feedbacks && <Viewers />}
           </div>
         </div>
       </div>

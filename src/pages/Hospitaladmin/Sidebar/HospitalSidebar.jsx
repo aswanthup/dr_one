@@ -51,7 +51,7 @@ function HospitalSidebar({ data: { SentData, selected } }) {
           FindButtonValue("hospital");
         }}
         className={
-          selected?.feedback
+          selected?.feedbacks
             ? "admimmenuicon admimmenuicon2 flex"
             : "admimmenuicon flex"
         }

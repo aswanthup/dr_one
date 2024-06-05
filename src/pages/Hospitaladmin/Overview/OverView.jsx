@@ -14,7 +14,7 @@ function Overview() {
           <div className="mainadmindoctordatas_profile_data flex">
             <div className="flex">
               {" "}
-              <h2>Prime Medical Hospital</h2>{" "}
+              <h2>Chemo Medical Hospital</h2>{" "}
               <h4
                 className="highlight_data"
                 style={{
@@ -43,7 +43,7 @@ function Overview() {
 
             <div className="flex texticonset">
               <i class="fi fi-sr-envelope"></i>
-              <h4 style={{ marginLeft: "10px" }}>anilyadhav@gmail.com</h4>
+              <h4 style={{ marginLeft: "10px" }}>Chemo@gmail.com</h4>
             </div>
           </div>
         </div>
@@ -51,9 +51,8 @@ function Overview() {
         <div className="mainadmindoctordatas_chart flex">
           <div className="mainadmindoctordatas_chart1 flex">
             <div className="mainadmindoctordatas_chart_icon flex">
-              <i class="fi fi-sr-call-outgoing"></i>
+              <i class="fi fi-sr-overview"></i>
             </div>
-
             <div style={{ marginLeft: "18px" }}>
               <h2>200</h2>
               <h4>Views</h4>
@@ -66,8 +65,8 @@ function Overview() {
             </div>
 
             <div style={{ marginLeft: "18px" }}>
-              <h2>200</h2>
-              <h4>Views</h4>
+              <h2>199</h2>
+              <h4>Contacted</h4>
             </div>
           </div>
         </div>
@@ -109,34 +108,27 @@ function Overview() {
             <div className="admin_fea_avai_left">
               <h3 style={{ marginBottom: "1.3vw" }}>Features</h3>
               <h4 style={{ marginBottom: "1.3vw" }}>
-                <i class="ri-arrow-right-circle-fill"></i>Features 1
+                <i class="ri-arrow-right-circle-fill"></i>Casuality
               </h4>
               <h4 style={{ marginBottom: "1.3vw" }}>
-                <i class="ri-arrow-right-circle-fill"></i>Features 1
+                <i class="ri-arrow-right-circle-fill"></i> Palliative
               </h4>
               <h4 style={{ marginBottom: "1.3vw" }}>
-                <i class="ri-arrow-right-circle-fill"></i>Features 1
+                <i class="ri-arrow-right-circle-fill"></i>Care
               </h4>
-              <h4 style={{ marginBottom: "1.3vw" }}>
-                <i class="ri-arrow-right-circle-fill"></i>Features 1
-              </h4>
+
             </div>
 
             <div className="admin_fea_avai_right">
               <h3 style={{ marginBottom: "1.3vw" }}>Specialities</h3>
 
               <h4 style={{ marginBottom: "1.3vw" }}>
-                <i class="ri-arrow-right-circle-fill"></i>Features 1
+                <i class="ri-arrow-right-circle-fill"></i>General Practitioner
               </h4>
               <h4 style={{ marginBottom: "1.3vw" }}>
-                <i class="ri-arrow-right-circle-fill"></i>Features 1
+                <i class="ri-arrow-right-circle-fill"></i>Homeopathic Materia Medica
               </h4>
-              <h4 style={{ marginBottom: "1.3vw" }}>
-                <i class="ri-arrow-right-circle-fill"></i>Features 1
-              </h4>
-              <h4 style={{ marginBottom: "1.3vw" }}>
-                <i class="ri-arrow-right-circle-fill"></i>Features 1
-              </h4>
+
             </div>
           </div>
         </div>

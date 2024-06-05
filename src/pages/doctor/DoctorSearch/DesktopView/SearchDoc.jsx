@@ -43,7 +43,7 @@ export default function SearchDoc() {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [])
-  
+  console.log(docsBySearch)
 
   return (
     <>
