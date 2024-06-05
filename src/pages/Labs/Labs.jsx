@@ -13,6 +13,7 @@ import Navbar from '../../components/Navbar';
 import { useNavigate } from 'react-router-dom';
 import { services } from './LabFIltering/constatnts/Filter';
 import axios from 'axios';
+import { port } from '../../config';
 
 export default function Labs() {
   const navigate = useNavigate()
@@ -54,7 +55,21 @@ export default function Labs() {
     }
   }, []);
 
+  const handleSearchData = async (type,speciality) => {
+    try {
+      const { id } = JSON.parse(localStorage.getItem("loginData")) || {};
+      const data = {
+        user_id: 8 || "",
+        speciality: speciality || "",
+        type: type || "",
+      };
+      const response = await axios.post(`${port}/lab/lab_searchdata`,data);
+      console.log(response)
+    } catch (err) {
+      console.error(err)
 
+    }
+  };
 
 
   return (
@@ -113,7 +128,7 @@ export default function Labs() {
             <h1>Find Test by <span className="color-blue">Health Concern</span></h1>
           </div>
           <div className="health-concern flex">
-            <div className="home-specialties-card flex">
+            <div onClick={()=>handleSearchData("Allopathy","General medicine")} className="home-specialties-card flex">
               <div className="home-specialties-image">
                 <img src="/images/1 (2).jpg" alt="" />
               </div>
@@ -180,7 +195,7 @@ export default function Labs() {
               <SwiperSlide>
                 <div className='lab-diagnostic-cards-Map'>
                   {ServiceEle.map(ele =>
-                    <div onClick={() => { navigateElements(ele) }} className="lab-diagnostic-cards flex">
+                    <div onClick={() => { navigateElements(ele) ;handleSearchData(ele)}} className="lab-diagnostic-cards flex">
                       <div className="lab-diagnostic-card">
                         <h2>{ele}</h2>
                         <div className="lab-diagnostic-paragraph">

@@ -25,7 +25,7 @@ function HospitalSidebar({ data: { SentData, selected } }) {
           FindButtonValue("doctor");
         }}
         className={
-          selected?.doctor
+          (selected?.doctor || selected?.manageDoc)
             ? "admimmenuicon admimmenuicon2 flex"
             : "admimmenuicon flex"
         }

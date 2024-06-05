@@ -1,20 +1,20 @@
 import React from "react";
 
-function Overview() {
+function Overview({ hospital }) {
   return (
     <>
       <div className="mainadmindoctordatas flex">
         <div className="mainadmindoctordatas_profile flex">
           <img
             className="mainadmindoctordatas_profile_photo"
-            src="/images/doc.jpg"
+            src= {hospital.photo.image1 || "/images/doc.jpg" }
             alt=""
           />
 
           <div className="mainadmindoctordatas_profile_data flex">
             <div className="flex">
               {" "}
-              <h2>Chemo Medical Hospital</h2>{" "}
+              <h2> {hospital?.name || "Baby Medical Hospital"}</h2>{" "}
               <h4
                 className="highlight_data"
                 style={{
@@ -23,7 +23,7 @@ function Overview() {
                   marginLeft: "10px",
                 }}
               >
-                Homeopathy
+                {hospital?.type || "Homeopathy"}
               </h4>
             </div>
 
@@ -31,19 +31,23 @@ function Overview() {
               className="highlight_data"
               style={{ background: "#3A65FD", color: "white" }}
             >
-              LIP874657467
+              {hospital.licence_no || "LN12345"}
             </h4>
 
             <div className="flex">
               <div className="flex texticonset">
                 <i class="fi fi-sr-call-outgoing"></i>
-                <h4 style={{ marginLeft: "10px" }}>+91 9878898346</h4>
+                <h4 style={{ marginLeft: "10px" }}>
+                  {hospital?.contact_no || "+91 999999999"}
+                </h4>
               </div>
             </div>
 
             <div className="flex texticonset">
               <i class="fi fi-sr-envelope"></i>
-              <h4 style={{ marginLeft: "10px" }}>Chemo@gmail.com</h4>
+              <h4 style={{ marginLeft: "10px" }}>
+                {hospital?.email || "baby@gmail.com"}
+              </h4>
             </div>
           </div>
         </div>
@@ -75,8 +79,8 @@ function Overview() {
       <div className="photosdivadmin">
         <h3 style={{ marginBottom: "1.3vw" }}>About</h3>
         <div className="photosdivadminsection flex">
-          <img src="/images/doc.jpg" alt="" />
-          <img src="/images/doc.jpg" alt="" />
+          <img src={hospital.photo.image1 || "/images/doc.jpg"} alt="" />
+          <img src={hospital.photo.image2 || "/images/doc.jpg"} alt="" />
           <img src="/images/doc.jpg" alt="" />
         </div>
       </div>
@@ -86,17 +90,13 @@ function Overview() {
           <h3 style={{ marginBottom: "1.3vw" }}>About</h3>
 
           <h4 style={{ marginBottom: "1.3vw" }}>
-            Open-source neutral-style system symbols elaborately crafted for
-            designers and developers. All of the icons are free for both
-            personal and commercial use.
+            {hospital?.about || "about"}
           </h4>
           <h3 style={{ marginBottom: "1.3vw" }}>Address</h3>
 
-          <h4 style={{ marginBottom: "1vw" }}>
-            Fifth Floor Arcadia Market Sec 49 South City 2, Gurgaon
-          </h4>
+          <h4 style={{ marginBottom: "1vw" }}>{hospital?.address}</h4>
           <div className="flex adimindoctorpin">
-            <h4 style={{ background: "#3A65FD", color: "white" }}>986744</h4>
+            <h4 style={{ background: "#3A65FD", color: "white" }}>{hospital?.pincode}</h4>
             <h4 style={{ background: "#F3F6FF", color: "#6B8CFE" }}>
               Kozhikode
             </h4>
@@ -107,28 +107,27 @@ function Overview() {
           <div className="admin_fea_avai flex">
             <div className="admin_fea_avai_left">
               <h3 style={{ marginBottom: "1.3vw" }}>Features</h3>
-              <h4 style={{ marginBottom: "1.3vw" }}>
-                <i class="ri-arrow-right-circle-fill"></i>Casuality
-              </h4>
-              <h4 style={{ marginBottom: "1.3vw" }}>
-                <i class="ri-arrow-right-circle-fill"></i> Palliative
-              </h4>
-              <h4 style={{ marginBottom: "1.3vw" }}>
-                <i class="ri-arrow-right-circle-fill"></i>Care
-              </h4>
+              {hospital?.feature.length>0 &&
+              hospital.feature.map((feature)=>(
 
+              <h4 style={{ marginBottom: "1.3vw" }}>
+                <i class="ri-arrow-right-circle-fill"></i>{feature}
+              </h4>
+              ))}
+            
             </div>
 
             <div className="admin_fea_avai_right">
               <h3 style={{ marginBottom: "1.3vw" }}>Specialities</h3>
 
-              <h4 style={{ marginBottom: "1.3vw" }}>
-                <i class="ri-arrow-right-circle-fill"></i>General Practitioner
-              </h4>
-              <h4 style={{ marginBottom: "1.3vw" }}>
-                <i class="ri-arrow-right-circle-fill"></i>Homeopathic Materia Medica
-              </h4>
+              {hospital?.speciality.length>0 &&
+              hospital.speciality.map((speciality)=>(
 
+              <h4 style={{ marginBottom: "1.3vw" }}>
+                <i class="ri-arrow-right-circle-fill"></i>{speciality}
+              </h4>
+              ))}
+            
             </div>
           </div>
         </div>
