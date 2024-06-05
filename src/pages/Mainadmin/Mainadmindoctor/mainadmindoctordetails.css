@@ -783,3 +783,92 @@ td:nth-child(9) {
 
 
 /*End Customer */
+
+
+
+/*Feedback section */
+
+.feedbacksectioncard{
+    width:28vw;
+    border: 1px solid #a4b7fc;
+    padding:1.3vw;
+    border-radius:6px;
+}
+
+.feedbacksection{
+    justify-content: space-between;
+    margin-top:1.3vw;
+}
+
+
+.feedbacksectioncardtop img{
+   width: 40px;
+   height: 40px;
+   object-fit: cover;
+   border-radius: 50px;
+}
+.feedbacksectioncardtop{
+    align-items: center;
+}
+.photoandtitle img{
+   width: 30px;
+   height: 30px;
+   object-fit: cover;
+   border-radius: 50px;
+}
+
+.feedbacksectioncardbutton{
+    justify-content: space-between;
+    align-items: center;
+    margin-top:1vw;
+    background-color: #d3dcfd;
+    padding:10px;
+    border-radius:5px;
+}
+.photoandtitle{
+    align-items: center;
+}
+
+.photoandtitle h4{
+    padding:3px 10px;
+    border-radius: 5px;
+ color: white;
+ margin-left: 5px;
+ font-size:1rem;
+}
+.photoandtitle h3{
+    font-size:1rem;
+    letter-spacing:1px;
+}
+
+.feedbacksectioncardrewiewpara{
+      height:200px;
+      overflow: scroll;
+     
+}
+
+.feedbacksectioncardrewiewpara2{
+    width:100%;
+}
+
+.feedbacksectioncardrewiewpara h4{
+    width:100%;
+}
+
+.feedbacksectioncardrewiewstar{
+    gap:10px;
+    padding: 1vw 0px;
+}
+.feedbacksectioncardrewiewstar i{
+    color:#FB8500 ;
+    font-size:16px;
+}
+
+
+
+
+
+
+
+
+/*End Feedback section */
