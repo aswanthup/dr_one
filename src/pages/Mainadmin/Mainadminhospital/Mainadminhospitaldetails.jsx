@@ -46,21 +46,13 @@ export default function Mainadminhospitaldetails() {
           <div className="mainadmindoctordatas_chart1 flex">
 
             <div className="mainadmindoctordatas_chart_icon flex">
-<<<<<<< HEAD
-              <i class="fi fi-sr-call-outgoing"></i>
-=======
-            <i class="fi fi-sr-overview"></i>
->>>>>>> 242938a235f1ccbe1c3086fa4a969806f8d0ea76
+              <i class="fi fi-sr-overview"></i>
             </div>
 
             <div style={{ marginLeft: "18px" }}>
               <h2>200</h2>
               <h4>Views</h4>
             </div>
-
-
-
-
 
           </div>
 
@@ -70,15 +62,9 @@ export default function Mainadminhospitaldetails() {
               <i class="fi fi-sr-call-outgoing"></i>
             </div>
 
-<<<<<<< HEAD
             <div style={{ marginLeft: "18px" }}>
               <h2>200</h2>
-              <h4>Views</h4>
-=======
-            <div style={{marginLeft:"18px"}}>
-                <h2>200</h2>
-                <h4>Contact</h4>
->>>>>>> 242938a235f1ccbe1c3086fa4a969806f8d0ea76
+              <h4>Contacted</h4>
             </div>
 
 
