@@ -46,7 +46,7 @@ export default function Mainadminlabsdetails() {
              <div className="mainadmindoctordatas_chart1 flex">
     
                 <div className="mainadmindoctordatas_chart_icon flex">
-                <i class="fi fi-sr-call-outgoing"></i>
+                <i class="fi fi-sr-overview"></i>
                 </div>
     
                 <div style={{marginLeft:"18px"}}>

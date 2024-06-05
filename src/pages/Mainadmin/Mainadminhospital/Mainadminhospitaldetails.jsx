@@ -46,7 +46,7 @@ export default function Mainadminhospitaldetails() {
          <div className="mainadmindoctordatas_chart1 flex">
 
             <div className="mainadmindoctordatas_chart_icon flex">
-            <i class="fi fi-sr-call-outgoing"></i>
+            <i class="fi fi-sr-overview"></i>
             </div>
 
             <div style={{marginLeft:"18px"}}>
@@ -68,7 +68,7 @@ export default function Mainadminhospitaldetails() {
 
             <div style={{marginLeft:"18px"}}>
                 <h2>200</h2>
-                <h4>Views</h4>
+                <h4>Contact</h4>
             </div>
 
             

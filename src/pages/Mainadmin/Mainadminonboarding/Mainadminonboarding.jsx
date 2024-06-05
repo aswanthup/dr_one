@@ -60,8 +60,8 @@ export default function Mainadminonboarding() {
     <th>Type</th>
     <th>Name</th>
     <th>Number</th>
-    <th>PIN & Location</th>
-    <th>Registration Date</th>
+    <th>Location</th>
+    <th>Registration Date</th>  
     <th>Status</th>
   </tr>
   <tr>
