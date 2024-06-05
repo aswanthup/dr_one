@@ -266,6 +266,67 @@
 
 }
 
+.doc_profileSecFeedBack {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.doc_profileSecFeedBack h2 {
+    font-weight: 600;
+    color: rgba(0, 0, 0, 0.603);
+}
+
+.doc_profileSecFeedBackAndRatingBox {
+    width: 400px;
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    height: 200px;
+    border-radius: 20px;
+    border: 1px solid #7E83FF;
+    background-color: #7e82ff1d;
+}
+
+.doc_profileSecFeedBackAndRatingBoxFlex {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 50%;
+    justify-content: center;
+    align-items: center;
+}
+
+.doc_profileSecFeedBackAndRatingBoxFlex h1 {
+    color: #7E83FF;
+    text-align: center;
+    font-weight: 700;
+}
+
+.doc_profileSecFeedBackAndRatingBoxFlex p {
+    color: #7e82ffa8;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 400;
+    letter-spacing: 2px;
+}
+
+.doc_profileSecFeedBackStart {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.doc_profileSecFeedBItem {
+    display: flex;
+    width: 100%;
+    border-radius: 10px;
+    height: fit-content ;
+    padding: 20px;
+
+}
+
 @media screen and (max-width:1100px) {
     .doctor-profile-photo img {
         top: -60px;

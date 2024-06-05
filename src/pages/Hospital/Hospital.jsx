@@ -199,8 +199,6 @@ export default function Hospital() {
 
               </div>
 
-
-
             </div>
 
 
@@ -208,8 +206,6 @@ export default function Hospital() {
             <div className='medical_image flex'>
               <img src="images/do.jpg" alt="" />
             </div>
-
-
 
             <div className='medical_right flex'>
 
@@ -244,8 +240,6 @@ export default function Hospital() {
                     <h4>Ayurvedic</h4>
                     <i class="ri-arrow-right-circle-line"></i>
                   </div>
-
-
                 </a>
 
               </div>
@@ -465,12 +459,9 @@ export default function Hospital() {
 
 
 
-
-
-
         <div className="mobile-second-heading">
           <h1>Find Hospitals by </h1>
-          <h1><span className='color-blue '>Specialties</span></h1>
+          <h1><span className='color-blue '>Specialities</span></h1>
         </div>
 
         <div className='spec_main_card flex'>
