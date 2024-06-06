@@ -7,7 +7,7 @@ function Overview({ hospital }) {
         <div className="mainadmindoctordatas_profile flex">
           <img
             className="mainadmindoctordatas_profile_photo"
-            src= {hospital.photo.image1 || "/images/doc.jpg" }
+            src= {hospital?.photo?.image1 || "/images/doc.jpg" }
             alt=""
           />
 
@@ -31,7 +31,7 @@ function Overview({ hospital }) {
               className="highlight_data"
               style={{ background: "#3A65FD", color: "white" }}
             >
-              {hospital.licence_no || "LN12345"}
+              {hospital?.licence_no || "LN12345"}
             </h4>
 
             <div className="flex">

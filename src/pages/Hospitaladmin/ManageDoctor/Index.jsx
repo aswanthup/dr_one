@@ -43,6 +43,8 @@ const Index = () => {
     },
   ]);
   const { selectedDoc } = useContext(HospitalAdminContext);
+  const { id } = JSON.parse(localStorage.getItem("loginData")) || {};
+  const doctor_id=selectedDoc?.id
   const ResetTimePicker = () => {
     setTimePickers([
       {
@@ -155,13 +157,17 @@ const Index = () => {
     }
   };
   //fetch selected doctor details
-  const fetchDoctor = async (id) => {
+  const fetchDoctor = async (hospital_id, doctor_id) => {
     try {
-      const response = await axios.post(`${port}/doctor/doctordetails`, {
-        id: id,
-      });
-      setDoctorData(response.data.data);
-      console.log(response);
+      const response = await axios.post(
+        `${port}/hospital/hospitaldoctordetails`,
+        {
+          hospital_id,
+          doctor_id,
+        }
+      );
+      setDoctorData(response.data.data.doctorId);
+      console.log(response.data.data.doctorId);
     } catch (err) {
       console.error(err);
     } finally {
@@ -169,8 +175,9 @@ const Index = () => {
   };
 
   useEffect(() => {
-    // setDoctorData(selectedDoc)
-    fetchDoctor(194);
+    if (selectedDoc.id) {
+      fetchDoctor(id, doctor_id);
+    }
   }, []);
 
   const DecrementInput = (MainInd, SubInd) => {
@@ -220,22 +227,10 @@ const Index = () => {
 
   const SaveData = () => {
     const data = {
-      hospital_id: FormValues?.hospital_id,
+      hospital_id: id,
       days: TimePickers,
-      doctor_id: LoggedData?.id,
+      doctor_id: selectedDoc.id,
     };
-
-    // const checkingValues = TimePickers?.filter(Values => {
-    //   const CheckStartPoint = Values?.availableTimes?.filter(availableTimes =>
-    //     availableTimes?.startTime
-    //   );
-    //   const checkEndPoint = Values?.availableTimes?.filter(ele => ele?.endTime);
-    //   return checkEndPoint?.length === CheckStartPoint?.length
-    // })
-    // console.log("checkingValues>>>>", checkingValues)
-    // if (!FormValues?.hospital_id && checkingValues?.length > 0) {
-    //   toastify({ msg: "Hospital not default; residential auto-added." })
-    // }
 
     let hasStartTime = [];
     let hasEndTime = [];
@@ -255,7 +250,6 @@ const Index = () => {
         if (endTime) hasEndTime.push(endTime);
         FindStartTime = hasStartTime.filter((ele) => ele?.endTime);
         FindEndTime = hasEndTime.filter((ele) => ele?.startTime);
-        // console.log("FindStartEndTime>>>", FindStartEndTime);
       });
     }
     if (
@@ -265,29 +259,22 @@ const Index = () => {
       checkingValues = true;
     }
     console.log("checkingValues>>>>", checkingValues);
-    if (
-      checkingValues &&
-      !FormValues?.hospital_id &&
-      !FormValues?.hospital_name
-    ) {
-      toastify({ msg: "Hospital not default; residential auto-added." });
-    }
     if (checkingValues) {
-      setloading(true);
-      axios
-        .post(`${port}/hospital/consultation_details`, data)
-        .then((res) => {
-          if (res?.data?.success) {
-            toastify({ msg: res?.data?.message, success: true });
-            handleClose();
-            ResetTimePicker();
-            setloading(false);
-          }
-        })
-        .catch((err) => {
-          // toastify({ msg: err?.response?.data?.message })
-          setloading(false);
-        });
+      console.log(data);
+      // setloading(true);
+      // axios
+      //   .post(`${port}/hospital/consultation_details`, data)
+      //   .then((res) => {
+      //     if (res?.data?.success) {
+      //       toastify({ msg: res?.data?.message, success: true });
+      //       handleClose();
+      //       ResetTimePicker();
+      //       setloading(false);
+      //     }
+      //   })
+      //   .catch((err) => {
+      //     setloading(false);
+      //   });
     } else {
       toastify({ msg: "Please verify either the start time or the end time" });
       setloading(false);
@@ -377,6 +364,7 @@ const Index = () => {
     setDoctorData({ ...DoctorData, [name]: value });
   };
   console.log(DoctorData);
+  console.log(TimePickers);
   return (
     <>
       <div className="mainadmindoctordatas flex">
@@ -526,7 +514,7 @@ const Index = () => {
                   <div className="hospitaltime_name">
                     <h3>{ele?.hospital_name}</h3>
                     <div className="availabilityDays">
-                      {ele?.days_timing.map((TimingByDay, index) => (
+                      {ele?.days_timing?.map((TimingByDay, index) => (
                         <>
                           <p
                             className="availabilityDaysPtag"
@@ -572,7 +560,7 @@ const Index = () => {
           </div>
 
           <div className="mainadmindoctoravilabilityAdd">
-            <button onClick={handleOpen}>Add more</button>
+            <button onClick={handleOpen}>Manage availability</button>
           </div>
         </div>
       </div>
@@ -584,8 +572,8 @@ const Index = () => {
         aria-describedby="modal-modal-description"
       >
         <div className="viewdetails">
-          <h2>Specify your hospital visit duration.</h2>
-          <div className="modalInputdiv">
+          {/* <h2>Specify your hospital visit duration.</h2> */}
+          {/* <div className="modalInputdiv">
             <label style={{ fontWeight: "500" }} className="modalInputdivlabel">
               Select your residential or hospital
             </label>
@@ -608,16 +596,16 @@ const Index = () => {
                 </>
               </optgroup>
               <optgroup label="Hospitals">
-                {/* {Hospitals.map((ele, index) => (
+                {Hospitals.map((ele, index) => (
                   <option data-name={ele.name} value={ele?.id}>
                     {ele?.name}
                   </option>
-                ))} */}
+                ))}
               </optgroup>
             </select>
-          </div>
+          </div> */}
           <label style={{ fontWeight: "500" }} className="modalInputdivlabel">
-            Select your Time
+            Select Time
           </label>
           <div className="viewdataTimePicker">
             <div
