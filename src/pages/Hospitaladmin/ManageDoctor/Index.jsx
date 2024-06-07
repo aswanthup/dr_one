@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import EditIcon from "@mui/icons-material/Edit";
 import "../../doctor/DocComponents/DocAdminProfile/DocAdminProfile.css";
+import styles from "./styles.module.css";
 import dayjs from "dayjs";
 import { toast } from "react-toastify";
 import { Modal } from "@mui/material";
@@ -20,30 +21,11 @@ const Index = () => {
   const [deletePopup, setdeletePopUp] = useState(false);
   const [loading, setloading] = useState(false);
   const [editAboutProfile, seteditAboutProfile] = useState(false);
-  const [TimePickers, setTimePickers] = useState([
-    { day: "Sunday", id: 1, availableTimes: [{ startTime: "", endTime: "" }] },
-    { day: "Monday", id: 2, availableTimes: [{ startTime: "", endTime: "" }] },
-    { day: "Tuesday", id: 3, availableTimes: [{ startTime: "", endTime: "" }] },
-    {
-      day: "Wednesday",
-      id: 4,
-      availableTimes: [{ startTime: "", endTime: "" }],
-    },
-    {
-      day: "Thursday",
-      id: 5,
-      availableTimes: [{ startTime: "", endTime: "" }],
-    },
-    { day: "Friday", id: 6, availableTimes: [{ startTime: "", endTime: "" }] },
-    {
-      day: "Saturday",
-      id: 7,
-      availableTimes: [{ startTime: "", endTime: "" }],
-    },
-  ]);
+  const [TimePickers, setTimePickers] = useState();
+  const [editingId, setEditingId] = useState(); //db id which edits availability
   const { selectedDoc } = useContext(HospitalAdminContext);
   const { id } = JSON.parse(localStorage.getItem("loginData")) || {};
-  const doctor_id=selectedDoc?.id
+  const doctor_id = selectedDoc?.id;
   const ResetTimePicker = () => {
     setTimePickers([
       {
@@ -111,13 +93,18 @@ const Index = () => {
     console.log(values);
     const name = day?.name;
     let mainind = day?.mainInd;
+    console.log(name);
+    console.log(mainind);
     let timingArray = [...(TimePickers[mainind].availableTimes || [])];
+    console.log(timingArray);
     timingArray[day?.index] = { ...timingArray[day?.index], [name]: values };
+    console.log(timingArray);
     let tempData = [...(TimePickers || [])];
     tempData[day?.mainInd] = {
       ...tempData[day?.mainInd],
       availableTimes: timingArray,
     };
+    console.log(tempData);
     setTimePickers(tempData);
   };
   const edittime = (e, day) => {
@@ -132,8 +119,6 @@ const Index = () => {
     };
     setEditValues({ ...EditValues, days_timing: tempData });
   };
-
- 
 
   const toastify = (data) => {
     if (data?.success) {
@@ -152,10 +137,13 @@ const Index = () => {
           doctor_id,
         }
       );
-      setDoctorData(response.data.data.doctorId);
-      setcurrentAvailability(response.data.data.days_timing)
+      const responseData = response.data.data;
+      setDoctorData(responseData.doctorId);
+      setcurrentAvailability(responseData.days_timing);
+      setTimePickers(responseData.days_timing);
+      setEditingId(responseData.id);
 
-      console.log(response.data.data);
+      console.log(responseData);
     } catch (err) {
       console.error(err);
     } finally {
@@ -196,6 +184,7 @@ const Index = () => {
     }
   };
   const EditIncrement = (id) => {
+    alert("phhh");
     const find = EditValues?.days_timing?.filter((ele) => ele.id === id);
     const index = EditValues?.days_timing?.findIndex((ele) => ele.id === id);
     if (find.length > 0) {
@@ -215,9 +204,8 @@ const Index = () => {
 
   const SaveData = () => {
     const data = {
-      hospital_id: id,
-      days: TimePickers,
-      doctor_id: selectedDoc.id,
+      id: editingId,
+      days_timing: TimePickers,
     };
 
     let hasStartTime = [];
@@ -249,20 +237,21 @@ const Index = () => {
     console.log("checkingValues>>>>", checkingValues);
     if (checkingValues) {
       console.log(data);
-      // setloading(true);
-      // axios
-      //   .post(`${port}/hospital/consultation_details`, data)
-      //   .then((res) => {
-      //     if (res?.data?.success) {
-      //       toastify({ msg: res?.data?.message, success: true });
-      //       handleClose();
-      //       ResetTimePicker();
-      //       setloading(false);
-      //     }
-      //   })
-      //   .catch((err) => {
-      //     setloading(false);
-      //   });
+      setloading(true);
+      axios
+        .post(`${port}/hospital/edit_consultation`, data)
+        .then((res) => {
+          if (res?.data?.success) {
+            toastify({ msg: res?.data?.message, success: true });
+            handleClose();
+            ResetTimePicker();
+            setloading(false);
+            fetchDoctor()
+          }
+        })
+        .catch((err) => {
+          setloading(false);
+        });
     } else {
       toastify({ msg: "Please verify either the start time or the end time" });
       setloading(false);
@@ -360,7 +349,7 @@ const Index = () => {
         <div className="mainadmindoctordatas_profile flex">
           <img
             className="mainadmindoctordatas_profile_photo"
-            src="/images/doc.jpg"
+            src={DoctorData?.image}
             alt=""
           />
           <div className="mainadmindoctordatas_profile_data flex">
@@ -488,7 +477,7 @@ const Index = () => {
           </div>
         </div>
 
-        <div className="mainadmindoctoravilabilityProfile">
+        <div className={styles.availabilitySection}>
           <div className="mainadmindoctoravilabilityHeight flex">
             <i style={{ color: "#6B8CFE" }} class="ri-time-fill"></i>
             <h3 style={{ marginBottom: "1.3vw", marginLeft: "0.6vw" }}>
@@ -496,36 +485,30 @@ const Index = () => {
             </h3>
           </div>
 
-          <div className="">
-            <div style={{border:"1px solid red",display:"flex",flexDirection:"column"}}>
-
+          <div style={{ display: "flex", gap: ".5rem" }}>
             {currentAvailability?.length > 0 ? (
               currentAvailability?.map((ele, index) => (
-                    <div className="availabilityDays" style={{border:"1px solid blue"}}>
-                      {ele?.availableTimes?.map((TimingByDay, dayIndex) => (
-                        <>
-                          <p
-                            className="availabilityDaysPtag"
-                            style={{
-                              color: TimingByDay[0]?.startTime
-                                ? ""
-                                : "rgb(128 128 128 / 91%)",
-                            }}
-                          >
-                            {ele?.day.slice(0, 3)}{" "}
-                          </p>
-                          <p className="availabilityDaysPtag2">
-                            {ele?.days_timing?.length === index + 1 ? "" : ","}
-                          </p>
-                          &nbsp;
-                        </>
-                      ))}
-                    </div>
+                <div className="availabilityDays" style={{ width: "50px" }}>
+                  {/* {ele?.availableTimes?.map((TimingByDay, dayIndex) => ( */}
+                  <>
+                    <p
+                      className={styles.date}
+                      style={{
+                        color: ele.availableTimes[0]?.startTime
+                          ? "blue"
+                          : "rgb(128 128 128 / 91%)",
+                      }}
+                    >
+                      {ele?.day.slice(0, 3)}{" "}
+                    </p>
+                    &nbsp;
+                  </>
+                  {/* ))} */}
+                </div>
               ))
             ) : (
               <h3>Data not found</h3>
             )}
-            </div>
           </div>
 
           <div className="mainadmindoctoravilabilityAdd">
