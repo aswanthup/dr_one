@@ -25,7 +25,10 @@
     grid-auto-flow: column;
     overflow-x: auto;
     overscroll-behavior-inline: contain;
+}
 
+.lab-deatails-Services {
+    min-height: 200px;
 }
 
 ::-webkit-scrollbar {

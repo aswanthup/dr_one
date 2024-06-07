@@ -21,6 +21,8 @@ import {
   speacializationNames,
 } from "../HospitalFiltering/constants/Filter";
 import { SearchDocContext } from "../../contexts/Doctor/SearchDoctorProvider";
+import axios from "axios";
+import { port } from "../../config";
 export default function Doctor() {
   const [visibleContent, setVisibleContent] = useState(2);
   const [SpecialisationBatch, setSpecialisationBatch] = useState([]);
@@ -75,6 +77,7 @@ export default function Doctor() {
     ) {
       type = "Homeopathy";
     }
+    handleSearchData(type,lowerCasedSpecialization);
     setFilters({
       type: type,
       specializations: [lowerCasedSpecialization],
@@ -83,6 +86,24 @@ export default function Doctor() {
       name: "",
     });
     navigate("/searchdoctor", { state: "hi" });
+  };
+
+  const handleSearchData = async (type, speciality) => {
+    try {
+      // const { id } = JSON.parse(localStorage.getItem("loginData")) || {};
+      const data = {
+        user_id: 8 || "",
+        speciality: speciality || "",
+        type: type || "",
+      };
+      const response = await axios.post(
+        `${port}/doctor/doctor_searchdata`,
+        data
+      );
+      console.log(response);
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   const renderHosFilteringBYSpeciality = (Value) => {
@@ -285,9 +306,7 @@ export default function Doctor() {
                   </div>
                   <div
                     onClick={() =>
-                      handleSelectSpecialization(
-                        "general medicine"
-                      )
+                      handleSelectSpecialization("general medicine")
                     }
                     className="home-specialties-button"
                   >

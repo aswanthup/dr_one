@@ -1,19 +1,27 @@
-import React from "react";
+import React, { useContext } from "react";
 import styles from "./styles.module.css";
 import { useNavigate } from "react-router-dom";
+import { HospitalAdminContext } from "../../../contexts/Doctor/HospitalAdminProvider";
 
-export const DoctorCard = ({ data }) => {
+export const DoctorCard = ({ data, setChangeDashboards }) => {
   console.log({ data });
-const tempImage='./images/TempDocImg.jpg'
-  const navigate = useNavigate();
+  const{setSelectedDoc}=useContext(HospitalAdminContext)
+  const tempImage = "./images/TempDocImg.jpg";
+  const handleClick = () => {
+    setSelectedDoc(data)
+    setChangeDashboards({
+      manageDoc: true,
+    });
+  };
   return (
     <>
-      <div
-       onClick={() => navigate("/doctorprofile", { state: data })}
-        className={styles.cardContainer}
-      >
+      <div onClick={handleClick} className={styles.cardContainer}>
         <div>
-          <img className={styles.docImage} src={data?.image || tempImage} alt="" />
+          <img
+            className={styles.docImage}
+            src={data?.image || tempImage}
+            alt=""
+          />
         </div>
         <div>
           <div>

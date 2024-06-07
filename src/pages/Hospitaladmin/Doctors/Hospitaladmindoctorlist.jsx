@@ -10,7 +10,7 @@ import HospitalSidebar from "../HospitalSidebar";
 import { useNavigate } from "react-router-dom";
 import { port } from "../../../config";
 
-export default function Hospitaladmindoctorlist() {
+export default function Hospitaladmindoctorlist({setChangeDashboards}) {
   const navigate = useNavigate();
   const [doctorsData, setDoctorsData] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -21,9 +21,12 @@ export default function Hospitaladmindoctorlist() {
 
   const getDoctorsData = async () => {
     try {
+      
+      
       setLoading(true);
+      const { id } = JSON.parse(localStorage.getItem("loginData")) || {};
       const response = await axios.post(`${port}/hospital/getdoctorlist`, {
-        id: 52,
+        id: id,
       });
       console.log(response.data.data);
       setDoctorsData(response.data.data);
@@ -58,7 +61,7 @@ export default function Hospitaladmindoctorlist() {
             <div className="hospitaladmin-doclist-cardcontainer">
               {doctorsData.map((value, index) => (
                 <div className="hospital-admin-card" key={index}>
-                  <DoctorCard data={value} />
+                  <DoctorCard setChangeDashboards={setChangeDashboards} data={value} />
                 </div>
               ))}
             </div>

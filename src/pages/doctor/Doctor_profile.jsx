@@ -131,7 +131,23 @@ export default function Doctor_profile() {
 
             <div className='doc_profileSecFeedBackStart'>
               <div className='doc_profileSecFeedBItem'>
-
+                <div className='doc_profileSecFeedBItemImgSec'>
+                  <img src="./images/TempDocImg.jpg" alt="" />
+                </div>
+                <div className='doc_profileSecFeedBItemImgSec'>
+                  <div className='doc_profileSecFeedBItemImgSecFlex'>
+                    <i className="ri-star-fill" />
+                    <i className="ri-star-fill" />
+                    <i className="ri-star-fill" />
+                    <i className="ri-star-fill" />
+                  </div>
+                  <p> 2/4/2024</p>
+                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam minus voluptatibus reiciendis quos commodi quasi quidem nam eos nobis voluptatem ullam at vero veniam nostrum doloribus magni illum, possimus modi?</p>
+                  <div className='doc_profileSecFeedBIFlexName'>
+                    <i class="ri-checkbox-circle-line"></i>
+                    <h4>Haseeb</h4>
+                  </div>
+                </div>
               </div>
             </div>
 

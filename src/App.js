@@ -37,8 +37,8 @@ import Hospitaladminregistration1 from "./pages/Hospitaladmin/Hospitaladminregis
 import Labadminregistration1 from "./pages/Labadmin/Labadminregistration1";
 import Labadminregistration2 from "./pages/Labadmin/Labadminregistration2";
 import Pharmacyadminregister2 from "./pages/Pharmacyadmin/Pharmacyadminregister2";
-import { LocalizationProvider } from '@mui/x-date-pickers';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
+import { LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import Pharmacyregistration1 from "./pages/Pharmacyadmin/Pharmacyregistration1";
 import SearchDoc from "./pages/doctor/DoctorSearch/Index";
 import Registerlanding from "./pages/registerlanding/Registerlanding";
@@ -69,15 +69,14 @@ import Mainadmincustomer from "./pages/Mainadmin/Mainadmincustomer/Mainadmincust
 import Mainadmincustomerdetails from "./pages/Mainadmin/Mainadmincustomer/Mainadmincustomerdetails";
 import { DocProfileMainSec } from "./pages/doctor/DocProfileMainSec/DocProfileMainSec";
 import HospitalDetailed from "./pages/Hospital/HospitalDetailed/HospitalDetailed";
+import HospitalAdminProvider from "./contexts/Doctor/HospitalAdminProvider";
 
 function App() {
   return (
     <div className="App">
       <ToastifyComponent />
       <BrowserRouter>
-
         <LocalizationProvider dateAdapter={AdapterDayjs}>
-
           <Routes>
             <Route path="/footer" element={<Footer />}></Route>
             <Route path="/" element={<Mainpage />}></Route>
@@ -94,9 +93,19 @@ function App() {
             <Route path="/about" element={<About />}></Route>
             <Route path="/notification" element={<Notification />}></Route>
             <Route path="/userprofile" element={<Userprofile />}></Route>
-            <Route path="/pharmacydetails" element={<Pharmacydetails />}></Route>
+            <Route
+              path="/pharmacydetails"
+              element={<Pharmacydetails />}
+            ></Route>
             <Route path="/nav" element={<Navbar2 />}></Route>
-            <Route path="/hospitaladmin" element={<Hospitaladmin />}></Route>
+            <Route
+              path="/hospitaladmin"
+              element={
+                <HospitalAdminProvider>
+                  <Hospitaladmin />
+                </HospitalAdminProvider>
+              }
+            ></Route>
             <Route path="/rightnav" element={<Rightnavbar />}></Route>
             <Route path="/hosPitalfilter" element={<Hosconnect />}></Route>
             <Route
@@ -107,7 +116,10 @@ function App() {
               path="/hospitaladmindoctorlist"
               element={<Hospitaladmindoctorlist />}
             ></Route>
-            <Route path="/hospitaldetails" element={<Hospitaldetails />}></Route>
+            <Route
+              path="/hospitaldetails"
+              element={<Hospitaldetails />}
+            ></Route>
             <Route
               path="/hospitaladmindoctorcard"
               element={<Hospitaladmin_doctor_card />}
@@ -142,7 +154,6 @@ function App() {
               element={<Doctoradminregistration2 />}
             ></Route>
 
-
             <Route path="/doctoradmin" element={<Doctoradmin />}></Route>
 
             {/* Pharmacy admin */}
@@ -172,44 +183,90 @@ function App() {
             <Route path="/labadmin" element={<Labadmin />}></Route>
             <Route path="/labfiltering" element={<Connect />}></Route>
             <Route path="/loader" element={<Loader />}></Route>
-            <Route path='/registration' element={<Registerlanding />} ></Route>
-            <Route path='/LabProfile' element={<LabAdminProfile />} ></Route>
-            <Route path='/analyzelab' element={<AnalyzeLabAdmin />} ></Route>
-            <Route path='/editLaboratory' element={<EditLaboratory />} ></Route>
-            <Route path='/hospitaldetailed' element={<HospitalDetailed />} ></Route>
+            <Route path="/registration" element={<Registerlanding />}></Route>
+            <Route path="/LabProfile" element={<LabAdminProfile />}></Route>
+            <Route path="/analyzelab" element={<AnalyzeLabAdmin />}></Route>
+            <Route path="/editLaboratory" element={<EditLaboratory />}></Route>
+            <Route
+              path="/hospitaldetailed"
+              element={<HospitalDetailed />}
+            ></Route>
 
             {/* Main admin */}
 
-            <Route path='/mainadmin' element={<Mainadmin />}></Route>
+            <Route path="/mainadmin" element={<Mainadmin />}></Route>
 
+            <Route
+              path="/mainadmindoctordetails"
+              element={<Mainadmindoctordetails />}
+            ></Route>
+            <Route
+              path="/mainadmindoctorapprove"
+              element={<Mainadmindoctorapprove />}
+            ></Route>
+            <Route
+              path="/mainadmindoctorlist"
+              element={<Mainadmindoctorlist />}
+            ></Route>
 
-            <Route path='/mainadmindoctordetails' element={<Mainadmindoctordetails />}></Route>
-            <Route path='/mainadmindoctorapprove' element={<Mainadmindoctorapprove />}></Route>
-            <Route path='/mainadmindoctorlist' element={<Mainadmindoctorlist />}></Route>
+            <Route
+              path="/mainadminhospitallist"
+              element={<Mainadminhospitallist />}
+            ></Route>
+            <Route
+              path="/mainadminhospitaldetails"
+              element={<Mainadminhospitaldetails />}
+            ></Route>
+            <Route
+              path="/mainadminhospitalapprove"
+              element={<Mainadminhospitalapprove />}
+            ></Route>
 
+            <Route
+              path="/mainadminlabslist"
+              element={<Mainadminlabslist />}
+            ></Route>
+            <Route
+              path="/mainadminlabsdetails"
+              element={<Mainadminlabsdetails />}
+            ></Route>
+            <Route
+              path="/mainadminlabsapprove"
+              element={<Mainadminlabsapprove />}
+            ></Route>
 
-            <Route path='/mainadminhospitallist' element={<Mainadminhospitallist />}></Route>
-            <Route path='/mainadminhospitaldetails' element={<Mainadminhospitaldetails />}></Route>
-            <Route path='/mainadminhospitalapprove' element={<Mainadminhospitalapprove />}></Route>
+            <Route
+              path="/mainadminnavbar"
+              element={<Mainadminnavbar />}
+            ></Route>
 
+            <Route
+              path="/mainadminsidebar"
+              element={<Mainadminsidebar />}
+            ></Route>
 
-            <Route path='/mainadminlabslist' element={<Mainadminlabslist />}></Route>
-            <Route path='/mainadminlabsdetails' element={<Mainadminlabsdetails />}></Route>
-            <Route path='/mainadminlabsapprove' element={<Mainadminlabsapprove />}></Route>
-
-
-            <Route path='/mainadminnavbar' element={<Mainadminnavbar />}></Route>
-
-            <Route path='/mainadminsidebar' element={<Mainadminsidebar />}></Route>
-
-            <Route path='/mainadminonboading' element={<Mainadminonboarding />}></Route>
-            <Route path='/mainadminfeedback' element={<Mainadminfeedback />}></Route>
-            <Route path='/mainadminfeedback' element={<Mainadmincustomer />}></Route>
-            <Route path='/mainadminfeedback' element={<Mainadmincustomerdetails />}></Route>
-            <Route path='/doctoradminprofile' element={<DocProfileMainSec />}></Route>
+            <Route
+              path="/mainadminonboading"
+              element={<Mainadminonboarding />}
+            ></Route>
+            <Route
+              path="/mainadminfeedback"
+              element={<Mainadminfeedback />}
+            ></Route>
+            <Route
+              path="/mainadminfeedback"
+              element={<Mainadmincustomer />}
+            ></Route>
+            <Route
+              path="/mainadminfeedback"
+              element={<Mainadmincustomerdetails />}
+            ></Route>
+            <Route
+              path="/doctoradminprofile"
+              element={<DocProfileMainSec />}
+            ></Route>
 
             {/*End Main admin */}
-
           </Routes>
         </LocalizationProvider>
       </BrowserRouter>
