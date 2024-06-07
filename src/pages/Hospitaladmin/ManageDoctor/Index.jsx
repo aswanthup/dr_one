@@ -244,9 +244,9 @@ const Index = () => {
           if (res?.data?.success) {
             toastify({ msg: res?.data?.message, success: true });
             handleClose();
-            ResetTimePicker();
+            // ResetTimePicker();
+            fetchDoctor(id, doctor_id);
             setloading(false);
-            fetchDoctor()
           }
         })
         .catch((err) => {
