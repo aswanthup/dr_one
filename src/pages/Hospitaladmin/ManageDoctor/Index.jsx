@@ -20,7 +20,6 @@ const Index = () => {
   const [deletePopup, setdeletePopUp] = useState(false);
   const [loading, setloading] = useState(false);
   const [editAboutProfile, seteditAboutProfile] = useState(false);
-  const [Hospitals, setHospitals] = useState([]);
   const [TimePickers, setTimePickers] = useState([
     { day: "Sunday", id: 1, availableTimes: [{ startTime: "", endTime: "" }] },
     { day: "Monday", id: 2, availableTimes: [{ startTime: "", endTime: "" }] },
@@ -134,20 +133,7 @@ const Index = () => {
     setEditValues({ ...EditValues, days_timing: tempData });
   };
 
-  const NameOnchange = (e) => {
-    const selectedOption = e.target.options[e.target.selectedIndex];
-    const hospital_id = parseInt(e.target.value);
-    const hospital_name = selectedOption.getAttribute("data-name");
-
-    console.log("Selected ID:", hospital_id);
-    console.log("Selected Name:", hospital_name);
-
-    setFormValues({
-      ...FormValues,
-      hospital_id: hospital_id,
-      hospital_name: hospital_name,
-    });
-  };
+ 
 
   const toastify = (data) => {
     if (data?.success) {
@@ -167,7 +153,9 @@ const Index = () => {
         }
       );
       setDoctorData(response.data.data.doctorId);
-      console.log(response.data.data.doctorId);
+      setcurrentAvailability(response.data.data.days_timing)
+
+      console.log(response.data.data);
     } catch (err) {
       console.error(err);
     } finally {
@@ -365,6 +353,7 @@ const Index = () => {
   };
   console.log(DoctorData);
   console.log(TimePickers);
+  console.log(currentAvailability);
   return (
     <>
       <div className="mainadmindoctordatas flex">
@@ -507,56 +496,36 @@ const Index = () => {
             </h3>
           </div>
 
-          <div className="mainadmindoctoravilabilityContent">
-            {currentAvailability.length > 0 ? (
+          <div className="">
+            <div style={{border:"1px solid red",display:"flex",flexDirection:"column"}}>
+
+            {currentAvailability?.length > 0 ? (
               currentAvailability?.map((ele, index) => (
-                <div className="hospitaltime flex">
-                  <div className="hospitaltime_name">
-                    <h3>{ele?.hospital_name}</h3>
-                    <div className="availabilityDays">
-                      {ele?.days_timing?.map((TimingByDay, index) => (
+                    <div className="availabilityDays" style={{border:"1px solid blue"}}>
+                      {ele?.availableTimes?.map((TimingByDay, dayIndex) => (
                         <>
                           <p
                             className="availabilityDaysPtag"
                             style={{
-                              color: TimingByDay.availableTimes[0]?.startTime
+                              color: TimingByDay[0]?.startTime
                                 ? ""
                                 : "rgb(128 128 128 / 91%)",
                             }}
                           >
-                            {TimingByDay?.day.slice(0, 3)}{" "}
+                            {ele?.day.slice(0, 3)}{" "}
                           </p>
                           <p className="availabilityDaysPtag2">
-                            {ele?.days_timing.length === index + 1 ? "" : ","}
+                            {ele?.days_timing?.length === index + 1 ? "" : ","}
                           </p>
                           &nbsp;
                         </>
                       ))}
                     </div>
-                  </div>
-                  <div className="hospitaltimebuttongapSet">
-                    <div
-                      onClick={() =>
-                        handleOpen({ edit: true, id: ele?.hospital_id })
-                      }
-                      className="hospitaltimebuttonProfile"
-                    >
-                      <h4>View Details</h4>
-                    </div>
-                    <div
-                      onClick={() => {
-                        DeleteTimeConfirm({ id: ele.id, index: index });
-                      }}
-                      className="hospitaltimebuttongapSetDltBtn"
-                    >
-                      <i class="ri-delete-bin-6-line"></i>{" "}
-                    </div>
-                  </div>
-                </div>
               ))
             ) : (
               <h3>Data not found</h3>
             )}
+            </div>
           </div>
 
           <div className="mainadmindoctoravilabilityAdd">
@@ -572,38 +541,6 @@ const Index = () => {
         aria-describedby="modal-modal-description"
       >
         <div className="viewdetails">
-          {/* <h2>Specify your hospital visit duration.</h2> */}
-          {/* <div className="modalInputdiv">
-            <label style={{ fontWeight: "500" }} className="modalInputdivlabel">
-              Select your residential or hospital
-            </label>
-            <select
-              onChange={NameOnchange}
-              name="myBrowser"
-              className="modalInputOpenDiv"
-            >
-              <option selected disabled>
-                Choose Hospitals or Residence
-              </option>
-              <optgroup label="Select Residence or">
-                <option data-name="Residential" value="">
-                  Residential
-                </option>
-                <>
-                  <p className="modalInputPtag">
-                    <span className="modalInputPtagSpan">+</span> Add Hospital
-                  </p>
-                </>
-              </optgroup>
-              <optgroup label="Hospitals">
-                {Hospitals.map((ele, index) => (
-                  <option data-name={ele.name} value={ele?.id}>
-                    {ele?.name}
-                  </option>
-                ))}
-              </optgroup>
-            </select>
-          </div> */}
           <label style={{ fontWeight: "500" }} className="modalInputdivlabel">
             Select Time
           </label>
