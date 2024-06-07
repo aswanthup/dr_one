@@ -153,31 +153,73 @@ export default function Mainadminhospitaldetails() {
       </div>
 
 
+      <div style={{marginTop:"1.3vw"}} className='flex admin_view_more'>
+    <h3>Latest Feedbacks</h3>
+    <h4>View More<i style={{marginLeft:"0.5vw"}} class="ri-arrow-right-up-line"></i></h4>
+    </div>
 
+    <div className="feedbacksectiondoctor">
 
-      <div className='admin_disable_section flex'>
-
-        <div className='admin_disable_section_left flex'>
-          <i class="fi fi-sr-exclamation"></i>
-          <div style={{ marginLeft: "1.3vw" }}>
-            <h2>Date of join</h2>
-            <h4>2/4/2023</h4>
-          </div>
-
-          <div style={{ marginLeft: "1.5vw" }}>
-            <h2>Last Actived</h2>
-            <h4>2/4/2023</h4>
-          </div>
-
-
-
-
+      
+    <div className="feedbacksectiondoctorcard flex">
+      <div><img src="/images/man.jpg" alt="" /></div>
+      <div className='flex feedbacksectiondoctorcarddata'>
+        <div className='flex feedbacksectiondoctorcardstar'>
+        <i class="ri-star-fill"></i>
+        <i class="ri-star-fill"></i>
+        <i class="ri-star-fill"></i>
+        <i class="ri-star-fill"></i>
+        <i class="ri-star-fill"></i>
         </div>
-
-        <div className='admin_disable_button'>
-          <h4>Disable</h4>
+        <h4>Dr. Yadav took the time to thoroughly understand my medical history and current concerns. He listened attentively and asked insightful questions, making me feel heard and valued as a patient. His deep knowledge and expertise were evident, and he explained my diagnosis and treatment options in a clear and understandable manner</h4>
+        <div className='flex feedbacksectiondoctorcardname'>
+        <i class="fi fi-ss-octagon-check"></i>
+          <h3 style={{marginLeft:"10px"}}>Aswanth</h3>
         </div>
       </div>
+    </div>
+
+
+    <div className="feedbacksectiondoctorcard flex">
+      <div><img src="/images/man.jpg" alt="" /></div>
+      <div className='flex feedbacksectiondoctorcarddata'>
+        <div className='flex feedbacksectiondoctorcardstar'>
+        <i class="ri-star-fill"></i>
+        <i class="ri-star-fill"></i>
+        <i class="ri-star-fill"></i>
+        <i class="ri-star-fill"></i>
+        <i class="ri-star-fill"></i>
+        </div>
+        <h4>Dr. Yadav took the time to thoroughly understand my medical history and current concerns. He listened attentively and asked insightful questions, making me feel heard and valued as a patient. His deep knowledge and expertise were evident, and he explained my diagnosis and treatment options in a clear and understandable manner</h4>
+        <div className='flex feedbacksectiondoctorcardname'>
+        <i class="fi fi-ss-octagon-check"></i>
+          <h3 style={{marginLeft:"10px"}}>Aswanth</h3>
+        </div>
+      </div>
+    </div>
+
+
+    <div className="feedbacksectiondoctorcard flex">
+      <div><img src="/images/man.jpg" alt="" /></div>
+      <div className='flex feedbacksectiondoctorcarddata'>
+        <div className='flex feedbacksectiondoctorcardstar'>
+        <i class="ri-star-fill"></i>
+        <i class="ri-star-fill"></i>
+        <i class="ri-star-fill"></i>
+        <i class="ri-star-fill"></i>
+        <i class="ri-star-fill"></i>
+        </div>
+        <h4>Dr. Yadav took the time to thoroughly understand my medical history and current concerns. He listened attentively and asked insightful questions, making me feel heard and valued as a patient. His deep knowledge and expertise were evident, and he explained my diagnosis and treatment options in a clear and understandable manner</h4>
+        <div className='flex feedbacksectiondoctorcardname'>
+        <i class="fi fi-ss-octagon-check"></i>
+          <h3 style={{marginLeft:"10px"}}>Aswanth</h3>
+        </div>
+      </div>
+    </div>
+
+    </div>
+
+    
 
 
       <h3 style={{ marginBottom: "1.3vw" }}>Views</h3>
@@ -310,7 +352,29 @@ export default function Mainadminhospitaldetails() {
 
 
       </table>
+      <div className='admin_disable_section flex'>
 
+<div className='admin_disable_section_left flex'>
+  <i class="fi fi-sr-exclamation"></i>
+  <div style={{ marginLeft: "1.3vw" }}>
+    <h2>Date of join</h2>
+    <h4>2/4/2023</h4>
+  </div>
+
+  <div style={{ marginLeft: "1.5vw" }}>
+    <h2>Last Actived</h2>
+    <h4>2/4/2023</h4>
+  </div>
+
+
+
+
+</div>
+
+<div className='admin_disable_button'>
+  <h4>Disable</h4>
+</div>
+</div>
 
 
 

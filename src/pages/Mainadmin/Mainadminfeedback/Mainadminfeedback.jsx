@@ -4,7 +4,7 @@ export default function Mainadminfeedback() {
   return (
     <div>
         <div style={{marginTop:"1.3vw"}} className='flex admin_view_more'>
-    <h3>Views</h3>
+    <h3>Feedbacks</h3>
     <h4>Filter<i style={{marginLeft:"0.5vw"}} class="ri-equalizer-3-line"></i></h4>
     </div>
 
