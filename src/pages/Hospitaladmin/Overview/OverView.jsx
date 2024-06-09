@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import EditIcon from "@mui/icons-material/Edit";
 import { IconButton } from "@mui/material";
+import axios from "axios";
+import { port } from "../../../config";
 
 function Overview({ hospital }) {
   const [isAboutEditable, setIsAboutEditable] = useState(false);
+  const [about, setAbout] = useState();
 
   const handleAboutEditToggle = () => {
     setIsAboutEditable(!isAboutEditable);
@@ -11,9 +14,14 @@ function Overview({ hospital }) {
 
   const handleAboutEdit = (e) => {
     const { name, value } = e.target;
+    setAbout({ name: value });
   };
-  const handleSentAbout = () => {
-   
+  const handleSentAbout = async () => {
+    try {
+      const response = await axios.post(`${port}`, about);
+    } catch {
+    } finally {
+    }
   };
   return (
     <>
@@ -115,11 +123,11 @@ function Overview({ hospital }) {
               {hospital?.about || "about"}
             </h4>
           )}
-           {isAboutEditable &&
-                            <div className='mainadmindoctoraboutConfirmBtn'>
-                                <button onClick={handleSentAbout}>Update</button>
-                            </div>
-                        }
+          {isAboutEditable && (
+            <div className="mainadmindoctoraboutConfirmBtn">
+              <button onClick={handleSentAbout}>Update</button>
+            </div>
+          )}
           <h3 style={{ marginBottom: "1.3vw" }}>Address</h3>
 
           <h4 style={{ marginBottom: "1vw" }}>{hospital?.address}</h4>
