@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import EditIcon from "@mui/icons-material/Edit";
-import "../../doctor/DocComponents/DocAdminProfile/DocAdminProfile.css";
+import "../../../doctor/DocComponents/DocAdminProfile/DocAdminProfile.css";
 import styles from "./styles.module.css";
 import dayjs from "dayjs";
 import { toast } from "react-toastify";
@@ -10,16 +10,16 @@ import axios from "axios";
 import AddIcon from "@mui/icons-material/Add";
 import DeleteIcon from "@mui/icons-material/Delete";
 import RemoveIcon from "@mui/icons-material/Remove";
-import { port } from "../../../config";
-import { Loader } from "../../../components/Loader/Loader";
-import { HospitalAdminContext } from "../../../contexts/Doctor/HospitalAdminProvider";
+import { port } from "../../../../config";
+import { Loader } from "../../../../components/Loader/Loader";
+import { HospitalAdminContext } from "../../../../contexts/Doctor/HospitalAdminProvider";
 const Index = () => {
   const [open, setOpen] = React.useState({});
   const [FormValues, setFormValues] = useState({});
   const [DoctorData, setDoctorData] = useState();
   const [EditValues, setEditValues] = useState({});
   const [deletePopup, setdeletePopUp] = useState(false);
-  const [loading, setloading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [editAboutProfile, seteditAboutProfile] = useState(false);
   const [TimePickers, setTimePickers] = useState();
   const [editingId, setEditingId] = useState(); //db id which edits availability
@@ -129,6 +129,7 @@ const Index = () => {
   };
   //fetch selected doctor details
   const fetchDoctor = async (hospital_id, doctor_id) => {
+    setIsLoading(true);
     try {
       const response = await axios.post(
         `${port}/hospital/hospitaldoctordetails`,
@@ -147,6 +148,7 @@ const Index = () => {
     } catch (err) {
       console.error(err);
     } finally {
+      setIsLoading(false);
     }
   };
 
@@ -234,27 +236,33 @@ const Index = () => {
     ) {
       checkingValues = true;
     }
-    console.log("checkingValues>>>>", checkingValues);
     if (checkingValues) {
-      console.log(data);
-      setloading(true);
-      axios
-        .post(`${port}/hospital/edit_consultation`, data)
-        .then((res) => {
-          if (res?.data?.success) {
-            toastify({ msg: res?.data?.message, success: true });
-            handleClose();
-            // ResetTimePicker();
-            fetchDoctor(id, doctor_id);
-            setloading(false);
-          }
-        })
-        .catch((err) => {
-          setloading(false);
-        });
+      //call the api
+      callApi(data);
     } else {
       toastify({ msg: "Please verify either the start time or the end time" });
-      setloading(false);
+    }
+  };
+  //call to api
+  const callApi = async (data) => {
+    setIsLoading(true);
+    try {
+      const response = await axios.post(
+        `${port}/hospital/edit_consultation`,
+        data
+      );
+      if (response?.data?.success) {
+        toastify({ msg: response.data.message, success: true });
+        handleClose();
+        fetchDoctor(id, doctor_id);
+      }
+    } catch (err) {
+      console.error("error");
+      toastify({
+        msg: "Failed to update consultation. Please try again.",
+      });
+    } finally {
+      setIsLoading(false);
     }
   };
   const EditData = () => {
@@ -269,23 +277,23 @@ const Index = () => {
     });
     console.log("checkingValues>>>", checkingValues);
     if (checkingValues.length === 7) {
-      setloading(true);
+      setIsLoading(true);
       axios
         .post(`${port}/hospital/edit_consultation`, EditValues)
         .then((res) => {
           if (res?.data?.success) {
             toastify({ msg: res?.data?.message, success: true });
             handleClose();
-            setloading(false);
+            setIsLoading(false);
           }
         })
         .catch((err) => {
           toastify({ msg: err?.response?.data?.message });
-          setloading(false);
+          setIsLoading(false);
         });
     } else {
       toastify({ msg: "Please verify either the start time or the end time" });
-      setloading(false);
+      setIsLoading(false);
     }
   };
   const DeleteTimeConfirm = (check) => {
@@ -301,7 +309,7 @@ const Index = () => {
       id: deletePopup?.id,
       doctor_id: LoggedData?.id,
     };
-    setloading(true);
+    setIsLoading(true);
     axios
       .post(`${port}/hospital/delete_availability`, data)
       .then((res) => {
@@ -312,12 +320,12 @@ const Index = () => {
           setcurrentAvailability(allAvailblity);
           DeleteTimeConfirm({ cls: true });
           toastify({ success: true, msg: res?.data?.message });
-          setloading(false);
+          setIsLoading(false);
         }
       })
       .catch((err) => {
         toast.info(err.response.data.message);
-        setloading(false);
+        setIsLoading(false);
       });
   };
   // console.log("DoctorData>>>>", DoctorData)
@@ -345,6 +353,8 @@ const Index = () => {
   console.log(currentAvailability);
   return (
     <>
+      {isLoading && <Loader />}
+
       <div className="mainadmindoctordatas flex">
         <div className="mainadmindoctordatas_profile flex">
           <img

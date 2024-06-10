@@ -1,12 +1,29 @@
 import React, { useState } from "react";
 import EditIcon from "@mui/icons-material/Edit";
 import { IconButton } from "@mui/material";
+import { toast } from "react-toastify";
 import axios from "axios";
 import { port } from "../../../config";
+import { Loader } from "../../../components/Loader/Loader";
 
 function Overview({ hospital }) {
+  const [isLoading, setIsLoading] = useState(false);
   const [isAboutEditable, setIsAboutEditable] = useState(false);
-  const [about, setAbout] = useState();
+  const [about, setAbout] = useState({
+    about: "",
+  });
+
+  const toastConfig = {
+    position: "top-right",
+    autoClose: 3000,
+    hideProgressBar: false,
+    newestOnTop: false,
+    closeOnClick: true,
+    rtl: false,
+    pauseOnFocusLoss: true,
+    draggable: true,
+    pauseOnHover: true,
+  };
 
   const handleAboutEditToggle = () => {
     setIsAboutEditable(!isAboutEditable);
@@ -14,17 +31,34 @@ function Overview({ hospital }) {
 
   const handleAboutEdit = (e) => {
     const { name, value } = e.target;
-    setAbout({ name: value });
+    setAbout({ [name]: value });
   };
   const handleSentAbout = async () => {
+    if (!about?.about) {
+      toast.warning("No changes were made", {
+        ...toastConfig,
+        autoClose: "6000",
+      });
+      return;
+    }
+    setIsLoading(true);
     try {
-      const response = await axios.post(`${port}`, about);
-    } catch {
+      const payload = {
+        hospital_id: hospital.id,
+        about: about?.about,
+      };
+      const response = await axios.post(`${port}/hospital/edit`, payload);
+      toast.success(response.data.message, toastConfig);
+    } catch (err) {
+      console.error("Error updating hospital info:", err);
+      toast.error("Failed to update hospital information.");
     } finally {
+      setIsLoading(false);
     }
   };
   return (
     <>
+      {isLoading && <Loader />}
       <div className="mainadmindoctordatas flex">
         <div className="mainadmindoctordatas_profile flex">
           <img
@@ -115,7 +149,7 @@ function Overview({ hospital }) {
             <textarea
               onChange={handleAboutEdit}
               className="adimindoctorpinAbout"
-              value={hospital?.about}
+              value={about?.about || hospital?.about}
               name="about"
             ></textarea>
           ) : (
@@ -125,7 +159,11 @@ function Overview({ hospital }) {
           )}
           {isAboutEditable && (
             <div className="mainadmindoctoraboutConfirmBtn">
-              <button onClick={handleSentAbout}>Update</button>
+              <button
+                onClick={handleSentAbout}
+              >
+                Update
+              </button>
             </div>
           )}
           <h3 style={{ marginBottom: "1.3vw" }}>Address</h3>

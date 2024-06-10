@@ -4,16 +4,16 @@ import Rightnavbar from "../../../components/Rightnavbar";
 import "./hospitaladmindoctorlist.css";
 import Hospitaladmin_doctor_card from "../../../components/Hospitaladmin_doctor_card";
 import axios from "axios";
-import { Backdrop, CircularProgress } from "@mui/material";
 import { DoctorCard } from "../DoctorCard/DoctorCard";
 import HospitalSidebar from "../HospitalSidebar";
 import { useNavigate } from "react-router-dom";
 import { port } from "../../../config";
+import { Loader } from "../../../components/Loader/Loader";
 
-export default function Hospitaladmindoctorlist({setChangeDashboards}) {
+export default function Hospitaladmindoctorlist({ setChangeDashboards }) {
   const navigate = useNavigate();
   const [doctorsData, setDoctorsData] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     getDoctorsData();
@@ -21,9 +21,7 @@ export default function Hospitaladmindoctorlist({setChangeDashboards}) {
 
   const getDoctorsData = async () => {
     try {
-      
-      
-      setLoading(true);
+      setIsLoading(true);
       const { id } = JSON.parse(localStorage.getItem("loginData")) || {};
       const response = await axios.post(`${port}/hospital/getdoctorlist`, {
         id: id,
@@ -33,14 +31,16 @@ export default function Hospitaladmindoctorlist({setChangeDashboards}) {
     } catch (err) {
       console.log(err);
     } finally {
-      setLoading(false);
+      setIsLoading(false);
     }
   };
 
   return (
     <>
+      {isLoading && <Loader />}
+
       <div className="hospitaladmin-main flex ">
-        <div className="hospitaladmin_right" style={{width:"100%"}}>
+        <div className="hospitaladmin_right" style={{ width: "100%" }}>
           <div className="manage_doctor ">
             <div className="flex-center">
               <h1>Manage Doctors</h1>
@@ -61,23 +61,16 @@ export default function Hospitaladmindoctorlist({setChangeDashboards}) {
             <div className="hospitaladmin-doclist-cardcontainer">
               {doctorsData.map((value, index) => (
                 <div className="hospital-admin-card" key={index}>
-                  <DoctorCard setChangeDashboards={setChangeDashboards} data={value} />
+                  <DoctorCard
+                    setChangeDashboards={setChangeDashboards}
+                    data={value}
+                  />
                 </div>
               ))}
             </div>
           </div>
         </div>
       </div>
-      <Backdrop
-        sx={{
-          color: "#fff",
-          zIndex: (theme) => theme.zIndex.drawer + 1,
-        }}
-        open={loading}
-        // onClick={handleClose}
-      >
-        <CircularProgress color="inherit" />
-      </Backdrop>
     </>
   );
 }

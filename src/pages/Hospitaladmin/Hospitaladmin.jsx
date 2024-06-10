@@ -5,13 +5,13 @@ import HospitalAdminDashBoard from "./Overview/OverView";
 import HospitalTopbar from "./Topbar/HospitalTopbar";
 import Hospitaladmindoctorlist from "./Doctors/Hospitaladmindoctorlist";
 import Viewers from "./Viewers/Viewers";
-import ManageDoc from './ManageDoctor/Index'
+import ManageDoc from "./Doctors/ManageDoctor/Index";
 import axios from "axios";
 import { port } from "../../config";
 import { Loader } from "../../components/Loader/Loader";
 
 export default function Hospitaladmin() {
-  const [loading, setLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [ChangeDashboards, setChangeDashboards] = useState({
     overview: true,
   });
@@ -38,16 +38,17 @@ export default function Hospitaladmin() {
     setChangeDashboards({ [data]: true });
   };
   const fetchHospital = async () => {
-    setLoading(true);
+    setIsLoading(true);
     try {
       const { id } = JSON.parse(localStorage.getItem("loginData")) || {};
-      const response = await axios.post(`${port}/hospital/hospitaldetails`,{ id:id}      
-      );
+      const response = await axios.post(`${port}/hospital/hospitaldetails`, {
+        id: id,
+      });
       setHospital(response.data.data);
     } catch (err) {
       console.error(err);
     } finally {
-      setLoading(false);
+      setIsLoading(false);
     }
   };
   useEffect(() => {
@@ -55,26 +56,33 @@ export default function Hospitaladmin() {
   }, []);
   console.log("Hospital data ", hospital);
   return (
-    <div className="mainadminsection">
-      <HospitalTopbar
-        data={{ SentData: SentData, selected: ChangeDashboards }}
-      />
-      <div className="mainadmindoctorsection flex">
-        <Sidebar data={{ SentData: SentData, selected: ChangeDashboards }} />
-        <div className="mainadmindoctordetails mainadmincontainer">
-          <div className="scroll">
-            {ChangeDashboards?.overview && (
-              <HospitalAdminDashBoard hospital={hospital} />
-            )}
-            {ChangeDashboards?.doctor && <Hospitaladmindoctorlist setChangeDashboards={setChangeDashboards} />}
-            {ChangeDashboards?.viewers && <Viewers />}
-            {ChangeDashboards?.feedbacks && <Viewers />}
-            {ChangeDashboards?.manageDoc && <ManageDoc />}
+    <>
+      {isLoading &&<Loader />}
+      <div className="mainadminsection">
+        <HospitalTopbar
+          data={{ SentData: SentData, selected: ChangeDashboards }}
+        />
+        <div className="mainadmindoctorsection flex">
+          <Sidebar data={{ SentData: SentData, selected: ChangeDashboards }} />
+          <div className="mainadmindoctordetails mainadmincontainer">
+            <div className="scroll">
+              {ChangeDashboards?.overview && (
+                <HospitalAdminDashBoard hospital={hospital} />
+              )}
+              {ChangeDashboards?.doctor && (
+                <Hospitaladmindoctorlist
+                  setChangeDashboards={setChangeDashboards}
+                />
+              )}
+              {ChangeDashboards?.viewers && <Viewers />}
+              {ChangeDashboards?.feedbacks && <Viewers />}
+              {ChangeDashboards?.manageDoc && <ManageDoc />}
+            </div>
           </div>
         </div>
-      </div>
-      {/* {loading &&
+        {/* {isLoading &&
       <loader/>} */}
-    </div>
+      </div>
+    </>
   );
 }

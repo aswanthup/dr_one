@@ -5,7 +5,7 @@ import {
   speacializationNames,
   ayurSpec,
   homeoDept,
-} from "../../doctor/constants/filter";
+} from "../../../doctor/constants/filter";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -13,11 +13,12 @@ import { Backdrop, CircularProgress } from "@mui/material";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { Bounce, ToastContainer, toast } from "react-toastify";
-import { port } from "../../../config";
+import { port } from "../../../../config";
 import dayjs from "dayjs";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import { Loader } from "../../../../components/Loader/Loader";
 export default function Hospitaladminadddoctor() {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
@@ -53,7 +54,7 @@ export default function Hospitaladminadddoctor() {
     formState: { errors },
     reset,
   } = useForm({ resolver: yupResolver(schema) });
-  const storedLoginData = localStorage.getItem("loginData")
+  const storedLoginData = localStorage.getItem("loginData");
   const LoggedData = JSON.parse(storedLoginData);
   const onSubmit = async (dataForm) => {
     console.log({ dataForm });
@@ -144,7 +145,9 @@ export default function Hospitaladminadddoctor() {
   };
 
   return (
-    <div>
+    <>
+      {isLoading && <Loader />}
+
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="adddoctor">
           <div>
@@ -423,16 +426,8 @@ export default function Hospitaladminadddoctor() {
           </div>
         </div>
       </form>
-      <Backdrop
-        sx={{
-          color: "#fff",
-          zIndex: (theme) => theme.zIndex.drawer + 1,
-        }}
-        open={isLoading}
-      >
-        <CircularProgress color="inherit" />
-      </Backdrop>
+
       <ToastContainer />
-    </div>
+    </>
   );
 }
