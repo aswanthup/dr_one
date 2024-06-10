@@ -13,6 +13,7 @@ import RemoveIcon from "@mui/icons-material/Remove";
 import { port } from "../../../../config";
 import { Loader } from "../../../../components/Loader/Loader";
 import { HospitalAdminContext } from "../../../../contexts/Doctor/HospitalAdminProvider";
+import ConfirmationModal from '../../../../components/Confirmation/Index'
 const Index = () => {
   const [open, setOpen] = React.useState({});
   const [FormValues, setFormValues] = useState({});
@@ -23,6 +24,7 @@ const Index = () => {
   const [editAboutProfile, seteditAboutProfile] = useState(false);
   const [TimePickers, setTimePickers] = useState();
   const [editingId, setEditingId] = useState(); //db id which edits availability
+  const [showConfirmationModal, setShowConfirmationModal] = useState(false);
   const { selectedDoc } = useContext(HospitalAdminContext);
   const { id } = JSON.parse(localStorage.getItem("loginData")) || {};
   const doctor_id = selectedDoc?.id;
@@ -252,7 +254,7 @@ const Index = () => {
         data
       );
       if (response?.data?.success) {
-        toastify({ msg: response.data.message, success: true });
+        toastify({ msg: "successfully updated availabilty", success: true });
         handleClose();
         fetchDoctor(id, doctor_id);
       }
@@ -553,7 +555,7 @@ const Index = () => {
                           <TimePicker
                             // label="Start Time"
                             name="startTime"
-                            className="viewdataTimePickerCompo"
+                            className="viewdataTimePickerCompo_hospital"
                             value={
                               data?.startTime ? dayjs(data?.startTime) : null
                             }
@@ -571,7 +573,7 @@ const Index = () => {
                           <label htmlFor="">End time</label>
                           <TimePicker
                             // label="End Time"
-                            className="viewdataTimePickerCompo"
+                            className="viewdataTimePickerCompo_hospital"
                             value={data?.endTime ? dayjs(data?.endTime) : null}
                             name="endTime"
                             onChange={(e) => {
@@ -609,8 +611,9 @@ const Index = () => {
                 </div>
               ))}
             </div>
-            <div className="viewdataFinalSaveButton">
+            <div className="viewdataFinalSaveButton" style={{gap:"2rem"}}>
               <button onClick={SaveData}>Save</button>
+              <button style={{background:"#ff6347"}} onClick={()=>setShowConfirmationModal(true)}>Reset</button>
             </div>
           </div>
         </div>
@@ -653,7 +656,7 @@ const Index = () => {
                             <TimePicker
                               // label="Start Time"
                               name="startTime"
-                              className="viewdataTimePickerCompo"
+                              className="viewdataTimePickerCompo_hospital"
                               value={
                                 data?.startTime ? dayjs(data?.startTime) : null
                               }
@@ -671,7 +674,7 @@ const Index = () => {
                             <label htmlFor="">End time</label>
                             <TimePicker
                               // label="End Time"
-                              className="viewdataTimePickerCompo"
+                              className="viewdataTimePickerCompo_hospital"
                               value={
                                 data?.endTime ? dayjs(data?.endTime) : null
                               }
@@ -747,6 +750,7 @@ const Index = () => {
           </div>
         </div>
       </Modal>
+      <ConfirmationModal confirmation={showConfirmationModal} setConfirmation={setShowConfirmationModal} handleYes={ResetTimePicker}/>
     </>
   );
 };
