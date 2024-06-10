@@ -47,25 +47,15 @@ export default function Labdetails() {
               <div className="lab-details-heading">
                 <h2>Photos</h2>
               </div>
-
-
-
-
               <div className="lab-details-imges wrapper">
                 <div class="track">
-
                   <div><img src="images/la (1).jpg" alt="" /></div>
                   <div><img src="images/la (2).jpg" alt="" /></div>
                   <div><img src="images/la (3).jpg" alt="" /></div>
                   <div><img src="images/la (4).jpg" alt="" /></div>
                   <div><img src="images/la (1).jpg" alt="" /></div>
-
                 </div>
-
               </div>
-
-
-
             </div>
             <div className="lab-deatails-Services">
               <div className="lab-details-heading">
