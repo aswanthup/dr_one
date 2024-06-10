@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import '../doctor/doctor-profile.css'
 import Footer from '../../components/Footer'
 import Navbar from '../../components/Navbar'
@@ -6,7 +6,13 @@ import { useLocation } from 'react-router-dom';
 import { Modal } from '@mui/material';
 import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
 import CallIcon from '@mui/icons-material/Call';
+import axios from 'axios';
+import { toast } from 'react-toastify';
+import { port } from '../../config';
+import moment from 'moment/moment';
 export default function Doctor_profile() {
+  const [currentAvailability, setcurrentAvailability] = useState([])
+  const [ViewAvailabilityData, setViewAvailabilityData] = useState()
   const [open, setopen] = useState(false)
   const days = [
     "Sunday", "Monday",
@@ -17,14 +23,55 @@ export default function Doctor_profile() {
   const location = useLocation();
   const doctor = location?.state
   console.log(doctor)
-  const viewDetailedData = (data) => {
-    const id = data?.id
+  const viewDetailedData = (id) => {
+    const HosData = currentAvailability?.find(ele => ele?.id === id)
+    setViewAvailabilityData(HosData)
     openModal()
   }
+
+  useEffect(() => {
+    const data = {
+      id: doctor?.id
+    }
+    if (data?.id) {
+      axios.post(`${port}/hospital/consultationdata`, data).then((res) => {
+        setcurrentAvailability(res.data.data)
+        console.log(res)
+      }).catch((err) => {
+        console.log(err)
+        toast.info(err?.response?.data?.message)
+      })
+    }
+    if (doctor?.id) {
+      const data = {
+        userid: 7,
+        id: doctor?.id,
+        type: "Doctor"
+      }
+      axios.post(`http://192.168.1.11:3003/user/viewcount`, data).then((res) => {
+        console.log("res>>>>", res)
+      })
+    }
+  }, [])
+  console.log("currentAvailability>>>>>", currentAvailability)
 
   const openModal = () => {
     setopen(!open)
   }
+  const storedLoginData = localStorage.getItem("loginData")
+  const LoggedData = JSON.parse(storedLoginData);
+  const cunsultNow = () => {
+    const data = {
+      userid: 7,
+      id: doctor?.id,
+      type: "Doctor"
+    }
+    axios.post(`http://192.168.1.11:3003/user/consultcount`, data).then((res) => {
+      console.log("res>>>>", res)
+    })
+  }
+
+  console.log("ViewAvailabilityData>>>>", ViewAvailabilityData)
   return (
     <div>
       <Navbar />
@@ -36,8 +83,6 @@ export default function Doctor_profile() {
             <div className="doctor-profile-photo">
               <img src={doctor?.image || `images/doc.jpg`} alt="" />
             </div>
-
-
             <div className="doctor-profile-left-right flex">
               <div className="doctor-profile-left flex">
                 <h2 style={{ color: 'white' }}>{doctor?.name}</h2>
@@ -60,16 +105,8 @@ export default function Doctor_profile() {
                 <h4>
                   {doctor?.about || "Dr. Rohith Rajashekhar is a Dentist,Restorative Dentist and Cosmetic/Aesthetic Dentist in T Dasarahalli, Bangalore and has an experience of 6 years in these fields. Dr. Rohith Rajashekhar practices at Partha Dental Skin Hair in T Dasarahalli, Bangalore. He completed BDS from Rajiv Gandhi University of Health Sciences in 2017 and MDS - Prosthodontist And Crown Bridge from Rajiv Gandhi University of Health Sciences in 2022"}
                 </h4>
-
-
-
               </div>
-
-
-
             </div>
-
-
 
           </div>
           <div className='DoctorAvailableSec'>
@@ -77,39 +114,20 @@ export default function Doctor_profile() {
               <p>Available</p>
             </div>
             <div className='DoctorAvailableAvailableSec'>
-              <div className='DoctorAvailableSecSettingSec'>
-                <div className='DoctorAvailableTiming'>
-                  <p>Caritas hospital, Kotayam</p>
-                  <div className='DoctorAvailableTimingDays'>
-                    {days.map((day, index) =>
-                      <p>{day.slice(0, 3)}<span>{index === days?.length - 1 ? '' : ","}</span></p>
-                    )}
+              {currentAvailability?.map(ele =>
+                <div className='DoctorAvailableSecSettingSec'>
+                  <div className='DoctorAvailableTiming'>
+                    <p>{ele?.hospital_name}</p>
+                    <div className='DoctorAvailableTimingDays'>
+                      {days.map((day, index) =>
+                        <p style={{ color: ele?.days_timing?.find(mapday => mapday?.day === day && mapday?.availableTimes?.find(data => data?.startTime !== "" && data?.endTime !== "")) ? 'blue' : "grey" }}>{day.slice(0, 3)}<span>{index === days?.length - 1 ? '' : ","}</span></p>
+                      )}
+                    </div>
                   </div>
+                  <button onClick={() => { viewDetailedData(ele?.id) }}>View Details</button>
                 </div>
-                <button onClick={() => { viewDetailedData() }}>View Details</button>
-              </div>
-              <div className='DoctorAvailableSecSettingSec'>
-                <div className='DoctorAvailableTiming'>
-                  <p>Caritas hospital, Kotayam</p>
-                  <div className='DoctorAvailableTimingDays'>
-                    {days.map((day, index) =>
-                      <p>{day.slice(0, 3)}<span>{index === days?.length - 1 ? '' : ","}</span></p>
-                    )}
-                  </div>
-                </div>
-                <button>View Details</button>
-              </div>
-              <div className='DoctorAvailableSecSettingSec'>
-                <div className='DoctorAvailableTiming'>
-                  <p>Caritas hospital, Kotayam</p>
-                  <div className='DoctorAvailableTimingDays'>
-                    {days.map((day, index) =>
-                      <p>{day.slice(0, 3)}<span>{index === days?.length - 1 ? '' : ","}</span></p>
-                    )}
-                  </div>
-                </div>
-                <button>View Details</button>
-              </div>
+              )}
+
             </div>
 
           </div>
@@ -162,7 +180,7 @@ export default function Doctor_profile() {
           <>
             <div className='doc_profileSec'>
               <div className='doc_profileFirstTag'>
-                <p>Caritas hospital, Kotayam</p>
+                <p>{ViewAvailabilityData?.hospital_name}</p>
               </div>
               <div className='doc_profileModalLocSec'>
                 <LocationOnOutlinedIcon id="doc_profileModalLocSecIcon" />
@@ -171,31 +189,27 @@ export default function Doctor_profile() {
                 </p>
               </div>
               <div className='doc_profileModalLocTimingSec'>
-                <div className='doc_profileModalLocTimging'>
-                  <button>Sun</button>
-                  <p>10.00 am to 11.00 pm
-                  </p>
-                </div>
-                <div className='doc_profileModalLocTimging'>
-                  <button>Sun</button>
-                  <p>10.00 am to 11.00 pm
-                  </p>
-                </div>
-                <div className='doc_profileModalLocTimging'>
-                  <button>Sun</button>
-                  <p>10.00 am to 11.00 pm
-                  </p>
-                </div>
-                <div className='doc_profileModalLocTimging'>
-                  <button>Sun</button>
-                  <p>10.00 am to 11.00 pm
-                  </p>
-                </div>
+                {ViewAvailabilityData?.days_timing?.map(ele =>
+                  ele?.availableTimes?.find(CheckTime => CheckTime?.startTime && CheckTime?.endTime) ?
+                    <div className='doc_profileModalLocTimging'>
+                      <button>{ele?.day.slice(0, 3)}</button>
+                      <div className='doc_profileModalLocTimgingGap'>
+                        {ele?.availableTimes.map(timing =>
+                          <p>{moment(timing?.startTime).format('LT')} to {moment(timing?.endTime).format('LT')}
+                          </p>
+                        )}
+                      </div>
+                    </div>
+                    : ''
+
+                )}
+
+
               </div>
               <div className='doc_profileModalAlignCont'>
-                <button>
+                <a href={`tel:91${doctor?.phone_no}`} onClick={cunsultNow} >
                   <CallIcon id="doc_profileModalBtnIcon" />
-                  Contact now</button>
+                  Contact now</a>
               </div>
             </div>
           </>
@@ -206,7 +220,7 @@ export default function Doctor_profile() {
       <Footer />
 
 
-    </div>
+    </div >
 
   )
 }

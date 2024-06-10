@@ -200,7 +200,7 @@
 
 }
 
-.doc_profileModalAlignCont button {
+.doc_profileModalAlignCont a {
     border: none;
     background-color: #7E83FF;
     color: rgba(255, 255, 255, 0.879);
@@ -211,6 +211,8 @@
     align-items: center;
     display: flex;
     gap: 5px;
+    padding: 10px;
+    border-radius: 10px;
 
 }
 
@@ -219,11 +221,18 @@
     color: rgba(255, 255, 255, 0.818);
 }
 
+.doc_profileModalLocTimgingGap {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
 .doc_profileModalLocTimging button {
     border: none;
     background-color: #2A9D8F;
     color: white;
     letter-spacing: 1px;
+    width: 50px;
 
 }
 

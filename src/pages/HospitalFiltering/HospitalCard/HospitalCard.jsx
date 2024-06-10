@@ -8,7 +8,7 @@ export const HospitalCard = ({ data }) => {
     return (
         <>
             <div
-                onClick={() => navigate("/hospitaldetailed", { state: { id: details?.id } })}
+                onClick={() => navigate("/hospitaldetailed", { state: { details: details } })}
                 className={styles.cardContainer}>
                 <div>
                     <img className={styles.docImage} src={details.photo?.image1 || TemPImg} alt="" />

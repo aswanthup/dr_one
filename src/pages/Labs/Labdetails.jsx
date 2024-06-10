@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Headroom from 'react-headroom';
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
 import { useLocation } from 'react-router-dom';
 import { services } from './LabFIltering/constatnts/Filter';
+import axios from 'axios';
 
 
 export default function Labdetails() {
@@ -11,6 +12,29 @@ export default function Labdetails() {
   const location = useLocation()
   const LabDetails = location?.state?.data
   console.log("LabDetails>>>>", LabDetails)
+  const cunsultNow = () => {
+    const data = {
+      userid: 7,
+      id: LabDetails?.id,
+      type: "Lab"
+    }
+    axios.post(`http://192.168.1.11:3003/user/consultcount`, data).then((res) => {
+      console.log("res>>>>", res)
+    })
+  }
+  useEffect(() => {
+    if (LabDetails?.id) {
+      const data = {
+        userid: 7,
+        id: LabDetails?.id,
+        type: "Lab"
+      }
+      axios.post(`http://192.168.1.11:3003/user/viewcount`, data).then((res) => {
+        console.log("res>>>>", res)
+      })
+    }
+  }, [])
+
   if (LabDetails) {
     return (
       <div>
@@ -39,7 +63,7 @@ export default function Labdetails() {
                 </div>
                 <div className="lab-details-buttons flex">
                   <a className="flex lab-details-buttons1" href><h4>{LabDetails?.timing.opening_time} to {LabDetails?.timing.closing_time}</h4></a>
-                  <a className="flex lab-details-buttons2" href={`tel:${LabDetails?.phone_no}`}><h4>Contact Now</h4></a>
+                  <a className="flex lab-details-buttons2" onClick={cunsultNow} href={`tel:${LabDetails?.phone_no}`}><h4>Contact Now</h4></a>
                 </div>
               </div>
             </div>

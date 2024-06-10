@@ -55,7 +55,6 @@ export default function Hospitaldetails() {
           <div hospital_admin_data_section>
 
 
-
           </div>
 
 

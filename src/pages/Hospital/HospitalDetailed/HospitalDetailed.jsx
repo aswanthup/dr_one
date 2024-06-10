@@ -6,17 +6,29 @@ import { port } from '../../../config'
 import { useLocation } from 'react-router-dom'
 const HospitalDetailed = () => {
     const location = useLocation()
-    const [HospitalData, setHospitalData] = useState()
+    const HospitalData = location?.state?.details
     const TemPImg = "./images/TempHosImg.jpg"
-    useEffect(() => {
+    const cunsultNow = () => {
         const data = {
-            id: location?.state?.id
+            userid: 7,
+            id: HospitalData?.id,
+            type: "Hospital"
         }
-
-        axios.post(`${port}/hospital/hospitaldetails`, data).then((res) => {
-            console.log(res)
-            setHospitalData(res?.data?.data)
+        axios.post(`http://192.168.1.11:3003/user/consultcount`, data).then((res) => {
+            console.log("res>>>>", res)
         })
+    }
+    useEffect(() => {
+        if (HospitalData?.id) {
+            const data = {
+                userid: 7,
+                id: HospitalData?.id,
+                type: "Hospital"
+            }
+            axios.post(`http://192.168.1.11:3003/user/viewcount`, data).then((res) => {
+                console.log("res>>>>", res)
+            })
+        }
     }, [])
 
     return (
@@ -26,18 +38,19 @@ const HospitalDetailed = () => {
                     <div className="mainadmindoctordatas_profile flex">
                         <img className='mainadmindoctordatas_profile_photo' src={HospitalData?.photo?.image1 || TemPImg} alt="" />
                         <div className="mainadmindoctordatas_profile_data flex">
-                            <div className='flex'>  <h2>{HospitalData?.name}</h2> <h4 className='highlight_data' style={{ background: "#2A9D8F", color: "white", marginLeft: "10px" }}>{HospitalData?.type}</h4></div>
-                            <h4 className='highlight_data' style={{ background: "#3A65FD", color: "white", }}>{HospitalData?.licence_no}</h4>
+                            <div className='flex'>  <h2>{HospitalData?.name}</h2> </div>
+                            <h4 className='highlight_data' style={{ background: "#3A65FD", color: "white", }}>{HospitalData?.type}</h4>
                             <div className='flex'>
-                                <div className='flex texticonset'>
-                                    <i class="fi fi-sr-call-outgoing"></i>
-                                    <h4 style={{ marginLeft: "10px" }}>+91 {HospitalData?.contact_no}</h4>
 
-                                </div>
                             </div>
                             <div className='flex texticonset'>
                                 <i class="fi fi-sr-envelope"></i>
                                 <h4 style={{ marginLeft: "10px" }}>{HospitalData?.email}</h4>
+                            </div>
+                            <div className='flex texticonsetAlign'>
+                                <a onClick={cunsultNow} href={`tel:91${HospitalData?.contact}`}>
+                                    <i class="fi fi-sr-call-outgoing"></i>
+                                    Contact now</a>
                             </div>
                         </div>
                     </div>
