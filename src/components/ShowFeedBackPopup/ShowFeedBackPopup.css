@@ -1,5 +1,5 @@
 .ShowFeedBackPopupIn {
-    width: 35%;
+    width: 32%;
     background-color: white;
     height: fit-content;
     padding: 20px;
@@ -10,6 +10,7 @@
 
 }
 
+
 .ShowFeedBackPopupInImg {
     display: flex;
     width: 100%;
@@ -19,7 +20,7 @@
 }
 
 .ShowFeedBackPopupInImg img {
-    height: 130px;
+    height: 100px;
     border-radius: 50%;
 }
 
@@ -35,21 +36,31 @@
     gap: 15px;
     display: flex;
     flex-direction: column;
+    align-items: center;
+}
+
+.ShowFeedBackPopupTextLater button {
+    font-size: 15px;
+    font-weight: 300;
+    color: #7E83FF;
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+}
+
+
+.ShowFeedBackPopupTextLater {
+    display: flex;
+    justify-content: center;
 }
 
 .ShowFeedBackPopupText p {
     display: flex;
     justify-content: center;
-    font-size: 21px;
+    font-size: 18px;
     color: rgba(0, 0, 0, 0.858);
     letter-spacing: 1px;
     font-weight: 300;
-}
-
-.ShowFeedBackPopupText button {
-    width: 100%;
-    display: flex;
-    justify-content: center;
 }
 
 .ShowFeedBackPopupText button {
@@ -58,7 +69,20 @@
     background-color: #2A9D8F;
     display: flex;
     align-items: center;
-    font-size: 17px;
+    font-size: 15px;
+    letter-spacing: 2px;
+    color: white;
+    border: none;
+}
+
+
+.ShowFeedBackPopupText button {
+    width: 100%;
+    height: 50px;
+    background-color: #2A9D8F;
+    display: flex;
+    align-items: center;
+    font-size: 15px;
     letter-spacing: 2px;
     color: white;
     border: none;
@@ -73,7 +97,7 @@
 .ShowFeedBackPopupButton1 {
     width: 100%;
     background-color: #FA8D0D;
-    font-size: 17px;
+    font-size: 15px;
     letter-spacing: 2px;
     color: white;
     display: flex;
@@ -87,7 +111,7 @@
 .ShowFeedBackPopupButton2 {
     width: 100%;
     background-color: #7E83FF;
-    font-size: 17px;
+    font-size: 15px;
     letter-spacing: 2px;
     display: flex;
     align-items: center;
