@@ -1,4 +1,10 @@
-const ShowFeedBackPopup = () => {
+import { Modal } from '@mui/material';
+import axios from 'axios';
+import React, { useContext, useEffect, useState } from 'react'
+import { toast } from 'react-toastify';
+import { PopupContext } from './ShowFeedBackPopupContext';
+
+export const ShowFeedBackPopup = () => {
     const { isPopupVisible, hidePopup, ContactData } = useContext(PopupContext);
     const [ConstantData, setConstantData] = useState(null);
     const [FinalData, setFinalData] = useState({ rating: 0, feedback: '', status: '' });
@@ -161,6 +167,5 @@ const ShowFeedBackPopup = () => {
     );
 };
 
-export default ShowFeedBackPopup;
 
 

@@ -71,7 +71,7 @@ import { DocProfileMainSec } from "./pages/doctor/DocProfileMainSec/DocProfileMa
 import HospitalDetailed from "./pages/Hospital/HospitalDetailed/HospitalDetailed";
 import HospitalAdminProvider from "./contexts/Doctor/HospitalAdminProvider";
 import { ShowFeedBackPopupContext } from "./components/ShowFeedBackPopup/ShowFeedBackPopupContext";
-import ShowFeedBackPopup from "./components/ShowFeedBackPopup/ShowFeedBackPopup";
+import { ShowFeedBackPopup } from "./components/ShowFeedBackPopup/ShowFeedBackPopup";
 function App() {
   return (
     <div className="App">
