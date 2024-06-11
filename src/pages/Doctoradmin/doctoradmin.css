@@ -321,6 +321,10 @@ button {
     width: 50%;
 }
 
+.viewdataTimePickerCompo_hospital {
+    width: 100%;
+}
+
 
 .viewdataFinalSaveButton {
     display: flex;
