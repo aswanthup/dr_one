@@ -5,6 +5,7 @@ import Footer from '../../components/Footer';
 import { useLocation } from 'react-router-dom';
 import { services } from './LabFIltering/constatnts/Filter';
 import axios from 'axios';
+import { port } from '../../config';
 
 
 export default function Labdetails() {
@@ -18,7 +19,7 @@ export default function Labdetails() {
       id: LabDetails?.id,
       type: "Lab"
     }
-    axios.post(`http://192.168.1.11:3003/user/consultcount`, data).then((res) => {
+    axios.post(`${port}/user/consultcount`, data).then((res) => {
       console.log("res>>>>", res)
     })
   }
@@ -29,7 +30,7 @@ export default function Labdetails() {
         id: LabDetails?.id,
         type: "Lab"
       }
-      axios.post(`http://192.168.1.11:3003/user/viewcount`, data).then((res) => {
+      axios.post(`${port}/user/viewcount`, data).then((res) => {
         console.log("res>>>>", res)
       })
     }

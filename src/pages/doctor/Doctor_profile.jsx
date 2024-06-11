@@ -48,7 +48,7 @@ export default function Doctor_profile() {
         id: doctor?.id,
         type: "Doctor"
       }
-      axios.post(`http://192.168.1.11:3003/user/viewcount`, data).then((res) => {
+      axios.post(`${port}/user/viewcount`, data).then((res) => {
         console.log("res>>>>", res)
       })
     }
@@ -66,7 +66,7 @@ export default function Doctor_profile() {
       id: doctor?.id,
       type: "Doctor"
     }
-    axios.post(`http://192.168.1.11:3003/user/consultcount`, data).then((res) => {
+    axios.post(`${port}/user/consultcount`, data).then((res) => {
       console.log("res>>>>", res)
     })
   }

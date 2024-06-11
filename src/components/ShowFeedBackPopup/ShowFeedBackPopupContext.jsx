@@ -3,6 +3,8 @@
 
 import axios from 'axios';
 import React, { createContext, useEffect, useState } from 'react';
+import { port } from '../../config';
+import { toast } from 'react-toastify';
 
 export const PopupContext = createContext();
 
@@ -18,16 +20,18 @@ export const ShowFeedBackPopupContext = ({ children }) => {
         const data = {
             user_id: 7
         }
-        axios.post(`http://192.168.1.11:3003/user/doctorafterconsult`, data).then((res) => {
+        axios.post(`${port}/user/doctorafterconsult`, data).then((res) => {
             console.log("res>>>>", res)
             if (res.data.success)
-                setContactData(res?.data?.interactions)
+            setContactData(res?.data?.interactions)
             setIsPopupVisible(true);
+        }).catch(err => {
+            // toast.info(err?.response?.data?.message)
         })
-        // axios.post(`http://192.168.1.11:3003/user/hospitalafterconsult`, data).then((res) => {
+        // axios.post(`${port}/user/hospitalafterconsult`, data).then((res) => {
         //     console.log("res>>>>", res)
         // })
-        // axios.post(`http://192.168.1.11:3003/user/labafterconsult`, data).then((res) => {
+        // axios.post(`${port}/user/labafterconsult`, data).then((res) => {
         //     console.log("res>>>>", res)
         // })
     }, [])

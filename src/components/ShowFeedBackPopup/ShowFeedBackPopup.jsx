@@ -3,11 +3,12 @@ import axios from 'axios';
 import React, { useContext, useEffect, useState } from 'react'
 import { toast } from 'react-toastify';
 import { PopupContext } from './ShowFeedBackPopupContext';
-
+import { port } from '../../config';
+import "./ShowFeedBackPopup.css"
 export const ShowFeedBackPopup = () => {
     const { isPopupVisible, hidePopup, ContactData } = useContext(PopupContext);
     const [ConstantData, setConstantData] = useState(null);
-    const [FinalData, setFinalData] = useState({ rating: 0, feedback: '', status: '' });
+    const [FinalData, setFinalData] = useState({ rating: 0, message: '', status: '' });
 
     const gettingValues = (e) => {
         const { value, name } = e.target;
@@ -38,9 +39,9 @@ export const ShowFeedBackPopup = () => {
         const checkFields = !SentData.rating || !SentData?.message
         console.log("SentData>>>>", SentData)
         if (!checkFields) {
-            axios.post(`http://192.168.1.11:3003/doctor/doctor_feedback`, SentData).then((res) => {
+            axios.post(`${port}/doctor/doctor_feedback`, SentData).then((res) => {
                 console.log(res);
-                if (res?.data?.success) {
+                if (res?.data) {
                     toast.success(res?.data?.message)
                     setFinalData(prevData => ({ ...prevData, status: "success" }));
                 }
