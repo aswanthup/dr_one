@@ -12,7 +12,9 @@ const HospitalDetailed = () => {
         const data = {
             userid: 7,
             id: HospitalData?.id,
-            type: "Hospital"
+            type: "Hospital",
+            status: "P"
+
         }
         axios.post(`${port}/user/consultcount`, data).then((res) => {
             console.log("res>>>>", res)

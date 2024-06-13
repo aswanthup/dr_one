@@ -39,10 +39,6 @@ export default function Mainadmin() {
               </>
 
             }
-            
-
-
-
 
 
             {ChangeDashboards?.doctor &&

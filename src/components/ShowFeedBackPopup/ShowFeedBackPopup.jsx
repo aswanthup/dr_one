@@ -30,27 +30,77 @@ export const ShowFeedBackPopup = () => {
     const LoggedData = JSON.parse(storedLoginData);
 
     const SubmitData = () => {
-        const SentData = {
-            ...FinalData,
-            user_id: 7,
-            doctor_id: ConstantData?.doctor_id,
-            interactedid: ConstantData?.lastInteractionId
-        };
-        const checkFields = !SentData.rating || !SentData?.message
-        console.log("SentData>>>>", SentData)
-        if (!checkFields) {
-            axios.post(`${port}/doctor/doctor_feedback`, SentData).then((res) => {
-                console.log(res);
-                if (res?.data) {
-                    toast.success(res?.data?.message)
-                    setFinalData(prevData => ({ ...prevData, status: "success" }));
-                }
-            });
-        } else {
-            if (!SentData.rating) {
-                toast.info("Please provide a rating.")
+        if (ConstantData?.type === "doctor") {
+            const SentData = {
+                ...FinalData,
+                user_id: 7,
+                doctor_id: ConstantData?.doctor_id,
+                interactedid: ConstantData?.lastInteractionId
+            };
+            const checkFields = !SentData.rating || !SentData?.message
+            console.log("SentData>>>>", SentData)
+            if (!checkFields) {
+                axios.post(`${port}/doctor/doctor_feedback`, SentData).then((res) => {
+                    console.log(res);
+                    if (res?.data) {
+                        toast.success(res?.data?.message)
+                        setFinalData(prevData => ({ ...prevData, status: "success" }));
+                    }
+                });
             } else {
-                toast.info("Please provide a feedback.")
+                if (!SentData.rating) {
+                    toast.info("Please provide a rating.")
+                } else {
+                    toast.info("Please provide a feedback.")
+                }
+            }
+        } else if (ConstantData.type === "Hospital") {
+            const SentData = {
+                ...FinalData,
+                user_id: 7,
+                hospital_id: ConstantData?.hospital_id,
+                interactedid: ConstantData?.lastInteractionId
+            };
+            const checkFields = !SentData.rating || !SentData?.message
+            console.log("SentData>>>>", SentData)
+            if (!checkFields) {
+                axios.post(`${port}/hospital/hospital_feedback`, SentData).then((res) => {
+                    console.log(res);
+                    if (res?.data) {
+                        toast.success(res?.data?.message)
+                        setFinalData(prevData => ({ ...prevData, status: "success" }));
+                    }
+                });
+            } else {
+                if (!SentData.rating) {
+                    toast.info("Please provide a rating.")
+                } else {
+                    toast.info("Please provide a feedback.")
+                }
+            }
+        } else if (ConstantData?.type === "Lab") {
+            const SentData = {
+                ...FinalData,
+                user_id: 7,
+                lab_id: ConstantData?.lab_id,
+                interactedid: ConstantData?.lastInteractionId
+            };
+            const checkFields = !SentData.rating || !SentData?.message
+            console.log("SentData>>>>", SentData)
+            if (!checkFields) {
+                axios.post(`${port}/lab/lab_feedback`, SentData).then((res) => {
+                    console.log(res);
+                    if (res?.data) {
+                        toast.success(res?.data?.message)
+                        setFinalData(prevData => ({ ...prevData, status: "success" }));
+                    }
+                });
+            } else {
+                if (!SentData.rating) {
+                    toast.info("Please provide a rating.")
+                } else {
+                    toast.info("Please provide a feedback.")
+                }
             }
         }
 
@@ -74,6 +124,30 @@ export const ShowFeedBackPopup = () => {
         }
     }, [ContactData]);
 
+    const UpdateStatus = (e) => {
+        const value = e?.target?.value
+        console.log("value>>>>", value)
+        const SentData = {
+            status: value,
+            user_id: 7,
+            type: ConstantData?.type,
+            interactedid: ConstantData?.lastInteractionId
+        };
+        console.log("SentData>>>>", SentData)
+        if (SentData?.status) {
+            axios.post(`${port}/user/afterconsultupdate`, SentData).then((res) => {
+                console.log(res);
+                if (res?.data) {
+                    toast.success(res?.data?.message)
+                    closePopup()
+                    // setFinalData(prevData => ({ ...prevData, status: "success" }));
+                }
+            }).catch(err => {
+                console.log(err)
+            })
+        }
+    }
+    console.log("ContactData>>>", ContactData)
     return (
         <>
             <Modal
@@ -91,7 +165,7 @@ export const ShowFeedBackPopup = () => {
                             <div className='ShowFeedBackPopupReview'>
                                 <img src="./images/TempDocImg.jpg" alt="" />
                                 <div className='ShowFeedBackPopupRevieName'>
-                                    <h5>{ConstantData?.doctor_name}</h5>
+                                    <h5>{ConstantData?.doctor_name || ConstantData?.hospital_name || ConstantData?.lab_name}</h5>
                                     <p>How would you rate your experience</p>
                                 </div>
                             </div>
@@ -145,7 +219,7 @@ export const ShowFeedBackPopup = () => {
                                 <img src="./images/TempDocImg.jpg" alt="" />
                             </div>
                             <div className='ShowFeedBackPopupText'>
-                                <p>Have you consulted {ConstantData?.doctor_name}?</p>
+                                <p>{ConstantData?.type === "Doctor" ? ` Have you consulted ${ConstantData?.doctor_name} ?` : ConstantData?.type === "Hospital" ? ` Are you Visited in ${ConstantData?.hospital_name} ?` : `Are you Visited in ${ConstantData?.Hospital_name} ?`}</p>
                                 <p>Are you happy to share a review?</p>
                             </div>
                             <div className='ShowFeedBackPopupInButtinsGap'>
@@ -153,11 +227,11 @@ export const ShowFeedBackPopup = () => {
                                     <button onClick={gettingValues} name='status' value={"Y"}>Yes, Sure</button>
                                 </div>
                                 <div className='ShowFeedBackPopupButtons'>
-                                    <button onClick={gettingValues} name='status' value={"NR"} className='ShowFeedBackPopupButton1'>Not Responding</button>
-                                    <button onClick={gettingValues} name='status' value={"N"} className='ShowFeedBackPopupButton2'>Not Consulted</button>
+                                    <button onClick={(e) => { UpdateStatus(e) }} name='status' value={"NR"} className='ShowFeedBackPopupButton1'>Not Responding</button>
+                                    <button onClick={(e) => { UpdateStatus(e) }} name='status' value={"N"} className='ShowFeedBackPopupButton2'>Not Consulted</button>
                                 </div>
                                 <div className='ShowFeedBackPopupTextLater'>
-                                    <button onClick={gettingValues} name='status' value={"L"}>Maybe Later</button>
+                                    <button onClick={(e) => { UpdateStatus(e) }} name='status' value={"L"}>Maybe Later</button>
                                 </div>
                             </div>
                         </>

@@ -64,7 +64,8 @@ export default function Doctor_profile() {
     const data = {
       userid: 7,
       id: doctor?.id,
-      type: "Doctor"
+      type: "Doctor",
+      status: "P"
     }
     axios.post(`${port}/user/consultcount`, data).then((res) => {
       console.log("res>>>>", res)

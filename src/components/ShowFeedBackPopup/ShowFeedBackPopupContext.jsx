@@ -11,6 +11,9 @@ export const PopupContext = createContext();
 export const ShowFeedBackPopupContext = ({ children }) => {
     const [isPopupVisible, setIsPopupVisible] = useState(false);
     const [ContactData, setContactData] = useState([]);
+    const [hospitalData, sethospitalData] = useState([]);
+    const [LabData, setLabData] = useState([]);
+    const [docData, setdocData] = useState([]);
     const storedLoginData = localStorage.getItem("loginData")
     const LoggedData = JSON.parse(storedLoginData);
     const showPopup = () => {
@@ -22,20 +25,38 @@ export const ShowFeedBackPopupContext = ({ children }) => {
         }
         axios.post(`${port}/user/doctorafterconsult`, data).then((res) => {
             console.log("res>>>>", res)
+            if (res.data.success) {
+                setdocData(res?.data?.interactions)
+                setIsPopupVisible(true);
+            }
+        }).catch(err => {
+            console.log(err)
+        })
+        axios.post(`${port}/user/hospitalafterconsult`, data).then((res) => {
+            console.log("res>>>>", res)
+            if (res.data.success) {
+                sethospitalData(res?.data?.interactions)
+                setIsPopupVisible(true);
+            }
+        }).catch(err => {
+            console.log(err)
+        })
+        axios.post(`${port}/user/labafterconsult`, data).then((res) => {
+            console.log("res>>>>", res)
             if (res.data.success)
-            setContactData(res?.data?.interactions)
+                setLabData(res?.data?.interactions)
             setIsPopupVisible(true);
         }).catch(err => {
-            // toast.info(err?.response?.data?.message)
+            console.log(err)
         })
-        // axios.post(`${port}/user/hospitalafterconsult`, data).then((res) => {
-        //     console.log("res>>>>", res)
-        // })
-        // axios.post(`${port}/user/labafterconsult`, data).then((res) => {
-        //     console.log("res>>>>", res)
-        // })
     }, [])
 
+
+
+
+    useEffect(() => {
+        setContactData([...hospitalData, ...docData, ...LabData])
+    }, [hospitalData, docData, LabData])
     const hidePopup = () => {
         setIsPopupVisible(false);
     };

@@ -61,6 +61,7 @@
     color: rgba(0, 0, 0, 0.858);
     letter-spacing: 1px;
     font-weight: 300;
+    text-align: center;
 }
 
 .ShowFeedBackPopupText button {

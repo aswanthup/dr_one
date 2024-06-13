@@ -17,7 +17,8 @@ export default function Labdetails() {
     const data = {
       userid: 7,
       id: LabDetails?.id,
-      type: "Lab"
+      type: "Lab",
+      status: "P"
     }
     axios.post(`${port}/user/consultcount`, data).then((res) => {
       console.log("res>>>>", res)
