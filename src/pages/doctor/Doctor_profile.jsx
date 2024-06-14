@@ -62,7 +62,7 @@ export default function Doctor_profile() {
   const LoggedData = JSON.parse(storedLoginData);
   const cunsultNow = () => {
     const data = {
-      userid: 7,
+      userid: 6,
       id: doctor?.id,
       type: "Doctor",
       status: "P"

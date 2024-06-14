@@ -15,7 +15,7 @@ export default function Labdetails() {
   console.log("LabDetails>>>>", LabDetails)
   const cunsultNow = () => {
     const data = {
-      userid: 7,
+      userid: 6,
       id: LabDetails?.id,
       type: "Lab",
       status: "P"

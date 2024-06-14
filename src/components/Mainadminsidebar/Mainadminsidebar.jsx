@@ -70,12 +70,22 @@ export default function Mainadminsidebar({ data: { SentData, selected } }) {
         }}
         className={selected?.feedback ? "admimmenuicon admimmenuicon2 flex" : "admimmenuicon flex"}>
         <i class="fi fi-sr-feedback-review"></i>
-       
+
         <h4>Feedback</h4>
 
       </div>
 
-    
+      <div
+        onClick={() => {
+          FindButtonValue("category")
+        }}
+        className={selected?.category ? "admimmenuicon admimmenuicon2 flex" : "admimmenuicon flex"}>
+        <i class="ri-edit-line"></i>
+        <h4>Edit category</h4>
+
+      </div>
+
+
 
 
 

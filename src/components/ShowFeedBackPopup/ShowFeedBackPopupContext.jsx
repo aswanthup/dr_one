@@ -21,11 +21,11 @@ export const ShowFeedBackPopupContext = ({ children }) => {
     };
     useEffect(() => {
         const data = {
-            user_id: 7
+            user_id: 6
         }
         axios.post(`${port}/user/doctorafterconsult`, data).then((res) => {
             console.log("res>>>>", res)
-            if (res.data.success) {
+            if (res?.data?.interactions?.length > 0) {
                 setdocData(res?.data?.interactions)
                 setIsPopupVisible(true);
             }
@@ -34,7 +34,7 @@ export const ShowFeedBackPopupContext = ({ children }) => {
         })
         axios.post(`${port}/user/hospitalafterconsult`, data).then((res) => {
             console.log("res>>>>", res)
-            if (res.data.success) {
+            if (res?.data?.interactions.length > 0) {
                 sethospitalData(res?.data?.interactions)
                 setIsPopupVisible(true);
             }
@@ -43,9 +43,10 @@ export const ShowFeedBackPopupContext = ({ children }) => {
         })
         axios.post(`${port}/user/labafterconsult`, data).then((res) => {
             console.log("res>>>>", res)
-            if (res.data.success)
-                setLabData(res?.data?.interactions)
-            setIsPopupVisible(true);
+            if (res?.data?.data?.length > 0) {
+                setLabData(res?.data?.data)
+                setIsPopupVisible(true);
+            }
         }).catch(err => {
             console.log(err)
         })

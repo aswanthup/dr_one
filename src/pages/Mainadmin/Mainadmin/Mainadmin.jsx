@@ -15,10 +15,11 @@ import Mainadminfeedback from '../Mainadminfeedback/Mainadminfeedback'
 import Mainadminonboarding from '../Mainadminonboarding/Mainadminonboarding'
 import Mainadminoverview from '../Mainadminoverview/Mainadminoverview'
 import Mainadmincustomerdetails from '../Mainadmincustomer/Mainadmincustomerdetails'
+import { MainAdminCategoryEdit } from '../MainAdminCategoryEdit/MainAdminCategoryEdit'
 
 export default function Mainadmin() {
   const [ChangeDashboards, setChangeDashboards] = useState({
-    overview: true
+    category: true
   })
   const SentData = (data) => {
     setChangeDashboards({ [data]: true })
@@ -31,11 +32,11 @@ export default function Mainadmin() {
         <Mainadminsidebar data={{ SentData: SentData, selected: ChangeDashboards }} />
         <div className="mainadmindoctordetails mainadmincontainer">
           <div className="scroll">
-          {ChangeDashboards?.overview &&
+            {ChangeDashboards?.overview &&
               <>
                 <Mainadminoverview />
                 <br /><br /><br /><br /><br /><br /><br /><br />
-             
+
               </>
 
             }
@@ -45,9 +46,7 @@ export default function Mainadmin() {
               <>
                 <Mainadmindoctorlist />
                 <br /><br /><br /><br /><br /><br /><br /><br />
-                <Mainadmindoctordetails />
-                <br /><br /><br /><br /><br /><br /><br /><br />
-                <Mainadmindoctorapprove />
+                {/* <Mainadmindoctorapprove /> */}
                 <br /><br /><br /><br /><br /><br /><br /><br />
               </>
 
@@ -92,6 +91,12 @@ export default function Mainadmin() {
             {ChangeDashboards?.onboarding &&
               <>
                 <Mainadminonboarding />
+              </>
+
+            }
+            {ChangeDashboards?.category &&
+              <>
+                <MainAdminCategoryEdit />
               </>
 
             }

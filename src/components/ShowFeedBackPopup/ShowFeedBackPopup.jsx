@@ -30,10 +30,10 @@ export const ShowFeedBackPopup = () => {
     const LoggedData = JSON.parse(storedLoginData);
 
     const SubmitData = () => {
-        if (ConstantData?.type === "doctor") {
+        if (ConstantData?.type === "Doctor") {
             const SentData = {
                 ...FinalData,
-                user_id: 7,
+                user_id: 6,
                 doctor_id: ConstantData?.doctor_id,
                 interactedid: ConstantData?.lastInteractionId
             };
@@ -57,7 +57,7 @@ export const ShowFeedBackPopup = () => {
         } else if (ConstantData.type === "Hospital") {
             const SentData = {
                 ...FinalData,
-                user_id: 7,
+                user_id: 6,
                 hospital_id: ConstantData?.hospital_id,
                 interactedid: ConstantData?.lastInteractionId
             };
@@ -81,7 +81,7 @@ export const ShowFeedBackPopup = () => {
         } else if (ConstantData?.type === "Lab") {
             const SentData = {
                 ...FinalData,
-                user_id: 7,
+                user_id: 6,
                 lab_id: ConstantData?.lab_id,
                 interactedid: ConstantData?.lastInteractionId
             };
@@ -129,7 +129,7 @@ export const ShowFeedBackPopup = () => {
         console.log("value>>>>", value)
         const SentData = {
             status: value,
-            user_id: 7,
+            user_id: 6,
             type: ConstantData?.type,
             interactedid: ConstantData?.lastInteractionId
         };
@@ -219,7 +219,7 @@ export const ShowFeedBackPopup = () => {
                                 <img src="./images/TempDocImg.jpg" alt="" />
                             </div>
                             <div className='ShowFeedBackPopupText'>
-                                <p>{ConstantData?.type === "Doctor" ? ` Have you consulted ${ConstantData?.doctor_name} ?` : ConstantData?.type === "Hospital" ? ` Are you Visited in ${ConstantData?.hospital_name} ?` : `Are you Visited in ${ConstantData?.Hospital_name} ?`}</p>
+                                <p>{ConstantData?.type === "Doctor" ? ` Have you consulted ${ConstantData?.doctor_name} ?` : ConstantData?.type === "Hospital" ? ` Are you Visited in ${ConstantData?.hospital_name} ?` : `Are you Visited in ${ConstantData?.lab_name} ?`}</p>
                                 <p>Are you happy to share a review?</p>
                             </div>
                             <div className='ShowFeedBackPopupInButtinsGap'>

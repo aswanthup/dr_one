@@ -72,6 +72,7 @@ import HospitalDetailed from "./pages/Hospital/HospitalDetailed/HospitalDetailed
 import HospitalAdminProvider from "./contexts/Doctor/HospitalAdminProvider";
 import { ShowFeedBackPopupContext } from "./components/ShowFeedBackPopup/ShowFeedBackPopupContext";
 import { ShowFeedBackPopup } from "./components/ShowFeedBackPopup/ShowFeedBackPopup";
+import { DoctorFeedbackList } from "./pages/Mainadmin/Mainadmindoctor/DoctorFeedBacklist/DoctorFeedbackList";
 function App() {
   return (
     <div className="App">
@@ -267,6 +268,10 @@ function App() {
               <Route
                 path="/doctoradminprofile"
                 element={<DocProfileMainSec />}
+              ></Route>
+              <Route
+                path="/doctorfeedacklist"
+                element={<DoctorFeedbackList />}
               ></Route>
 
               {/*End Main admin */}

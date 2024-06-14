@@ -4,7 +4,7 @@ export const features = ["Op", "Casuality", "Palliative", "Care", "Other Service
 
 
 export const speacializationNames = [
-    "Anesthesiology and Critical Care",
+    "Anesthesiology and Critical Care", 
     "Cardiology",
     "Cosmetics and Plastic Surgery",
     "Dental",

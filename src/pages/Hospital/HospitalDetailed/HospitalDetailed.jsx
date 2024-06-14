@@ -10,7 +10,7 @@ const HospitalDetailed = () => {
     const TemPImg = "./images/TempHosImg.jpg"
     const cunsultNow = () => {
         const data = {
-            userid: 7,
+            userid: 6,
             id: HospitalData?.id,
             type: "Hospital",
             status: "P"
