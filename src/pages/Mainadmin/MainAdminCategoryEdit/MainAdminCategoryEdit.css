@@ -187,3 +187,106 @@
     justify-content: end;
     position: relative;
 }
+
+.MainAdminCatEditSecModal {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.MainAdminCatEditSecModalDiv {
+    height: 200px;
+    width: 25%;
+    background-color: white;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+}
+
+.MainAdminCatEditSecModalDiv p {
+    font-size: 20px;
+    font-weight: 400;
+}
+
+.MainAdminCatEditSecModalDiv input {
+    font-size: 15px;
+    font-weight: 400;
+    border-bottom: 1px solid black;
+    height: 40px;
+}
+
+.MainAdminCatEditSecModalButton {
+    display: flex;
+    justify-content: end;
+}
+
+.MainAdminCatEditSecModalButton button {
+    width: 100px;
+    font-size: 15px;
+    background-color: rgb(20, 168, 20);
+    color: white;
+    height: 30px;
+    letter-spacing: 1px;
+    border: none;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+.EditQuestionsModalSec {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.EditQuestionsModal {
+    width: 25%;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    background-color: white;
+    align-items: center;
+    padding: 20px;
+}
+
+.EditQuestionsModal p {
+    color: rgba(0, 0, 0, 0.713);
+    font-size: 20px;
+    text-align: center;
+    font-weight: 400;
+}
+
+.EditQuestionsModalFlex {
+    display: flex;
+    gap: 20px;
+}
+
+.EditQuestionsModalFlex1 {
+    background-color: rgba(255, 0, 0, 0.692);
+    border: none;
+    letter-spacing: 1px;
+    color: white;
+    width: 100px;
+}
+
+.EditQuestionsModalFlex2 {
+    background-color: rgba(26, 217, 54, 0.846);
+    border: none;
+    letter-spacing: 1px;
+    color: white;
+    width: 100px;
+}
+
+#EditQuestionsDeleteIcon {
+    font-size: 40px;
+    color: white;
+    border-radius: 50%;
+    height: 70px;
+    width: 70px;
+    background-color: red;
+    padding: 10px;
+}
