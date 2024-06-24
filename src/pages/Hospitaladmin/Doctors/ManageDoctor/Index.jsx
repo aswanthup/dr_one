@@ -29,7 +29,7 @@ const Index = () => {
   const { id } = JSON.parse(localStorage.getItem("loginData")) || {};
   const doctor_id = selectedDoc?.id;
   const ResetTimePicker = () => {
-    setTimePickers([
+    setTimePickers([  
       {
         day: "Sunday",
         id: 1,
@@ -611,9 +611,9 @@ const Index = () => {
                 </div>
               ))}
             </div>
-            <div className="viewdataFinalSaveButton" style={{gap:"2rem"}}>
+            <div className="viewdataFinalSaveButton" style={{ gap: "2rem" }}>
               <button onClick={SaveData}>Save</button>
-              <button style={{background:"#ff6347"}} onClick={()=>setShowConfirmationModal(true)}>Reset</button>
+              <button style={{ background: "#ff6347" }} onClick={() => setShowConfirmationModal(true)}>Reset</button>
             </div>
           </div>
         </div>
@@ -750,7 +750,7 @@ const Index = () => {
           </div>
         </div>
       </Modal>
-      <ConfirmationModal confirmation={showConfirmationModal} setConfirmation={setShowConfirmationModal} handleYes={ResetTimePicker}/>
+      <ConfirmationModal confirmation={showConfirmationModal} setConfirmation={setShowConfirmationModal} handleYes={ResetTimePicker} />
     </>
   );
 };

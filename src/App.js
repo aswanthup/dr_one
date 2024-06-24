@@ -73,6 +73,8 @@ import HospitalAdminProvider from "./contexts/Doctor/HospitalAdminProvider";
 import { ShowFeedBackPopupContext } from "./components/ShowFeedBackPopup/ShowFeedBackPopupContext";
 import { ShowFeedBackPopup } from "./components/ShowFeedBackPopup/ShowFeedBackPopup";
 import { DoctorFeedbackList } from "./pages/Mainadmin/Mainadmindoctor/DoctorFeedBacklist/DoctorFeedbackList";
+import MainAdminDoctorEditBasic from "./pages/Mainadmin/Mainadmindoctor/MainAdminDoctorEdit/MainAdminDoctorEditBasic";
+import { MainAdminDoctorEditFinal } from "./pages/Mainadmin/Mainadmindoctor/MainAdminDoctorEdit/MainAdminDoctorEditFinal";
 function App() {
   return (
     <div className="App">
@@ -272,6 +274,14 @@ function App() {
               <Route
                 path="/doctorfeedacklist"
                 element={<DoctorFeedbackList />}
+              ></Route>
+              <Route
+                path="/mainadmindoctorEditbasic"
+                element={<MainAdminDoctorEditBasic />}
+              ></Route>
+              <Route
+                path="/mainadmindoctorEditFinal"
+                element={<MainAdminDoctorEditFinal />}
               ></Route>
 
               {/*End Main admin */}

@@ -213,12 +213,12 @@ export const DocAdminProfile = () => {
         if (hasStartTime.length === FindStartTime.length && hasEndTime.length === FindEndTime.length) {
             checkingValues = true;
         }
-        console.log("checkingValues>>>>", checkingValues)
         if (checkingValues && !FormValues?.hospital_id && !FormValues?.hospital_name) {
             toastify({ msg: "Hospital not default; residential auto-added." })
         }
         if (checkingValues) {
             setloading(true)
+            console.log("data>>>>", data)
             axios.post(`${port}/hospital/consultation_details`, data).then((res) => {
                 if (res?.data?.success) {
                     toastify({ msg: res?.data?.message, success: true })
@@ -228,7 +228,7 @@ export const DocAdminProfile = () => {
                     setloading(false)
                 }
             }).catch((err) => {
-                // toastify({ msg: err?.response?.data?.message })
+                toastify({ msg: err?.response?.data?.message })
                 setloading(false)
             })
         } else {

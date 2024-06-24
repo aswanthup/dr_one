@@ -216,10 +216,10 @@ export default function Doctoradmin() {
     if (hasStartTime.length === FindStartTime.length && hasEndTime.length === FindEndTime.length) {
       checkingValues = true;
     }
-    console.log("checkingValues>>>>", checkingValues)
     if (checkingValues && !FormValues?.hospital_id && !FormValues?.hospital_name) {
       toastify({ msg: "Hospital not default; residential auto-added." })
     }
+    console.log("data>>>>", data)
     if (checkingValues) {
       setloading(true)
       axios.post(`${port}/hospital/consultation_details`, data).then((res) => {

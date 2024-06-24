@@ -16,14 +16,18 @@ import Mainadminonboarding from '../Mainadminonboarding/Mainadminonboarding'
 import Mainadminoverview from '../Mainadminoverview/Mainadminoverview'
 import Mainadmincustomerdetails from '../Mainadmincustomer/Mainadmincustomerdetails'
 import { MainAdminCategoryEdit } from '../MainAdminCategoryEdit/MainAdminCategoryEdit'
+import MainAdminDoctorEditBasic from '../Mainadmindoctor/MainAdminDoctorEdit/MainAdminDoctorEditBasic'
 
 export default function Mainadmin() {
   const [ChangeDashboards, setChangeDashboards] = useState({
     category: true
   })
+  const [DetailData, setDetailData] = useState()
   const SentData = (data) => {
     setChangeDashboards({ [data]: true })
   }
+
+
   console.log("ChangeDashboards>>>>", ChangeDashboards)
   return (
     <div className="mainadminsection">
@@ -44,20 +48,23 @@ export default function Mainadmin() {
 
             {ChangeDashboards?.doctor &&
               <>
-                <Mainadmindoctorlist />
-                <br /><br /><br /><br /><br /><br /><br /><br />
-                {/* <Mainadmindoctorapprove /> */}
-                <br /><br /><br /><br /><br /><br /><br /><br />
+                <Mainadmindoctorlist updateState={{ setChangeDashboards, setDetailData }} />
               </>
-
             }
+            {ChangeDashboards?.doctorDetail &&
+              <>
+                <Mainadmindoctordetails Data={{ DetailData }} />
+              </>
+            }
+
             {ChangeDashboards?.hospital &&
               <>
-                <Mainadminhospitallist />
-                <br /><br /><br /><br /><br /><br /><br /><br />
-                <Mainadminhospitaldetails />
-                <br /><br /><br /><br /><br /><br /><br /><br />
-                <Mainadminhospitalapprove />
+                <Mainadminhospitallist updateState={{ setChangeDashboards, setDetailData }} />
+              </>
+            }
+            {ChangeDashboards?.hospitaldetails &&
+              <>
+                <Mainadminhospitaldetails Data={{ DetailData }} />
               </>
             }
 

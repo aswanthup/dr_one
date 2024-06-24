@@ -57,7 +57,7 @@ export default function Hospitaladmin() {
   console.log("Hospital data ", hospital);
   return (
     <>
-      {isLoading &&<Loader />}
+      {isLoading && <Loader />}
       <div className="mainadminsection">
         <HospitalTopbar
           data={{ SentData: SentData, selected: ChangeDashboards }}

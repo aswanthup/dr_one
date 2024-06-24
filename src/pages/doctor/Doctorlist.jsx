@@ -8,11 +8,11 @@ import Footer from '../../components/Footer'
 export default function Doctorlist() {
   return (
     <div>
-         <div>
+      <div>
         {/* Navbar */}
- <Headroom>
-    <Navbar />
- </Headroom>
+        <Headroom>
+          <Navbar />
+        </Headroom>
 
         {/*End Navbar */}
         <div className="container-third">
@@ -130,7 +130,7 @@ export default function Doctorlist() {
         </div>
       </div>
 
-<Footer />
+      <Footer />
 
     </div>
   )

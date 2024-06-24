@@ -4,7 +4,7 @@ import axios from 'axios'
 import moment from 'moment'
 import { useNavigate } from 'react-router-dom'
 
-export default function Mainadmindoctorlist() {
+export default function Mainadmindoctorlist({ updateState: { setChangeDashboards, setDetailData } }) {
   const navigate = useNavigate()
   const [Doctors, setDoctors] = useState([])
   const [initialData, setinitialData] = useState([])
@@ -17,7 +17,8 @@ export default function Mainadmindoctorlist() {
   }, [])
 
   const navigateFn = (data) => {
-    navigate("/mainadmindoctordetails", { state: { data: data } })
+    setDetailData(data)
+    setChangeDashboards({ doctorDetail: true })
   }
   const SearchData = (e) => {
     const { name, value } = e?.target;
@@ -40,25 +41,34 @@ export default function Mainadmindoctorlist() {
 
     setDoctors(tempData);
   };
+
   const filterDate = (e) => {
     const { value } = e.target;
-    const inputDate = moment(value); // Assuming a date input
+    console.log('Input value:', value);
+
+    const inputDate = moment(value).startOf('day');
+    console.log('Parsed input date:', inputDate);
 
     if (!inputDate.isValid()) {
+      console.error('Invalid date input');
       return; // Handle invalid date input (optional)
     }
 
     const filteredData = initialData.filter(item => {
-      const itemDate = moment(item?.datetime);
+      const itemDate = moment(item?.datetime).startOf('day');
+      console.log('Item date:', itemDate);
+
       if (itemDate.isValid()) {
-        // Adjust filtering logic based on your needs (see options above)
-        return itemDate.isSame(inputDate, 'day'); // Example: filter by day
+        // Compare only the date part
+        return itemDate.isSame(inputDate, 'day');
       }
       return false;
     });
 
+    console.log('Filtered data:', filteredData);
     setDoctors(filteredData);
   };
+
   return (
     <div>
 

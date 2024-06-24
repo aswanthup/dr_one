@@ -347,8 +347,15 @@
     color: rgba(0, 0, 0, 0.501);
 }
 
-.admin_disable_button h4 {
+.admin_disable_button2 h4 {
     background-color: #F35454;
+    color: white;
+    padding: .2vw 1.5vw;
+    border-radius: 5px;
+}
+
+.admin_disable_button h4 {
+    background-color: #5cf354;
     color: white;
     padding: .2vw 1.5vw;
     border-radius: 5px;
@@ -525,57 +532,6 @@ tr:hover {
     background-color: #f1f1f1;
 }
 
-.doctortable {
-
-    /* Column width */
-    th:nth-child(1),
-    td:nth-child(1) {
-        width: 2%;
-    }
-
-    th:nth-child(2),
-    td:nth-child(2) {
-        width: 12.5%;
-    }
-
-    th:nth-child(3),
-    td:nth-child(3) {
-        width: 12.5%;
-    }
-
-    th:nth-child(4),
-    td:nth-child(4) {
-        width: 12.5%;
-    }
-
-    th:nth-child(5),
-    td:nth-child(5) {
-        width: 12.5%;
-    }
-
-    th:nth-child(6),
-    td:nth-child(6) {
-        width: 8%;
-    }
-
-    th:nth-child(7),
-    td:nth-child(7) {
-        width: 8%;
-    }
-
-    th:nth-child(8),
-    td:nth-child(8) {
-        width: 12%;
-    }
-
-    th:nth-child(9),
-    td:nth-child(9) {
-        width: 8%;
-    }
-
-}
-
-
 
 
 /* Doctor Views List */
@@ -619,165 +575,6 @@ tr:hover {
     background-color: #f1f1f1;
 }
 
-.onboardingtable {
-
-    th:nth-child(1),
-    td:nth-child(1) {
-        width: 2%;
-    }
-
-    th:nth-child(2),
-    td:nth-child(2) {
-        width: 12.5%;
-    }
-
-    th:nth-child(3),
-    td:nth-child(3) {
-        width: 19.5%;
-    }
-
-    th:nth-child(4),
-    td:nth-child(4) {
-        width: 12.5%;
-    }
-
-    th:nth-child(5),
-    td:nth-child(5) {
-        width: 12.5%;
-    }
-
-    th:nth-child(6),
-    td:nth-child(6) {
-        width: 8%;
-    }
-
-    th:nth-child(7),
-    td:nth-child(7) {
-        width: 5%;
-    }
-
-    td:nth-child(7) {
-        color: #3A65FD;
-    }
-
-
-}
-
-
-
-
-
-
-/*End Onboarding table */
-
-
-
-/* Customer */
-
-.do_la_ho_card {
-    margin-top: 1.3vw;
-    width: 300px;
-    height: fit-content;
-    border-radius: 6px;
-    border: 1px solid #a4b7fca2;
-    padding: 1.2vw;
-
-    /* box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px, rgb(209, 213, 219) 0px 0px 0px 1px inset; */
-}
-
-.do_la_ho_card_doctor {
-    justify-content: space-between;
-    margin-bottom: 1vw;
-}
-
-.do_la_ho_card_data {
-    justify-content: space-between;
-}
-
-.do_la_ho_card2 {
-    margin-left: 10px;
-}
-
-
-
-
-.customertable {
-    width: 100%;
-    border-collapse: collapse;
-    /* margin: 30px 0; */
-    font-size: 1.2rem;
-    font-weight: 300;
-}
-
-/* Table header styling */
-th,
-td {
-    border: 1px solid #a4b7fc;
-    text-align: left;
-    padding: 8px;
-}
-
-/* Header row background color */
-th {
-    background-color: #e4eaff;
-    font-weight: 600;
-}
-
-/* Zebra stripe rows */
-tr:nth-child(even) {
-    background-color: #f9f9f9;
-}
-
-/* Hover effect for rows */
-tr:hover {
-    background-color: #f1f1f1;
-}
-
-
-/* Column width */
-.customertable th:nth-child(1),
-.onboardingtable td:nth-child(1) {
-    width: 2%;
-}
-
-.customertable th:nth-child(2),
-.onboardingtable td:nth-child(2) {
-    width: 12.5%;
-}
-
-.customertable th:nth-child(3),
-.onboardingtable td:nth-child(3) {
-    width: 12.5%;
-}
-
-.customertable th:nth-child(4),
-.onboardingtable td:nth-child(4) {
-    width: 12.5%;
-}
-
-.customertable th:nth-child(5),
-.onboardingtable td:nth-child(5) {
-    width: 12.5%;
-}
-
-.customertable th:nth-child(6),
-.onboardingtable td:nth-child(6) {
-    width: 8%;
-}
-
-.customertable th:nth-child(7),
-.onboardingtable td:nth-child(7) {
-    width: 6%;
-}
-
-.customertable th:nth-child(8),
-.onboardingtable td:nth-child(8) {
-    width: 6%;
-}
-
-.customertable td:nth-child(8) {
-    color: #3A65FD;
-}
 
 
 
@@ -960,8 +757,24 @@ tr:hover {
 
 }
 
-
+.OnBoardingtableTh {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
 
 
 
 /*End Feedback section */
+.mainadmindoctoraboutFlexEnd {
+    display: flex;
+    justify-content: end;
+}
+
+.mainadmindoctoraboutFlexEnd button {
+    background-color: #2A9D8F;
+    color: white;
+    font-size: 15px;
+    letter-spacing: 1px;
+    border: none;
+}

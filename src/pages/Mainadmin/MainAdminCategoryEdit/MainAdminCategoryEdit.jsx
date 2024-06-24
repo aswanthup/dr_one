@@ -82,7 +82,6 @@ export const MainAdminCategoryEdit = () => {
         } else {
             setConditionForDoc({ edit: true })
         }
-
     }
     const EditFnLab = () => {
         if (ConditionForDoc?.edit) {
@@ -90,7 +89,6 @@ export const MainAdminCategoryEdit = () => {
         } else {
             setConditionForLab({ edit: true })
         }
-
     }
     useEffect(() => {
         loadingFn(true)
@@ -106,6 +104,7 @@ export const MainAdminCategoryEdit = () => {
         })
     }, [])
 
+    console.log("DeletePopup>>>>", DeletePopup)
     const EditFnBox = (index, which) => {
 
         const Type = Object.keys(HosSections)
@@ -129,7 +128,7 @@ export const MainAdminCategoryEdit = () => {
             if (res?.data?.success) {
                 loadingFn(false)
                 setConditionForHos({ edit: true, index: index })
-                setDeletePopup({ can: true })
+                setDeletePopup({ ...DeletePopup, can: true })
                 loadingFn(false)
             }
         }).catch((err) => {
@@ -163,7 +162,7 @@ export const MainAdminCategoryEdit = () => {
                 if (res?.data?.success)
                     toast.success(res?.data?.message);
                 setConditionForDoc({ edit: true, index: index })
-                setDeletePopup({ can: true })
+                setDeletePopup({ ...DeletePopup, can: true })
                 loadingFn(false)
 
             }).catch((err) => {
@@ -201,7 +200,7 @@ export const MainAdminCategoryEdit = () => {
                 if (res?.data?.success)
                     toast.success(res?.data?.message);
                 setConditionForLab({ edit: true, index: index })
-                setDeletePopup({ can: true })
+                setDeletePopup({ ...DeletePopup, can: true })
                 loadingFn(false)
             }).catch((err) => {
                 console.log(err)
@@ -212,8 +211,38 @@ export const MainAdminCategoryEdit = () => {
             toast.info("Check Fields")
         }
         loadingFn(true)
-
     }
+
+
+
+    const CheckEdit = (which, maintype) => {
+        const Type = Object.keys(LabSections)
+        let Data = ''
+        if (Type[0] === "Features") {
+            Data = {
+                main_type: maintype,
+                features: which
+            }
+        } else {
+            Data = {
+                main_type: "Laboratory",
+                services: which
+            }
+
+        }
+        axios.post(`${port}/admin/editcategory`, Data).then((res) => {
+            console.log("res>>>>", res)
+            if (res?.data?.success)
+                toast.success(res?.data?.message);
+            return { data: "success" }
+            loadingFn(false)
+        }).catch((err) => {
+            console.log(err)
+            toast.info(err.response?.data?.message)
+            loadingFn(false)
+        })
+    }
+
     const editHosSpeciality = (e, index) => {
         const value = e?.target?.value
         let tempSepeciality = [...Hosspecialities]
@@ -334,29 +363,33 @@ export const MainAdminCategoryEdit = () => {
 
     const AddCategoryOnchange = (e) => {
         const value = e?.target?.value
-        console.log("checkingggg>>>>>", ModalCondition?.type)
         setModalCondition({ ...ModalCondition, value: value })
     }
     const AddCategory = () => {
-        if (ModalCondition?.type === "Hospital") {
-            let TempData = [...Hosspecialities]
-            TempData = [...TempData, ModalCondition?.value]
-            setHosspecialities(TempData)
-            setModalCondition({ open: false })
-            toast.info("Click the Save button to apply your changes")
-        } else if (ModalCondition?.type === "Doctor") {
-            let TempData = [...Docspecialities]
-            TempData = [...TempData, ModalCondition?.value]
-            setDocspecialities(TempData)
-            setModalCondition({ open: false })
-            toast.info("Click the Save button to apply your changes")
-        } else if (ModalCondition?.type === "Laboratory") {
-            let TempData = [...LabPrintingItems]
-            TempData = [...TempData, ModalCondition?.value]
-            setLabPrintingItems(TempData)
-            setModalCondition({ open: false })
-            toast.info("Click the Save button to apply your changes")
+        if (ModalCondition?.value) {
+            if (ModalCondition?.type === "Hospital") {
+                let TempData = [...Hosspecialities]
+                TempData = [...TempData, ModalCondition?.value]
+                setHosspecialities(TempData)
+                setModalCondition({ open: false })
+                toast.info("Click the Save button to apply your changes")
+            } else if (ModalCondition?.type === "Doctor") {
+                let TempData = [...Docspecialities]
+                TempData = [...TempData, ModalCondition?.value]
+                setDocspecialities(TempData)
+                setModalCondition({ open: false })
+                toast.info("Click the Save button to apply your changes")
+            } else if (ModalCondition?.type === "Laboratory") {
+                let TempData = [...LabPrintingItems]
+                TempData = [...TempData, ModalCondition?.value]
+                setLabPrintingItems(TempData)
+                setModalCondition({ open: false })
+                toast.info("Click the Save button to apply your changes")
+            }
+        } else {
+            toast.info("Please enter values")
         }
+
     }
 
     const OpenDeletePopup = (index, type) => {
@@ -386,6 +419,7 @@ export const MainAdminCategoryEdit = () => {
             setDeletePopup({ delete: false })
         }
     }
+
     return (
         <div className='MainAdminCategoryEdit'>
             <div className='MainAdminCategoryEditHeader'>
@@ -568,7 +602,9 @@ export const MainAdminCategoryEdit = () => {
                         < Loader />
                     }
                 </>
-                : ''
+                : <>
+                    <Loader />
+                </>
             }
         </div >
 
