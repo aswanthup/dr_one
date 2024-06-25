@@ -20,7 +20,7 @@ import MainAdminDoctorEditBasic from '../Mainadmindoctor/MainAdminDoctorEdit/Mai
 
 export default function Mainadmin() {
   const [ChangeDashboards, setChangeDashboards] = useState({
-    category: true
+    doctor: true
   })
   const [DetailData, setDetailData] = useState()
   const SentData = (data) => {
@@ -28,6 +28,7 @@ export default function Mainadmin() {
   }
 
 
+  console.log("ChangeDashboards>>>>", ChangeDashboards)
   return (
     <div className="mainadminsection">
       <Mainadminnavbar data={{ SentData: SentData, selected: ChangeDashboards }} />

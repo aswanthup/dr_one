@@ -206,7 +206,6 @@ export const MainAdminCategoryEdit = () => {
             }
         }
         CheckEdit(Data, index, "Hospital")
-        loadingFn(true)
     }
 
     const EditFnBoxDoc = (index, which) => {
@@ -227,9 +226,9 @@ export const MainAdminCategoryEdit = () => {
         if (Data?.main_type) {
             CheckEdit(Data, index, "Doctor")
         } else {
+
             toast.info("Check Fields")
         }
-        loadingFn(true)
     }
     const EditFnBoxLab = (index, which) => {
         const Type = Object.keys(LabSections)
@@ -251,7 +250,6 @@ export const MainAdminCategoryEdit = () => {
         } else {
             toast.info("Check Fields")
         }
-        loadingFn(true)
     }
 
 
@@ -359,6 +357,7 @@ export const MainAdminCategoryEdit = () => {
 
     const closePopups = () => {
         setDeletePopup({ delete: false })
+        loadingFn(false)
     }
 
 
