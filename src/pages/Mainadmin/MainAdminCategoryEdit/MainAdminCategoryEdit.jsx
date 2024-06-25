@@ -90,11 +90,11 @@ export const MainAdminCategoryEdit = () => {
             setConditionForLab({ edit: true })
         }
     }
-    useEffect(() => {
+
+    const IntialApiCall = () => {
         loadingFn(true)
         axios.get(`${port}/admin/getcategory`).then((res) => {
             setcategories(res?.data?.data)
-            console.log("res>>>>", res)
             loadingFn(false)
             const FindData = res?.data?.data?.transformedData?.find(ele => ele?.type === "Homeopathy")
             setHosspecialities(FindData?.department)
@@ -102,14 +102,15 @@ export const MainAdminCategoryEdit = () => {
             const LabServices = res?.data?.data?.originalData?.find(ele => ele?.Laboratory)
             setLabPrintingItems(LabServices?.Laboratory?.services)
         })
+    }
+
+    useEffect(() => {
+        IntialApiCall()
     }, [])
 
-    console.log("DeletePopup>>>>", DeletePopup)
     const EditFnBox = (index, which) => {
-
         const Type = Object.keys(HosSections)
         let Data = {}
-        console.log(Type[0])
         if (Type[0] === "Features") {
             Data = {
                 main_type: "Hospital",
@@ -118,30 +119,15 @@ export const MainAdminCategoryEdit = () => {
         } else {
             Data = {
                 type: Type[0],
-                main_type: "Doctor",
+                main_type: "Hospital",
                 department: which,
             }
         }
-        axios.post(`${port}/admin/editcategory`, Data).then((res) => {
-            console.log(res)
-            toast.success(res?.data?.message)
-            if (res?.data?.success) {
-                loadingFn(false)
-                setConditionForHos({ edit: true, index: index })
-                setDeletePopup({ ...DeletePopup, can: true })
-                loadingFn(false)
-            }
-        }).catch((err) => {
-            toast.info(err.response?.data?.message)
-            loadingFn(false)
-        })
-        console.log("Data>>>>>>", Data)
+        CheckEdit(Data, index, "Hospital")
         loadingFn(true)
-
     }
 
     const EditFnBoxDoc = (index, which) => {
-        console.log(Object.keys(DocSections))
         const Type = Object.keys(DocSections)
         let Data = {}
         if (Type[0] === "Features") {
@@ -157,29 +143,14 @@ export const MainAdminCategoryEdit = () => {
             }
         }
         if (Data?.main_type) {
-            axios.post(`${port}/admin/editcategory`, Data).then((res) => {
-                console.log("res>>>>", res)
-                if (res?.data?.success)
-                    toast.success(res?.data?.message);
-                setConditionForDoc({ edit: true, index: index })
-                setDeletePopup({ ...DeletePopup, can: true })
-                loadingFn(false)
-
-            }).catch((err) => {
-                toast.info(err.response?.data?.message)
-                loadingFn(false)
-
-            })
+            CheckEdit(Data, index, "Doctor")
         } else {
             toast.info("Check Fields")
         }
-        console.log(Data)
         loadingFn(true)
     }
     const EditFnBoxLab = (index, which) => {
-        console.log(Object.keys(LabSections))
         const Type = Object.keys(LabSections)
-        console.log("Typeeee>>>>>", Type[0])
         let Data = {}
         if (Type[0] === "Features") {
             Data = {
@@ -191,22 +162,10 @@ export const MainAdminCategoryEdit = () => {
                 main_type: "Laboratory",
                 services: which
             }
-
         }
-        console.log(Data)
+        // console.log(Data)
         if (Data?.main_type) {
-            axios.post(`${port}/admin/editcategory`, Data).then((res) => {
-                console.log("res>>>>", res)
-                if (res?.data?.success)
-                    toast.success(res?.data?.message);
-                setConditionForLab({ edit: true, index: index })
-                setDeletePopup({ ...DeletePopup, can: true })
-                loadingFn(false)
-            }).catch((err) => {
-                console.log(err)
-                toast.info(err.response?.data?.message)
-                loadingFn(false)
-            })
+            CheckEdit(Data, index, "Laboratory")
         } else {
             toast.info("Check Fields")
         }
@@ -215,34 +174,113 @@ export const MainAdminCategoryEdit = () => {
 
 
 
-    const CheckEdit = (which, maintype) => {
-        const Type = Object.keys(LabSections)
-        let Data = ''
-        if (Type[0] === "Features") {
-            Data = {
-                main_type: maintype,
-                features: which
+
+    const CheckEdit = async (Data, index, type) => {
+        console.log("coming Data>", index);
+        console.log("State Data>", ConditionForHos?.index);
+        try {
+            const Checking = type === "Hospital" ?
+                ConditionForHos?.index === index
+                :
+                type === "Laboratory" ?
+                    ConditionForLab?.index === index
+                    :
+                    type === "Doctor" ?
+                        ConditionForDoc?.index === index
+                        :
+                        ''
+
+            if (!Checking) {
+                console.log("Checking>>>>", Checking)
+                const res = await axios.post(`${port}/admin/editcategory`, Data);
+                if (res?.data?.success) {
+                    if (type === "Laboratory") {
+                        console.log("Laboratory");
+                        setConditionForLab({ edit: true, index, type });
+                    } else if (type === "Hospital") {
+                        console.log("Hospital");
+                        setConditionForHos({ edit: true, index, type });
+                    } else if (type === "Doctor") {
+                        console.log("Doctor");
+                        setConditionForDoc({ edit: true, index, type });
+                    }
+                    toast.success(res?.data?.message);
+                    loadingFn(false);
+                    const passingData = { checking: true }
+                    return passingData;
+                }
+            } else {
+                const passingData = { checking: true }
+                return passingData
+            }
+        } catch (err) {
+            toast.info(err.response?.data?.message);
+            loadingFn(false);
+            const passingData = { checking: false }
+            return passingData;  // Return the success message
+        }
+    };
+    const OpenDeletePopup = async (index, main_type, which) => {
+        console.log("main_type>>>>", main_type, "index>>>>>", index, "which>>>>>", which,)
+        let Data = ""
+        if (main_type === "Laboratory") {
+            const type = Object.keys(LabSections)
+            if (type[0] === "Features") {
+                Data = {
+                    main_type: main_type,
+                    features: which
+                }
+            } else {
+                Data = {
+                    main_type: main_type,
+                    services: which
+                }
+            }
+        } else if (main_type === "Hospital") {
+            const type = Object.keys(HosSections)
+
+            if (type[0] === "Features") {
+                Data = {
+                    main_type: "Hospital",
+                    features: which
+                }
+            } else {
+                Data = {
+                    type: type[0],
+                    main_type: "Hospital",
+                    department: which,
+                }
             }
         } else {
-            Data = {
-                main_type: "Laboratory",
-                services: which
+            const type = Object.keys(DocSections)
+            if (type[0] === "Features") {
+                Data = {
+                    main_type: "Doctor",
+                    features: which
+                }
+            } else {
+                Data = {
+                    type: type[0],
+                    main_type: "Doctor",
+                    department: which,
+                }
             }
-
         }
-        axios.post(`${port}/admin/editcategory`, Data).then((res) => {
-            console.log("res>>>>", res)
-            if (res?.data?.success)
-                toast.success(res?.data?.message);
-            return { data: "success" }
-            loadingFn(false)
-        }).catch((err) => {
-            console.log(err)
-            toast.info(err.response?.data?.message)
-            loadingFn(false)
-        })
+
+        const Getting = await CheckEdit(Data, index, main_type);
+        console.log("Data>>>>>", Getting)
+        if (Getting?.checking) {
+            setDeletePopup({ ...DeletePopup, delete: true, index: index, main_type })
+        }
     }
 
+    const closePopups = () => {
+        setDeletePopup({ delete: false })
+    }
+
+
+
+    console.log("DeletePopup", DeletePopup)
     const editHosSpeciality = (e, index) => {
         const value = e?.target?.value
         let tempSepeciality = [...Hosspecialities]
@@ -262,7 +300,7 @@ export const MainAdminCategoryEdit = () => {
         setDocspecialities(tempSepeciality)
     }
     const SaveDoc = () => {
-        console.log(Object.keys(DocSections))
+        // console.log(Object.keys(DocSections))
         const Type = Object.keys(DocSections)
         let Data = {}
         if (Type[0] === "Features") {
@@ -279,21 +317,21 @@ export const MainAdminCategoryEdit = () => {
         }
         if (Data?.main_type) {
             axios.post(`${port}/admin/addcategory`, Data).then((res) => {
-                console.log("res>>>>", res)
                 if (res?.data?.success)
                     toast.success(res?.data?.message);
                 loadingFn(false)
+                IntialApiCall()
             })
         } else {
             toast.success("Check Fields")
         }
-        console.log(Data)
+        // console.log(Data)
         loadingFn(true)
     }
     const SaveHos = () => {
-        console.log(Object.keys(HosSections))
+        // console.log(Object.keys(HosSections))
         const Type = Object.keys(HosSections)
-        console.log("Typeeee>>>>>", Type[0])
+        // console.log("Typeeee>>>>>", Type[0])
         let Data = {}
         if (Type[0] === "Features") {
             Data = {
@@ -309,22 +347,23 @@ export const MainAdminCategoryEdit = () => {
         }
         if (Data?.main_type) {
             axios.post(`${port}/admin/addcategory`, Data).then((res) => {
-                console.log("res>>>>", res)
+                // console.log("res>>>>", res)
                 if (res?.data?.success)
                     toast.success(res?.data?.message);
                 loadingFn(false)
+                IntialApiCall()
+
             })
         } else {
             toast.info("Check Fields")
         }
-        console.log(Data)
+        // console.log(Data)
         loadingFn(true)
-
     }
     const SaveLab = () => {
-        console.log(Object.keys(LabSections))
+        // console.log(Object.keys(LabSections))
         const Type = Object.keys(LabSections)
-        console.log("Typeeee>>>>>", Type[0])
+        // console.log("Typeeee>>>>>", Type[0])
         let Data = {}
         if (Type[0] === "Features") {
             Data = {
@@ -340,16 +379,17 @@ export const MainAdminCategoryEdit = () => {
         }
         if (Data?.main_type) {
             axios.post(`${port}/admin/addcategory`, Data).then((res) => {
-                console.log("res>>>>", res)
+                // console.log("res>>>>", res)
                 if (res?.data?.success)
                     toast.success(res?.data?.message);
                 loadingFn(false)
+                IntialApiCall()
             })
         } else {
             toast.info("Check Fields")
         }
         loadingFn(true)
-        console.log(Data)
+        // console.log(Data)
     }
 
 
@@ -368,11 +408,16 @@ export const MainAdminCategoryEdit = () => {
     const AddCategory = () => {
         if (ModalCondition?.value) {
             if (ModalCondition?.type === "Hospital") {
-                let TempData = [...Hosspecialities]
-                TempData = [...TempData, ModalCondition?.value]
-                setHosspecialities(TempData)
-                setModalCondition({ open: false })
-                toast.info("Click the Save button to apply your changes")
+                if (!Hosspecialities.includes(ModalCondition?.value)) {
+                    let TempData = [...Hosspecialities]
+                    TempData = [...TempData, ModalCondition?.value]
+                    setHosspecialities(TempData)
+                    setModalCondition({ open: false })
+                    toast.info("Click the Save button to apply your changes")
+                } else {
+                    toast.info("This category has been already added")
+                }
+
             } else if (ModalCondition?.type === "Doctor") {
                 let TempData = [...Docspecialities]
                 TempData = [...TempData, ModalCondition?.value]
@@ -392,31 +437,28 @@ export const MainAdminCategoryEdit = () => {
 
     }
 
-    const OpenDeletePopup = (index, type) => {
-        if (DeletePopup?.delete) {
-            setDeletePopup({ delete: false })
-        } else {
-            setDeletePopup({ ...DeletePopup, delete: true, index: index, type })
-        }
+    console.log("DeletePopup>>>>", DeletePopup)
 
-    }
-    console.log(Hosspecialities)
+
+    // // console.log(Hosspecialities)
     const ConfirmDelete = () => {
-        if (DeletePopup?.type === 'hospital') {
+        if (DeletePopup?.main_type === 'Hospital') {
             let TempData = [...Hosspecialities]
             TempData.splice(DeletePopup?.index, 1)
             setHosspecialities(TempData)
-            setDeletePopup({ delete: false })
-        } else if (DeletePopup?.type === 'doctor') {
+            toast.info("Click the Save button to apply your changes")
+            closePopups()
+        } else if (DeletePopup?.main_type === 'Doctor') {
             let TempData = [...Docspecialities]
             TempData.splice(DeletePopup?.index, 1)
-            setDocspecialities(TempData)
-            setDeletePopup({ delete: false })
-        } else if (DeletePopup?.type === 'lab') {
+            toast.info("Click the Save button to apply your changes")
+            closePopups()
+        } else if (DeletePopup?.main_type === 'Laboratory') {
             let TempData = [...LabPrintingItems]
             TempData.splice(DeletePopup?.index, 1)
             setLabPrintingItems(TempData)
-            setDeletePopup({ delete: false })
+            toast.info("Click the Save button to apply your changes")
+            closePopups()
         }
     }
 
@@ -449,18 +491,18 @@ export const MainAdminCategoryEdit = () => {
                                 <div className='MainAdminCatSetSecondSecAlignItem'>
                                     {Hosspecialities.map((ele, index) =>
                                         ConditionForHos?.index !== index ?
-                                            <div onClick={() => { EditFnBox(index, ele) }} className='MainAdminCatSetSecondSecDivIcon'>
+                                            <div className='MainAdminCatSetSecondSecDivIcon'>
                                                 {ConditionForHos?.edit &&
-                                                    <i onClick={() => { OpenDeletePopup(index, "hospital") }} class="ri-close-line"></i>}
-                                                <div className='MainAdminCatSetSecondSecDiv'>
+                                                    <i onClick={() => { OpenDeletePopup(index, "Hospital", ele) }} class="ri-close-line"></i>}
+                                                <div onClick={() => { EditFnBox(index, ele) }} className='MainAdminCatSetSecondSecDiv'>
                                                     <p>{ele}</p>
                                                 </div>
                                             </div>
                                             :
-                                            ConditionForHos?.edit && ConditionForHos.index == index &&
+                                            ConditionForHos?.edit && ConditionForHos?.index == index &&
                                             < div className='MainAdminCatSetSecondSecDivIcon' >
-                                                <i onClick={() => { OpenDeletePopup(index, "hospital") }} class="ri-close-line"></i>
-                                                <input onChange={(e) => { editHosSpeciality(e, index) }} value={ele} className='MainAdminCatSetSecondSecDiv' />
+                                                <i onClick={() => { OpenDeletePopup(index, "Hospital", ele) }} class="ri-close-line"></i>
+                                                <input maxLength={90} maxLength={90} onChange={(e) => { editHosSpeciality(e, index) }} value={ele} className='MainAdminCatSetSecondSecDiv' />
                                             </div>
                                     )}
                                 </div>
@@ -496,18 +538,18 @@ export const MainAdminCategoryEdit = () => {
                                 <div className='MainAdminCatSetSecondSecAlignItem'>
                                     {Docspecialities.map((ele, index) =>
                                         ConditionForDoc?.index !== index ?
-                                            <div onClick={() => { EditFnBoxDoc(index, ele) }} className='MainAdminCatSetSecondSecDivIcon'>
+                                            <div className='MainAdminCatSetSecondSecDivIcon'>
                                                 {ConditionForDoc?.edit &&
-                                                    <i onClick={() => { OpenDeletePopup(index, "doctor") }} class="ri-close-line"></i>}
-                                                <div className='MainAdminCatSetSecondSecDiv'>
+                                                    <i onClick={() => { OpenDeletePopup(index, "Doctor", ele) }} class="ri-close-line"></i>}
+                                                <div onClick={() => { EditFnBoxDoc(index, ele) }} className='MainAdminCatSetSecondSecDiv'>
                                                     <p>{ele}</p>
                                                 </div>
                                             </div>
                                             :
                                             ConditionForDoc?.edit && ConditionForDoc.index == index &&
                                             < div className='MainAdminCatSetSecondSecDivIcon' >
-                                                <i onClick={() => { OpenDeletePopup(index, "doctor") }} class="ri-close-line"></i>
-                                                <input onChange={(e) => { editDocSpeciality(e, index) }} value={ele} className='MainAdminCatSetSecondSecDiv' />
+                                                <i onClick={() => { OpenDeletePopup(index, "Doctor", ele) }} class="ri-close-line"></i>
+                                                <input maxLength={90} onChange={(e) => { editDocSpeciality(e, index) }} value={ele} className='MainAdminCatSetSecondSecDiv' />
                                             </div>
                                     )}
                                 </div>
@@ -544,18 +586,18 @@ export const MainAdminCategoryEdit = () => {
                                 <div className='MainAdminCatSetSecondSecAlignItem'>
                                     {LabPrintingItems?.map((ele, index) =>
                                         ConditionForLab?.index !== index ?
-                                            <div onClick={() => { EditFnBoxLab(index, ele) }} className='MainAdminCatSetSecondSecDivIcon'>
+                                            <div className='MainAdminCatSetSecondSecDivIcon'>
                                                 {ConditionForLab?.edit &&
-                                                    <i onClick={() => { OpenDeletePopup(index, "lab") }} class="ri-close-line"></i>}
-                                                <div className='MainAdminCatSetSecondSecDiv'>
+                                                    <i onClick={() => { OpenDeletePopup(index, "Laboratory", ele) }} class="ri-close-line"></i>}
+                                                <div onClick={() => { EditFnBoxLab(index, ele) }} className='MainAdminCatSetSecondSecDiv'>
                                                     <p>{ele}</p>
                                                 </div>
                                             </div>
                                             :
                                             ConditionForLab?.edit && ConditionForLab.index == index &&
                                             < div className='MainAdminCatSetSecondSecDivIcon' >
-                                                <i onClick={() => { OpenDeletePopup(index, "lab") }} class="ri-close-line"></i>
-                                                <input onChange={(e) => { editLabSpeciality(e, index) }} value={ele} className='MainAdminCatSetSecondSecDiv' />
+                                                <i onClick={() => { OpenDeletePopup(index, "Laboratory", ele) }} class="ri-close-line"></i>
+                                                <input maxLength={90} onChange={(e) => { editLabSpeciality(e, index) }} value={ele} className='MainAdminCatSetSecondSecDiv' />
                                             </div>
                                     )}
                                 </div>
@@ -577,21 +619,20 @@ export const MainAdminCategoryEdit = () => {
                         <>
                             <div className='MainAdminCatEditSecModalDiv'>
                                 <p>Add Category</p>
-                                <input onChange={AddCategoryOnchange} type="text" placeholder='Input categories' />
+                                <input maxLength={90} onChange={AddCategoryOnchange} type="text" placeholder='Input categories' />
                                 <div className='MainAdminCatEditSecModalButton'>
                                     <button onClick={AddCategory}>Add</button>
                                 </div>
                             </div>
                         </>
                     </Modal>
-                    {DeletePopup?.can &&
-                        <Modal className='EditQuestionsModalSec' open={DeletePopup?.delete} onClose={OpenDeletePopup}>
+                    {DeletePopup?.delete &&
+                        <Modal className='EditQuestionsModalSec' open={DeletePopup?.delete} onClose={closePopups}>
                             <div className='EditQuestionsModal'>
-
                                 <DeleteIcon id="EditQuestionsDeleteIcon" />
                                 <p>Are you sure you want to proceed with the removal?</p>
                                 <div className='EditQuestionsModalFlex'>
-                                    <button className='EditQuestionsModalFlex1' onClick={OpenDeletePopup}>Close</button>
+                                    <button className='EditQuestionsModalFlex1' onClick={closePopups}>Close</button>
                                     <button className='EditQuestionsModalFlex2' onClick={ConfirmDelete} >Confirm</button>
                                 </div>
                             </div>
