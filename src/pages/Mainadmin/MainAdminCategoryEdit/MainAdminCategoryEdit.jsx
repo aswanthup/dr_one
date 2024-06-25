@@ -258,6 +258,7 @@ export const MainAdminCategoryEdit = () => {
 
 
     const CheckEdit = async (Data, index, type) => {
+        loadingFn(true)
         console.log("coming Data>", index);
         console.log("State Data>", ConditionForHos?.index);
         try {
