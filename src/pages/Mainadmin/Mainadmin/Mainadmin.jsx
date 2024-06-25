@@ -28,7 +28,6 @@ export default function Mainadmin() {
   }
 
 
-  console.log("ChangeDashboards>>>>", ChangeDashboards)
   return (
     <div className="mainadminsection">
       <Mainadminnavbar data={{ SentData: SentData, selected: ChangeDashboards }} />

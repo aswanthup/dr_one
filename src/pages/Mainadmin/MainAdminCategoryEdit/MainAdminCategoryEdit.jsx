@@ -8,22 +8,14 @@ import { Loader } from "../../../components/Loader/Loader"
 import DeleteIcon from '@mui/icons-material/Delete';
 export const MainAdminCategoryEdit = () => {
 
-    const [HosSections, setHosSections] = useState({
-        Homeopathy: true
-    })
+    const [HosSections, setHosSections] = useState({})
     const [DeletePopup, setDeletePopup] = useState({
         index: '',
         delete: false
     })
-    const [Loading, setLoading] = useState(
-        false
-    )
-    const [LabSections, setLabSections] = useState({
-        Services: true
-    })
-    const [DocSections, setDocSections] = useState({
-        Homeopathy: true
-    })
+    const [Loading, setLoading] = useState(false)
+    const [LabSections, setLabSections] = useState({})
+    const [DocSections, setDocSections] = useState({})
     const [ModalCondition, setModalCondition] = useState({})
     const [ConditionForHos, setConditionForHos] = useState({})
     const [ConditionForLab, setConditionForLab] = useState({})
@@ -37,34 +29,106 @@ export const MainAdminCategoryEdit = () => {
         setLoading(condition)
     }
 
-    const HosChangeSections = (sec) => {
-        setHosSections({ [sec]: true })
-        setConditionForHos({ edit: false })
-        if (sec === "Features") {
-            const FindData = categories?.originalData?.find(ele => ele?.Hospital)
-            setHosspecialities(FindData?.Hospital?.features)
+    const arraysEqual = (arr1, arr2) => {
+        if (arr1?.length !== arr2?.length) return false;
+        return arr1.every((value, index) => value === arr2[index]);
+    }
+
+
+    const CheckingDataInputed = () => {
+        const Type = Object.keys(HosSections)
+        console.log("Type>>>", Type)
+        if (Type[0] === "Features") {
+            const FindSecInd = categories?.originalData?.findIndex(ele => ele?.Hospital)
+            const originalData = categories?.originalData[FindSecInd]?.Hospital?.features
+            if (arraysEqual(originalData, Hosspecialities)) {
+                return "success"
+            } else {
+                toast.info("Please save changes")
+                return "false"
+            }
         } else {
-            const FindData = categories?.transformedData?.find(ele => ele?.type === sec)
-            if (FindData) {
-                setHosspecialities(FindData?.department)
+            const FindDataIndex = categories?.transformedData?.findIndex(ele => ele?.type === Type[0])
+            console.log(FindDataIndex)
+            const originalData = categories?.transformedData[FindDataIndex].department
+            console.log(originalData, Hosspecialities)
+            if (arraysEqual(originalData, Hosspecialities)) {
+                return "success"
+            } else {
+                toast.info("Please save changes")
+                return "false"
             }
         }
     }
-    const LabChangeSections = (sec) => {
-        setLabSections({ [sec]: true })
-        setConditionForLab({ edit: false })
-        if (sec) {
-            const LabServices = categories?.originalData?.find(ele => ele?.Laboratory)
-            setLabPrintingItems(LabServices.Laboratory?.[sec.toLowerCase()])
+    const CheckingDataInputedDoc = () => {
+        const Type = Object.keys(DocSections)
+        console.log("Type>>>", Type)
+        const FindDataIndex = categories?.transformedData?.findIndex(ele => ele?.type === Type[0])
+        console.log(FindDataIndex)
+        const originalData = categories?.transformedData[FindDataIndex].department
+        console.log(originalData, Hosspecialities)
+        if (arraysEqual(originalData, Docspecialities)) {
+            return "success"
+        } else {
+            toast.info("Please save changes")
+            return "false"
         }
     }
+    const CheckingDataInputedLab = () => {
+        const Type = Object.keys(LabSections)
+        console.log("Type>>>", Type)
+        const FindIndex = categories?.originalData?.findIndex(ele => ele?.Laboratory)
+        const originalData = categories?.originalData[FindIndex]?.Laboratory?.[Type[0].toLowerCase()]
+        if (arraysEqual(originalData, LabPrintingItems)) {
+            return "success"
+        } else {
+            toast.info("Please save changes")
+            return "false"
+        }
+    }
+    console.log("categories>>>>", categories)
+    const HosChangeSections = (sec) => {
+        const retrunElement = CheckingDataInputed()
+        console.log("retrunElement>>>>", retrunElement)
+        if (retrunElement === "success") {
+            if (sec === "Features") {
+                const FindData = categories?.originalData?.find(ele => ele?.Hospital)
+                setHosspecialities(FindData?.Hospital?.features)
+                setHosSections({ [sec]: true })
+                setConditionForHos({ edit: false })
+            } else {
+                const FindData = categories?.transformedData?.find(ele => ele?.type === sec)
+                if (FindData) {
+                    setHosSections({ [sec]: true })
+                    setConditionForHos({ edit: false })
+                    setHosspecialities(FindData?.department)
+                }
+            }
+        }
+
+    }
+    const LabChangeSections = (sec) => {
+        const retrunElement = CheckingDataInputedLab()
+        if (retrunElement === "success") {
+            setLabSections({ [sec]: true })
+            setConditionForLab({ edit: false })
+            if (sec) {
+                const LabServices = categories?.originalData?.find(ele => ele?.Laboratory)
+                setLabPrintingItems(LabServices.Laboratory?.[sec.toLowerCase()])
+            }
+        }
+
+    }
     const DocChangeSections = (sec) => {
-        setDocSections({ [sec]: true })
-        setConditionForDoc({ edit: false })
-        if (sec) {
-            const FindData = categories?.transformedData?.find(ele => ele?.type === sec)
-            if (FindData) {
-                setDocspecialities(FindData?.department)
+        const retrunElement = CheckingDataInputedDoc()
+        if (retrunElement === "success") {
+            setDocSections({ [sec]: true })
+            setConditionForDoc({ edit: false })
+            if (sec) {
+                const FindData = categories?.transformedData?.find(ele => ele?.type === sec)
+                if (FindData) {
+                    setDocspecialities(FindData?.department)
+                }
             }
         }
     }
@@ -95,13 +159,31 @@ export const MainAdminCategoryEdit = () => {
         loadingFn(true)
         axios.get(`${port}/admin/getcategory`).then((res) => {
             setcategories(res?.data?.data)
+            console.log(res)
             loadingFn(false)
-            const FindData = res?.data?.data?.transformedData?.find(ele => ele?.type === "Homeopathy")
+
+            if (res?.data?.data) {
+                setInitialStateSetting(res?.data?.data)
+            }
+
+        })
+    }
+
+    const setInitialStateSetting = (Data) => {
+        if (Data && Array.isArray(Data.allTypes) && Data.allTypes.length > 0) {
+            const firstType = Data.allTypes[0];
+            console.log("Data?.allTypes?.[0]>>>>", firstType);
+            setDocSections({ [firstType]: true });
+            setHosSections({ [firstType]: true });
+            setLabSections({ Services: true });
+            const FindData = Data?.transformedData?.find(ele => ele?.type === Data.allTypes[0])
             setHosspecialities(FindData?.department)
             setDocspecialities(FindData?.department)
-            const LabServices = res?.data?.data?.originalData?.find(ele => ele?.Laboratory)
+            const LabServices = Data.originalData?.find(ele => ele?.Laboratory)
             setLabPrintingItems(LabServices?.Laboratory?.services)
-        })
+        } else {
+            console.warn("Data?.allTypes is undefined or empty.");
+        }
     }
 
     useEffect(() => {
@@ -325,13 +407,10 @@ export const MainAdminCategoryEdit = () => {
         } else {
             toast.success("Check Fields")
         }
-        // console.log(Data)
         loadingFn(true)
     }
     const SaveHos = () => {
-        // console.log(Object.keys(HosSections))
         const Type = Object.keys(HosSections)
-        // console.log("Typeeee>>>>>", Type[0])
         let Data = {}
         if (Type[0] === "Features") {
             Data = {
@@ -347,7 +426,6 @@ export const MainAdminCategoryEdit = () => {
         }
         if (Data?.main_type) {
             axios.post(`${port}/admin/addcategory`, Data).then((res) => {
-                // console.log("res>>>>", res)
                 if (res?.data?.success)
                     toast.success(res?.data?.message);
                 loadingFn(false)
@@ -357,13 +435,10 @@ export const MainAdminCategoryEdit = () => {
         } else {
             toast.info("Check Fields")
         }
-        // console.log(Data)
         loadingFn(true)
     }
     const SaveLab = () => {
-        // console.log(Object.keys(LabSections))
         const Type = Object.keys(LabSections)
-        // console.log("Typeeee>>>>>", Type[0])
         let Data = {}
         if (Type[0] === "Features") {
             Data = {
@@ -379,17 +454,16 @@ export const MainAdminCategoryEdit = () => {
         }
         if (Data?.main_type) {
             axios.post(`${port}/admin/addcategory`, Data).then((res) => {
-                // console.log("res>>>>", res)
                 if (res?.data?.success)
                     toast.success(res?.data?.message);
                 loadingFn(false)
                 IntialApiCall()
+
             })
         } else {
             toast.info("Check Fields")
         }
         loadingFn(true)
-        // console.log(Data)
     }
 
 
@@ -420,6 +494,7 @@ export const MainAdminCategoryEdit = () => {
 
             } else if (ModalCondition?.type === "Doctor") {
                 let TempData = [...Docspecialities]
+
                 TempData = [...TempData, ModalCondition?.value]
                 setDocspecialities(TempData)
                 setModalCondition({ open: false })
@@ -440,7 +515,6 @@ export const MainAdminCategoryEdit = () => {
     console.log("DeletePopup>>>>", DeletePopup)
 
 
-    // // console.log(Hosspecialities)
     const ConfirmDelete = () => {
         if (DeletePopup?.main_type === 'Hospital') {
             let TempData = [...Hosspecialities]
@@ -502,7 +576,7 @@ export const MainAdminCategoryEdit = () => {
                                             ConditionForHos?.edit && ConditionForHos?.index == index &&
                                             < div className='MainAdminCatSetSecondSecDivIcon' >
                                                 <i onClick={() => { OpenDeletePopup(index, "Hospital", ele) }} class="ri-close-line"></i>
-                                                <input maxLength={90} maxLength={90} onChange={(e) => { editHosSpeciality(e, index) }} value={ele} className='MainAdminCatSetSecondSecDiv' />
+                                                <input maxLength={90} onChange={(e) => { editHosSpeciality(e, index) }} value={ele} className='MainAdminCatSetSecondSecDiv' />
                                             </div>
                                     )}
                                 </div>
