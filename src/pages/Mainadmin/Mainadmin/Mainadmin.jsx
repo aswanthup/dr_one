@@ -70,11 +70,17 @@ export default function Mainadmin() {
 
             {ChangeDashboards?.lab &&
               <>
-                <Mainadminlabslist />
-                <br /><br /><br /><br /><br /><br /><br /><br />
-                <Mainadminlabsdetails />
-                <br /><br /><br /><br /><br /><br /><br /><br />
-                <Mainadminlabsapprove />
+                <Mainadminlabslist updateState={setChangeDashboards} setLabDetails={setDetailData} />
+             
+
+              </>
+
+            }
+            {ChangeDashboards?.singleLabDetails &&
+              <>
+             
+                <Mainadminlabsdetails labData={DetailData} />  
+         
 
               </>
 

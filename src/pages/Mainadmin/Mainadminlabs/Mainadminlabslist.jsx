@@ -1,123 +1,224 @@
-import React from 'react'
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { port } from "../../../config";
+import moment from "moment";
 
-export default function Mainadminlabslist() {
+export default function Mainadminlabslist({ updateState, setLabDetails }) {
+  const [allLabs, setAllLabs] = useState([
+    {
+      id: "",
+      name: "",
+      phone_no: "",
+      pincode: "",
+      address: "",
+      status: "",
+      services: "",
+      features: "",
+      datetime: "",
+      email: "",
+    },
+  ]);
+  const [filteredLabs, setFilteredLabs] = useState([
+    {
+      name: "",
+      pincode: "",
+      datetime: "",
+      services: "",
+      features: "",
+    },
+  ]);
+
+  const [filters, setFilters] = useState({
+    labName: "",
+    pincode: "",
+    date: "",
+    services: "",
+    feature: "",
+  });
+
+  useEffect(() => {
+    fetchAllLabDetails();
+  }, []);
+
+  useEffect(() => {
+    if (allLabs.length > 0) {
+      handleFilters();
+    }
+  }, [filters]);
+
+  const fetchAllLabDetails = async () => {
+    try {
+      const response = await axios.get(`${port}/lab/getlab`);
+      console.log(response);
+      setAllLabs(response?.data?.data);
+      setFilteredLabs(response?.data?.data);
+    } catch (err) {
+      console.error(err);
+    } finally {
+    }
+  };
+
+  const handleFilters = () => {
+    const filteredData = allLabs?.filter((lab) => {
+      const nameMatch =
+        !filters.labName ||
+        lab.name.toLowerCase().includes(filters?.labName.toLowerCase());
+
+      const dateMatch =
+        !filters.date || filters?.date === reformatDate(lab?.datetime);
+
+      const pinCodeMatch =
+        !filters.pincode ||
+        lab?.pincode?.toLowerCase().includes(filters?.pincode?.toLowerCase());
+      const servicesMatch =
+        !filters.services ||
+        lab?.services?.some((service) =>
+          service.toLowerCase().includes(filters?.services?.toLowerCase())
+        );
+      const featuresMatch =
+        !filters.feature ||
+        lab?.features?.some((feature) =>
+          feature.toLowerCase().includes(filters?.feature?.toLowerCase())
+        );
+
+      return nameMatch && dateMatch && pinCodeMatch && servicesMatch &&featuresMatch;
+    });
+    console.log(filteredData);
+    setFilteredLabs(filteredData);
+  };
+  const reformatDate = (dateString) => {
+    return moment(dateString).format("DD-MM-YYYY");
+  };
+  const handleFilterChange = (e) => {
+    const { name, value } = e.target;
+    setFilters((prev) => ({
+      ...prev,
+      [name]: name === "date" ? reformatDate(value) : value,
+    }));
+  };
+
+  const handleLabClick = (labDetail) => {
+    setLabDetails(labDetail);
+    updateState({ singleLabDetails: true });
+  };
+
+  console.log("filters =>", filters);
+
   return (
     <div>
-<div className="mainadmindoctordatas_chart mainadmindoctordatas_chart_doctor flex">
+      <div className="mainadmindoctordatas_chart mainadmindoctordatas_chart_doctor flex">
+        <div className="mainadmindoctordatas_chart1 mainadmindoctordatas_chart10 flex">
+          <div className="mainadmindoctordatas_chart_icon mainadmindoctordatas_chart_icon10 flex">
+            <i class="fi fi-sr-syringe"></i>
+          </div>
 
-     
-<div className="mainadmindoctordatas_chart1 mainadmindoctordatas_chart10 flex">
+          <div style={{ marginLeft: "18px" }}>
+            <h2>200</h2>
+            <h4>Labs</h4>
+          </div>
+        </div>
 
-   <div className="mainadmindoctordatas_chart_icon mainadmindoctordatas_chart_icon10 flex">
-   <i class="fi fi-sr-syringe"></i>
-   </div>
+        <div className="mainadmindoctordatas_chart1 mainadmindoctordatas_chart2 mainadmindoctordatas_chart11  flex">
+          <div className="mainadmindoctordatas_chart_icon mainadmindoctordatas_chart_icon11 flex">
+            <i class="ri-rest-time-line"></i>
+          </div>
 
-   <div style={{marginLeft:"18px"}}>
-       <h2>200</h2>
-       <h4>Labs</h4>
-   </div>
+          <div style={{ marginLeft: "18px" }}>
+            <h2>200</h2>
+            <h4>Inactive</h4>
+          </div>
+        </div>
 
-   
+        <div className="mainadmindoctordatas_chart1 mainadmindoctordatas_chart2 mainadmindoctordatas_chart12 flex">
+          <div className="mainadmindoctordatas_chart_icon mainadmindoctordatas_chart_icon12 flex">
+            <i class="ri-close-circle-line"></i>
+          </div>
 
-               
-   
- </div>
+          <div style={{ marginLeft: "18px" }}>
+            <h2>200</h2>
+            <h4>Disabled</h4>
+          </div>
+        </div>
+      </div>
 
- <div className="mainadmindoctordatas_chart1 mainadmindoctordatas_chart2 mainadmindoctordatas_chart11  flex">
+      <h3 style={{ marginBottom: "1.3vw" }}>Lab List</h3>
+      <table className="doctortable">
+        <tr className="doctortableTr">
+          <th>No</th>
+          <th className="doctortableTh">
+            Laboratary Name <br />
+            <input
+              type="text"
+              onChange={handleFilterChange}
+              name="labName"
+              placeholder="Search labs"
+            />
+          </th>
+          <th>Mobile Number</th>
+          <th>
+            PIN & Location <br />
+            <input
+              type="text"
+              onChange={handleFilterChange}
+              name="pincode"
+              placeholder="Search with pincode"
+            />
+          </th>
+          <th>
+            Services <br />
+            <input
+              type="text"
+              onChange={handleFilterChange}
+              name="services"
+              placeholder="Search Services"
+            />
+          </th>
+          <th> Features <br />
+          <input
+              type="text"
+              onChange={handleFilterChange}
+              name="feature"
+              placeholder="Search Feature"
+            />
+          </th>
+          <th>Clicks</th>
+          <th>
+            Join Date <br />
+            <input
+              type="date"
+              max={new Date()}
+              onChange={handleFilterChange}
+              name="date"
+            />
+          </th>
+          <th>Status</th>
+        </tr>
+        {filteredLabs?.map((ele, index) => (
+          <tr
+            className="mainadmin-Lab-tablebody-tr"
+            key={ele.id}
+            onClick={() => handleLabClick(ele)}
+          >
+            <td>{index + 1}</td>
+            <td>{ele?.name}</td>
+            <td>{ele?.phone_no}</td>
+            <td>{`${ele?.pincode} , ${ele?.address}`}</td>
+            <td>
+              {ele?.services?.length > 0 &&
+                ele.services.map((service) => `${service} ,`)}
+            </td>
+            <td>
+              {" "}
+              {ele?.features?.length > 0 &&
+                ele.features.map((feature) => `${feature} ,`)}
+            </td>
+            <td>10</td>
 
- <div className="mainadmindoctordatas_chart_icon mainadmindoctordatas_chart_icon11 flex">
- <i class="ri-rest-time-line"></i>
-   </div>
-
-   <div style={{marginLeft:"18px"}}>
-       <h2>200</h2>
-       <h4>Inactive</h4>
-   </div>   
- </div>
-
- <div className="mainadmindoctordatas_chart1 mainadmindoctordatas_chart2 mainadmindoctordatas_chart12 flex">
-
-<div className="mainadmindoctordatas_chart_icon mainadmindoctordatas_chart_icon12 flex">
-   <i class="ri-close-circle-line"></i> 
-  </div>
-
-  <div style={{marginLeft:"18px"}}>
-      <h2>200</h2>
-      <h4>Disabled</h4>
-  </div>   
-</div>
-</div>
-
-
-
-
-<h3 style={{marginBottom:"1.3vw"}}>Lab List</h3>
-<table className='doctortable'>
-  <tr>
-    <th>No</th>
-    <th>Hospital Name</th>
-    <th>Mobile Number</th>
-    <th>PIN & Location</th>
-    <th>Specialities</th>
-    <th>Clicks</th>
-    <th>Contacts</th>
-    <th>Join Date</th>
-    <th>Status</th>
-  </tr>
-  <tr>
-    <td>1</td>
-    <td>Maria Anders</td><td>+49 30 123456</td>
-    <td>Germany</td>
-    <td>Berlin</td>
-    <td>100</td>
-    <td>10</td>
-    
-    <td>9/5/2024</td>
-    <td>Active</td>
-  </tr>
-  <tr>
-    <td>2</td>
-    <td>Francisco Chang</td><td>+52 55 987654</td>
-    <td>Mexico</td>
-    <td>Mexico City</td>
-    <td>100</td>
-    <td>10</td>
-    <td>2/5/2024</td>
-    <td>Approved</td>
-  </tr>
-  <tr>
-    <td>3</td>
-    <td>Helen Bennett</td> <td>+44 20 7654321</td>
-    <td>UK</td>
-    <td>London</td>
-    <td>100</td>
-    <td>10</td>
-   
-    <td>4/5/2024</td>
-    <td>Rejected</td>
-  </tr>
-  <tr>
-    <td>4</td>
-    <td>Yoshi Tannamuri</td> <td>+1 604 1234567</td>
-    <td>Canada</td>
-    <td>Vancouver</td>
-    <td>100</td>
-    <td>10</td>
-    <td>4/5/2024</td>
-    <td>Actived</td>
-  </tr>
-  <tr>
-    <td>5</td>
-    <td>Yoshi Tannamuri</td><td>+1 604 1234567</td>
-    <td>Canada</td>
-    <td>Vancouver</td>
-    <td>100</td>
-    <td>10</td>
-    <td>4/5/2024</td>
-    <td>Disabled</td>
-  </tr>
-</table>
-
-  </div>
-  )
+            <td>{moment(ele?.datetime).format("DD-MM-YYYY")}</td>
+            <td>Active</td>
+          </tr>
+        ))}
+      </table>
+    </div>
+  );
 }

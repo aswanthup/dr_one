@@ -57,7 +57,7 @@ export default function Mainadminsidebar({ data: { SentData, selected } }) {
         onClick={() => {
           FindButtonValue("lab")
         }}
-        className={selected?.lab ? "admimmenuicon admimmenuicon2 flex" : "admimmenuicon flex"}>
+        className={(selected?.lab||selected.singleLabDetails) ? "admimmenuicon admimmenuicon2 flex" : "admimmenuicon flex"}>
 
         <i class="fi fi-sr-syringe"></i>
         <h4>Labs</h4>
