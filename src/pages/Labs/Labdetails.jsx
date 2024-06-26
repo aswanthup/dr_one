@@ -15,7 +15,7 @@ export default function Labdetails() {
   console.log("LabDetails>>>>", LabDetails)
   const cunsultNow = () => {
     const data = {
-      userid: 6,
+      userid: 15,
       id: LabDetails?.id,
       type: "Lab",
       status: "P"
@@ -27,7 +27,7 @@ export default function Labdetails() {
   useEffect(() => {
     if (LabDetails?.id) {
       const data = {
-        userid: 7,
+        userid: 15,
         id: LabDetails?.id,
         type: "Lab"
       }

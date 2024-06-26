@@ -12,7 +12,7 @@ const HospitalDetailed = () => {
     const TemPImg = "./images/TempHosImg.jpg"
     const cunsultNow = () => {
         const data = {
-            userid: 6,
+            userid: 15,
             id: HospitalData?.id,
             type: "Hospital",
             status: "P"
@@ -24,7 +24,7 @@ const HospitalDetailed = () => {
     useEffect(() => {
         if (HospitalData?.id) {
             const data = {
-                userid: 7,
+                userid: 15,
                 id: HospitalData?.id,
                 type: "Hospital"
             }

@@ -44,7 +44,7 @@ export default function Doctor_profile() {
     }
     if (doctor?.id) {
       const data = {
-        userid: 7,
+        userid: 15,
         id: doctor?.id,
         type: "Doctor"
       }
@@ -62,7 +62,7 @@ export default function Doctor_profile() {
   const LoggedData = JSON.parse(storedLoginData);
   const cunsultNow = () => {
     const data = {
-      userid: 6,
+      userid: 15,
       id: doctor?.id,
       type: "Doctor",
       status: "P"
