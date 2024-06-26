@@ -50,6 +50,8 @@ const ChatBotAfterLogin = () => {
         axios.post("http://3.111.142.178:3003/pharmacy/updatedchat", PassingData).then((res) => {
             BotRes(res?.data?.message)
             console.log("res>>>", res)
+        }).catch((err) => {
+            console.log(err)
         })
 
     }
@@ -97,12 +99,12 @@ const ChatBotAfterLogin = () => {
                         </button>
                     </div>
                     <div id="chatContainer" className='ChatBotChatsSec'>
-                        {Chats?.map((ele,index) =>
+                        {Chats?.map((ele, index) =>
                             <>
                                 <div className='ChatBotChatsSecAlign'>
                                     {ele?.bot &&
                                         <>
-                                            <div  className='ChatBotChatsSecChatBot'>
+                                            <div className='ChatBotChatsSecChatBot'>
                                                 <p>{ele?.bot}</p>
                                             </div>
                                         </>

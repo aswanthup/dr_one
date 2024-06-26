@@ -108,7 +108,10 @@ export const CusSigninAndSignUp = ({ Caller: { ReCallF, OpenModal } }) => {
         if (!SubmitValues && !FindError) {
             axios.post(`${port}/user/addusers`, FormData).then((res) => {
                 console.log("res>>>", res)
-                if (res?.data?.success) toast.success(res?.data?.message);
+                if (res?.data?.success) {
+                    toast.success(res?.data?.message)
+                    setChangeBoxes({ signIn: true })
+                };
             }).catch((err) => {
                 console.log(err)
                 toast.info(err?.response?.data?.message);
