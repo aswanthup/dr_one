@@ -19,6 +19,10 @@ export const ProfileView = ({ data: { CloserModal, OpenPro } }) => {
         setOpenProfile(OpenPro)
     }, [OpenPro])
 
+    const logout = () => {
+        localStorage.removeItem("cuslogin");
+        window.location.reload()
+    }
     return (
         <>
             <Modal open={OpenProfile} onClose={closeProfile} className='ProfileViewAlign'>
@@ -69,7 +73,7 @@ export const ProfileView = ({ data: { CloserModal, OpenPro } }) => {
 
                         </div>
                         <div className='ProfileAlignCardDetailSec'>
-                            <div className='ProfileAlignLogoutSec'>
+                            <div onClick={logout} className='ProfileAlignLogoutSec'>
                                 <PowerSettingsNewIcon id="ProfileAlignCardDetLogoutIcon" />
                                 <p className='ProfileAlignCardDetLogoutFont'>Logout</p>
                             </div>

@@ -21,7 +21,7 @@ export const ShowFeedBackPopupContext = ({ children }) => {
     };
     useEffect(() => {
         const data = {
-            user_id: 6
+            user_id: 15
         }
         axios.post(`${port}/user/doctorafterconsult`, data).then((res) => {
             console.log("res>>>>", res)

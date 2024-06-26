@@ -4,6 +4,8 @@ import { useEffect } from 'react'
 import axios from 'axios'
 import { port } from '../../../config'
 import { useLocation } from 'react-router-dom'
+import Navbar from '../../../components/Navbar'
+import Footer from '../../../components/Footer'
 const HospitalDetailed = () => {
     const location = useLocation()
     const HospitalData = location?.state?.details
@@ -14,7 +16,6 @@ const HospitalDetailed = () => {
             id: HospitalData?.id,
             type: "Hospital",
             status: "P"
-
         }
         axios.post(`${port}/user/consultcount`, data).then((res) => {
             console.log("res>>>>", res)
@@ -35,6 +36,7 @@ const HospitalDetailed = () => {
 
     return (
         <>
+            <Navbar />
             <div className='HospitalDetailedPadding'>
                 <div className="mainadmindoctordatas flex">
                     <div className="mainadmindoctordatas_profile flex">
@@ -59,7 +61,7 @@ const HospitalDetailed = () => {
                 </div>
 
                 <div className="photosdivadmin">
-                    <h3 style={{ marginBottom: "1.3vw" }}>About</h3>
+                    <h3 style={{ marginBottom: "1.3vw" }}>Photos</h3>
                     <div className="photosdivadminsection flex">
                         <img src={HospitalData?.photo?.image2} alt="" />
                         <img src={HospitalData?.photo?.image3} alt="" />
@@ -142,7 +144,7 @@ const HospitalDetailed = () => {
 
                 </div>
             </div>
-
+            <Footer />
         </>
     )
 }

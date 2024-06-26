@@ -2,234 +2,70 @@ import React, { useEffect, useRef, useState } from 'react'
 import "../ChatBot/ChatBot.css"
 import { Button, Modal } from '@mui/material'
 import TelegramIcon from '@mui/icons-material/Telegram';
-import { Navigate, useNavigate } from 'react-router-dom';
 import CloseIcon from '@mui/icons-material/Close';
 import axios from 'axios';
-import { toast } from 'react-toastify';
-import { port } from '../../config';
 
 const ChatBotAfterLogin = () => {
     const [ChatSec, setChatSec] = useState(false)
-    const [Chats, setChats] = useState([{
-        bot: "Hello, Thank you for your interest in partnering with us.",
-    }])
-    const inpRef = useRef(null)
+    const [Chats, setChats] = useState([])
     const [TempUserInput, setTempUserInput] = useState()
-    const navigate = useNavigate()
 
     const ChatTrue = () => {
         if (ChatSec) {
             setChatSec(false)
             setTempUserInput('')
-            if (Chats.find(ele => ele.Qnm === 1 && ele.answer === "Doctor")) {
-                if (Chats.find(ele => ele.Qnm === 4)) {
-                    setFirstMessage()
-                }
-            } else if (Chats.find(ele => ele.Qnm === 1 && ele.answer === "Hospital" || ele.answer === "Laboratory")) {
-                if (Chats.find(ele => ele.Qnm === 5)) {
-                    setFirstMessage()
-                }
-            }
-
         } else {
             setChatSec(true)
         }
     }
     console.log("Chats>>>", Chats)
-    const ChooseFn = (e) => {
-        const value = e?.target?.value
-        console.log("value>>>>", value)
-        let TempChat = [...Chats]
-        const index = TempChat?.length - 1
-        if (value === 'Doctor') {
-            TempChat[index] = { ...TempChat[index], user: value, answer: value }
-        } else {
-            TempChat[index] = { ...TempChat[index], user: value, answer: value }
-        }
-        setChats(TempChat)
-        UpdatingMsgs(TempChat)
+
+
+
+    const InputField = (e) => {
+        const value = e?.target?.value               // Set to empty string if no value
+        setTempUserInput(value);
     }
-
-
     useEffect(() => {
-        // UpdatingMsgs()
         const chatContainer = document.getElementById('chatContainer');
         if (chatContainer) {
             chatContainer.scrollTop = chatContainer?.scrollHeight;
         }
     }, [Chats, TempUserInput])
-
-    const InputField = (e) => {
-        const value = e?.target?.value
-            ? (e?.target?.value[0]?.toUpperCase() + e?.target?.value?.slice(1))  // Capitalize first letter
-            : '';                                           // Set to empty string if no value
-        setTempUserInput(value);
-    }
     const ConfirmInput = () => {
+        console.log("checkingggggg>>>>>")
         let TempChats = Chats
-        const tempChatFilter = TempChats.filter(ele => ele?.Qnm)
-        const FinalQnm = tempChatFilter[tempChatFilter?.length - 1]?.Qnm
-        const FInalQnmIndex = TempChats.findIndex(ele => ele.Qnm === FinalQnm)
-        TempChats[FInalQnmIndex] = { ...TempChats[FInalQnmIndex], answer: TempUserInput }
         TempChats[TempChats?.length - 1] = { ...TempChats[TempChats?.length - 1], user: TempUserInput }
+        console.log(TempChats)
+        setChats(TempChats)
+        CallBotApi(TempUserInput)
+    }
+
+
+    const CallBotApi = (UserInput) => {
+        const PassingData = {
+            message: UserInput
+        }
+        console.log("PassingData>>>>", PassingData)
+        axios.post("http://3.111.142.178:3003/pharmacy/updatedchat", PassingData).then((res) => {
+            BotRes(res?.data?.message)
+            console.log("res>>>", res)
+        })
+
+    }
+
+    const BotRes = (response) => {
+        let TempChats = Chats
+        TempChats = [...TempChats, { bot: response } || '']
         setChats(TempChats)
         setTempUserInput('')
-        UpdatingMsgs(TempChats)
     }
 
-    const UpdatingMsgs = (tmepchats) => {
-        let TempChat = tmepchats
-        const findFirstQ = TempChat?.find(ele => ele?.Qnm === 1)
-        const botHos1Q = 'Please enter the Hospital name.'
-        const botLab1Q = 'Please enter the Laboratory name.'
-        const botDoc1Q = 'Please enter your name.'
-        const who = findFirstQ?.answer
-        if (who && !TempChat?.find(ele => ele?.bot === botHos1Q || ele?.bot === botLab1Q || ele?.bot === botDoc1Q)) {
-            console.log("who>>>>", who)
-            switch (who) {
-                case 'Doctor':
-                    TempChat = [
-                        ...TempChat,
-                        {
-                            bot: botDoc1Q,
-                            Qnm: 2
-                        }]
-                    break;
-                case 'Hospital':
-                    TempChat = [
-                        ...TempChat,
-                        {
-                            bot: botHos1Q,
-                            Qnm: 2
-                        }]
-                    break;
-                case 'Laboratory':
-                    TempChat = [...TempChat,
-                    {
-                        bot: botLab1Q,
-                        Qnm: 2
-                    }]
-                    break;
-            }
-        }
-        const findSecondQ = TempChat?.find(ele => ele?.Qnm === 2)
-        const botHos2Q = `Please enter your contact number.`
-        const botLab2Q = `Please enter your contact number. `
-        const botDoc2Q = `Hello Dr. ${findSecondQ?.answer}, Please enter your contact number. `
-        if (findSecondQ?.Qnm === 2 && findSecondQ?.answer && !TempChat?.find(ele => ele.bot === botHos2Q || ele.bot === botLab2Q || ele.bot === botDoc2Q)) {
-            switch (who) {
-                case 'Doctor':
-                    TempChat =
-                        [...TempChat,
-                        {
-                            bot: botDoc2Q
-                            , Qnm: 3
-                        }]
+    useEffect(() => {
+        const intialMessage = "Hi"
+        CallBotApi(intialMessage)
+    }, [])
 
-                    break;
-                case 'Hospital':
-                    TempChat = [
-                        ...TempChat,
-                        {
-                            bot: botHos2Q
-                            , Qnm: 3
-                        }
-                    ]
-                    break;
-                case 'Laboratory':
-                    TempChat = [
-                        ...TempChat,
-                        {
-                            bot: botLab2Q
-                            , Qnm: 3
-                        }
-                    ]
-                    break;
-            }
-        }
-        if (findFirstQ?.answer === "Doctor") {
-            const findThirdQ = TempChat?.find(ele => ele?.Qnm === 3)
-            const botRes3Q = "Thank you for providing your details. We have assigned a relationship manager for you. You will receive call from them soon."
-            const error = 'Please enter a valid phone number.'
-            const PatternMob = /^[6-9]\d{9}$/
-            if (findThirdQ && findThirdQ.answer && !TempChat?.find(ele => ele.bot === botRes3Q)) {
-                if (PatternMob?.test(findThirdQ?.answer)) {
-                    TempChat.push({ bot: botRes3Q, Qnm: 4 });
-                } else {
-                    if (!TempChat?.find(ele => ele?.bot?.error === error)) {
-                        TempChat.push({ bot: error });
-                    }
-                }
-            }
-        } else {
-            const findThirdQ = TempChat?.find(ele => ele?.Qnm === 3)
-            const botRes3Q = "Would you like to receive a call from our relationship manager?."
-            const error = 'Please enter a valid phone number.'
-            const PatternMob = /^[6-9]\d{9}$/
-            if (findThirdQ && findThirdQ.answer && !TempChat?.find(ele => ele.bot === botRes3Q)) {
-                if (PatternMob?.test(findThirdQ?.answer)) {
-                    TempChat.push({ bot: botRes3Q, Qnm: 4 });
-                } else {
-                    if (!TempChat?.find(ele => ele?.bot?.error === error)) {
-                        TempChat.push({ bot: error });
-                    }
-                }
-            }
-        }
-        const findFourQ = TempChat?.find(ele => ele?.Qnm === 4)
-        const botRes3Q = "Thank you for providing your details. We have assigned a relationship manager for you. You will receive call from them soon."
-        const botRes3QNo = "Please click the button to access the registration page.";
-        if (findFourQ && findFourQ?.answer && !TempChat?.find(ele => ele.bot === botRes3QNo)) {
-            if (findFourQ?.answer === "Thru relationship manager") {
-                TempChat.push({ bot: botRes3Q, Qnm: 5 });
-            }
-        }
-        let FinalData = ''
-        TempChat?.map(ele => {
-            if (ele.Qnm === 1) {
-                FinalData = { ...FinalData, type: ele?.answer }
-            }
-            if (ele.Qnm === 2) {
-                FinalData = { ...FinalData, name: ele?.answer }
-            }
-            if (ele.Qnm === 3) {
-                FinalData = { ...FinalData, contact_number: parseInt(ele?.answer) }
-            }
-        })
-        console.log("findAllhAnswers>>>>", FinalData)
-        const CheckingNull = !FinalData?.contact_number || !FinalData?.name || !FinalData?.type
-        if (FinalData.type === "Doctor") {
-            const FindCheckAnswer = TempChat.find(ele => ele.Qnm === 4)
-            if (FindCheckAnswer?.bot && !CheckingNull) {
-                axios.post(`${port}/user/messagesave`, FinalData).then((res => {
-                    console.log("res>>>>>", res)
-                    // if (res?.data?.success) {
-                    //     setTimeout(() => {
-                    //         CloseAndClear()
-                    //     }, 2000);
-                    // }
-                }))
-            }
-        } else if (FinalData.type === "Hospital" || FinalData.type === "Laboratory") {
-            const FindCheckAnswer = TempChat.find(ele => ele.Qnm === 5)
-            console.log("FindCheckAnswer>>>>", FindCheckAnswer)
-            if (FindCheckAnswer?.bot && !CheckingNull) {
-                axios.post(`${port}/user/messagesave`, FinalData).then((res => {
-                    console.log("res>>>>>", res)
-                    // if (res?.data?.success) {
-                    //     setTimeout(() => {
-                    //         CloseAndClear()
-                    //     }, 2000);
-                    // }
-                }))
-            }
-        }
-
-        setTimeout(() => {
-            setChats(TempChat)
-        }, 400);
-
-    }
 
     const handleClick = (event) => {
         if (event.key === 'Enter') {
@@ -238,16 +74,9 @@ const ChatBotAfterLogin = () => {
     }
     const CloseAndClear = () => {
         setChatSec(false)
-        setFirstMessage()
     }
 
-    const setFirstMessage = () => {
-        setChats([{
-            bot: "Hello, Thank you for your interest in partnering with us.",
-            ExtraBot: 'Please choose the category',
-            Qnm: 1
-        }])
-    }
+
     return (
 
         <div className='ChatBotAlignBotIcon'>
@@ -268,44 +97,32 @@ const ChatBotAfterLogin = () => {
                         </button>
                     </div>
                     <div id="chatContainer" className='ChatBotChatsSec'>
-                        {Chats?.map(ele =>
+                        {Chats?.map((ele,index) =>
                             <>
                                 <div className='ChatBotChatsSecAlign'>
                                     {ele?.bot &&
                                         <>
-                                            <div className='ChatBotChatsSecChatBot'>
+                                            <div  className='ChatBotChatsSecChatBot'>
                                                 <p>{ele?.bot}</p>
                                             </div>
-                                            
-
-
                                         </>
                                     }
+                                    {ele?.user &&
+                                        <div className='ChatBotChatsSecUserBot'>
+                                            <p>{ele?.user}</p>
+                                        </div>
+                                    }
                                 </div >
-                                {ele?.user &&
-                                    <div className='ChatBotChatsSecUserBot'>
-                                        <p>{ele?.user}</p>
-                                    </div>
-                                }
+
                             </>
                         )}
                     </div>
                     <div className='ChatBotInputSec'>
-                        <input maxLength={40}
-                            disabled={
-                                Chats[Chats?.length - 1]?.Qnm === 1 ||
-                                    Chats[Chats?.length - 1]?.Qnm === 5 ||
-                                    Chats?.find(ele => ele.Qnm === 4
-                                    ) ?
-                                    true : false}
-                            onKeyDown={handleClick}
+                        <input onKeyDown={handleClick} maxLength={40}
                             onChange={InputField}
-                            ref={inpRef}
+                            placeholder='Input your queries'
+                            type="text"
                             value={TempUserInput}
-                            placeholder={Chats[Chats?.length - 1]?.Qnm === 1 || Chats[Chats?.length - 1]?.Qnm === 4 && !Chats.find(ele => ele.Qnm === 1 && ele.answer === "Doctor") ? 'Please select the Buttons...'
-                                :
-                                'Type your message here...'
-                            } type={Chats[Chats?.length - 1]?.Qnm === 3 ? "number" : "text"}
                             name="UserInput" id="" />
                         <button onClick={ConfirmInput} value="confirm" className='ChatBotInputSecIcon'>
                             <TelegramIcon id="ChatBotInputSecOrgIcon" />

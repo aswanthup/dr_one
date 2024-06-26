@@ -90,7 +90,10 @@ export const CusSigninAndSignUp = ({ Caller: { ReCallF, OpenModal } }) => {
         if (!SubmitValues) {
             axios.post(`${port}/user/userlogin`, FormData).then((res) => {
                 console.log("res>>>>", res)
+                const loginData = { id: res?.data?.logged_id };
+                localStorage.setItem("cuslogin", JSON.stringify(loginData))
                 if (res?.data?.success) toast.success(res?.data?.message);
+                window.location.reload()
             }).catch((err) => {
                 toast.info(err?.response?.data?.message);
             })

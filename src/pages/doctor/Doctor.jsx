@@ -92,7 +92,7 @@ export default function Doctor() {
     try {
       // const { id } = JSON.parse(localStorage.getItem("loginData")) || {};
       const data = {
-        user_id: 8 || "",
+        user_id: 15 || "",
         speciality: speciality || "",
         type: type || "",
       };

@@ -17,7 +17,8 @@ export default function Navbar() {
       setopen(true)
     }
   }
-
+  const storedLoginData = localStorage.getItem("cuslogin");
+  const LoggedData = JSON.parse(storedLoginData);
   const location = useLocation()
   console.log("location>>>>", location)
   const path = location?.pathname
@@ -61,13 +62,17 @@ export default function Navbar() {
 
           <div className="nav-buttons flex">
             <div className="nav-button">
-              <button onClick={toggleSignInModal}>
-                <h3 className="nav-button1" >Login</h3>
-              </button>
+              {LoggedData ?
+                <div onClick={openProFn} className='NavbarProfileDiv'>
+                  <img src="/images/TempDocImg.jpg" alt="" />
+                </div> :
+                <button onClick={toggleSignInModal}>
+                  <h3 className="nav-button1" >Login</h3>
+                </button>
+              }
+
             </div>
-            {/* <div onClick={openProFn} className='NavbarProfileDiv'>
-              <img src="/images/TempDocImg.jpg" alt="" />
-            </div> */}
+
             <div onClick={SelectOpen} className='menubutton flex'>
               <i class="ri-menu-2-fill"></i>
             </div>

@@ -33,7 +33,7 @@ export const ShowFeedBackPopup = () => {
         if (ConstantData?.type === "Doctor") {
             const SentData = {
                 ...FinalData,
-                user_id: 6,
+                user_id: 15,
                 doctor_id: ConstantData?.doctor_id,
                 interactedid: ConstantData?.lastInteractionId
             };
@@ -57,7 +57,7 @@ export const ShowFeedBackPopup = () => {
         } else if (ConstantData.type === "Hospital") {
             const SentData = {
                 ...FinalData,
-                user_id: 6,
+                user_id: 15,
                 hospital_id: ConstantData?.hospital_id,
                 interactedid: ConstantData?.lastInteractionId
             };
@@ -81,7 +81,7 @@ export const ShowFeedBackPopup = () => {
         } else if (ConstantData?.type === "Lab") {
             const SentData = {
                 ...FinalData,
-                user_id: 6,
+                user_id: 15,
                 lab_id: ConstantData?.lab_id,
                 interactedid: ConstantData?.lastInteractionId
             };
@@ -129,7 +129,7 @@ export const ShowFeedBackPopup = () => {
         console.log("value>>>>", value)
         const SentData = {
             status: value,
-            user_id: 6,
+            user_id: 15,
             type: ConstantData?.type,
             interactedid: ConstantData?.lastInteractionId
         };

@@ -38,6 +38,11 @@ export default function Mainpage() {
     setAllDocsBySearch,
   } = useContext(SearchDocContext);
 
+
+
+  const storedLoginData = localStorage.getItem("cuslogin");
+  const LoggedData = JSON.parse(storedLoginData);
+
   console.log("selectTypes>>", selectTypes);
   useEffect(() => {
     AOS.init({
@@ -228,9 +233,11 @@ export default function Mainpage() {
       <div>
         <div className="desktop">
           {/* Navbar */}
-
-          {/* <ChatBot /> */}
-          <ChatBotAfterLogin />
+          {LoggedData ?
+            <ChatBotAfterLogin />
+            :
+            <ChatBot />
+          }
           {/*End Navbar */}
           {/* Hero section */}
           <div className="container-second hero-main2 flex">
@@ -483,7 +490,7 @@ export default function Mainpage() {
 
               <div className="MainPageTypeAndSpecialityImgSecAlign">
                 <img
-                  src="/images/SecImg.jpg"
+                  src="/images/backgroundSpeciality.png"
                   className="MainPageTypeAndSpecialityImg"
                   alt=""
                 />
