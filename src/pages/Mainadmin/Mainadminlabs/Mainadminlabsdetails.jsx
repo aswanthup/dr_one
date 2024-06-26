@@ -1,16 +1,25 @@
-import React from "react";
+import React, { useContext } from "react";
 import Mainadminnavbar from "../../../components/Mainadminnavbar/Mainadminnavbar";
 import Mainadminsidebar from "../../../components/Mainadminsidebar/Mainadminsidebar";
+import { useNavigate } from "react-router-dom";
+import { MyContext } from "../../../contexts/Contexts";
 
 export default function Mainadminlabsdetails({ labData }) {
-  console.log(labData);
+  
+  const { LabAdminRg, setLabAdminRg } = useContext(MyContext)
+  const navigate=useNavigate()
+  const handleEditClick=()=>{
+    console.log(labData);
+    setLabAdminRg(labData)
+    navigate("/mainadminlabeditlab1")
+  }
   return (
     <>
       <div className="mainadmindoctordatas flex">
         <div className="mainadmindoctordatas_profile flex">
           <img
             className="mainadmindoctordatas_profile_photo"
-            src={labData?.photo || "/images/doc.jpg" }
+            src={labData?.photo?.image1 || "/images/doc.jpg" }
             alt=""
           />
 
@@ -86,7 +95,7 @@ export default function Mainadminlabsdetails({ labData }) {
         </div>
       </div>
 
-      <div className="mainadmindoctoraboutavail flex">
+      <div className="mainadmindoctoraboutavail flex" >
         <div className="mainadmindoctorabout ">
           <h3 style={{ marginBottom: "1.3vw" }}>About</h3>
 
@@ -100,9 +109,10 @@ export default function Mainadminlabsdetails({ labData }) {
               Kozhikode
             </h4>
           </div>
+        
         </div>
 
-        <div className="mainadmindoctoravilability mainadmindoctoravilability2">
+        <div className="mainadmindoctoravilability mainadmindoctoravilability2" >
           <div className="admin_fea_avai flex">
             <div className="admin_fea_avai_left">
               <h3 style={{ marginBottom: "1.3vw" }}>Features</h3>
@@ -127,6 +137,10 @@ export default function Mainadminlabsdetails({ labData }) {
           </div>
         </div>
       </div>
+    
+      <div className='mainadmindoctoraboutFlexEnd'>
+            <button onClick={handleEditClick}>Edit Profile</button>
+          </div>
 
       <div style={{ marginTop: "1.3vw" }} className="flex admin_view_more">
         <h3>Latest Feedbacks</h3>

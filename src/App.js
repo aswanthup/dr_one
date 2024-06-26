@@ -75,6 +75,8 @@ import { ShowFeedBackPopup } from "./components/ShowFeedBackPopup/ShowFeedBackPo
 import { DoctorFeedbackList } from "./pages/Mainadmin/Mainadmindoctor/DoctorFeedBacklist/DoctorFeedbackList";
 import MainAdminDoctorEditBasic from "./pages/Mainadmin/Mainadmindoctor/MainAdminDoctorEdit/MainAdminDoctorEditBasic";
 import { MainAdminDoctorEditFinal } from "./pages/Mainadmin/Mainadmindoctor/MainAdminDoctorEdit/MainAdminDoctorEditFinal";
+import Mainadminlabeditlab1 from "./pages/Mainadmin/Mainadminlabs/edit data/LabEdit1";
+import Mainadminlabeditlab2 from "./pages/Mainadmin/Mainadminlabs/edit data/LabEdit2";
 function App() {
   return (
     <div className="App">
@@ -283,6 +285,16 @@ function App() {
                 path="/mainadmindoctorEditFinal"
                 element={<MainAdminDoctorEditFinal />}
               ></Route>
+              <Route
+                path="/mainadminlabeditlab1"
+                element={<Mainadminlabeditlab1 />}
+              ></Route>
+              <Route
+                path="/mainadminlabeditlab2"
+                element={<Mainadminlabeditlab2 />}
+              ></Route>
+
+              
 
               {/*End Main admin */}
             </Routes>
