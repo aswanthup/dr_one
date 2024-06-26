@@ -12,13 +12,10 @@ const MainAdminDoctorEditBasic = () => {
     const location = useLocation()
     const navigate = useNavigate();
     const [fileName, setFileName] = useState("No file selected");
-    const [showPassword, setShowPassword] = useState(false);
-    const [ShowRePassword, setShowRePassword] = useState(false);
     const { editDoc, seteditDoc } = useContext(MyContext);
-    console.log("Data===", editDoc);
     const [validationErrors, setValidationErrors] = useState({});
 
-    console.log("validationErrors", validationErrors);
+    // console.log("validationErrors", validationErrors);
     const handleFileChange = (event) => {
         const selectedFile = event.target?.files[0];
 
@@ -36,15 +33,17 @@ const MainAdminDoctorEditBasic = () => {
         }
     };
 
+
+    console.log("ValidationErrors>>>", validationErrors)
     const handleChange = (e) => {
         const { name, value } = e?.target;
-        if ((name === "phone") & (value.toString().length > 10)) {
+        if ((name === "phone_no") & (value.toString().length > 10)) {
             seteditDoc({
                 ...editDoc,
-                [name]: editDoc.phone,
+                [name]: editDoc.phone_no,
             });
             return;
-        } else if (name === "secondname" || name === "name") {
+        } else if (name === "second_name" || name === "name") {
             seteditDoc({
                 ...editDoc,
                 [name]: value,
@@ -59,40 +58,34 @@ const MainAdminDoctorEditBasic = () => {
 
         setValidationErrors({ ...validationErrors, [e.target.name]: "" });
 
-        if (name === "password") {
-            if (!validPassword(value)) {
-                setValidationErrors((prevErrors) => ({
-                    ...prevErrors,
-                    [name]:
-                        "Password must be 6+ characters with an uppercase letter, digit, and special character.",
-                }));
-            } else if (editDoc.confirmPassword) {
-                if (value !== editDoc.confirmPassword) {
-                    setValidationErrors((prevErrors) => ({
-                        ...prevErrors,
-                        confirmPassword: "Passwords do not match",
-                    }));
-                } else {
-                    setValidationErrors((prevErrors) => ({
-                        ...prevErrors,
-                        confirmPassword: "",
-                    }));
-                }
-            } else {
-                setValidationErrors((prevErrors) => ({
-                    ...prevErrors,
-                    [name]: "",
-                }));
-            }
-        }
+        // if (name === "password") {
+        //     if (!validPassword(value)) {
+        //         setValidationErrors((prevErrors) => ({
+        //             ...prevErrors,
+        //             [name]:
+        //                 "Password must be 6+ characters with an uppercase letter, digit, and special character.",
+        //         }));
+        //     } else if (editDoc.confirmPassword) {
+        //         if (value !== editDoc.confirmPassword) {
+        //             setValidationErrors((prevErrors) => ({
+        //                 ...prevErrors,
+        //                 confirmPassword: "Passwords do not match",
+        //             }));
+        //         } else {
+        //             setValidationErrors((prevErrors) => ({
+        //                 ...prevErrors,
+        //                 confirmPassword: "",
+        //             }));
+        //         }
+        //     } else {
+        //         setValidationErrors((prevErrors) => ({
+        //             ...prevErrors,
+        //             [name]: "",
+        //         }));
+        //     }
+        // }
 
         // Validate confirm password
-        if (name === "confirmPassword" && value !== editDoc.password) {
-            setValidationErrors((prevErrors) => ({
-                ...prevErrors,
-                [name]: "Passwords do not match",
-            }));
-        }
 
         if (name === "email") {
             if (!validateEmail(value)) {
@@ -108,7 +101,7 @@ const MainAdminDoctorEditBasic = () => {
             }
         }
 
-        if (name === "phone") {
+        if (name === "phone_no") {
             if (/^\d{10}$/.test(value) === false) {
                 setValidationErrors((prevErrors) => ({
                     ...prevErrors,
@@ -127,39 +120,33 @@ const MainAdminDoctorEditBasic = () => {
         const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         return regex.test(email);
     };
-    const validPassword = (password) => {
-        const regex = /^(?=.*[A-Z])(?=.*\d)(?=.*[@.#$!%*?&]).{6,}$/;
-        return regex.test(password);
-    };
 
+    console.log(editDoc, editDoc)
     const handleClick = () => {
-        // const isInValid =
-        //     !editDoc.name ||
-        //     !editDoc.secondname ||
-        //     !editDoc.phone ||
-        //     !editDoc.email ||
-        //     !editDoc.password ||
-        //     !editDoc.confirmPassword
-        // // !editDoc.docImage;
+        const isInValid =
+            (!editDoc.name) ||
+            (!editDoc.second_name) ||
+            (!editDoc.phone_no) ||
+            (!editDoc.email)
 
-        // const isValidationError =
-        //     validationErrors.confirmPassword ||
-        //     validationErrors.email ||
-        //     validationErrors.password ||
-        //     validationErrors.phone;
+        const isValidationError =
+            validationErrors.confirmPassword ||
+            validationErrors.email ||
+            validationErrors.password ||
+            validationErrors.phone_no;
 
-        // if (isInValid) {
-        //     toast.info("All fields required");
-        // } else if (isValidationError) {
-        //     if (validationErrors.password) {
-        //         toast.info("Please check password");
-        //     } else {
-        //         toast.info(isValidationError);
-        //     }
-        // } else {
-        //     navigate("/mainadmindoctorEditFinal", { state: editDoc });
-        // }
-        navigate("/mainadmindoctorEditFinal", { state: editDoc });
+        if (isInValid) {
+            toast.info("All fields required");
+        } else if (isValidationError) {
+            if (validationErrors.password) {
+                toast.info("Please check password");
+            } else {
+                toast.info(isValidationError);
+            }
+        } else {
+            navigate("/mainadmindoctorEditFinal", { state: editDoc });
+        }
+        // navigate("/mainadmindoctorEditFinal", { state: editDoc });
 
     };
     const handleKeyPress = (event) => {
@@ -169,22 +156,13 @@ const MainAdminDoctorEditBasic = () => {
             event.preventDefault();
         }
     };
-    const handleClickShowPassword = () => setShowPassword((show) => !show);
-    const handleClickShowRePassword = () => setShowRePassword((show) => !show);
-
-    const handleMouseDownPassword = (event) => {
-        event.preventDefault();
-    };
-    const handleMouseDownRePassword = (event) => {
-        event.preventDefault();
-    };
 
     useEffect(() => {
         seteditDoc(location?.state?.data)
     }, [])
 
 
-    console.log(editDoc);
+    // console.log(editDoc);
 
     return (
         <>
@@ -224,9 +202,9 @@ const MainAdminDoctorEditBasic = () => {
                                         <h4>Second Name</h4>
                                         <input
                                             type="text"
-                                            name="secondname"
+                                            name="second_name"
                                             autoComplete="off"
-                                            value={editDoc?.secondname}
+                                            value={editDoc?.second_name}
                                             maxLength={50}
                                             onChange={handleChange}
                                         />
@@ -254,9 +232,6 @@ const MainAdminDoctorEditBasic = () => {
                         {validationErrors.phone}
                       </p>
                     )} */}
-                                            <p className="register-number-warning">
-                                                This number will be kept confidential and shall be used for OTP verifications
-                                            </p>
                                         </div>{" "}
                                     </div>
 
@@ -282,112 +257,6 @@ const MainAdminDoctorEditBasic = () => {
                                     </div>
                                 </div>
 
-                                <div className="register-right-section flex">
-                                    <div style={{ position: "relative" }}>
-                                        <h4>Password</h4>
-                                        <div
-                                            style={{
-                                                position: "relative",
-                                            }}
-                                            className="pass-con-Inp"
-                                        >
-                                            <input
-                                                maxLength={50}
-                                                value={editDoc?.password}
-                                                name="password"
-                                                onChange={handleChange}
-                                                style={{
-                                                    margin: 0,
-                                                    position: "absolute",
-                                                    top: "0",
-                                                    left: "0",
-                                                    height: "100%",
-                                                    width: "calc(100% - 2px)",
-                                                    padding: "0 10px",
-                                                    appearance: "none",
-                                                    WebkitAppearance: "none",
-                                                    border: validationErrors?.password ? "2px solid red" : ''
-                                                }}
-                                                type={showPassword ? "text" : "password"}
-                                            />
-
-                                            <IconButton
-                                                tabIndex={-1}
-                                                sx={{
-                                                    position: "absolute",
-                                                    top: "50%",
-                                                    right: "10px",
-                                                    transform: "translateY(-50%)",
-                                                    color: "#fafaf9",
-                                                }}
-                                                aria-label="toggle password visibility"
-                                                onClick={handleClickShowPassword}
-                                                onMouseDown={handleMouseDownPassword}
-                                            >
-                                                {showPassword ? <VisibilityOff /> : <Visibility />}
-                                            </IconButton>
-                                        </div>
-                                        {validationErrors.password && (
-                                            <div className="main-waring-section main-waring-section-pass">
-                                                <p className="register-number-warning">
-                                                    {validationErrors?.password}
-                                                </p>
-                                            </div>
-                                        )}
-                                    </div>
-                                    <div style={{ position: "relative" }}>
-                                        <h4>Confirm Password</h4>
-                                        <div
-                                            style={{
-                                                position: "relative",
-                                            }}
-                                            className="pass-con-Inp"
-                                        >
-                                            <input
-                                                maxLength={50}
-                                                value={editDoc?.confirmPassword}
-                                                name="confirmPassword"
-                                                onChange={handleChange}
-                                                style={{
-                                                    margin: 0,
-                                                    position: "absolute",
-                                                    top: "0",
-                                                    left: "0",
-                                                    height: "100%",
-                                                    width: "calc(100% - 2px)",
-                                                    padding: "0 10px",
-                                                    appearance: "none",
-                                                    WebkitAppearance: "none",
-                                                    border: validationErrors?.confirmPassword ? "2px solid red" : ''
-                                                }}
-                                                type={ShowRePassword ? "text" : "password"}
-                                            />
-
-                                            <IconButton
-                                                tabIndex={-1}
-                                                sx={{
-                                                    position: "absolute",
-                                                    top: "50%",
-                                                    right: "10px",
-                                                    transform: "translateY(-50%)",
-                                                    color: "#fafaf9",
-                                                }}
-                                                aria-label="toggle password visibility"
-                                                onClick={handleClickShowRePassword}
-                                                onMouseDown={handleMouseDownRePassword}
-                                            >
-                                                {ShowRePassword ? <VisibilityOff /> : <Visibility />}
-                                            </IconButton>
-                                        </div>
-                                        <div className="main-waring-section">
-                                            {validationErrors.confirmPassword && (
-                                                <p className="register-number-warning">
-                                                    {validationErrors.confirmPassword}
-                                                </p>
-                                            )}
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
 
                             <div className="register-button-section flex">

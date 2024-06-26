@@ -20,7 +20,7 @@ import MainAdminDoctorEditBasic from '../Mainadmindoctor/MainAdminDoctorEdit/Mai
 
 export default function Mainadmin() {
   const [ChangeDashboards, setChangeDashboards] = useState({
-    category: true
+    doctor: true
   })
   const [DetailData, setDetailData] = useState()
   const SentData = (data) => {
