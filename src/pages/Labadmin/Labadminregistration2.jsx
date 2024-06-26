@@ -83,7 +83,7 @@ export default function Labadminregistration2() {
   const updatePosts = (pinCode) => {
     if (pinCode.length === 6) {
       axios
-        .get(`${port}/pincode/${pinCode}`)
+        .get(`https://api.postalpincode.in/pincode/${pinCode}`)
         .then((res) => {
           console.log("res.data[0]?.PostOffice", res.data[0]?.PostOffice);
           if (res.data[0]?.PostOffice?.length > 0) {
