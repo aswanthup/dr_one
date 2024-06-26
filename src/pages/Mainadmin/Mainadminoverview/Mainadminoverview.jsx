@@ -1,4 +1,6 @@
 import React from 'react'
+import Mainadminprofile from '../Mainadminprofile/Mainadminprofile'
+import Adminlist from '../Mainadmin/Adminlist'
 
 export default function Mainadminoverview() {
   return (
@@ -114,6 +116,12 @@ export default function Mainadminoverview() {
       </div> 
 
 
+
+
+
+      <Mainadminprofile />
+
+<Adminlist />
     </div>
   )
 }
