@@ -99,7 +99,6 @@ export default function Mainadmin() {
               <>
                 <Mainadminonboarding />
               </>
-
             }
             {ChangeDashboards?.category &&
               <>

@@ -18,6 +18,7 @@ import {
 } from "../doctor/constants/filter";
 import axios from "axios";
 import { SearchDocContext } from "../../contexts/Doctor/SearchDoctorProvider";
+import ChatBotAfterLogin from "../../components/ChatBotAfterLogin/ChatBotAfterLogin";
 export default function Mainpage() {
   const [latitude, setLatitude] = useState(null);
   const [longitude, setLongitude] = useState(null);
@@ -228,7 +229,8 @@ export default function Mainpage() {
         <div className="desktop">
           {/* Navbar */}
 
-          <ChatBot />
+          {/* <ChatBot /> */}
+          <ChatBotAfterLogin />
           {/*End Navbar */}
           {/* Hero section */}
           <div className="container-second hero-main2 flex">

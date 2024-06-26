@@ -176,6 +176,7 @@ button {
     display: flex;
     flex-direction: column;
     height: fit-content;
+    max-height: 90vh;
     overflow-x: scroll;
 }
 

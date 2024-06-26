@@ -37,82 +37,82 @@ export default function Mainadmindoctorapprove() {
 
     <>
 
-      <div className="mainadmindoctordatas flex">
+      <div style={{ padding: '20px' }}>
 
-        <div className="mainadmindoctordatas_profile flex">
+        <div className="mainadmindoctordatas flex">
 
-          <img className='mainadmindoctordatas_profile_photo' src="/images/doc.jpg" alt="" />
+          <div className="mainadmindoctordatas_profile flex">
 
-          <div className="mainadmindoctordatas_profile_data flex">
+            <img className='mainadmindoctordatas_profile_photo' src="/images/doc.jpg" alt="" />
 
-            <div className='flex'>  <h2>{DetailedData?.name}</h2> <h4 className='highlight_data' style={{ background: "#2A9D8F", color: "white", marginLeft: "10px" }}>{DetailedData?.sector}</h4></div>
+            <div className="mainadmindoctordatas_profile_data flex">
 
-            <h4 className='highlight_data' style={{ background: "#3A65FD", color: "white", }}>{DetailedData?.education_qualification}({DetailedData?.specialization})</h4>
+              <div className='flex'>  <h2>{DetailedData?.name}</h2> <h4 className='highlight_data' style={{ background: "#2A9D8F", color: "white", marginLeft: "10px" }}>{DetailedData?.sector}</h4></div>
 
-            <div className='flex'>
+              <h4 className='highlight_data' style={{ background: "#3A65FD", color: "white", }}>{DetailedData?.education_qualification}({DetailedData?.specialization})</h4>
+
+              <div className='flex'>
+                <div className='flex texticonset'>
+                  <i class="fi fi-sr-call-outgoing"></i>
+                  <h4 style={{ marginLeft: "10px" }}>+91 {DetailedData?.phone_no}</h4>
+
+                </div>
+                <div className='flex texticonset' style={{ marginLeft: "20px" }}>
+                  <i class="fi fi-sr-city"></i>    <h4 style={{ marginLeft: "10px" }}>{DetailedData?.phone_office}</h4>
+                </div>
+              </div>
+
               <div className='flex texticonset'>
-                <i class="fi fi-sr-call-outgoing"></i>
-                <h4 style={{ marginLeft: "10px" }}>+91 {DetailedData?.phone_no}</h4>
-
+                <i class="fi fi-sr-envelope"></i>
+                <h4 style={{ marginLeft: "10px" }}>{DetailedData?.email}</h4>
               </div>
-              <div className='flex texticonset' style={{ marginLeft: "20px" }}>
-                <i class="fi fi-sr-city"></i>    <h4 style={{ marginLeft: "10px" }}>{DetailedData?.phone_office}</h4>
-              </div>
+
+
+
             </div>
-
-            <div className='flex texticonset'>
-              <i class="fi fi-sr-envelope"></i>
-              <h4 style={{ marginLeft: "10px" }}>{DetailedData?.email}</h4>
-            </div>
-
-
-
-          </div>
-        </div>
-
-
-
-
-
-
-
-      </div>
-
-      <div className="mainadmindoctoraboutavail flex">
-
-        <div className="mainadmindoctorabout">
-          <h3 style={{ marginBottom: "1.3vw" }}>About</h3>
-          <div className='flex' style={{ marginBottom: "1vw" }}><h4 className='highlight_data' style={{ background: "#2A9D8F", color: "white", }}>Allopathy</h4> <h4 className='highlight_data' style={{ marginLeft: "20px", background: "#FB8500", color: "white", }}>Epilepsy</h4></div>
-          <h4 style={{ marginBottom: "1.3vw" }}>{DetailedData?.about}</h4>
-        </div>
-
-        <div className="mainadmindoctoraddress">
-
-          <h3 style={{ marginBottom: "1.3vw" }}>Address</h3>
-
-          <h4 style={{ marginBottom: "1vw" }}>{DetailedData?.address}</h4>
-          <div className='flex adimindoctorpin'>
-            <h4 style={{ background: "#3A65FD", color: "white" }}>{DetailedData.pincode}</h4>
           </div>
 
+
+
+
+
+
+
         </div>
 
+        <div className="mainadmindoctoraboutavail flex">
+
+          <div className="mainadmindoctorabout">
+            <h3 style={{ marginBottom: "1.3vw" }}>About</h3>
+            <div className='flex' style={{ marginBottom: "1vw" }}><h4 className='highlight_data' style={{ background: "#2A9D8F", color: "white", }}>Allopathy</h4> <h4 className='highlight_data' style={{ marginLeft: "20px", background: "#FB8500", color: "white", }}>Epilepsy</h4></div>
+            <h4 style={{ marginBottom: "1.3vw" }}>{DetailedData?.about}</h4>
+          </div>
+
+          <div className="mainadmindoctoraddress">
+
+            <h3 style={{ marginBottom: "1.3vw" }}>Address</h3>
+
+            <h4 style={{ marginBottom: "1vw" }}>{DetailedData?.address}</h4>
+            <div className='flex adimindoctorpin'>
+              <h4 style={{ background: "#3A65FD", color: "white" }}>{DetailedData.pincode}</h4>
+            </div>
+
+          </div>
 
 
-      </div>
 
-
-
-
-      <div className='admin_disable_section admin_disable_section2 flex'>
-        <div className='flex'>
-          <i class="fi fi-sr-exclamation"></i>
-          <h4 style={{ marginLeft: "0.6vw" }} >Waiting for your response</h4>
         </div>
 
-        <div className='admin_disable_button flex'>
-          <h4 onClick={() => ResponseAdmin("reject")}>Reject</h4>
-          <h4 onClick={() => ResponseAdmin("approve")} style={{ marginLeft: "0.6vw", backgroundColor: "rgb(42, 157, 143)" }}>Approve</h4>
+        <div className='admin_disable_section admin_disable_section2 flex'>
+          <div className='flex'>
+            <i class="fi fi-sr-exclamation"></i>
+            <h4 style={{ marginLeft: "0.6vw" }} >Waiting for your response</h4>
+          </div>
+
+          <div className='admin_disable_button flex'>
+            <h4 onClick={() => ResponseAdmin("reject")}>Reject</h4>
+            <h4 onClick={() => ResponseAdmin("approve")} style={{ marginLeft: "0.6vw", backgroundColor: "rgb(42, 157, 143)" }}>Approve</h4>
+          </div>
         </div>
       </div>
 
