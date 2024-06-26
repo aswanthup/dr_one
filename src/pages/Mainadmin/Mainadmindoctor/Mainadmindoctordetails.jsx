@@ -245,7 +245,7 @@ export default function Mainadmindoctordetails({ Data: { DetailData } }) {
               {currentAvailability.map(ele =>
                 <div className="hospitaltime flex">
                   <div className="hospitaltime_name">
-                    <h3>Caritas hospital, Kotayam</h3>
+                    <h3>{ele?.hospital_name}</h3>
                     <div className='availabilityDays'>
 
                       {ele?.days_timing.map((TimingByDay, index) =>
@@ -313,7 +313,6 @@ export default function Mainadmindoctordetails({ Data: { DetailData } }) {
           </div >
 
           <div className='mainadmindoctoraboutFlexEnd'>
-            <button onClick={EditDetailsCondition}>Edit Profile</button>
           </div>
 
 
@@ -353,35 +352,35 @@ export default function Mainadmindoctordetails({ Data: { DetailData } }) {
               </div>
             </>
           }
-          {Viewers?.cunsultData?.length > 0 &&
-            <>
-              <div className='flex admin_view_more'>
-                <h3>Views</h3>
-                <h4>View More<i style={{ marginLeft: "0.5vw" }} class="ri-arrow-right-up-line"></i></h4>
-              </div>
-              <table className='doctortable'>
+          {/* {Viewers?.cunsultData?.length > 0 && */}
+          <>
+            <div className='flex admin_view_more'>
+              <h3>Views</h3>
+              <h4>View More<i style={{ marginLeft: "0.5vw" }} class="ri-arrow-right-up-line"></i></h4>
+            </div>
+            <table className='doctortable'>
+              <tr>
+                <th>No</th>
+                <th>Customer Name</th>
+                <th>Mobile Number</th>
+                <th>Date & Time</th>
+                <th>Location</th>
+                <th>Status</th>
+              </tr>
+              {[1, 2, 3, 4, 5].map((ele, index) =>
                 <tr>
-                  <th>No</th>
-                  <th>Customer Name</th>
-                  <th>Mobile Number</th>
-                  <th>Date & Time</th>
-                  <th>Location</th>
-                  <th>Status</th>
+                  <td>{index + 1}</td>
+                  <td>Maria Anders</td>
+                  <td>+49 30 123456</td>
+                  <td>Germany</td>
+                  <td>9/5/2024</td>
+                  <td>Contacted</td>
                 </tr>
-                {Viewers?.cunsultData?.map((ele, index) =>
-                  <tr>
-                    <td>{index + 1}</td>
-                    <td>Maria Anders</td>
-                    <td>+49 30 123456</td>
-                    <td>Germany</td>
-                    <td>9/5/2024</td>
-                    <td>Contacted</td>
-                  </tr>
-                )}
-              </table>
-            </>
+              )}
+            </table>
+          </>
 
-          }
+          {/* } */}
 
 
 
@@ -407,6 +406,7 @@ export default function Mainadmindoctordetails({ Data: { DetailData } }) {
             </div>
 
             <div className={DoctorDetails?.status === "N" ? 'admin_disable_button' : DoctorDetails?.status === "Y" ? "admin_disable_button2" : ''}>
+              <button onClick={EditDetailsCondition}>Edit Profile</button>
               <h4 onClick={UpdateStatus}>{DoctorDetails?.status === "N" ? "Active" : DoctorDetails?.status === "Y" ? "Disabled" : ''}</h4>
             </div>
           </div>

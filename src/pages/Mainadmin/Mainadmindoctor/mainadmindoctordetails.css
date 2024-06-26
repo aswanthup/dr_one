@@ -352,6 +352,39 @@
     color: white;
     padding: .2vw 1.5vw;
     border-radius: 5px;
+    display: flex;
+    align-items: center;
+}
+
+.admin_disable_button2 {
+    display: flex;
+    gap: 10px;
+}
+
+.admin_disable_button2 button {
+    background-color: #23a01c;
+    color: white;
+    padding: .2vw 1.5vw;
+    border-radius: 5px;
+    font-size: 1.2rem;
+}
+
+.admin_disable_button {
+    display: flex;
+    gap: 10px;
+
+}
+
+.admin_disable_button button {
+    background-color: #23a01c;
+    color: white;
+    padding: .2vw 1.5vw;
+    border-radius: 5px;
+}
+
+.admin_disable_button button {
+    display: flex;
+    gap: 10px;
 }
 
 .admin_disable_button h4 {
@@ -359,6 +392,7 @@
     color: white;
     padding: .2vw 1.5vw;
     border-radius: 5px;
+    display: flex;
 }
 
 .admin_disable_section_left {
@@ -777,4 +811,11 @@ tr:hover {
     font-size: 15px;
     letter-spacing: 1px;
     border: none;
+}
+
+.admin_disable_sectionFlex {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+
 }
