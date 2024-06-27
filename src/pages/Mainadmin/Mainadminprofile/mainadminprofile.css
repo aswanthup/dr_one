@@ -2,6 +2,7 @@
     width: 300px;
     border: 1px solid #a4b7fc94;
     padding-bottom:10px;
+    background-color: white;
 }
 
 .mainadminprofilenamecard{
@@ -24,7 +25,15 @@
 .adminmenuprofile{
     padding:10px 20px;
     align-items: center;
+    transition: 600ms ease-in-out;
 }
+
+.adminmenuprofile:hover{
+    background-color: #e4eaff;
+
+}
+
+
 
 .adminmenuprofile i{
     font-weight:100;
@@ -60,4 +69,14 @@
     font-size:1rem;
     padding:0px 10px;
     border-radius:50px;
+}
+
+
+
+
+.mainadminprofilecard{
+    position: relative;
+    top: 66px;
+    left:1220px;
+    border-radius:10px;
 }
