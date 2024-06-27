@@ -405,7 +405,7 @@ export default function Mainadmindoctordetails({ Data: { DetailData } }) {
 
             </div>
 
-            <div className={DoctorDetails?.status === "N" ? 'admin_disable_button' : DoctorDetails?.status === "Y" ? "admin_disable_button2" : ''}>
+            <div className={DoctorDetails?.status === "N" ? 'admin_disable_button' : DoctorDetails?.status === "Y" || DoctorDetails?.status === null ? "admin_disable_button2" : ''}>
               <button onClick={EditDetailsCondition}>Edit Profile</button>
               <h4 onClick={UpdateStatus}>{DoctorDetails?.status === "N" ? "Active" : DoctorDetails?.status === "Y" ? "Disabled" : ''}</h4>
             </div>

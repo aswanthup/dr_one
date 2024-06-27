@@ -1,8 +1,14 @@
-import React from 'react'
+import { Modal } from '@mui/material'
+import React, { useState } from 'react'
 
 export default function Mainadminnavbar({ data: { SentData, selected } }) {
+  const [ProfilePopup, setProfilePopup] = useState(false)
   const FindButtonValue = (data) => {
     SentData(data)
+  }
+
+  const OpenPopup = () => {
+    setProfilePopup(!ProfilePopup)
   }
   return (
     <div className="doctoradminnavbar">
@@ -26,12 +32,16 @@ export default function Mainadminnavbar({ data: { SentData, selected } }) {
             <i class="ri-notification-2-line"></i>
           </div>
 
-          <img style={{ marginLeft: "18px" }} src="/images/doc.jpg" alt="" />
+          <img onClick={OpenPopup} style={{ marginLeft: "18px" }} src="/images/doc.jpg" alt="" />
 
         </div>
 
-
+        <Modal open={ProfilePopup} onClose={OpenPopup}>
+          <>
+          </>
+        </Modal>
       </div>
     </div>
+
   )
 }

@@ -257,9 +257,9 @@ export const MainAdminDoctorEditFinal = () => {
                             maxLength={50}
                             type="text"
                             autoComplete="off"
-                            value={editDoc?.qualification}
+                            value={editDoc?.education_qualification}
                             onChange={handleChange}
-                            name="qualification"
+                            name="education_qualification"
                         />
                     </div>
                     <div>
@@ -269,9 +269,9 @@ export const MainAdminDoctorEditFinal = () => {
                             maxLength={50}
                             type="text"
                             autoComplete="off"
-                            value={editDoc?.additionalQualification}
+                            value={editDoc?.additional_qualification}
                             onChange={handleChange}
-                            name="additionalQualification"
+                            name="additional_qualification"
                         />
                     </div>
                     <div>
@@ -363,7 +363,7 @@ export const MainAdminDoctorEditFinal = () => {
                                     boxSizing: "border-box",
                                     borderRadius: "0.5vw",
                                 }}
-                                value={editDoc?.selectedYear ? dayjs(editDoc?.selectedYear) : null}
+                                value={editDoc?.experience ? dayjs(editDoc?.experience) : null}
                                 views={["year"]}
                                 className="date-picker"
                             />
