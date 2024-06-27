@@ -1,9 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { useNavigate } from "react-router-dom";
+import { Modal } from "@mui/material";
 
 export const DocProfileTopbar = () => {
-    const navigate=useNavigate()
+  const [ProfilePopup, setProfilePopup] = useState(false)
+  const navigate = useNavigate()
+  const openPopups = () => {
+    setProfilePopup(!ProfilePopup)
+  }
   return (
     <>
       <div className="doctoradminnavbar">
@@ -20,13 +25,18 @@ export const DocProfileTopbar = () => {
             >
               <i class="ri-notification-2-line"></i>
             </div>
-            <img style={{ marginLeft: "18px" }} src="/images/doc.jpg" alt="" />
-            <div  style={{paddingLeft:"1rem",cursor:"pointer"}} onClick={()=>navigate("/login")}>
-              <LogoutIcon style={{color:"blue",fontSize:"25px"}} id="LabAdminProfileLogoutSecIcon" />
+            <img onClick={openPopups} style={{ marginLeft: "18px" }} src="/images/doc.jpg" alt="" />
+            <div style={{ paddingLeft: "1rem", cursor: "pointer" }} onClick={() => navigate("/login")}>
+              <LogoutIcon style={{ color: "blue", fontSize: "25px" }} id="LabAdminProfileLogoutSecIcon" />
             </div>
           </div>
         </div>
       </div>
+      <Modal open={ProfilePopup} onClose={openPopups}>
+        <>
+
+        </>
+      </Modal>
     </>
   );
 };

@@ -77,15 +77,16 @@ export const MainAdminDoctorEditFinal = () => {
         });
     };
     const handleSubmit = (e) => {
+
         e.preventDefault();
         setloader(true);
         // Check if any other validations fail
         const checkFields = [
             "name",
-            "phone",
+            "phone_no",
             "email",
             "password",
-            "qualification",
+            "education_qualification",
             "specialization",
             "type",
             "gender",
@@ -106,40 +107,43 @@ export const MainAdminDoctorEditFinal = () => {
                     !(ele in editDoc)
             )
         ) {
+            alert("falseeeee")
             setloader(false);
             toast.info("Please fill in all fields.");
             return;
-        }
-        // Check if there are any validation errors
-        if (postalError) {
-            setloader(false);
-            toast.error("Please fix the pincode error.");
-            return;
-        }
-        const formData = new FormData();
-        formData.append("image", editDoc.docImage);
-        formData.append("data", JSON.stringify(editDoc));
-        axios
-            .post(`${port}/doctor/dr_registration`, formData)
-            .then((res) => {
-                if (res.data.success === true) {
-                    toast.success(res.data.message);
-                    setloader(false);
-                    setTimeout(() => {
-                        seteditDoc({});
-                        navigate("/");
-                    }, 2500);
-                } else {
-                    toast.error(res.data.message);
-                    setloader(false);
-                }
-            })
-            .catch((err) => {
-                toast.info(err?.response?.data?.message);
-            })
-            .finally(() => {
+        } else {
+            // Check if there are any validation errors
+            if (postalError) {
                 setloader(false);
-            });
+                toast.error("Please fix the pincode error.");
+                return;
+            } else {
+                alert("falseeeee")
+                axios
+                    .post(`${port}/doctor/completeedit`, editDoc)
+                    .then((res) => {
+                        if (res.data.success === true) {
+                            toast.success(res.data.message);
+                            setloader(false);
+                            setTimeout(() => {
+                                seteditDoc({});
+                                navigate("");
+                            }, 2500);
+                        } else {
+                            toast.error(res.data.message);
+                            setloader(false);
+                        }
+                    })
+                    .catch((err) => {
+                        console.log(err)
+                        toast.info(err?.response?.data?.message);
+                    })
+                    .finally(() => {
+                        setloader(false);
+                    });
+            }
+        }
+
     };
     const updatePosts = (pinCode) => {
         if (pinCode?.length === 6) {
