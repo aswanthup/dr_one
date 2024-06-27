@@ -1,6 +1,7 @@
 import React from 'react'
 import Mainadminprofile from '../Mainadminprofile/Mainadminprofile'
 import Adminlist from '../Mainadmin/Adminlist'
+import Addadmins from '../Mainadmin/Addadmins'
 
 export default function Mainadminoverview() {
   return (
@@ -122,6 +123,7 @@ export default function Mainadminoverview() {
       <Mainadminprofile />
 
 <Adminlist />
+<Addadmins />
     </div>
   )
 }
