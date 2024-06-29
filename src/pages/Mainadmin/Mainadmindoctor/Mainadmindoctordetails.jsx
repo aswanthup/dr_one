@@ -105,7 +105,7 @@ export default function Mainadmindoctordetails({ Data: { DetailData } }) {
     axios.post(`${port}/doctor/doctor_disable`, Data).then((res) => {
       console.log("res>>>>>>>", res)
       if (res?.data?.message) {
-        toast.info(res?.data?.message)
+        toast.success(res?.data?.message)
         ChangeStatus()
       }
     }).catch((err) => {
@@ -407,7 +407,7 @@ export default function Mainadmindoctordetails({ Data: { DetailData } }) {
 
             <div className={DoctorDetails?.status === "N" ? 'admin_disable_button' : DoctorDetails?.status === "Y" || DoctorDetails?.status === null ? "admin_disable_button2" : ''}>
               <button onClick={EditDetailsCondition}>Edit Profile</button>
-              <h4 onClick={UpdateStatus}>{DoctorDetails?.status === "N" ? "Active" : DoctorDetails?.status === "Y" ? "Disabled" : ''}</h4>
+              <h4 onClick={UpdateStatus}>{DoctorDetails?.status === "N" ? "Active" : DoctorDetails?.status === "Y" || DoctorDetails?.status === null ? "Disabled" : ''}</h4>
             </div>
           </div>
         </div >

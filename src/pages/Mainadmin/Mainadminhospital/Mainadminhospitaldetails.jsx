@@ -1,15 +1,18 @@
 import React, { useEffect, useState } from 'react'
-import { useLocation } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { port } from '../../../config'
 import axios from 'axios'
+import moment from 'moment'
+import { toast } from 'react-toastify'
 
 export default function Mainadminhospitaldetails({ Data }) {
   const location = useLocation()
 
-  const [HospitalDetails, setHospitalDetails] = useState(Data)
+  const [HospitalDetails, setHospitalDetails] = useState(Data?.DetailData)
   const [Feedbacks, setFeedbacks] = useState([])
   const [views, setviews] = useState([])
 
+  const navigate = useNavigate()
   console.log(HospitalDetails)
 
   useEffect(() => {
@@ -25,7 +28,35 @@ export default function Mainadminhospitaldetails({ Data }) {
       setviews(res?.data?.data)
     })
   }, [])
-
+  const EditDetailsCondition = () => {
+    navigate("/mainadminhospitalBasicedit", { state: { data: HospitalDetails } })
+  }
+  const UpdateStatus = () => {
+    const Data = {
+      id: HospitalDetails?.id,
+      status: HospitalDetails?.status === "Y" ? "N" : "Y"
+    }
+    console.log("Data>>>>", Data)
+    axios.post(`${port}/hospital/approvehospital`, Data).then((res) => {
+      console.log("res>>>>>>>", res)
+      if (res?.data?.message) {
+        toast.success(res?.data?.message)
+        ChangeStatus()
+      }
+    }).catch((err) => {
+      toast.info(err.response.data.message)
+    })
+  }
+  const ChangeStatus = () => {
+    let temp = HospitalDetails
+    if (temp?.status === "Y") {
+      temp = { ...temp, status: "N" }
+    } else {
+      temp = { ...temp, status: "Y" }
+    }
+    console.log(temp)
+    setHospitalDetails(temp)
+  }
   return (
 
     <>
@@ -135,7 +166,7 @@ export default function Mainadminhospitaldetails({ Data }) {
 
             <div className='admin_fea_avai_left'>
               <h3 style={{ marginBottom: "1.3vw" }}>Features</h3>
-              {HospitalDetails?.feature.map(ele =>
+              {HospitalDetails?.feature?.map(ele =>
                 <h4 style={{ marginBottom: "1.3vw" }}><i class="ri-arrow-right-circle-fill"></i>{ele}</h4>
               )}
             </div>
@@ -143,7 +174,7 @@ export default function Mainadminhospitaldetails({ Data }) {
             <div className='admin_fea_avai_right'>
               <h3 style={{ marginBottom: "1.3vw" }}>Specialities</h3>
 
-              {HospitalDetails?.speciality.map(ele =>
+              {HospitalDetails?.speciality?.map(ele =>
                 <h4 style={{ marginBottom: "1.3vw" }}><i class="ri-arrow-right-circle-fill"></i>{ele}</h4>
               )}
             </div>
@@ -327,27 +358,30 @@ export default function Mainadminhospitaldetails({ Data }) {
 
 
       </table>
+
+
       <div className='admin_disable_section flex'>
+
+
 
         <div className='admin_disable_section_left flex'>
           <i class="fi fi-sr-exclamation"></i>
           <div style={{ marginLeft: "1.3vw" }}>
             <h2>Date of join</h2>
-            <h4>2/4/2023</h4>
+            <h4>{moment(HospitalDetails?.datetime).subtract(10, 'days').calendar()}</h4>
           </div>
 
           <div style={{ marginLeft: "1.5vw" }}>
             <h2>Last Actived</h2>
-            <h4>2/4/2023</h4>
+            <h4>{moment(HospitalDetails?.last_active).subtract(10, 'days').calendar()}</h4>
           </div>
-
-
 
 
         </div>
 
-        <div className='admin_disable_button'>
-          <h4>Disable</h4>
+        <div className={HospitalDetails?.status === "N" ? 'admin_disable_button' : HospitalDetails?.status === "Y" || HospitalDetails?.status === null ? "admin_disable_button2" : ''}>
+          <button onClick={EditDetailsCondition}>Edit Profile</button>
+          <h4 onClick={UpdateStatus}>{HospitalDetails?.status === "N" ? "Active" : HospitalDetails?.status === "Y" || HospitalDetails?.status === null ? "Disabled" : ''}</h4>
         </div>
       </div>
 

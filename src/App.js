@@ -77,6 +77,8 @@ import MainAdminDoctorEditBasic from "./pages/Mainadmin/Mainadmindoctor/MainAdmi
 import { MainAdminDoctorEditFinal } from "./pages/Mainadmin/Mainadmindoctor/MainAdminDoctorEdit/MainAdminDoctorEditFinal";
 import Mainadminlabeditlab1 from "./pages/Mainadmin/Mainadminlabs/edit data/LabEdit1";
 import Mainadminlabeditlab2 from "./pages/Mainadmin/Mainadminlabs/edit data/LabEdit2";
+import { MainAdminHospitalEditBasic } from "./pages/Mainadmin/Mainadminhospital/MainAdminHospitalEdit/MainAdminHospitalEditBasic";
+import { MainAdminHospitalEditFinal } from "./pages/Mainadmin/Mainadminhospital/MainAdminHospitalEdit/MainAdminHospitalEditFinal";
 function App() {
   return (
     <div className="App">
@@ -266,7 +268,7 @@ function App() {
                 element={<Mainadmincustomer />}
               ></Route>
               <Route
-                path="/mainadminfeedback"
+                path="/Mainadmincustomerdetails"
                 element={<Mainadmincustomerdetails />}
               ></Route>
               <Route
@@ -293,8 +295,16 @@ function App() {
                 path="/mainadminlabeditlab2"
                 element={<Mainadminlabeditlab2 />}
               ></Route>
+              <Route
+                path="/mainadminhospitalBasicedit"
+                element={<MainAdminHospitalEditBasic />}
+              ></Route>
+              <Route
+                path="/mainadminhospitalFinaledit"
+                element={<MainAdminHospitalEditFinal />}
+              ></Route>
 
-              
+
 
               {/*End Main admin */}
             </Routes>

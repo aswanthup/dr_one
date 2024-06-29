@@ -24,7 +24,7 @@ export default function Mainadminhospitallist({ updateState: { setChangeDashboar
     let tempData = initialData;
     console.log(value)
     if (!value) {
-      setHospital(Hospital);
+      setHospital(initialData);
       return;
     }
 

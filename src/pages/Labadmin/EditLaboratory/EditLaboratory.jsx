@@ -286,7 +286,7 @@ export const EditLaboratory = () => {
                                 </div>
                                 <TimePicker
                                     className='EditLabInputsSec1InnerTime'
-                                    value={DetailedData?.timing?.opening_time ? dayjs(DetailedData?.timing?.opening_time, 'hh:mm A') : null}
+                                    value={DetailedData?.timing?.closing_time ? dayjs(DetailedData?.timing?.closing_time, 'hh:mm A') : null}
                                     onChange={(e) => { TimeSetting(e, "opening_time") }}
                                 />                        </div>
                         </div>

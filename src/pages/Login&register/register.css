@@ -37,6 +37,7 @@
     /* height: 80vh; */
     color: var(--color-white);
 
+
 }
 
 
@@ -80,7 +81,8 @@ label {
     background-color: rgba(246, 246, 249, .4);
     padding: 1vw;
     color: white;
-    &:focus{
+
+    &:focus {
         border: 1px solid white;
     }
 }
@@ -94,7 +96,8 @@ label {
     background-color: rgba(246, 246, 249, .4);
     padding: 1vw;
     color: white;
-    &:focus{
+
+    &:focus {
         border: 1px solid white;
     }
 }
@@ -177,11 +180,39 @@ label {
 }
 
 
-
+.registration-form-edit {
+    /* height: fit-content; */
+    /* height: 150dvh; */
+    width: 72vw;
+    background-color: var(--color-primary);
+    border-radius: 2vw;
+    padding: 2vw;
+    /* height: 80vh; */
+    color: var(--color-white);
+    width: 100%;
+    padding: 5vw;
+    border-radius: 0vw;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    border-radius: 20px;
+}
 
 
 .hospitalname_input input {
     width: 54vw;
+    border: none;
+    border-radius: 5px;
+    margin-top: 1vw;
+    background-color: rgba(246, 246, 249, .4);
+    padding: 1vw;
+    color: white;
+    height: 3vw;
+}
+
+
+.hospitalname_input_Hospital input {
+    width: 100%;
     border: none;
     border-radius: 5px;
     margin-top: 1vw;
@@ -309,6 +340,8 @@ label {
         /* height: fit-content; */
         /* height: 150dvh; */
     }
+
+
 }
 
 

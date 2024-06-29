@@ -1,8 +1,6 @@
 import React, { useContext } from "react";
 import "../../../Doctoradmin/doctoradminregistration2.css";
 import { useState, useEffect } from "react";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { MyContext } from "../../../../contexts/Contexts";
@@ -17,6 +15,8 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import dayjs, { Dayjs } from "dayjs";
+import { Loader } from "../../../../components/Loader/Loader.jsx";
+import { toast } from "react-toastify";
 export const MainAdminDoctorEditFinal = () => {
     const navigate = useNavigate();
     const { editDoc, seteditDoc } = useContext(MyContext);
@@ -25,32 +25,19 @@ export const MainAdminDoctorEditFinal = () => {
     const [loader, setloader] = useState(false);
 
     useEffect(() => {
-        const names = [
-            "confirmPassword",
-            "email",
-            "name",
-            "password",
-            "phone",
-            "secondname"]
-        if (names.some((ele) => !editDoc[ele])) {
-            // navigate('/doctoradminregistration1')
-        }
+        //     const names = ["confirmPassword", "email", "name", "password", "phone", "secondname"];
+        //     if (names.some((ele) => !editDoc[ele])) {
+        //         // navigate('/doctoradminregistration1')
+        //     }
         window.scrollTo(0, 0); // Scrolls to the top of the page
+    }, [editDoc, navigate]);
 
-    }, [])
     const handleKeyPress = (event) => {
-        // Check if the pressed key is '.' or '-'
-        if (
-            event?.key === "." ||
-            event?.key === "-" ||
-            event?.key === "e" ||
-            event?.key === "+" ||
-            event?.key === "E"
-        ) {
-            // Prevent the default behavior for these keys
+        if ([".", "-", "e", "+", "E"].includes(event?.key)) {
             event.preventDefault();
         }
     };
+
     const handleChange = (e) => {
         const { name, value } = e.target;
         if (name === "phone_office" && value.length > 11) {
@@ -61,6 +48,7 @@ export const MainAdminDoctorEditFinal = () => {
             [name]: value,
         });
     };
+
     const handleTypeChanges = (e) => {
         const { name, value } = e.target;
         seteditDoc({
@@ -68,100 +56,81 @@ export const MainAdminDoctorEditFinal = () => {
             [name]: value,
         });
     };
+
     const handleYearChange = (e) => {
-        console.log(e);
         seteditDoc({
             ...editDoc,
             selectedYear: e.$d,
             experience: e.$y,
         });
     };
-    const handleSubmit = (e) => {
 
+    const handleSubmit = (e) => {
         e.preventDefault();
-        setloader(true);
-        // Check if any other validations fail
-        const checkFields = [
-            "name",
-            "phone_no",
-            "email",
-            "password",
-            "education_qualification",
-            "specialization",
-            "type",
-            "gender",
-            "address",
-            "experience",
-            "about",
-            "registration_no",
-            "pincode",
-            "sector",
-            "phone_office",
-        ];
-        if (
-            checkFields.some(
-                (ele) =>
-                    editDoc[ele] === null ||
-                    editDoc[ele] === undefined ||
-                    editDoc[ele] === "" ||
-                    !(ele in editDoc)
-            )
-        ) {
-            alert("falseeeee")
-            setloader(false);
+        // setloader(true);
+        const checkFields =
+            !editDoc?.name ||
+            !editDoc?.phone_no ||
+            !editDoc?.email ||
+            !editDoc?.password ||
+            !editDoc?.education_qualification ||
+            !editDoc?.specialization ||
+            !editDoc?.type ||
+            !editDoc?.gender ||
+            !editDoc?.address ||
+            !editDoc?.experience ||
+            !editDoc?.about ||
+            !editDoc?.registration_no ||
+            !editDoc?.pincode ||
+            !editDoc?.sector ||
+            !editDoc?.phone_office
+        console.log("checkFields>>>>", checkFields)
+        if (checkFields) {
+            // setloader(false);
+            alert("Please fill in all fields.")
             toast.info("Please fill in all fields.");
             return;
+        } else if (postalError) {
+            setloader(false);
+            toast.error("Please fix the pincode error.");
+            return;
         } else {
-            // Check if there are any validation errors
-            if (postalError) {
-                setloader(false);
-                toast.error("Please fix the pincode error.");
-                return;
-            } else {
-                alert("falseeeee")
-                axios
-                    .post(`${port}/doctor/completeedit`, editDoc)
-                    .then((res) => {
-                        if (res.data.success === true) {
-                            toast.success(res.data.message);
-                            setloader(false);
-                            setTimeout(() => {
-                                seteditDoc({});
-                                navigate("");
-                            }, 2500);
-                        } else {
-                            toast.error(res.data.message);
-                            setloader(false);
-                        }
-                    })
-                    .catch((err) => {
-                        console.log(err)
-                        toast.info(err?.response?.data?.message);
-                    })
-                    .finally(() => {
+            console.log(editDoc)
+            axios
+                .post(`https://test.apis.dr1.co.in/doctor/completeedit`, editDoc)
+                .then((res) => {
+                    console.log(res.data.message)
+                    if (res.data.success) {
                         setloader(false);
-                    });
-            }
-        }
+                        setTimeout(() => {
+                            seteditDoc({});
+                            navigate(-2);
+                        }, 2500);
+                        // toast.success(res.data.message);
+                        alert(res.data.message)
+                    } else {
+                        toast.info(res.data.message);
+                        setloader(false);
+                    }
+                })
+                .catch((err) => {
+                    toast.info(err?.response?.data?.message);
+                })
 
+        }
     };
+
     const updatePosts = (pinCode) => {
         if (pinCode?.length === 6) {
-            seteditDoc({
-                ...editDoc,
+            seteditDoc((prevData) => ({
+                ...prevData,
                 pincode: pinCode,
                 selectedPlace: "",
-            });
+            }));
             axios
                 .get(`https://api.postalpincode.in/pincode/${pinCode}`)
                 .then((res) => {
                     const { PostOffice } = res?.data[0];
-                    seteditDoc({
-                        ...editDoc,
-                        Postoffice: PostOffice,
-                        pincode: pinCode,
-                        selectedPlace: "",
-                    });
                     if (PostOffice === null) {
                         toast.info("Pincode not found");
                     } else {
@@ -175,6 +144,12 @@ export const MainAdminDoctorEditFinal = () => {
                             Block: postData.Block,
                             pincode: parseInt(editDoc?.pincode),
                         });
+                        seteditDoc((prevData) => ({
+                            ...prevData,
+                            Postoffice: PostOffice,
+                            pincode: pinCode,
+                            selectedPlace: "",
+                        }));
                     }
                 });
         }
@@ -187,56 +162,45 @@ export const MainAdminDoctorEditFinal = () => {
             return;
         }
 
-        if (!/^\d{6}$/.test(value)) {
+        if (/^\d{0,6}$/.test(value)) {
+            const pincode = value ? parseInt(value, 10) : "";  // Convert to int or keep as empty string
             seteditDoc((prevData) => ({
                 ...prevData,
-                pincode: value,
+                pincode: pincode,
                 Postoffice: [],
                 selectedPlace: "",
             }));
 
-            if (value === "") {
+            if (value.length === 6) {
+                updatePosts(value);
                 setPostalError("");
             } else {
                 setPostalError("Please enter a 6-digit pincode");
             }
         } else {
-            updatePosts(value);
+            setPostalError("Please enter a valid pincode");
         }
-    };
+    }
 
-    // return specializations based on the selected type//
     const getSpecializationOptions = () => {
         if (!editDoc) return null;
 
         switch (editDoc.type) {
             case "Allopathy":
                 return speacializationNames.map((value, index) => (
-                    <option
-                        key={index}
-                        value={value}
-                        className="doctoradminregistration_gender_font"
-                    >
+                    <option key={index} value={value} className="doctoradminregistration_gender_font">
                         {value}
                     </option>
                 ));
             case "Ayurvedic":
                 return ayurSpec.map((value, index) => (
-                    <option
-                        key={index}
-                        value={value}
-                        className="doctoradminregistration_gender_font"
-                    >
+                    <option key={index} value={value} className="doctoradminregistration_gender_font">
                         {value}
                     </option>
                 ));
             case "Homeopathy":
                 return homeoDept.map((value, index) => (
-                    <option
-                        key={index}
-                        value={value}
-                        className="doctoradminregistration_gender_font"
-                    >
+                    <option key={index} value={value} className="doctoradminregistration_gender_font">
                         {value}
                     </option>
                 ));
@@ -246,12 +210,12 @@ export const MainAdminDoctorEditFinal = () => {
     };
 
     console.log({ editDoc });
-
     return (
         <div className="doctoradminregistration flex desktop">
             <div>
                 <h1>Doctor Registration</h1>
             </div>
+            {/* {loader && <Loader />} */}
             <div className="doctoradminregistration_input flex">
                 <div className="doctoradminregistration_input1 flex">
                     <div>
@@ -485,7 +449,7 @@ export const MainAdminDoctorEditFinal = () => {
                                         onKeyDown={handleKeyPress}
                                         type="number"
                                         autoComplete="off"
-                                        value={editDoc?.pincode ?? ""}
+                                        value={editDoc?.pincode}
                                         placeholder="Pincode"
                                         maxLength={6}
                                         onChange={handlePostChange}

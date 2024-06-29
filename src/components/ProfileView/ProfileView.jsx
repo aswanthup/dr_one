@@ -8,16 +8,33 @@ import TransgenderIcon from '@mui/icons-material/Transgender';
 import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
 import EmailIcon from '@mui/icons-material/Email';
 import PowerSettingsNewIcon from '@mui/icons-material/PowerSettingsNew';
+import axios from 'axios';
+import { port } from '../../config';
 export const ProfileView = ({ data: { CloserModal, OpenPro } }) => {
     const data = { gender: 'male' }
     const [OpenProfile, setOpenProfile] = useState(OpenPro)
+    const [profile, setprofile] = useState()
     const closeProfile = () => {
         setOpenProfile(false)
         CloserModal()
     }
+    const { id } = JSON.parse(localStorage.getItem("cuslogin")) || {};
     useEffect(() => {
+        console.log(id)
+        const data = {
+            id: id
+        }
+        axios.post(`${port}/user/getprofile`, data).then((res) => {
+            console.log("res>>>>>>>>>>>>>>", res)
+            setprofile(res?.data?.userDetails)
+        }).catch((err) => {
+            console.log(err)
+        })
         setOpenProfile(OpenPro)
     }, [OpenPro])
+
+
+
 
     const logout = () => {
         localStorage.removeItem("cuslogin");
@@ -35,7 +52,7 @@ export const ProfileView = ({ data: { CloserModal, OpenPro } }) => {
                     </div>
                     <div className='ProfileAlignCardImg'>
                         <img src="/images/TempDocImg.jpg" alt="" />
-                        <p>Arun Yadhav</p>
+                        <p>{profile?.name}</p>
                         <div className='ProfileAlignCardDetailSec'>
                             <div className='ProfileAlignCardDetGender'>
                                 {
@@ -50,28 +67,30 @@ export const ProfileView = ({ data: { CloserModal, OpenPro } }) => {
                             </div>
                             <div className='ProfileAlignCardAge'>
                                 <img className='' src="/images/Group 153.png" alt="" />
-                                <p>13 - 19 years</p>
+                                <p>{profile?.agegroup} years</p>
                             </div>
                         </div>
                         <div className='ProfileAlignCardDetailSec'>
                             <div className='ProfileAlignCardAge'>
                                 <LocalPhoneIcon id="ProfileAlignCardDetPhoneIcon" />
-                                <p> +91 9747137305</p>
+                                <p> +91 {profile?.phone_no}</p>
                             </div>
 
                         </div>
                         <div className='ProfileAlignCardDetailSec'>
                             <div className='ProfileAlignCardAge'>
                                 <EmailIcon id="ProfileAlignCardDetPhoneIcon" />
-                                <p> arunyadhav@gmail.com</p>
+                                <p> {profile?.email}</p>
                             </div>
                         </div>
-                        <div className='ProfileAlignCardDetailSec'>
-                            <div className='ProfileAlignCardPInCode'>
-                                <p>670604</p>
+                        {profile?.pincode &&
+                            <div className='ProfileAlignCardDetailSec'>
+                                <div className='ProfileAlignCardPInCode'>
+                                    <p>{profile?.pincode}</p>
+                                </div>
                             </div>
+                        }
 
-                        </div>
                         <div className='ProfileAlignCardDetailSec'>
                             <div onClick={logout} className='ProfileAlignLogoutSec'>
                                 <PowerSettingsNewIcon id="ProfileAlignCardDetLogoutIcon" />

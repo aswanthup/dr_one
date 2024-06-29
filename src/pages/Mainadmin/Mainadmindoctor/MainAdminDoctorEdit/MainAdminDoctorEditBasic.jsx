@@ -58,34 +58,7 @@ const MainAdminDoctorEditBasic = () => {
 
         setValidationErrors({ ...validationErrors, [e.target.name]: "" });
 
-        // if (name === "password") {
-        //     if (!validPassword(value)) {
-        //         setValidationErrors((prevErrors) => ({
-        //             ...prevErrors,
-        //             [name]:
-        //                 "Password must be 6+ characters with an uppercase letter, digit, and special character.",
-        //         }));
-        //     } else if (editDoc.confirmPassword) {
-        //         if (value !== editDoc.confirmPassword) {
-        //             setValidationErrors((prevErrors) => ({
-        //                 ...prevErrors,
-        //                 confirmPassword: "Passwords do not match",
-        //             }));
-        //         } else {
-        //             setValidationErrors((prevErrors) => ({
-        //                 ...prevErrors,
-        //                 confirmPassword: "",
-        //             }));
-        //         }
-        //     } else {
-        //         setValidationErrors((prevErrors) => ({
-        //             ...prevErrors,
-        //             [name]: "",
-        //         }));
-        //     }
-        // }
 
-        // Validate confirm password
 
         if (name === "email") {
             if (!validateEmail(value)) {
@@ -162,7 +135,6 @@ const MainAdminDoctorEditBasic = () => {
     }, [])
 
 
-    // console.log(editDoc);
 
     return (
         <>
@@ -177,13 +149,8 @@ const MainAdminDoctorEditBasic = () => {
 
                         <div className="registration-form">
                             <div className="do-title">
-                                <h1 style={{ color: "white" }}>Doctor Registration</h1>
+                                <h1 style={{ color: "white" }}>Doctor Edit</h1>
                             </div>
-
-                            {/* <label className="photo-upload">
-               <h4>Upload Photo</h4>
-                  <input type="file" />
-               </div> */}
 
                             <div className="register-input-section">
                                 <div className="register-left-section flex">
@@ -275,7 +242,6 @@ const MainAdminDoctorEditBasic = () => {
                             <img src="images/Group 73.png" alt="" />
                         </div>
                     </div>
-
 
                 </div>
                 <ToastContainer />

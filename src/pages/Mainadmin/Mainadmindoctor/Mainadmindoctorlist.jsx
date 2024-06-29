@@ -25,7 +25,7 @@ export default function Mainadmindoctorlist({ updateState: { setChangeDashboards
     let tempData = initialData;
     console.log(value)
     if (!value) {
-      setDoctors(Doctors);
+      setDoctors(initialData);
       return;
     }
 

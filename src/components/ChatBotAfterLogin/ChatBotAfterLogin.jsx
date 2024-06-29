@@ -47,12 +47,12 @@ const ChatBotAfterLogin = () => {
             message: UserInput
         }
         console.log("PassingData>>>>", PassingData)
-        axios.post("http://3.111.142.178:3003/pharmacy/updatedchat", PassingData).then((res) => {
-            BotRes(res?.data?.message)
-            console.log("res>>>", res)
-        }).catch((err) => {
-            console.log(err)
-        })
+        // axios.post("http://3.111.142.178:3003/pharmacy/updatedchat", PassingData).then((res) => {
+        //     BotRes(res?.data?.message)
+        //     console.log("res>>>", res)
+        // }).catch((err) => {
+        //     console.log(err)
+        // })
 
     }
 

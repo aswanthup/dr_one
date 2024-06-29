@@ -380,6 +380,7 @@
     color: white;
     padding: .2vw 1.5vw;
     border-radius: 5px;
+    align-items: center;
 }
 
 .admin_disable_button button {

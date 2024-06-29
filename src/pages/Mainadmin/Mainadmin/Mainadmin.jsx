@@ -71,27 +71,23 @@ export default function Mainadmin() {
             {ChangeDashboards?.lab &&
               <>
                 <Mainadminlabslist updateState={setChangeDashboards} setLabDetails={setDetailData} />
-             
+
 
               </>
 
             }
             {ChangeDashboards?.singleLabDetails &&
               <>
-             
-                <Mainadminlabsdetails labData={DetailData} />  
-         
+
+                <Mainadminlabsdetails labData={DetailData} />
+
 
               </>
 
             }
             {ChangeDashboards?.customer &&
               <>
-                <Mainadmincustomer />
-                <br /><br /><br /><br /><br /><br /><br /><br />
-                <br /><br /><br /><br /><br /><br /><br /><br />
-                <Mainadmincustomerdetails />
-                <br /><br /><br /><br /><br /><br /><br /><br />
+                <Mainadmincustomer updateState={{ setChangeDashboards, setDetailData }} />
               </>
 
             }
@@ -109,6 +105,12 @@ export default function Mainadmin() {
             {ChangeDashboards?.category &&
               <>
                 <MainAdminCategoryEdit />
+              </>
+
+            }
+            {ChangeDashboards?.customerDetail &&
+              <>
+                <Mainadmincustomerdetails Details={DetailData} />
               </>
 
             }
