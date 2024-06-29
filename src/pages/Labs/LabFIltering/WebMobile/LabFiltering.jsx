@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Footer from "../../../../components/Footer";
 import axios from "axios";
 import styles from "../../../doctor/DoctorSearch/DesktopView/searchdoc.module.css";
@@ -14,12 +14,15 @@ import { port } from '../../../../config';
 import { Loader } from '../../../../components/Loader/Loader';
 import { LabCard } from '../LabCard/LabCard';
 import { useLocation } from 'react-router-dom';
+import { MyContext } from '../../../../contexts/Contexts';
 export const LabFiltering = () => {
     const [filters, setFilters] = useState({
         services: "",
         type: "",
         features: ""
     });
+    const { Categories, setCategories } = useContext(MyContext)
+
     const [lab, setlab] = useState([])
     const [labFilter, setlabFilter] = useState([])
     const [loading, setloading] = useState(false)
@@ -33,6 +36,10 @@ export const LabFiltering = () => {
             setlabFilter([])
         }
     }
+
+    const services = Categories?.laboratoryServices
+    const features = Categories?.laboratoryFeatures
+
     // useEffect(() => {
     //     let FinalData = lab || [];
     //     let updatedArray = [];
@@ -245,7 +252,7 @@ export const LabFiltering = () => {
                             </div>
                             <div>
                                 <FormGroup>
-                                    {services.map((name, index) => (
+                                    {services?.map((name, index) => (
                                         <FormControlLabel
                                             name="services"
                                             // disabled={
@@ -271,7 +278,7 @@ export const LabFiltering = () => {
                             </div>
                             <div>
                                 <FormGroup>
-                                    {features.map((name, index) => (
+                                    {features?.map((name, index) => (
                                         <FormControlLabel
                                             name='features'
                                             // checked={

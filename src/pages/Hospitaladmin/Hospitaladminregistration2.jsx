@@ -9,35 +9,27 @@ import { port } from '../../config'
 import { Backdrop, CircularProgress, Modal } from '@mui/material'
 import { Loader } from '../../components/Loader/Loader'
 import CloseIcon from '@mui/icons-material/Close';
-import { ayurSpec, homeoDept, speacializationNames, type } from '../HospitalFiltering/constants/Filter'
+// import { ayurSpec, homeoDept, speacializationNames, type } from '../HospitalFiltering/constants/Filter'
 
 export default function Hospitaladminregistration2() {
         const { HospitalAdminRg, setHospitalAdminRg } = useContext(MyContext)
+        const { Categories, setCategories } = useContext(MyContext)
         const [Errors, setErrors] = useState({})
         const [specialties, setspecialties] = useState([])
         const [ModalOpen, setModalOpen] = useState({
                 features: false,
                 specialties: false
         })
+        console.log("Category>>>>", Categories)
+        const speacializationNames = Categories?.allopathySpecs
+        const homeoDept = Categories?.homeopathySpecs
+        const ayurSpec = Categories?.ayurvedicSpecs
+        const type = Categories?.types
+        const Features = Categories?.hospitalFeatures
+
         const navigate = useNavigate()
         const [loader, setloader] = useState(false)
 
-        // const specialties = [
-        //         { name: "Gynaecology" },
-        //         { name: "Dermatology" },
-        //         { name: "General medicine" },
-        //         { name: "Mental health" },
-        //         { name: "Pediatrics" },
-        //         { name: "Cardiology" },
-
-        // ]
-        const Features = [
-                { name: "Casualty" },
-                { name: "OPD" },
-                { name: "Palliative" },
-                { name: "Care" },
-                { name: "Other Services " },
-        ]
         useEffect(() => {
                 if (HospitalAdminRg?.type === "Allopathy") {
                         setspecialties(speacializationNames)
@@ -325,7 +317,7 @@ export default function Hospitaladminregistration2() {
                                                         >
                                                                 Select Type
                                                         </option>
-                                                        {type.map((types, index) => (
+                                                        {type?.map((types, index) => (
                                                                 <option style={{ color: "black" }}
                                                                         key={index}
                                                                         value={types}>
@@ -472,16 +464,16 @@ export default function Hospitaladminregistration2() {
 
                                                         <div className='Features_card_ho_ad_check '>
                                                                 {ModalOpen?.features ?
-                                                                        Features.map((ele) =>
+                                                                        Features?.map((ele) =>
                                                                                 <label class="form-control flex">
-                                                                                        <input autoComplete="off" value={ele?.name || ''}
-                                                                                                checked={HospitalAdminRg?.features?.includes(ele.name)}
+                                                                                        <input autoComplete="off" value={ele || ''}
+                                                                                                checked={HospitalAdminRg?.features?.includes(ele)}
                                                                                                 onChange={(e) => { storeArray(e, { features: true }) }} type="checkbox" name="checkbox" />
-                                                                                        <h4 className='select-new'>{ele.name}</h4>
+                                                                                        <h4 className='select-new'>{ele}</h4>
                                                                                 </label>
                                                                         )
                                                                         :
-                                                                        specialties.map((ele) =>
+                                                                        specialties?.map((ele) =>
                                                                                 <label class="form-control flex">
                                                                                         <input autoComplete="off" value={ele || ''}
                                                                                                 checked={HospitalAdminRg?.specialties?.includes(ele)}
@@ -491,8 +483,6 @@ export default function Hospitaladminregistration2() {
                                                                         )
                                                                 }
                                                         </div>
-
-
 
                                                         <button onClick={CloseModal} className='Features_card_ho_ad_button'><h4>Submit</h4></button>
                                                 </div>

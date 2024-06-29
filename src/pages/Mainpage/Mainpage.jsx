@@ -10,25 +10,22 @@ import "aos/dist/aos.css";
 import ChatBot from "../../components/ChatBot/ChatBot";
 import { services } from "../Labs/LabFIltering/constatnts/Filter";
 import ArrowCircleRightOutlinedIcon from "@mui/icons-material/ArrowCircleRightOutlined";
-import {
-  ayurSpec,
-  homeoDept,
-  speacializationNames,
-  types,
-} from "../doctor/constants/filter";
+
 import axios from "axios";
 import { SearchDocContext } from "../../contexts/Doctor/SearchDoctorProvider";
 import ChatBotAfterLogin from "../../components/ChatBotAfterLogin/ChatBotAfterLogin";
+import { MyContext } from "../../contexts/Contexts";
+import { InnerLoader } from "../../components/Loader/InnerLoader";
 export default function Mainpage() {
   const [latitude, setLatitude] = useState(null);
   const [longitude, setLongitude] = useState(null);
   const [error, setError] = useState(null);
-  const [locationData, setlocationData] = useState("");
+  const { Categories, setCategories } = useContext(MyContext)
 
   const navigate = useNavigate();
   const location = useLocation();
   const [selectTypes, setselectTypes] = useState({
-    [types?.[0]]: true,
+
   });
   const [SpecialisationBatch, setSpecialisationBatch] = useState([]);
   const {
@@ -38,6 +35,11 @@ export default function Mainpage() {
     setAllDocsBySearch,
   } = useContext(SearchDocContext);
 
+  const speacializationNames = Categories?.allopathySpecs
+  const homeoDept = Categories?.homeopathySpecs
+  const ayurSpec = Categories?.ayurvedicSpecs
+  const types = Categories?.types
+  // const Features = Categories?.hospitalFeatures
 
 
   const storedLoginData = localStorage.getItem("cuslogin");
@@ -61,62 +63,71 @@ export default function Mainpage() {
   };
 
   useEffect(() => {
-    if (selectTypes?.Allopathy) {
-      let settingAllopathy = 0;
-      let AllopathyUpdatingBatch = [];
-      speacializationNames.forEach((ele, index) => {
-        if (
-          !AllopathyUpdatingBatch[settingAllopathy] ||
-          AllopathyUpdatingBatch[settingAllopathy].length < 12
-        ) {
-          AllopathyUpdatingBatch[settingAllopathy] = [
-            ...(AllopathyUpdatingBatch[settingAllopathy] || []),
-            ele,
-          ];
-        } else {
-          settingAllopathy += 1;
-          AllopathyUpdatingBatch[settingAllopathy] = [ele];
-        }
-        setSpecialisationBatch(AllopathyUpdatingBatch);
-      });
-    } else if (selectTypes.Ayurvedic) {
-      let settingAllopathy = 0;
-      let AllopathyUpdatingBatch = [];
-      ayurSpec.forEach((ele, index) => {
-        if (
-          !AllopathyUpdatingBatch[settingAllopathy] ||
-          AllopathyUpdatingBatch[settingAllopathy].length < 12
-        ) {
-          AllopathyUpdatingBatch[settingAllopathy] = [
-            ...(AllopathyUpdatingBatch[settingAllopathy] || []),
-            ele,
-          ];
-        } else {
-          settingAllopathy += 1;
-          AllopathyUpdatingBatch[settingAllopathy] = [ele];
-        }
-        setSpecialisationBatch(AllopathyUpdatingBatch);
-      });
-    } else if (selectTypes.Homeopathy) {
-      let settingAllopathy = 0;
-      let AllopathyUpdatingBatch = [];
-      homeoDept.forEach((ele, index) => {
-        if (
-          !AllopathyUpdatingBatch[settingAllopathy] ||
-          AllopathyUpdatingBatch[settingAllopathy].length < 12
-        ) {
-          AllopathyUpdatingBatch[settingAllopathy] = [
-            ...(AllopathyUpdatingBatch[settingAllopathy] || []),
-            ele,
-          ];
-        } else {
-          settingAllopathy += 1;
-          AllopathyUpdatingBatch[settingAllopathy] = [ele];
-        }
-        setSpecialisationBatch(AllopathyUpdatingBatch);
-      });
-    } else {
-      setSpecialisationBatch();
+    if (Categories) {
+      setselectTypes({ [types?.[0]]: true, })
+    }
+
+  }, [Categories])
+
+  useEffect(() => {
+    if (Categories) {
+      if (selectTypes?.Allopathy && Categories) {
+        let settingAllopathy = 0;
+        let AllopathyUpdatingBatch = [];
+        speacializationNames.forEach((ele, index) => {
+          if (
+            !AllopathyUpdatingBatch[settingAllopathy] ||
+            AllopathyUpdatingBatch[settingAllopathy].length < 12
+          ) {
+            AllopathyUpdatingBatch[settingAllopathy] = [
+              ...(AllopathyUpdatingBatch[settingAllopathy] || []),
+              ele,
+            ];
+          } else {
+            settingAllopathy += 1;
+            AllopathyUpdatingBatch[settingAllopathy] = [ele];
+          }
+          setSpecialisationBatch(AllopathyUpdatingBatch);
+        });
+      } else if (selectTypes.Ayurvedic) {
+        let settingAllopathy = 0;
+        let AllopathyUpdatingBatch = [];
+        ayurSpec.forEach((ele, index) => {
+          if (
+            !AllopathyUpdatingBatch[settingAllopathy] ||
+            AllopathyUpdatingBatch[settingAllopathy].length < 12
+          ) {
+            AllopathyUpdatingBatch[settingAllopathy] = [
+              ...(AllopathyUpdatingBatch[settingAllopathy] || []),
+              ele,
+            ];
+          } else {
+            settingAllopathy += 1;
+            AllopathyUpdatingBatch[settingAllopathy] = [ele];
+          }
+          setSpecialisationBatch(AllopathyUpdatingBatch);
+        });
+      } else if (selectTypes.Homeopathy) {
+        let settingAllopathy = 0;
+        let AllopathyUpdatingBatch = [];
+        homeoDept.forEach((ele, index) => {
+          if (
+            !AllopathyUpdatingBatch[settingAllopathy] ||
+            AllopathyUpdatingBatch[settingAllopathy].length < 12
+          ) {
+            AllopathyUpdatingBatch[settingAllopathy] = [
+              ...(AllopathyUpdatingBatch[settingAllopathy] || []),
+              ele,
+            ];
+          } else {
+            settingAllopathy += 1;
+            AllopathyUpdatingBatch[settingAllopathy] = [ele];
+          }
+          setSpecialisationBatch(AllopathyUpdatingBatch);
+        });
+      } else {
+        setSpecialisationBatch();
+      }
     }
   }, [selectTypes]);
   const renderHosFilteringBYSpeciality = (Value) => {
@@ -496,7 +507,7 @@ export default function Mainpage() {
                 />
                 <div className="MainPageTypeAndSpecialityContentSec">
                   <div className="MainPageTypeAndSpecialityContentType">
-                    {types.map(
+                    {types?.map(
                       (ele) => (
                         // ele !== "Others" ?
                         <div
@@ -518,21 +529,25 @@ export default function Mainpage() {
                   </div>
                   <div className="MainPageTypeAndSpecialityContentServices">
                     {SpecialisationBatch?.map((ele) => (
-                      <div className="spec_main_cards_align flex">
-                        {ele?.map((speciality) => (
-                          <div
-                            onClick={() =>
-                              handleSelectSpecialization(speciality)
-                            }
-                            className="spec_main_card flex"
-                          >
-                            <h4>{speciality}</h4>
-                            <div className="spec_main_card_button flex">
-                              <i class="ri-arrow-right-line"></i>
+                      SpecialisationBatch?.length > 0 ?
+                        <div className="spec_main_cards_align flex">
+                          {ele?.map((speciality) => (
+                            <div
+                              onClick={() =>
+                                handleSelectSpecialization(speciality)
+                              }
+                              className="spec_main_card flex"
+                            >
+                              <h4>{speciality}</h4>
+                              <div className="spec_main_card_button flex">
+                                <i class="ri-arrow-right-line"></i>
+                              </div>
                             </div>
-                          </div>
-                        ))}
-                      </div>
+
+                          ))}
+                        </div>
+                        :
+                        <InnerLoader />
                     ))}
                   </div>
                 </div>
@@ -1053,6 +1068,6 @@ export default function Mainpage() {
       </div>
 
       <Footer />
-    </div>
+    </div >
   );
 }

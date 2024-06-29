@@ -6,12 +6,12 @@ import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { MyContext } from "../../contexts/Contexts";
-import {
-  ayurSpec,
-  homeoDept,
-  speacializationNames,
-  types,
-} from "../../pages/doctor/constants/filter.js";
+// import {
+//   ayurSpec,
+//   homeoDept,
+//   speacializationNames,
+//   types,
+// } from "../../pages/doctor/constants/filter.js";
 import { port } from "../../config.js";
 import { Loader } from "../../components/Loader/Loader.jsx";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
@@ -25,21 +25,27 @@ export default function Doctoradminregistration2() {
   const [postalError, setPostalError] = useState("");
   const [addressdata, setAddressdata] = useState({});
   const [loader, setloader] = useState(false);
+  const { Categories, setCategories } = useContext(MyContext)
 
-  useEffect(() => {
-    const names = [
-      "confirmPassword",
-      "email",
-      "name",
-      "password",
-      "phone",
-      "secondname"]
-    if (names.some((ele) => !Data[ele])) {
-      navigate('/doctoradminregistration1')
-    }
-    window.scrollTo(0, 0); // Scrolls to the top of the page
+  const speacializationNames = Categories?.allopathySpecs
+  const homeoDept = Categories?.homeopathySpecs
+  const ayurSpec = Categories?.ayurvedicSpecs
+  const types = Categories?.types
 
-  }, [])
+  // useEffect(() => {
+  //   const names = [
+  //     "confirmPassword",
+  //     "email",
+  //     "name",
+  //     "password",
+  //     "phone",
+  //     "secondname"]
+  //   if (names.some((ele) => !Data[ele])) {
+  //     navigate('/doctoradminregistration1')
+  //   }
+  //   window.scrollTo(0, 0); // Scrolls to the top of the page
+
+  // }, [])
   const handleKeyPress = (event) => {
     // Check if the pressed key is '.' or '-'
     if (
@@ -336,7 +342,7 @@ export default function Doctoradminregistration2() {
                 >
                   Select type
                 </option>
-                {types.map((data, index) => (
+                {types?.map((data, index) => (
                   <option
                     key={index}
                     value={data}
@@ -715,7 +721,7 @@ export default function Doctoradminregistration2() {
                   value=""
                   className="doctoradminregistration_gender_font"
                 ></option>
-               {getSpecializationOptions()}
+                {getSpecializationOptions()}
               </select>
             </div>
             <div>

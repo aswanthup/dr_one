@@ -15,6 +15,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import { Loader } from '../../components/Loader/Loader'
 export default function Labadminregistration2() {
   const { LabAdminRg, setLabAdminRg } = useContext(MyContext)
+  const { Categories, setCategories } = useContext(MyContext)
   const [Errors, setErrors] = useState({})
   const [loader, setloader] = useState(false)
   const [FileName, setFileName] = useState()
@@ -24,34 +25,18 @@ export default function Labadminregistration2() {
     services: false
   })
   const isMobile = useMediaQuery({ maxWidth: 980 })
-  const Services = [
-    { name: "Blood Count Tests" },
-    { name: "Genetic Testing" },
-    { name: "Kidney Tests" },
-    { name: "Laboratory Tests" },
-    { name: "Prenatal Testing" },
-    { name: "Thyroid Tests" },
-    { name: "Bilirubin Test" },
-    { name: "Cholesterol Level" },
-    { name: "Electrocardiogram" },
-  ]
-  const Features = [
-    { name: "Home collection" },
-    { name: "Online report" },
-    { name: "Cashless" },
-    { name: "24 hours services" },
-    { name: "Doctor available" },
+  const Services = Categories?.laboratoryServices
+  console.log("Categories>>>>", Categories)
+  const Features = Categories?.laboratoryFeatures
 
-  ]
-
-  useEffect(() => {
-    if (!LabAdminRg?.name && !LabAdminRg?.contact_no && !LabAdminRg?.password && !LabAdminRg?.email && !LabAdminRg?.repassword) {
-      navigate("/labadminregistration1")
-    } else {
-      setLabAdminRg({ ...LabAdminRg, timing: { closing_time: '06:00 PM', opening_time: '10:00 AM' } })
-    }
-    window.scrollTo(0, 0); // Scrolls to the top of the page
-  }, [])
+  // useEffect(() => {
+  //   if (!LabAdminRg?.name && !LabAdminRg?.contact_no && !LabAdminRg?.password && !LabAdminRg?.email && !LabAdminRg?.repassword) {
+  //     navigate("/labadminregistration1")
+  //   } else {
+  //     setLabAdminRg({ ...LabAdminRg, timing: { closing_time: '06:00 PM', opening_time: '10:00 AM' } })
+  //   }
+  //   window.scrollTo(0, 0); // Scrolls to the top of the page
+  // }, [])
   const toastifyFun = (value, success) => {
     if (!success?.success) {
       toast.info(value, {
@@ -148,7 +133,16 @@ export default function Labadminregistration2() {
     setLabAdminRg({ ...LabAdminRg, features: features, Services: Services });
   };
   const Finish = () => {
-    if (LabAdminRg?.pincode && LabAdminRg?.about && LabAdminRg?.lisence_no && LabAdminRg?.address && LabAdminRg?.features?.length > 0 && LabAdminRg?.Services?.length > 0 && !Errors?.pincode && LabAdminRg?.timing?.opening_time && LabAdminRg?.timing?.closing_time && LabAdminRg?.place) {
+    if (LabAdminRg?.pincode &&
+      LabAdminRg?.about &&
+      LabAdminRg?.lisence_no &&
+      LabAdminRg?.address &&
+      LabAdminRg?.features?.length > 0 &&
+      LabAdminRg?.Services?.length > 0 &&
+      !Errors?.pincode &&
+      LabAdminRg?.timing?.opening_time &&
+      LabAdminRg?.timing?.closing_time &&
+      LabAdminRg?.place) {
       setloader(true)
       CheckValidation()
       let temp = []
@@ -451,21 +445,21 @@ export default function Labadminregistration2() {
           <div className='Features_card_ho_ad flex'>
             <div className='Features_card_ho_ad_check '>
               {ModalOpen?.features ?
-                Features.map((ele) =>
+                Features?.map((ele) =>
                   <label class="form-control flex">
-                    <input autoComplete="off" value={ele?.name || ''}
-                      checked={LabAdminRg?.features?.includes(ele.name)}
+                    <input autoComplete="off" value={ele || ''}
+                      checked={LabAdminRg?.features?.includes(ele)}
                       onChange={(e) => { storeArray(e, { features: true }) }} type="checkbox" name="checkbox" />
-                    <h4 className='select-new'>{ele.name}</h4>
+                    <h4 className='select-new'>{ele}</h4>
                   </label>
                 )
                 :
-                Services.map((ele) =>
+                Services?.map((ele) =>
                   <label class="form-control flex">
-                    <input autoComplete="off" value={ele?.name || ''}
-                      checked={LabAdminRg?.Services?.includes(ele.name)}
+                    <input autoComplete="off" value={ele || ''}
+                      checked={LabAdminRg?.Services?.includes(ele)}
                       onChange={(e) => { storeArray(e, { Services: true }) }} type="checkbox" name="checkbox" />
-                    <h4 className='select-new'>{ele.name}</h4>
+                    <h4 className='select-new'>{ele}</h4>
                   </label>
                 )
               }

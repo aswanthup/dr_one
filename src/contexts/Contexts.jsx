@@ -10,8 +10,7 @@ export default function Contexts({ children }) {
     const [HospitalAdminRg, setHospitalAdminRg] = useState({})
     const [LabAdminRg, setLabAdminRg] = useState({})
     const [editDoc, seteditDoc] = useState({})
-    const [labCategories, setlabCategories] = useState({})
-    const [hosAndDocCategories, sethosAndDoclabCategories] = useState({})
+    const [Categories, setCategories] = useState({})
     const [editHos, seteditHos] = useState({})
     const [passedSpecialization, setPassedSpecialization] = useState("")
     const [passedType, setPassedType] = useState("")
@@ -29,21 +28,16 @@ export default function Contexts({ children }) {
         editDoc,
         seteditDoc,
         editHos,
-        seteditHos
+        seteditHos,
+        Categories,
+        setCategories
     }
 
     useEffect(() => {
-        axios.get(`${port}/admin/getcategory`).then((res) => {
+        axios.get(`http://192.168.1.13:3003/admin/getallcategories`).then((res) => {
             console.log(res)
-            const ShortKey = res?.data?.data
-            const filteredData = ShortKey?.originalData?.find(ele => ele?.Laboratory)
-            console.log("filteredData>>>>", filteredData)
-            const splitCategoriesLab = {
-                features: filteredData?.Laboratory?.features,
-                services: filteredData?.Laboratory?.services
-            }
-            console.log("splitCategoriesLab>>>>>", splitCategoriesLab)
-            setlabCategories(splitCategoriesLab)
+            const Fullcategories = res?.data
+            setCategories(Fullcategories)
         })
     }, [])
 

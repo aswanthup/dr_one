@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import "./HospitalFiltering.css"
 import Footer from "../../../components/Footer";
 import axios from "axios";
@@ -12,11 +12,12 @@ import {
 } from "@mui/material";
 import Navbar from '../../../components/Navbar';
 import { SearchBox } from '../SearchComponent/SearchBox';
-import { ayurSpec, homeoDept, speacializationNames, type, features } from '../constants/Filter';
+// import { ayurSpec, homeoDept, speacializationNames, type, features } from '../constants/Filter';
 import { port } from '../../../config';
 import { Loader } from '../../../components/Loader/Loader';
 import { HospitalCard } from '../HospitalCard/HospitalCard';
 import { useLocation } from 'react-router-dom';
+import { MyContext } from '../../../contexts/Contexts';
 export const HospitalFiltering = () => {
     const [filters, setFilters] = useState({
         speciality: "",
@@ -29,6 +30,14 @@ export const HospitalFiltering = () => {
     const [speciality, setspeciality] = useState([])
     const [hospitalsFilter, sethospitalsFilter] = useState([])
     const [loading, setloading] = useState(false)
+    const { Categories, setCategories } = useContext(MyContext)
+
+
+    const speacializationNames = Categories?.allopathySpecs
+    const homeoDept = Categories?.homeopathySpecs
+    const ayurSpec = Categories?.ayurvedicSpecs
+    const type = Categories?.types
+    const features = Categories?.hospitalFeatures
 
     const updateDocByPlace = (value, Place) => {
         if (value?.length > 0) {
@@ -182,7 +191,7 @@ export const HospitalFiltering = () => {
                                     defaultValue=""
                                     name="radio-buttons-group"
                                 >
-                                    {type.map((types, index) => (
+                                    {type?.map((types, index) => (
                                         <FormControlLabel
                                             // disabled={location?.state?.type ? true : false}
                                             onChange={handleTypeChanges}
@@ -206,7 +215,7 @@ export const HospitalFiltering = () => {
                             </div>
                             <div className='HosFilteringSpeciHeight'>
                                 <FormGroup sx={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-                                    {speciality.map((name, index) => (
+                                    {speciality?.map((name, index) => (
                                         <FormControlLabel
                                             name="speciality"
                                             disabled={
@@ -232,7 +241,7 @@ export const HospitalFiltering = () => {
                             </div>
                             <div>
                                 <FormGroup>
-                                    {features.map((name, index) => (
+                                    {features?.map((name, index) => (
                                         <FormControlLabel
                                             name='features'
                                             // checked={

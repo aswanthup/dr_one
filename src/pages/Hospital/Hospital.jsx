@@ -1,24 +1,22 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "../Hospital/hospital.css";
 import Headroom from "react-headroom";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import { useNavigate } from "react-router-dom";
-import {
-  ayurSpec,
-  homeoDept,
-  speacializationNames,
-  type,
-} from "../HospitalFiltering/constants/Filter";
+
 import SearchIcon from "@mui/icons-material/Search";
 import axios from "axios";
 import { port } from "../../config";
+import { MyContext } from "../../contexts/Contexts";
 export default function Hospital() {
   const navigate = useNavigate();
   const [SpecialisationBatch, setSpecialisationBatch] = useState([]);
   const [position, setPosition] = useState({});
   const [ayurvedic, setayruvedic] = useState([]);
+  const [FullSpecialisation, setFullSpecialisation] = useState([]);
   const [Homeo, setHomeo] = useState([]);
+  const { Categories, setCategories } = useContext(MyContext)
   const SearchHostpital = () => {
     navigate("/hospitalfilter");
   };
@@ -28,33 +26,33 @@ export default function Hospital() {
   };
   const renderHosFilteringBYSpeciality = (Value) => {
     if (speacializationNames.includes(Value?.speciality)) {
-      handleSearchData("Allopathy",Value?.speciality)
+      handleSearchData("Allopathy", Value?.speciality)
       navigate("/hospitalfilter", {
         state: { speciality: Value?.speciality, type: "Allopathy" },
       });
     } else if (ayurSpec.includes(Value?.speciality)) {
-      handleSearchData("Ayurvedic",Value?.speciality)
+      handleSearchData("Ayurvedic", Value?.speciality)
       navigate("/hospitalfilter", {
         state: { speciality: Value?.speciality, type: "Ayurvedic" },
       });
     } else if (homeoDept.includes(Value?.speciality)) {
-      handleSearchData("Homeopathy",Value?.speciality)
+      handleSearchData("Homeopathy", Value?.speciality)
       navigate("/hospitalfilter", {
         state: { speciality: Value?.speciality, type: "Homeopathy" },
       });
     }
   };
-
-  const FullSpecialisation = [
-    ...speacializationNames,
-    ...homeoDept,
-    ...ayurSpec,
-  ];
+  const speacializationNames = Categories?.allopathySpecs
+  const homeoDept = Categories?.homeopathySpecs
+  const ayurSpec = Categories?.ayurvedicSpecs
 
   useEffect(() => {
+    const Data = [...speacializationNames || [],
+    ...homeoDept || [],
+    ...ayurSpec || []]
     let settingAllopathy = 0;
     let AllopathyUpdatingBatch = [];
-    FullSpecialisation.forEach((ele, index) => {
+    Data.forEach((ele, index) => {
       if (
         !AllopathyUpdatingBatch[settingAllopathy] ||
         AllopathyUpdatingBatch[settingAllopathy].length < 12
@@ -69,7 +67,9 @@ export default function Hospital() {
       }
       setSpecialisationBatch(AllopathyUpdatingBatch);
     });
-  }, []);
+    setFullSpecialisation(Data)
+  }, [Categories])
+
 
   useEffect(() => {
     const array = [1, 1];
@@ -106,7 +106,7 @@ export default function Hospital() {
     }
   }, []);
 
-  const handleSearchData = async (type,speciality) => {
+  const handleSearchData = async (type, speciality) => {
     try {
       const { id } = JSON.parse(localStorage.getItem("loginData")) || {};
       const data = {
@@ -114,7 +114,7 @@ export default function Hospital() {
         speciality: speciality || "",
         type: type || "",
       };
-      const response = await axios.post(`${port}/hospital/hospital_searchdata`,data);
+      const response = await axios.post(`${port}/hospital/hospital_searchdata`, data);
       console.log(response)
     } catch (err) {
       console.error(err)

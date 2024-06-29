@@ -15,17 +15,14 @@ import $ from "jquery"; // Import jQuery
 import Navbar from "../../components/Navbar";
 import { useNavigate } from "react-router-dom";
 import { MyContext } from "../../contexts/Contexts";
-import {
-  ayurSpec,
-  homeoDept,
-  speacializationNames,
-} from "../HospitalFiltering/constants/Filter";
 import { SearchDocContext } from "../../contexts/Doctor/SearchDoctorProvider";
 import axios from "axios";
 import { port } from "../../config";
 export default function Doctor() {
   const [visibleContent, setVisibleContent] = useState(2);
   const [SpecialisationBatch, setSpecialisationBatch] = useState([]);
+  const [FullSpecialisation, setFullSpecialisation] = useState([]);
+  const { Categories, setCategories } = useContext(MyContext)
   const {
     setFilters,
     setFilteredDoctors,
@@ -77,7 +74,7 @@ export default function Doctor() {
     ) {
       type = "Homeopathy";
     }
-    handleSearchData(type,lowerCasedSpecialization);
+    handleSearchData(type, lowerCasedSpecialization);
     setFilters({
       type: type,
       specializations: [lowerCasedSpecialization],
@@ -122,16 +119,21 @@ export default function Doctor() {
     }
   };
 
-  const FullSpecialisation = [
-    ...speacializationNames,
-    ...homeoDept,
-    ...ayurSpec,
-  ];
+
+
+  const speacializationNames = Categories?.allopathySpecs
+  const homeoDept = Categories?.homeopathySpecs
+  const ayurSpec = Categories?.ayurvedicSpecs
+  // const type = Categories?.types
+
 
   useEffect(() => {
+    const Data = [...speacializationNames || [],
+    ...homeoDept || [],
+    ...ayurSpec || []]
     let settingAllopathy = 0;
     let AllopathyUpdatingBatch = [];
-    FullSpecialisation.forEach((ele, index) => {
+    Data.forEach((ele, index) => {
       if (
         !AllopathyUpdatingBatch[settingAllopathy] ||
         AllopathyUpdatingBatch[settingAllopathy].length < 12
@@ -146,7 +148,9 @@ export default function Doctor() {
       }
       setSpecialisationBatch(AllopathyUpdatingBatch);
     });
-  }, []);
+    setFullSpecialisation(Data)
+  }, [Categories])
+
 
   const SearchSpeciality = (e) => {
     const query = e?.target?.value.toLowerCase();
