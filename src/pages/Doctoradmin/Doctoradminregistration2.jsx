@@ -32,20 +32,20 @@ export default function Doctoradminregistration2() {
   const ayurSpec = Categories?.ayurvedicSpecs
   const types = Categories?.types
 
-  // useEffect(() => {
-  //   const names = [
-  //     "confirmPassword",
-  //     "email",
-  //     "name",
-  //     "password",
-  //     "phone",
-  //     "secondname"]
-  //   if (names.some((ele) => !Data[ele])) {
-  //     navigate('/doctoradminregistration1')
-  //   }
-  //   window.scrollTo(0, 0); // Scrolls to the top of the page
+  useEffect(() => {
+    const names = [
+      "confirmPassword",
+      "email",
+      "name",
+      "password",
+      "phone",
+      "secondname"]
+    if (names.some((ele) => !Data[ele])) {
+      navigate('/doctoradminregistration1')
+    }
+    window.scrollTo(0, 0); // Scrolls to the top of the page
 
-  // }, [])
+  }, [])
   const handleKeyPress = (event) => {
     // Check if the pressed key is '.' or '-'
     if (
